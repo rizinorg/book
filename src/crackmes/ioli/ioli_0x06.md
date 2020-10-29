@@ -4,7 +4,7 @@ IOLI 0x06
 nearly a routine to check this binary (not complete output in the following):
 
 ```shell
-rabin2 -z ./crackme0x06
+rz-bin -z ./crackme0x06
 [Strings]
 nth paddr      vaddr      len size section type  string
 ―――――――――――――――――――――――――――――――――――――――――――――――――――――――
@@ -14,7 +14,7 @@ nth paddr      vaddr      len size section type  string
 3   0x00000763 0x08048763 24  25   .rodata ascii IOLI Crackme Level 0x06\n
 4   0x0000077c 0x0804877c 10  11   .rodata ascii Password:
 
-rabin2 -I ./crackme0x06
+rz-bin -I ./crackme0x06
 arch     x86
 baddr    0x8048000
 bintype  elf

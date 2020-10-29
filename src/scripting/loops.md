@@ -1,7 +1,7 @@
 # Loops
 
 One of the most common task in automation is looping through something,
-there are multiple ways to do this in radare2.
+there are multiple ways to do this in rizin.
 
 We can loop over flags:
 ```
@@ -94,7 +94,7 @@ xor ebp, ebp
 mov r9, rdx
 ```
 
-radare2 also offers various `foreach` constructs for looping. One of the most useful is for looping through all the instructions of a function:
+rizin also offers various `foreach` constructs for looping. One of the most useful is for looping through all the instructions of a function:
 ```
 [0x004047d0]> pdf
 ╒ (fcn) entry0 42

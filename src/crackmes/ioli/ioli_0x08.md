@@ -11,10 +11,10 @@ Password: 12346
 Password OK!
 ```
 
-[dustri](https://dustri.org/b/defeating-ioli-with-radare2.html) provided a better way to check crackme0x08. 0x07 is the stripped version of 0x08.
+[dustri](https://dustri.org/b/defeating-ioli-with-rizin.html) provided a better way to check crackme0x08. 0x07 is the stripped version of 0x08.
 
 ```sh
-$ radiff2 -A -C ./crackme0x07 ./crackme0x08
+$ rz-diff -A -C ./crackme0x07 ./crackme0x08
 ...
               fcn.08048360  23 0x8048360 |   MATCH  (1.000000) | 0x8048360   23 sym._init
  sym.imp.__libc_start_main   6 0x8048388 |   MATCH  (1.000000) | 0x8048388    6 sym.imp.__libc_start_main

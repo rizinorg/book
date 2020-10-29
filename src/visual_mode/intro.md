@@ -1,6 +1,6 @@
 # Visual Mode
 
-The visual mode is a more user-friendly interface alternative to radare2's command-line prompt. It allows easy navigation, has a cursor mode for selecting bytes, and offers numerous key bindings to simplify debugger use.
+The visual mode is a more user-friendly interface alternative to rizin's command-line prompt. It allows easy navigation, has a cursor mode for selecting bytes, and offers numerous key bindings to simplify debugger use.
 To enter visual mode, use `V` command. To exit from it back to command line, press `q`.
 
 ## Navigation
@@ -41,7 +41,7 @@ Visual mode help:
  \        toggle visual split mode
  "        toggle the column mode (uses pC..)
  /        in cursor mode search in current block
- :cmd     run radare command
+ :cmd     run rizin command
  ;[-]cmt  add/remove comment
  0        seek to beginning of current function
  [1-9]    follow jmp/call identified by shortcut (like ;[1])
@@ -65,7 +65,7 @@ Visual mode help:
  g        go/seek to given offset
  O        toggle asm.pseudo and asm.esil
  p/P      rotate print modes (hex, disasm, debug, words, buf)
- q        back to radare shell
+ q        back to rizin shell
  r        refresh screen / in cursor mode browse comments
  R        randomize color palette (ecr)
  sS       step / step over

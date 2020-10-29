@@ -10,9 +10,9 @@ Password: hello
 Invalid Password!
 ```
 
-check it with rabin2.
+check it with rz-bin.
 ```
-$ rabin2 -z ./crackme0x02
+$ rz-bin -z ./crackme0x02
 [Strings]
 nth paddr      vaddr      len size section type  string
 ―――――――――――――――――――――――――――――――――――――――――――――――――――――――
@@ -94,7 +94,7 @@ for example:
 
 we can easily get the value of eax. it's 0x16.
 
-It gets hard when the scale of program grows. radare2 provides a pseudo disassembler output in C-like syntax. It may be useful.
+It gets hard when the scale of program grows. rizin provides a pseudo disassembler output in C-like syntax. It may be useful.
 ```
 [0x08048330]> pdc@main
 function main () {
@@ -158,9 +158,9 @@ function main () {
 }
 ```
 
-The `pdc` command is unreliable especially in processing loops (while, for, etc.). So I prefer to use the [r2dec](https://github.com/radareorg/r2dec-js) plugin in r2 repo to generate the pseudo C code. you can install it easily:
+The `pdc` command is unreliable especially in processing loops (while, for, etc.). So I prefer to use the [r2dec](https://github.com/rizinorg/r2dec-js) plugin in rizin repo to generate the pseudo C code. you can install it easily:
 ```
-r2pm install r2dec
+rz-pm install r2dec
 ```
 
 decompile `main()` with the following command (like `F5` in IDA):
@@ -226,7 +226,7 @@ given the initial status that var_8h is 0x5a, var_ch is 0x1ec, we have
 var_ch = 338724 (0x52b24):
 
 ```
-$ rax2 '=10' '(0x5a+0x1ec)*(0x5a+0x1ec)' 
+$ rz-ax '=10' '(0x5a+0x1ec)*(0x5a+0x1ec)' 
 338724
 
 $ ./crackme0x02

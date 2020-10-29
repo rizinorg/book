@@ -2,7 +2,7 @@
 
 Below is a list of the most frequently used configuration variables. You can get a complete list by issuing `e` command without arguments. For example, to see all variables defined in the "cfg" namespace, issue `e cfg.` (mind the ending dot). You can get help on any eval configuration variable by using `e? cfg.`
 
-The `e??` command to get help on all the evaluable configuration variables of radare2. As long as the output of this command is pretty large you can combine it with the internal grep `~` to filter for what you are looking for:
+The `e??` command to get help on all the evaluable configuration variables of rizin. As long as the output of this command is pretty large you can combine it with the internal grep `~` to filter for what you are looking for:
 
 ![e??~color](../img/configuration/e--color.png)
 
@@ -10,7 +10,7 @@ The Visual mode has an eval browser that is accessible through the `Vbe` command
 
 ### asm.arch
 
-Defines the target CPU architecture used for disassembling (`pd`, `pD` commands) and code analysis (`a` command). You can find the list of possible values by looking at the result of `e asm.arch=?` or `rasm2 -L`.
+Defines the target CPU architecture used for disassembling (`pd`, `pD` commands) and code analysis (`a` command). You can find the list of possible values by looking at the result of `e asm.arch=?` or `rz-asm -L`.
 It is quite simple to add new architectures for disassembling and analyzing code. There is an interface for that. For x86, it is used to attach a number of third-party disassembler engines, including GNU binutils, Udis86 and a few handmade ones.
 
 ### asm.bits
@@ -153,7 +153,7 @@ This variable specifies the mode for colorized screen output: "false" (or 0) mea
 
 ### scr.seek
 
-This variable accepts a full-featured expression or a pointer/flag (eg. eip). If set, radare will set seek position to its value on startup.
+This variable accepts a full-featured expression or a pointer/flag (eg. eip). If set, rizin will set seek position to its value on startup.
 
 ### scr.scrollbar
 If you have set up any [flagzones](http://book.rada.re/basic_commands/flags.html#flag-zones) (`fz?`), this variable will let you display the scrollbar with the flagzones, in Visual mode. Set it to `1` to display the scrollbar at the right end, `2` for the top and `3` to display it at the bottom.
@@ -164,7 +164,7 @@ A boolen variable to show UTF-8 characters instead of ANSI.
 
 ### cfg.fortunes
 
-Enables or disables "fortune" messages displayed at each radare start.
+Enables or disables "fortune" messages displayed at each rizin start.
 
 ### cfg.fortunes.type
 

@@ -1,6 +1,6 @@
 # WinDBG Kernel-mode Debugging (KD)
 
-The WinDBG KD interface support for r2 allows you to attach to VM running
+The WinDBG KD interface support for rizin allows you to attach to VM running
 Windows and debug its kernel over a serial port or network.
 
 It is also possible to use the remote GDB interface to connect and
@@ -70,28 +70,28 @@ which allows to enable kernel debugging:
 bcedit /set {globalsettings} advancedoptions true
 ```
 
-## Connecting to KD interface on r2
+## Connecting to KD interface on rizin
 
 ### Serial Port
-Radare2 will use the `winkd` io plugin to connect to a socket file
+Rizin will use the `winkd` io plugin to connect to a socket file
 created by virtualbox or qemu. Also, the `winkd` debugger plugin and
 we should specify the x86-32 too. (32 and 64 bit debugging is supported)
 ```
-$ r2 -a x86 -b 32 -D winkd winkd:///tmp/winkd.pipe
+$ rizin -a x86 -b 32 -D winkd winkd:///tmp/winkd.pipe
 ```
 
 On Windows you should run the following line:
 ```
-$ radare2 -D winkd winkd://\\.\pipe\com_1
+$ rizin -D winkd winkd://\\.\pipe\com_1
 ```
 
 ### Network
 ```
-$ r2 -a x86 -b 32 -d winkd://<hostip>:<port>:w.x.y.z
+$ rizin -a x86 -b 32 -d winkd://<hostip>:<port>:w.x.y.z
 ```
 
 ## Using KD
-When connecting to a KD interface, r2 will send a breakin packet to interrupt
+When connecting to a KD interface, rizin will send a breakin packet to interrupt
 the target and we will get stuck here:
 ```
 [0x828997b8]> pd 20
@@ -111,7 +111,7 @@ dc
 dr eip=eip+1
 dc
 ```
-Now the Windows VM will be interactive again. We will need to kill r2 and
+Now the Windows VM will be interactive again. We will need to kill rizin and
 attach again to get back to control the kernel.
 
 In addition, the `dp` command can be used to list all processes, and
@@ -120,7 +120,7 @@ address of the process in the physical memory layout.
 
 # WinDBG Backend for Windows (DbgEng)
 
-On Windows, radare2 can use `DbgEng.dll` as a debugging backend,
+On Windows, rizin can use `DbgEng.dll` as a debugging backend,
 allowing it to make use of WinDBG's capabilities, supporting dump files,
 local and remote user and kernel mode debugging.
 
@@ -128,23 +128,23 @@ You can use the debugging DLLs included on Windows or get the latest version fro
 
 > You cannot use DLLs from the Microsoft Store's `WinDbg Preview` app folder directly as they are not marked as executable for normal users.
 
-> radare2 will try to load `dbgeng.dll` from the `_NT_DEBUGGER_EXTENSION_PATH` environment variable before using Windows' default library search path.
+> rizin will try to load `dbgeng.dll` from the `_NT_DEBUGGER_EXTENSION_PATH` environment variable before using Windows' default library search path.
 
 ## Using the plugin
 
 To use the `windbg` plugin, pass the same command-line options as you would for `WinDBG` or `kd` (see Microsoft's [documentation](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/windbg-command-line-options)), quoting/escaping when necessary:
 
 ```
-> r2 -d "windbg://-remote tcp:server=Server,port=Socket"
+> rizin -d "windbg://-remote tcp:server=Server,port=Socket"
 ```
 ```
-> r2 -d "windbg://MyProgram.exe \"my arg\""
+> rizin -d "windbg://MyProgram.exe \"my arg\""
 ```
 ```
-> r2 -d "windbg://-k net:port=<n>,key=<MyKey>"
+> rizin -d "windbg://-k net:port=<n>,key=<MyKey>"
 ```
 ```
-> r2 -d "windbg://-z MyDumpFile.dmp"
+> rizin -d "windbg://-z MyDumpFile.dmp"
 ```
 
 You can then debug normally (see `d?` command) or interact with the backend shell directly with the `=!` command:
@@ -158,8 +158,8 @@ hit breakpoint at: 0x7ffc98f42190
 
 [0x7fffcf232190]> =!k4
 Child-SP          RetAddr           Call Site
-00000033`73b1f618 00007ff6`c67a861d r_main!r_main_radare2
-00000033`73b1f620 00007ff6`c67d0019 radare2!main+0x8d
-00000033`73b1f720 00007ff6`c67cfebe radare2!invoke_main+0x39
-00000033`73b1f770 00007ff6`c67cfd7e radare2!__scrt_common_main_seh+0x12e
+00000033`73b1f618 00007ff6`c67a861d r_main!r_main_rizin
+00000033`73b1f620 00007ff6`c67d0019 rizin!main+0x8d
+00000033`73b1f720 00007ff6`c67cfebe rizin!invoke_main+0x39
+00000033`73b1f770 00007ff6`c67cfd7e rizin!__scrt_common_main_seh+0x12e
 ```

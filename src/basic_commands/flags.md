@@ -20,7 +20,7 @@ To switch between or create new flagspaces use the `fs` command:
 [0x00005310]> fs?
 |Usage: fs [*] [+-][flagspace|addr] # Manage flagspaces
 | fs            display flagspaces
-| fs*           display flagspaces as r2 commands
+| fs*           display flagspaces as rizin commands
 | fsj           display flagspaces in JSON
 | fs *          select all flagspaces
 | fs flagspace  select flagspace or create if it doesn't exist
@@ -32,7 +32,7 @@ To switch between or create new flagspaces use the `fs` command:
 | fsq           list flagspaces in quiet mode
 | fsm [addr]    move flags at given address to the current flagspace
 | fss           display flagspaces stack
-| fss*          display flagspaces stack in r2 commands
+| fss*          display flagspaces stack in rizin commands
 | fssj          display flagspaces stack in JSON
 | fsr newname   rename selected flagspace
 [0x00005310]> fs
@@ -99,7 +99,7 @@ to have the flags, for example inside the functions, with simple and ubiquitous 
 
 ### Flag Zones
 
-radare2 offers flag zones, which lets you label different offsets on the scrollbar, for making it easier to navigate through large binaries. You can set a flag zone on the current seek using:
+rizin offers flag zones, which lets you label different offsets on the scrollbar, for making it easier to navigate through large binaries. You can set a flag zone on the current seek using:
 
 ```
 [0x00003a04]> fz flag-zone-name

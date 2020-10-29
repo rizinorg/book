@@ -1,12 +1,12 @@
 ## Authors & Contributors
 
-This book wouldn't be possible without the help of a large list of contributors who have been reviewing, writing and reporting bugs and stuff in the radare2 project as well as in this book.
+This book wouldn't be possible without the help of a large list of contributors who have been reviewing, writing and reporting bugs and stuff in the rizin project as well as in this book.
 
-### The radare2 book
+### The rizin book
 
-This book was started by maijin as a new version of the original radare book written by pancake.
+This book was started by maijin as a new version of the original rizin book written by pancake.
 
-* Old radare1 book [http://www.radare.org/get/radare.pdf](http://www.radare.org/get/radare.pdf)
+* Old rizin1 book [http://www.rizin.org/get/rizin.pdf](http://www.rizin.org/get/rizin.pdf)
 
 Many thanks to everyone who has been involved with the gitbook:
 
@@ -73,7 +73,7 @@ muzlightbeer,
 pancake,
 polym (Tim),
 puddl3glum,
-radare,
+rizin,
 sghctoma,
 shakreiner,
 sivaramaaa,

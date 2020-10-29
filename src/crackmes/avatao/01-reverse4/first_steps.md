@@ -1,11 +1,11 @@
 .first_steps
 ------------
 
-OK, enough of praising r2, lets start reversing this stuff. First, you have to
+OK, enough of praising rizin, lets start reversing this stuff. First, you have to
 know your enemy:
 
 ```
-[0x00 avatao]$ rabin2 -I reverse4
+[0x00 avatao]$ rz-bin -I reverse4
 pic      false
 canary   true
 nx       true
@@ -30,9 +30,9 @@ rpath    NONE
 binsz    8620
 ```
 
-> ***r2 tip:*** rabin2 is one of the handy tools that comes with radare2. It can
+> ***rizin tip:*** rz-bin is one of the handy tools that comes with rizin. It can
 > be used to extract information (imports, symbols, libraries, etc.) about
-> binary executables. As always, check the help (rabin2 -h)!
+> binary executables. As always, check the help (rz-bin -h)!
 
 So, its a dynamically linked, stripped, 64bit Linux executable - nothing fancy
 here. Let's try to run it:
@@ -51,16 +51,16 @@ Size of data: 1
 OK, so it reads a number as a size from the standard input first, than reads
 further, probably "size" bytes/characters, processes this input, and outputs
 either "Wrong!", nothing or something else, presumably our flag. But do not
-waste any more time monkeyfuzzing the executable, let's fire up r2, because in
+waste any more time monkeyfuzzing the executable, let's fire up rizin, because in
 asm we trust!
 
 ```
-[0x00 avatao]$ r2 -A reverse4
+[0x00 avatao]$ rizin -A reverse4
  -- Heisenbug: A bug that disappears or alters its behavior when one attempts to probe or isolate it.
 [0x00400720]>
 ```
 
-> ***r2 tip:*** The -A switch runs *aaa* command at start to analyze all
+> ***rizin tip:*** The -A switch runs *aaa* command at start to analyze all
 > referenced code, so we will have functions, strings, XREFS, etc. right at the
 > beginning. As usual, you can get help with *?*.
 
@@ -73,10 +73,10 @@ avatao_reverse4
 [0x00400720]>
 ```
 
-> ***r2 tip:*** You can save a project using Ps [file], and load one using Po [file].
+> ***rizin tip:*** You can save a project using Ps [file], and load one using Po [file].
 > With the -p option, you can load a project when starting r2.
 
-We can list all the strings r2 found:
+We can list all the strings rizin found:
 
 ```
 [0x00400720]> fs strings
@@ -92,7 +92,7 @@ We can list all the strings r2 found:
 [0x00400720]>
 ```
 
-> ***r2 tip***: r2 puts so called flags on important/interesting offsets, and
+> ***rizin tip***: rizin puts so called flags on important/interesting offsets, and
 > organizes these flags into flagspaces (strings, functions, symbols, etc.) You
 > can list all flagspaces using *fs*, and switch the current one using
 > *fs [flagspace]* (the default is \*, which means all the flagspaces). The
@@ -118,7 +118,7 @@ d 0x400db4 mov edi, str.You_won__The_flag_is:__s_n
 d 0x400dd2 mov edi, str.Your_getting_closer_
 ```
 
-> ***r2 tip***: We can list crossreferences to addresses using the *axt [addr]*
+> ***rizin tip***: We can list crossreferences to addresses using the *axt [addr]*
 > command (similarly, we can use *axf* to list references from the address).
 > The *@@* is an iterator, it just runs the command once for every arguments
 > listed.

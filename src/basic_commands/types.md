@@ -1,6 +1,6 @@
 ## Working with data types
 
-Radare2 can also work with data types. You can use standard C data types or define your own using C. Currently, there is a support for structs, unions, function signatures, and enums.
+Rizin can also work with data types. You can use standard C data types or define your own using C. Currently, there is a support for structs, unions, function signatures, and enums.
 
 ```
 [0x00000000]> t?
@@ -8,7 +8,7 @@ Usage: t   # cparse types commands
 | t                          List all loaded types
 | tj                         List all loaded types as json
 | t <type>                   Show type in 'pf' syntax
-| t*                         List types info in r2 commands
+| t*                         List types info in rizin commands
 | t- <name>                  Delete types by its name
 | t-*                        Remove all types
 | tail [filename]            Output the last part of files
@@ -36,15 +36,15 @@ Usage: t   # cparse types commands
 
 There are three different methods to define new types:
 
-1. Defining a new type from r2 shell immediately, to do this you will use `td` command, and put the whole line between double quotes. For example:
+1. Defining a new type from rizin shell immediately, to do this you will use `td` command, and put the whole line between double quotes. For example:
 
 `"td struct person {int age; char *name; char *address;};"`
 
 2. You can also use `to -` to open a text editor and write your own types in there. This is preferable when you got too many types to define.
 
-3. Radare2 also supports loading header files using the command `to` followed by a path to the header file you want to load.
+3. Rizin also supports loading header files using the command `to` followed by a path to the header file you want to load.
 
-You can View loaded types in r2 using `ts` for structures, `tu` for unions, `tf` for function signatures, `te` for enums.
+You can View loaded types in rizin using `ts` for structures, `tu` for unions, `tf` for function signatures, `te` for enums.
 
 You can also cast pointers to data types and view data in there accordingly with `tp`. EX:
 

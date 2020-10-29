@@ -6,12 +6,12 @@ know, static analysis suffers from the path explosion problem, which is impossib
 to solve even in the most basic way without at least a partial emulation.
 
 Thus many professional reverse engineering tools use code emulation while
-performing an analysis of binary code, and radare2 is no difference here.
+performing an analysis of binary code, and rizin is no difference here.
 
-For partial emulation (or imprecise full emulation) radare2 uses its own
+For partial emulation (or imprecise full emulation) rizin uses its own
 [ESIL](../disassembling/esil.md) intermediate language and virtual machine.
 
-Radare2 supports this kind of partial emulation for all platforms that
+Rizin supports this kind of partial emulation for all platforms that
 implement ESIL uplifting (x86/x86_64, ARM, arm64, MIPS, powerpc, sparc, AVR, 8051, Gameboy, ...).
 
 One of the most common usages of such emulation is to calculate

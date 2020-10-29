@@ -1,6 +1,6 @@
 ## Block Size
 
-The block size determines how many bytes radare2 commands will process when not given an explicit size argument. You can temporarily change the block size by specifying a numeric argument to the print commands. For example `px 20`.
+The block size determines how many bytes rizin commands will process when not given an explicit size argument. You can temporarily change the block size by specifying a numeric argument to the print commands. For example `px 20`.
 
 ```
 [0xB7F9D810]> b?
@@ -11,7 +11,7 @@ The block size determines how many bytes radare2 commands will process when not 
 | b        display current block size
 | b+3      increase blocksize by 3
 | b-16     decrease blocksize by 16
-| b*       display current block size in r2 command
+| b*       display current block size in rizin command
 | bf foo   set block size to flag size
 | bj       display block size information in JSON
 | bm 1M    set max block size

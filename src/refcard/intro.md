@@ -1,4 +1,4 @@
-# Radare2 Reference Card
+# Rizin Reference Card
 
 This chapter is based on the Radare 2 reference card by Thanat0s, which is under the GNU GPL. Original license is as follows:
 
@@ -52,7 +52,7 @@ you can use the `fs` command to restrict it.
 ## Information
 
 Binary files have information stored inside the headers. The `i`
-command uses the RBin api and allows us to the same things rabin2
+command uses the RzBin api and allows us to the same things rz-bin
 do. Those are the most common ones.
 
 | Command | Description              |
@@ -80,7 +80,7 @@ allows us to print it in utf-16, pascal, zero terminated, .. formats.
 
 ## Visual mode
 
-The visual mode is the standard interactive interface of radare2.
+The visual mode is the standard interactive interface of rizin.
 
 To enter in visual mode use the `v` or `V` command, and then you'll only
 have to press keys to get the actions happen instead of commands.
@@ -97,7 +97,7 @@ have to press keys to get the actions happen instead of commands.
 | o              | Toggle asm.pseudo and asm.esil                    |
 | .              | Seek to program counter                           |
 | /              | In cursor mode, search in current block           |
-| :cmd           | Run radare command                                |
+| :cmd           | Run rizin command                                |
 | ;[-]cmt        | Add/remove comment                                |
 | /*+-[]         | Change block size, [] = resize hex.cols           |
 | <,>            | Seek aligned to block size                        |
@@ -110,7 +110,6 @@ have to press keys to get the actions happen instead of commands.
 | f/F            | Set/unset flag                                    |
 | gG             | Go seek to begin and end of file (0-$s)           |
 | mK/’K          | Mark/go to Key (any key)                          |
-| M              | Walk the mounted filesystems                      |
 | n/N            | Seek next/prev function/flag/hit (scr.nkey)       |
 | C              | Toggle (C)olors                                   |
 | R              | Randomize color palette (ecr)                     |
@@ -156,31 +155,13 @@ where the `/` command may search for the given value.
 | /z min max     | Search for strings of given size              |
 | /v[?248] num   | Look for a asm.bigendian 32bit value          |
 
-## Saving (Broken)
-
-This feature has broken and not been resolved at the time of writing these words (Nov.16th 2020). check [#Issue 6945: META - Project files](https://github.com/radareorg/radare2/issues/6945) and [#Issue 17034](https://github.com/radareorg/radare2/issues/17034) for more details.
-
-To save your analysis for now, write your own script which records the function name, variable name, etc. for example:
-```sh
-vim sample_A.r2
-
-e scr.utf8 = false
-s 0x000403ce0
-aaa
-s fcn.00403130
-afn return_delta_to_heapaddr
-afvn iter var_04h
-...
-
-```
-
 ## Usable variables in expression
 
 The `?$?` command will display the variables that can be used in any math
-operation inside the r2 shell. For example, using the `? $$` command to evaluate
+operation inside the rizin shell. For example, using the `? $$` command to evaluate
 a number or `?v` to just the value in one format.
 
-All commands in r2 that accept a number supports the use of those variables.
+All commands in rizin that accept a number supports the use of those variables.
 
 | Command       | Description                                      |
 |:--------------|:-------------------------------------------------|
@@ -225,4 +206,4 @@ All commands in r2 that accept a number supports the use of those variables.
 | $r{reg}       | get value of named register|
 | $k{kv}        | get value of an sdb query value|
 | $s{flag}      | get size of flag|
-| RNum          | $variables usable in math expressions|
+| RzNum        | $variables usable in math expressions|

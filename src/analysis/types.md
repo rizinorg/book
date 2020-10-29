@@ -1,6 +1,6 @@
 # Types
 
-Radare2 supports the C-syntax data types description.
+Rizin supports the C-syntax data types description.
 Those types are parsed by a C11-compatible parser and stored in
 the internal SDB, thus are introspectable with `k` command.
 
@@ -12,7 +12,7 @@ Most of the related commands are located in `t` namespace:
 | t                          List all loaded types
 | tj                         List all loaded types as json
 | t <type>                   Show type in 'pf' syntax
-| t*                         List types info in r2 commands
+| t*                         List types info in rizin commands
 | t- <name>                  Delete types by its name
 | t-*                        Remove all types
 | tail [filename]            Output the last part of files
@@ -38,7 +38,7 @@ Most of the related commands are located in `t` namespace:
 
 Note that the basic (atomic) types are not those from C standard -
 not `char`, `_Bool`, or `short`. Because those types can be different
-from one platform to another, radare2 uses `definite` types like as
+from one platform to another, rizin uses `definite` types like as
 `int8_t` or `uint64_t` and will convert `int` to `int32_t` or `int64_t`
 depending on the binary or debuggee platform/compiler.
 
@@ -68,13 +68,13 @@ There are three easy ways to define a new type:
 
 ```
 [0x000051c0]> "td struct foo {char* a; int b;}"
-[0x000051c0]> cat ~/radare2-regressions/bins/headers/s3.h
+[0x000051c0]> cat ~/rizin-regressions/bins/headers/s3.h
 struct S1 {
     int x[3];
     int y[4];
     int z;
 };
-[0x000051c0]> to ~/radare2-regressions/bins/headers/s3.h
+[0x000051c0]> to ~/rizin-regressions/bins/headers/s3.h
 [0x000051c0]> ts
 foo
 S1
@@ -153,7 +153,7 @@ Moreover, the link will be shown in the disassembly output or visual mode:
  0x00005202      mov rbp, rsp
 ```
 
-Once the struct is linked, radare2 tries to propagate structure offset in the function at current offset, to run this analysis on whole program or at any targeted functions after all structs are linked you have `aat` command:
+Once the struct is linked, rizin tries to propagate structure offset in the function at current offset, to run this analysis on whole program or at any targeted functions after all structs are linked you have `aat` command:
 
 ```
 [0x00000000]> aa?
@@ -182,7 +182,7 @@ The return value of `malloc` may differ between two emulations, so you have to s
 
 ### Structure Immediates
 
-There is one more important aspect of using types in radare2 - using `aht` you
+There is one more important aspect of using types in rizin - using `aht` you
 can change the immediate in the opcode to the structure offset.
 Lets see a simple example of [R]SI-relative addressing
 

@@ -1,13 +1,13 @@
 # Basic Debugger Session
 
-To debug a program, start radare with the `-d` option. Note that you can attach to a running process by specifying its PID, or you can start a new program by specifying its name and parameters:
+To debug a program, start rizin with the `-d` option. Note that you can attach to a running process by specifying its PID, or you can start a new program by specifying its name and parameters:
 
 ```
 $ pidof mc
 32220
-$ r2 -d 32220
-$ r2 -d /bin/ls
-$ r2 -a arm -b 16 -d gdb://192.168.1.43:9090
+$ rizin -d 32220
+$ rizin -d /bin/ls
+$ rizin -a arm -b 16 -d gdb://192.168.1.43:9090
 ...
 ```
 
@@ -15,8 +15,8 @@ In the second case, the debugger will fork and load the debugee `ls` program in 
 
 It will pause its execution early in `ld.so` dynamic linker. As a result, you will not yet see the entrypoint or any shared libraries at this point.
 
-You can override this behavior by setting another name for an entry breakpoint. To do this, add a radare command
-`e dbg.bep=entry` or `e dbg.bep=main` to your startup script, usually it is `~/.config/radare2/radare2rc`.
+You can override this behavior by setting another name for an entry breakpoint. To do this, add a rizin command
+`e dbg.bep=entry` or `e dbg.bep=main` to your startup script, usually it is `~/.config/rizin/rizinrc`.
 
 Another way to continue until a specific address is by using the `dcu` command. Which means: "debug continue until" taking the address of the place to stop at. For example:
 
@@ -40,7 +40,7 @@ Below is a list of most common commands used with debugger:
 > dr eax=33     ; set register value. eax = 33
 ```
 
-There is another option for debugging in radare, which may be easier: using visual mode.
+There is another option for debugging in rizin, which may be easier: using visual mode.
 
 That way you will neither need to remember many commands nor to keep program state in your mind.
 
@@ -57,7 +57,7 @@ Use F7 or `s` to step into and F8 or `S` to step over current instruction.
 With the `c` key you can toggle the cursor mode to mark a byte range selection
 (for example, to later overwrite them with nop). You can set breakpoints with `F2` key.
 
-In visual mode you can enter regular radare commands by prepending them with `:`.
+In visual mode you can enter regular rizin commands by prepending them with `:`.
 For example, to dump a one block of memory contents at ESI:
 ```
 <Press ':'>

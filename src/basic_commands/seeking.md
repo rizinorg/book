@@ -50,7 +50,7 @@ Usage: s    # Help for the seek commands. See ?$? to see all variables
 | s+                Redo seek
 | s+ n              Seek n bytes forward
 | s++[n]            Seek blocksize bytes forward (/=n)
-| s[j*=!]           List undo seek history (JSON, =list, *r2, !=names, s==)
+| s[j*=!]           List undo seek history (JSON, =list, *rizin, !=names, s==)
 | s/ DATA           Search for next occurrence of 'DATA'
 | s/x 9091          Search for next occurrence of \x90\x91
 | sa [[+-]a] [asz]  Seek asz (or bsize) aligned to addr
@@ -84,10 +84,10 @@ In the visual mode, you can press `u` (undo) or `U` (redo) inside the seek histo
 ## Open file
 
 As a test file, let's use a simple `hello_world.c` compiled in Linux ELF format.
-After we compile it let's open it with radare2:
+After we compile it let's open it with rizin:
 
 ```
-$ r2 hello_world
+$ rizin hello_world
 ```
 
 Now we have the command prompt:

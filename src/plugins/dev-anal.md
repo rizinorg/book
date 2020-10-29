@@ -2,17 +2,17 @@
 
 After implementing disassembly plugin, you might have noticed that output
 is far from being good - no proper highlighting, no reference lines
-and so on. This is because radare2 requires every architecture plugin
+and so on. This is because rizin requires every architecture plugin
 to provide also analysis information about every opcode. At the moment
 the implementation of disassembly and opcodes analysis is separated between
-two modules - RAsm and RAnal. Thus we need to write an analysis plugin too.
+two modules - RzAsm and RzAnalysis. Thus we need to write an analysis plugin too.
 The principle is very similar - you just need to create a C file and
 corresponding Makefile.
 
-They structure of RAnal plugin looks like
+They structure of RzAnalysis plugin looks like
 
 ```c
-RAnalPlugin r_anal_plugin_v810 = {
+RzAnalysisPlugin r_anal_plugin_v810 = {
 	.name = "mycpu",
 	.desc = "MYCPU code analysis plugin",
 	.license = "LGPL3",
@@ -25,17 +25,17 @@ RAnalPlugin r_anal_plugin_v810 = {
 ```
 
 Like with disassembly plugin there is a key function - `mycpu_op` which scans the opcode and builds
-RAnalOp structure. On the other hand, in this example analysis plugins also performs uplifting to
+RzAnalysisOp structure. On the other hand, in this example analysis plugins also performs uplifting to
 ESIL, which is enabled in `.esil = true` statement. Thus, `mycpu_op` obliged to fill the
-corresponding RAnalOp ESIL field for the opcodes. Second important thing for ESIL uplifting and
+corresponding RzAnalysisOp ESIL field for the opcodes. Second important thing for ESIL uplifting and
 emulation - register profile, like in debugger, which is set within `set_reg_profile` function.
 
 **Makefile**
 
 ```makefile
 NAME=anal_snes
-R2_PLUGIN_PATH=$(shell r2 -H R2_USER_PLUGINS)
-LIBEXT=$(shell r2 -H LIBEXT)
+R2_PLUGIN_PATH=$(shell rizin -H R2_USER_PLUGINS)
+LIBEXT=$(shell rizin -H LIBEXT)
 CFLAGS=-g -fPIC $(shell pkg-config --cflags r_anal)
 LDFLAGS=-shared $(shell pkg-config --libs r_anal)
 OBJS=$(NAME).o
@@ -59,7 +59,7 @@ uninstall:
 **anal_snes.c:**
 
 ```c
-/* radare - LGPL - Copyright 2015 - condret */
+/* rizin - LGPL - Copyright 2015 - condret */
 
 #include <string.h>
 #include <r_types.h>
@@ -68,8 +68,8 @@ uninstall:
 #include <r_anal.h>
 #include "snes_op_table.h"
 
-static int snes_anop(RAnal *anal, RAnalOp *op, ut64 addr, const ut8 *data, int len) {
-	memset (op, '\0', sizeof (RAnalOp));
+static int snes_anop(RzAnalysis *anal, RzAnalysisOp *op, ut64 addr, const ut8 *data, int len) {
+	memset (op, '\0', sizeof (RzAnalysisOp));
 	op->size = snes_op[data[0]].len;
 	op->addr = addr;
 	op->type = R_ANAL_OP_TYPE_UNK;
@@ -99,22 +99,22 @@ struct r_anal_plugin_t r_anal_plugin_snes = {
 };
 
 #ifndef R2_PLUGIN_INCORE
-R_API RLibStruct radare_plugin = {
+R_API RLibStruct rizin_plugin = {
 	.type = R_LIB_TYPE_ANAL,
 	.data = &r_anal_plugin_snes,
 	.version = R2_VERSION
 };
 #endif
 ```
-After compiling radare2 will list this plugin in the output:
+After compiling rizin will list this plugin in the output:
 ```
 _dA_  _8_16      snes        LGPL3   SuperNES CPU
 ```
 
-**snes_op_table**.h: https://github.com/radareorg/radare2/blob/master/libr/asm/arch/snes/snes_op_table.h
+**snes_op_table**.h: https://github.com/rizinorg/rizin/blob/master/libr/asm/arch/snes/snes_op_table.h
 
 Example:
 
-* **6502**: https://github.com/radareorg/radare2/commit/64636e9505f9ca8b408958d3c01ac8e3ce254a9b
-* **SNES**: https://github.com/radareorg/radare2/commit/60d6e5a1b9d244c7085b22ae8985d00027624b49
+* **6502**: https://github.com/rizinorg/rizin/commit/64636e9505f9ca8b408958d3c01ac8e3ce254a9b
+* **SNES**: https://github.com/rizinorg/rizin/commit/60d6e5a1b9d244c7085b22ae8985d00027624b49
 

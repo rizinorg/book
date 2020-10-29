@@ -1,8 +1,8 @@
 # Dietline
 
-Radare2 comes with the lean [readline](https://en.wikipedia.org/wiki/GNU_Readline)-like input capability through the lean library to handle the command edition and history navigation. It allows users to perform cursor movements, search the
-history, and implements autocompletion. Moreover, due to the radare2 portability, dietline provides
-the uniform experience among all supported platforms. It is used in all radare2 subshells - main
+Rizin comes with the lean [readline](https://en.wikipedia.org/wiki/GNU_Readline)-like input capability through the lean library to handle the command edition and history navigation. It allows users to perform cursor movements, search the
+history, and implements autocompletion. Moreover, due to the rizin portability, dietline provides
+the uniform experience among all supported platforms. It is used in all rizin subshells - main
 prompt, SDB shell, visual prompt, and offsets prompt. It also implements the most common features
 and keybindings compatible with the GNU Readline.
 
@@ -13,7 +13,7 @@ autocompletion options.
 
 # Autocompletion
 
-In the every shell and radare2 command autocompletion is supported. There are multiple modes of it -
+In the every shell and rizin command autocompletion is supported. There are multiple modes of it -
 files, flags, and SDB keys/namespaces. To provide the easy way to select possible completion options
 the scrollable popup widget is available. It can be enabled with `scr.prompt.popup`, just set it to
 the `true`.
@@ -48,7 +48,7 @@ By default dietline mode is compatible with readline Emacs-like mode key binding
 
 # Vi mode
 
-Radare2 also comes with in vi mode that can be enabled by toggling `scr.prompt.vi`. The various keybindings available in this mode are:
+Rizin also comes with in vi mode that can be enabled by toggling `scr.prompt.vi`. The various keybindings available in this mode are:
 
 ## Entering command modes
 - `ESC` - enter into the control mode

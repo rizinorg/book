@@ -25,7 +25,7 @@ As you may know, binaries have sections and maps. The sections define the conten
 
 Before the IO refactoring done by condret, the `S` command was used to manage what we now call maps. Currently the `S` command is deprecated because `iS` and `om` should be enough.
 
-Firmware images, bootloaders and binary files usually place various sections of a binary at different addresses in memory. To represent this behavior, radare offers the `iS`. Use `iS?` to get the help message. To list all created sections use `iS` (or `iSj` to get the json format). The `iS=` will show the region bars in ascii-art.
+Firmware images, bootloaders and binary files usually place various sections of a binary at different addresses in memory. To represent this behavior, rizin offers the `iS`. Use `iS?` to get the help message. To list all created sections use `iS` (or `iSj` to get the json format). The `iS=` will show the region bars in ascii-art.
 
 You can create a new mapping using the `om` subcommand as follows:
 ```
@@ -48,7 +48,7 @@ You can also use `om` command to view information about mapped sections:
  2 fd: 3 +0x00002de8 0x00003de8 - 0x0000402f r-- fmap.LOAD3
  1 fd: 4 +0x00000000 0x00004030 - 0x00004037 rw- mmap.LOAD3
  ```
-Use `om?` to get all the possible subcommands. To list all the defined maps use `om` (or `omj` to get the json format or `om*` to get the r2 commands format). To get the ascii art view use `om=`. 
+Use `om?` to get all the possible subcommands. To list all the defined maps use `om` (or `omj` to get the json format or `om*` to get the rizin commands format). To get the ascii art view use `om=`. 
 
 It is also possible to delete the mapped section using the `om-mapid` command.
 

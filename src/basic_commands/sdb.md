@@ -1,6 +1,6 @@
 # SDB
 
-SDB stands for String DataBase. It's a simple key-value database that only operates with strings created by pancake. It is used in many parts of r2 to have a disk and in-memory database which is small and fast to manage using it as a hashtable on steroids.
+SDB stands for String DataBase. It's a simple key-value database that only operates with strings created by pancake. It is used in many parts of rizin to have a disk and in-memory database which is small and fast to manage using it as a hashtable on steroids.
 
 SDB is a simple string key/value database based on djb’s cdb disk storage and supports JSON and arrays introspection.
 
@@ -70,7 +70,7 @@ $ rm -f d
 ```
 
 ## So what ?
-So, you can now do this inside your radare2 sessions!
+So, you can now do this inside your rizin sessions!
 
 Let's take a simple binary, and check what is already _sdbized_.
 ```
@@ -82,7 +82,7 @@ $ gcc test.c -o test
 ```
 
 ```
-$ r2 -A ./test
+$ rizin -A ./test
 [0x08048320]> k **
 bin
 anal

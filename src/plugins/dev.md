@@ -1,6 +1,6 @@
 ## Implementing a new architecture
 
-radare2 splits the logic of a CPU into several modules. You should write more than one plugin to get full support for a specific arch. Let's see which are those:
+rizin splits the logic of a CPU into several modules. You should write more than one plugin to get full support for a specific arch. Let's see which are those:
 
 * r_asm : assembler and disassembler
 * r_anal : code analysis (opcode,type,esil,..)
@@ -14,7 +14,7 @@ Bear in mind that plugins can be compiled static or dynamically, this means that
 
 To configure which plugins you want to compile use the `./configure-plugins` script which accepts the flags --shared and --static to specify them. You can also add it manually inside the `plugins.def.cfg` and then remove the `plugins.cfg` and run `./configure-plugins` again to update the `libr/config.mk` and `libr/config.h`.
 
-You may find some examples of external plugins in [radare2-extras](https://github.com/radareorg/radare2-extras) repository.
+You may find some examples of external plugins in [rizin-extras](https://github.com/rizinorg/rizin-extras) repository.
 
 ## Writing the r_asm plugin
 
@@ -24,7 +24,7 @@ The official way to make third-party plugins is to distribute them into a separa
 $ cd my-cpu
 $ cat Makefile
 NAME=mycpu
-R2_PLUGIN_PATH=$(shell r2 -hh|grep R2_LIBR_PLUGINS|awk '{print $$2}')
+R2_PLUGIN_PATH=$(shell rizin -hh|grep R2_LIBR_PLUGINS|awk '{print $$2}')
 CFLAGS=-g -fPIC $(shell pkg-config --cflags r_asm)
 LDFLAGS=-shared $(shell pkg-config --libs r_asm)
 OBJS=$(NAME).o
@@ -77,7 +77,7 @@ static const char *ops[OPS*2] = {
 
 /* Main function for disassembly */
 //b for byte, l for length
-static int disassemble (RAsm *a, RAsmOp *op, const ut8 *b, int l) {
+static int disassemble (RzAsm *a, RzAsmOp *op, const ut8 *b, int l) {
 	char arg[32];
         int idx = (b[0]&0xf)\*2;
 	op->size = 2;
@@ -110,7 +110,7 @@ static int disassemble (RAsm *a, RAsmOp *op, const ut8 *b, int l) {
 }
 
 /* Structure of exported functions and data */
-RAsmPlugin r_asm_plugin_mycpu = {
+RzAsmPlugin r_asm_plugin_mycpu = {
         .name = "mycpu",
         .arch = "mycpu",
         .license = "LGPL3",
@@ -120,7 +120,7 @@ RAsmPlugin r_asm_plugin_mycpu = {
 };
 
 #ifndef CORELIB
-struct r_lib_struct_t radare_plugin = {
+struct r_lib_struct_t rizin_plugin = {
         .type = R_LIB_TYPE_ASM,
         .data = &r_asm_plugin_mycpu
 };

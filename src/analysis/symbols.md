@@ -1,9 +1,9 @@
 # Symbols
 
-Radare2 automatically parses available imports and exports sections in the binary,
+Rizin automatically parses available imports and exports sections in the binary,
 moreover, it can load additional debugging information if present.
 Two main formats are supported: DWARF and PDB (for Windows binaries).
-Note that, unlike many tools radare2 doesn't rely on Windows API to parse
+Note that, unlike many tools rizin doesn't rely on Windows API to parse
 PDB files, thus they can be loaded on any other supported platform - e.g.
 Linux or OS X.
 
@@ -13,7 +13,7 @@ stored as a separate binary, thus the different logic of handling it.
 
 At first, one of the common scenarios is to analyze the file from Windows distribution.
 In this case, all PDB files are available on the Microsoft server, which is by default
-is in options. See all pdb options in radare2:
+is in options. See all pdb options in rizin:
 
 ```
 pdb.autoload = 0
@@ -22,7 +22,7 @@ pdb.server = https://msdl.microsoft.com/download/symbols
 pdb.useragent = Microsoft-Symbol-Server/6.11.0001.402
 ```
 
-Using the variable `pdb.server` you can change the address where radare2 will try to
+Using the variable `pdb.server` you can change the address where rizin will try to
 download the PDB file by the GUID stored in the executable header.
 You can make use of multiple symbol servers by separating each URL with a semi-colon:
 ```
@@ -38,8 +38,8 @@ says to automatically extract them.
 
 Note that for the automatic downloading to work you need "cabextract" tool, and wget/curl installed.
 
-Sometimes you don't need to do that from the radare2 itself, thus - two handy
-rabin2 options:
+Sometimes you don't need to do that from the rizin itself, thus - two handy
+rz-bin options:
 
 ```
  -P              show debug/pdb information
@@ -57,29 +57,29 @@ manipulated by the `id` commands:
 [0x000051c0]> id?
 |Usage: id Debug information
 | Output mode:
-| '*'              Output in radare commands
+| '*'              Output in rizin commands
 | id               Source lines
 | idp [file.pdb]   Load pdb file information
 | idpi [file.pdb]  Show pdb file information
 | idpd             Download pdb file on remote server
 ```
 
-Where `idpi` is basically the same as `rabin2 -P`.
+Where `idpi` is basically the same as `rz-bin -P`.
 Note that `idp` can be also used not only in the static analysis mode, but also
 in the debugging mode, even if connected via WinDbg.
 
 For simplifying the loading PDBs, especially for the processes with many linked DLLs,
-radare2 can autoload all required PDBs automatically - you need just set the
+rizin can autoload all required PDBs automatically - you need just set the
 `e pdb.autoload=true` option. Then if you load some file in debugging mode
-in Windows, using `r2 -d file.exe` or `r2 -d 2345` (attach to pid 2345), all
+in Windows, using `rizin -d file.exe` or `rizin -d 2345` (attach to pid 2345), all
 related PDB files will be loaded automatically.
 
 DWARF information loading, on the other hand, is completely automated. You don't
 need to run any commands/change any options:
 
 ```
-r2 `which rabin2`
-[0x00002437 8% 300 /usr/local/bin/rabin2]> pd $r
+rizin `which rz-bin`
+[0x00002437 8% 300 /usr/local/bin/rz-bin]> pd $r
 0x00002437  jne 0x2468                  ;[1]
 0x00002439  cmp qword reloc.__cxa_finalize_224, 0
 0x00002441  push rbp
@@ -127,7 +127,7 @@ r2 `which rabin2`
 0x000024db  leave                       ; ../blob/version.c:29
 0x000024dc  ret
 ;-- rabin_show_help:
-0x000024dd  push rbp                    ; .//rabin2.c:27
+0x000024dd  push rbp                    ; .//rz-bin.c:27
 ```
 
 As you can see, it loads function names and source line information.

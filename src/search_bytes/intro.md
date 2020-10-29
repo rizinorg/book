@@ -1,6 +1,6 @@
 # Searching for Bytes
 
-The radare2 search engine is based on work done by esteve, plus multiple features implemented on top of it. It supports multiple keyword searches, binary masks, and hexadecimal values. It automatically creates flags for search hit locations ease future referencing.
+The rizin search engine is based on work done by esteve, plus multiple features implemented on top of it. It supports multiple keyword searches, binary masks, and hexadecimal values. It automatically creates flags for search hit locations ease future referencing.
 
 Search is initiated by `/` command.
 ```
@@ -16,7 +16,7 @@ Search is initiated by `/` command.
 | /a jmp eax              assemble opcode and search its bytes
 | /A jmp                  find analyzed instructions of this type (/A? for help)
 | /b                      search backwards, command modifier, followed by other command
-| /B                      search recognized RBin headers
+| /B                      search recognized RzBin headers
 | /c jmp [esp]            search for asm code matching the given string
 | /ce rsp,rbp             search for esil expressions matching
 | /C[ar]                  search for crypto materials
@@ -48,6 +48,6 @@ anal.depth)
 | /z min max              search for strings of given size
 ```
 
-Because everything is treated as a file in radare2, it does not matter whether you search in a socket, a remote device, in process memory, or a file.
+Because everything is treated as a file in rizin, it does not matter whether you search in a socket, a remote device, in process memory, or a file.
 
 note that '/*' starts multiline comment. It's not for searching. type '*/' to end comment.

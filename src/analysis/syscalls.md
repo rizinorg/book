@@ -1,6 +1,6 @@
 # Syscalls
 
-Radare2 allows manual search for assembly code looking like a syscall operation.
+Rizin allows manual search for assembly code looking like a syscall operation.
 For example on ARM platform usually they are represented by the `svc` instruction,
 on the others can be a different instructions, e.g. `syscall` on x86 PC.
 ```
@@ -38,7 +38,7 @@ To reduce searching time it is possible to [restrict the
 searching](../search_bytes/configurating_the_search.md) range for
 only executable segments or sections with `/as @e:search.in=io.maps.x`
 
-Using the [ESIL emulation](emulation.md) radare2 can print syscall arguments
+Using the [ESIL emulation](emulation.md) rizin can print syscall arguments
 in the disassembly output. To enable the linear (but very rough) emulation use
 `asm.emu` configuration variable:
 ```
@@ -50,7 +50,7 @@ in the disassembly output. To enable the linear (but very rough) emulation use
 ```
 
 In case of executing `aae` (or `aaaa` which calls `aae`) command
-radare2 will push found syscalls to a special `syscall.` flagspace,
+rizin will push found syscalls to a special `syscall.` flagspace,
 which can be useful for automation purpose:
 ```
 [0x000187c2]> fs
@@ -77,7 +77,7 @@ It also can be interactively navigated through within HUD mode (`V_`)
    0x0002ac36  syscall.sd_ble_gap_disconnect.3
 ```
 
-When debugging in radare2, you can use `dcs` to continue execution until the next syscall. You can also run `dcs*` to trace all syscalls.
+When debugging in rizin, you can use `dcs` to continue execution until the next syscall. You can also run `dcs*` to trace all syscalls.
 ```
 [0xf7fb9120]> dcs*
 Running child until syscalls:-1 
@@ -90,7 +90,7 @@ child stopped with signal 133
 child stopped with signal 133
 ```
 
-radare2 also has a syscall name to syscall number utility. You can return the syscall name of a given syscall number or vice versa, without leaving the shell.
+rizin also has a syscall name to syscall number utility. You can return the syscall name of a given syscall number or vice versa, without leaving the shell.
 
 ```
 [0x08048436]> asl 1

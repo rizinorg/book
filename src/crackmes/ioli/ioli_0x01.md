@@ -10,10 +10,10 @@ Password: test
 Invalid Password!
 ```
 
-Let's check for strings with rabin2.
+Let's check for strings with rz-bin.
 
 ```
-$ rabin2 -z ./crackme0x01
+$ rz-bin -z ./crackme0x01
 [Strings]
 nth paddr      vaddr      len size section type  string
 ―――――――――――――――――――――――――――――――――――――――――――――――――――――――
@@ -26,7 +26,7 @@ nth paddr      vaddr      len size section type  string
 This isn't going to be as easy as 0x00. Let's try disassembly with r2.
 
 ```
-$ r2 ./crackme0x01 
+$ rizin ./crackme0x01 
 -- Use `zoom.byte=printable` in zoom mode ('z' in Visual mode) to find strings
 [0x08048330]> aa
 [0x08048330]> pdf@main
@@ -65,7 +65,7 @@ $ r2 ./crackme0x01
 \           0x08048454      c3             ret
 ```
 
-"aa" tells r2 to analyze the whole binary, which gets you symbol names, among things.
+"aa" tells rizin to analyze the whole binary, which gets you symbol names, among things.
 
 "pdf" stands for
 
@@ -87,7 +87,7 @@ If you look carefully, you'll see a `cmp` instruction, with a constant, 0x149a. 
 0x0804842b    817dfc9a140. cmp dword [ebp + 0xfffffffc], 0x149a
 ```
 
-You can use radare2's `?` command to display 0x149a in another numeric base.
+You can use rizin's `?` command to display 0x149a in another numeric base.
 
 ```
 [0x08048330]> ? 0x149a

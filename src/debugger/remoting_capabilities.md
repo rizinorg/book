@@ -1,13 +1,13 @@
 # Remote Access Capabilities
 
-Radare can be run locally, or it can be started as a server process which is controlled by a local
-radare2 process. This is possible because everything uses radare's IO subsystem which abstracts access to system(), cmd() and all basic IO operations so to work over a network.
+Rizin can be run locally, or it can be started as a server process which is controlled by a local
+rizin process. This is possible because everything uses rizin's IO subsystem which abstracts access to system(), cmd() and all basic IO operations so to work over a network.
 
-Help for commands useful for remote access to radare:
+Help for commands useful for remote access to rizin:
 
 ```
 [0x00405a04]> =?
-Usage:  =[:!+-=ghH] [...]   # connect with other instances of r2
+Usage:  =[:!+-=ghH] [...]   # connect with other instances of rizin
 
 remote commands:
 | =                             list all open connections
@@ -32,32 +32,32 @@ other:
 | =:host:port cmd               run 'cmd' command on remote server
 
 examples:
-| =+tcp://localhost:9090/       connect to: r2 -c.:9090 ./bin
-| =+rap://localhost:9090/       connect to: r2 rap://:9090
-| =+http://localhost:9090/cmd/  connect to: r2 -c'=h 9090' bin
+| =+tcp://localhost:9090/       connect to: rizin -c.:9090 ./bin
+| =+rap://localhost:9090/       connect to: rizin rap://:9090
+| =+http://localhost:9090/cmd/  connect to: rizin -c'=h 9090' bin
 | o rap://:9090/                start the rap server on tcp port 9090
 ```
 
-You can learn radare2 remote capabilities by displaying the list of supported IO plugins: `radare2 -L`.
+You can learn rizin remote capabilities by displaying the list of supported IO plugins: `rizin -L`.
 
 A little example should make this clearer. A typical remote session might look like this:
 
 At the remote host1:
 
 ```
-$ radare2 rap://:1234
+$ rizin rap://:1234
 ```
 
 At the remote host2:
 
 ```
-$ radare2 rap://:1234
+$ rizin rap://:1234
 ```
 
 At localhost:
 
 ```
-$ radare2 -
+$ rizin -
 ```
 
 Add hosts
@@ -103,7 +103,7 @@ To remove hosts (and close connections):
 [0x004048c5]> =-
 ```
 
-You can also redirect radare output to a TCP or UDP server (such as `nc -l`). First, Add the server with '=+ tcp://' or '=+ udp://', then you can redirect the output of a command to be sent to the server:
+You can also redirect rizin output to a TCP or UDP server (such as `nc -l`). First, Add the server with '=+ tcp://' or '=+ udp://', then you can redirect the output of a command to be sent to the server:
 
 ```
 [0x004048c5]> =+ tcp://<host>:<port>/

@@ -1,7 +1,7 @@
 [book]
-title = "The Official Radare2 Book"
+title = "The Official Rizin Book"
 author = "pancake <pancake@nopcode.org>"
-description = "The Official Radare2 Book"
+description = "The Official Rizin Book"
 
 [build]
 create-missing = false

@@ -1,18 +1,18 @@
 # Configuration
 
-The core reads `~/.config/radare2/radare2rc` while starting. You can add `e` commands to this file to tune the radare2 configuration to your taste.
+The core reads `~/.config/rizin/rizinrc` while starting. You can add `e` commands to this file to tune the rizin configuration to your taste.
 
-To prevent radare2 from parsing this file at startup, pass it the `-N` option.
+To prevent rizin from parsing this file at startup, pass it the `-N` option.
 
-All the configuration of radare2 is done with the `eval` commands. A typical startup configuration file looks like this:
+All the configuration of rizin is done with the `eval` commands. A typical startup configuration file looks like this:
 ```sh
-$ cat ~/.radare2rc
+$ cat ~/.rizinrc
 e scr.color = 1
 e dbg.bep   = loader
 ```
-The configuration can also be changed with `-e` <config=value> command-line option. This way you can adjust configuration from the command line, keeping the .radare2rc file intact. For example, to start with empty configuration and then adjust `scr.color` and `asm.syntax` the following line may be used:
+The configuration can also be changed with `-e` <config=value> command-line option. This way you can adjust configuration from the command line, keeping the .rizinrc file intact. For example, to start with empty configuration and then adjust `scr.color` and `asm.syntax` the following line may be used:
 ```sh
-$ radare2 -N -e scr.color=1 -e asm.syntax=intel -d /bin/ls
+$ rizin -N -e scr.color=1 -e asm.syntax=intel -d /bin/ls
 ```
 Internally, the configuration is stored in a hash table. The variables are grouped in namespaces: `cfg.`, `file.`, `dbg.`, `scr.` and so on.
 
@@ -36,7 +36,7 @@ Usage: e [var[=value]]  Evaluable vars
 | e!a             invert the boolean value of 'a' var
 | ec [k] [color]  set color for given key (prompt, offset, ...)
 | eevar           open editor to change the value of var
-| ed              open editor to change the ~/.radare2rc
+| ed              open editor to change the ~/.rizinrc
 | ej              list config vars in JSON
 | env [k[=v]]     get/set environment variable
 | er [key]        set config key as readonly. no way back

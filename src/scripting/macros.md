@@ -1,6 +1,6 @@
 # Macros
 
-Apart from simple sequencing and looping, radare2 allows to write
+Apart from simple sequencing and looping, rizin allows to write
 simple macros, using this construction:
 ```
 [0x00404800]> (qwe; pd 4; ao)
@@ -63,7 +63,7 @@ As you can see, the arguments are named by index, starting from 0: $0, $1, ...
 
 # Aliases
 
-radare2 also offers aliases which might help you save time by quickly executing your most used commands. They are under `$?`
+rizin also offers aliases which might help you save time by quickly executing your most used commands. They are under `$?`
 
 The general usage of the feature is: `$alias=cmd`
 

@@ -1,12 +1,12 @@
 ## Implementing a new disassembly plugin
 
-Radare2 has modular architecture, thus adding support for a new architecture is very easy, if you
+Rizin has modular architecture, thus adding support for a new architecture is very easy, if you
 are fluent in C. For various reasons it might be easier to implement it out of the tree. For this we
 will need to create single C file, called `asm_mycpu.c` and makefile for it.
 
-The key thing of RAsm plugin is a structure
+The key thing of RzAsm plugin is a structure
 ```c
-RAsmPlugin r_asm_plugin_mycpu = {
+RzAsmPlugin r_asm_plugin_mycpu = {
 	.name = "mycpu",
 	.license = "LGPL3",
 	.desc = "MYCPU disassembly plugin",
@@ -21,15 +21,15 @@ where `.disassemble` is a pointer to disassembly function, which accepts the byt
 and length:
 
 ```c
-static int disassemble(RAsm *a, RAsmOp *op, const ut8 *buf, int len)
+static int disassemble(RzAsm *a, RzAsmOp *op, const ut8 *buf, int len)
 ```
 
 **Makefile**
 
 ```makefile
 NAME=asm_snes
-R2_PLUGIN_PATH=$(shell r2 -H R2_USER_PLUGINS)
-LIBEXT=$(shell r2 -H LIBEXT)
+R2_PLUGIN_PATH=$(shell rizin -H R2_USER_PLUGINS)
+LIBEXT=$(shell rizin -H LIBEXT)
 CFLAGS=-g -fPIC $(shell pkg-config --cflags r_anal)
 LDFLAGS=-shared $(shell pkg-config --libs r_anal)
 OBJS=$(NAME).o
@@ -53,7 +53,7 @@ uninstall:
 **asm_mycpu.c**
 
 ```c
-/* radare - LGPL - Copyright 2018 - user */
+/* rizin - LGPL - Copyright 2018 - user */
 
 #include <stdio.h>
 #include <string.h>
@@ -61,7 +61,7 @@ uninstall:
 #include <r_lib.h>
 #include <r_asm.h>
 
-static int disassemble(RAsm *a, RAsmOp *op, const ut8 *buf, int len) {
+static int disassemble(RzAsm *a, RzAsmOp *op, const ut8 *buf, int len) {
 	struct op_cmd cmd = {
 		.instr = "",
 		.operands = ""
@@ -75,7 +75,7 @@ static int disassemble(RAsm *a, RAsmOp *op, const ut8 *buf, int len) {
 	return op->size = ret;
 }
 
-RAsmPlugin r_asm_plugin_mycpu = {
+RzAsmPlugin r_asm_plugin_mycpu = {
 	.name = "mycpu",
 	.license = "LGPL3",
 	.desc = "MYCPU disassembly plugin",
@@ -86,7 +86,7 @@ RAsmPlugin r_asm_plugin_mycpu = {
 };
 
 #ifndef R2_PLUGIN_INCORE
-R_API RLibStruct radare_plugin = {
+R_API RLibStruct rizin_plugin = {
 	.type = R_LIB_TYPE_ASM,
 	.data = &r_asm_plugin_mycpu,
 	.version = R2_VERSION
@@ -94,14 +94,14 @@ R_API RLibStruct radare_plugin = {
 #endif
 ```
 
-After compiling radare2 will list this plugin in the output:
+After compiling rizin will list this plugin in the output:
 ```
 _d__  _8_32      mycpu        LGPL3   MYCPU
 ```
 
 ### Moving plugin into the tree
 
-Pushing a new architecture into the main branch of r2 requires to modify several files in order to make it fit into the way the rest of plugins are built.
+Pushing a new architecture into the main branch of rizin requires to modify several files in order to make it fit into the way the rest of plugins are built.
 
 List of affected files:
 
@@ -112,10 +112,10 @@ List of affected files:
 
 Check out how the NIOS II CPU disassembly plugin was implemented by reading those commits:
 
-Implement RAsm plugin:
-https://github.com/radareorg/radare2/commit/933dc0ef6ddfe44c88bbb261165bf8f8b531476b
+Implement RzAsm plugin:
+https://github.com/rizinorg/rizin/commit/933dc0ef6ddfe44c88bbb261165bf8f8b531476b
 
-Implement RAnal plugin:
-https://github.com/radareorg/radare2/commit/ad430f0d52fbe933e0830c49ee607e9b0e4ac8f2
+Implement RzAnalysis plugin:
+https://github.com/rizinorg/rizin/commit/ad430f0d52fbe933e0830c49ee607e9b0e4ac8f2
 
 

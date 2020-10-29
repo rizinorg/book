@@ -2,13 +2,13 @@
 
 Code analysis is a common technique used to extract information from assembly code.
 
-Radare2 has different code analysis techniques implemented in the core and available in different commands.
+Rizin has different code analysis techniques implemented in the core and available in different commands.
 
-As long as the whole functionalities of r2 are available with the API as well as using commands. This gives you the ability to implement your own analysis loops using any programming language, even with r2 oneliners, shellscripts, or analysis or core native plugins.
+As long as the whole functionalities of rizin are available with the API as well as using commands. This gives you the ability to implement your own analysis loops using any programming language, even with rizin oneliners, shellscripts, or analysis or core native plugins.
 
 The analysis will show up the internal data structures to identify basic blocks, function trees and to extract opcode-level information.
 
-The most common radare2 analysis command sequence is `aa`, which stands for "analyze all". That all is referring to all symbols and entry-points. If your binary is stripped you will need to use other commands like `aaa`, `aab`, `aar`, `aac` or so.
+The most common rizin analysis command sequence is `aa`, which stands for "analyze all". That all is referring to all symbols and entry-points. If your binary is stripped you will need to use other commands like `aaa`, `aab`, `aar`, `aac` or so.
 
 Take some time to understand what each command does and the results after running them to find the best one for your needs.
 
@@ -66,12 +66,12 @@ Take some time to understand what each command does and the results after runnin
 
 In this example, we analyze the whole file (`aa`) and then print disassembly of the `main()` function (`pdf`).
 The `aa` command belongs to the family of auto analysis commands and performs only the most basic
-auto analysis steps. In radare2 there are many different types of the auto analysis commands with a
+auto analysis steps. In rizin there are many different types of the auto analysis commands with a
 different analysis depth, including partial emulation: `aa`, `aaa`, `aab`, `aaaa`, ...
-There is also a mapping of those commands to the r2 CLI options: `r2 -A`, `r2 -AA`, and so on.
+There is also a mapping of those commands to the rizin CLI options: `rizin -A`, `rizin -AA`, and so on.
 
 It is a common sense that completely automated analysis can produce non sequitur results, thus
-radare2 provides separate commands for the particular stages of the analysis allowing fine-grained
+rizin provides separate commands for the particular stages of the analysis allowing fine-grained
 control of the analysis process. Moreover, there is a treasure trove of configuration variables
 for controlling the analysis outcomes. You can find them in `anal.*` and `emu.*`
 cfg variables' namespaces.
@@ -154,11 +154,11 @@ int code_block()
   return result;
 }
 ```
-then compile it with `gcc -c example.c -m32 -O0 -fno-pie`, we will get the object file `example.o`. open it with radare2. 
+then compile it with `gcc -c example.c -m32 -O0 -fno-pie`, we will get the object file `example.o`. open it with rizin.
 
 since we haven't analyzed it yet, the `pdf` command will not print out the disassembly here:
 ```
-$ r2 example.o 
+$ rizin example.o
 [0x08000034]> pdf
 p: Cannot find function at 0x08000034
 [0x08000034]> pd
@@ -192,7 +192,7 @@ create a function at 0x8000034 named code_block:
 ```
 
 In most cases, we use jump or call instructions as code block boundaries. so the range of first block is from `0x08000034 push ebp` to `0x08000048 jmp 0x8000052`.
-use `afb+` command to add it. 
+use `afb+` command to add it.
 
 ```
 [0x08000034]> afb+ code_block 0x8000034 0x800004a-0x8000034 0x8000052
@@ -238,14 +238,14 @@ There are 5 important program wide half-automated analysis commands:
  - `aar` - analyze data references
  - `aad` - analyze pointers to pointers references
 
-Those are only generic semi-automated reference searching algorithms. Radare2 provides a
+Those are only generic semi-automated reference searching algorithms. Rizin provides a
 wide choice of manual references' creation of any kind. For this fine-grained control
 you can use `ax` commands.
 
 ```
 Usage: ax[?d-l*]   # see also 'afx?'
 | ax              list refs
-| ax*             output radare commands
+| ax*             output rizin commands
 | ax addr [at]    add code ref pointing to addr (from curseek)
 | ax- [at]        clean all refs/refs from addr
 | ax-*            clean all refs/refs
@@ -267,7 +267,7 @@ Usage: ax[?d-l*]   # see also 'afx?'
 | axs addr [at]   add string ref
 ```
 
-The most commonly used `ax` commands are `axt` and `axf`, especially as a part of various r2pipe
+The most commonly used `ax` commands are `axt` and `axf`, especially as a part of various rz-pipe
 scripts. Lets say we see the string in the data or a code section and want to find all places
 it was referenced from, we should use `axt`:
 
@@ -289,7 +289,7 @@ sub.strlen_d50 0x5de0 [STRING] lea rcx, str.02x
 (nofunc) 0x17838 [CODE] jae str.02x
 ```
 
-There are also some useful commands under `axt`. Use `axtg` to generate radare2 commands which will help you to create graphs according to the XREFs.
+There are also some useful commands under `axt`. Use `axtg` to generate rizin commands which will help you to create graphs according to the XREFs.
 
 ```
 [0x08048320]> s main
@@ -299,7 +299,7 @@ agn 0x80483e0 "main"
 age 0x8048337 0x80483e0
 ```
 
-Use `axt*` to split the radare2 commands and set flags on those corresponding XREFs.
+Use `axt*` to split the rizin commands and set flags on those corresponding XREFs.
 
 Also under `ax` is `axg`, which finds the path between two points in the file by showing an XREFs graph to reach the location or function. For example:
 
@@ -311,7 +311,7 @@ Also under `ax` is `axg`, which finds the path between two points in the file by
     - 0x08048337 fcn 0x08048320 entry0
   - 0x08048425 fcn 0x080483e0 main
 ```
-Use `axg*` to generate radare2 commands which will help you to create graphs using `agn` and `age` commands, according to the XREFs.
+Use `axg*` to generate rizin commands which will help you to create graphs using `agn` and `age` commands, according to the XREFs.
 
 Apart from predefined algorithms to identify functions there is a way to specify
 a function prelude with a configuration option `anal.prelude`. For example, like
@@ -326,7 +326,7 @@ on x86\_64 platform. It should be specified _before_ any analysis commands.
 
 ## Configuration
 
-Radare2 allows to change the behavior of almost any analysis stages or commands.
+Rizin allows to change the behavior of almost any analysis stages or commands.
 There are different kinds of the configuration options:
 
  - Flow control
@@ -338,22 +338,22 @@ There are different kinds of the configuration options:
 
 ### Control flow configuration
 
-Two most commonly used options for changing the behavior of control flow analysis in radare2 are
-`anal.hasnext` and `anal.jmp.after`. The first one allows forcing radare2 to continue the analysis
+Two most commonly used options for changing the behavior of control flow analysis in rizin are
+`anal.hasnext` and `anal.jmp.after`. The first one allows forcing rizin to continue the analysis
 after the end of the function, even if the next chunk of the code wasn't called anywhere, thus
-analyzing all of the available functions. The latter one allows forcing radare2 to continue
+analyzing all of the available functions. The latter one allows forcing rizin to continue
 the analysis even after unconditional jumps.
 
 In addition to those we can also set `anal.jmp.indir` to follow the indirect jumps, continuing analysis;
 `anal.pushret` to analyze `push ...; ret` sequence as a jump; `anal.nopskip` to skip the NOP
 sequences at a function beginning.
 
-For now, radare2 also allows you to change the maximum basic block size with `anal.bb.maxsize` option
+For now, rizin also allows you to change the maximum basic block size with `anal.bb.maxsize` option
 . The default value just works in most use cases, but it's useful to increase that for example when
 dealing with obfuscated code. Beware that some of basic blocks
 control options may disappear in the future in favor of more automated ways to set those.
 
-For some unusual binaries or targets, there is an option `anal.noncode`. Radare2 doesn't try
+For some unusual binaries or targets, there is an option `anal.noncode`. Rizin doesn't try
 to analyze data sections as a code by default. But in some cases - malware, packed binaries,
 binaries for embedded systems, it is often a case. Thus - this option.
 
@@ -391,7 +391,7 @@ Please see `e anal.in=??` for the complete list.
 
 Jump tables are one of the trickiest targets in binary reverse engineering. There are hundreds
 of different types, the end result depending on the compiler/linker and LTO stages of optimization.
-Thus radare2 allows enabling some experimental jump tables detection algorithms using `anal.jmp.tbl`
+Thus rizin allows enabling some experimental jump tables detection algorithms using `anal.jmp.tbl`
 option. Eventually, algorithms moved into the default analysis loops once they start to work on
 every supported platform/target/testcase.
 Two more options can affect the jump tables analysis results too:
@@ -402,7 +402,7 @@ Two more options can affect the jump tables analysis results too:
 ### Platform specific controls
 
 There are two common problems when analyzing embedded targets: ARM/Thumb detection and MIPS GP
-value. In case of ARM binaries radare2 supports some auto-detection of ARM/Thumb mode switches, but
+value. In case of ARM binaries rizin supports some auto-detection of ARM/Thumb mode switches, but
 beware that it uses partial ESIL emulation, thus slowing the analysis process. If you will not
 like the results, particular functions' mode can be overridden with `afB` command.
 
@@ -431,7 +431,7 @@ This mode allows you to see the disassembly of each node separately, just naviga
 ## Analysis hints
 
 It is not an uncommon case that analysis results are not perfect even after you tried every single
-configuration option. This is where the "analysis hints" radare2 mechanism comes in. It allows
+configuration option. This is where the "analysis hints" rizin mechanism comes in. It allows
 to override some basic opcode or meta-information properties, or even to rewrite the whole opcode
 string. These commands are located under `ah` namespace:
 
@@ -443,7 +443,7 @@ Usage: ah[lba-]  Analysis Hints
 | ah.                list hints in human-readable format from current offset
 | ah-                remove all hints
 | ah- offset [size]  remove hints at given offset
-| ah* offset         list hints in radare commands format
+| ah* offset         list hints in rizin commands format
 | aha ppc @ 0x42     force arch ppc for all addrs >= 0x42 or until the next hint
 | aha 0 @ 0x84       disable the effect of arch hints for all addrs >= 0x84 or until the next hint
 | ahb 16 @ 0x42      force 16bit for all addrs >= 0x42 or until the next hint
@@ -505,7 +505,7 @@ which can be checked with `ah` command:
 ```
 
 Sometimes we need to override jump or call address, for example in case of tricky
-relocation, which is unknown for radare2, thus we can change the value manually.
+relocation, which is unknown for rizin, thus we can change the value manually.
 The current analysis information about a particular opcode can be checked with `ao` command.
 We can use `ahc` command for performing such a change:
 

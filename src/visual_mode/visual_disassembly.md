@@ -28,7 +28,7 @@ d → d
 ...
 ```
 
-To improve code readability you can change how radare2 presents numerical values in disassembly, by default most of disassembly display numerical value as hexadecimal. Sometimes you would like to view it as a decimal, binary or even custom defined constant. To change value format you can use `d` following by `i` then choose what base to work in, this is the equivalent to `ahi`:
+To improve code readability you can change how rizin presents numerical values in disassembly, by default most of disassembly display numerical value as hexadecimal. Sometimes you would like to view it as a decimal, binary or even custom defined constant. To change value format you can use `d` following by `i` then choose what base to work in, this is the equivalent to `ahi`:
 
 ```
 d → i → ...
@@ -41,7 +41,7 @@ d → i →  2
 
 ### Usage of the Cursor for Inserting/Patching...
 
-Remember that, to be able to actually edit files loaded in radare2, you have to start it with the `-w` option. Otherwise a file is opened in read-only mode.
+Remember that, to be able to actually edit files loaded in rizin, you have to start it with the `-w` option. Otherwise a file is opened in read-only mode.
 
 Pressing lowercase `c` toggles the cursor mode. When this mode is active, the currently selected byte (or byte range) is highlighted.
 
@@ -61,7 +61,7 @@ into the disassembly. To use it, seek or place the cursor at the wanted location
 
 ## XREF
 
-When radare2 has discovered a XREF during the analysis, it will show you the information in the Visual Disassembly using `XREF` tag:
+When rizin has discovered a XREF during the analysis, it will show you the information in the Visual Disassembly using `XREF` tag:
 
 ```
 ; DATA XREF from 0x00402e0e (unk)
@@ -110,7 +110,7 @@ changed using the `e` command. All configuration keys can also be edited through
 
 ## Visual Configuration Editor
 
-This HUD can be accessed using the `e` key in visual mode. The editor allows you to easily examine and change radare2's configuration. For example, if you want to change something about the disassembly display, select `asm` from the list, navigate to the item you wish to modify it, then select it by hitting `Enter`.
+This HUD can be accessed using the `e` key in visual mode. The editor allows you to easily examine and change rizin's configuration. For example, if you want to change something about the disassembly display, select `asm` from the list, navigate to the item you wish to modify it, then select it by hitting `Enter`.
 If the item is a boolean variable, it will toggle, otherwise you will be prompted to provide a new value.
 
 

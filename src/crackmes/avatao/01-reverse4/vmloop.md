@@ -12,8 +12,8 @@ reverse yet. The thing is that this function uses a jump table at 0x00400a74,
 
 ![vmloop bb-0a74](img/vmloop/bb-0a74.png)
 
-and r2 can't yet recognize jump tables
-([Issue 3201](https://github.com/radareorg/radare2/issues/3201)), so the analysis of
+and rizin can't yet recognize jump tables
+([Issue 3201](https://github.com/rizinorg/rizin/issues/3201)), so the analysis of
 this function is a bit incomplete. This means that we can't really use the graph
 view now, so either we just use visual mode, or fix those basic blocks. The
 entire function is just 542 bytes long, so we certainly could reverse it without
@@ -30,14 +30,14 @@ arguments and local variables was not entirely correct), and we also know that
 :> afvn local_3 bytecode
 ```
 
-Next, *sym.memory* is put into another local variable at *rbp-8* that r2 did not
+Next, *sym.memory* is put into another local variable at *rbp-8* that rizin did not
 recognize. So let's define it!
 
 ```
 :> afv 8 memory qword
 ```
 
-> ***r2 tip***: The *afv [idx] [name] [type]* command is used to define local
+> ***rizin tip***: The *afv [idx] [name] [type]* command is used to define local
 > variable at [frame pointer - idx] with the name [name] and type [type]. You
 > can also remove local variables using the *afv- [idx]* command.
 
@@ -62,7 +62,7 @@ series of qwords:
 [0x00400ec0]> Cd 8 @@=`?s $$ $$+8*0x17 8`
 ```
 
-> ***r2 tip***: Except for the *?s*, all parts of this command should be
+> ***rizin tip***: Except for the *?s*, all parts of this command should be
 > familiar now, but lets recap it! *Cd* defines a memory area as data, and 8 is
 > the size of that memory area. *@@* is an iterator that make the preceding
 > command run for every element that *@@* holds. In this example it holds a
@@ -133,7 +133,7 @@ instructions' ASCII values:
 Ok, so these offsets were not on the graph, so it is time to define basic blocks
 for them!
 
-> ***r2 tip***: You can define basic blocks using the *afb+* command. You have
+> ***rizin tip***: You can define basic blocks using the *afb+* command. You have
 > to supply what function the block belongs to, where does it start, and what is
 > its size. If the block ends in a jump, you have to specify where does it jump
 > too. If the jump is a conditional jump, the false branch's destination address
@@ -179,7 +179,7 @@ And here is the graph in its full glory after a bit of manual restructuring:
 I think it worth it, don't you? :) (Well, the restructuring did not really worth
 it, because it is apparently not stored when you save the project.)
 
-> ***r2 tip***: You can move the selected node around in graph view using the
+> ***rizin tip***: You can move the selected node around in graph view using the
 > HJKL keys.
 
 By the way, here is how IDA's graph of this same function looks like for comparison:
@@ -216,7 +216,7 @@ And a two parameters example:
 
 We should also realize that these blocks put the number of bytes they eat up of
 the bytecode (1 byte instruction + 1 or 2 bytes arguments = 2 or 3) into a local
-variable at 0xc. r2 did not recognize this local var, so lets do it manually!
+variable at 0xc. rizin did not recognize this local var, so lets do it manually!
 
 ```
 :> afv 0xc instr_ptr_step dword
@@ -280,19 +280,19 @@ The function this instruction calls is at offset 0x40080d, so lets seek there!
 [offset]> 0x40080d
 ```
 
-> ***r2 tip:*** In visual mode you can just hit \<Enter\> when the current line is
-> a jump or a call, and r2 will seek to the destination address.
+> ***rizin tip:*** In visual mode you can just hit \<Enter\> when the current line is
+> a jump or a call, and rizin will seek to the destination address.
 
 If we seek to that address from the graph mode, we are presented with a message
 that says "Not in a function. Type 'df' to define it here. This is because the
-function is called from a basic block r2 did not recognize, so r2 could not
+function is called from a basic block rizin did not recognize, so rizin could not
 find the function either. Lets obey, and type *df*! A function is indeed created, but
 we want some meaningful name for it. So press *dr* while still in visual mode,
 and name this function *instr_A*!
 
 ![instr_A minimap](img/instr_A/instr_A_minimap.png)
 
-> ***r2 tip:*** You should realize that these commands are all part of the same
+> ***rizin tip:*** You should realize that these commands are all part of the same
 > menu system in visual mode I was talking about when we first used *Cd* to
 > declare *sym.memory* as data.
 
@@ -329,7 +329,7 @@ This is the "M" branch:
 ![instr_A switch-M](img/instr_A/switch-M.png)
 
 It basically loads an address from offset 0x602088 and adds *arg2* to the byte
-at that address. As r2 kindly shows us in a comment, 0x602088 initially holds
+at that address. As rizin kindly shows us in a comment, 0x602088 initially holds
 the address of *sym.memory*, the area where we have to construct the "Such VM!
 MuCH reV3rse!" string. It is safe to assume that somehow we will be able to
 modify the value stored at 0x602088, so this "M" branch will be able to modify
@@ -366,9 +366,9 @@ instruction does the following:
 This function is not recognized either, so we have to manually define it like we
 did with *instr_A*. After we do, and take a look at the minimap, scroll through
 the basic blocks, it is pretty obvious that these two functions are very-very
-similar. We can use *radiff2* to see the difference.
+similar. We can use *rz-diff* to see the difference.
 
-> ***r2 tip:*** radiff2 is used to compare binary files. There's a few options
+> ***rizin tip:*** rz-diff is used to compare binary files. There's a few options
 > we can control the type of binary diffing the tool does, and to what kind of
 > output format we want. One of the cool features is that it can generate
 > [DarumGrim](http://www.darungrim.org/)-style bindiff graphs using the *-g*
@@ -380,16 +380,16 @@ graphs for comparing *instr_A* to *instr_S* and for comparing *instr_S* to
 *instr_A*.
 
 ```
-[0x00 ~]$ radiff2 -g 0x40080d,0x40089f  reverse4 reverse4 | xdot -
+[0x00 ~]$ rz-diff -g 0x40080d,0x40089f  reverse4 reverse4 | xdot -
 ```
 ![instr_S graph1](img/instr_S/graph1.png)
 
 ```
-[0x00 ~]$ radiff2 -g 0x40089f,0x40080d  reverse4 reverse4 | xdot -
+[0x00 ~]$ rz-diff -g 0x40089f,0x40080d  reverse4 reverse4 | xdot -
 ```
 ![instr_S graph2](img/instr_S/graph2.png)
 
-A sad truth reveals itself after a quick glance at these graphs: radiff2 is a
+A sad truth reveals itself after a quick glance at these graphs: rz-diff is a
 liar! In theory, grey boxes should be identical, yellow ones should differ only
 at some offsets, and red ones should differ seriously. Well this is obviously
 not the case here - e.g. the larger grey boxes are clearly not identical. This

@@ -27,16 +27,16 @@ The aim is to be able to express most of the common operations performed by CPUs
 
 ## Using ESIL
 
-r2's visual mode is great to inspect the ESIL evaluations.
+rizin's visual mode is great to inspect the ESIL evaluations.
 
 There are 3 environment variables that are important for watching what a program does:
 ```
 [0x00000000]> e emu.str = true
 ```
 
-`asm.emu` tells r2 if you want ESIL information to be displayed. If it is set to true, you will see comments appear to the right of your disassembly that tell you how the contents of registers and memory addresses are changed by the current instruction. For example, if you have an instruction that subtracts a value from a register it tells you what the value was before and what it becomes after. This is super useful so you don't have to sit there yourself and track which value goes where.
+`asm.emu` tells rizin if you want ESIL information to be displayed. If it is set to true, you will see comments appear to the right of your disassembly that tell you how the contents of registers and memory addresses are changed by the current instruction. For example, if you have an instruction that subtracts a value from a register it tells you what the value was before and what it becomes after. This is super useful so you don't have to sit there yourself and track which value goes where.
 
-One problem with this is that it is a lot of information to take in at once and sometimes you simply don't need it. r2 has a nice compromise for this. That is what the `emu.str` variable is for (`asm.emustr` on <= 2.2). Instead of this super verbose output with every register value, this only adds really useful information to the output, e.g., strings that are found at addresses a program uses or whether a jump is likely to be taken or not.
+One problem with this is that it is a lot of information to take in at once and sometimes you simply don't need it. rizin has a nice compromise for this. That is what the `emu.str` variable is for (`asm.emustr` on <= 2.2). Instead of this super verbose output with every register value, this only adds really useful information to the output, e.g., strings that are found at addresses a program uses or whether a jump is likely to be taken or not.
 
 The third important variable is `asm.esil`. This switches your disassembly to no longer show you the actual disassembled instructions, but instead now shows you corresponding ESIL expressions that describe what the instruction does.
 So if you want to take a look at how instructions are expressed in ESIL simply set "asm.esil" to true.
@@ -291,7 +291,7 @@ What to do with them? What about bit arithmetics if use variables instead of reg
 
 ### Floating Point Unit Support
 
-At the moment of this writing, ESIL does not yet support FPU. But you can implement support for unsupported instructions using r2pipe. Eventually we will get proper support for multimedia and floating point.
+At the moment of this writing, ESIL does not yet support FPU. But you can implement support for unsupported instructions using rz-pipe. Eventually we will get proper support for multimedia and floating point.
 
 ### Handling x86 REP Prefix in ESIL
 

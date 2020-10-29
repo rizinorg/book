@@ -10,10 +10,10 @@ Password: 1234
 Invalid Password!
 ```
 
-The first thing to check is if the password is just plaintext inside the file. In this case, we don't need to do any disassembly, and we can just use rabin2 with the -z flag to search for strings in the binary.
+The first thing to check is if the password is just plaintext inside the file. In this case, we don't need to do any disassembly, and we can just use rz-bin with the -z flag to search for strings in the binary.
 
 ```
-$ rabin2 -z ./crackme0x00
+$ rz-bin -z ./crackme0x00
 [Strings]
 nth paddr      vaddr      len size section type  string
 ―――――――――――――――――――――――――――――――――――――――――――――――――――――――

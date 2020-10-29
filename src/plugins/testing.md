@@ -1,15 +1,15 @@
 # Testing the plugin
 
-This plugin is used by rasm2 and r2. You can verify that the plugin is properly loaded with this command:
+This plugin is used by rz-asm and rizin. You can verify that the plugin is properly loaded with this command:
 ```
-$ rasm2 -L | grep mycpu
+$ rz-asm -L | grep mycpu
 _d  mycpu        My CPU disassembler  (LGPL3)
 ```
 
 Let's open an empty file using the 'mycpu' arch and write some random code there.
 
 ```
-$ r2 -
+$ rizin -
  -- I endians swap
 [0x00000000]> e asm.arch=mycpu
 [0x00000000]> woR
@@ -28,6 +28,6 @@ $ r2 -
 Yay! it works.. and the mandatory oneliner too!
 
 ```
-r2 -nqamycpu -cwoR -cpd' 10' -
+rizin -nqamycpu -cwoR -cpd' 10' -
 ```
 

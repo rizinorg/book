@@ -1,6 +1,6 @@
 # Calling Conventions
 
-Radare2 uses calling conventions to help in identifying function formal arguments and return types. 
+Rizin uses calling conventions to help in identifying function formal arguments and return types. 
 It is used also as a guide for basic function prototype and type propagation.
 
 ```

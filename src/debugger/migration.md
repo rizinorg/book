@@ -2,35 +2,35 @@
 
 ## How to run the program using the debugger ##
 
-`r2 -d /bin/ls` - start in debugger mode => [[video](http://asciinema.org/a/12022)]
+`rizin -d /bin/ls` - start in debugger mode => [[video](http://asciinema.org/a/12022)]
 
 ## How do I attach/detach to running process ? (gdb -p) ##
 
-`r2 -d <pid>` - attach to process
+`rizin -d <pid>` - attach to process
 
-`r2 ptrace://pid` - same as above, but only for io (not debugger backend hooked)
+`rizin ptrace://pid` - same as above, but only for io (not debugger backend hooked)
 
 `[0x7fff6ad90028]> o-225` - close fd=225 (listed in `o~[1]:0`)
 
-`r2 -D gdb gdb://localhost:1234` - attach to gdbserver
+`rizin -D gdb gdb://localhost:1234` - attach to gdbserver
 
-## How to set args/environment variable/load a specific libraries for the debugging session of radare
+## How to set args/environment variable/load a specific libraries for the debugging session of rizin
 
-Use `rarun2` (`libpath=$PWD:/tmp/lib`, `arg2=hello`, `setenv=FOO=BAR` ...) see `rarun2 -h` / `man rarun2`
+Use `rz-run` (`libpath=$PWD:/tmp/lib`, `arg2=hello`, `setenv=FOO=BAR` ...) see `rz-run -h` / `man rz-run`
 
-## How to script radare2 ?
+## How to script rizin ?
 
-`r2 -i <scriptfile> ...` - run a script **after** loading the file => [[video](http://asciinema.org/a/12020)]
+`rizin -i <scriptfile> ...` - run a script **after** loading the file => [[video](http://asciinema.org/a/12020)]
 
-`r2 -I <scriptfile> ...` - run a script **before** loading the file
+`rizin -I <scriptfile> ...` - run a script **before** loading the file
 
-`r2 -c $@ | awk $@`  - run through awk to get asm from function => [[link](http://sprunge.us/dEOK)]
+`rizin -c $@ | awk $@`  - run through awk to get asm from function => [[link](http://sprunge.us/dEOK)]
 
 `[0x80480423]> . scriptfile` - interpret this file => [[video](http://asciinema.org/a/12017)]
 
 `[0x80480423]> #!c` - enter C repl  (see `#!` to list all available RLang plugins)  => [[video](http://asciinema.org/a/12019)], everything have to be done in a oneliner or a .c file must be passed as an argument.
 
-To get `#!python` and much more, just build [radare2-bindings](https://github.com/radareorg/radare2-bindings)
+To get `#!python` and much more, just build [rizin-bindings](https://github.com/rizinorg/rizin-bindings)
 
 ## How to list Source code as in gdb list ?
 
@@ -38,7 +38,7 @@ To get `#!python` and much more, just build [radare2-bindings](https://github.co
 
 # shortcuts
 
-| Command       | IDA Pro       | radare2        | r2 (visual mode) | GDB | WinDbg |
+| Command       | IDA Pro       | rizin        | rizin (visual mode) | GDB | WinDbg |
 | ------------- | ------------- |----------------|------------------|-----|-----|
 |**Analysis** |               |                |
 |Analysis of everything        |`Automatically launched when opening a binary`            |`aaa or -A (aaaa or -AA for even experimental analysis)`           | `N/A`              |N/A              |N/A
@@ -64,16 +64,16 @@ To get `#!python` and much more, just build [radare2-bindings](https://github.co
 |define as undefined|`u`        |`C- [size]`     | `d-` or `du`     |N/A              |N/A
 |define as string|`A`           |`Cs [size]`     | `ds`             |N/A              |N/A
 |define as struct|`Alt+Q`       |`Cf [size]`     | `dF`             |N/A              |N/A
-|**Debugger**   |               |                |                | 
+|**Debugger**   |               |                |                |
 |Start Process/ Continue execution|`F9`    |`dc` | `F9`             | `r` and `c`             | `g`
 |Terminate Process|`Ctrl+F2`    |`dk 9`          | ?                | `kill`             | `q`
 |Detach         |`?`            | `o-`           | ?                | `detach`             |
 |step into      |`F7`           |`ds`            | `s`              | `n`             | `t`
 |step into 4 instructions | ?   | `ds 4`         | F7               | `n 4`             | `t 4`
-|step over      |`F8`           |`dso`           | `S`              | `s`             | `p` 
+|step over      |`F8`           |`dso`           | `S`              | `s`             | `p`
 |step until a specific address|?|`dsu <addr>`    | ?                | `s`             | `g <addr>`
 |Run until return|`Ctrl+F7`     |`dcr`           | ?                | `finish`             | `gu`
-|Run until cursor|`F4`          |[#249](https://github.com/radareorg/radare2/issues/249)| [#249](https://github.com/radareorg/radare2/issues/249) | N/A             | N/A
+|Run until cursor|`F4`          |[#249](https://github.com/rizinorg/rizin/issues/249)| [#249](https://github.com/rizinorg/rizin/issues/249) | N/A             | N/A
 |Show Backtrace |`?`            |`dbt`           | ?                | `bt`             |
 |display Register|On register Windows|`dr all`   | Shown in Visual mode | `info registers`             | `r`
 |display eax    |On register Windows |`dr?eax`   | Shown in Visual mode | `info registers eax`             | `r rax`
@@ -92,7 +92,7 @@ To get `#!python` and much more, just build [radare2-bindings](https://github.co
 |Sections/regions   | `pdb menu`           | `asm.dwarf.file`, `pdb.XX`)               | N/A                 |  add-symbol-file | r
 |**BackTrace**   |            |                |                  |
 |Stack Trace   | N/A           | `dbt`               | N/A                 | `bt` | `k`
-|Stack Trace in Json   | N/A           | `dbtj`               | N/A                 |  | 
+|Stack Trace in Json   | N/A           | `dbtj`               | N/A                 |  |
 |Partial Backtrace (innermost)  | N/A           | `dbt` (`dbg.btdepth` `dbg.btalgo`)               | N/A                 | bt <N> | k <N>
 |Partial Backtrace (outermost)  | N/A           | `dbt` (`dbg.btdepth` `dbg.btalgo`)               | N/A                 | bt -<N> |
 |Stacktrace for all threads  | N/A           | `dbt@t`               | N/A                 | `thread apply all bt` | `~* k`
@@ -125,8 +125,8 @@ This can be done using 2 commands:
 2. then use `dp` to select what process you want to debug.
 
 # Common features
-- r2 accepts FLIRT signatures
-- r2 can connect to GDB, LLVM and WinDbg
-- r2 can write/patch in place
-- r2 have fortunes and [s]easter eggs[/s]balls of steel
-- r2 can do basic loading of ELF core files from the box and MDMP (Windows minidumps)
+- rizin accepts FLIRT signatures
+- rizin can connect to GDB, LLVM and WinDbg
+- rizin can write/patch in place
+- rizin have fortunes and [s]easter eggs[/s]balls of steel
+- rizin can do basic loading of ELF core files from the box and MDMP (Windows minidumps)

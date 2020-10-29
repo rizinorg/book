@@ -1,6 +1,6 @@
 # Heap
 
-radare2's `dm` subcommands can also display a map of the heap which is useful for those who are interested in inspecting the heap and its content. Simply execute `dmh` to show a map of the heap:
+rizin's `dm` subcommands can also display a map of the heap which is useful for those who are interested in inspecting the heap and its content. Simply execute `dmh` to show a map of the heap:
 
 ```
 [0x7fae46236ca6]> dmh

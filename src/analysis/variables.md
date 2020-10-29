@@ -1,6 +1,6 @@
 # Managing variables
 
-Radare2 allows managing local variables, no matter their location, stack or registers.
+Rizin allows managing local variables, no matter their location, stack or registers.
 The variables' auto analysis is enabled by default but can be disabled with `anal.vars`
 configuration option.
 
@@ -8,12 +8,12 @@ The main variables commands are located in `afv` namespace:
 
 ```
 Usage: afv  [rbs]
-| afv*                          output r2 command to add args/locals to flagspace
+| afv*                          output rizin command to add args/locals to flagspace
 | afv-([name])                  remove all or given var
 | afv=                          list function variables and arguments with disasm refs
 | afva                          analyze function arguments/locals
 | afvb[?]                       manipulate bp based arguments/locals
-| afvd name                     output r2 command for displaying the value of args/locals in the debugger
+| afvd name                     output rizin command for displaying the value of args/locals in the debugger
 | afvf                          show BP relative stackframe variables
 | afvn [new_name] ([old_name])  rename argument/local
 | afvr[?]                       manipulate register based arguments
@@ -32,7 +32,7 @@ If we check the help for `afvr` we will get the way two others commands works to
 ```
 |Usage: afvr [reg] [type] [name]
 | afvr                        list register based arguments
-| afvr*                       same as afvr but in r2 commands
+| afvr*                       same as afvr but in rizin commands
 | afvr [reg] [name] ([type])  define register arguments
 | afvrj                       return list of register arguments in JSON format
 | afvr- [name]                delete register arguments at the given index
@@ -40,7 +40,7 @@ If we check the help for `afvr` we will get the way two others commands works to
 | afvrs [reg] [addr]          define argument set reference
 ```
 
-Like many other things variables detection is performed by radare2 automatically, but results
+Like many other things variables detection is performed by rizin automatically, but results
 can be changed with those arguments/variables control commands. This kind of analysis
 relies heavily on preloaded function prototypes and the calling-convention, thus loading symbols
 can improve it. Moreover, after changing something we can rerun variables analysis with
@@ -117,7 +117,7 @@ local_32h
 
 The type inference for local variables and arguments is well integrated with the command `afta`.
 
-Let's see an example of this with a simple [hello_world](https://github.com/radareorg/radare2book/tree/master/examples/hello_world) binary
+Let's see an example of this with a simple [hello_world](https://github.com/rizinorg/rizinbook/tree/master/examples/hello_world) binary
 
 ```
 [0x000007aa]> pdf
@@ -179,4 +179,4 @@ spec.win.u32=unsigned int
 ```
 Then change your default specification to newly created one using this config variable `e anal.spec = win`
 
-For more information about primitive and user-defined types support in radare2 refer to [types](types.md) chapter.
+For more information about primitive and user-defined types support in rizin refer to [types](types.md) chapter.

@@ -1,6 +1,6 @@
 # Plugins
 
-radare2 is implemented on top of a bunch of libraries, almost every of those
+rizin is implemented on top of a bunch of libraries, almost every of those
 libraries support plugins to extend the capabilities of the library or add
 support for different targets.
 
@@ -26,15 +26,15 @@ reg       # arch register logic
 
 ## Listing plugins
 
-Some r2 tools have the `-L` flag to list all the plugins associated to the
+Some rizin tools have the `-L` flag to list all the plugins associated to the
 functionality.
 ```
-rasm2 -L    # list asm plugins
-r2 -L       # list io plugins
-rabin2 -L   # list bin plugins
-rahash2 -L  # list hash/crypto/encoding plugins
+rz-asm -L   # list asm plugins
+rizin -L    # list io plugins
+rz-bin -L   # list bin plugins
+rz-hash -L  # list hash/crypto/encoding plugins
 ```
-There are more plugins in r2land, we can list them from inside r2, and this is
+There are more plugins in rizin ecosystem, we can list them from inside rizin, and this is
 done by using the `L` suffix.
 
 Those are some of the commands:
@@ -54,5 +54,5 @@ e anal.arch=?  # list analysis plugins
 ```
 ## Notes
 
-Note there are some inconsistencies that most likely will be fixed in the future radare2 versions.
+Note there are some inconsistencies that most likely will be fixed in the future rizin versions.
 

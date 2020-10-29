@@ -31,10 +31,10 @@ rsp = 0x7fff515923c0
 [0x4A13B8C0]> dr rip = esp   ; set 'rip' as esp
 ```
 
-Interaction between a plugin and the core is done by commands returning radare instructions. This is used, for example, to set flags in the core to set  values of registers.
+Interaction between a plugin and the core is done by commands returning rizin instructions. This is used, for example, to set flags in the core to set  values of registers.
 
 ```
-[0x7f0f2dbae630]> dr*      ; Appending '*' will show radare commands
+[0x7f0f2dbae630]> dr*      ; Appending '*' will show rizin commands
 f r15 1 0x0
 f r14 1 0x0
 f r13 1 0x0

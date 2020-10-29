@@ -1,12 +1,12 @@
 ## Comparing Bytes
 
-For most generic reverse engineering tasks like finding the differences between two binary files, which bytes has changed, find differences in the graphs of the code analysis results, and other diffing operations you can just use radiff2:
+For most generic reverse engineering tasks like finding the differences between two binary files, which bytes has changed, find differences in the graphs of the code analysis results, and other diffing operations you can just use rz-diff:
 
 ```
-$ radiff2 -h
+$ rz-diff -h
 ```
 
-Inside r2, the functionalities exposed by radiff2 are available with the `c` command.
+Inside rizin, the functionalities exposed by rz-diff are available with the `c` command.
 
 `c` (short for "compare") allows you to compare arrays of bytes from different sources. The command accepts input in a number of formats and then compares it against values found at current seek position.
 
@@ -14,7 +14,7 @@ Inside r2, the functionalities exposed by radiff2 are available with the `c` com
 [0x00404888]> c?
 Usage: c[?dfx] [argument]   # Compare
 | c [string]               Compare a plain with escaped chars string
-| c* [string]              Same as above, but printing r2 commands instead
+| c* [string]              Same as above, but printing rizin commands instead
 | c1 [addr]                Compare 8 bits from current offset
 | c2 [value]               Compare a word from a math expression
 | c4 [value]               Compare a doubleword from a math expression
@@ -32,7 +32,7 @@ Usage: c[?dfx] [argument]   # Compare
 | cV[1248] [addr] @at      Compare 1,2,4,8-byte address contents (silent, return in $?)
 | cw[?] [us?] [...]        Compare memory watchers
 | cx [hexpair]             Compare hexpair string (use '.' as nibble wildcard)
-| cx* [hexpair]            Compare hexpair string (output r2 commands)
+| cx* [hexpair]            Compare hexpair string (output rizin commands)
 | cX [addr]                Like 'cc' but using hexdiff output
 | cd [dir]                 chdir
 | cl|cls|clear             Clear screen, (clear0 to goto 0, 0 only)
@@ -87,7 +87,7 @@ Compare 2/4 equal bytes
 You can use the compare command to find differences between a current block and a file previously dumped to a disk:
 
 ```
-r2 /bin/true
+rizin /bin/true
 [0x08049A80]> s 0
 [0x08048000]> cf /bin/true
 Compare 512/512 equal bytes

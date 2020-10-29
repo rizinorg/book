@@ -4,7 +4,7 @@ When analyzing data it is usually handy to have different ways to represent it i
 
 Representing basic block edges, function calls, string references as graphs show a very clear view of this information.
 
-Radare2 supports various types of graph available through commands starting with `ag`:
+Rizin supports various types of graph available through commands starting with `ag`:
 
 ```
 [0x00005000]> ag?
@@ -27,7 +27,7 @@ Radare2 supports various types of graph available through commands starting with
 
 Output formats:
 | <blank>                 Ascii art
-| *                       r2 commands
+| *                       rizin commands
 | d                       Graphviz dot
 | g                       Graph Modelling Language (gml)
 | j                       json ('J' for formatted disassembly)
@@ -48,7 +48,7 @@ Here's a short description for every output format available:
 
 Displays the graph directly to stdout using ASCII art to represent blocks and edges.
 
-_Warning: displaying large graphs directly to stdout might prove to be computationally expensive and will make r2 not responsive for some time. In case of a doubt, prefer using the interactive view (explained below)._
+_Warning: displaying large graphs directly to stdout might prove to be computationally expensive and will make rizin not responsive for some time. In case of a doubt, prefer using the interactive view (explained below)._
 
 ### Interactive Ascii Art (e.g. `agfv`)
 
@@ -76,23 +76,23 @@ Prints the GML source code representing the graph, which can be interpreted by p
 
 ### SDB key-value (e.g. `agfk`)
 
-Prints key-value strings representing the graph that was stored by sdb (radare2's string database).
+Prints key-value strings representing the graph that was stored by sdb (rizin's string database).
 
 ### R2 custom graph commands (e.g. `agf*`)
 
-Prints r2 commands that would recreate the desired graph. The commands to construct the graph are `agn [title] [body]` to add a node and `age [title1] [title2]` to add an edge.
+Prints rizin commands that would recreate the desired graph. The commands to construct the graph are `agn [title] [body]` to add a node and `age [title1] [title2]` to add an edge.
 The `[body]` field can be expressed in base64 to include special formatting (such as newlines).
 
 To easily execute the printed commands, it is possible to prepend a dot to the command (`.agf*`).
 
 ### Web / image	(e.g. `agfw`)
 
-Radare2 will convert the graph to dot format, use the `dot` program to convert it to a `.gif` image and then try to find an already installed viewer on your system (`xdg-open`, `open`, ...) and display the graph there.
+Rizin will convert the graph to dot format, use the `dot` program to convert it to a `.gif` image and then try to find an already installed viewer on your system (`xdg-open`, `open`, ...) and display the graph there.
 
 The extension of the output image can be set with the `graph.extension` config variable. Available extensions are `png, jpg, gif, pdf, ps`.
 
 _Note: for particularly large graphs, the most recommended extension is `svg` as it will produce images of much smaller size_
 
-If `graph.web` config variable is enabled, radare2 will try to display the graph using the browser (_this feature is experimental and unfinished, and
+If `graph.web` config variable is enabled, rizin will try to display the graph using the browser (_this feature is experimental and unfinished, and
 disabled by default._)
 

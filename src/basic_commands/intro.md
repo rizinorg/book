@@ -1,6 +1,6 @@
 # Basic Commands
 
-Most command names in radare are derived from action names. They should be easy to remember, as they are short. Actually, all commands are single letters. Subcommands or related commands are specified using the second character of the command name. For example, `/ foo` is a command to search plain string, while `/x 90 90` is used to look for hexadecimal pairs.
+Most command names in rizin are derived from action names. They should be easy to remember, as they are short. Actually, all commands are single letters. Subcommands or related commands are specified using the second character of the command name. For example, `/ foo` is a command to search plain string, while `/x 90 90` is used to look for hexadecimal pairs.
 
 The general format for a valid command (as explained in the [Command Format](../first_steps/command_format.md) chapter) looks like this:
 
@@ -17,7 +17,7 @@ For example,
 If a command starts with `=!`, the rest of the string is passed to the currently loaded IO plugin (a debugger, for example). Most plugins provide help messages with `=!?` or `=!help`.
 
 ```
-$ r2 -d /bin/ls
+$ rizin -d /bin/ls
 > =!help      ; handled by the IO plugin
 ```
 

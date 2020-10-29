@@ -1,6 +1,6 @@
 ## Print Modes
 
-One of the key features of radare2 is displaying information in many formats. The goal is to offer a selection of display choices to interpret binary data in the best possible way.
+One of the key features of rizin is displaying information in many formats. The goal is to offer a selection of display choices to interpret binary data in the best possible way.
 
 Binary data can be represented as integers, shorts, longs, floats, timestamps, hexpair strings, or more complex formats like C structures, disassembly listings, decompilation listing, be a result of an external processing...
 
@@ -231,7 +231,7 @@ Some examples are below:
 Valid print code formats for human-readable languages are:
 
 * `pc`     C
-* `pc*`    print 'wx' r2 commands
+* `pc*`    print 'wx' rizin commands
 * `pch`    C half-words (2 byte)
 * `pcw`    C words (4 byte)
 * `pcd`    C dwords (8 byte)
@@ -271,7 +271,7 @@ That cstring can be used in many programming languages, not just C.
 
 ### Strings
 
-Strings are probably one of the most important entry points when starting to reverse engineer a program because they usually reference information about functions' actions (asserts, debug or info messages...). Therefore, radare supports various string formats:
+Strings are probably one of the most important entry points when starting to reverse engineer a program because they usually reference information about functions' actions (asserts, debug or info messages...). Therefore, rizin supports various string formats:
 
 ```
 [0x00000000]> ps?
@@ -335,7 +335,7 @@ This can be used to look at the arguments passed to a function. To achieve this,
 A practical example for using `pf` on a binary of a GStreamer plugin:
 
 ```
-$ radare ~/.gstreamer-0.10/plugins/libgstflumms.so
+$ rizin ~/.gstreamer-0.10/plugins/libgstflumms.so
 [0x000028A0]> seek sym.gst_plugin_desc
 [0x000185E0]> pf iissxsssss major minor name desc _init version \
  license source package origin

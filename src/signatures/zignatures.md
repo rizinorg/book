@@ -1,6 +1,6 @@
 # Signatures
 
-Radare2 has its own format of the signatures, allowing to both load/apply and
+Rizin has its own format of the signatures, allowing to both load/apply and
 create them on the fly. They are available under the `z` command namespace:
 
 ```
@@ -9,7 +9,7 @@ Usage: z[*j-aof/cs] [args]   # Manage zignatures
 | z            show zignatures
 | z.           find matching zignatures in current offset
 | zb[?][n=5]   search for best match
-| z*           show zignatures in radare format
+| z*           show zignatures in rizin format
 | zq           show zignatures in quiet mode
 | zj           show zignatures in json format
 | zk           show zignatures in sdb format
@@ -29,7 +29,7 @@ from the compressed SDB file using `zoz` command.
 
 To create signature you need to make function first, then you can create it from the function:
 ```
-r2 /bin/ls
+rizin /bin/ls
 [0x000051c0]> aaa # this creates functions, including 'entry0'
 [0x000051c0]> zaf entry0 entry
 [0x000051c0]> z
@@ -66,7 +66,7 @@ If you want, instead, to save all created signatures, you need to save it into t
 
 Then we can apply them. Lets open a file again:
 ```
-r2 /bin/ls
+rizin /bin/ls
  -- Log On. Hack In. Go Anywhere. Get Everything.
 [0x000051c0]> zo myentry
 [0x000051c0]> z
@@ -106,7 +106,7 @@ hits: 1
 ```
 We are setting the search mode to `io.section` (it was `file` by default) to search in the current
 section (assuming we are currently in the `.text` section of course).
-Now we can check, what radare2 found for us:
+Now we can check, what rizin found for us:
 ```
 [0x000051c0]> pd 5
 ;-- entry0:
@@ -124,7 +124,7 @@ Here we can see the comment of `entry0`, which is taken from the ELF parsing, bu
 Signatures configuration stored in the `zign.` config vars' namespace:
 ```
 [0x000051c0]> e? zign.
-       zign.autoload: Autoload all zignatures located in ~/.local/share/radare2/zigns
+       zign.autoload: Autoload all zignatures located in ~/.local/share/rizin/zigns
           zign.bytes: Use bytes patterns for matching
    zign.diff.bthresh: Threshold for diffing zign bytes [0, 1] (see zc?)
    zign.diff.gthresh: Threshold for diffing zign graphs [0, 1] (see zc?)

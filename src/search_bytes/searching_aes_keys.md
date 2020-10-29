@@ -1,9 +1,9 @@
 ## Searching for AES Keys
 
-Thanks to Victor Muñoz, radare2 now has support of the algorithm he developed, capable of finding **expanded AES** keys with `/Ca` command. It searches from current seek position up to the `search.distance` limit, or until end of file is reached. You can interrupt current search by pressing `Ctrl-C`. For example, to look for AES keys in physical memory of your system:
+Thanks to Victor Muñoz, rizin now has support of the algorithm he developed, capable of finding **expanded AES** keys with `/Ca` command. It searches from current seek position up to the `search.distance` limit, or until end of file is reached. You can interrupt current search by pressing `Ctrl-C`. For example, to look for AES keys in physical memory of your system:
 
 ```
-$ sudo r2 /dev/mem
+$ sudo rizin /dev/mem
 [0x00000000]> /ca
 0 AES keys found
 ```
@@ -24,7 +24,7 @@ hits: 0
 010 0x000096d4 0x000196d4 GLOBAL    OBJ   16 AES_KEY
 ```
 
-Other than that, AES keys might show up in different ways in the binary: encrypted, hidden by another encrypting routine, so there's no absolute way other than understanding the binary being analized. For instance, `p=e` might give some hints if high(er) entropy sections are found trying to cover up a hardcoded secret. As an example on entropy searching, since radare 3.2.0, there's the possibility to delimit entropy sections for later use like so:
+Other than that, AES keys might show up in different ways in the binary: encrypted, hidden by another encrypting routine, so there's no absolute way other than understanding the binary being analized. For instance, `p=e` might give some hints if high(er) entropy sections are found trying to cover up a hardcoded secret. As an example on entropy searching, since rizin 3.2.0, there's the possibility to delimit entropy sections for later use like so:
 
 ```
 [0x00000000]> b

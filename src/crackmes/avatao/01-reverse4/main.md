@@ -9,18 +9,18 @@ that:
 [0x00400c63]>
 ```
 
-> ***r2 tip:*** You can go to any offset, flag, expression, etc. in the
+> ***rizin tip:*** You can go to any offset, flag, expression, etc. in the
 > executable using the *s* command (seek). You can use references, like *$$*
 > (current offset), you can undo (*s-*) or redo (*s+*) seeks, search strings
 > (*s/ [string]*) or hex values (*s/x 4142*), and a lot of other useful stuff.
 > Make sure to check out *s?*!
 
 Now that we are at the beginning of the main function, we could use *p* to show
-a disassembly (*pd*, *pdf*), but r2 can do something much cooler: it has a
+a disassembly (*pd*, *pdf*), but rizin can do something much cooler: it has a
 visual mode, and it can display graphs similar to IDA, but way cooler, since
 they are ASCII-art graphs :)
 
-> ***r2 tip:*** The command family *p* is used to print stuff. For example it can
+> ***rizin tip:*** The command family *p* is used to print stuff. For example it can
 > show disassembly (*pd*), disassembly of the current function (*pdf*), print
 > strings (*ps*), hexdump (*px*), base64 encode/decode data (*p6e*, *p6d*), or
 > print raw bytes (*pr*) so you can for example dump parts of the binary to other
@@ -31,7 +31,7 @@ look at a function:
 
 ![main functions's minimap](img/main/main_minimap.png)
 
-> ***r2 tip:*** With command *V* you can enter the so-called visual mode, which
+> ***rizin tip:*** With command *V* you can enter the so-called visual mode, which
 > has several views. You can switch between them using *p* and *P*. The graph
 > view can be displayed by hitting *V* in visual mode (or using *VV* at the
 > prompt).
@@ -58,7 +58,7 @@ We can see that the program reads a word (2 bytes) into the local variable named
 3000 0xbb8 05670 2.9K 0000:0bb8 3000 10111000 3000.0 0.000000f 0.000000
 ```
 
-> ***r2 tip***: yep, *?* will evaluate expressions, and print the result in
+> ***rizin tip***: yep, *?* will evaluate expressions, and print the result in
 > various formats.
 
 If the value is greater than 3000, then it will be forced to be 3000:
@@ -71,14 +71,14 @@ There are a few things happening in the next block:
 
 First, the "Size of data: " message we saw when we run the program is printed.
 So now we know that the local variable *local_10_6* is the size of the input
-data - so lets name it accordingly (remember, you can open the r2 shell from
+data - so lets name it accordingly (remember, you can open the rizin shell from
 visual mode using the *:* key!):
 
 ```
 :> afvn local_10_6 input_size
 ```
 
-> ***r2 tip***: The *af* command family is used to analyze functions. This
+> ***rizin tip***: The *af* command family is used to analyze functions. This
 > includes manipulating arguments and local variables too, which is accessible
 > via the *afv* commands. You can list function arguments (*afa*),  local
 > variables (*afv*), or you can even rename them (*afan*, *afvn*). Of course
@@ -111,7 +111,7 @@ Since it probably will be important later on, we should label it:
 :> f sym.memory 0x200 0x602120
 ```
 
-> ***r2 tip***: Flags can be managed using the *f* command family. We've just
+> ***rizin tip***: Flags can be managed using the *f* command family. We've just
 > added the flag sym.memory to a 0x200 bytes long memory area at 0x602120. It is
 > also possible to remove (*f-name*), rename (*fr [old] [new]*), add comment
 > (*fC [name] [cmt]*) or even color (*fc [name] [color]*) flags.
@@ -123,7 +123,7 @@ show up as a hexdump in disassembly view:
 :> Cd 0x200 @ sym.memory
 ```
 
-> ***r2 tip***: The command family *C* is used to manage metadata. You can set
+> ***rizin tip***: The command family *C* is used to manage metadata. You can set
 > (*CC*) or edit (*CC*) comments, declare memory areas as data (*Cd*), strings
 > (*Cs*), etc. These commands can also be issued via a menu in visual mode
 > invoked by pressing *d*.
@@ -146,7 +146,7 @@ stuff according to their purpose (just like when you are writing programs).
 :> afvn input_data bytecode
 ```
 
-> ***r2 tip***: The *af* command is used to analyze a function with a given name
+> ***rizin tip***: The *af* command is used to analyze a function with a given name
 > at the given address. The other two commands should be familiar from earlier.
 
 After renaming local variables, flagging that memory area, and renaming the VM
@@ -228,7 +228,7 @@ more checks:
 This piece of code may look a bit strange if you are not familiar with x86_64
 specific stuff. In particular, we are talking about RIP-relative addressing,
 where offsets are described as displacements from the current instruction
-pointer, which makes implementing PIE easier. Anyways, r2 is nice enough to
+pointer, which makes implementing PIE easier. Anyways, rizin is nice enough to
 display the actual address (0x602104). Got the address, flag it!
 
 ```
@@ -236,7 +236,7 @@ display the actual address (0x602104). Got the address, flag it!
 ```
 
 Keep in mind though, that if RIP-relative addressing is used, flags won't appear
-directly in the disassembly, but r2 displays them as comments:
+directly in the disassembly, but rizin displays them as comments:
 
 ![main bb-0d6b_meta](img/main/bb-0d6b_meta.png)
 

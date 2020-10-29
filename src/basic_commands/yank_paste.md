@@ -1,6 +1,6 @@
 ## Yank/Paste
 
-Radare2 has an internal clipboard to save and write portions of memory loaded from the current io layer.
+Rizin has an internal clipboard to save and write portions of memory loaded from the current io layer.
 
 This clipboard can be manipulated with the `y` command.
 
@@ -21,7 +21,7 @@ Usage: y[ptxy] [len] [[@]addr]   # See wd? for memcpy, same as 'yf'.
 | y 16 @ 0x200    copy 16 bytes into clipboard from 0x200
 | y 16            copy 16 bytes into clipboard
 | y               show yank buffer information (srcoff len bytes)
-| y*              print in r2 commands what's been yanked
+| y*              print in rizin commands what's been yanked
 | yf 64 0x200     copy file 64 bytes from 0x200 from file
 | yfa file copy   copy all bytes from file (opens w/ io)
 | yfx 10203040    yank from hexpairs (same as ywx)

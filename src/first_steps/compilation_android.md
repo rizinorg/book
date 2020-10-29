@@ -1,6 +1,6 @@
 ## Android
 
-Radare2 can be cross-compiled for other architectures/systems as well, like Android.
+Rizin can be cross-compiled for other architectures/systems as well, like Android.
 
 ### Prerequisites
 
@@ -21,7 +21,7 @@ Download the Android NDK from the [official site](https://developer.android.com/
 ##### Specify NDK base path
 
 ```
-$ echo NDK=/tmp/android-ndk  > ~/.r2androidrc
+$ echo NDK=/tmp/android-ndk  > ~/.rzandroidrc
 ```
 
 ##### Compile + create tar.gz + push it to connected android device
@@ -74,11 +74,11 @@ A bit of explanation about all the options:
   to properly set LD_* environment variables in your Android environment to make
   it find the right libraries. Binaries have everything they need inside.
 * `-Dblob=true`: it tells meson to compile just one binary with all the needed
-  code for running `radare2`, `rabin2`, `rasm2`, etc. and creates symbolic links to
+  code for running `rizin`, `rz-bin`, `rz-asm`, etc. and creates symbolic links to
   those names. This avoids creating many statically compiled large binaries and
-  just create one that provides all features. You will still have `rabin2`,
-  `rasm2`, `rax2`, etc. but they are just symlinks to `radare2`.
-* `--cross-file ./meson-android.ini`: it describes how to compile radare2 for Android
+  just create one that provides all features. You will still have `rz-bin`,
+  `rz-asm`, `rz-ax`, etc. but they are just symlinks to `rizin`.
+* `--cross-file ./meson-android.ini`: it describes how to compile rizin for Android
 
 Then compile and install the project:
 ```
@@ -88,15 +88,15 @@ $ ninja -C build install
 
 ##### Move files to your android device and enjoy
 
-At this point you can copy the generated files in /tmp/android-dir to your Android device and running radare2 from it.
+At this point you can copy the generated files in /tmp/android-dir to your Android device and running rizin from it.
 For example:
 ```
-$ cd /tmp && tar -cvf radare2-android.tar.gz android-dir
-$ adb push radare2-android.tar.gz /data/local/tmp
+$ cd /tmp && tar -cvf rizin-android.tar.gz android-dir
+$ adb push rizin-android.tar.gz /data/local/tmp
 $ adb shell
 DEVICE:/ $ cd /data/local/tmp
-DEVICE:/data/local/tmp $ tar xvf radare2-android.tar.gz
-DEVICE:/data/local/tmp $ ./android-dir/bin/radare2
-Usage: r2 [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i file]
+DEVICE:/data/local/tmp $ tar xvf rizin-android.tar.gz
+DEVICE:/data/local/tmp $ ./android-dir/bin/rizin
+Usage: rizin [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i file]
           [-s addr] [-B baddr] [-m maddr] [-c cmd] [-e k=v] file|pid|-|--|=
 ```

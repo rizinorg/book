@@ -1,18 +1,18 @@
 ## Contributing
 
-### Radare2 Book
+### Rizin Book
 
-If you want to contribute to the Radare2 book, you can do it at the [Github repository](https://github.com/radareorg/radare2book).
+If you want to contribute to the Rizin book, you can do it at the [Github repository](https://github.com/rizinorg/rizinbook).
 Suggested contributions include:
 
 * Crackme writeups
 * CTF writeups
-* Documentation on how to use Radare2
-* Documentation on developing for Radare2
-* Conference presentations/workshops using Radare2
-* Missing content from the Radare1 book updated to Radare2
+* Documentation on how to use Rizin
+* Documentation on developing for Rizin
+* Conference presentations/workshops using Rizin
+* Missing content from the Radare1 book updated to Rizin
 
-Please get permission to port any content you do not own/did not create before you put it in the Radare2 book.
+Please get permission to port any content you do not own/did not create before you put it in the Rizin book.
 
-See <https://github.com/radareorg/radare2/blob/master/DEVELOPERS.md> for general help on contributing to radare2.
+See <https://github.com/rizinorg/rizin/blob/master/DEVELOPERS.md> for general help on contributing to rizin.
 

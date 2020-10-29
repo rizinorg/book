@@ -29,10 +29,10 @@ Usage: w[x] [str] [<file] [<<EOF] [@addr]
 | wd [off] [n]         duplicate N bytes from offset at current seek (memcpy) (see y?)
 | we[?] [nNsxX] [arg]  extend write operations (insert instead of replace)
 | wf[fs] -|file        write contents of file at current offset
-| wh r2                whereis/which shell command
+| wh rizin                whereis/which shell command
 | wm f0ff              set binary mask hexpair to be used as cyclic write mask
 | wo[?] hex            write in block with operation. 'wo?' fmi
-| wp[?] -|file         apply radare patch file. See wp? fmi
+| wp[?] -|file         apply rizin patch file. See wp? fmi
 | wr 10                write 10 random bytes
 | ws pstring           write 1 byte for length and then the string
 | wt[f][?] file [sz]   write to file (from current seek, blocksize or sz bytes)
@@ -81,7 +81,7 @@ an operator. The command is applied to the current block. Supported operators in
 |  wo4  4=  4 byte endian swap
 ```
 
-It is possible to implement cipher-algorithms using radare core primitives and `wo`. A sample session performing xor(90) + add(01, 02):
+It is possible to implement cipher-algorithms using rizin core primitives and `wo`. A sample session performing xor(90) + add(01, 02):
 
 ```
 [0x7fcd6a891630]> px

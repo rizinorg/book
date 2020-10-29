@@ -1,14 +1,14 @@
 ## Mapping Files
 
-Radare's I/O subsystem allows you to map the contents of files into the same I/O space used to contain a loaded binary. New contents can be placed at random offsets.
+Rizin's I/O subsystem allows you to map the contents of files into the same I/O space used to contain a loaded binary. New contents can be placed at random offsets.
 
 The `o` command permits the user to open a file, this is mapped at offset 0 unless it has a known binary header and then the maps are created in virtual addresses.
 
 Sometimes, we want to rebase a binary, or maybe we want to load or map the file in a different address.
 
-When launching r2, the base address can be changed with the `-B` flag. But you must notice the difference when opening files with unknown headers, like bootloaders, so we need to map them using the `-m` flag (or specifying it as argument to the `o` command).
+When launching rizin, the base address can be changed with the `-B` flag. But you must notice the difference when opening files with unknown headers, like bootloaders, so we need to map them using the `-m` flag (or specifying it as argument to the `o` command).
 
-radare2 is able to open files and map portions of them at random places in memory specifying attributes like permissions and name. It is the perfect basic tooling to reproduce an environment like a core file, a debug session, by also loading and mapping all the libraries the binary depends on.
+rizin is able to open files and map portions of them at random places in memory specifying attributes like permissions and name. It is the perfect basic tooling to reproduce an environment like a core file, a debug session, by also loading and mapping all the libraries the binary depends on.
 
 Opening files (and mapping them) is done using the `o` (open) command. Let's read the help:
 
@@ -18,17 +18,17 @@ Opening files (and mapping them) is done using the `o` (open) command. Let's rea
 | o                         list opened files
 | o-1                       close file descriptor 1
 | o-!*                      close all opened files
-| o--                       close all files, analysis, binfiles, flags, same as !r2 --
+| o--                       close all files, analysis, binfiles, flags, same as !rizin --
 | o [file]                  open [file] file in read-only
 | o+ [file]                 open file in read-write mode
 | o [file] 0x4000 rwx       map file at 0x4000
 | oa[-] [A] [B] [filename]  Specify arch and bits for given file
 | oq                        list all open files
-| o*                        list opened files in r2 commands
+| o*                        list opened files in rizin commands
 | o. [len]                  open a malloc://[len] copying the bytes from current offset
 | o=                        list opened files (ascii-art bars)
 | ob[?] [lbdos] [...]       list opened binary files backed by fd
-| oc [file]                 open core file, like relaunching r2
+| oc [file]                 open core file, like relaunching rizin
 | of [file]                 open file and map it at addr 0 as read-only
 | oi[-|idx]                 alias for o, but using index instead of fd
 | oj[?]                     list opened files in JSON format
@@ -46,7 +46,7 @@ Opening files (and mapping them) is done using the `o` (open) command. Let's rea
 Prepare a simple layout:
 
 ```sh
-$ rabin2 -l /bin/ls
+$ rz-bin -l /bin/ls
 [Linked libraries]
 libselinux.so.1
 librt.so.1

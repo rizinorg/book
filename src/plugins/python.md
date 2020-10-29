@@ -1,13 +1,13 @@
 # Python plugins
 
-At first, to be able to write a plugins in Python for radare2 you need to install
-r2lang plugin: `r2pm -i lang-python`.
+At first, to be able to write a plugins in Python for rizin you need to install
+rz-lang plugin: `rz-pm -i lang-python`.
 Note - in the following examples there are missing functions of the actual decoding
 for the sake of readability!
 
 For this you need to do this:
-1. `import r2lang` and `from r2lang import R` (for constants)
-2. Make a function with 2 subfunctions - `assemble` and `disassemble` and returning plugin structure - for RAsm plugin
+1. `import rzlang` and `from rzlang import RZ` (for constants)
+2. Make a function with 2 subfunctions - `assemble` and `disassemble` and returning plugin structure - for RzAsm plugin
 ```python
 def mycpu(a):
     def assemble(s):
@@ -35,7 +35,7 @@ def mycpu(a):
             "disassemble" : disassemble,
     }
 ```
-4. Make a function with 2 subfunctions - `set_reg_profile` and `op` and returning plugin structure - for RAnal plugin
+4. Make a function with 2 subfunctions - `set_reg_profile` and `op` and returning plugin structure - for RzAnalysis plugin
 
 ```python
 def mycpu_anal(a):
@@ -68,7 +68,7 @@ def mycpu_anal(a):
             opcode = get_opcode(memview) # https://docs.python.org/3/library/stdtypes.html#memoryview
             esilstr = optbl[opcode][2]
             if optbl[opcode][0] == "J": # it's jump
-                analop["type"] = R.R_ANAL_OP_TYPE_JMP
+                analop["type"] = RZ.RZ_ANAL_OP_TYPE_JMP
                 analop["jump"] = decode_jump(opcode, j_mask)
                 esilstr = jump_esil(esilstr, opcode, j_mask)
 
@@ -92,25 +92,25 @@ def mycpu_anal(a):
             "op" : op,
     }
 ```
-6. Then register those using `r2lang.plugin("asm")` and `r2lang.plugin("anal")` respectively
+6. Then register those using `rzlang.plugin("asm")` and `rzlang.plugin("anal")` respectively
 
 ```python
 print("Registering MYCPU disasm plugin...")
-print(r2lang.plugin("asm", mycpu))
+print(rzlang.plugin("asm", mycpu))
 print("Registering MYCPU analysis plugin...")
-print(r2lang.plugin("anal", mycpu_anal))
+print(rzlang.plugin("analysis", mycpu_analysis))
 ```
 
 You can combine everything in one file and load it using `-i` option:
 ```
-r2 -I mycpu.py some_file.bin
+rizin -I mycpu.py some_file.bin
 ```
-Or you can load it from the r2 shell: `#!python mycpu.py`
+Or you can load it from the rizin shell: `#!python mycpu.py`
 
 See also:
 
-* [Python](https://github.com/radareorg/radare2-bindings/blob/master/libr/lang/p/test-py-asm.py)
-* [Javascript](https://github.com/radareorg/radare2-bindings/blob/master/libr/lang/p/dukasm.js)
+* [Python](https://github.com/rizinorg/rizin-bindings/blob/master/libr/lang/p/test-py-asm.py)
+* [Javascript](https://github.com/rizinorg/rizin-bindings/blob/master/libr/lang/p/dukasm.js)
 
 ### Implementing new format plugin in Python
 
@@ -118,7 +118,7 @@ Note - in the following examples there are missing functions of the actual decod
 for the sake of readability!
 
 For this you need to do this:
-1. `import r2lang`
+1. `import rzlang`
 2. Make a function with  subfunctions:
    - `load`
    - `load_bytes`
@@ -132,7 +132,7 @@ For this you need to do this:
    - `binsym`
    - `info`
 
-   and returning plugin structure - for RAsm plugin
+   and returning plugin structure - for RzAsm plugin
 ```python
 def le_format(a):
     def load(binf):
@@ -196,5 +196,5 @@ There is a special function, which returns information about the file - `info`:
 
 ```python
 print("Registering OS/2 LE/LX plugin...")
-print(r2lang.plugin("bin", le_format))
+print(rzlang.plugin("bin", le_format))
 ```

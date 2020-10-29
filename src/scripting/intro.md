@@ -1,8 +1,8 @@
 ## Scripting
 
-Radare2 provides a wide set of a features to automate boring work.
+Rizin provides a wide set of a features to automate boring work.
 It ranges from the simple sequencing of the commands to the calling
-scripts/another programs via IPC (Inter-Process Communication), called r2pipe.
+scripts/another programs via IPC (Inter-Process Communication), called rz-pipe.
 
 As mentioned a few times before there is an ability to sequence commands
 using `;` semicolon operator.
@@ -28,9 +28,9 @@ The second important way to sequence the commands is with a simple pipe `|`
 ```
 ao|grep address
 ```
-Note, the `|` pipe only can pipe output of r2 commands to external (shell)
+Note, the `|` pipe only can pipe output of rizin commands to external (shell)
 commands, like system programs or builtin shell commands.
-There is a similar way to sequence r2 commands, using the backtick operator `` `command` ``. The quoted part will undergo command substitution and the output will be used as an argument of the command line.
+There is a similar way to sequence rizin commands, using the backtick operator `` `command` ``. The quoted part will undergo command substitution and the output will be used as an argument of the command line.
 
 For example, we want to see a few bytes of the memory at the address referred to
 by the 'mov eax, addr' instruction. We can do that without jumping to it, using
@@ -58,14 +58,14 @@ family: cpu
 0x0061e627  7461 6200 2e69 6e74 6572                 tab..inter
 [0x00404800]>
 ```
-And of course it's possible to redirect the output of an r2 command into a file, using the `>` and `>>`
+And of course it's possible to redirect the output of an rizin command into a file, using the `>` and `>>`
 commands
 ```
 [0x00404800]> px 10 @ `ao~ptr[1]` > example.txt
 [0x00404800]> px 10 @ `ao~ptr[1]` >> example.txt
 ```
 
-Radare2 also provides quite a few Unix type file processing commands like head, tail, cat, grep and many more. One such command is [Uniq](https://en.wikipedia.org/wiki/Uniq), which can be used to filter a file to display only non-duplicate content. So to make a new file with only unique strings, you can do:
+Rizin also provides quite a few Unix type file processing commands like head, tail, cat, grep and many more. One such command is [Uniq](https://en.wikipedia.org/wiki/Uniq), which can be used to filter a file to display only non-duplicate content. So to make a new file with only unique strings, you can do:
 ```
 [0x00404800]> uniq file > uniq_file
 ```
@@ -107,7 +107,7 @@ five
 great
 one
 one
-radare
+rizin
 ```
 
 The `?$?` command describes several helpful variables you can use to do similar actions even more

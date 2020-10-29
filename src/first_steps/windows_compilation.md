@@ -1,8 +1,8 @@
 ## Windows
 
-Radare2 relies on the Meson build system generator to support compilation on all platforms, including Windows. Meson will generate a Visual Studio Solution, all the necessary project files, and wire up the Microsoft Visual C++ compiler for you.
+Rizin relies on the Meson build system generator to support compilation on all platforms, including Windows. Meson will generate a Visual Studio Solution, all the necessary project files, and wire up the Microsoft Visual C++ compiler for you.
 
-> **tip** You can download nightly binaries from https://ci.appveyor.com/project/radareorg/radare2/history. Be sure to download only from `master` branch!
+> **tip** You can download nightly binaries from https://ci.appveyor.com/project/rizinorg/rizin/history. Be sure to download only from `master` branch!
 
 ### Prerequisites
 
@@ -26,30 +26,30 @@ If you need a copy of Visual Studio, the Community versions are free and work gr
 * [Download Visual Studio 2017 Community](https://visualstudio.microsoft.com/downloads/)
 
 #### Install Python 3 and Meson via Conda
-It is strongly recommended you install Conda — a Python environment management system — when working with Python on the Windows platform. This will isolate the Radare2 build environment from other installed Python versions and minimize potential conflicts.
+It is strongly recommended you install Conda — a Python environment management system — when working with Python on the Windows platform. This will isolate the Rizin build environment from other installed Python versions and minimize potential conflicts.
 
 ##### Set Up Conda:
 1. Download the appropriate Conda (Python 3.x) for your platform (https://conda.io/miniconda.html)
 2. Install Conda with the recommended defaults
 
-##### Create a Python Environment for Radare2
-Follow these steps to create and activate a Conda environment named *r2*. All instructions from this point on will assume this name matches your environment, but you may change this if desired.
+##### Create a Python Environment for Rizin
+Follow these steps to create and activate a Conda environment named *rizin*. All instructions from this point on will assume this name matches your environment, but you may change this if desired.
 
 1. Start > Anaconda Prompt
-2. `conda create -n r2 python=3`
-3. `activate r2`
+2. `conda create -n rizin python=3`
+3. `activate rizin`
 
-Any time you wish to enter this environment, open the Anaconda Prompt and re-issue `activate r2`. Conversely, `deactivate` will leave the environment.
+Any time you wish to enter this environment, open the Anaconda Prompt and re-issue `activate rizin`. Conversely, `deactivate` will leave the environment.
 
 ##### Install Meson
 
-1. Enter the Radare2 Conda environment, if needed (`activate r2`)
+1. Enter the Rizin Conda environment, if needed (`activate rizin`)
 2. Download https://github.com/mesonbuild/meson/archive/master.zip
 3. `pip install \path\to\downloaded\master.zip`
 4. Verify Meson is version 0.48 or higher (`meson -v`)
 
 #### Install Git for Windows
-All Radare2 code is managed via the Git version control system and [hosted on GitHub](https://github.com/radare).
+All Rizin code is managed via the Git version control system and [hosted on GitHub](https://github.com/rizin).
 
 Follow these steps to install Git for Windows.
 
@@ -65,20 +65,20 @@ Follow these steps to install Git for Windows.
 2. Close any previously open console windows and re-open them to ensure they receive the new PATH
 3. Ensure `git --version` works
 
-#### Get Radare2 Code
-Follow these steps to clone the Radare2 git repository.
+#### Get Rizin Code
+Follow these steps to clone the Rizin git repository.
 
-1. In your Radare2 Conda environment, navigate to a location where the code will be saved and compiled. This location needs approximately **3-4GiB** of space
-2. Clone the repository with `git clone https://github.com/radareorg/radare2.git`
+1. In your Rizin Conda environment, navigate to a location where the code will be saved and compiled. This location needs approximately **3-4GiB** of space
+2. Clone the repository with `git clone https://github.com/rizinorg/rizin.git`
 
-#### Compile Radare2 Code
-Follow these steps to compile the Radare2 Code.
+#### Compile Rizin Code
+Follow these steps to compile the Rizin Code.
 
 Compiled binaries will be installed into the `dest` folder.
 
-1. Enter the Radare2 Conda environment
-2. Navigate to the root of the Radare2 sources (`cd radare2`)
-3. Initialize Visual Studio tooling by executing the command below that matches the version of Visual Studio installed on your machine and the version of Radare2 you wish to install:
+1. Enter the Rizin Conda environment
+2. Navigate to the root of the Rizin sources (`cd rizin`)
+3. Initialize Visual Studio tooling by executing the command below that matches the version of Visual Studio installed on your machine and the version of Rizin you wish to install:
 
     * **Visual Studio 2015:**
 
@@ -117,22 +117,22 @@ Compiled binaries will be installed into the `dest` folder.
 
     Note: Change `Debug` to `Release` in the command below depending on the version desired.
 
-    `msbuild build\radare2.sln /p:Configuration=Debug /m`
+    `msbuild build\rizin.sln /p:Configuration=Debug /m`
 
     The `/m[axcpucount]` switch creates one MSBuild worker process per logical processor on your machine. You can specify a numeric value (e.g. `/m:2`) to limit the number of worker processes if needed. (This should not be confused with the Visual C++ Compiler switch `/MP`.)
 
     If you get an error with the 32-bit install that says something along the lines of `error MSB4126: The specified solution configuration "Debug|x86" is invalid.` Get around this by adding the following argument to the command: `/p:Platform=Win32`
 
 6. Install into your destination folder: `meson install -C build --no-rebuild`
-7. Check your Radare2 version: `dest\bin\radare2.exe -v`
+7. Check your Rizin version: `dest\bin\rizin.exe -v`
 
-#### Check That Radare2 Runs From All Locations
-1. In the file explorer go to the folder Radare2 was just installed in.
+#### Check That Rizin Runs From All Locations
+1. In the file explorer go to the folder Rizin was just installed in.
 2. From this folder go to `dest` > `bin` and keep this window open.
 3. Go to System Properties: In the Windows search bar enter `sysdm.cpl`.
 4. Go to `Advanced > Environment Variables`.
 5. Click on the PATH variable and then click edit (if it exists within both the user and system variables, look at the user version).
 6. Ensure the file path displayed in the window left open is listed within the PATH variable. If it is not add it and click `ok`.
 7. Log out of your Windows session.
-8. Open up a new Windows Command Prompt: type `cmd` in the search bar. Ensure that the current path is not in the Radare2 folder.
-9. Check Radare2 version from Command Prompt Window: `radare2 -v`
+8. Open up a new Windows Command Prompt: type `cmd` in the search bar. Ensure that the current path is not in the Rizin folder.
+9. Check Rizin version from Command Prompt Window: `rizin -v`

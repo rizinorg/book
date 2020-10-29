@@ -4,7 +4,7 @@ IOLI 0x07
 a weird "wtf?" string.
 
 ```sh
-$ rabin2 -z ./crackme0x07
+$ rz-bin -z ./crackme0x07
 [Strings]
 nth paddr      vaddr      len size section type  string
 ―――――――――――――――――――――――――――――――――――――――――――――――――――――――
@@ -28,7 +28,7 @@ int32_t main (int32_t arg_10h) {
 }
 ```
 
-due to the symbol info lost, neither `aa` nor `aaa` show the name of functions. we can double check this in "flagspace". Radare2 use fcn_080485b9 as the function name. It's a common case in reverse engineering that we don't have any symbol info of the binary.
+due to the symbol info lost, neither `aa` nor `aaa` show the name of functions. we can double check this in "flagspace". Rizin use fcn_080485b9 as the function name. It's a common case in reverse engineering that we don't have any symbol info of the binary.
 
 ```sh
 [0x080487fd]> fs symbols
@@ -121,7 +121,7 @@ Password: 12346
 Password OK!
 ```
 
-wait ... where is the 'wtf?'. Often, we would like to find the cross reference (xref) to strings (or data, functions, etc.) in reverse engineering. The related commands in Radare2 are under "ax" namespace:
+wait ... where is the 'wtf?'. Often, we would like to find the cross reference (xref) to strings (or data, functions, etc.) in reverse engineering. The related commands in Rizin are under "ax" namespace:
 
 ```sh
 [0x08048400]> f

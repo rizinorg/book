@@ -21,7 +21,7 @@ Panels can be accessed by using `v` or by using `!` from the visual mode.
 |Visual Ascii Art Panels:
 | |      split the current panel vertically
 | -      split the current panel horizontally
-| :      run r2 command in prompt
+| :      run rizin command in prompt
 | ;      add/remove comment
 | _      start the hud input mode
 | \      show the user-friendly hud

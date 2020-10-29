@@ -1,8 +1,8 @@
 ## Configuring Search Options
 
-The radare2 search engine can be configured through several configuration variables, modifiable with the `e` command.
+The rizin search engine can be configured through several configuration variables, modifiable with the `e` command.
 ```
-e cmd.hit = x         ; radare2 command to execute on every search hit
+e cmd.hit = x         ; rizin command to execute on every search hit
 e search.distance = 0 ; search string distance
 e search.in = [foo]   ; pecify search boundarie. Supported values are listed under e search.in=??
 e search.align = 4    ; only show search results aligned by specified boundary.

@@ -1,6 +1,6 @@
 # Memory Maps
 
-The ability to understand and manipulate the memory maps of a debugged program is important for many different Reverse Engineering tasks. radare2 offers a rich set of commands to handle memory maps in the binary. This includes listing the memory maps of the currently debugged binary, removing memory maps, handling loaded libraries and more.
+The ability to understand and manipulate the memory maps of a debugged program is important for many different Reverse Engineering tasks. rizin offers a rich set of commands to handle memory maps in the binary. This includes listing the memory maps of the currently debugged binary, removing memory maps, handling loaded libraries and more.
 
 First, let's see the help message for `dm`, the command which is responsible for handling memory maps:
 
@@ -11,12 +11,12 @@ Usage: dm   # Memory maps commands
 | dm address size                  Allocate <size> bytes at <address> (anywhere if address is -1) in child process
 | dm=                              List memory maps of target process (ascii-art bars)
 | dm.                              Show map name of current address
-| dm*                              List memmaps in radare commands
+| dm*                              List memmaps in rizin commands
 | dm- address                      Deallocate memory map of <address>
 | dmd[a] [file]                    Dump current (all) debug map region to a file (from-to.dmp) (see Sd)
 | dmh[?]                           Show map of heap
 | dmi [addr|libname] [symname]     List symbols of target lib
-| dmi* [addr|libname] [symname]    List symbols of target lib in radare commands
+| dmi* [addr|libname] [symname]    List symbols of target lib in rizin commands
 | dmi.                             List closest symbol to the current address
 | dmiv                             Show address of given symbol for given lib
 | dmj                              List memmaps in JSON format
@@ -26,7 +26,7 @@ Usage: dm   # Memory maps commands
 | dms[?] <id> <mapaddr>            Take memory snapshot
 | dms- <id> <mapaddr>              Restore memory snapshot
 | dmS [addr|libname] [sectname]    List sections of target lib
-| dmS* [addr|libname] [sectname]   List sections of target lib in radare commands
+| dmS* [addr|libname] [sectname]   List sections of target lib in rizin commands
 | dmL address size                 Allocate <size> bytes at <address> and promote to huge page
 ```
 
@@ -35,7 +35,7 @@ In this chapter, we'll go over some of the most useful subcommands of `dm` using
 First things first - open a program in debugging mode:
 
 ```
-$ r2 -d helloworld
+$ rizin -d helloworld
 Process with PID 20304 started...
 = attach 20304 20304
 bin.baddr 0x56136b475000
@@ -44,7 +44,7 @@ asm.bits 64
 [0x7f133f022fb0]>
 ```
 
-> Note that we passed "helloworld" to radare2 without "./". radare2 will try to find this program in the current directory and then in $PATH, even if no "./" is passed. This is contradictory with UNIX systems, but makes the behaviour consistent for windows users
+> Note that we passed "helloworld" to rizin without "./". rizin will try to find this program in the current directory and then in $PATH, even if no "./" is passed. This is contradictory with UNIX systems, but makes the behaviour consistent for windows users
 
 Let's use `dm` to print the memory maps of the binary we've just opened:
 
@@ -79,7 +79,7 @@ Using `dmm` we can "List modules (libraries, binaries loaded in memory)", this i
 ```
 > Note that the output of `dm` subcommands, and `dmm` specifically, might be different in various systems and different binaries.
 
-We can see that along with our `helloworld` binary itself, another library was loaded which is `ld-2.27.so`. We don't see `libc` yet and this is because radare2 breaks before `libc` is loaded to memory. Let's use `dcu` (**d**ebug **c**ontinue **u**ntil) to execute our program until the entry point of the program, which radare flags as `entry0`.
+We can see that along with our `helloworld` binary itself, another library was loaded which is `ld-2.27.so`. We don't see `libc` yet and this is because rizin breaks before `libc` is loaded to memory. Let's use `dcu` (**d**ebug **c**ontinue **u**ntil) to execute our program until the entry point of the program, which rizin flags as `entry0`.
 
 ```
 [0x7fa80a19dfb0]> dcu entry0

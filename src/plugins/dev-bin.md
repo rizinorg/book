@@ -10,8 +10,8 @@ In `info` add `et->has_va = 1;` and `ptr->srwx` with the `R_BIN_SCN_MAP;` attrib
 
 ```Makefile
 NAME=bin_nes
-R2_PLUGIN_PATH=$(shell r2 -H R2_USER_PLUGINS)
-LIBEXT=$(shell r2 -H LIBEXT)
+R2_PLUGIN_PATH=$(shell rizin -H R2_USER_PLUGINS)
+LIBEXT=$(shell rizin -H LIBEXT)
 CFLAGS=-g -fPIC $(shell pkg-config --cflags r_bin)
 LDFLAGS=-shared $(shell pkg-config --libs r_bin)
 OBJS=$(NAME).o
@@ -39,7 +39,7 @@ uninstall:
 #include <r_util.h>
 #include <r_bin.h>
 
-static bool load_buffer(RBinFile *bf, void **bin_obj, RBuffer *b, ut64 loadaddr, Sdb *sdb) {
+static bool load_buffer(RzBinFile *bf, void **bin_obj, RBuffer *b, ut64 loadaddr, Sdb *sdb) {
 	ut64 size;
 	const ut8 *buf = r_buf_data (b, &size);
 	r_return_val_if_fail (buf, false);
@@ -47,7 +47,7 @@ static bool load_buffer(RBinFile *bf, void **bin_obj, RBuffer *b, ut64 loadaddr,
 	return *bin_obj != NULL;
 }
 
-static void destroy(RBinFile *bf) {
+static void destroy(RzBinFile *bf) {
 	r_bin_free_all_nes_obj (bf->o->bin_obj);
 	bf->o->bin_obj = NULL;
 }
@@ -57,8 +57,8 @@ static bool check_buffer(RBuffer *b) {
 	return (!memcmp (buf, "\x4E\x45\x53\x1A", 4));
 }
 
-static RBinInfo* info(RBinFile *arch) {
-	RBinInfo \*ret = R_NEW0 (RBinInfo);
+static RzBinInfo* info(RzBinFile *arch) {
+	RzBinInfo \*ret = R_NEW0 (RzBinInfo);
 	if (!ret) return NULL;
 
 	if (!arch || !arch->buf) {
@@ -90,7 +90,7 @@ struct r_bin_plugin_t r_bin_plugin_nes = {
 };
 
 #ifndef R2_PLUGIN_INCORE
-R_API RLibStruct radare_plugin = {
+R_API RLibStruct rizin_plugin = {
 	.type = R_LIB_TYPE_BIN,
 	.data = &r_bin_plugin_nes,
 	.version = R2_VERSION
@@ -101,9 +101,9 @@ R_API RLibStruct radare_plugin = {
 
 ### Some Examples
 
-* XBE - https://github.com/radareorg/radare2/pull/972
-* COFF - https://github.com/radareorg/radare2/pull/645
-* TE - https://github.com/radareorg/radare2/pull/61
-* Zimgz - https://github.com/radareorg/radare2/commit/d1351cf836df3e2e63043a6dc728e880316f00eb
-* OMF - https://github.com/radareorg/radare2/commit/44fd8b2555a0446ea759901a94c06f20566bbc40
+* XBE - https://github.com/rizinorg/rizin/pull/972
+* COFF - https://github.com/rizinorg/rizin/pull/645
+* TE - https://github.com/rizinorg/rizin/pull/61
+* Zimgz - https://github.com/rizinorg/rizin/commit/d1351cf836df3e2e63043a6dc728e880316f00eb
+* OMF - https://github.com/rizinorg/rizin/commit/44fd8b2555a0446ea759901a94c06f20566bbc40
 
