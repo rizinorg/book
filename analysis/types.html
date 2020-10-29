@@ -1,0 +1,526 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Types - The Official Radare2 Book</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="The Official Radare2 Book">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../first_steps/history.html"><strong aria-hidden="true">1.1.</strong> History</a></li><li class="chapter-item expanded "><a href="../first_steps/overview.html"><strong aria-hidden="true">1.2.</strong> The Framework</a></li><li class="chapter-item expanded "><a href="../first_steps/getting_radare.html"><strong aria-hidden="true">1.3.</strong> Downloading radare2</a></li><li class="chapter-item expanded "><a href="../first_steps/compilation_portability.html"><strong aria-hidden="true">1.4.</strong> Compilation and Portability</a></li><li class="chapter-item expanded "><a href="../first_steps/windows_compilation.html"><strong aria-hidden="true">1.5.</strong> Compilation on Windows</a></li><li class="chapter-item expanded "><a href="../first_steps/compilation_android.html"><strong aria-hidden="true">1.6.</strong> Compilation on Android</a></li><li class="chapter-item expanded "><a href="../first_steps/ui.html"><strong aria-hidden="true">1.7.</strong> User Interfaces</a></li></ol></li><li class="chapter-item expanded "><a href="../first_steps/intro.html"><strong aria-hidden="true">2.</strong> First Steps</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../first_steps/commandline_flags.html"><strong aria-hidden="true">2.1.</strong> Command-line Flags</a></li><li class="chapter-item expanded "><a href="../first_steps/command_format.html"><strong aria-hidden="true">2.2.</strong> Command Format</a></li><li class="chapter-item expanded "><a href="../first_steps/expressions.html"><strong aria-hidden="true">2.3.</strong> Expressions</a></li><li class="chapter-item expanded "><a href="../first_steps/basic_debugger_session.html"><strong aria-hidden="true">2.4.</strong> Basic Debugger Session</a></li><li class="chapter-item expanded "><a href="../first_steps/contributing.html"><strong aria-hidden="true">2.5.</strong> Contributing to radare2</a></li></ol></li><li class="chapter-item expanded "><a href="../configuration/intro.html"><strong aria-hidden="true">3.</strong> Configuration</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../configuration/colors.html"><strong aria-hidden="true">3.1.</strong> Colors</a></li><li class="chapter-item expanded "><a href="../configuration/evars.html"><strong aria-hidden="true">3.2.</strong> Configuration Variables</a></li><li class="chapter-item expanded "><a href="../configuration/files.html"><strong aria-hidden="true">3.3.</strong> Files</a></li></ol></li><li class="chapter-item expanded "><a href="../basic_commands/intro.html"><strong aria-hidden="true">4.</strong> Basic Commands</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basic_commands/seeking.html"><strong aria-hidden="true">4.1.</strong> Seeking</a></li><li class="chapter-item expanded "><a href="../basic_commands/block_size.html"><strong aria-hidden="true">4.2.</strong> Block Size</a></li><li class="chapter-item expanded "><a href="../basic_commands/sections.html"><strong aria-hidden="true">4.3.</strong> Sections</a></li><li class="chapter-item expanded "><a href="../basic_commands/mapping_files.html"><strong aria-hidden="true">4.4.</strong> Mapping Files</a></li><li class="chapter-item expanded "><a href="../basic_commands/print_modes.html"><strong aria-hidden="true">4.5.</strong> Print Modes</a></li><li class="chapter-item expanded "><a href="../basic_commands/flags.html"><strong aria-hidden="true">4.6.</strong> Flags</a></li><li class="chapter-item expanded "><a href="../basic_commands/write.html"><strong aria-hidden="true">4.7.</strong> Write</a></li><li class="chapter-item expanded "><a href="../basic_commands/zoom.html"><strong aria-hidden="true">4.8.</strong> Zoom</a></li><li class="chapter-item expanded "><a href="../basic_commands/yank_paste.html"><strong aria-hidden="true">4.9.</strong> Yank/Paste</a></li><li class="chapter-item expanded "><a href="../basic_commands/comparing_bytes.html"><strong aria-hidden="true">4.10.</strong> Comparing Bytes</a></li><li class="chapter-item expanded "><a href="../basic_commands/sdb.html"><strong aria-hidden="true">4.11.</strong> SDB</a></li><li class="chapter-item expanded "><a href="../basic_commands/dietline.html"><strong aria-hidden="true">4.12.</strong> Dietline</a></li></ol></li><li class="chapter-item expanded "><a href="../visual_mode/intro.html"><strong aria-hidden="true">5.</strong> Visual mode</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../visual_mode/visual_disassembly.html"><strong aria-hidden="true">5.1.</strong> Visual Disassembly</a></li><li class="chapter-item expanded "><a href="../visual_mode/visual_assembler.html"><strong aria-hidden="true">5.2.</strong> Visual Assembler</a></li><li class="chapter-item expanded "><a href="../visual_mode/visual_configuration_editor.html"><strong aria-hidden="true">5.3.</strong> Visual Configuration Editor</a></li><li class="chapter-item expanded "><a href="../visual_mode/visual_panels.html"><strong aria-hidden="true">5.4.</strong> Visual Panels</a></li></ol></li><li class="chapter-item expanded "><a href="../search_bytes/intro.html"><strong aria-hidden="true">6.</strong> Searching bytes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../search_bytes/basic_searches.html"><strong aria-hidden="true">6.1.</strong> Basic Searches</a></li><li class="chapter-item expanded "><a href="../search_bytes/configurating_the_search.html"><strong aria-hidden="true">6.2.</strong> Configurating the Search</a></li><li class="chapter-item expanded "><a href="../search_bytes/pattern_search.html"><strong aria-hidden="true">6.3.</strong> Pattern Search</a></li><li class="chapter-item expanded "><a href="../search_bytes/automation.html"><strong aria-hidden="true">6.4.</strong> Automation</a></li><li class="chapter-item expanded "><a href="../search_bytes/backward_search.html"><strong aria-hidden="true">6.5.</strong> Backward Search</a></li><li class="chapter-item expanded "><a href="../search_bytes/search_in_assembly.html"><strong aria-hidden="true">6.6.</strong> Search in Assembly</a></li><li class="chapter-item expanded "><a href="../search_bytes/searching_aes_keys.html"><strong aria-hidden="true">6.7.</strong> Searching for AES Keys</a></li></ol></li><li class="chapter-item expanded "><a href="../disassembling/intro.html"><strong aria-hidden="true">7.</strong> Disassembling</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../disassembling/adding_metadata.html"><strong aria-hidden="true">7.1.</strong> Adding Metadata</a></li><li class="chapter-item expanded "><a href="../disassembling/esil.html"><strong aria-hidden="true">7.2.</strong> ESIL</a></li></ol></li><li class="chapter-item expanded "><a href="../analysis/intro.html"><strong aria-hidden="true">8.</strong> Analysis</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../analysis/code_analysis.html"><strong aria-hidden="true">8.1.</strong> Code Analysis</a></li><li class="chapter-item expanded "><a href="../analysis/variables.html"><strong aria-hidden="true">8.2.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../analysis/types.html" class="active"><strong aria-hidden="true">8.3.</strong> Types</a></li><li class="chapter-item expanded "><a href="../analysis/calling_conventions.html"><strong aria-hidden="true">8.4.</strong> Calling Conventions</a></li><li class="chapter-item expanded "><a href="../analysis/vtables.html"><strong aria-hidden="true">8.5.</strong> Virtual Tables</a></li><li class="chapter-item expanded "><a href="../analysis/syscalls.html"><strong aria-hidden="true">8.6.</strong> Syscalls</a></li><li class="chapter-item expanded "><a href="../analysis/emulation.html"><strong aria-hidden="true">8.7.</strong> Emulation</a></li><li class="chapter-item expanded "><a href="../analysis/symbols.html"><strong aria-hidden="true">8.8.</strong> Symbols information</a></li><li class="chapter-item expanded "><a href="../signatures/zignatures.html"><strong aria-hidden="true">8.9.</strong> Signatures</a></li><li class="chapter-item expanded "><a href="../analysis/graphs.html"><strong aria-hidden="true">8.10.</strong> Graph commands</a></li></ol></li><li class="chapter-item expanded "><a href="../scripting/intro.html"><strong aria-hidden="true">9.</strong> Scripting</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../scripting/loops.html"><strong aria-hidden="true">9.1.</strong> Loops</a></li><li class="chapter-item expanded "><a href="../scripting/macros.html"><strong aria-hidden="true">9.2.</strong> Macros</a></li><li class="chapter-item expanded "><a href="../scripting/r2pipe.html"><strong aria-hidden="true">9.3.</strong> R2pipe</a></li></ol></li><li class="chapter-item expanded "><a href="../debugger/intro.html"><strong aria-hidden="true">10.</strong> Debugger</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../debugger/getting_started.html"><strong aria-hidden="true">10.1.</strong> Getting Started</a></li><li class="chapter-item expanded "><a href="../debugger/migration.html"><strong aria-hidden="true">10.2.</strong> Migration from ida, GDB or WinDBG</a></li><li class="chapter-item expanded "><a href="../debugger/registers.html"><strong aria-hidden="true">10.3.</strong> Registers</a></li><li class="chapter-item expanded "><a href="../debugger/memory_maps.html"><strong aria-hidden="true">10.4.</strong> Memory Maps</a></li><li class="chapter-item expanded "><a href="../debugger/heap.html"><strong aria-hidden="true">10.5.</strong> Heap</a></li><li class="chapter-item expanded "><a href="../debugger/files.html"><strong aria-hidden="true">10.6.</strong> Files</a></li><li class="chapter-item expanded "><a href="../debugger/revdebug.html"><strong aria-hidden="true">10.7.</strong> Reverse Debugging</a></li><li class="chapter-item expanded "><a href="../debugger/windows_messages.html"><strong aria-hidden="true">10.8.</strong> Windows Messages</a></li></ol></li><li class="chapter-item expanded "><a href="../debugger/remoting_capabilities.html"><strong aria-hidden="true">11.</strong> Remote Access</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../debugger/remote_gdb.html"><strong aria-hidden="true">11.1.</strong> Remote GDB</a></li><li class="chapter-item expanded "><a href="../debugger/windbg.html"><strong aria-hidden="true">11.2.</strong> Remote WinDbg</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/intro.html"><strong aria-hidden="true">12.</strong> Command Line Tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/rax2/intro.html"><strong aria-hidden="true">12.1.</strong> Rax2</a></li><li class="chapter-item expanded "><a href="../tools/rafind2/intro.html"><strong aria-hidden="true">12.2.</strong> Rafind2</a></li><li class="chapter-item expanded "><a href="../tools/rarun2/intro.html"><strong aria-hidden="true">12.3.</strong> Rarun2</a></li><li class="chapter-item expanded "><a href="../tools/rabin2/intro.html"><strong aria-hidden="true">12.4.</strong> Rabin2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/rabin2/file_identification.html"><strong aria-hidden="true">12.4.1.</strong> File Identification</a></li><li class="chapter-item expanded "><a href="../tools/rabin2/entrypoints.html"><strong aria-hidden="true">12.4.2.</strong> Entrypoint</a></li><li class="chapter-item expanded "><a href="../tools/rabin2/imports.html"><strong aria-hidden="true">12.4.3.</strong> Imports</a></li><li class="chapter-item expanded "><a href="../tools/rabin2/exports.html"><strong aria-hidden="true">12.4.4.</strong> Exports</a></li><li class="chapter-item expanded "><a href="../tools/rabin2/symbols.html"><strong aria-hidden="true">12.4.5.</strong> Symbols (exports)</a></li><li class="chapter-item expanded "><a href="../tools/rabin2/libraries.html"><strong aria-hidden="true">12.4.6.</strong> Libraries</a></li><li class="chapter-item expanded "><a href="../tools/rabin2/strings.html"><strong aria-hidden="true">12.4.7.</strong> Strings</a></li><li class="chapter-item expanded "><a href="../tools/rabin2/program_sections.html"><strong aria-hidden="true">12.4.8.</strong> Program Sections</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/radiff2/intro.html"><strong aria-hidden="true">12.5.</strong> Radiff2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/radiff2/binary_diffing.html"><strong aria-hidden="true">12.5.1.</strong> Binary Diffing</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/rasm2/intro.html"><strong aria-hidden="true">12.6.</strong> Rasm2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/rasm2/assemble.html"><strong aria-hidden="true">12.6.1.</strong> Assemble</a></li><li class="chapter-item expanded "><a href="../tools/rasm2/disassemble.html"><strong aria-hidden="true">12.6.2.</strong> Disassemble</a></li><li class="chapter-item expanded "><a href="../tools/rasm2/config.html"><strong aria-hidden="true">12.6.3.</strong> Configuration</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/ragg2/ragg2.html"><strong aria-hidden="true">12.7.</strong> Ragg2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/ragg2/lang.html"><strong aria-hidden="true">12.7.1.</strong> Language</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/rahash2/intro.html"><strong aria-hidden="true">12.8.</strong> Rahash2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/rahash2/rahash_tool.html"><strong aria-hidden="true">12.8.1.</strong> Rahash Tool</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../plugins/intro.html"><strong aria-hidden="true">13.</strong> Plugins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../plugins/ioplugins.html"><strong aria-hidden="true">13.1.</strong> IO plugins</a></li><li class="chapter-item expanded "><a href="../plugins/dev-asm.html"><strong aria-hidden="true">13.2.</strong> Asm plugins</a></li><li class="chapter-item expanded "><a href="../plugins/dev-anal.html"><strong aria-hidden="true">13.3.</strong> Analysis plugins</a></li><li class="chapter-item expanded "><a href="../plugins/dev-bin.html"><strong aria-hidden="true">13.4.</strong> Bin plugins</a></li><li class="chapter-item expanded "><a href="../plugins/dev-other.html"><strong aria-hidden="true">13.5.</strong> Other plugins</a></li><li class="chapter-item expanded "><a href="../plugins/python.html"><strong aria-hidden="true">13.6.</strong> Python plugins</a></li><li class="chapter-item expanded "><a href="../plugins/debug.html"><strong aria-hidden="true">13.7.</strong> Debugging</a></li><li class="chapter-item expanded "><a href="../plugins/testing.html"><strong aria-hidden="true">13.8.</strong> Testing</a></li><li class="chapter-item expanded "><a href="../plugins/r2pm.html"><strong aria-hidden="true">13.9.</strong> Packaging</a></li></ol></li><li class="chapter-item expanded "><a href="../crackmes/intro.html"><strong aria-hidden="true">14.</strong> Crackmes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../crackmes/ioli/intro.html"><strong aria-hidden="true">14.1.</strong> IOLI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../crackmes/ioli/ioli_0x00.html"><strong aria-hidden="true">14.1.1.</strong> IOLI 0x00</a></li><li class="chapter-item expanded "><a href="../crackmes/ioli/ioli_0x01.html"><strong aria-hidden="true">14.1.2.</strong> IOLI 0x01</a></li><li class="chapter-item expanded "><a href="../crackmes/ioli/ioli_0x02.html"><strong aria-hidden="true">14.1.3.</strong> IOLI 0x02</a></li><li class="chapter-item expanded "><a href="../crackmes/ioli/ioli_0x03.html"><strong aria-hidden="true">14.1.4.</strong> IOLI 0x03</a></li><li class="chapter-item expanded "><a href="../crackmes/ioli/ioli_0x04.html"><strong aria-hidden="true">14.1.5.</strong> IOLI 0x04</a></li><li class="chapter-item expanded "><a href="../crackmes/ioli/ioli_0x05.html"><strong aria-hidden="true">14.1.6.</strong> IOLI 0x05</a></li><li class="chapter-item expanded "><a href="../crackmes/ioli/ioli_0x06.html"><strong aria-hidden="true">14.1.7.</strong> IOLI 0x06</a></li><li class="chapter-item expanded "><a href="../crackmes/ioli/ioli_0x07.html"><strong aria-hidden="true">14.1.8.</strong> IOLI 0x07</a></li><li class="chapter-item expanded "><a href="../crackmes/ioli/ioli_0x08.html"><strong aria-hidden="true">14.1.9.</strong> IOLI 0x08</a></li><li class="chapter-item expanded "><a href="../crackmes/ioli/ioli_0x09.html"><strong aria-hidden="true">14.1.10.</strong> IOLI 0x09</a></li></ol></li><li class="chapter-item expanded "><a href="../crackmes/avatao/01-reverse4/intro.html"><strong aria-hidden="true">14.2.</strong> Avatao R3v3rs3 4</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../crackmes/avatao/01-reverse4/radare2.html"><strong aria-hidden="true">14.2.1.</strong> .radare2</a></li><li class="chapter-item expanded "><a href="../crackmes/avatao/01-reverse4/first_steps.html"><strong aria-hidden="true">14.2.2.</strong> .first_steps</a></li><li class="chapter-item expanded "><a href="../crackmes/avatao/01-reverse4/main.html"><strong aria-hidden="true">14.2.3.</strong> .main</a></li><li class="chapter-item expanded "><a href="../crackmes/avatao/01-reverse4/vmloop.html"><strong aria-hidden="true">14.2.4.</strong> .vmloop</a></li><li class="chapter-item expanded "><a href="../crackmes/avatao/01-reverse4/instructionset.html"><strong aria-hidden="true">14.2.5.</strong> .instructionset</a></li><li class="chapter-item expanded "><a href="../crackmes/avatao/01-reverse4/bytecode.html"><strong aria-hidden="true">14.2.6.</strong> .bytecode</a></li><li class="chapter-item expanded "><a href="../crackmes/avatao/01-reverse4/outro.html"><strong aria-hidden="true">14.2.7.</strong> .outro</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../refcard/intro.html"><strong aria-hidden="true">15.</strong> Reference Card</a></li><li class="chapter-item expanded "><a href="../credits/credits.html"><strong aria-hidden="true">16.</strong> Acknowledgments</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">The Official Radare2 Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#types" id="types">Types</a></h1>
+<p>Radare2 supports the C-syntax data types description.
+Those types are parsed by a C11-compatible parser and stored in
+the internal SDB, thus are introspectable with <code>k</code> command.</p>
+<p>Most of the related commands are located in <code>t</code> namespace:</p>
+<pre><code>[0x000051c0]&gt; t?
+| Usage: t   # cparse types commands
+| t                          List all loaded types
+| tj                         List all loaded types as json
+| t &lt;type&gt;                   Show type in 'pf' syntax
+| t*                         List types info in r2 commands
+| t- &lt;name&gt;                  Delete types by its name
+| t-*                        Remove all types
+| tail [filename]            Output the last part of files
+| tc [type.name]             List all/given types in C output format
+| te[?]                      List all loaded enums
+| td[?] &lt;string&gt;             Load types from string
+| tf                         List all loaded functions signatures
+| tk &lt;sdb-query&gt;             Perform sdb query
+| tl[?]                      Show/Link type to an address
+| tn[?] [-][addr]            manage noreturn function attributes and marks
+| to -                       Open cfg.editor to load types
+| to &lt;path&gt;                  Load types from C header file
+| toe [type.name]            Open cfg.editor to edit types
+| tos &lt;path&gt;                 Load types from parsed Sdb database
+| tp  &lt;type&gt; [addr|varname]  cast data at &lt;address&gt; to &lt;type&gt; and print it (XXX: type can contain spaces)
+| tpv &lt;type&gt; @ [value]       Show offset formatted for given type
+| tpx &lt;type&gt; &lt;hexpairs&gt;      Show value for type with specified byte sequence (XXX: type can contain spaces)
+| ts[?]                      Print loaded struct types
+| tu[?]                      Print loaded union types
+| tx[f?]                     Type xrefs
+| tt[?]                      List all loaded typedefs
+</code></pre>
+<p>Note that the basic (atomic) types are not those from C standard -
+not <code>char</code>, <code>_Bool</code>, or <code>short</code>. Because those types can be different
+from one platform to another, radare2 uses <code>definite</code> types like as
+<code>int8_t</code> or <code>uint64_t</code> and will convert <code>int</code> to <code>int32_t</code> or <code>int64_t</code>
+depending on the binary or debuggee platform/compiler.</p>
+<p>Basic types can be listed using <code>t</code> command, for the structured types
+you need to use <code>ts</code>, <code>tu</code> or <code>te</code> for enums:</p>
+<pre><code>[0x000051c0]&gt; t
+char
+char *
+int
+int16_t
+int32_t
+int64_t
+int8_t
+long
+long long
+...
+</code></pre>
+<h3><a class="header" href="#loading-types" id="loading-types">Loading types</a></h3>
+<p>There are three easy ways to define a new type:</p>
+<ul>
+<li>Directly from the string using <code>td</code> command</li>
+<li>From the file using <code>to &lt;filename&gt;</code> command</li>
+<li>Open  an <code>$EDITOR</code> to type the definitions in place using <code>to -</code></li>
+</ul>
+<pre><code>[0x000051c0]&gt; &quot;td struct foo {char* a; int b;}&quot;
+[0x000051c0]&gt; cat ~/radare2-regressions/bins/headers/s3.h
+struct S1 {
+    int x[3];
+    int y[4];
+    int z;
+};
+[0x000051c0]&gt; to ~/radare2-regressions/bins/headers/s3.h
+[0x000051c0]&gt; ts
+foo
+S1
+</code></pre>
+<p>Also note there is a config option to specify include directories for types parsing</p>
+<pre><code>[0x00000000]&gt; e??~dir.type
+dir.types: Default path to look for cparse type files
+[0x00000000]&gt; e dir.types
+/usr/include
+</code></pre>
+<h3><a class="header" href="#printing-types" id="printing-types">Printing types</a></h3>
+<p>Notice below we have used <code>ts</code> command, which basically converts
+the C type description (or to be precise it's SDB representation)
+into the sequence of <code>pf</code> commands. See more about <a href="../basic_commands/print_modes.html">print format</a>.</p>
+<p>The <code>tp</code> command uses the <code>pf</code> string to print all the members of type at the current offset/given address:</p>
+<pre><code>[0x000051c0]&gt; ts foo
+pf zd a b
+[0x000051c0]&gt; tp foo
+ a : 0x000051c0 = 'hello'
+ b : 0x000051cc = 10
+[0x000051c0]&gt; tp foo 0x000053c0
+ a : 0x000053c0 = 'world'
+ b : 0x000053cc = 20
+</code></pre>
+<p>Also, you could fill your own data into the struct and print it using <code>tpx</code> command</p>
+<pre><code>[0x000051c0]&gt; tpx foo 4141414144141414141442001000000
+ a : 0x000051c0 = AAAAD.....B
+ b : 0x000051cc = 16
+</code></pre>
+<h3><a class="header" href="#linking-types" id="linking-types">Linking Types</a></h3>
+<p>The <code>tp</code> command just performs a temporary cast. But if we want to link some address or variable
+with the chosen type, we can use <code>tl</code> command to store the relationship in SDB.</p>
+<pre><code>[0x000051c0]&gt; tl S1 = 0x51cf
+[0x000051c0]&gt; tll
+(S1)
+ x : 0x000051cf = [ 2315619660, 1207959810, 34803085 ]
+ y : 0x000051db = [ 2370306049, 4293315645, 3860201471, 4093649307 ]
+ z : 0x000051eb = 4464399
+</code></pre>
+<p>Moreover, the link will be shown in the disassembly output or visual mode:</p>
+<pre><code>[0x000051c0 15% 300 /bin/ls]&gt; pd $r @ entry0
+ ;-- entry0:
+ 0x000051c0      xor ebp, ebp
+ 0x000051c2      mov r9, rdx
+ 0x000051c5      pop rsi
+ 0x000051c6      mov rdx, rsp
+ 0x000051c9      and rsp, 0xfffffffffffffff0
+ 0x000051cd      push rax
+ 0x000051ce      push rsp
+(S1)
+ x : 0x000051cf = [ 2315619660, 1207959810, 34803085 ]
+ y : 0x000051db = [ 2370306049, 4293315645, 3860201471, 4093649307 ]
+ z : 0x000051eb = 4464399
+ 0x000051f0      lea rdi, loc._edata         ; 0x21f248
+ 0x000051f7      push rbp
+ 0x000051f8      lea rax, loc._edata         ; 0x21f248
+ 0x000051ff      cmp rax, rdi
+ 0x00005202      mov rbp, rsp
+</code></pre>
+<p>Once the struct is linked, radare2 tries to propagate structure offset in the function at current offset, to run this analysis on whole program or at any targeted functions after all structs are linked you have <code>aat</code> command:</p>
+<pre><code>[0x00000000]&gt; aa?
+| aat [fcn]           Analyze all/given function to convert immediate to linked structure offsets (see tl?)
+</code></pre>
+<p>Note sometimes the emulation may not be accurate, for example as below :</p>
+<pre><code>|0x000006da  push rbp
+|0x000006db  mov rbp, rsp
+|0x000006de  sub rsp, 0x10
+|0x000006e2  mov edi, 0x20               ; &quot;@&quot;
+|0x000006e7  call sym.imp.malloc         ;  void *malloc(size_t size)
+|0x000006ec  mov qword [local_8h], rax
+|0x000006f0  mov rax, qword [local_8h]
+
+</code></pre>
+<p>The return value of <code>malloc</code> may differ between two emulations, so you have to set the hint for return value manually using <code>ahr</code> command, so run <code>tl</code> or <code>aat</code> command after setting up the return value hint.</p>
+<pre><code>[0x000006da]&gt; ah?
+| ahr val            set hint for return value of a function
+</code></pre>
+<h3><a class="header" href="#structure-immediates" id="structure-immediates">Structure Immediates</a></h3>
+<p>There is one more important aspect of using types in radare2 - using <code>aht</code> you
+can change the immediate in the opcode to the structure offset.
+Lets see a simple example of [R]SI-relative addressing</p>
+<pre><code>[0x000052f0]&gt; pd 1
+0x000052f0      mov rax, qword [rsi + 8]    ; [0x8:8]=0
+</code></pre>
+<p>Here <code>8</code> - is some offset in the memory, where <code>rsi</code> probably holds
+some structure pointer. Imagine that we have the following structures</p>
+<pre><code>
+[0x000052f0]&gt; &quot;td struct ms { char b[8]; int member1; int member2; };&quot;
+[0x000052f0]&gt; &quot;td struct ms1 { uint64_t a; int member1; };&quot;
+[0x000052f0]&gt; &quot;td struct ms2 { uint16_t a; int64_t b; int member1; };&quot;
+</code></pre>
+<p>Now we need to set the proper structure member offset instead of <code>8</code> in this instruction.
+At first, we need to list available types matching this offset:</p>
+<pre><code>[0x000052f0]&gt; ahts 8
+ms.member1
+ms1.member1
+</code></pre>
+<p>Note, that <code>ms2</code> is not listed, because it has no members with offset <code>8</code>.
+After listing available options we can link it to the chosen offset at
+the current address:</p>
+<pre><code>[0x000052f0]&gt; aht ms1.member1
+[0x000052f0]&gt; pd 1
+0x000052f0      488b4608       mov rax, qword [rsi + ms1.member1]    ; [0x8:8]=0
+</code></pre>
+<h3><a class="header" href="#managing-enums" id="managing-enums">Managing enums</a></h3>
+<ul>
+<li>Printing all fields in enum using <code>te</code> command</li>
+</ul>
+<pre><code>[0x00000000]&gt; &quot;td enum Foo {COW=1,BAR=2};&quot;
+[0x00000000]&gt; te Foo
+COW = 0x1
+BAR = 0x2
+</code></pre>
+<ul>
+<li>Finding matching enum member for given bitfield and vice-versa</li>
+</ul>
+<pre><code>[0x00000000]&gt; te Foo 0x1
+COW
+[0x00000000]&gt; teb Foo COW
+0x1
+</code></pre>
+<h2><a class="header" href="#internal-representation" id="internal-representation">Internal representation</a></h2>
+<p>To see the internal representation of the types you can use <code>tk</code> command:</p>
+<pre><code>[0x000051c0]&gt; tk~S1
+S1=struct
+struct.S1=x,y,z
+struct.S1.x=int32_t,0,3
+struct.S1.x.meta=4
+struct.S1.y=int32_t,12,4
+struct.S1.y.meta=4
+struct.S1.z=int32_t,28,0
+struct.S1.z.meta=0
+[0x000051c0]&gt;
+</code></pre>
+<p>Defining primitive types requires an understanding of basic <code>pf</code> formats,
+you can find the whole list of format specifier in <code>pf??</code>:</p>
+<pre><code>-----------------------------------------------------
+| format | explanation                              |
+|---------------------------------------------------|
+|  b     |  byte (unsigned)                         |
+|  c     |  char (signed byte)                      |
+|  d     |  0x%%08x hexadecimal value (4 bytes)     |
+|  f     |  float value (4 bytes)                   |
+|  i     |  %%i integer value (4 bytes)             |
+|  o     |  0x%%08o octal value (4 byte)            |
+|  p     |  pointer reference (2, 4 or 8 bytes)     |
+|  q     |  quadword (8 bytes)                      |
+|  s     |  32bit pointer to string (4 bytes)       |
+|  S     |  64bit pointer to string (8 bytes)       |
+|  t     |  UNIX timestamp (4 bytes)                |
+|  T     |  show Ten first bytes of buffer          |
+|  u     |  uleb128 (variable length)               |
+|  w     |  word (2 bytes unsigned short in hex)    |
+|  x     |  0x%%08x hex value and flag (fd @ addr)  |
+|  X     |  show formatted hexpairs                 |
+|  z     |  \0 terminated string                    |
+|  Z     |  \0 terminated wide string               |
+-----------------------------------------------------
+
+</code></pre>
+<p>there are basically 3 mandatory keys for defining basic data types:
+<code>X=type</code>
+<code>type.X=format_specifier</code>
+<code>type.X.size=size_in_bits</code>
+For example, let's define <code>UNIT</code>, according to <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa383751%28v=vs.85%29.aspx#UINT">Microsoft documentation</a>
+<code>UINT</code> is just equivalent of standard C <code>unsigned int</code> (or <code>uint32_t</code> in terms of TCC engine).
+It will be defined as:</p>
+<pre><code>UINT=type
+type.UINT=d
+type.UINT.size=32
+</code></pre>
+<p>Now there is an optional entry:</p>
+<p><code>X.type.pointto=Y</code></p>
+<p>This one may only be used in case of pointer <code>type.X=p</code>, one good example is LPFILETIME definition,
+it is a pointer to <code>_FILETIME</code> which happens to be a structure.
+Assuming that we are targeting only 32-bit windows machine, it will be defined as the following:</p>
+<pre><code>LPFILETIME=type
+type.LPFILETIME=p
+type.LPFILETIME.size=32
+type.LPFILETIME.pointto=_FILETIME
+</code></pre>
+<p>This last field is not mandatory because sometimes the data structure
+internals will be proprietary, and we will not have a clean representation for it.</p>
+<p>There is also one more optional entry:</p>
+<pre><code>type.UINT.meta=4
+</code></pre>
+<p>This entry is for integration with C parser and carries the type class information:
+integer size, signed/unsigned, etc.</p>
+<h3><a class="header" href="#structures" id="structures">Structures</a></h3>
+<p>Those are the basic keys for structs (with just two elements):</p>
+<pre><code>X=struct
+struct.X=a,b
+struct.X.a=a_type,a_offset,a_number_of_elements
+struct.X.b=b_type,b_offset,b_number_of_elements
+</code></pre>
+<p>The first line is used to define a structure called <code>X</code>, the second line
+defines the elements of <code>X</code> as comma separated values. After that, we just define each element info.</p>
+<p>For example. we can have a struct like this one:</p>
+<pre><code>struct _FILETIME {
+	DWORD dwLowDateTime;
+	DWORD dwHighDateTime;
+}
+</code></pre>
+<p>assuming we have <code>DWORD</code> defined, the struct will look like this</p>
+<pre><code> _FILETIME=struct
+struct._FILETIME=dwLowDateTime,dwHighDateTime
+struct._FILETIME.dwLowDateTime=DWORD,0,0
+struct._FILETIME.dwHighDateTime=DWORD,4,0
+</code></pre>
+<p>Note that the number of elements field is used in case of arrays only
+to identify how many elements are in arrays, other than that it is zero by default.</p>
+<h3><a class="header" href="#unions" id="unions">Unions</a></h3>
+<p>Unions are defined exactly like structs the only difference is that you will replace the word <code>struct</code> with the word <code>union</code>.</p>
+<h3><a class="header" href="#function-prototypes" id="function-prototypes">Function prototypes</a></h3>
+<p>Function prototypes representation is the most detail oriented and the most important one of them all. Actually, this is the one used directly for type matching</p>
+<pre><code>X=func
+func.X.args=NumberOfArgs
+func.x.arg0=Arg_type,arg_name
+.
+.
+.
+func.X.ret=Return_type
+func.X.cc=calling_convention
+</code></pre>
+<p>It should be self-explanatory. Let's do strncasecmp as an example for x86 arch for Linux machines. According to man pages, strncasecmp is defined as the following:</p>
+<pre><code>int strcasecmp(const char *s1, const char *s2, size_t n);
+</code></pre>
+<p>When converting it into its sdb representation it will look like the following:</p>
+<pre><code>strcasecmp=func
+func.strcasecmp.args=3
+func.strcasecmp.arg0=char *,s1
+func.strcasecmp.arg1=char *,s2
+func.strcasecmp.arg2=size_t,n
+func.strcasecmp.ret=int
+func.strcasecmp.cc=cdecl
+</code></pre>
+<p>Note that the <code>.cc</code> part is optional and if it didn't exist the default calling-convention for your target architecture will be used instead.
+There is one extra optional key</p>
+<pre><code>func.x.noreturn=true/false
+</code></pre>
+<p>This key is used to mark functions that will not return once called, such as <code>exit</code> and <code>_exit</code>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../analysis/variables.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../analysis/calling_conventions.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../analysis/variables.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../analysis/calling_conventions.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

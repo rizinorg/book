@@ -1,0 +1,543 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ESIL - The Official Radare2 Book</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="The Official Radare2 Book">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../first_steps/history.html"><strong aria-hidden="true">1.1.</strong> History</a></li><li class="chapter-item expanded "><a href="../first_steps/overview.html"><strong aria-hidden="true">1.2.</strong> The Framework</a></li><li class="chapter-item expanded "><a href="../first_steps/getting_radare.html"><strong aria-hidden="true">1.3.</strong> Downloading radare2</a></li><li class="chapter-item expanded "><a href="../first_steps/compilation_portability.html"><strong aria-hidden="true">1.4.</strong> Compilation and Portability</a></li><li class="chapter-item expanded "><a href="../first_steps/windows_compilation.html"><strong aria-hidden="true">1.5.</strong> Compilation on Windows</a></li><li class="chapter-item expanded "><a href="../first_steps/compilation_android.html"><strong aria-hidden="true">1.6.</strong> Compilation on Android</a></li><li class="chapter-item expanded "><a href="../first_steps/ui.html"><strong aria-hidden="true">1.7.</strong> User Interfaces</a></li></ol></li><li class="chapter-item expanded "><a href="../first_steps/intro.html"><strong aria-hidden="true">2.</strong> First Steps</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../first_steps/commandline_flags.html"><strong aria-hidden="true">2.1.</strong> Command-line Flags</a></li><li class="chapter-item expanded "><a href="../first_steps/command_format.html"><strong aria-hidden="true">2.2.</strong> Command Format</a></li><li class="chapter-item expanded "><a href="../first_steps/expressions.html"><strong aria-hidden="true">2.3.</strong> Expressions</a></li><li class="chapter-item expanded "><a href="../first_steps/basic_debugger_session.html"><strong aria-hidden="true">2.4.</strong> Basic Debugger Session</a></li><li class="chapter-item expanded "><a href="../first_steps/contributing.html"><strong aria-hidden="true">2.5.</strong> Contributing to radare2</a></li></ol></li><li class="chapter-item expanded "><a href="../configuration/intro.html"><strong aria-hidden="true">3.</strong> Configuration</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../configuration/colors.html"><strong aria-hidden="true">3.1.</strong> Colors</a></li><li class="chapter-item expanded "><a href="../configuration/evars.html"><strong aria-hidden="true">3.2.</strong> Configuration Variables</a></li><li class="chapter-item expanded "><a href="../configuration/files.html"><strong aria-hidden="true">3.3.</strong> Files</a></li></ol></li><li class="chapter-item expanded "><a href="../basic_commands/intro.html"><strong aria-hidden="true">4.</strong> Basic Commands</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basic_commands/seeking.html"><strong aria-hidden="true">4.1.</strong> Seeking</a></li><li class="chapter-item expanded "><a href="../basic_commands/block_size.html"><strong aria-hidden="true">4.2.</strong> Block Size</a></li><li class="chapter-item expanded "><a href="../basic_commands/sections.html"><strong aria-hidden="true">4.3.</strong> Sections</a></li><li class="chapter-item expanded "><a href="../basic_commands/mapping_files.html"><strong aria-hidden="true">4.4.</strong> Mapping Files</a></li><li class="chapter-item expanded "><a href="../basic_commands/print_modes.html"><strong aria-hidden="true">4.5.</strong> Print Modes</a></li><li class="chapter-item expanded "><a href="../basic_commands/flags.html"><strong aria-hidden="true">4.6.</strong> Flags</a></li><li class="chapter-item expanded "><a href="../basic_commands/write.html"><strong aria-hidden="true">4.7.</strong> Write</a></li><li class="chapter-item expanded "><a href="../basic_commands/zoom.html"><strong aria-hidden="true">4.8.</strong> Zoom</a></li><li class="chapter-item expanded "><a href="../basic_commands/yank_paste.html"><strong aria-hidden="true">4.9.</strong> Yank/Paste</a></li><li class="chapter-item expanded "><a href="../basic_commands/comparing_bytes.html"><strong aria-hidden="true">4.10.</strong> Comparing Bytes</a></li><li class="chapter-item expanded "><a href="../basic_commands/sdb.html"><strong aria-hidden="true">4.11.</strong> SDB</a></li><li class="chapter-item expanded "><a href="../basic_commands/dietline.html"><strong aria-hidden="true">4.12.</strong> Dietline</a></li></ol></li><li class="chapter-item expanded "><a href="../visual_mode/intro.html"><strong aria-hidden="true">5.</strong> Visual mode</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../visual_mode/visual_disassembly.html"><strong aria-hidden="true">5.1.</strong> Visual Disassembly</a></li><li class="chapter-item expanded "><a href="../visual_mode/visual_assembler.html"><strong aria-hidden="true">5.2.</strong> Visual Assembler</a></li><li class="chapter-item expanded "><a href="../visual_mode/visual_configuration_editor.html"><strong aria-hidden="true">5.3.</strong> Visual Configuration Editor</a></li><li class="chapter-item expanded "><a href="../visual_mode/visual_panels.html"><strong aria-hidden="true">5.4.</strong> Visual Panels</a></li></ol></li><li class="chapter-item expanded "><a href="../search_bytes/intro.html"><strong aria-hidden="true">6.</strong> Searching bytes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../search_bytes/basic_searches.html"><strong aria-hidden="true">6.1.</strong> Basic Searches</a></li><li class="chapter-item expanded "><a href="../search_bytes/configurating_the_search.html"><strong aria-hidden="true">6.2.</strong> Configurating the Search</a></li><li class="chapter-item expanded "><a href="../search_bytes/pattern_search.html"><strong aria-hidden="true">6.3.</strong> Pattern Search</a></li><li class="chapter-item expanded "><a href="../search_bytes/automation.html"><strong aria-hidden="true">6.4.</strong> Automation</a></li><li class="chapter-item expanded "><a href="../search_bytes/backward_search.html"><strong aria-hidden="true">6.5.</strong> Backward Search</a></li><li class="chapter-item expanded "><a href="../search_bytes/search_in_assembly.html"><strong aria-hidden="true">6.6.</strong> Search in Assembly</a></li><li class="chapter-item expanded "><a href="../search_bytes/searching_aes_keys.html"><strong aria-hidden="true">6.7.</strong> Searching for AES Keys</a></li></ol></li><li class="chapter-item expanded "><a href="../disassembling/intro.html"><strong aria-hidden="true">7.</strong> Disassembling</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../disassembling/adding_metadata.html"><strong aria-hidden="true">7.1.</strong> Adding Metadata</a></li><li class="chapter-item expanded "><a href="../disassembling/esil.html" class="active"><strong aria-hidden="true">7.2.</strong> ESIL</a></li></ol></li><li class="chapter-item expanded "><a href="../analysis/intro.html"><strong aria-hidden="true">8.</strong> Analysis</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../analysis/code_analysis.html"><strong aria-hidden="true">8.1.</strong> Code Analysis</a></li><li class="chapter-item expanded "><a href="../analysis/variables.html"><strong aria-hidden="true">8.2.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../analysis/types.html"><strong aria-hidden="true">8.3.</strong> Types</a></li><li class="chapter-item expanded "><a href="../analysis/calling_conventions.html"><strong aria-hidden="true">8.4.</strong> Calling Conventions</a></li><li class="chapter-item expanded "><a href="../analysis/vtables.html"><strong aria-hidden="true">8.5.</strong> Virtual Tables</a></li><li class="chapter-item expanded "><a href="../analysis/syscalls.html"><strong aria-hidden="true">8.6.</strong> Syscalls</a></li><li class="chapter-item expanded "><a href="../analysis/emulation.html"><strong aria-hidden="true">8.7.</strong> Emulation</a></li><li class="chapter-item expanded "><a href="../analysis/symbols.html"><strong aria-hidden="true">8.8.</strong> Symbols information</a></li><li class="chapter-item expanded "><a href="../signatures/zignatures.html"><strong aria-hidden="true">8.9.</strong> Signatures</a></li><li class="chapter-item expanded "><a href="../analysis/graphs.html"><strong aria-hidden="true">8.10.</strong> Graph commands</a></li></ol></li><li class="chapter-item expanded "><a href="../scripting/intro.html"><strong aria-hidden="true">9.</strong> Scripting</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../scripting/loops.html"><strong aria-hidden="true">9.1.</strong> Loops</a></li><li class="chapter-item expanded "><a href="../scripting/macros.html"><strong aria-hidden="true">9.2.</strong> Macros</a></li><li class="chapter-item expanded "><a href="../scripting/r2pipe.html"><strong aria-hidden="true">9.3.</strong> R2pipe</a></li></ol></li><li class="chapter-item expanded "><a href="../debugger/intro.html"><strong aria-hidden="true">10.</strong> Debugger</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../debugger/getting_started.html"><strong aria-hidden="true">10.1.</strong> Getting Started</a></li><li class="chapter-item expanded "><a href="../debugger/migration.html"><strong aria-hidden="true">10.2.</strong> Migration from ida, GDB or WinDBG</a></li><li class="chapter-item expanded "><a href="../debugger/registers.html"><strong aria-hidden="true">10.3.</strong> Registers</a></li><li class="chapter-item expanded "><a href="../debugger/memory_maps.html"><strong aria-hidden="true">10.4.</strong> Memory Maps</a></li><li class="chapter-item expanded "><a href="../debugger/heap.html"><strong aria-hidden="true">10.5.</strong> Heap</a></li><li class="chapter-item expanded "><a href="../debugger/files.html"><strong aria-hidden="true">10.6.</strong> Files</a></li><li class="chapter-item expanded "><a href="../debugger/revdebug.html"><strong aria-hidden="true">10.7.</strong> Reverse Debugging</a></li><li class="chapter-item expanded "><a href="../debugger/windows_messages.html"><strong aria-hidden="true">10.8.</strong> Windows Messages</a></li></ol></li><li class="chapter-item expanded "><a href="../debugger/remoting_capabilities.html"><strong aria-hidden="true">11.</strong> Remote Access</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../debugger/remote_gdb.html"><strong aria-hidden="true">11.1.</strong> Remote GDB</a></li><li class="chapter-item expanded "><a href="../debugger/windbg.html"><strong aria-hidden="true">11.2.</strong> Remote WinDbg</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/intro.html"><strong aria-hidden="true">12.</strong> Command Line Tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/rax2/intro.html"><strong aria-hidden="true">12.1.</strong> Rax2</a></li><li class="chapter-item expanded "><a href="../tools/rafind2/intro.html"><strong aria-hidden="true">12.2.</strong> Rafind2</a></li><li class="chapter-item expanded "><a href="../tools/rarun2/intro.html"><strong aria-hidden="true">12.3.</strong> Rarun2</a></li><li class="chapter-item expanded "><a href="../tools/rabin2/intro.html"><strong aria-hidden="true">12.4.</strong> Rabin2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/rabin2/file_identification.html"><strong aria-hidden="true">12.4.1.</strong> File Identification</a></li><li class="chapter-item expanded "><a href="../tools/rabin2/entrypoints.html"><strong aria-hidden="true">12.4.2.</strong> Entrypoint</a></li><li class="chapter-item expanded "><a href="../tools/rabin2/imports.html"><strong aria-hidden="true">12.4.3.</strong> Imports</a></li><li class="chapter-item expanded "><a href="../tools/rabin2/exports.html"><strong aria-hidden="true">12.4.4.</strong> Exports</a></li><li class="chapter-item expanded "><a href="../tools/rabin2/symbols.html"><strong aria-hidden="true">12.4.5.</strong> Symbols (exports)</a></li><li class="chapter-item expanded "><a href="../tools/rabin2/libraries.html"><strong aria-hidden="true">12.4.6.</strong> Libraries</a></li><li class="chapter-item expanded "><a href="../tools/rabin2/strings.html"><strong aria-hidden="true">12.4.7.</strong> Strings</a></li><li class="chapter-item expanded "><a href="../tools/rabin2/program_sections.html"><strong aria-hidden="true">12.4.8.</strong> Program Sections</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/radiff2/intro.html"><strong aria-hidden="true">12.5.</strong> Radiff2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/radiff2/binary_diffing.html"><strong aria-hidden="true">12.5.1.</strong> Binary Diffing</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/rasm2/intro.html"><strong aria-hidden="true">12.6.</strong> Rasm2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/rasm2/assemble.html"><strong aria-hidden="true">12.6.1.</strong> Assemble</a></li><li class="chapter-item expanded "><a href="../tools/rasm2/disassemble.html"><strong aria-hidden="true">12.6.2.</strong> Disassemble</a></li><li class="chapter-item expanded "><a href="../tools/rasm2/config.html"><strong aria-hidden="true">12.6.3.</strong> Configuration</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/ragg2/ragg2.html"><strong aria-hidden="true">12.7.</strong> Ragg2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/ragg2/lang.html"><strong aria-hidden="true">12.7.1.</strong> Language</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/rahash2/intro.html"><strong aria-hidden="true">12.8.</strong> Rahash2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/rahash2/rahash_tool.html"><strong aria-hidden="true">12.8.1.</strong> Rahash Tool</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../plugins/intro.html"><strong aria-hidden="true">13.</strong> Plugins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../plugins/ioplugins.html"><strong aria-hidden="true">13.1.</strong> IO plugins</a></li><li class="chapter-item expanded "><a href="../plugins/dev-asm.html"><strong aria-hidden="true">13.2.</strong> Asm plugins</a></li><li class="chapter-item expanded "><a href="../plugins/dev-anal.html"><strong aria-hidden="true">13.3.</strong> Analysis plugins</a></li><li class="chapter-item expanded "><a href="../plugins/dev-bin.html"><strong aria-hidden="true">13.4.</strong> Bin plugins</a></li><li class="chapter-item expanded "><a href="../plugins/dev-other.html"><strong aria-hidden="true">13.5.</strong> Other plugins</a></li><li class="chapter-item expanded "><a href="../plugins/python.html"><strong aria-hidden="true">13.6.</strong> Python plugins</a></li><li class="chapter-item expanded "><a href="../plugins/debug.html"><strong aria-hidden="true">13.7.</strong> Debugging</a></li><li class="chapter-item expanded "><a href="../plugins/testing.html"><strong aria-hidden="true">13.8.</strong> Testing</a></li><li class="chapter-item expanded "><a href="../plugins/r2pm.html"><strong aria-hidden="true">13.9.</strong> Packaging</a></li></ol></li><li class="chapter-item expanded "><a href="../crackmes/intro.html"><strong aria-hidden="true">14.</strong> Crackmes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../crackmes/ioli/intro.html"><strong aria-hidden="true">14.1.</strong> IOLI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../crackmes/ioli/ioli_0x00.html"><strong aria-hidden="true">14.1.1.</strong> IOLI 0x00</a></li><li class="chapter-item expanded "><a href="../crackmes/ioli/ioli_0x01.html"><strong aria-hidden="true">14.1.2.</strong> IOLI 0x01</a></li><li class="chapter-item expanded "><a href="../crackmes/ioli/ioli_0x02.html"><strong aria-hidden="true">14.1.3.</strong> IOLI 0x02</a></li><li class="chapter-item expanded "><a href="../crackmes/ioli/ioli_0x03.html"><strong aria-hidden="true">14.1.4.</strong> IOLI 0x03</a></li><li class="chapter-item expanded "><a href="../crackmes/ioli/ioli_0x04.html"><strong aria-hidden="true">14.1.5.</strong> IOLI 0x04</a></li><li class="chapter-item expanded "><a href="../crackmes/ioli/ioli_0x05.html"><strong aria-hidden="true">14.1.6.</strong> IOLI 0x05</a></li><li class="chapter-item expanded "><a href="../crackmes/ioli/ioli_0x06.html"><strong aria-hidden="true">14.1.7.</strong> IOLI 0x06</a></li><li class="chapter-item expanded "><a href="../crackmes/ioli/ioli_0x07.html"><strong aria-hidden="true">14.1.8.</strong> IOLI 0x07</a></li><li class="chapter-item expanded "><a href="../crackmes/ioli/ioli_0x08.html"><strong aria-hidden="true">14.1.9.</strong> IOLI 0x08</a></li><li class="chapter-item expanded "><a href="../crackmes/ioli/ioli_0x09.html"><strong aria-hidden="true">14.1.10.</strong> IOLI 0x09</a></li></ol></li><li class="chapter-item expanded "><a href="../crackmes/avatao/01-reverse4/intro.html"><strong aria-hidden="true">14.2.</strong> Avatao R3v3rs3 4</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../crackmes/avatao/01-reverse4/radare2.html"><strong aria-hidden="true">14.2.1.</strong> .radare2</a></li><li class="chapter-item expanded "><a href="../crackmes/avatao/01-reverse4/first_steps.html"><strong aria-hidden="true">14.2.2.</strong> .first_steps</a></li><li class="chapter-item expanded "><a href="../crackmes/avatao/01-reverse4/main.html"><strong aria-hidden="true">14.2.3.</strong> .main</a></li><li class="chapter-item expanded "><a href="../crackmes/avatao/01-reverse4/vmloop.html"><strong aria-hidden="true">14.2.4.</strong> .vmloop</a></li><li class="chapter-item expanded "><a href="../crackmes/avatao/01-reverse4/instructionset.html"><strong aria-hidden="true">14.2.5.</strong> .instructionset</a></li><li class="chapter-item expanded "><a href="../crackmes/avatao/01-reverse4/bytecode.html"><strong aria-hidden="true">14.2.6.</strong> .bytecode</a></li><li class="chapter-item expanded "><a href="../crackmes/avatao/01-reverse4/outro.html"><strong aria-hidden="true">14.2.7.</strong> .outro</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../refcard/intro.html"><strong aria-hidden="true">15.</strong> Reference Card</a></li><li class="chapter-item expanded "><a href="../credits/credits.html"><strong aria-hidden="true">16.</strong> Acknowledgments</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">The Official Radare2 Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#esil" id="esil">ESIL</a></h1>
+<p>ESIL stands for 'Evaluable Strings Intermediate Language'. It aims to describe a <a href="https://en.wikipedia.org/wiki/Forth_%28programming_language%29">Forth</a>-like representation for every target CPU opcode semantics. ESIL representations can be evaluated (interpreted) in order to emulate individual instructions. Each command of an ESIL expression is separated by a comma. Its virtual machine can be described as this:</p>
+<pre><code>   while ((word=haveCommand())) {
+     if (word.isOperator()) {
+       esilOperators[word](esil);
+     } else {
+       esil.push (word);
+     }
+     nextCommand();
+   }
+</code></pre>
+<p>As we can see ESIL uses a stack-based interpreter similar to what is commonly used for calculators. You have two categories of inputs: values and operators. A value simply gets pushed on the stack, an operator then pops values (its arguments if you will) off the stack, performs its operation and pushes its results (if any) back on. We can think of ESIL as a post-fix notation of the operations we want to do.</p>
+<p>So let's see an example:</p>
+<pre><code>4,esp,-=,ebp,esp,=[4]
+</code></pre>
+<p>Can you guess what this is? If we take this post-fix notation and transform it back to in-fix we get</p>
+<pre><code>esp -= 4
+4bytes(dword) [esp] = ebp
+</code></pre>
+<p>We can see that this corresponds to the x86 instruction <code>push ebp</code>! Isn't that cool?
+The aim is to be able to express most of the common operations performed by CPUs, like binary arithmetic operations, memory loads and stores, processing syscalls. This way if we can transform the instructions to ESIL we can see what a program does while it is running even for the most cryptic architectures you definitely don't have a device to debug on for.</p>
+<h2><a class="header" href="#using-esil" id="using-esil">Using ESIL</a></h2>
+<p>r2's visual mode is great to inspect the ESIL evaluations.</p>
+<p>There are 3 environment variables that are important for watching what a program does:</p>
+<pre><code>[0x00000000]&gt; e emu.str = true
+</code></pre>
+<p><code>asm.emu</code> tells r2 if you want ESIL information to be displayed. If it is set to true, you will see comments appear to the right of your disassembly that tell you how the contents of registers and memory addresses are changed by the current instruction. For example, if you have an instruction that subtracts a value from a register it tells you what the value was before and what it becomes after. This is super useful so you don't have to sit there yourself and track which value goes where.</p>
+<p>One problem with this is that it is a lot of information to take in at once and sometimes you simply don't need it. r2 has a nice compromise for this. That is what the <code>emu.str</code> variable is for (<code>asm.emustr</code> on &lt;= 2.2). Instead of this super verbose output with every register value, this only adds really useful information to the output, e.g., strings that are found at addresses a program uses or whether a jump is likely to be taken or not.</p>
+<p>The third important variable is <code>asm.esil</code>. This switches your disassembly to no longer show you the actual disassembled instructions, but instead now shows you corresponding ESIL expressions that describe what the instruction does.
+So if you want to take a look at how instructions are expressed in ESIL simply set &quot;asm.esil&quot; to true.</p>
+<pre><code>[0x00000000]&gt; e asm.esil = true
+</code></pre>
+<p>In visual mode you can also toggle this by simply typing <code>O</code>.</p>
+<h2><a class="header" href="#esil-commands" id="esil-commands">ESIL Commands</a></h2>
+<ul>
+<li>&quot;ae&quot; : Evaluate ESIL expression.</li>
+</ul>
+<pre><code>[0x00000000]&gt; &quot;ae 1,1,+&quot;
+0x2
+[0x00000000]&gt;
+</code></pre>
+<ul>
+<li>&quot;aes&quot; : ESIL Step.</li>
+</ul>
+<pre><code>[0x00000000]&gt; aes
+[0x00000000]&gt;10aes
+</code></pre>
+<ul>
+<li>&quot;aeso&quot; : ESIL Step Over.</li>
+</ul>
+<pre><code>[0x00000000]&gt; aeso
+[0x00000000]&gt;10aeso
+</code></pre>
+<ul>
+<li>&quot;aesu&quot; : ESIL Step Until.</li>
+</ul>
+<pre><code>[0x00001000]&gt; aesu 0x1035
+ADDR BREAK
+[0x00001019]&gt;
+</code></pre>
+<ul>
+<li>&quot;ar&quot; : Show/modify ESIL registry.</li>
+</ul>
+<pre><code>[0x00001ec7]&gt; ar r_00 = 0x1035
+[0x00001ec7]&gt; ar r_00
+0x00001035
+[0x00001019]&gt;
+</code></pre>
+<h3><a class="header" href="#esil-instruction-set" id="esil-instruction-set">ESIL Instruction Set</a></h3>
+<p>Here is the complete instruction set used by the ESIL VM:</p>
+<table><thead><tr><th>ESIL Opcode</th><th>Operands</th><th>Name</th><th>Operation</th><th>example</th></tr></thead><tbody>
+<tr><td>TRAP</td><td>src</td><td>Trap</td><td>Trap signal</td><td></td></tr>
+<tr><td><strong>$</strong></td><td>src</td><td>Syscall</td><td>syscall</td><td></td></tr>
+<tr><td><strong>$$</strong></td><td>src</td><td>Instruction address</td><td>Get address of current instruction<br>stack=instruction address</td><td></td></tr>
+<tr><td><strong>==</strong></td><td>src,dst</td><td>Compare</td><td>stack = (dst == src) ; <br> update_eflags(dst - src)</td><td></td></tr>
+<tr><td><strong>&lt;</strong></td><td>src,dst</td><td>Smaller (signed comparison)</td><td>stack = (dst &lt; src) ; <br> update_eflags(dst - src)</td><td>[0x0000000]&gt; &quot;ae 1,5,&lt;&quot; <br>0x0<br>&gt; &quot;ae 5,5&quot;<br>0x0&quot;</td></tr>
+<tr><td><strong>&lt;=</strong></td><td>src,dst</td><td>Smaller or Equal (signed comparison)</td><td>stack = (dst &lt;= src) ; <br> update_eflags(dst - src)</td><td>[0x0000000]&gt; &quot;ae 1,5,&lt;&quot; <br>0x0<br>&gt; &quot;ae 5,5&quot;<br>0x1&quot;</td></tr>
+<tr><td><strong>&gt;</strong></td><td>src,dst</td><td>Bigger (signed comparison)</td><td>stack = (dst &gt; src) ; <br> update_eflags(dst - src)</td><td>&gt; &quot;ae 1,5,&gt;&quot;<br>0x1<br>&gt; &quot;ae 5,5,&gt;&quot;<br>0x0</td></tr>
+<tr><td><strong>&gt;=</strong></td><td>src,dst</td><td>Bigger or Equal (signed comparison)</td><td>stack = (dst &gt;= src) ; <br> update_eflags(dst - src)</td><td>&gt; &quot;ae 1,5,&gt;=&quot;<br>0x1<br>&gt; &quot;ae 5,5,&gt;=&quot;<br>0x1</td></tr>
+<tr><td><strong>&lt;&lt;</strong></td><td>src,dst</td><td>Shift Left</td><td>stack = dst &lt;&lt; src</td><td>&gt; &quot;ae 1,1,&lt;&lt;&quot;<br>0x2<br>&gt; &quot;ae 2,1,&lt;&lt;&quot;<br>0x4</td></tr>
+<tr><td><strong>&gt;&gt;</strong></td><td>src,dst</td><td>Shift Right</td><td>stack = dst &gt;&gt; src</td><td>&gt; &quot;ae 1,4,&gt;&gt;&quot;<br>0x2<br>&gt; &quot;ae 2,4,&gt;&gt;&quot;<br>0x1</td></tr>
+<tr><td><strong>&lt;&lt;&lt;</strong></td><td>src,dst</td><td>Rotate Left</td><td>stack=dst ROL src</td><td>&gt; &quot;ae 31,1,&lt;&lt;&lt;&quot;<br>0x80000000<br>&gt; &quot;ae 32,1,&lt;&lt;&lt;&quot;<br>0x1</td></tr>
+<tr><td><strong>&gt;&gt;&gt;</strong></td><td>src,dst</td><td>Rotate Right</td><td>stack=dst ROR src</td><td>&gt; &quot;ae 1,1,&gt;&gt;&gt;&quot;<br>0x80000000<br>&gt; &quot;ae 32,1,&gt;&gt;&gt;&quot;<br>0x1</td></tr>
+<tr><td><strong>&amp;</strong></td><td>src,dst</td><td>AND</td><td>stack = dst &amp; src</td><td>&gt; &quot;ae 1,1,&amp;&quot;<br>0x1<br>&gt; &quot;ae 1,0,&amp;&quot;<br>0x0<br>&gt;  &quot;ae 0,1,&amp;&quot;<br>0x0<br>&gt; &quot;ae 0,0,&amp;&quot;<br>0x0</td></tr>
+<tr><td><strong>|</strong></td><td>src,dst</td><td>OR</td><td>stack = dst | src</td><td>&gt; &quot;ae 1,1,|&quot;<br>0x1<br>&gt; &quot;ae 1,0,|&quot;<br>0x1<br>&gt; &quot;ae 0,1,|&quot;<br>0x1<br>&gt; &quot;ae 0,0,|&quot;<br>0x0</td></tr>
+<tr><td><strong>^</strong></td><td>src,dst</td><td>XOR</td><td>stack = dst ^src</td><td>&gt; &quot;ae 1,1,^&quot;<br>0x0<br>&gt; &quot;ae 1,0,^&quot;<br>0x1<br>&gt; &quot;ae 0,1,^&quot;<br>0x1<br>&gt; &quot;ae 0,0,^&quot;<br>0x0</td></tr>
+<tr><td><strong>+</strong></td><td>src,dst</td><td>ADD</td><td>stack = dst + src</td><td>&gt; &quot;ae 3,4,+&quot;<br>0x7<br>&gt; &quot;ae 5,5,+&quot;<br>0xa</td></tr>
+<tr><td><strong>-</strong></td><td>src,dst</td><td>SUB</td><td>stack = dst - src</td><td>&gt; &quot;ae 3,4,-&quot;<br>0x1<br>&gt; &quot;ae 5,5,-&quot;<br>0x0<br>&gt; &quot;ae 4,3,-&quot;<br>0xffffffffffffffff</td></tr>
+<tr><td><strong>*</strong></td><td>src,dst</td><td>MUL</td><td>stack = dst * src</td><td>&gt; &quot;ae 3,4,*&quot;<br>0xc<br>&gt; &quot;ae 5,5,*&quot;<br>0x19</td></tr>
+<tr><td><strong>/</strong></td><td>src,dst</td><td>DIV</td><td>stack = dst / src</td><td>&gt; &quot;ae 2,4,/&quot;<br>0x2<br>&gt; &quot;ae 5,5,/&quot;<br>0x1<br>&gt; &quot;ae 5,9,/&quot;<br>0x1</td></tr>
+<tr><td><strong>%</strong></td><td>src,dst</td><td>MOD</td><td>stack = dst % src</td><td>&gt; &quot;ae 2,4,%&quot;<br>0x0<br>&gt; &quot;ae 5,5,%&quot;<br>0x0<br>&gt; &quot;ae 5,9,%&quot;<br>0x4</td></tr>
+<tr><td><strong>!</strong></td><td>src</td><td>NEG</td><td>stack = !!!src</td><td>&gt; &quot;ae 1,!&quot;<br>0x0<br>&gt; &quot;ae 4,!&quot;<br>0x0<br>&gt; &quot;ae 0,!&quot;<br>0x1<br></td></tr>
+<tr><td><strong>++</strong></td><td>src</td><td>INC</td><td>stack = src++</td><td>&gt; ar r_00=0;ar r_00<br>0x00000000<br>&gt; &quot;ae r_00,++&quot;<br>0x1<br>&gt; ar r_00<br>0x00000000<br>&gt; &quot;ae 1,++&quot;<br>0x2</td></tr>
+<tr><td><strong>--</strong></td><td>src</td><td>DEC</td><td>stack = src--</td><td>&gt; ar r_00=5;ar r_00<br>0x00000005<br>&gt; &quot;ae r_00,--&quot;<br>0x4<br>&gt; ar r_00<br>0x00000005<br>&gt; &quot;ae 5,--&quot;<br>0x4</td></tr>
+<tr><td><strong>=</strong></td><td>src,reg</td><td>EQU</td><td>reg = src</td><td>&gt; &quot;ae 3,r_00,=&quot;<br>&gt; aer r_00<br>0x00000003<br>&gt; &quot;ae r_00,r_01,=&quot;<br>&gt; aer r_01<br>0x00000003</td></tr>
+<tr><td><strong>+=</strong></td><td>src,reg</td><td>ADD eq</td><td>reg = reg + src</td><td>&gt; ar r_01=5;ar r_00=0;ar r_00<br>0x00000000<br>&gt; &quot;ae r_01,r_00,+=&quot;<br>&gt; ar r_00<br>0x00000005<br>&gt; &quot;ae 5,r_00,+=&quot;<br>&gt; ar r_00<br>0x0000000a</td></tr>
+<tr><td><strong>-=</strong></td><td>src,reg</td><td>SUB eq</td><td>reg = reg - src</td><td>&gt; &quot;ae r_01,r_00,-=&quot;<br>&gt; ar r_00<br>0x00000004<br>&gt; &quot;ae 3,r_00,-=&quot;<br>&gt; ar r_00<br>0x00000001</td></tr>
+<tr><td><strong>*=</strong></td><td>src,reg</td><td>MUL eq</td><td>reg = reg * src</td><td>&gt; ar r_01=3;ar r_00=5;ar r_00<br>0x00000005<br>&gt; &quot;ae r_01,r_00,*=&quot;<br>&gt; ar r_00<br>0x0000000f<br>&gt; &quot;ae 2,r_00,*=&quot;<br>&gt; ar r_00<br>0x0000001e</td></tr>
+<tr><td><strong>/=</strong></td><td>src,reg</td><td>DIV eq</td><td>reg = reg / src</td><td>&gt; ar r_01=3;ar r_00=6;ar r_00<br>0x00000006<br>&gt; &quot;ae r_01,r_00,/=&quot;<br>&gt; ar r_00<br>0x00000002<br>&gt; &quot;ae 1,r_00,/=&quot;<br>&gt; ar r_00<br>0x00000002</td></tr>
+<tr><td><strong>%=</strong></td><td>src,reg</td><td>MOD eq</td><td>reg = reg % src</td><td>&gt;  ar r_01=3;ar r_00=7;ar r_00<br> 0x00000007<br> &gt; &quot;ae r_01,r_00,%=&quot;<br> &gt; ar r_00<br> 0x00000001<br> &gt;  ar r_00=9;ar r_00<br> 0x00000009<br> &gt; &quot;ae 5,r_00,%=&quot;<br> &gt; ar r_00<br> 0x00000004</td></tr>
+<tr><td><strong>&lt;&lt;=</strong></td><td>src,reg</td><td>Shift Left eq</td><td>reg = reg &lt;&lt; src</td><td>&gt; ar r_00=1;ar r_01=1;ar r_01<br>0x00000001<br>&gt; &quot;ae r_00,r_01,&lt;&lt;=&quot;<br>&gt; ar r_01<br>0x00000002<br>&gt; &quot;ae 2,r_01,&lt;&lt;=&quot;<br>&gt; ar r_01<br>0x00000008</td></tr>
+<tr><td><strong>&gt;&gt;=</strong></td><td>src,reg</td><td>Shift Right eq</td><td>reg = reg &lt;&lt; src</td><td>&gt; ar r_00=1;ar r_01=8;ar r_01<br>0x00000008<br>&gt; &quot;ae r_00,r_01,&gt;&gt;=&quot;<br>&gt; ar r_01<br>0x00000004<br>&gt; &quot;ae 2,r_01,&gt;&gt;=&quot;<br>&gt; ar r_01<br>0x00000001</td></tr>
+<tr><td><strong>&amp;=</strong></td><td>src,reg</td><td>AND eq</td><td>reg = reg &amp; src</td><td>&gt; ar r_00=2;ar r_01=6;ar r_01<br>0x00000006<br>&gt; &quot;ae r_00,r_01,&amp;=&quot;<br>&gt; ar r_01<br>0x00000002<br>&gt; &quot;ae 2,r_01,&amp;=&quot;<br>&gt; ar r_01<br>0x00000002<br>&gt; &quot;ae 1,r_01,&amp;=&quot;<br>&gt; ar r_01<br>0x00000000</td></tr>
+<tr><td><strong>|=</strong></td><td>src,reg</td><td>OR eq</td><td>reg = reg | src</td><td>&gt; ar r_00=2;ar r_01=1;ar r_01<br>0x00000001<br>&gt; &quot;ae r_00,r_01,|=&quot;<br>&gt; ar r_01<br>0x00000003<br>&gt; &quot;ae 4,r_01,|=&quot;<br>&gt; ar r_01<br>0x00000007</td></tr>
+<tr><td><strong>^=</strong></td><td>src,reg</td><td>XOR eq</td><td>reg = reg ^ src</td><td>&gt; ar r_00=2;ar r_01=0xab;ar r_01<br>0x000000ab<br>&gt; &quot;ae r_00,r_01,^=&quot;<br>&gt; ar r_01<br>0x000000a9<br>&gt; &quot;ae 2,r_01,^=&quot;<br>&gt; ar r_01<br>0x000000ab</td></tr>
+<tr><td><strong>++=</strong></td><td>reg</td><td>INC eq</td><td>reg = reg + 1</td><td>&gt; ar r_00=4;ar r_00<br>0x00000004<br>&gt; &quot;ae r_00,++=&quot;<br>&gt; ar r_00<br>0x00000005</td></tr>
+<tr><td><strong>--=</strong></td><td>reg</td><td>DEC eq</td><td>reg = reg - 1</td><td>&gt; ar r_00=4;ar r_00<br>0x00000004<br>&gt; &quot;ae r_00,--=&quot;<br>&gt; ar r_00<br>0x00000003</td></tr>
+<tr><td><strong>!=</strong></td><td>reg</td><td>NOT eq</td><td>reg = !reg</td><td>&gt; ar r_00=4;ar r_00<br>0x00000004<br>&gt; &quot;ae r_00,!=&quot;<br>&gt; ar r_00<br>0x00000000<br>&gt; &quot;ae r_00,!=&quot;<br>&gt; ar r_00<br>0x00000001</td></tr>
+<tr><td>---</td><td>---</td><td>---</td><td>---</td><td>----------------------------------------------</td></tr>
+<tr><td>=[]<br>=[*]<br>=[1]<br>=[2]<br>=[4]<br>=[8]</td><td>src,dst</td><td>poke</td><td>*dst=src</td><td><br>&gt; &quot;ae 0xdeadbeef,0x10000,=[4],&quot;<br><br>&gt; pxw 4@0x10000<br>0x00010000  0xdeadbeef                                ....<br><br>&gt; &quot;ae 0x0,0x10000,=[4],&quot;<br><br>&gt; pxw 4@0x10000<br>0x00010000  0x00000000</td></tr>
+<tr><td>[]<br>[*]<br>[1]<br>[2]<br>[4]<br>[8]</td><td>src</td><td>peek</td><td>stack=*src</td><td><br>&gt; w test@0x10000<br><br>&gt; &quot;ae 0x10000,[4],&quot;<br>0x74736574<br><br>&gt; ar r_00=0x10000<br><br>&gt; &quot;ae r_00,[4],&quot;<br>0x74736574</td></tr>
+<tr><td>|=[]<br>|=[1]<br>|=[2]<br>|=[4]<br>|=[8]</td><td>reg</td><td>nombre</td><td>code</td><td>&gt; <br>&gt;</td></tr>
+<tr><td>SWAP</td><td></td><td>Swap</td><td>Swap two top elements</td><td>SWAP</td></tr>
+<tr><td>PICK</td><td>n</td><td>Pick</td><td>Pick nth element<br> from the top of the stack</td><td>2,PICK</td></tr>
+<tr><td>RPICK</td><td>m</td><td>Reverse Pick</td><td>Pick nth element<br> from the base of the stack</td><td>0,RPICK</td></tr>
+<tr><td>DUP</td><td></td><td>Duplicate</td><td>Duplicate top element in stack</td><td>DUP</td></tr>
+<tr><td>NUM</td><td></td><td>Numeric</td><td>If top element is a reference <br> (register name, label, etc),<br> dereference it and push its real value</td><td>NUM</td></tr>
+<tr><td>CLEAR</td><td></td><td>Clear</td><td>Clear stack</td><td>CLEAR</td></tr>
+<tr><td>BREAK</td><td></td><td>Break</td><td>Stops ESIL emulation</td><td>BREAK</td></tr>
+<tr><td>GOTO</td><td>n</td><td>Goto</td><td>Jumps to Nth ESIL word</td><td>GOTO 5</td></tr>
+<tr><td>TODO</td><td></td><td>To Do</td><td>Stops execution<br> (reason: ESIL expression not completed)</td><td>TODO</td></tr>
+</tbody></table>
+<h3><a class="header" href="#esil-flags" id="esil-flags">ESIL Flags</a></h3>
+<p>ESIL VM has an internal state flags that are read-only and can be used to export those values to the underlying target CPU flags. It is because the ESIL VM always calculates all flag changes, while target CPUs only update flags under certain conditions or at specific instructions.</p>
+<p>Internal flags are prefixed with <code>$</code> character.</p>
+<pre><code>z      - zero flag, only set if the result of an operation is 0
+b      - borrow, this requires to specify from which bit (example: $b4 - checks if borrow from bit 4)
+c      - carry, same like above (example: $c7 - checks if carry from bit 7)
+o      - overflow
+p      - parity
+r      - regsize ( asm.bits/8 )
+s      - sign
+ds     - delay slot state
+jt     - jump target
+js     - jump target set
+[0-9]* - Used to set flags and registers without having any side effects,
+         i.e. setting esil_cur, esil_old and esil_lastsz.
+         (example: &quot;$0,of,=&quot; to reset the overflow flag)
+</code></pre>
+<h2><a class="header" href="#syntax-and-commands" id="syntax-and-commands">Syntax and Commands</a></h2>
+<p>A target opcode is translated into a comma separated list of ESIL expressions.</p>
+<pre><code>xor eax, eax    -&gt;    0,eax,=,1,zf,=
+</code></pre>
+<p>Memory access is defined by brackets operation:</p>
+<pre><code>mov eax, [0x80480]   -&gt;   0x80480,[],eax,=
+</code></pre>
+<p>Default operand size is determined by size of operation destination.</p>
+<pre><code>movb $0, 0x80480     -&gt;   0,0x80480,=[1]
+</code></pre>
+<p>The <code>?</code> operator uses the value of its argument to decide whether to evaluate the expression in curly braces.</p>
+<ol>
+<li>Is the value zero?      -&gt; Skip it.</li>
+<li>Is the value non-zero?  -&gt; Evaluate it.</li>
+</ol>
+<pre><code>cmp eax, 123  -&gt;   123,eax,==,$z,zf,=
+jz eax        -&gt;   zf,?{,eax,eip,=,}
+</code></pre>
+<p>If you want to run several expressions under a conditional, put them in curly braces:</p>
+<pre><code>zf,?{,eip,esp,=[],eax,eip,=,$r,esp,-=,}
+</code></pre>
+<p>Whitespaces, newlines and other chars are ignored. So the first thing when processing a ESIL program is to remove spaces:</p>
+<pre><code>esil = r_str_replace (esil, &quot; &quot;, &quot;&quot;, R_TRUE);
+</code></pre>
+<p>Syscalls need special treatment. They are indicated by '$' at the beginning of an expression. You can pass an optional numeric value to specify a number of syscall. An ESIL emulator must handle syscalls. See (r_esil_syscall).</p>
+<h2><a class="header" href="#arguments-order-for-non-associative-operations" id="arguments-order-for-non-associative-operations">Arguments Order for Non-associative Operations</a></h2>
+<p>As discussed on IRC, the current implementation works like this:</p>
+<pre><code>a,b,-      b - a
+a,b,/=     b /= a
+</code></pre>
+<p>This approach is more readable, but it is less stack-friendly.</p>
+<h3><a class="header" href="#special-instructions" id="special-instructions">Special Instructions</a></h3>
+<p>NOPs are represented as empty strings. As it was said previously, syscalls are marked by '$' command. For example, '0x80,$'. It delegates emulation from the ESIL machine to a callback which implements syscalls for a specific OS/kernel.</p>
+<p>Traps are implemented with the <code>TRAP</code> command. They are used to throw exceptions for invalid instructions, division by zero, memory read error, or any other needed by specific architectures.</p>
+<h3><a class="header" href="#quick-analysis" id="quick-analysis">Quick Analysis</a></h3>
+<p>Here is a list of some quick checks to retrieve information from an ESIL string. Relevant information will be probably found in the first expression of the list.</p>
+<pre><code>indexOf('[')    -&gt; have memory references
+indexOf(&quot;=[&quot;)   -&gt; write in memory
+indexOf(&quot;pc,=&quot;) -&gt; modifies program counter (branch, jump, call)
+indexOf(&quot;sp,=&quot;) -&gt; modifies the stack (what if we found sp+= or sp-=?)
+indexOf(&quot;=&quot;)    -&gt; retrieve src and dst
+indexOf(&quot;:&quot;)    -&gt; unknown esil, raw opcode ahead
+indexOf(&quot;$&quot;)    -&gt; accesses internal esil vm flags ex: $z
+indexOf(&quot;$&quot;)    -&gt; syscall ex: 1,$
+indexOf(&quot;TRAP&quot;) -&gt; can trap
+indexOf('++')   -&gt; has iterator
+indexOf('--')   -&gt; count to zero
+indexOf(&quot;?{&quot;)   -&gt; conditional
+equalsTo(&quot;&quot;)    -&gt; empty string, aka nop (wrong, if we append pc+=x)
+</code></pre>
+<p>Common operations:</p>
+<ul>
+<li>Check dstreg</li>
+<li>Check srcreg</li>
+<li>Get destinaion</li>
+<li>Is jump</li>
+<li>Is conditional</li>
+<li>Evaluate</li>
+<li>Is syscall</li>
+</ul>
+<h3><a class="header" href="#cpu-flags" id="cpu-flags">CPU Flags</a></h3>
+<p>CPU flags are usually defined as single bit registers in the RReg profile. They are sometimes found under the 'flg' register type.</p>
+<h3><a class="header" href="#variables" id="variables">Variables</a></h3>
+<p>Properties of the VM variables:</p>
+<ol>
+<li>
+<p>They have no predefined bit width. This way it should be easy to extend them to 128, 256 and 512 bits later, e.g. for MMX, SSE, AVX, Neon SIMD.</p>
+</li>
+<li>
+<p>There can be unbound number of variables. It is done for SSA-form compatibility.</p>
+</li>
+<li>
+<p>Register names have no specific syntax. They are just strings.</p>
+</li>
+<li>
+<p>Numbers can be specified in any base supported by RNum (dec, hex, oct, binary ...).</p>
+</li>
+<li>
+<p>Each ESIL backend should have an associated RReg profile to describe the ESIL register specs.</p>
+</li>
+</ol>
+<h3><a class="header" href="#bit-arrays" id="bit-arrays">Bit Arrays</a></h3>
+<p>What to do with them? What about bit arithmetics if use variables instead of registers?</p>
+<h3><a class="header" href="#arithmetics" id="arithmetics">Arithmetics</a></h3>
+<ol>
+<li>ADD (&quot;+&quot;)</li>
+<li>MUL (&quot;*&quot;)</li>
+<li>SUB (&quot;-&quot;)</li>
+<li>DIV (&quot;/&quot;)</li>
+<li>MOD (&quot;%&quot;)</li>
+</ol>
+<h3><a class="header" href="#bit-arithmetics" id="bit-arithmetics">Bit Arithmetics</a></h3>
+<ol>
+<li>AND  &quot;&amp;&quot;</li>
+<li>OR   &quot;|&quot;</li>
+<li>XOR  &quot;^&quot;</li>
+<li>SHL  &quot;&lt;&lt;&quot;</li>
+<li>SHR  &quot;&gt;&gt;&quot;</li>
+<li>ROL  &quot;&lt;&lt;&lt;&quot;</li>
+<li>ROR  &quot;&gt;&gt;&gt;&quot;</li>
+<li>NEG  &quot;!&quot;</li>
+</ol>
+<h3><a class="header" href="#floating-point-unit-support" id="floating-point-unit-support">Floating Point Unit Support</a></h3>
+<p>At the moment of this writing, ESIL does not yet support FPU. But you can implement support for unsupported instructions using r2pipe. Eventually we will get proper support for multimedia and floating point.</p>
+<h3><a class="header" href="#handling-x86-rep-prefix-in-esil" id="handling-x86-rep-prefix-in-esil">Handling x86 REP Prefix in ESIL</a></h3>
+<p>ESIL specifies that the parsing control-flow commands must be uppercase. Bear in mind that some architectures have uppercase register names. The corresponding register profile should take care not to reuse any of the following:</p>
+<pre><code>3,SKIP   - skip N instructions. used to make relative forward GOTOs
+3,GOTO   - goto instruction 3
+LOOP     - alias for 0,GOTO
+BREAK    - stop evaluating the expression
+STACK    - dump stack contents to screen
+CLEAR    - clear stack
+</code></pre>
+<h4><a class="header" href="#usage-example" id="usage-example">Usage Example:</a></h4>
+<p>rep cmpsb</p>
+<pre><code>cx,!,?{,BREAK,},esi,[1],edi,[1],==,?{,BREAK,},esi,++,edi,++,cx,--,0,GOTO
+</code></pre>
+<h3><a class="header" href="#unimplementedunhandled-instructions" id="unimplementedunhandled-instructions">Unimplemented/Unhandled Instructions</a></h3>
+<p>Those are expressed with the 'TODO' command. They act as a 'BREAK', but displays a warning message describing that an instruction is not implemented and will not be emulated. For example:</p>
+<pre><code>fmulp ST(1), ST(0)      =&gt;      TODO,fmulp ST(1),ST(0)
+</code></pre>
+<h3><a class="header" href="#esil-disassembly-example" id="esil-disassembly-example">ESIL Disassembly Example:</a></h3>
+<pre><code>[0x1000010f8]&gt; e asm.esil=true
+[0x1000010f8]&gt; pd $r @ entry0
+0x1000010f8    55           8,rsp,-=,rbp,rsp,=[8]
+0x1000010f9    4889e5       rsp,rbp,=
+0x1000010fc    4883c768     104,rdi,+=
+0x100001100    4883c668     104,rsi,+=
+0x100001104    5d           rsp,[8],rbp,=,8,rsp,+=
+0x100001105    e950350000   0x465a,rip,= ;[1]
+0x10000110a    55           8,rsp,-=,rbp,rsp,=[8]
+0x10000110b    4889e5       rsp,rbp,=
+0x10000110e    488d4668     rsi,104,+,rax,=
+0x100001112    488d7768     rdi,104,+,rsi,=
+0x100001116    4889c7       rax,rdi,=
+0x100001119    5d           rsp,[8],rbp,=,8,rsp,+=
+0x10000111a    e93b350000   0x465a,rip,= ;[1]
+0x10000111f    55           8,rsp,-=,rbp,rsp,=[8]
+0x100001120    4889e5       rsp,rbp,=
+0x100001123    488b4f60     rdi,96,+,[8],rcx,=
+0x100001127    4c8b4130     rcx,48,+,[8],r8,=
+0x10000112b    488b5660     rsi,96,+,[8],rdx,=
+0x10000112f    b801000000   1,eax,=
+0x100001134    4c394230     rdx,48,+,[8],r8,==,cz,?=
+0x100001138    7f1a         sf,of,!,^,zf,!,&amp;,?{,0x1154,rip,=,} ;[2]
+0x10000113a    7d07         of,!,sf,^,?{,0x1143,rip,} ;[3]
+0x10000113c    b8ffffffff   0xffffffff,eax,= ;  0xffffffff
+0x100001141    eb11         0x1154,rip,= ;[2]
+0x100001143    488b4938     rcx,56,+,[8],rcx,=
+0x100001147    48394a38     rdx,56,+,[8],rcx,==,cz,?=
+</code></pre>
+<h3><a class="header" href="#introspection" id="introspection">Introspection</a></h3>
+<p>To ease ESIL parsing we should have a way to express introspection expressions to extract the data that we want. For example, we may want to get the target address of a jump. The parser for ESIL expressions should offer an API to make it possible to extract information by analyzing the expressions easily.</p>
+<pre><code>&gt;  ao~esil,opcode
+opcode: jmp 0x10000465a
+esil: 0x10000465a,rip,=
+</code></pre>
+<p>We need a way to retrieve the numeric value of 'rip'. This is a very simple example, but there are more complex, like conditional ones. We need expressions to be able to get:</p>
+<ul>
+<li>opcode type</li>
+<li>destination of a jump</li>
+<li>condition depends on</li>
+<li>all regs modified (write)</li>
+<li>all regs accessed (read)</li>
+</ul>
+<h3><a class="header" href="#api-hooks" id="api-hooks">API HOOKS</a></h3>
+<p>It is important for emulation to be able to setup hooks in the parser, so we can extend it to implement analysis without having to change it again and again. That is, every time an operation is about to be executed, a user hook is called. It can be used for example to determine if <code>RIP</code> is going to change, or if the instruction updates the stack.
+Later, we can split that callback into several ones to have an event-based analysis API that may be extended in JavaScript like this:</p>
+<pre><code>esil.on('regset', function(){..
+esil.on('syscall', function(){esil.regset('rip'
+</code></pre>
+<p>For the API, see the functions <code>hook_flag_read()</code>, <code>hook_execute()</code> and <code>hook_mem_read()</code>. A callback should return true or 1 if you want to override the action that it takes. For example, to deny memory reads in a region, or voiding memory writes, effectively making it read-only.
+Return false or 0 if you want to trace ESIL expression parsing.</p>
+<p>Other operations require bindings to external functionalities to work. In this case, <code>r_ref</code> and <code>r_io</code>. This must be defined when initializing the ESIL VM.</p>
+<ul>
+<li>Io Get/Set
+<pre><code>Out ax, 44
+44,ax,:ou
+</code></pre>
+</li>
+<li>Selectors (cs,ds,gs...)
+<pre><code>Mov eax, ds:[ebp+8]
+Ebp,8,+,:ds,eax,=
+</code></pre>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../disassembling/adding_metadata.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../analysis/intro.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../disassembling/adding_metadata.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../analysis/intro.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
