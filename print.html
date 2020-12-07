@@ -5860,11 +5860,11 @@ Try to get the child? y
 `--------------------------------------------'
 </code></pre>
 <h1><a class="header" href="#remote-access-capabilities" id="remote-access-capabilities">Remote Access Capabilities</a></h1>
-<p>Radare can be run locally, or it can be started as a server process which is controlled by a local
+<p>Rizin can be run locally, or it can be started as a server process which is controlled by a local
 rizin process. This is possible because everything uses rizin's IO subsystem which abstracts access to system(), cmd() and all basic IO operations so to work over a network.</p>
 <p>Help for commands useful for remote access to rizin:</p>
 <pre><code>[0x00405a04]&gt; =?
-Usage:  =[:!+-=ghH] [...]   # connect with other instances of r2
+Usage:  =[:!+-=ghH] [...]   # connect with other instances of rizin
 
 remote commands:
 | =                             list all open connections
@@ -6079,7 +6079,7 @@ for every boot, but it is possible to always show the advanced boot options,
 which allows to enable kernel debugging:</p>
 <pre><code>bcedit /set {globalsettings} advancedoptions true
 </code></pre>
-<h2><a class="header" href="#connecting-to-kd-interface-on-r2" id="connecting-to-kd-interface-on-r2">Connecting to KD interface on r2</a></h2>
+<h2><a class="header" href="#connecting-to-kd-interface-on-rizin" id="connecting-to-kd-interface-on-rizin">Connecting to KD interface on rizin</a></h2>
 <h3><a class="header" href="#serial-port-1" id="serial-port-1">Serial Port</a></h3>
 <p>Rizin will use the <code>winkd</code> io plugin to connect to a socket file
 created by virtualbox or qemu. Also, the <code>winkd</code> debugger plugin and
