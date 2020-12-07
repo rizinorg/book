@@ -168,10 +168,10 @@ based on the <a href="https://github.com/radareorg/radare2book">radare2 book</a>
 <p>The editor was originally designed to recover a deleted file from an HFS+ partition.</p>
 <p>After that, pancake decided to extend the tool to have a pluggable io to be able to attach to processes and implemented the debugger functionalities, support for multiple architectures, and code analysis.</p>
 <p>Since then, the project has evolved to provide a complete framework for analyzing binaries, while making use of basic UNIX concepts. Those concepts include the famous &quot;everything is a file&quot;, &quot;small programs that interact using stdin/stdout&quot;, and &quot;keep it simple&quot; paradigms.</p>
-<p>The need for scripting showed the fragility of the initial design: a monolithic tool made the API hard to use, and so a deep refactoring was needed. In 2009 rizin (r2) was born as a fork of rizin1. The refactor added flexibility and dynamic features. This enabled much better integration, paving the way to use rizin <a href="https://github.com/rizinorg/rizin-bindings">from different programming languages</a>. Later on, the <a href="https://github.com/rizinorg/rizin-r2pipe">r2pipe API</a> allowed access to rizin via pipes from any language.</p>
+<p>The need for scripting showed the fragility of the initial design: a monolithic tool made the API hard to use, and so a deep refactoring was needed. In 2009 rizin (r2) was born as a fork of rizin1. The refactor added flexibility and dynamic features. This enabled much better integration, paving the way to use rizin <a href="https://github.com/rizinorg/rizin-bindings">from different programming languages</a>. Later on, the <a href="https://github.com/rizinorg/rizin-rz-pipe">rz-pipe API</a> allowed access to rizin via pipes from any language.</p>
 <p>What started as a one-man project, with some eventual contributions, gradually evolved into a big community-based project around 2014. The number of users was growing fast, and the author-and main developer-had to switch roles from coder to manager in order to integrate the work of the different developers that were joining the project.</p>
 <p>Instructing users to report their issues allows the project to define new directions to evolve in. Everything is managed in <a href="https://github.com/rizinorg/rizin">rizin's GitHub</a> and discussed in the Telegram channel.</p>
-<p>The project remains active at the time of writing this book, and there are several side projects that provide, among other things, a graphical user interface (<a href="https://github.com/rizinorg/cutter">Cutter</a>), a decompiler (<a href="https://github.com/wargio/r2dec-js">r2dec</a>, <a href="https://github.com/rizinorg/radeco">radeco</a>), Frida integration (<a href="https://github.com/nowsecure/r2frida">r2frida</a>), Yara, Unicorn, Keystone, and many other projects indexed in the <a href="https://github.com/rizinorg/rizin-pm">r2pm</a> (the rizin package manager).</p>
+<p>The project remains active at the time of writing this book, and there are several side projects that provide, among other things, a graphical user interface (<a href="https://github.com/rizinorg/cutter">Cutter</a>), a decompiler (<a href="https://github.com/wargio/r2dec-js">r2dec</a>, <a href="https://github.com/rizinorg/radeco">radeco</a>), Frida integration (<a href="https://github.com/nowsecure/r2frida">r2frida</a>), Yara, Unicorn, Keystone, and many other projects indexed in the <a href="https://github.com/rizinorg/rizin-pm">rz-pm</a> (the rizin package manager).</p>
 <p>Since 2016, the community gathers once a year in <a href="https://www.rizin.org/con/">r2con</a>, a congress around rizin that takes place in Barcelona.</p>
 <h2><a class="header" href="#the-framework" id="the-framework">The Framework</a></h2>
 <p>The Rizin project is a set of small command-line utilities that can be used together or independently.</p>
@@ -2589,7 +2589,7 @@ You can also press <code>&quot;</code> to quickly browse through the different o
 | /a jmp eax              assemble opcode and search its bytes
 | /A jmp                  find analyzed instructions of this type (/A? for help)
 | /b                      search backwards, command modifier, followed by other command
-| /B                      search recognized RBin headers
+| /B                      search recognized RzBin headers
 | /c jmp [esp]            search for asm code matching the given string
 | /ce rsp,rbp             search for esil expressions matching
 | /C[ar]                  search for crypto materials
@@ -4891,7 +4891,7 @@ disabled by default.</em>)</p>
 <h2><a class="header" href="#scripting" id="scripting">Scripting</a></h2>
 <p>Rizin provides a wide set of a features to automate boring work.
 It ranges from the simple sequencing of the commands to the calling
-scripts/another programs via IPC (Inter-Process Communication), called r2pipe.</p>
+scripts/another programs via IPC (Inter-Process Communication), called rz-pipe.</p>
 <p>As mentioned a few times before there is an ability to sequence commands
 using <code>;</code> semicolon operator.</p>
 <pre><code>[0x00404800]&gt; pd 1 ; ao 1
@@ -6157,7 +6157,7 @@ Child-SP          RetAddr           Call Site
 <ul>
 <li>these companion tools</li>
 <li>native library apis</li>
-<li>scripting with r2pipe</li>
+<li>scripting with rz-pipe</li>
 <li>the rizin shell</li>
 </ul>
 <h2><a class="header" href="#rax2" id="rax2">Rax2</a></h2>
@@ -6731,9 +6731,9 @@ Usage: rz-diff [-abBcCdjrspOxuUvV] [-A[A]] [-g sym] [-m graph_mode][-t %] [file]
   -C         graphdiff code (columns: off-A, match-ratio, off-B) (see -A)
   -d         use delta diffing
   -D         show disasm instead of hexpairs
-  -e [k=v]   set eval config var value for all RCore instances
+  -e [k=v]   set eval config var value for all RzCore instances
   -g [sym|off1,off2]   graph diff of given symbol, or between two offsets
-  -G [cmd]   run an rizin command on every RCore instance created
+  -G [cmd]   run an rizin command on every RzCore instance created
   -i         diff imports of target files (see -u, -U and -z)
   -j         output in json format
   -n         print bare addresses only (diff.bare=1)
@@ -7465,7 +7465,7 @@ rw_  procpid  /proc/pid/mem io (LGPL3)
 rwd  ptrace   ptrace and /proc/pid/mem (if available) io (LGPL3)
 rwd  qnx      Attach to QNX pdebug instance, qnx://host:1234 (LGPL3)
 rw_  r2k      kernel access API io (r2k://) (LGPL3)
-rw_  r2pipe   r2pipe io plugin (MIT)
+rw_  rz-pipe   rz-pipe io plugin (MIT)
 rw_  r2web    r2web io client (r2web://cloud.rada.re/cmd/) (LGPL3)
 rw_  rap      rizin network protocol (rap://:port rap://host:port/file) (LGPL3)
 rw_  rbuf     RBuffer IO plugin: rbuf:// (LGPL)
@@ -7481,8 +7481,8 @@ rw_  zip      Open zip files [apk|ipa|zip|zipall]://[file//path] (BSD)
 <p>Rizin has modular architecture, thus adding support for a new architecture is very easy, if you
 are fluent in C. For various reasons it might be easier to implement it out of the tree. For this we
 will need to create single C file, called <code>asm_mycpu.c</code> and makefile for it.</p>
-<p>The key thing of RAsm plugin is a structure</p>
-<pre><code class="language-c">RAsmPlugin r_asm_plugin_mycpu = {
+<p>The key thing of RzAsm plugin is a structure</p>
+<pre><code class="language-c">RzAsmPlugin r_asm_plugin_mycpu = {
 	.name = &quot;mycpu&quot;,
 	.license = &quot;LGPL3&quot;,
 	.desc = &quot;MYCPU disassembly plugin&quot;,
@@ -7494,7 +7494,7 @@ will need to create single C file, called <code>asm_mycpu.c</code> and makefile 
 </code></pre>
 <p>where <code>.disassemble</code> is a pointer to disassembly function, which accepts the bytes buffer
 and length:</p>
-<pre><code class="language-c">static int disassemble(RAsm *a, RAsmOp *op, const ut8 *buf, int len)
+<pre><code class="language-c">static int disassemble(RzAsm *a, RzAsmOp *op, const ut8 *buf, int len)
 </code></pre>
 <p><strong>Makefile</strong></p>
 <pre><code class="language-makefile">NAME=asm_snes
@@ -7528,7 +7528,7 @@ uninstall:
 #include &lt;r_lib.h&gt;
 #include &lt;r_asm.h&gt;
 
-static int disassemble(RAsm *a, RAsmOp *op, const ut8 *buf, int len) {
+static int disassemble(RzAsm *a, RzAsmOp *op, const ut8 *buf, int len) {
 	struct op_cmd cmd = {
 		.instr = &quot;&quot;,
 		.operands = &quot;&quot;
@@ -7542,7 +7542,7 @@ static int disassemble(RAsm *a, RAsmOp *op, const ut8 *buf, int len) {
 	return op-&gt;size = ret;
 }
 
-RAsmPlugin r_asm_plugin_mycpu = {
+RzAsmPlugin r_asm_plugin_mycpu = {
 	.name = &quot;mycpu&quot;,
 	.license = &quot;LGPL3&quot;,
 	.desc = &quot;MYCPU disassembly plugin&quot;,
@@ -7573,9 +7573,9 @@ R_API RLibStruct rizin_plugin = {
 <li><code>libr/include/r_asm.h</code> : add the struct definition in there</li>
 </ul>
 <p>Check out how the NIOS II CPU disassembly plugin was implemented by reading those commits:</p>
-<p>Implement RAsm plugin:
+<p>Implement RzAsm plugin:
 https://github.com/rizinorg/rizin/commit/933dc0ef6ddfe44c88bbb261165bf8f8b531476b</p>
-<p>Implement RAnal plugin:
+<p>Implement RzAnalysis plugin:
 https://github.com/rizinorg/rizin/commit/ad430f0d52fbe933e0830c49ee607e9b0e4ac8f2</p>
 <h2><a class="header" href="#implementing-a-new-analysis-plugin" id="implementing-a-new-analysis-plugin">Implementing a new analysis plugin</a></h2>
 <p>After implementing disassembly plugin, you might have noticed that output
@@ -7583,11 +7583,11 @@ is far from being good - no proper highlighting, no reference lines
 and so on. This is because rizin requires every architecture plugin
 to provide also analysis information about every opcode. At the moment
 the implementation of disassembly and opcodes analysis is separated between
-two modules - RAsm and RAnal. Thus we need to write an analysis plugin too.
+two modules - RzAsm and RzAnalysis. Thus we need to write an analysis plugin too.
 The principle is very similar - you just need to create a C file and
 corresponding Makefile.</p>
-<p>They structure of RAnal plugin looks like</p>
-<pre><code class="language-c">RAnalPlugin r_anal_plugin_v810 = {
+<p>They structure of RzAnalysis plugin looks like</p>
+<pre><code class="language-c">RzAnalysisPlugin r_anal_plugin_v810 = {
 	.name = &quot;mycpu&quot;,
 	.desc = &quot;MYCPU code analysis plugin&quot;,
 	.license = &quot;LGPL3&quot;,
@@ -7599,9 +7599,9 @@ corresponding Makefile.</p>
 };
 </code></pre>
 <p>Like with disassembly plugin there is a key function - <code>mycpu_op</code> which scans the opcode and builds
-RAnalOp structure. On the other hand, in this example analysis plugins also performs uplifting to
+RzAnalysisOp structure. On the other hand, in this example analysis plugins also performs uplifting to
 ESIL, which is enabled in <code>.esil = true</code> statement. Thus, <code>mycpu_op</code> obliged to fill the
-corresponding RAnalOp ESIL field for the opcodes. Second important thing for ESIL uplifting and
+corresponding RzAnalysisOp ESIL field for the opcodes. Second important thing for ESIL uplifting and
 emulation - register profile, like in debugger, which is set within <code>set_reg_profile</code> function.</p>
 <p><strong>Makefile</strong></p>
 <pre><code class="language-makefile">NAME=anal_snes
@@ -7636,8 +7636,8 @@ uninstall:
 #include &lt;r_anal.h&gt;
 #include &quot;snes_op_table.h&quot;
 
-static int snes_anop(RAnal *anal, RAnalOp *op, ut64 addr, const ut8 *data, int len) {
-	memset (op, '\0', sizeof (RAnalOp));
+static int snes_anop(RzAnalysis *anal, RzAnalysisOp *op, ut64 addr, const ut8 *data, int len) {
+	memset (op, '\0', sizeof (RzAnalysisOp));
 	op-&gt;size = snes_op[data[0]].len;
 	op-&gt;addr = addr;
 	op-&gt;type = R_ANAL_OP_TYPE_UNK;
@@ -7715,7 +7715,7 @@ uninstall:
 <pre><code class="language-c">#include &lt;r_util.h&gt;
 #include &lt;r_bin.h&gt;
 
-static bool load_buffer(RBinFile *bf, void **bin_obj, RBuffer *b, ut64 loadaddr, Sdb *sdb) {
+static bool load_buffer(RzBinFile *bf, void **bin_obj, RBuffer *b, ut64 loadaddr, Sdb *sdb) {
 	ut64 size;
 	const ut8 *buf = r_buf_data (b, &amp;size);
 	r_return_val_if_fail (buf, false);
@@ -7723,7 +7723,7 @@ static bool load_buffer(RBinFile *bf, void **bin_obj, RBuffer *b, ut64 loadaddr,
 	return *bin_obj != NULL;
 }
 
-static void destroy(RBinFile *bf) {
+static void destroy(RzBinFile *bf) {
 	r_bin_free_all_nes_obj (bf-&gt;o-&gt;bin_obj);
 	bf-&gt;o-&gt;bin_obj = NULL;
 }
@@ -7733,8 +7733,8 @@ static bool check_buffer(RBuffer *b) {
 	return (!memcmp (buf, &quot;\x4E\x45\x53\x1A&quot;, 4));
 }
 
-static RBinInfo* info(RBinFile *arch) {
-	RBinInfo \*ret = R_NEW0 (RBinInfo);
+static RzBinInfo* info(RzBinFile *arch) {
+	RzBinInfo \*ret = R_NEW0 (RzBinInfo);
 	if (!ret) return NULL;
 
 	if (!arch || !arch-&gt;buf) {
@@ -7819,7 +7819,7 @@ for the sake of readability!</p>
 <p>For this you need to do this:</p>
 <ol>
 <li><code>import rzlang</code> and <code>from rzlang import RZ</code> (for constants)</li>
-<li>Make a function with 2 subfunctions - <code>assemble</code> and <code>disassemble</code> and returning plugin structure - for RAsm plugin</li>
+<li>Make a function with 2 subfunctions - <code>assemble</code> and <code>disassemble</code> and returning plugin structure - for RzAsm plugin</li>
 </ol>
 <pre><code class="language-python">def mycpu(a):
     def assemble(s):
@@ -7848,7 +7848,7 @@ for the sake of readability!</p>
     }
 </code></pre>
 <ol start="4">
-<li>Make a function with 2 subfunctions - <code>set_reg_profile</code> and <code>op</code> and returning plugin structure - for RAnal plugin</li>
+<li>Make a function with 2 subfunctions - <code>set_reg_profile</code> and <code>op</code> and returning plugin structure - for RzAnalysis plugin</li>
 </ol>
 <pre><code class="language-python">def mycpu_anal(a):
        def set_reg_profile():
@@ -7944,7 +7944,7 @@ for the sake of readability!</p>
 <li><code>binsym</code></li>
 <li><code>info</code></li>
 </ul>
-<p>and returning plugin structure - for RAsm plugin</p>
+<p>and returning plugin structure - for RzAsm plugin</p>
 </li>
 </ol>
 <pre><code class="language-python">def le_format(a):
@@ -8065,8 +8065,8 @@ _d  mycpu        My CPU disassembler  (LGPL3)
 <p>Yay! it works.. and the mandatory oneliner too!</p>
 <pre><code>rizin -nqamycpu -cwoR -cpd' 10' -
 </code></pre>
-<h1><a class="header" href="#creating-an-r2pm-package-of-the-plugin" id="creating-an-r2pm-package-of-the-plugin">Creating an r2pm package of the plugin</a></h1>
-<p>As you remember rizin has its own <a href="plugins/../tools/r2pm/intro.html">packaging manager</a> and we can easily
+<h1><a class="header" href="#creating-an-rz-pm-package-of-the-plugin" id="creating-an-rz-pm-package-of-the-plugin">Creating an rz-pm package of the plugin</a></h1>
+<p>As you remember rizin has its own <a href="plugins/../tools/rz-pm/intro.html">packaging manager</a> and we can easily
 add newly written plugin for everyone to access.</p>
 <p>All packages are located in <a href="https://github.com/rizinorg/rizin-pm">rizin-pm</a> repository, and have
 very simple text format.</p>
@@ -8390,7 +8390,7 @@ function main () {
 }
 </code></pre>
 <p>The <code>pdc</code> command is unreliable especially in processing loops (while, for, etc.). So I prefer to use the <a href="https://github.com/rizinorg/r2dec-js">r2dec</a> plugin in rizin repo to generate the pseudo C code. you can install it easily:</p>
-<pre><code>r2pm install r2dec
+<pre><code>rz-pm install r2dec
 </code></pre>
 <p>decompile <code>main()</code> with the following command (like <code>F5</code> in IDA):</p>
 <pre><code class="language-C">[0x08048330]&gt; pdd@main
@@ -10156,7 +10156,7 @@ you can use the <code>fs</code> command to restrict it.</p>
 </tbody></table>
 <h2><a class="header" href="#information" id="information">Information</a></h2>
 <p>Binary files have information stored inside the headers. The <code>i</code>
-command uses the RBin api and allows us to the same things rz-bin
+command uses the RzBin api and allows us to the same things rz-bin
 do. Those are the most common ones.</p>
 <table><thead><tr><th align="left">Command</th><th align="left">Description</th></tr></thead><tbody>
 <tr><td align="left">ii</td><td align="left">Information on imports</td></tr>

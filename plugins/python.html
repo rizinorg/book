@@ -155,7 +155,7 @@ for the sake of readability!</p>
 <p>For this you need to do this:</p>
 <ol>
 <li><code>import rzlang</code> and <code>from rzlang import RZ</code> (for constants)</li>
-<li>Make a function with 2 subfunctions - <code>assemble</code> and <code>disassemble</code> and returning plugin structure - for RAsm plugin</li>
+<li>Make a function with 2 subfunctions - <code>assemble</code> and <code>disassemble</code> and returning plugin structure - for RzAsm plugin</li>
 </ol>
 <pre><code class="language-python">def mycpu(a):
     def assemble(s):
@@ -184,7 +184,7 @@ for the sake of readability!</p>
     }
 </code></pre>
 <ol start="4">
-<li>Make a function with 2 subfunctions - <code>set_reg_profile</code> and <code>op</code> and returning plugin structure - for RAnal plugin</li>
+<li>Make a function with 2 subfunctions - <code>set_reg_profile</code> and <code>op</code> and returning plugin structure - for RzAnalysis plugin</li>
 </ol>
 <pre><code class="language-python">def mycpu_anal(a):
        def set_reg_profile():
@@ -280,7 +280,7 @@ for the sake of readability!</p>
 <li><code>binsym</code></li>
 <li><code>info</code></li>
 </ul>
-<p>and returning plugin structure - for RAsm plugin</p>
+<p>and returning plugin structure - for RzAsm plugin</p>
 </li>
 </ol>
 <pre><code class="language-python">def le_format(a):

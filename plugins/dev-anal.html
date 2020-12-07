@@ -153,11 +153,11 @@ is far from being good - no proper highlighting, no reference lines
 and so on. This is because rizin requires every architecture plugin
 to provide also analysis information about every opcode. At the moment
 the implementation of disassembly and opcodes analysis is separated between
-two modules - RAsm and RAnal. Thus we need to write an analysis plugin too.
+two modules - RzAsm and RzAnalysis. Thus we need to write an analysis plugin too.
 The principle is very similar - you just need to create a C file and
 corresponding Makefile.</p>
-<p>They structure of RAnal plugin looks like</p>
-<pre><code class="language-c">RAnalPlugin r_anal_plugin_v810 = {
+<p>They structure of RzAnalysis plugin looks like</p>
+<pre><code class="language-c">RzAnalysisPlugin r_anal_plugin_v810 = {
 	.name = &quot;mycpu&quot;,
 	.desc = &quot;MYCPU code analysis plugin&quot;,
 	.license = &quot;LGPL3&quot;,
@@ -169,9 +169,9 @@ corresponding Makefile.</p>
 };
 </code></pre>
 <p>Like with disassembly plugin there is a key function - <code>mycpu_op</code> which scans the opcode and builds
-RAnalOp structure. On the other hand, in this example analysis plugins also performs uplifting to
+RzAnalysisOp structure. On the other hand, in this example analysis plugins also performs uplifting to
 ESIL, which is enabled in <code>.esil = true</code> statement. Thus, <code>mycpu_op</code> obliged to fill the
-corresponding RAnalOp ESIL field for the opcodes. Second important thing for ESIL uplifting and
+corresponding RzAnalysisOp ESIL field for the opcodes. Second important thing for ESIL uplifting and
 emulation - register profile, like in debugger, which is set within <code>set_reg_profile</code> function.</p>
 <p><strong>Makefile</strong></p>
 <pre><code class="language-makefile">NAME=anal_snes
@@ -206,8 +206,8 @@ uninstall:
 #include &lt;r_anal.h&gt;
 #include &quot;snes_op_table.h&quot;
 
-static int snes_anop(RAnal *anal, RAnalOp *op, ut64 addr, const ut8 *data, int len) {
-	memset (op, '\0', sizeof (RAnalOp));
+static int snes_anop(RzAnalysis *anal, RzAnalysisOp *op, ut64 addr, const ut8 *data, int len) {
+	memset (op, '\0', sizeof (RzAnalysisOp));
 	op-&gt;size = snes_op[data[0]].len;
 	op-&gt;addr = addr;
 	op-&gt;type = R_ANAL_OP_TYPE_UNK;

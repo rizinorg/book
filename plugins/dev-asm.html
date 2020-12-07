@@ -151,8 +151,8 @@
 <p>Rizin has modular architecture, thus adding support for a new architecture is very easy, if you
 are fluent in C. For various reasons it might be easier to implement it out of the tree. For this we
 will need to create single C file, called <code>asm_mycpu.c</code> and makefile for it.</p>
-<p>The key thing of RAsm plugin is a structure</p>
-<pre><code class="language-c">RAsmPlugin r_asm_plugin_mycpu = {
+<p>The key thing of RzAsm plugin is a structure</p>
+<pre><code class="language-c">RzAsmPlugin r_asm_plugin_mycpu = {
 	.name = &quot;mycpu&quot;,
 	.license = &quot;LGPL3&quot;,
 	.desc = &quot;MYCPU disassembly plugin&quot;,
@@ -164,7 +164,7 @@ will need to create single C file, called <code>asm_mycpu.c</code> and makefile 
 </code></pre>
 <p>where <code>.disassemble</code> is a pointer to disassembly function, which accepts the bytes buffer
 and length:</p>
-<pre><code class="language-c">static int disassemble(RAsm *a, RAsmOp *op, const ut8 *buf, int len)
+<pre><code class="language-c">static int disassemble(RzAsm *a, RzAsmOp *op, const ut8 *buf, int len)
 </code></pre>
 <p><strong>Makefile</strong></p>
 <pre><code class="language-makefile">NAME=asm_snes
@@ -198,7 +198,7 @@ uninstall:
 #include &lt;r_lib.h&gt;
 #include &lt;r_asm.h&gt;
 
-static int disassemble(RAsm *a, RAsmOp *op, const ut8 *buf, int len) {
+static int disassemble(RzAsm *a, RzAsmOp *op, const ut8 *buf, int len) {
 	struct op_cmd cmd = {
 		.instr = &quot;&quot;,
 		.operands = &quot;&quot;
@@ -212,7 +212,7 @@ static int disassemble(RAsm *a, RAsmOp *op, const ut8 *buf, int len) {
 	return op-&gt;size = ret;
 }
 
-RAsmPlugin r_asm_plugin_mycpu = {
+RzAsmPlugin r_asm_plugin_mycpu = {
 	.name = &quot;mycpu&quot;,
 	.license = &quot;LGPL3&quot;,
 	.desc = &quot;MYCPU disassembly plugin&quot;,
@@ -243,9 +243,9 @@ R_API RLibStruct rizin_plugin = {
 <li><code>libr/include/r_asm.h</code> : add the struct definition in there</li>
 </ul>
 <p>Check out how the NIOS II CPU disassembly plugin was implemented by reading those commits:</p>
-<p>Implement RAsm plugin:
+<p>Implement RzAsm plugin:
 https://github.com/rizinorg/rizin/commit/933dc0ef6ddfe44c88bbb261165bf8f8b531476b</p>
-<p>Implement RAnal plugin:
+<p>Implement RzAnalysis plugin:
 https://github.com/rizinorg/rizin/commit/ad430f0d52fbe933e0830c49ee607e9b0e4ac8f2</p>
 
                     </main>

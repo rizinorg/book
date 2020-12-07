@@ -179,7 +179,7 @@ uninstall:
 <pre><code class="language-c">#include &lt;r_util.h&gt;
 #include &lt;r_bin.h&gt;
 
-static bool load_buffer(RBinFile *bf, void **bin_obj, RBuffer *b, ut64 loadaddr, Sdb *sdb) {
+static bool load_buffer(RzBinFile *bf, void **bin_obj, RBuffer *b, ut64 loadaddr, Sdb *sdb) {
 	ut64 size;
 	const ut8 *buf = r_buf_data (b, &amp;size);
 	r_return_val_if_fail (buf, false);
@@ -187,7 +187,7 @@ static bool load_buffer(RBinFile *bf, void **bin_obj, RBuffer *b, ut64 loadaddr,
 	return *bin_obj != NULL;
 }
 
-static void destroy(RBinFile *bf) {
+static void destroy(RzBinFile *bf) {
 	r_bin_free_all_nes_obj (bf-&gt;o-&gt;bin_obj);
 	bf-&gt;o-&gt;bin_obj = NULL;
 }
@@ -197,8 +197,8 @@ static bool check_buffer(RBuffer *b) {
 	return (!memcmp (buf, &quot;\x4E\x45\x53\x1A&quot;, 4));
 }
 
-static RBinInfo* info(RBinFile *arch) {
-	RBinInfo \*ret = R_NEW0 (RBinInfo);
+static RzBinInfo* info(RzBinFile *arch) {
+	RzBinInfo \*ret = R_NEW0 (RzBinInfo);
 	if (!ret) return NULL;
 
 	if (!arch || !arch-&gt;buf) {
