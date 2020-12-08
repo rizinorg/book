@@ -150,15 +150,9 @@
                         <h2><a class="header" href="#adding-metadata-to-disassembly" id="adding-metadata-to-disassembly">Adding Metadata to Disassembly</a></h2>
 <p>The typical work involved in reversing binary files makes powerful annotation capabilities essential.
 Radare offers multiple ways to store and retrieve such metadata.</p>
-<p>By following common basic UNIX principles, it is easy to write a small utility in a scripting language which uses <code>objdump</code>, <code>otool</code> or any other existing utility to obtain information from a binary and to import it into rizin. For example, take a look at <code>idc2r.py</code> shipped with <a href="https://github.com/rizinorg/rizinida">rizinida</a>. To use it, invoke it as <code>idc2r.py file.idc &gt; file.r2</code>. It reads an IDC file exported from an IDA Pro database and produces an rizin script containing the same comments, names of functions and other data. You can import the resulting 'file.r2' by using the dot <code>.</code> command of rizin:</p>
-<pre><code>[0x00000000]&gt; . file.r2
+<p>By following common basic UNIX principles, it is easy to write a small utility in a scripting language which uses <code>objdump</code>, <code>otool</code> or any other existing utility to obtain information from a binary and to import it into rizin. For example, take a look at <a href="https://github.com/williballenthin/python-idb">python-idb</a>-based <code>ida2rz.py</code> which opens IDB files directly without IDA Pro installed. You can load the resulting file with the <code>.</code> (dot) command into the rizin:</p>
+<pre><code>[0x00000000]&gt; . file.rz
 </code></pre>
-<p>The <code>.</code> command is used to interpret Radare commands from external sources, including files and program output. For example, to omit generation of an intermediate file and import the script directly you can use this combination:</p>
-<pre><code>[0x00000000]&gt; .!idc2r.py &lt; file.idc
-</code></pre>
-<p>Please keep in mind that importing IDA Pro metadata from IDC dump is deprecated mechanism and might
-not work in the future. The recommended way to do it - use <a href="https://github.com/williballenthin/python-idb">python-idb</a>-based <code>ida2r2.py</code> which
-opens IDB files directly without IDA Pro installed.</p>
 <p>The <code>C</code> command is used to manage comments and data conversions. You can define a range of program's bytes to be interpreted as either code, binary data or string. It is also possible to execute external code at every specified flag location in order to fetch some metadata, such as a comment, from an external file or database.</p>
 <p>There are many different metadata manipulation commands, here is the glimpse of all of them:</p>
 <pre><code>[0x00404cc0]&gt; C?

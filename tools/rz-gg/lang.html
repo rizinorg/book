@@ -148,14 +148,14 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#syntax-of-the-language" id="syntax-of-the-language">Syntax of the language</a></h1>
-<p>The code of r_egg is compiled as in a flow. It is a one-pass compiler;</p>
+<p>The code of rz_egg is compiled as in a flow. It is a one-pass compiler;</p>
 <p>this means that you have to define the proper stackframe size at the</p>
 <p>beginning of the function, and you have to define the functions in</p>
 <p>order to avoid getting compilation errors.</p>
 <p>The compiler generates assembly code for x86-{32,64} and arm. But it aims</p>
-<p>to support more platforms. This code is the compiled with r_asm and</p>
-<p>injected into a tiny binary with r_bin.</p>
-<p>You may like to use r_egg to create standalone binaries, position-</p>
+<p>to support more platforms. This code is the compiled with rz_asm and</p>
+<p>injected into a tiny binary with rz_bin.</p>
+<p>You may like to use rz_egg to create standalone binaries, position-</p>
 <p>independent raw eggs to be injected on running processes or to patch</p>
 <p>on-disk binaries.</p>
 <p>The generated code is not yet optimized, but it's safe to be executed</p>
@@ -169,19 +169,19 @@
 <p><code> printf@alias(0x8053940);</code></p>
 <h3><a class="header" href="#includes" id="includes">Includes</a></h3>
 <p>Use <code>cat(1)</code> or the preprocessor to concatenate multiple files to be compiled.</p>
-<p><code> INCDIR@alias(&quot;/usr/include/ragg2&quot;);</code></p>
+<p><code> INCDIR@alias(&quot;/usr/include/rz-gg&quot;);</code></p>
 <p><code> sys-osx.r@include(INCDIR);</code></p>
 <h3><a class="header" href="#hashbang" id="hashbang">Hashbang</a></h3>
 <p>eggs can use a hashbang to make them executable.</p>
 <p><code>$ head -n1 hello.r</code></p>
-<p><code> #!/usr/bin/ragg2 -X</code></p>
+<p><code> #!/usr/bin/rz-gg -X</code></p>
 <p><code> $ ./hello.r</code></p>
 <p><code> Hello World!</code></p>
 <h3><a class="header" href="#main" id="main">Main</a></h3>
 <p>The execution of the code is done as in a flow. The first function to be</p>
 <p>defined will be the first one to be executed. If you want to run main()</p>
 <p>just do like this:</p>
-<p><code> #!/usr/bin/ragg2 -X</code></p>
+<p><code> #!/usr/bin/rz-gg -X</code></p>
 <p><code> main();</code></p>
 <p><code> ...</code></p>
 <p><code> main@global(128,64) {</code></p>
@@ -238,13 +238,13 @@
 <h3><a class="header" href="#tracing" id="tracing">Tracing</a></h3>
 <p>Sometimes r_egg programs will break or just not work as expected. Use the</p>
 <p>'trace' architecture to get a arch-backend call trace:</p>
-<p><code> $ ragg2 -a trace -s yourprogram.r</code></p>
+<p><code> $ rz-gg -a trace -s yourprogram.r</code></p>
 <h3><a class="header" href="#pointers" id="pointers">Pointers</a></h3>
 <p>TODO: Theorically '*' is used to get contents of a memory pointer.</p>
 <h3><a class="header" href="#virtual-registers" id="virtual-registers">Virtual registers</a></h3>
 <p>TODO: a0, a1, a2, a3, sp, fp, bp, pc</p>
 <h3><a class="header" href="#math-operations" id="math-operations">Math operations</a></h3>
-<p>Ragg2 supports local variables assignment by math operating, including</p>
+<p>rz-gg supports local variables assignment by math operating, including</p>
 <p>the following operators:</p>
 <p><code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>&amp;</code> <code>|</code> <code>^</code></p>
 <h3><a class="header" href="#return-values" id="return-values">Return values</a></h3>
@@ -260,14 +260,14 @@ main@global() {
 	add (3,4);
 }
 
-$ ragg2 -F -o test test.r
+$ rz-gg -F -o test test.r
 $ ./test
 $ echo $?
 7
 </code></pre>
 <h3><a class="header" href="#traps" id="traps">Traps</a></h3>
 <p>Each architecture have a different instruction to break the execution of</p>
-<p>the program. REgg language captures calls to 'break()' to run the emit_trap</p>
+<p>the program. RzEgg language captures calls to 'break()' to run the emit_trap</p>
 <p>callback of the selected arch. The</p>
 <p><code> break()</code>; --&gt; compiles into 'int3' on x86</p>
 <p><code> break;</code> --&gt; compiles into 'int3' on x86</p>

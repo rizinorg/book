@@ -147,15 +147,15 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#rarun2" id="rarun2">Rarun2</a></h1>
-<p>Rarun2 is a tool allowing to setup a specified execution environment - redefine stdin/stdout, pipes,
+                        <h1><a class="header" href="#rz-run" id="rz-run">Rz-run</a></h1>
+<p>rz-run is a tool allowing to setup a specified execution environment - redefine stdin/stdout, pipes,
 change the environment variables and other settings useful to craft the boundary conditions you need to run
 a binary for debugging.</p>
 <pre><code>$ rz-run -h
-Usage: rz-run -v|-t|script.rr2 [directive ..]
+Usage: rz-run -v|-t|script.rrz [directive ..]
 </code></pre>
 <p>It takes the text file in key=value format to specify the execution environment.
-Rarun2 can be used as both separate tool or as a part of rizin.
+Rz-run can be used as both separate tool or as a part of rizin.
 To load the rz-run profile in rizin you need to use either <code>-r</code> to load
 the profile from file or <code>-R</code> to specify the directive from string.</p>
 <p>The format of the profile is very simple. Note the most important keys - <code>program</code> and <code>arg*</code></p>
@@ -170,7 +170,7 @@ arg1=/bin
 # arg5=:!ragg2 -p n50 -d 10:0x8048123
 # arg6=@arg.txt
 # arg7=@300@ABCD # 300 chars filled with ABCD pattern
-# system=r2 -
+# system=rizin -
 # aslr=no
 setenv=FOO=BAR
 # unsetenv=FOO
@@ -199,7 +199,7 @@ timeout=3
 # chdir=/
 # chroot=/mnt/chroot
 # libpath=$PWD:/tmp/lib
-# r2preload=yes
+# rzpreload=yes
 # preload=/lib/libfoo.so
 # setuid=2000
 # seteuid=2000

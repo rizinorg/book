@@ -2862,15 +2862,9 @@ f entropy_section_6 0x00002000 0x0144f374
 <h2><a class="header" href="#adding-metadata-to-disassembly" id="adding-metadata-to-disassembly">Adding Metadata to Disassembly</a></h2>
 <p>The typical work involved in reversing binary files makes powerful annotation capabilities essential.
 Radare offers multiple ways to store and retrieve such metadata.</p>
-<p>By following common basic UNIX principles, it is easy to write a small utility in a scripting language which uses <code>objdump</code>, <code>otool</code> or any other existing utility to obtain information from a binary and to import it into rizin. For example, take a look at <code>idc2r.py</code> shipped with <a href="https://github.com/rizinorg/rizinida">rizinida</a>. To use it, invoke it as <code>idc2r.py file.idc &gt; file.r2</code>. It reads an IDC file exported from an IDA Pro database and produces an rizin script containing the same comments, names of functions and other data. You can import the resulting 'file.r2' by using the dot <code>.</code> command of rizin:</p>
-<pre><code>[0x00000000]&gt; . file.r2
+<p>By following common basic UNIX principles, it is easy to write a small utility in a scripting language which uses <code>objdump</code>, <code>otool</code> or any other existing utility to obtain information from a binary and to import it into rizin. For example, take a look at <a href="https://github.com/williballenthin/python-idb">python-idb</a>-based <code>ida2rz.py</code> which opens IDB files directly without IDA Pro installed. You can load the resulting file with the <code>.</code> (dot) command into the rizin:</p>
+<pre><code>[0x00000000]&gt; . file.rz
 </code></pre>
-<p>The <code>.</code> command is used to interpret Radare commands from external sources, including files and program output. For example, to omit generation of an intermediate file and import the script directly you can use this combination:</p>
-<pre><code>[0x00000000]&gt; .!idc2r.py &lt; file.idc
-</code></pre>
-<p>Please keep in mind that importing IDA Pro metadata from IDC dump is deprecated mechanism and might
-not work in the future. The recommended way to do it - use <a href="https://github.com/williballenthin/python-idb">python-idb</a>-based <code>ida2r2.py</code> which
-opens IDB files directly without IDA Pro installed.</p>
 <p>The <code>C</code> command is used to manage comments and data conversions. You can define a range of program's bytes to be interpreted as either code, binary data or string. It is also possible to execute external code at every specified flag location in order to fetch some metadata, such as a comment, from an external file or database.</p>
 <p>There are many different metadata manipulation commands, here is the glimpse of all of them:</p>
 <pre><code>[0x00404cc0]&gt; C?
@@ -5020,7 +5014,7 @@ diff: type: new
 </code></pre>
 <p>This command will extract the <code>name</code> field from the <code>afi</code> output of every flag with a name
 matching the regexp <code>fcn.*</code>.
-There are also a predefined loop called <code>@@f</code>, which runs your command on every functions found by r2:</p>
+There are also a predefined loop called <code>@@f</code>, which runs your command on every functions found by rizin:</p>
 <pre><code>[0x004047d6]&gt; afi @@f ~name
 </code></pre>
 <p>We can also loop over a list of offsets, using the following syntax:</p>
@@ -6159,10 +6153,10 @@ Child-SP          RetAddr           Call Site
 <li>scripting with rz-pipe</li>
 <li>the rizin shell</li>
 </ul>
-<h2><a class="header" href="#rax2" id="rax2">Rax2</a></h2>
+<h2><a class="header" href="#rz-ax-1" id="rz-ax-1">Rz-ax</a></h2>
 <p>The <code>rz-ax</code> utility comes with the rizin framework and aims to be a minimalistic expression evaluator for the shell. It is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ascii, octal to integer. It supports endianness and can be used as a shell if no arguments are given.</p>
 <p>This is the help message of rz-ax, this tool can be used in the command-line or interactively (reading the values from stdin), so it can be used as a multi-base calculator.</p>
-<p>Inside r2, the functionality of rz-ax is available under the ? command. For example:</p>
+<p>Inside rizin, the functionality of rz-ax is available under the ? command. For example:</p>
 <pre><code>[0x00000000]&gt; ? 3+4
 </code></pre>
 <p>As you can see, the numeric expressions can contain mathematical expressions like addition, substraction, .. as well as group operations with parenthesis.</p>
@@ -6261,7 +6255,7 @@ AB
 +-----------------+
 </code></pre>
 <h1><a class="header" href="#rz-find-1" id="rz-find-1">rz-find</a></h1>
-<p>Rafind2 is the command line fronted of the <code>r_search</code> library. Which allows you to search for strings, sequences of bytes with binary masks, etc</p>
+<p>Rz-find is the command line fronted of the <code>rz_search</code> library. Which allows you to search for strings, sequences of bytes with binary masks, etc</p>
 <pre><code>$ rz-find -h
 Usage: rz-find [-mXnzZhqv] [-a align] [-b sz] [-f/t from/to] [-[e|s|S] str] [-x hex] -|file|dir ..
  -a [align] only accept aligned hits
@@ -6269,7 +6263,7 @@ Usage: rz-find [-mXnzZhqv] [-a align] [-b sz] [-f/t from/to] [-[e|s|S] str] [-x 
  -e [regex] search for regex matches (can be used multiple times)
  -f [from]  start searching from address 'from'
  -h         show this help
- -i         identify filetype (r2 -nqcpm file)
+ -i         identify filetype (rizin -nqcpm file)
  -j         output in JSON
  -m         magic search, file-type carver
  -M [str]   set a binary mask to be applied on keywords
@@ -6323,15 +6317,15 @@ $ for a in `rz-find -s lib $F` ; do \
 0x00007fa9 )http://www.apple.com/certificateauthority0
 0x000080ab $http://crl.apple.com/codesigning.crl0
 </code></pre>
-<h1><a class="header" href="#rarun2" id="rarun2">Rarun2</a></h1>
-<p>Rarun2 is a tool allowing to setup a specified execution environment - redefine stdin/stdout, pipes,
+<h1><a class="header" href="#rz-run-1" id="rz-run-1">Rz-run</a></h1>
+<p>rz-run is a tool allowing to setup a specified execution environment - redefine stdin/stdout, pipes,
 change the environment variables and other settings useful to craft the boundary conditions you need to run
 a binary for debugging.</p>
 <pre><code>$ rz-run -h
-Usage: rz-run -v|-t|script.rr2 [directive ..]
+Usage: rz-run -v|-t|script.rrz [directive ..]
 </code></pre>
 <p>It takes the text file in key=value format to specify the execution environment.
-Rarun2 can be used as both separate tool or as a part of rizin.
+Rz-run can be used as both separate tool or as a part of rizin.
 To load the rz-run profile in rizin you need to use either <code>-r</code> to load
 the profile from file or <code>-R</code> to specify the directive from string.</p>
 <p>The format of the profile is very simple. Note the most important keys - <code>program</code> and <code>arg*</code></p>
@@ -6346,7 +6340,7 @@ arg1=/bin
 # arg5=:!ragg2 -p n50 -d 10:0x8048123
 # arg6=@arg.txt
 # arg7=@300@ABCD # 300 chars filled with ABCD pattern
-# system=r2 -
+# system=rizin -
 # aslr=no
 setenv=FOO=BAR
 # unsetenv=FOO
@@ -6375,7 +6369,7 @@ timeout=3
 # chdir=/
 # chroot=/mnt/chroot
 # libpath=$PWD:/tmp/lib
-# r2preload=yes
+# rzpreload=yes
 # preload=/lib/libfoo.so
 # setuid=2000
 # seteuid=2000
@@ -6529,7 +6523,7 @@ nth vaddr      bind   type   lib name
 </code></pre>
 <h2><a class="header" href="#exports" id="exports">Exports</a></h2>
 <p>rz-bin is able to find exports. For example:</p>
-<pre><code>$ rz-bin -E /usr/lib/libr_bin.so | head
+<pre><code>$ rz-bin -E /usr/lib/librz_bin.so | head
 [Exports]
 
 nth  paddr       vaddr      bind   type size lib name
@@ -6576,60 +6570,60 @@ f sym.program_invocation_short_name 8 0x0021f5e0
 </code></pre>
 <h2><a class="header" href="#list-libraries" id="list-libraries">List Libraries</a></h2>
 <p>rz-bin can list libraries used by a binary with the <code>-l</code> option:</p>
-<pre><code>$ rz-bin -l `which r2`
+<pre><code>$ rz-bin -l `which rizin`
 [Linked libraries]
-libr_core.so
-libr_parse.so
-libr_search.so
-libr_cons.so
-libr_config.so
-libr_bin.so
-libr_debug.so
-libr_analysis.so
-libr_reg.so
-libr_bp.so
-libr_io.so
-libr_fs.so
-libr_asm.so
-libr_syscall.so
-libr_hash.so
-libr_magic.so
-libr_flag.so
-libr_egg.so
-libr_crypto.so
-libr_util.so
+librz_core.so
+librz_parse.so
+librz_search.so
+librz_cons.so
+librz_config.so
+librz_bin.so
+librz_debug.so
+librz_analysis.so
+librz_reg.so
+librz_bp.so
+librz_io.so
+librz_fs.so
+librz_asm.so
+librz_syscall.so
+librz_hash.so
+librz_magic.so
+librz_flag.so
+librz_egg.so
+librz_crypto.so
+librz_util.so
 libpthread.so.0
 libc.so.6
 
 22 libraries
 </code></pre>
 <p>Lets check the output with <code>ldd</code> command:</p>
-<pre><code>$ ldd `which r2`
+<pre><code>$ ldd `which rizin`
 linux-vdso.so.1 (0x00007fffba38e000)
-libr_core.so =&gt; /usr/lib64/libr_core.so (0x00007f94b4678000)
-libr_parse.so =&gt; /usr/lib64/libr_parse.so (0x00007f94b4425000)
-libr_search.so =&gt; /usr/lib64/libr_search.so (0x00007f94b421f000)
-libr_cons.so =&gt; /usr/lib64/libr_cons.so (0x00007f94b4000000)
-libr_config.so =&gt; /usr/lib64/libr_config.so (0x00007f94b3dfa000)
-libr_bin.so =&gt; /usr/lib64/libr_bin.so (0x00007f94b3afd000)
-libr_debug.so =&gt; /usr/lib64/libr_debug.so (0x00007f94b38d2000)
-libr_analysis.so =&gt; /usr/lib64/libr_analysis.so (0x00007f94b2fbd000)
-libr_reg.so =&gt; /usr/lib64/libr_reg.so (0x00007f94b2db4000)
-libr_bp.so =&gt; /usr/lib64/libr_bp.so (0x00007f94b2baf000)
-libr_io.so =&gt; /usr/lib64/libr_io.so (0x00007f94b2944000)
-libr_fs.so =&gt; /usr/lib64/libr_fs.so (0x00007f94b270e000)
-libr_asm.so =&gt; /usr/lib64/libr_asm.so (0x00007f94b1c69000)
-libr_syscall.so =&gt; /usr/lib64/libr_syscall.so (0x00007f94b1a63000)
-libr_hash.so =&gt; /usr/lib64/libr_hash.so (0x00007f94b185a000)
-libr_magic.so =&gt; /usr/lib64/libr_magic.so (0x00007f94b164d000)
-libr_flag.so =&gt; /usr/lib64/libr_flag.so (0x00007f94b1446000)
-libr_egg.so =&gt; /usr/lib64/libr_egg.so (0x00007f94b1236000)
-libr_crypto.so =&gt; /usr/lib64/libr_crypto.so (0x00007f94b1016000)
-libr_util.so =&gt; /usr/lib64/libr_util.so (0x00007f94b0d35000)
+librz_core.so =&gt; /usr/lib64/librz_core.so (0x00007f94b4678000)
+librz_parse.so =&gt; /usr/lib64/librz_parse.so (0x00007f94b4425000)
+librz_search.so =&gt; /usr/lib64/librz_search.so (0x00007f94b421f000)
+librz_cons.so =&gt; /usr/lib64/librz_cons.so (0x00007f94b4000000)
+librz_config.so =&gt; /usr/lib64/librz_config.so (0x00007f94b3dfa000)
+librz_bin.so =&gt; /usr/lib64/librz_bin.so (0x00007f94b3afd000)
+librz_debug.so =&gt; /usr/lib64/librz_debug.so (0x00007f94b38d2000)
+librz_analysis.so =&gt; /usr/lib64/librz_analysis.so (0x00007f94b2fbd000)
+librz_reg.so =&gt; /usr/lib64/librz_reg.so (0x00007f94b2db4000)
+librz_bp.so =&gt; /usr/lib64/librz_bp.so (0x00007f94b2baf000)
+librz_io.so =&gt; /usr/lib64/librz_io.so (0x00007f94b2944000)
+librz_fs.so =&gt; /usr/lib64/librz_fs.so (0x00007f94b270e000)
+librz_asm.so =&gt; /usr/lib64/librz_asm.so (0x00007f94b1c69000)
+librz_syscall.so =&gt; /usr/lib64/librz_syscall.so (0x00007f94b1a63000)
+librz_hash.so =&gt; /usr/lib64/librz_hash.so (0x00007f94b185a000)
+librz_magic.so =&gt; /usr/lib64/librz_magic.so (0x00007f94b164d000)
+librz_flag.so =&gt; /usr/lib64/librz_flag.so (0x00007f94b1446000)
+librz_egg.so =&gt; /usr/lib64/librz_egg.so (0x00007f94b1236000)
+librz_crypto.so =&gt; /usr/lib64/librz_crypto.so (0x00007f94b1016000)
+librz_util.so =&gt; /usr/lib64/librz_util.so (0x00007f94b0d35000)
 libpthread.so.0 =&gt; /lib64/libpthread.so.0 (0x00007f94b0b15000)
 libc.so.6 =&gt; /lib64/libc.so.6 (0x00007f94b074d000)
-libr_lang.so =&gt; /usr/lib64/libr_lang.so (0x00007f94b0546000)
-libr_socket.so =&gt; /usr/lib64/libr_socket.so (0x00007f94b0339000)
+librz_lang.so =&gt; /usr/lib64/librz_lang.so (0x00007f94b0546000)
+librz_socket.so =&gt; /usr/lib64/librz_socket.so (0x00007f94b0339000)
 libm.so.6 =&gt; /lib64/libm.so.6 (0x00007f94affaf000)
 libdl.so.2 =&gt; /lib64/libdl.so.2 (0x00007f94afdab000)
 /lib64/ld-linux-x86-64.so.2 (0x00007f94b4c79000)
@@ -6821,7 +6815,7 @@ This is the result:</p>
 <p>Parts in yellow indicate that some offsets do not match. The grey piece means a perfect match. The orange one highlights a strong difference. If you look closely, you will see that the left part of the picture has <code>mov eax, 0x1; pop rbx; pop rbp; ret</code>, while the right one has <code>xor edx, edx; pop rbx; pop rbp; ret</code>.</p>
 <p>Binary diffing is an important feature for reverse engineering. It can be used to analyze <a href="https://en.wikipedia.org/wiki/Patch_Tuesday">security updates</a>, infected binaries, firmware changes and more...</p>
 <p>We have only shown the code analysis diffing functionality, but rizin supports additional types of diffing between two binaries: at byte level, deltified similarities, and more to come.</p>
-<p>We have plans to implement more kinds of bindiffing algorithms into r2, and why not, add support for ASCII art graph diffing and better integration with the rest of the toolkit.</p>
+<p>We have plans to implement more kinds of bindiffing algorithms into rizin, and why not, add support for ASCII art graph diffing and better integration with the rest of the toolkit.</p>
 <h1><a class="header" href="#rasm2" id="rasm2">Rasm2</a></h1>
 <p><code>rz-asm</code> is an inline assembler/disassembler. Initially, <code>rasm</code> tool was designed to be used for binary patching. Its main function is to get bytes corresponding to given machine instruction opcode.</p>
 <pre><code>$ rz-asm -h
@@ -7089,14 +7083,14 @@ $ rz-asm -a x86 -b 64 -D 48c7c00200000050488b3c2448c7c0010000000f054883c408c3
 <h2><a class="header" href="#tiny-binaries" id="tiny-binaries">Tiny binaries</a></h2>
 <p>You can create them using the <code>-F</code> flag in rz-gg, or the <code>-C</code> in rz-bin.</p>
 <h1><a class="header" href="#syntax-of-the-language" id="syntax-of-the-language">Syntax of the language</a></h1>
-<p>The code of r_egg is compiled as in a flow. It is a one-pass compiler;</p>
+<p>The code of rz_egg is compiled as in a flow. It is a one-pass compiler;</p>
 <p>this means that you have to define the proper stackframe size at the</p>
 <p>beginning of the function, and you have to define the functions in</p>
 <p>order to avoid getting compilation errors.</p>
 <p>The compiler generates assembly code for x86-{32,64} and arm. But it aims</p>
-<p>to support more platforms. This code is the compiled with r_asm and</p>
-<p>injected into a tiny binary with r_bin.</p>
-<p>You may like to use r_egg to create standalone binaries, position-</p>
+<p>to support more platforms. This code is the compiled with rz_asm and</p>
+<p>injected into a tiny binary with rz_bin.</p>
+<p>You may like to use rz_egg to create standalone binaries, position-</p>
 <p>independent raw eggs to be injected on running processes or to patch</p>
 <p>on-disk binaries.</p>
 <p>The generated code is not yet optimized, but it's safe to be executed</p>
@@ -7110,19 +7104,19 @@ $ rz-asm -a x86 -b 64 -D 48c7c00200000050488b3c2448c7c0010000000f054883c408c3
 <p><code> printf@alias(0x8053940);</code></p>
 <h3><a class="header" href="#includes" id="includes">Includes</a></h3>
 <p>Use <code>cat(1)</code> or the preprocessor to concatenate multiple files to be compiled.</p>
-<p><code> INCDIR@alias(&quot;/usr/include/ragg2&quot;);</code></p>
+<p><code> INCDIR@alias(&quot;/usr/include/rz-gg&quot;);</code></p>
 <p><code> sys-osx.r@include(INCDIR);</code></p>
 <h3><a class="header" href="#hashbang" id="hashbang">Hashbang</a></h3>
 <p>eggs can use a hashbang to make them executable.</p>
 <p><code>$ head -n1 hello.r</code></p>
-<p><code> #!/usr/bin/ragg2 -X</code></p>
+<p><code> #!/usr/bin/rz-gg -X</code></p>
 <p><code> $ ./hello.r</code></p>
 <p><code> Hello World!</code></p>
 <h3><a class="header" href="#main" id="main">Main</a></h3>
 <p>The execution of the code is done as in a flow. The first function to be</p>
 <p>defined will be the first one to be executed. If you want to run main()</p>
 <p>just do like this:</p>
-<p><code> #!/usr/bin/ragg2 -X</code></p>
+<p><code> #!/usr/bin/rz-gg -X</code></p>
 <p><code> main();</code></p>
 <p><code> ...</code></p>
 <p><code> main@global(128,64) {</code></p>
@@ -7179,13 +7173,13 @@ $ rz-asm -a x86 -b 64 -D 48c7c00200000050488b3c2448c7c0010000000f054883c408c3
 <h3><a class="header" href="#tracing" id="tracing">Tracing</a></h3>
 <p>Sometimes r_egg programs will break or just not work as expected. Use the</p>
 <p>'trace' architecture to get a arch-backend call trace:</p>
-<p><code> $ ragg2 -a trace -s yourprogram.r</code></p>
+<p><code> $ rz-gg -a trace -s yourprogram.r</code></p>
 <h3><a class="header" href="#pointers" id="pointers">Pointers</a></h3>
 <p>TODO: Theorically '*' is used to get contents of a memory pointer.</p>
 <h3><a class="header" href="#virtual-registers" id="virtual-registers">Virtual registers</a></h3>
 <p>TODO: a0, a1, a2, a3, sp, fp, bp, pc</p>
 <h3><a class="header" href="#math-operations" id="math-operations">Math operations</a></h3>
-<p>Ragg2 supports local variables assignment by math operating, including</p>
+<p>rz-gg supports local variables assignment by math operating, including</p>
 <p>the following operators:</p>
 <p><code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>&amp;</code> <code>|</code> <code>^</code></p>
 <h3><a class="header" href="#return-values" id="return-values">Return values</a></h3>
@@ -7201,14 +7195,14 @@ main@global() {
 	add (3,4);
 }
 
-$ ragg2 -F -o test test.r
+$ rz-gg -F -o test test.r
 $ ./test
 $ echo $?
 7
 </code></pre>
 <h3><a class="header" href="#traps" id="traps">Traps</a></h3>
 <p>Each architecture have a different instruction to break the execution of</p>
-<p>the program. REgg language captures calls to 'break()' to run the emit_trap</p>
+<p>the program. RzEgg language captures calls to 'break()' to run the emit_trap</p>
 <p>callback of the selected arch. The</p>
 <p><code> break()</code>; --&gt; compiles into 'int3' on x86</p>
 <p><code> break;</code> --&gt; compiles into 'int3' on x86</p>
