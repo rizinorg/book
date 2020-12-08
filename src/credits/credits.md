@@ -4,9 +4,10 @@ This book wouldn't be possible without the help of a large list of contributors 
 
 ### The rizin book
 
-This book was started by maijin as a new version of the original rizin book written by pancake.
+This book was started by maijin as a new version of the original radare1 book written by pancake. It was updated and reworked significantly for the radare2.
+With the rizin fork the book has been reworked again.
 
-* Old rizin1 book [http://www.rizin.org/get/rizin.pdf](http://www.rizin.org/get/rizin.pdf)
+* Old radare2 book [https://book.rada.re](https://book.rada.re)
 
 Many thanks to everyone who has been involved with the gitbook:
 
