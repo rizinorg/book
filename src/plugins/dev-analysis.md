@@ -12,7 +12,7 @@ corresponding Makefile.
 They structure of RzAnalysis plugin looks like
 
 ```c
-RzAnalysisPlugin r_anal_plugin_v810 = {
+RzAnalysisPlugin rz_analysis_plugin_v810 = {
 	.name = "mycpu",
 	.desc = "MYCPU code analysis plugin",
 	.license = "LGPL3",
@@ -33,11 +33,11 @@ emulation - register profile, like in debugger, which is set within `set_reg_pro
 **Makefile**
 
 ```makefile
-NAME=anal_snes
-R2_PLUGIN_PATH=$(shell rizin -H R2_USER_PLUGINS)
+NAME=analysis_snes
+RZ_PLUGIN_PATH=$(shell rizin -H RZ_USER_PLUGINS)
 LIBEXT=$(shell rizin -H LIBEXT)
-CFLAGS=-g -fPIC $(shell pkg-config --cflags r_anal)
-LDFLAGS=-shared $(shell pkg-config --libs r_anal)
+CFLAGS=-g -fPIC $(shell pkg-config --cflags rz_analysis)
+LDFLAGS=-shared $(shell pkg-config --libs rz_analysis)
 OBJS=$(NAME).o
 LIB=$(NAME).$(LIBEXT)
 
@@ -50,42 +50,42 @@ $(LIB): $(OBJS)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) -o $(LIB)
 
 install:
-	cp -f anal_snes.$(SO_EXT) $(R2_PLUGIN_PATH)
+	cp -f analysis_snes.$(SO_EXT) $(RZ_PLUGIN_PATH)
 
 uninstall:
-	rm -f $(R2_PLUGIN_PATH)/anal_snes.$(SO_EXT)
+	rm -f $(RZ_PLUGIN_PATH)/analysis_snes.$(SO_EXT)
 ```
 
-**anal_snes.c:**
+**analysis_snes.c:**
 
 ```c
 /* rizin - LGPL - Copyright 2015 - condret */
 
 #include <string.h>
-#include <r_types.h>
-#include <r_lib.h>
-#include <r_asm.h>
-#include <r_anal.h>
+#include <rz_types.h>
+#include <rz_lib.h>
+#include <rz_asm.h>
+#include <rz_analysis.h>
 #include "snes_op_table.h"
 
 static int snes_anop(RzAnalysis *anal, RzAnalysisOp *op, ut64 addr, const ut8 *data, int len) {
 	memset (op, '\0', sizeof (RzAnalysisOp));
 	op->size = snes_op[data[0]].len;
 	op->addr = addr;
-	op->type = R_ANAL_OP_TYPE_UNK;
+	op->type = RZ_ANALYSIS_OP_TYPE_UNK;
 	switch (data[0]) {
 		case 0xea:
-			op->type = R_ANAL_OP_TYPE_NOP;
+			op->type = RZ_ANALYSIS_OP_TYPE_NOP;
 			break;
 	}
 	return op->size;
 }
 
-struct r_anal_plugin_t r_anal_plugin_snes = {
+struct rz_analysis_plugin_t rz_analysis_plugin_snes = {
 	.name = "snes",
 	.desc = "SNES analysis plugin",
 	.license = "LGPL3",
-	.arch = R_SYS_ARCH_NONE,
+	.arch = RZ_SYS_ARCH_NONE,
 	.bits = 16,
 	.init = NULL,
 	.fini = NULL,
@@ -98,11 +98,11 @@ struct r_anal_plugin_t r_anal_plugin_snes = {
 	.diff_eval = NULL
 };
 
-#ifndef R2_PLUGIN_INCORE
-R_API RLibStruct rizin_plugin = {
-	.type = R_LIB_TYPE_ANAL,
-	.data = &r_anal_plugin_snes,
-	.version = R2_VERSION
+#ifndef RZ_PLUGIN_INCORE
+RZ_API RzLibStruct rizin_plugin = {
+	.type = RZ_LIB_TYPE_ANALYSIS,
+	.data = &rz_analysis_plugin_snes,
+	.version = RZ_VERSION
 };
 #endif
 ```

@@ -402,7 +402,7 @@ There are multiple options which can be used to configure the output of the disa
 
 ```
 [0x00005310]> e? asm.
-asm.anal: Analyze code and refs while disassembling (see anal.strings)
+asm.anal: Analyze code and refs while disassembling (see analysis.strings)
 asm.arch: Set the arch to be used by asm
 asm.assembler: Set the plugin name to use when assembling
 asm.bbline: Show empty line after every basic block

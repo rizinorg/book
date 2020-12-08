@@ -99,7 +99,7 @@
 * [Plugins](plugins/intro.md)
    * [IO plugins](plugins/ioplugins.md)
    * [Asm plugins](plugins/dev-asm.md)
-   * [Analysis plugins](plugins/dev-anal.md)
+   * [Analysis plugins](plugins/dev-analysis.md)
    * [Bin plugins](plugins/dev-bin.md)
    * [Other plugins](plugins/dev-other.md)
    * [Python plugins](plugins/python.md)

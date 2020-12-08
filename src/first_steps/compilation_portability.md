@@ -1,6 +1,6 @@
 ## Compilation and Portability
 
-Currently the core of rizin can be compiled on many systems and architectures, but the main development is done on GNU/Linux with GCC, and on MacOS X with clang. Radare is also known to compile on many different systems and architectures (including TCC and SunStudio).
+Currently the core of rizin can be compiled on many systems and architectures, but the main development is done on GNU/Linux with GCC, and on MacOS X with clang. Rizin is also known to compile on many different systems and architectures (including TCC and SunStudio).
 
 People often want to use rizin as a debugger for reverse engineering. Currently, the debugger layer can be used on Windows, GNU/Linux (Intel x86 and x86_64, MIPS, and ARM), OS X, FreeBSD, NetBSD, and OpenBSD (Intel x86 and x86_64)..
 
@@ -32,7 +32,7 @@ $ sys/meson.py --prefix=/usr --shared --install
 ```
 If you want to build locally:
 ```
-$ sys/meson.py --prefix=/home/$USER/r2meson --local --shared --install
+$ sys/meson.py --prefix=/home/$USER/rizin-meson --local --shared --install
 ```
 ### Docker
 
@@ -42,7 +42,7 @@ This dockerfile is also used by Remnux distribution from SANS, and is available 
 
 ## Cleaning Up Old Rizin Installations
 ```
-./configure --prefix=/old/r2/prefix/installation
+./configure --prefix=/old/rizin/prefix/installation
 make purge
 ```
 

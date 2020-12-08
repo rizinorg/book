@@ -26,7 +26,7 @@ Search is initiated by `/` command.
 | /f                      search forwards, command modifier, followed by other command
 | /F file [off] [sz]      search contents of file with offset and size
 | /g[g] [from]            find all graph paths A to B (/gg follow jumps, see search.count and
-anal.depth)
+analysis.depth)
 | /h[t] [hash] [len]      find block matching this hash. See ph
 | /i foo                  search for string 'foo' ignoring case
 | /m magicfile            search for matching magic file (use blocksize)

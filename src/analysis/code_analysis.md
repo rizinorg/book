@@ -73,7 +73,7 @@ There is also a mapping of those commands to the rizin CLI options: `rizin -A`, 
 It is a common sense that completely automated analysis can produce non sequitur results, thus
 rizin provides separate commands for the particular stages of the analysis allowing fine-grained
 control of the analysis process. Moreover, there is a treasure trove of configuration variables
-for controlling the analysis outcomes. You can find them in `anal.*` and `emu.*`
+for controlling the analysis outcomes. You can find them in `analysis.*` and `emu.*`
 cfg variables' namespaces.
 
 ## Analyze functions
@@ -314,8 +314,8 @@ Also under `ax` is `axg`, which finds the path between two points in the file by
 Use `axg*` to generate rizin commands which will help you to create graphs using `agn` and `age` commands, according to the XREFs.
 
 Apart from predefined algorithms to identify functions there is a way to specify
-a function prelude with a configuration option `anal.prelude`. For example, like
-`e anal.prelude = 0x554889e5` which means
+a function prelude with a configuration option `analysis.prelude`. For example, like
+`e analysis.prelude = 0x554889e5` which means
 
 ```
 push rbp
@@ -339,21 +339,21 @@ There are different kinds of the configuration options:
 ### Control flow configuration
 
 Two most commonly used options for changing the behavior of control flow analysis in rizin are
-`anal.hasnext` and `anal.jmp.after`. The first one allows forcing rizin to continue the analysis
+`analysis.hasnext` and `analysis.jmp.after`. The first one allows forcing rizin to continue the analysis
 after the end of the function, even if the next chunk of the code wasn't called anywhere, thus
 analyzing all of the available functions. The latter one allows forcing rizin to continue
 the analysis even after unconditional jumps.
 
-In addition to those we can also set `anal.jmp.indir` to follow the indirect jumps, continuing analysis;
-`anal.pushret` to analyze `push ...; ret` sequence as a jump; `anal.nopskip` to skip the NOP
+In addition to those we can also set `analysis.jmp.indir` to follow the indirect jumps, continuing analysis;
+`analysis.pushret` to analyze `push ...; ret` sequence as a jump; `analysis.nopskip` to skip the NOP
 sequences at a function beginning.
 
-For now, rizin also allows you to change the maximum basic block size with `anal.bb.maxsize` option
+For now, rizin also allows you to change the maximum basic block size with `analysis.bb.maxsize` option
 . The default value just works in most use cases, but it's useful to increase that for example when
 dealing with obfuscated code. Beware that some of basic blocks
 control options may disappear in the future in favor of more automated ways to set those.
 
-For some unusual binaries or targets, there is an option `anal.noncode`. Rizin doesn't try
+For some unusual binaries or targets, there is an option `analysis.noncode`. Rizin doesn't try
 to analyze data sections as a code by default. But in some cases - malware, packed binaries,
 binaries for embedded systems, it is often a case. Thus - this option.
 
@@ -362,11 +362,11 @@ binaries for embedded systems, it is often a case. Thus - this option.
 The most crucial options that change the analysis results drastically. Sometimes some can be
 disabled to save the time and memory when analyzing big binaries.
 
-- `anal.jmp.ref` - to allow references creation for unconditional jumps
-- `anal.jmp.cref` - same, but for conditional jumps
-- `anal.datarefs` - to follow the data references in code
-- `anal.refstr` - search for strings in data references
-- `anal.strings` - search for strings and creating references
+- `analysis.jmp.ref` - to allow references creation for unconditional jumps
+- `analysis.jmp.cref` - same, but for conditional jumps
+- `analysis.datarefs` - to follow the data references in code
+- `analysis.refstr` - search for strings in data references
+- `analysis.strings` - search for strings and creating references
 
 Note that strings references control is disabled by default because it increases the analysis time.
 
@@ -374,30 +374,30 @@ Note that strings references control is disabled by default because it increases
 
 There are a few options for this:
 
-- `anal.limits` - enables the range limits for analysis operations
-- `anal.from` - starting address of the limit range
-- `anal.to` - the corresponding end of the limit range
-- `anal.in` - specify search boundaries for analysis. You can set it to `io.maps`, `io.sections.exec`, `dbg.maps` and many more. For example:
-  - To analyze a specific memory map with `anal.from` and `anal.to`, set `anal.in = dbg.maps`.
-  - To analyze in the boundaries set by `anal.from` and `anal.to`, set `anal.in=range`.
-  - To analyze in the current mapped segment or section, you can put `anal.in=bin.segment` or `anal.in=bin.section`, respectively.
-  - To analyze in the current memory map, specify `anal.in=dbg.map`.
-  - To analyze in the stack or heap, you can set `anal.in=dbg.stack` or `anal.in=dbg.heap`.
-  - To analyze in the current function or basic block, you can specify `anal.in=anal.fcn` or `anal.in=anal.bb`.
+- `analysis.limits` - enables the range limits for analysis operations
+- `analysis.from` - starting address of the limit range
+- `analysis.to` - the corresponding end of the limit range
+- `analysis.in` - specify search boundaries for analysis. You can set it to `io.maps`, `io.sections.exec`, `dbg.maps` and many more. For example:
+  - To analyze a specific memory map with `analysis.from` and `analysis.to`, set `analysis.in = dbg.maps`.
+  - To analyze in the boundaries set by `analysis.from` and `analysis.to`, set `analysis.in=range`.
+  - To analyze in the current mapped segment or section, you can put `analysis.in=bin.segment` or `analysis.in=bin.section`, respectively.
+  - To analyze in the current memory map, specify `analysis.in=dbg.map`.
+  - To analyze in the stack or heap, you can set `analysis.in=dbg.stack` or `analysis.in=dbg.heap`.
+  - To analyze in the current function or basic block, you can specify `analysis.in=analysis.fcn` or `analysis.in=analysis.bb`.
 
-Please see `e anal.in=??` for the complete list.
+Please see `e analysis.in=??` for the complete list.
 
 ### Jump tables
 
 Jump tables are one of the trickiest targets in binary reverse engineering. There are hundreds
 of different types, the end result depending on the compiler/linker and LTO stages of optimization.
-Thus rizin allows enabling some experimental jump tables detection algorithms using `anal.jmp.tbl`
+Thus rizin allows enabling some experimental jump tables detection algorithms using `analysis.jmp.tbl`
 option. Eventually, algorithms moved into the default analysis loops once they start to work on
 every supported platform/target/testcase.
 Two more options can affect the jump tables analysis results too:
 
-- `anal.jmp.indir` - follow the indirect jumps, some jump tables rely on them
-- `anal.datarefs` - follow the data references, some jump tables use those
+- `analysis.jmp.indir` - follow the indirect jumps, some jump tables rely on them
+- `analysis.datarefs` - follow the data references, some jump tables use those
 
 ### Platform specific controls
 
@@ -408,7 +408,7 @@ like the results, particular functions' mode can be overridden with `afB` comman
 
 The MIPS GP problem is even trickier. It is a basic knowledge that GP value can be different not only
 for the whole program, but also for some functions. To partially solve that there are options
-`anal.gp` and `anal.gpfixed`. The first one sets the GP value for the whole program or particular
+`analysis.gp` and `analysis.gpfixed`. The first one sets the GP value for the whole program or particular
 function. The latter allows to "constantify" the GP value if some code is willing to change its
 value, always resetting it if the case. Those are heavily experimental and might be changed in the
 future in favor of more automated analysis.

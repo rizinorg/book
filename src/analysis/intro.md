@@ -17,7 +17,7 @@ These operations are handled by the `a` (analyze) command family:
 | ad [from] [to]     analyze data pointers to (from-to)
 | ae[?] [expr]       analyze opcode eval expression (see ao)
 | af[?]              analyze Functions
-| aF                 same as above, but using anal.depth=1
+| aF                 same as above, but using analysis.depth=1
 | ag[?] [options]    draw graphs in various formats
 | ah[?]              analysis hints (force opcode size, ...)
 | ai [addr]          address information (show perms, stack, heap, ...)

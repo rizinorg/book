@@ -1,8 +1,8 @@
 ## Write a debugger plugin
 
 * Adding the debugger registers profile into the shlr/gdb/src/core.c
-* Adding the registers profile and architecture support in the libr/debug/p/debug_native.c and libr/debug/p/debug_gdb.c
-* Add the code to apply the profiles into the function `r_debug_gdb_attach(RDebug *dbg, int pid)`
+* Adding the registers profile and architecture support in the librz/debug/p/debug_native.c and librz/debug/p/debug_gdb.c
+* Add the code to apply the profiles into the function `rz_debug_gdb_attach(RzDebug *dbg, int pid)`
 
 If you want to add support for the gdb, you can see the register profile in the active gdb session using command `maint print registers`.
 

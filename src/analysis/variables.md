@@ -1,7 +1,7 @@
 # Managing variables
 
 Rizin allows managing local variables, no matter their location, stack or registers.
-The variables' auto analysis is enabled by default but can be disabled with `anal.vars`
+The variables' auto analysis is enabled by default but can be disabled with `analysis.vars`
 configuration option.
 
 The main variables commands are located in `afv` namespace:
@@ -177,6 +177,6 @@ You could create a new profile for specifying a set of format chars depending on
 win=spec
 spec.win.u32=unsigned int
 ```
-Then change your default specification to newly created one using this config variable `e anal.spec = win`
+Then change your default specification to newly created one using this config variable `e analysis.spec = win`
 
 For more information about primitive and user-defined types support in rizin refer to [types](types.md) chapter.

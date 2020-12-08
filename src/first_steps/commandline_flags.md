@@ -8,7 +8,7 @@ $ rizin -h
 Usage: rizin [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i file]
           [-s addr] [-B baddr] [-m maddr] [-c cmd] [-e k=v] file|pid|-|--|=
  --           run rizin without opening any file
- -            same as 'r2 malloc://512'
+ -            same as 'rizin malloc://512'
  =            read file from stdin (use -i and -c to run cmds)
  -=           perform !=! command to run all commands remotely
  -0           print \x00 after init and every command
@@ -42,7 +42,7 @@ Usage: rizin [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i fil
  -p [prj]     use project, list if no arg, load if no file
  -P [file]    apply rapatch file and quit
  -r [rz-run]  specify rz-run profile to load (same as -e dbg.profile=X)
- -R [rr2rule] specify custom rz-run directive
+ -R [rrzrule] specify custom rz-run directive
  -s [addr]    initial seek
  -S           start rizin in sandbox mode
  -t           load rz-bin info in thread

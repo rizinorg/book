@@ -93,7 +93,7 @@ More about this operation mode you can read in [Reverse Debugging](../debugger/r
 
 Apart from the manual emulation mode, it can be used automatically in the analysis loop.
 For example, the `aaaa` command performs the ESIL emulation stage along with others.
-To disable or enable its usage you can use `anal.esil` configuration variable.
+To disable or enable its usage you can use `analysis.esil` configuration variable.
 There is one more important option, though setting it might be quite dangerous,
 especially in the case of malware - `emu.write` which allows ESIL VM to modify memory.
 Sometimes it is required though, especially in the process of deobfuscating or unpacking code.
