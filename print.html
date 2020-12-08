@@ -291,79 +291,15 @@ awesome
 <h2><a class="header" href="#downloading-rizin" id="downloading-rizin">Downloading rizin</a></h2>
 <p>You can get rizin from the website, <a href="http://rizin.org">http://rizin.org</a>,
 or the GitHub repository: <a href="https://github.com/rizinorg/rizin">https://github.com/rizinorg/rizin</a></p>
-<p>Binary packages are available for a number of operating systems (Ubuntu, Maemo, Gentoo, Windows, iPhone, and so on). But you are highly encouraged to get the source and compile it yourself to better understand the dependencies, to make examples more accessible and, of course, to have the most recent version.</p>
-<p>A new stable release is typically published every month. Nightly tarballs are sometimes available at <a href="http://bin.rada.re/">http://bin.rada.re/</a>.</p>
-<p>The rizin development repository is often more stable than the 'stable' releases. To obtain the latest version:</p>
-<pre><code>$ git clone https://github.com/rizinorg/rizin.git
-</code></pre>
-<p>This will probably take a while, so take a coffee break and continue reading this book.</p>
-<p>To update your local copy of the repository, use <code>git pull</code> anywhere in the rizin source code tree:</p>
-<pre><code>$ git pull
-</code></pre>
-<p>If you have local modifications of the source, you can revert them (and lose them!) with:</p>
-<pre><code>$ git reset --hard HEAD
-</code></pre>
-<p>Or send us a patch:</p>
-<pre><code>$ git diff &gt; rizin-foo.patch
-</code></pre>
-<p>The most common way to get rizin updated and installed system wide is by using:</p>
-<pre><code>$ sys/install.sh
-</code></pre>
-<h3><a class="header" href="#building-with-meson--ninja" id="building-with-meson--ninja">Building with meson + ninja</a></h3>
-<p>There is also a work-in-progress support for Meson.</p>
-<p>Using clang and ld.gold makes the build faster:</p>
-<pre><code class="language-bash">CC=clang LDFLAGS=-fuse-ld=gold meson . release --buildtype=release --prefix ~/.local/stow/rizin/release
-ninja -C release
-# ninja -C release install
-</code></pre>
-<h3><a class="header" href="#helper-scripts" id="helper-scripts">Helper Scripts</a></h3>
-<p>Take a look at the scripts in <code>sys/</code>, they are used to automate stuff related to syncing, building and installing rizin and its bindings.</p>
-<p>The most important one is <code>sys/install.sh</code>. It will pull, clean, build and symstall rizin system wide.</p>
-<p>Symstalling is the process of installing all the programs, libraries, documentation and data files using symlinks instead of copying the files.</p>
-<p>By default it will be installed in <code>/usr/local</code>, but you can specify a different prefix using the argument <code>--prefix</code>.</p>
-<p>This is useful for developers, because it permits them to just run 'make' and try changes without having to run make install again.</p>
-<h3><a class="header" href="#cleaning-up" id="cleaning-up">Cleaning Up</a></h3>
-<p>Cleaning up the source tree is important to avoid problems like linking to old objects files or not updating objects after an ABI change.</p>
-<p>The following commands may help you to get your git clone up to date:</p>
-<pre><code>$ git clean -xdf
-$ git reset --hard @~10
-$ git pull
-</code></pre>
-<p>If you want to remove previous installations from your system, you must run the following commands:</p>
-<pre><code>$ ./configure --prefix=/usr/local
-$ make purge
-</code></pre>
+<p>Binary packages will soon be available for most common platforms (e.g. Windows, MacOS, Linux), however you can still compile rizin yourself for many other architectures/operating systems.</p>
+<p>Please have a look at file <a href="https://github.com/rizinorg/rizin/blob/dev/BUILDING.md">BUILDING.md</a> in Rizin repository for more detailed instructions on how to build the tool.</p>
 <h2><a class="header" href="#compilation-and-portability" id="compilation-and-portability">Compilation and Portability</a></h2>
 <p>Currently the core of rizin can be compiled on many systems and architectures, but the main development is done on GNU/Linux with GCC, and on MacOS X with clang. Rizin is also known to compile on many different systems and architectures (including TCC and SunStudio).</p>
 <p>People often want to use rizin as a debugger for reverse engineering. Currently, the debugger layer can be used on Windows, GNU/Linux (Intel x86 and x86_64, MIPS, and ARM), OS X, FreeBSD, NetBSD, and OpenBSD (Intel x86 and x86_64)..</p>
-<p>Compared to core, the debugger feature is more restrictive portability-wise. If the debugger has not been ported to your favorite platform, you can disable the debugger layer with the --without-debugger <code>configure</code> script option when compiling rizin.</p>
+<p>Compared to core, the debugger feature is more restrictive portability-wise. If the debugger has not been ported to your favorite platform, you can disable the debugger layer with the meson option <code>-Ddebugger=false</code>. Have a look at <a href="https://github.com/rizinorg/rizin/blob/dev/BUILDING.md">BUILDING.md</a> for more information.</p>
 <p>Note that there are I/O plugins that use GDB, WinDbg, or Wine as back-ends, and therefore rely on presence of corresponding third-party tools (in case of remote debugging - just on the target machine).</p>
-<p>To build on a system using <code>acr</code> and <code>GNU Make</code> (e.g. on *BSD systems):</p>
-<pre><code>$ ./configure --prefix=/usr
-$ gmake
-$ sudo gmake install
-</code></pre>
-<p>There is also a simple script to do this automatically:</p>
-<pre><code>$ sys/install.sh
-</code></pre>
-<h3><a class="header" href="#static-build" id="static-build">Static Build</a></h3>
-<p>You can build rizin statically along with all other tools with the command:</p>
-<pre><code>$ sys/static.sh
-</code></pre>
-<h3><a class="header" href="#meson-build" id="meson-build">Meson build</a></h3>
-<p>You can use meson + ninja to build:</p>
-<pre><code>$ sys/meson.py --prefix=/usr --shared --install
-</code></pre>
-<p>If you want to build locally:</p>
-<pre><code>$ sys/meson.py --prefix=/home/$USER/rizin-meson --local --shared --install
-</code></pre>
 <h3><a class="header" href="#docker" id="docker">Docker</a></h3>
 <p>Rizin repository ships a <a href="https://github.com/rizinorg/rizin/blob/master/Dockerfile">Dockerfile</a> that you can use with Docker.</p>
-<p>This dockerfile is also used by Remnux distribution from SANS, and is available on the docker <a href="https://registry.hub.docker.com/u/remnux/rizin/">registryhub</a>.</p>
-<h2><a class="header" href="#cleaning-up-old-rizin-installations" id="cleaning-up-old-rizin-installations">Cleaning Up Old Rizin Installations</a></h2>
-<pre><code>./configure --prefix=/old/rizin/prefix/installation
-make purge
-</code></pre>
 <h2><a class="header" href="#windows" id="windows">Windows</a></h2>
 <p>Rizin relies on the Meson build system generator to support compilation on all platforms, including Windows. Meson will generate a Visual Studio Solution, all the necessary project files, and wire up the Microsoft Visual C++ compiler for you.</p>
 <blockquote>
@@ -387,8 +323,9 @@ make purge
 <ul>
 <li><a href="https://my.visualstudio.com/Downloads?q=Visual%20Studio%202015%20with%20Update%203">Download Visual Studio 2015 Community (registration required)</a></li>
 <li><a href="https://visualstudio.microsoft.com/downloads/">Download Visual Studio 2017 Community</a></li>
+<li><a href="https://visualstudio.microsoft.com/downloads/">Download Visual Studio 2019 Community</a></li>
 </ul>
-<h4><a class="header" href="#install-python-3-and-meson-via-conda" id="install-python-3-and-meson-via-conda">Install Python 3 and Meson via Conda</a></h4>
+<h4><a class="header" href="#install-python-3-and-mesonninja-via-conda" id="install-python-3-and-mesonninja-via-conda">Install Python 3 and Meson/Ninja via Conda</a></h4>
 <p>It is strongly recommended you install Conda — a Python environment management system — when working with Python on the Windows platform. This will isolate the Rizin build environment from other installed Python versions and minimize potential conflicts.</p>
 <h5><a class="header" href="#set-up-conda" id="set-up-conda">Set Up Conda:</a></h5>
 <ol>
@@ -403,18 +340,18 @@ make purge
 <li><code>activate rizin</code></li>
 </ol>
 <p>Any time you wish to enter this environment, open the Anaconda Prompt and re-issue <code>activate rizin</code>. Conversely, <code>deactivate</code> will leave the environment.</p>
-<h5><a class="header" href="#install-meson" id="install-meson">Install Meson</a></h5>
+<h5><a class="header" href="#install-meson--ninja" id="install-meson--ninja">Install Meson + Ninja</a></h5>
 <ol>
 <li>Enter the Rizin Conda environment, if needed (<code>activate rizin</code>)</li>
-<li>Download https://github.com/mesonbuild/meson/archive/master.zip</li>
-<li><code>pip install \path\to\downloaded\master.zip</code></li>
-<li>Verify Meson is version 0.48 or higher (<code>meson -v</code>)</li>
+<li>Download meson + ninja</li>
+<li><code>pip install meson ninja</code></li>
+<li>Verify Meson is version 0.50 or higher (<code>meson -v</code>)</li>
 </ol>
 <h4><a class="header" href="#install-git-for-windows" id="install-git-for-windows">Install Git for Windows</a></h4>
 <p>All Rizin code is managed via the Git version control system and <a href="https://github.com/rizin">hosted on GitHub</a>.</p>
 <p>Follow these steps to install Git for Windows.</p>
 <ol>
-<li>Download Git for Windows (https://git-scm.com/download/win)</li>
+<li>Download <a href="https://git-scm.com/download/win">Git for Windows</a></li>
 </ol>
 <p>As you navigate the install wizard, we recommend you set these options when they appear:
 * Use a TrueType font in all console windows
@@ -430,7 +367,7 @@ make purge
 <p>Follow these steps to clone the Rizin git repository.</p>
 <ol>
 <li>In your Rizin Conda environment, navigate to a location where the code will be saved and compiled. This location needs approximately <strong>3-4GiB</strong> of space</li>
-<li>Clone the repository with <code>git clone https://github.com/rizinorg/rizin.git</code></li>
+<li>Clone the repository with <code>git clone --recurse-submodules https://github.com/rizinorg/rizin.git</code></li>
 </ol>
 <h4><a class="header" href="#compile-rizin-code" id="compile-rizin-code">Compile Rizin Code</a></h4>
 <p>Follow these steps to compile the Rizin Code.</p>
@@ -451,9 +388,10 @@ make purge
 <p><code>&quot;%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat&quot; x86</code></p>
 </li>
 <li>
-<p><strong>Visual Studio 2017:</strong></p>
+<p><strong>Visual Studio 2017/2019:</strong></p>
 <p>Note 1: Change <code>Community</code> to either <code>Professional</code> or <code>Enterprise</code> in the command below depending on the version installed.</p>
 <p>Note 2: Change <code>vcvars32.bat</code> to <code>vcvars64.bat</code> in the command below for the 64-bit version.</p>
+<p>Note 3: Change <code>2017</code> to <code>2019</code> if you are using Visual Studio 2019.</p>
 <p><code>&quot;%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat&quot;</code></p>
 </li>
 <li>
@@ -469,23 +407,15 @@ make purge
 </li>
 </ol>
 <p>Note 1: Change <code>debug</code> to <code>release</code> in the command below depending on whether the latest version or release version is desired.</p>
-<p>Note 2: If you are using visual studio 2017, you can change swap <code>vs2015</code> for <code>vs2017</code>.</p>
-<p><code>meson build --buildtype debug --backend vs2015 --prefix %cd%\dest</code></p>
+<p><code>meson --buildtype debug --prefix %cd%\dest build</code></p>
 <p>Meson currently requires <code>--prefix</code> to point to an absolute path. We use the %CD% pseudo-variable to get the absolute path to the current working directory.</p>
 <ol start="5">
-<li>
-<p>Start a build:</p>
-<p>Note: Change <code>Debug</code> to <code>Release</code> in the command below depending on the version desired.</p>
-<p><code>msbuild build\rizin.sln /p:Configuration=Debug /m</code></p>
-<p>The <code>/m[axcpucount]</code> switch creates one MSBuild worker process per logical processor on your machine. You can specify a numeric value (e.g. <code>/m:2</code>) to limit the number of worker processes if needed. (This should not be confused with the Visual C++ Compiler switch <code>/MP</code>.)</p>
-<p>If you get an error with the 32-bit install that says something along the lines of <code>error MSB4126: The specified solution configuration &quot;Debug|x86&quot; is invalid.</code> Get around this by adding the following argument to the command: <code>/p:Platform=Win32</code></p>
-</li>
-<li>
-<p>Install into your destination folder: <code>meson install -C build --no-rebuild</code></p>
-</li>
-<li>
-<p>Check your Rizin version: <code>dest\bin\rizin.exe -v</code></p>
-</li>
+<li>Start a build:</li>
+</ol>
+<p><code>ninja -C build</code></p>
+<ol start="6">
+<li>Install into your destination folder: <code>ninja -C build install</code></li>
+<li>Check your Rizin version: <code>dest\bin\rizin.exe -v</code></li>
 </ol>
 <h4><a class="header" href="#check-that-rizin-runs-from-all-locations" id="check-that-rizin-runs-from-all-locations">Check That Rizin Runs From All Locations</a></h4>
 <ol>
@@ -512,17 +442,8 @@ make purge
 <h3><a class="header" href="#step-by-step-1" id="step-by-step-1">Step-by-step</a></h3>
 <h4><a class="header" href="#download-and-extract-the-android-ndk" id="download-and-extract-the-android-ndk">Download and extract the Android NDK</a></h4>
 <p>Download the Android NDK from the <a href="https://developer.android.com/ndk">official site</a> and extract it somewhere on your system (e.g. <code>/tmp/android-ndk</code>)</p>
-<h4><a class="header" href="#make" id="make">Make</a></h4>
-<h5><a class="header" href="#specify-ndk-base-path" id="specify-ndk-base-path">Specify NDK base path</a></h5>
-<pre><code>$ echo NDK=/tmp/android-ndk  &gt; ~/.rzandroidrc
-</code></pre>
-<h5><a class="header" href="#compile--create-targz--push-it-to-connected-android-device" id="compile--create-targz--push-it-to-connected-android-device">Compile + create tar.gz + push it to connected android device</a></h5>
-<pre><code>./sys/android-build.sh arm64-static
-</code></pre>
-<p>You can build for different architectures by changing the argument to
-<code>./sys/android-build.sh</code>. Run the script without any argument to see the
-accepted values.</p>
 <h4><a class="header" href="#meson" id="meson">Meson</a></h4>
+<p>See also <a href="https://github.com/rizinorg/rizin/blob/dev/BUILDING.md#cross-compilation-for-android">BUILDING.md</a>.</p>
 <h5><a class="header" href="#create-a-cross-file-for-meson" id="create-a-cross-file-for-meson">Create a cross-file for meson</a></h5>
 <p>Meson needs a configuration file that describes the cross compilation environment (e.g. <code>meson-android.ini</code>).
 You can adjust it as necessary, but something like the following should be a good starting point:</p>
@@ -578,6 +499,16 @@ DEVICE:/data/local/tmp $ ./android-dir/bin/rizin
 Usage: rizin [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i file]
           [-s addr] [-B baddr] [-m maddr] [-c cmd] [-e k=v] file|pid|-|--|=
 </code></pre>
+<h4><a class="header" href="#make-deprecated" id="make-deprecated">Make (deprecated)</a></h4>
+<h5><a class="header" href="#specify-ndk-base-path" id="specify-ndk-base-path">Specify NDK base path</a></h5>
+<pre><code>$ echo NDK=/tmp/android-ndk  &gt; ~/.rzandroidrc
+</code></pre>
+<h5><a class="header" href="#compile--create-targz--push-it-to-connected-android-device" id="compile--create-targz--push-it-to-connected-android-device">Compile + create tar.gz + push it to connected android device</a></h5>
+<pre><code>./sys/android-build.sh arm64-static
+</code></pre>
+<p>You can build for different architectures by changing the argument to
+<code>./sys/android-build.sh</code>. Run the script without any argument to see the
+accepted values.</p>
 <h2><a class="header" href="#basic-rizin-usage" id="basic-rizin-usage">Basic Rizin Usage</a></h2>
 <p>The learning curve is usually somewhat steep at the beginning. Although after an hour of using it you should easily understand how most things work, and how to combine the various tools rizin offers. You are encouraged to read the rest of this book to understand how some non-trivial things work, and to ultimately improve your skills.</p>
 <p><img src="first_steps/learning_curve.png" alt="learning_curve" /></p>

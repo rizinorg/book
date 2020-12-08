@@ -160,17 +160,8 @@
 <h3><a class="header" href="#step-by-step" id="step-by-step">Step-by-step</a></h3>
 <h4><a class="header" href="#download-and-extract-the-android-ndk" id="download-and-extract-the-android-ndk">Download and extract the Android NDK</a></h4>
 <p>Download the Android NDK from the <a href="https://developer.android.com/ndk">official site</a> and extract it somewhere on your system (e.g. <code>/tmp/android-ndk</code>)</p>
-<h4><a class="header" href="#make" id="make">Make</a></h4>
-<h5><a class="header" href="#specify-ndk-base-path" id="specify-ndk-base-path">Specify NDK base path</a></h5>
-<pre><code>$ echo NDK=/tmp/android-ndk  &gt; ~/.rzandroidrc
-</code></pre>
-<h5><a class="header" href="#compile--create-targz--push-it-to-connected-android-device" id="compile--create-targz--push-it-to-connected-android-device">Compile + create tar.gz + push it to connected android device</a></h5>
-<pre><code>./sys/android-build.sh arm64-static
-</code></pre>
-<p>You can build for different architectures by changing the argument to
-<code>./sys/android-build.sh</code>. Run the script without any argument to see the
-accepted values.</p>
 <h4><a class="header" href="#meson" id="meson">Meson</a></h4>
+<p>See also <a href="https://github.com/rizinorg/rizin/blob/dev/BUILDING.md#cross-compilation-for-android">BUILDING.md</a>.</p>
 <h5><a class="header" href="#create-a-cross-file-for-meson" id="create-a-cross-file-for-meson">Create a cross-file for meson</a></h5>
 <p>Meson needs a configuration file that describes the cross compilation environment (e.g. <code>meson-android.ini</code>).
 You can adjust it as necessary, but something like the following should be a good starting point:</p>
@@ -226,6 +217,16 @@ DEVICE:/data/local/tmp $ ./android-dir/bin/rizin
 Usage: rizin [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i file]
           [-s addr] [-B baddr] [-m maddr] [-c cmd] [-e k=v] file|pid|-|--|=
 </code></pre>
+<h4><a class="header" href="#make-deprecated" id="make-deprecated">Make (deprecated)</a></h4>
+<h5><a class="header" href="#specify-ndk-base-path" id="specify-ndk-base-path">Specify NDK base path</a></h5>
+<pre><code>$ echo NDK=/tmp/android-ndk  &gt; ~/.rzandroidrc
+</code></pre>
+<h5><a class="header" href="#compile--create-targz--push-it-to-connected-android-device" id="compile--create-targz--push-it-to-connected-android-device">Compile + create tar.gz + push it to connected android device</a></h5>
+<pre><code>./sys/android-build.sh arm64-static
+</code></pre>
+<p>You can build for different architectures by changing the argument to
+<code>./sys/android-build.sh</code>. Run the script without any argument to see the
+accepted values.</p>
 
                     </main>
 
