@@ -3,18 +3,10 @@
 The typical work involved in reversing binary files makes powerful annotation capabilities essential.
 Radare offers multiple ways to store and retrieve such metadata.
 
-By following common basic UNIX principles, it is easy to write a small utility in a scripting language which uses `objdump`, `otool` or any other existing utility to obtain information from a binary and to import it into rizin. For example, take a look at `idc2r.py` shipped with [rizinida](https://github.com/rizinorg/rizinida). To use it, invoke it as `idc2r.py file.idc > file.r2`. It reads an IDC file exported from an IDA Pro database and produces an rizin script containing the same comments, names of functions and other data. You can import the resulting 'file.r2' by using the dot `.` command of rizin:
+By following common basic UNIX principles, it is easy to write a small utility in a scripting language which uses `objdump`, `otool` or any other existing utility to obtain information from a binary and to import it into rizin. For example, take a look at [python-idb](https://github.com/williballenthin/python-idb)-based `ida2rz.py` which opens IDB files directly without IDA Pro installed. You can load the resulting file with the `.` (dot) command into the rizin:
 ```
-[0x00000000]> . file.r2
+[0x00000000]> . file.rz
 ```
-The `.` command is used to interpret Radare commands from external sources, including files and program output. For example, to omit generation of an intermediate file and import the script directly you can use this combination:
-```
-[0x00000000]> .!idc2r.py < file.idc
-```
-
-Please keep in mind that importing IDA Pro metadata from IDC dump is deprecated mechanism and might
-not work in the future. The recommended way to do it - use [python-idb](https://github.com/williballenthin/python-idb)-based `ida2r2.py` which
-opens IDB files directly without IDA Pro installed.
 
 The `C` command is used to manage comments and data conversions. You can define a range of program's bytes to be interpreted as either code, binary data or string. It is also possible to execute external code at every specified flag location in order to fetch some metadata, such as a comment, from an external file or database.
 

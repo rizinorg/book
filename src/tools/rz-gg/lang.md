@@ -1,6 +1,6 @@
 # Syntax of the language
 
-The code of r\_egg is compiled as in a flow. It is a one-pass compiler;
+The code of rz\_egg is compiled as in a flow. It is a one-pass compiler;
 
 this means that you have to define the proper stackframe size at the
 
@@ -10,11 +10,11 @@ order to avoid getting compilation errors.
 
 The compiler generates assembly code for x86-{32,64} and arm. But it aims
 
-to support more platforms. This code is the compiled with r\_asm and
+to support more platforms. This code is the compiled with rz\_asm and
 
-injected into a tiny binary with r\_bin.
+injected into a tiny binary with rz\_bin.
 
-You may like to use r\_egg to create standalone binaries, position-
+You may like to use rz\_egg to create standalone binaries, position-
 
 independent raw eggs to be injected on running processes or to patch
 
@@ -42,7 +42,7 @@ language. This is just an assembler-level keyword redefinition.
 
 Use `cat(1)` or the preprocessor to concatenate multiple files to be compiled.
 
-` INCDIR@alias("/usr/include/ragg2");`
+` INCDIR@alias("/usr/include/rz-gg");`
 
 ` sys-osx.r@include(INCDIR);`
 
@@ -54,7 +54,7 @@ eggs can use a hashbang to make them executable.
 
  `$ head -n1 hello.r`
 
-` #!/usr/bin/ragg2 -X`
+` #!/usr/bin/rz-gg -X`
 
 ` $ ./hello.r`
 
@@ -68,7 +68,7 @@ defined will be the first one to be executed. If you want to run main\(\)
 
 just do like this:
 
-` #!/usr/bin/ragg2 -X`
+` #!/usr/bin/rz-gg -X`
 
 ` main();`
 
@@ -188,7 +188,7 @@ Sometimes r\_egg programs will break or just not work as expected. Use the
 
 'trace' architecture to get a arch-backend call trace:
 
-` $ ragg2 -a trace -s yourprogram.r`
+` $ rz-gg -a trace -s yourprogram.r`
 
 ### Pointers
 
@@ -200,7 +200,7 @@ TODO: a0, a1, a2, a3, sp, fp, bp, pc
 
 ### Math operations
 
-Ragg2 supports local variables assignment by math operating, including
+rz-gg supports local variables assignment by math operating, including
 
 the following operators:
 
@@ -223,7 +223,7 @@ main@global() {
 	add (3,4);
 }
 
-$ ragg2 -F -o test test.r
+$ rz-gg -F -o test test.r
 $ ./test
 $ echo $?
 7
@@ -233,7 +233,7 @@ $ echo $?
 
 Each architecture have a different instruction to break the execution of
 
-the program. REgg language captures calls to 'break\(\)' to run the emit\_trap
+the program. RzEgg language captures calls to 'break\(\)' to run the emit\_trap
 
 callback of the selected arch. The
 

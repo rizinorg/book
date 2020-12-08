@@ -1,6 +1,6 @@
 # rz-find
 
-Rafind2 is the command line fronted of the `r_search` library. Which allows you to search for strings, sequences of bytes with binary masks, etc
+Rz-find is the command line fronted of the `rz_search` library. Which allows you to search for strings, sequences of bytes with binary masks, etc
 
 ```
 $ rz-find -h
@@ -10,7 +10,7 @@ Usage: rz-find [-mXnzZhqv] [-a align] [-b sz] [-f/t from/to] [-[e|s|S] str] [-x 
  -e [regex] search for regex matches (can be used multiple times)
  -f [from]  start searching from address 'from'
  -h         show this help
- -i         identify filetype (r2 -nqcpm file)
+ -i         identify filetype (rizin -nqcpm file)
  -j         output in JSON
  -m         magic search, file-type carver
  -M [str]   set a binary mask to be applied on keywords

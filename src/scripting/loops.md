@@ -40,7 +40,7 @@ Now let's say, for example, that we'd like see a particular field from this outp
 ```
 This command will extract the `name` field from the `afi` output of every flag with a name
 matching the regexp `fcn.*`.
-There are also a predefined loop called `@@f`, which runs your command on every functions found by r2:
+There are also a predefined loop called `@@f`, which runs your command on every functions found by rizin:
 ```
 [0x004047d6]> afi @@f ~name
 ```  

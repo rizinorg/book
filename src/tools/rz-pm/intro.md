@@ -5,7 +5,7 @@ Rizin has its own package manager for managing external plugins (mainly from
 
 ```
 $ rz-pm -h
-$R2PM_DBDIR: No such file or directory.
+$ RZPM_DBDIR: No such file or directory.
 Run 'rz-pm init' to initialize the package repository
 $ rz-pm init
 git clone https://github.com/rizinorg/rizin-pm
@@ -45,7 +45,7 @@ Commands:
  -gu,global-uninstall <pkg>  uninstall pkg from systemdir
  -u,uninstall <pkgname>      rz-pm -u baleful (-uu to force)
  -l,list                     list installed pkgs
- -r,run [cmd ...args]        run shell command with R2PM_BINDIR in PATH
+ -r,run [cmd ...args]        run shell command with RZPM_BINDIR in PATH
  -s,search [<keyword>]       search in database
  -t,test FX,XX,BR BID        check in Travis regressions
  -v,version                  show version
@@ -59,15 +59,15 @@ Commands:
  init | update ..            initialize/update database
  cd [git/dir]                cd into given git (see 'rz-pm ls')
  ls                          ls all cloned git repos in GITDIR
- suicide                     self remove all (home + system) installations of r2
- cache                       cache contents of rizin -H to make rz-pm r2-independent
+ suicide                     self remove all (home + system) installations of rizin
+ cache                       cache contents of rizin -H to make rz-pm rizin-independent
 Environment:
  SUDO=sudo                    use this tool as sudo
- R2PM_PLUGDIR=~/.local/share/rizin/plugins   # default value, home-install for plugins
- R2PM_BINDIR=~/.local/share/rizin/prefix/bin # bindir in r2's PATH
- R2PM_PLUGDIR=/usr/lib/rizin/last/           # for system-wide plugin installs
- R2PM_DBDIR=~/.local/share/rizin/rz-pm/db     # location of the db
- R2PM_GITDIR=~/.local/share/rizin/rz-pm/git   # cloned git repositories
+ RZPM_PLUGDIR=~/.local/share/rizin/plugins   # default value, home-install for plugins
+ RZPM_BINDIR=~/.local/share/rizin/prefix/bin # bindir in rizin's PATH
+ RZPM_PLUGDIR=/usr/lib/rizin/last/           # for system-wide plugin installs
+ RZPM_DBDIR=~/.local/share/rizin/rz-pm/db     # location of the db
+ RZPM_GITDIR=~/.local/share/rizin/rz-pm/git   # cloned git repositories
 ```
 
 The usual scenario of using it is to install new plugins, for example `lang-python3` (which is used

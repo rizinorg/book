@@ -2,7 +2,7 @@
 
 rz-bin is able to find exports. For example:
 ```
-$ rz-bin -E /usr/lib/libr_bin.so | head
+$ rz-bin -E /usr/lib/librz_bin.so | head
 [Exports]
 
 nth  paddr       vaddr      bind   type size lib name
