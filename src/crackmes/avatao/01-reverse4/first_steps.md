@@ -74,7 +74,7 @@ avatao_reverse4
 ```
 
 > ***rizin tip:*** You can save a project using Ps [file], and load one using Po [file].
-> With the -p option, you can load a project when starting r2.
+> With the -p option, you can load a project when starting rizin.
 
 We can list all the strings rizin found:
 

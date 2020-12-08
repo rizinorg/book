@@ -18,15 +18,15 @@ $ rz-bin -z ./crackme0x01
 nth paddr      vaddr      len size section type  string
 ―――――――――――――――――――――――――――――――――――――――――――――――――――――――
 0   0x00000528 0x08048528 24  25   .rodata ascii IOLI Crackme Level 0x01\n
-1   0x00000541 0x08048541 10  11   .rodata ascii Password: 
+1   0x00000541 0x08048541 10  11   .rodata ascii Password:
 2   0x0000054f 0x0804854f 18  19   .rodata ascii Invalid Password!\n
 3   0x00000562 0x08048562 15  16   .rodata ascii Password OK :)\n
 ```
 
-This isn't going to be as easy as 0x00. Let's try disassembly with r2.
+This isn't going to be as easy as 0x00. Let's try disassembly with rizin.
 
 ```
-$ rizin ./crackme0x01 
+$ rizin ./crackme0x01
 -- Use `zoom.byte=printable` in zoom mode ('z' in Visual mode) to find strings
 [0x08048330]> aa
 [0x08048330]> pdf@main

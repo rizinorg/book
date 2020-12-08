@@ -26,7 +26,6 @@ Panels can be accessed by using `v` or by using `!` from the visual mode.
 | _      start the hud input mode
 | \      show the user-friendly hud
 | ?      show this help
-| !      run r2048 game
 | .      seek to PC or entrypoint
 | *      show decompiler in the current panel
 | "      create a panel from the list and replace the current one
@@ -57,7 +56,7 @@ Panels can be accessed by using `v` or by using `!` from the visual mode.
 | p/P    rotate panel layout
 | q      quit, or close a tab
 | Q      close all the tabs and quit
-| r      toggle callhints/jmphints/leahints 
+| r      toggle callhints/jmphints/leahints
 | R      randomize color palette (ecr)
 | s/S    step in / step over
 | t/T    tab prompt / close a tab

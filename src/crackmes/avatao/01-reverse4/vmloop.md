@@ -17,7 +17,7 @@ and rizin can't yet recognize jump tables
 this function is a bit incomplete. This means that we can't really use the graph
 view now, so either we just use visual mode, or fix those basic blocks. The
 entire function is just 542 bytes long, so we certainly could reverse it without
-the aid of the graph mode, but since this writeup aims to include as much r2
+the aid of the graph mode, but since this writeup aims to include as much rizin
 wisdom as possible, I'm going to show you how to define basic blocks.
 
 First, lets analyze what we already have! First, *rdi* is put into local_3.
@@ -411,7 +411,7 @@ the former does subtraction. To summarize this:
 This one is simple, it just calls *instr_A(arg1, 1)*. As you may have noticed
 the function call looks like `call fcn.0040080d` instead of `call fcn.instr_A`.
 This is because when you save and open a project, function names get lost -
-another thing to examine and patch in r2!
+another thing to examine and patch in rizin!
 
 ###instr_D
 

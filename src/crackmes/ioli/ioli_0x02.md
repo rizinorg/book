@@ -22,7 +22,7 @@ nth paddr      vaddr      len size section type  string
 3   0x0000057f 0x0804857f 18  19   .rodata ascii Invalid Password!\n
 ```
 
-similar to 0x01, no explicity password string here. so it's time to analyze it with r2.
+similar to 0x01, no explicity password string here. so it's time to analyze it with rizin.
 ```
 [0x08048330]> aa
 [x] Analyze all flags starting with sym. and entry0 (aa)
@@ -114,15 +114,15 @@ function main () {
        eax <<<= 4
        esp -= eax
        dword [esp] = "IOLI Crackme Level 0x02\n" //[0x8048548:4]=0x494c4f49 ; str.IOLI_Crackme_Level_0x02 ; const char *format
-                                                   
+
        int printf("IOLI Crackme Level 0x02\n")
        dword [esp] = "Password: " //[0x8048561:4]=0x73736150 ; str.Password: ; const char *format
-                                                   
+
        int printf("Password: ")
        eax = var_4h
        dword [var_sp_4h] = eax
        dword [esp] = 0x804856c  //[0x804856c:4]=0x50006425 ; const char *format
-       int scanf("%d") 
+       int scanf("%d")
                                //sym.imp.scanf ()
        dword [var_8h] = 0x5a    //'Z' ; 90
        dword [var_ch] = 0x1ec   //492
@@ -140,7 +140,7 @@ function main () {
 
            //CODE XREF from main @ 0x8048451
            dword [esp] = s"Invalid Password!\n"//[0x804857f:4]=0x61766e49 ; str.Invalid_Password ; const char *format
-                                                       
+
            int printf("Invalid ")
        do
        {
@@ -222,11 +222,11 @@ if (var_ch == our_input)
   printf("Password OK :)\n");
 ```
 
-given the initial status that var_8h is 0x5a, var_ch is 0x1ec, we have 
+given the initial status that var_8h is 0x5a, var_ch is 0x1ec, we have
 var_ch = 338724 (0x52b24):
 
 ```
-$ rz-ax '=10' '(0x5a+0x1ec)*(0x5a+0x1ec)' 
+$ rz-ax '=10' '(0x5a+0x1ec)*(0x5a+0x1ec)'
 338724
 
 $ ./crackme0x02

@@ -180,10 +180,10 @@ dead at 0x00000000
            0x08048450      8d4588         lea eax, [var_78h]
 ```
 
-By the way, u can also open the file and use write data command to decrypt data.
+By the way, you can also open the file and use write data command to decrypt data.
 
 ```sh
-r2 -w ./crackme0x03
+rizin -w ./crackme0x03
 [0x08048360]> aaa
 [0x08048360]> fs strings
 [0x08048360]> f

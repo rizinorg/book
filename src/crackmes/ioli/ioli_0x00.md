@@ -18,7 +18,7 @@ $ rz-bin -z ./crackme0x00
 nth paddr      vaddr      len size section type  string
 ―――――――――――――――――――――――――――――――――――――――――――――――――――――――
 0   0x00000568 0x08048568 24  25   .rodata ascii IOLI Crackme Level 0x00\n
-1   0x00000581 0x08048581 10  11   .rodata ascii Password: 
+1   0x00000581 0x08048581 10  11   .rodata ascii Password:
 2   0x0000058f 0x0804858f 6   7    .rodata ascii 250382
 3   0x00000596 0x08048596 18  19   .rodata ascii Invalid Password!\n
 4   0x000005a9 0x080485a9 15  16   .rodata ascii Password OK :)\n
@@ -35,7 +35,7 @@ nth paddr      vaddr      len size section type  string
 Here we have the prompt for the password.
 
 ```
-1   0x00000581 0x08048581 10  11   .rodata ascii Password: 
+1   0x00000581 0x08048581 10  11   .rodata ascii Password:
 ```
 
 This is the error on entering an invalid password.
