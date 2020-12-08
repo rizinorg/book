@@ -159,7 +159,7 @@ reverse yet. The thing is that this function uses a jump table at 0x00400a74,</p
 this function is a bit incomplete. This means that we can't really use the graph
 view now, so either we just use visual mode, or fix those basic blocks. The
 entire function is just 542 bytes long, so we certainly could reverse it without
-the aid of the graph mode, but since this writeup aims to include as much r2
+the aid of the graph mode, but since this writeup aims to include as much rizin
 wisdom as possible, I'm going to show you how to define basic blocks.</p>
 <p>First, lets analyze what we already have! First, <em>rdi</em> is put into local_3.
 Since the application is a 64bit Linux executable, we know that <em>rdi</em> is the
@@ -463,7 +463,7 @@ the former does subtraction. To summarize this:</p>
 <p>This one is simple, it just calls <em>instr_A(arg1, 1)</em>. As you may have noticed
 the function call looks like <code>call fcn.0040080d</code> instead of <code>call fcn.instr_A</code>.
 This is because when you save and open a project, function names get lost -
-another thing to examine and patch in r2!</p>
+another thing to examine and patch in rizin!</p>
 <p>###instr_D</p>
 <p><img src="img/instr_D/instr_D.png" alt="instr_D" /></p>
 <p>Again, simple: it calls <em>instr_S(arg1, 1)</em>.</p>

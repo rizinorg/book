@@ -2464,7 +2464,7 @@ For example let's replace the <code>push</code> by a <code>jmp</code>:</p>
 <p><img src="visual_mode/../pics/before.png" alt="Before" /></p>
 <p>Notice the preview of the disassembly and arrows:</p>
 <p><img src="visual_mode/../pics/after.png" alt="After" /></p>
-<p>You need to open the file in writing mode (<code>r2 -w</code> or <code>oo+</code>) in order to patch the file.
+<p>You need to open the file in writing mode (<code>rizin -w</code> or <code>oo+</code>) in order to patch the file.
 You can also use the cache mode: <code>e io.cache = true</code> and <code>wc?</code>.</p>
 <p>Remember that patching files in debug mode only patch the memory not the file.</p>
 <h1><a class="header" href="#visual-configuration-editor-1" id="visual-configuration-editor-1">Visual Configuration Editor</a></h1>
@@ -2495,7 +2495,6 @@ For example, if you want to change the assembly display just select <code>asm</c
 | _      start the hud input mode
 | \      show the user-friendly hud
 | ?      show this help
-| !      run r2048 game
 | .      seek to PC or entrypoint
 | *      show decompiler in the current panel
 | &quot;      create a panel from the list and replace the current one
@@ -2526,7 +2525,7 @@ For example, if you want to change the assembly display just select <code>asm</c
 | p/P    rotate panel layout
 | q      quit, or close a tab
 | Q      close all the tabs and quit
-| r      toggle callhints/jmphints/leahints 
+| r      toggle callhints/jmphints/leahints
 | R      randomize color palette (ecr)
 | s/S    step in / step over
 | t/T    tab prompt / close a tab
@@ -5742,7 +5741,7 @@ Heap Layout
 <h1><a class="header" href="#files-1" id="files-1">Files</a></h1>
 <p>The rizin debugger allows the user to list and manipulate the file descriptors from the target process.</p>
 <p>This is a useful feature, which is not found in other debuggers, the functionality is similar to the lsof command line tool, but have extra subcommands to change the seek, close or duplicate them.</p>
-<p>So, at any time in the debugging session you can replace the stdio file descriptors to use network sockets created by r2, or replace a network socket connection to hijack it.</p>
+<p>So, at any time in the debugging session you can replace the stdio file descriptors to use network sockets created by rizin, or replace a network socket connection to hijack it.</p>
 <p>This functionality is also available in r2frida by using the dd command prefixed with a backslash. In rizin you may want to see the output of dd? for proper details.</p>
 <h1><a class="header" href="#reverse-debugging" id="reverse-debugging">Reverse Debugging</a></h1>
 <p>Rizin has reverse debugger, that can seek the program counter backward.
@@ -8083,9 +8082,9 @@ RZPM_END
 </code></pre>
 <p>Then add it in the <code>/db</code> directory of rizin-pm repository and send a pull request to the mainline.</p>
 <h1><a class="header" href="#crackmes" id="crackmes">Crackmes</a></h1>
-<p>Crackmes (from &quot;crack me&quot; challenge) are the training ground for reverse engineering people. This section will go over tutorials on how to defeat various crackmes using r2.</p>
+<p>Crackmes (from &quot;crack me&quot; challenge) are the training ground for reverse engineering people. This section will go over tutorials on how to defeat various crackmes using rizin.</p>
 <h1><a class="header" href="#ioli-crackmes" id="ioli-crackmes">IOLI CrackMes</a></h1>
-<p>The IOLI crackme is a good starting point for learning r2. This is a set of tutorials based on the tutorial at <a href="http://dustri.org/b/defeating-ioli-with-rizin.html">dustri</a></p>
+<p>The IOLI crackme is a good starting point for learning rizin. This is a set of tutorials based on the tutorial at <a href="http://dustri.org/b/defeating-ioli-with-rizin.html">dustri</a></p>
 <p>The IOLI crackmes are available at a locally hosted <a href="https://github.com/rizinorg/rizinbook/raw/master/src/crackmes/ioli/IOLI-crackme.tar.gz">mirror</a></p>
 <h1><a class="header" href="#ioli-0x00" id="ioli-0x00">IOLI 0x00</a></h1>
 <p>This is the first IOLI crackme, and the easiest one.</p>
@@ -8100,7 +8099,7 @@ Invalid Password!
 nth paddr      vaddr      len size section type  string
 ―――――――――――――――――――――――――――――――――――――――――――――――――――――――
 0   0x00000568 0x08048568 24  25   .rodata ascii IOLI Crackme Level 0x00\n
-1   0x00000581 0x08048581 10  11   .rodata ascii Password: 
+1   0x00000581 0x08048581 10  11   .rodata ascii Password:
 2   0x0000058f 0x0804858f 6   7    .rodata ascii 250382
 3   0x00000596 0x08048596 18  19   .rodata ascii Invalid Password!\n
 4   0x000005a9 0x080485a9 15  16   .rodata ascii Password OK :)\n
@@ -8111,7 +8110,7 @@ nth paddr      vaddr      len size section type  string
 0   0x00000568 0x08048568 24  25   .rodata ascii IOLI Crackme Level 0x00\n
 </code></pre>
 <p>Here we have the prompt for the password.</p>
-<pre><code>1   0x00000581 0x08048581 10  11   .rodata ascii Password: 
+<pre><code>1   0x00000581 0x08048581 10  11   .rodata ascii Password:
 </code></pre>
 <p>This is the error on entering an invalid password.</p>
 <pre><code>3   0x00000596 0x08048596 18  19   .rodata ascii Invalid Password!\n
@@ -8142,12 +8141,12 @@ Invalid Password!
 nth paddr      vaddr      len size section type  string
 ―――――――――――――――――――――――――――――――――――――――――――――――――――――――
 0   0x00000528 0x08048528 24  25   .rodata ascii IOLI Crackme Level 0x01\n
-1   0x00000541 0x08048541 10  11   .rodata ascii Password: 
+1   0x00000541 0x08048541 10  11   .rodata ascii Password:
 2   0x0000054f 0x0804854f 18  19   .rodata ascii Invalid Password!\n
 3   0x00000562 0x08048562 15  16   .rodata ascii Password OK :)\n
 </code></pre>
-<p>This isn't going to be as easy as 0x00. Let's try disassembly with r2.</p>
-<pre><code>$ rizin ./crackme0x01 
+<p>This isn't going to be as easy as 0x00. Let's try disassembly with rizin.</p>
+<pre><code>$ rizin ./crackme0x01
 -- Use `zoom.byte=printable` in zoom mode ('z' in Visual mode) to find strings
 [0x08048330]&gt; aa
 [0x08048330]&gt; pdf@main
@@ -8256,7 +8255,7 @@ nth paddr      vaddr      len size section type  string
 2   0x0000056f 0x0804856f 15  16   .rodata ascii Password OK :)\n
 3   0x0000057f 0x0804857f 18  19   .rodata ascii Invalid Password!\n
 </code></pre>
-<p>similar to 0x01, no explicity password string here. so it's time to analyze it with r2.</p>
+<p>similar to 0x01, no explicity password string here. so it's time to analyze it with rizin.</p>
 <pre><code>[0x08048330]&gt; aa
 [x] Analyze all flags starting with sym. and entry0 (aa)
 [0x08048330]&gt; pdf@main
@@ -8339,15 +8338,15 @@ function main () {
        eax &lt;&lt;&lt;= 4
        esp -= eax
        dword [esp] = &quot;IOLI Crackme Level 0x02\n&quot; //[0x8048548:4]=0x494c4f49 ; str.IOLI_Crackme_Level_0x02 ; const char *format
-                                                   
+
        int printf(&quot;IOLI Crackme Level 0x02\n&quot;)
        dword [esp] = &quot;Password: &quot; //[0x8048561:4]=0x73736150 ; str.Password: ; const char *format
-                                                   
+
        int printf(&quot;Password: &quot;)
        eax = var_4h
        dword [var_sp_4h] = eax
        dword [esp] = 0x804856c  //[0x804856c:4]=0x50006425 ; const char *format
-       int scanf(&quot;%d&quot;) 
+       int scanf(&quot;%d&quot;)
                                //sym.imp.scanf ()
        dword [var_8h] = 0x5a    //'Z' ; 90
        dword [var_ch] = 0x1ec   //492
@@ -8365,7 +8364,7 @@ function main () {
 
            //CODE XREF from main @ 0x8048451
            dword [esp] = s&quot;Invalid Password!\n&quot;//[0x804857f:4]=0x61766e49 ; str.Invalid_Password ; const char *format
-                                                       
+
            int printf(&quot;Invalid &quot;)
        do
        {
@@ -8440,9 +8439,9 @@ we can:</p>
 if (var_ch == our_input)
   printf(&quot;Password OK :)\n&quot;);
 </code></pre>
-<p>given the initial status that var_8h is 0x5a, var_ch is 0x1ec, we have 
+<p>given the initial status that var_8h is 0x5a, var_ch is 0x1ec, we have
 var_ch = 338724 (0x52b24):</p>
-<pre><code>$ rz-ax '=10' '(0x5a+0x1ec)*(0x5a+0x1ec)' 
+<pre><code>$ rz-ax '=10' '(0x5a+0x1ec)*(0x5a+0x1ec)'
 338724
 
 $ ./crackme0x02
@@ -8610,8 +8609,8 @@ dead at 0x00000000
            ; CODE XREF from sym.shift @ 0x8048432
            0x08048450      8d4588         lea eax, [var_78h]
 </code></pre>
-<p>By the way, u can also open the file and use write data command to decrypt data.</p>
-<pre><code class="language-sh">r2 -w ./crackme0x03
+<p>By the way, you can also open the file and use write data command to decrypt data.</p>
+<pre><code class="language-sh">rizin -w ./crackme0x03
 [0x08048360]&gt; aaa
 [0x08048360]&gt; fs strings
 [0x08048360]&gt; f
@@ -9278,7 +9277,7 @@ Password OK!
 </code></pre>
 <h1><a class="header" href="#ioli-0x09" id="ioli-0x09">IOLI 0x09</a></h1>
 <p>Hints: crackme0x09 hides the format string (%d and %s), and nothing more than 0x08.</p>
-<pre><code class="language-sh">$ export LOLA=help 
+<pre><code class="language-sh">$ export LOLA=help
 $ ./crackme0x09
 IOLI Crackme Level 0x09
 Password: 12346
@@ -9303,13 +9302,13 @@ used rizin alongside IDA, and only for smaller tasks, but I loved the whole conc
 at first sight. Since then, rizin evolved a lot, and I was planning for some
 time now to solve some crackmes with the framework, and write writeups about
 them. Well, this CTF gave me the perfect opportunity :)</p>
-<p>Because this writeup aims to show some of r2's features besides how the crackmes
+<p>Because this writeup aims to show some of rizin's features besides how the crackmes
 can be solved, I will explain every rizin command I use in blockquote paragraphs
 like this one:</p>
 <blockquote>
 <p><em><strong>rizin tip:</strong></em> Always use ? or -h to get more information!</p>
 </blockquote>
-<p>If you know r2, and just interested in the crackme, feel free to skip those
+<p>If you know rizin, and just interested in the crackme, feel free to skip those
 parts! Also keep in mind please, that because of this tutorial style I'm going
 to do a lot of stuff that you just don't do during a CTF, because there is no
 time for proper bookkeeping (e.g. flag every memory area according to its
@@ -9328,7 +9327,7 @@ Prefix with number to repeat command N times (f.ex: 3x)
 |%var =valueAlias for 'env' command
 | *off[=[0x]value]     Pointer read/write data/values (see ?v, wx, wv)
 | (macro arg0 arg1)    Manage scripting macros
-| .[-|(m)|f|!sh|cmd]   Define macro or load r2, cparse or rlang file
+| .[-|(m)|f|!sh|cmd]   Define macro or load rizin, cparse or rlang file
 | = [cmd]              Run this command via rap://
 | /                    Search for bytes, regexps, patterns, ..
 | ! [cmd]              Run given command as in system(3)
@@ -9427,7 +9426,7 @@ avatao_reverse4
 </code></pre>
 <blockquote>
 <p><em><strong>rizin tip:</strong></em> You can save a project using Ps [file], and load one using Po [file].
-With the -p option, you can load a project when starting r2.</p>
+With the -p option, you can load a project when starting rizin.</p>
 </blockquote>
 <p>We can list all the strings rizin found:</p>
 <pre><code>[0x00400720]&gt; fs strings
@@ -9692,7 +9691,7 @@ reverse yet. The thing is that this function uses a jump table at 0x00400a74,</p
 this function is a bit incomplete. This means that we can't really use the graph
 view now, so either we just use visual mode, or fix those basic blocks. The
 entire function is just 542 bytes long, so we certainly could reverse it without
-the aid of the graph mode, but since this writeup aims to include as much r2
+the aid of the graph mode, but since this writeup aims to include as much rizin
 wisdom as possible, I'm going to show you how to define basic blocks.</p>
 <p>First, lets analyze what we already have! First, <em>rdi</em> is put into local_3.
 Since the application is a 64bit Linux executable, we know that <em>rdi</em> is the
@@ -9996,7 +9995,7 @@ the former does subtraction. To summarize this:</p>
 <p>This one is simple, it just calls <em>instr_A(arg1, 1)</em>. As you may have noticed
 the function call looks like <code>call fcn.0040080d</code> instead of <code>call fcn.instr_A</code>.
 This is because when you save and open a project, function names get lost -
-another thing to examine and patch in r2!</p>
+another thing to examine and patch in rizin!</p>
 <p>###instr_D</p>
 <p><img src="crackmes/avatao/01-reverse4/img/instr_D/instr_D.png" alt="instr_D" /></p>
 <p>Again, simple: it calls <em>instr_S(arg1, 1)</em>.</p>
@@ -10105,7 +10104,7 @@ all possible instructions. This means that the code is ugly and unefficient.</p>
 <h2><a class="header" href="#outro" id="outro">.outro</a></h2>
 <p>Well, what can I say? Such VM, much reverse! :)</p>
 <p>What started out as a simple writeup for a simple crackme, became a rather
-lengthy writeup/r2 tutorial, so kudos if you've read through it. I hope you
+lengthy writeup/rizin tutorial, so kudos if you've read through it. I hope you
 enjoyed it (I know I did), and maybe even learnt something from it. I've surely
 learnt a lot about rizin during the process, and I've even contributed some small
 patches, and got a few ideas of more possible improvements.</p>

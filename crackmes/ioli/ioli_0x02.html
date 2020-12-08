@@ -164,7 +164,7 @@ nth paddr      vaddr      len size section type  string
 2   0x0000056f 0x0804856f 15  16   .rodata ascii Password OK :)\n
 3   0x0000057f 0x0804857f 18  19   .rodata ascii Invalid Password!\n
 </code></pre>
-<p>similar to 0x01, no explicity password string here. so it's time to analyze it with r2.</p>
+<p>similar to 0x01, no explicity password string here. so it's time to analyze it with rizin.</p>
 <pre><code>[0x08048330]&gt; aa
 [x] Analyze all flags starting with sym. and entry0 (aa)
 [0x08048330]&gt; pdf@main
@@ -247,15 +247,15 @@ function main () {
        eax &lt;&lt;&lt;= 4
        esp -= eax
        dword [esp] = &quot;IOLI Crackme Level 0x02\n&quot; //[0x8048548:4]=0x494c4f49 ; str.IOLI_Crackme_Level_0x02 ; const char *format
-                                                   
+
        int printf(&quot;IOLI Crackme Level 0x02\n&quot;)
        dword [esp] = &quot;Password: &quot; //[0x8048561:4]=0x73736150 ; str.Password: ; const char *format
-                                                   
+
        int printf(&quot;Password: &quot;)
        eax = var_4h
        dword [var_sp_4h] = eax
        dword [esp] = 0x804856c  //[0x804856c:4]=0x50006425 ; const char *format
-       int scanf(&quot;%d&quot;) 
+       int scanf(&quot;%d&quot;)
                                //sym.imp.scanf ()
        dword [var_8h] = 0x5a    //'Z' ; 90
        dword [var_ch] = 0x1ec   //492
@@ -273,7 +273,7 @@ function main () {
 
            //CODE XREF from main @ 0x8048451
            dword [esp] = s&quot;Invalid Password!\n&quot;//[0x804857f:4]=0x61766e49 ; str.Invalid_Password ; const char *format
-                                                       
+
            int printf(&quot;Invalid &quot;)
        do
        {
@@ -348,9 +348,9 @@ we can:</p>
 if (var_ch == our_input)
   printf(&quot;Password OK :)\n&quot;);
 </code></pre>
-<p>given the initial status that var_8h is 0x5a, var_ch is 0x1ec, we have 
+<p>given the initial status that var_8h is 0x5a, var_ch is 0x1ec, we have
 var_ch = 338724 (0x52b24):</p>
-<pre><code>$ rz-ax '=10' '(0x5a+0x1ec)*(0x5a+0x1ec)' 
+<pre><code>$ rz-ax '=10' '(0x5a+0x1ec)*(0x5a+0x1ec)'
 338724
 
 $ ./crackme0x02
