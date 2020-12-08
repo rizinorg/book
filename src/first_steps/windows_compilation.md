@@ -24,8 +24,9 @@ If you need a copy of Visual Studio, the Community versions are free and work gr
 
 * [Download Visual Studio 2015 Community (registration required)](https://my.visualstudio.com/Downloads?q=Visual%20Studio%202015%20with%20Update%203)
 * [Download Visual Studio 2017 Community](https://visualstudio.microsoft.com/downloads/)
+* [Download Visual Studio 2019 Community](https://visualstudio.microsoft.com/downloads/)
 
-#### Install Python 3 and Meson via Conda
+#### Install Python 3 and Meson/Ninja via Conda
 It is strongly recommended you install Conda — a Python environment management system — when working with Python on the Windows platform. This will isolate the Rizin build environment from other installed Python versions and minimize potential conflicts.
 
 ##### Set Up Conda:
@@ -41,19 +42,19 @@ Follow these steps to create and activate a Conda environment named *rizin*. All
 
 Any time you wish to enter this environment, open the Anaconda Prompt and re-issue `activate rizin`. Conversely, `deactivate` will leave the environment.
 
-##### Install Meson
+##### Install Meson + Ninja
 
 1. Enter the Rizin Conda environment, if needed (`activate rizin`)
-2. Download https://github.com/mesonbuild/meson/archive/master.zip
-3. `pip install \path\to\downloaded\master.zip`
-4. Verify Meson is version 0.48 or higher (`meson -v`)
+2. Download meson + ninja
+3. `pip install meson ninja`
+4. Verify Meson is version 0.50 or higher (`meson -v`)
 
 #### Install Git for Windows
 All Rizin code is managed via the Git version control system and [hosted on GitHub](https://github.com/rizin).
 
 Follow these steps to install Git for Windows.
 
-1. Download Git for Windows (https://git-scm.com/download/win)
+1. Download [Git for Windows](https://git-scm.com/download/win)
 
   As you navigate the install wizard, we recommend you set these options when they appear:
     * Use a TrueType font in all console windows
@@ -69,7 +70,7 @@ Follow these steps to install Git for Windows.
 Follow these steps to clone the Rizin git repository.
 
 1. In your Rizin Conda environment, navigate to a location where the code will be saved and compiled. This location needs approximately **3-4GiB** of space
-2. Clone the repository with `git clone https://github.com/rizinorg/rizin.git`
+2. Clone the repository with `git clone --recurse-submodules https://github.com/rizinorg/rizin.git`
 
 #### Compile Rizin Code
 Follow these steps to compile the Rizin Code.
@@ -86,11 +87,13 @@ Compiled binaries will be installed into the `dest` folder.
 
         `"%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86`
 
-    * **Visual Studio 2017:**
+    * **Visual Studio 2017/2019:**
 
         Note 1: Change `Community` to either `Professional` or `Enterprise` in the command below depending on the version installed.
 
         Note 2: Change `vcvars32.bat` to `vcvars64.bat` in the command below for the 64-bit version.
+
+        Note 3: Change `2017` to `2019` if you are using Visual Studio 2019.
 
          `"%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"`
 
@@ -107,23 +110,15 @@ Compiled binaries will be installed into the `dest` folder.
 
   Note 1: Change `debug` to `release` in the command below depending on whether the latest version or release version is desired.
 
-  Note 2: If you are using visual studio 2017, you can change swap `vs2015` for `vs2017`.
-
-  `meson build --buildtype debug --backend vs2015 --prefix %cd%\dest`
+  `meson --buildtype debug --prefix %cd%\dest build`
 
   Meson currently requires `--prefix` to point to an absolute path. We use the %CD% pseudo-variable to get the absolute path to the current working directory.
 
 5. Start a build:
 
-    Note: Change `Debug` to `Release` in the command below depending on the version desired.
+  `ninja -C build`
 
-    `msbuild build\rizin.sln /p:Configuration=Debug /m`
-
-    The `/m[axcpucount]` switch creates one MSBuild worker process per logical processor on your machine. You can specify a numeric value (e.g. `/m:2`) to limit the number of worker processes if needed. (This should not be confused with the Visual C++ Compiler switch `/MP`.)
-
-    If you get an error with the 32-bit install that says something along the lines of `error MSB4126: The specified solution configuration "Debug|x86" is invalid.` Get around this by adding the following argument to the command: `/p:Platform=Win32`
-
-6. Install into your destination folder: `meson install -C build --no-rebuild`
+6. Install into your destination folder: `ninja -C build install`
 7. Check your Rizin version: `dest\bin\rizin.exe -v`
 
 #### Check That Rizin Runs From All Locations
