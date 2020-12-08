@@ -16,25 +16,9 @@ Rizin can be cross-compiled for other architectures/systems as well, like Androi
 
 Download the Android NDK from the [official site](https://developer.android.com/ndk) and extract it somewhere on your system (e.g. `/tmp/android-ndk`)
 
-#### Make
-
-##### Specify NDK base path
-
-```
-$ echo NDK=/tmp/android-ndk  > ~/.rzandroidrc
-```
-
-##### Compile + create tar.gz + push it to connected android device
-
-```
-./sys/android-build.sh arm64-static
-```
-
-You can build for different architectures by changing the argument to
-`./sys/android-build.sh`. Run the script without any argument to see the
-accepted values.
-
 #### Meson
+
+See also [BUILDING.md](https://github.com/rizinorg/rizin/blob/dev/BUILDING.md#cross-compilation-for-android).
 
 ##### Create a cross-file for meson
 
@@ -100,3 +84,21 @@ DEVICE:/data/local/tmp $ ./android-dir/bin/rizin
 Usage: rizin [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i file]
           [-s addr] [-B baddr] [-m maddr] [-c cmd] [-e k=v] file|pid|-|--|=
 ```
+
+#### Make (deprecated)
+
+##### Specify NDK base path
+
+```
+$ echo NDK=/tmp/android-ndk  > ~/.rzandroidrc
+```
+
+##### Compile + create tar.gz + push it to connected android device
+
+```
+./sys/android-build.sh arm64-static
+```
+
+You can build for different architectures by changing the argument to
+`./sys/android-build.sh`. Run the script without any argument to see the
+accepted values.
