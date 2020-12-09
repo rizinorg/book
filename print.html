@@ -168,7 +168,7 @@ based on the <a href="https://github.com/radareorg/radare2book">radare2 book</a>
 <p>The editor was originally designed to recover a deleted file from an HFS+ partition.</p>
 <p>After that, pancake decided to extend the tool to have a pluggable io to be able to attach to processes and implemented the debugger functionalities, support for multiple architectures, and code analysis.</p>
 <p>Since then, the project has evolved to provide a complete framework for analyzing binaries, while making use of basic UNIX concepts. Those concepts include the famous &quot;everything is a file&quot;, &quot;small programs that interact using stdin/stdout&quot;, and &quot;keep it simple&quot; paradigms.</p>
-<p>The need for scripting showed the fragility of the initial design: a monolithic tool made the API hard to use, and so a deep refactoring was needed. In 2009 radare2 (r2) was born as a fork of radare1. The refactor added flexibility and dynamic features. This enabled much better integration, paving the way to use radare from different programming languages. Later on, the <a href="https://github.com/rizinorg/rizin-rz-pipe">rz-pipe API (formerly r2pipe)</a> allowed access to rizin via pipes from any language.</p>
+<p>The need for scripting showed the fragility of the initial design: a monolithic tool made the API hard to use, and so a deep refactoring was needed. In 2009 radare2 (r2) was born as a fork of radare1. The refactor added flexibility and dynamic features. This enabled much better integration, paving the way to use radare from different programming languages. Later on, the <a href="https://github.com/rizinorg/rz-pipe">rz-pipe API (formerly r2pipe)</a> allowed access to rizin via pipes from any language.</p>
 <p>What started as a one-man project, with some eventual contributions, gradually evolved into a big community-based project around 2014. The number of users was growing fast, and the author-and main developer-had to switch roles from coder to manager in order to integrate the work of the different developers that were joining the project. Since then project has changed it's name to Rizin and reworked development and governance methodology.</p>
 <p>Instructing users to report their issues allows the project to define new directions to evolve in. Everything is managed in <a href="https://github.com/rizinorg/rizin">rizin's GitHub</a> and discussed in the corresponding channels.</p>
 <p>The project remains active at the time of writing this book, and there are several side projects that provide, among other things, a graphical user interface (<a href="https://github.com/rizinorg/cutter">Cutter</a>), a decompiler <a href="https://github.com/rizinorg/rz-ghidra">rz-ghidra</a>), and many others.</p>
@@ -2245,7 +2245,6 @@ example <code>5j</code> will move down for 5 lines, or <code>2l</code> will move
  hjkl     move around (or HJKL) (left-down-up-right)
  i        insert hex or string (in hexdump) use tab to toggle
  mK/'K    mark/go to Key (any key)
- M        walk the mounted filesystems
  n/N      seek next/prev function/flag/hit (scr.nkey)
  g        go/seek to given offset
  O        toggle asm.pseudo and asm.esil
@@ -2255,7 +2254,6 @@ example <code>5j</code> will move down for 5 lines, or <code>2l</code> will move
  R        randomize color palette (ecr)
  sS       step / step over
  t        browse types
- T        enter textlog chat console (TT)
  uU       undo/redo seek
  v        visual function/vars code analysis menu
  V        (V)iew graph using cmd.graph (agv?)
@@ -2532,7 +2530,6 @@ analysis.depth)
 | /h[t] [hash] [len]      find block matching this hash. See ph
 | /i foo                  search for string 'foo' ignoring case
 | /m magicfile            search for matching magic file (use blocksize)
-| /M                      search for known filesystems and mount them automatically
 | /o [n]                  show offset of n instructions backward
 | /O [n]                  same as /o, but with a different fallback if anal cannot be used
 | /p patternsize          search for pattern of given size
@@ -4868,43 +4865,6 @@ family: cpu
 commands</p>
 <pre><code>[0x00404800]&gt; px 10 @ `ao~ptr[1]` &gt; example.txt
 [0x00404800]&gt; px 10 @ `ao~ptr[1]` &gt;&gt; example.txt
-</code></pre>
-<p>Rizin also provides quite a few Unix type file processing commands like head, tail, cat, grep and many more. One such command is <a href="https://en.wikipedia.org/wiki/Uniq">Uniq</a>, which can be used to filter a file to display only non-duplicate content. So to make a new file with only unique strings, you can do:</p>
-<pre><code>[0x00404800]&gt; uniq file &gt; uniq_file
-</code></pre>
-<p>The <a href="https://en.wikipedia.org/wiki/Head_%28Unix%29">head</a> command can be used to see the first N number of lines in the file, similarly <a href="https://en.wikipedia.org/wiki/Tail_(Unix)">tail</a> command allows the last N number of lines to be seen.</p>
-<pre><code>[0x00404800]&gt; head 3 foodtypes.txt
-1 Protein
-2 Carbohydrate
-3 Fat
-[0x00404800]&gt; tail 2 foodtypes.txt
-3 Shake
-4 Milk
-</code></pre>
-<p>The <a href="https://en.wikipedia.org/wiki/Join_%28Unix%29">join</a> command could be used to merge two different files with comman first field. </p>
-<pre><code>[0x00404800]&gt; cat foodtypes.txt
-1 Protein
-2 Carbohydrate
-3 Fat
-[0x00404800]&gt; cat foods.txt
-1 Cheese 
-2 Potato
-3 Butter
-[0x00404800]&gt; join foodtypes foods.txt
-1 Protein Cheese
-2 Carbohydrate Potato
-3 Fat Butter
-</code></pre>
-<p>Similarly, sorting the content is also possible with the <a href="https://en.wikipedia.org/wiki/Sort_%28Unix%29">sort</a> command. A typical 
-example could be:</p>
-<pre><code>[0x00404800]&gt; sort file
-eleven
-five
-five
-great
-one
-one
-rizin
 </code></pre>
 <p>The <code>?$?</code> command describes several helpful variables you can use to do similar actions even more
 easily, like the <code>$v</code> &quot;immediate value&quot; variable, or the <code>$m</code> opcode memory reference variable.</p>

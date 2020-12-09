@@ -205,43 +205,6 @@ commands</p>
 <pre><code>[0x00404800]&gt; px 10 @ `ao~ptr[1]` &gt; example.txt
 [0x00404800]&gt; px 10 @ `ao~ptr[1]` &gt;&gt; example.txt
 </code></pre>
-<p>Rizin also provides quite a few Unix type file processing commands like head, tail, cat, grep and many more. One such command is <a href="https://en.wikipedia.org/wiki/Uniq">Uniq</a>, which can be used to filter a file to display only non-duplicate content. So to make a new file with only unique strings, you can do:</p>
-<pre><code>[0x00404800]&gt; uniq file &gt; uniq_file
-</code></pre>
-<p>The <a href="https://en.wikipedia.org/wiki/Head_%28Unix%29">head</a> command can be used to see the first N number of lines in the file, similarly <a href="https://en.wikipedia.org/wiki/Tail_(Unix)">tail</a> command allows the last N number of lines to be seen.</p>
-<pre><code>[0x00404800]&gt; head 3 foodtypes.txt
-1 Protein
-2 Carbohydrate
-3 Fat
-[0x00404800]&gt; tail 2 foodtypes.txt
-3 Shake
-4 Milk
-</code></pre>
-<p>The <a href="https://en.wikipedia.org/wiki/Join_%28Unix%29">join</a> command could be used to merge two different files with comman first field. </p>
-<pre><code>[0x00404800]&gt; cat foodtypes.txt
-1 Protein
-2 Carbohydrate
-3 Fat
-[0x00404800]&gt; cat foods.txt
-1 Cheese 
-2 Potato
-3 Butter
-[0x00404800]&gt; join foodtypes foods.txt
-1 Protein Cheese
-2 Carbohydrate Potato
-3 Fat Butter
-</code></pre>
-<p>Similarly, sorting the content is also possible with the <a href="https://en.wikipedia.org/wiki/Sort_%28Unix%29">sort</a> command. A typical 
-example could be:</p>
-<pre><code>[0x00404800]&gt; sort file
-eleven
-five
-five
-great
-one
-one
-rizin
-</code></pre>
 <p>The <code>?$?</code> command describes several helpful variables you can use to do similar actions even more
 easily, like the <code>$v</code> &quot;immediate value&quot; variable, or the <code>$m</code> opcode memory reference variable.</p>
 
