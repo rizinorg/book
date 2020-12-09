@@ -21,7 +21,7 @@ It is possible to configure the color of almost any element of disassembly outpu
 
 Type `ec` to get a list of all currently used colors. Type `ecs` to show a color palette to pick colors from:
 
-![img](r2pal.png)
+![img](rzpal.png)
 
 ## Themes
 
