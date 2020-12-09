@@ -60,7 +60,6 @@ Visual mode help:
  hjkl     move around (or HJKL) (left-down-up-right)
  i        insert hex or string (in hexdump) use tab to toggle
  mK/'K    mark/go to Key (any key)
- M        walk the mounted filesystems
  n/N      seek next/prev function/flag/hit (scr.nkey)
  g        go/seek to given offset
  O        toggle asm.pseudo and asm.esil
@@ -70,7 +69,6 @@ Visual mode help:
  R        randomize color palette (ecr)
  sS       step / step over
  t        browse types
- T        enter textlog chat console (TT)
  uU       undo/redo seek
  v        visual function/vars code analysis menu
  V        (V)iew graph using cmd.graph (agv?)
