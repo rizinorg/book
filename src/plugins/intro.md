@@ -9,7 +9,7 @@ This section aims to explain what are the plugins, how to write them and use the
 ## Types of plugins
 ```
 $ ls libr/*/p | grep : | awk -F / '{ print $2 }'
-anal      # analysis plugins
+analysis  # analysis plugins
 asm       # assembler/disassembler plugins
 bin       # binary format parsing plugins
 bp        # breakpoint plugins

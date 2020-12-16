@@ -2,11 +2,11 @@
 
 rizin splits the logic of a CPU into several modules. You should write more than one plugin to get full support for a specific arch. Let's see which are those:
 
-* r_asm : assembler and disassembler
-* r_anal : code analysis (opcode,type,esil,..)
-* r_reg : registers
-* r_syscall : system calls
-* r_debug : debugger
+* rz_asm : assembler and disassembler
+* rz_analysis : code analysis (opcode,type,esil,..)
+* rz_reg : registers
+* rz_syscall : system calls
+* rz_debug : debugger
 
 The most basic feature you usually want to support from a specific architecture is the disassembler. You first need to read into a human readable form the bytes in there.
 
@@ -16,7 +16,7 @@ To configure which plugins you want to compile use the `./configure-plugins` scr
 
 You may find some examples of external plugins in [rizin-extras](https://github.com/rizinorg/rizin-extras) repository.
 
-## Writing the r_asm plugin
+## Writing the rz_asm plugin
 
 The official way to make third-party plugins is to distribute them into a separate repository. This is a sample disasm plugin:
 
@@ -24,9 +24,9 @@ The official way to make third-party plugins is to distribute them into a separa
 $ cd my-cpu
 $ cat Makefile
 NAME=mycpu
-R2_PLUGIN_PATH=$(shell rizin -hh|grep R2_LIBR_PLUGINS|awk '{print $$2}')
-CFLAGS=-g -fPIC $(shell pkg-config --cflags r_asm)
-LDFLAGS=-shared $(shell pkg-config --libs r_asm)
+RZ_PLUGIN_PATH=$(shell rizin -hh|grep RZ_LIBR_PLUGINS|awk '{print $$2}')
+CFLAGS=-g -fPIC $(shell pkg-config --cflags rz_asm)
+LDFLAGS=-shared $(shell pkg-config --libs rz_asm)
 OBJS=$(NAME).o
 SO_EXT=$(shell uname|grep -q Darwin && echo dylib || echo so)
 LIB=$(NAME).$(SO_EXT)
@@ -40,18 +40,18 @@ $(LIB): $(OBJS)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) -o $(LIB)
 
 install:
-	cp -f $(NAME).$(SO_EXT) $(R2_PLUGIN_PATH)
+	cp -f $(NAME).$(SO_EXT) $(RZ_PLUGIN_PATH)
 
 uninstall:
-	rm -f $(R2_PLUGIN_PATH)/$(NAME).$(SO_EXT)
+	rm -f $(RZ_PLUGIN_PATH)/$(NAME).$(SO_EXT)
 ```
 
 ```c
 $ cat mycpu.c
-/* example r_asm plugin by pancake at 2014 */
+/* example rz_asm plugin by pancake at 2014 */
 
-#include <r_asm.h>
-#include <r_lib.h>
+#include <rz_asm.h>
+#include <rz_lib.h>
 
 #define OPS 17
 
@@ -110,7 +110,7 @@ static int disassemble (RzAsm *a, RzAsmOp *op, const ut8 *b, int l) {
 }
 
 /* Structure of exported functions and data */
-RzAsmPlugin r_asm_plugin_mycpu = {
+RzAsmPlugin rz_asm_plugin_mycpu = {
         .name = "mycpu",
         .arch = "mycpu",
         .license = "LGPL3",
@@ -120,9 +120,9 @@ RzAsmPlugin r_asm_plugin_mycpu = {
 };
 
 #ifndef CORELIB
-struct r_lib_struct_t rizin_plugin = {
-        .type = R_LIB_TYPE_ASM,
-        .data = &r_asm_plugin_mycpu
+struct rz_lib_struct_t rizin_plugin = {
+        .type = RZ_LIB_TYPE_ASM,
+        .data = &rz_asm_plugin_mycpu
 };
 #endif
 ```

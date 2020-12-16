@@ -4,10 +4,8 @@ SDB stands for String DataBase. It's a simple key-value database that only opera
 
 SDB is a simple string key/value database based on djb’s cdb disk storage and supports JSON and arrays introspection.
 
-There’s also the sdbtypes: a vala library that implements several data structures on top of an sdb or a memcache instance.
-
 SDB supports:
-    
+
 - namespaces (multiple sdb paths)
 - atomic database sync (never corrupted)
 - bindings for vala, luvit, newlisp and nodejs
@@ -85,7 +83,7 @@ $ gcc test.c -o test
 $ rizin -A ./test
 [0x08048320]> k **
 bin
-anal
+analysis
 syscall
 debug
 ```
@@ -96,10 +94,10 @@ fd.6
 [0x08048320]> k bin/fd.6/*
 archs=0:0:x86:32
 ```
-The file corresponding to the sixth file descriptor is a x86_32 binary. 
+The file corresponding to the sixth file descriptor is a x86_32 binary.
 
 ```
-[0x08048320]> k anal/meta/*
+[0x08048320]> k analysis/meta/*
 meta.s.0x80484d0=12,SGVsbG8gd29ybGQ=
 [...]
 [0x08048320]> ?b64- SGVsbG8gd29ybGQ=
@@ -118,12 +116,12 @@ k **
 ```
 List sub-namespaces
 ```
-k anal/**
+k analysis/**
 ```
 List keys
 ```
 k *
-k anal/*
+k analysis/*
 ```
 Set a key
 ```
@@ -140,9 +138,9 @@ k syscall/*~^0x
 ```
 List all comments
 ```
-k anal/meta/*~.C.
+k analysis/meta/*~.C.
 ```
 Show a comment at given offset:
 ```
-k %anal/meta/[1]meta.C.0x100005000
+k %analysis/meta/[1]meta.C.0x100005000
 ```

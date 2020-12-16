@@ -31,7 +31,7 @@ analysis.depth)
 | /i foo                  search for string 'foo' ignoring case
 | /m magicfile            search for matching magic file (use blocksize)
 | /o [n]                  show offset of n instructions backward
-| /O [n]                  same as /o, but with a different fallback if anal cannot be used
+| /O [n]                  same as /o, but with a different fallback if analysis cannot be used
 | /p patternsize          search for pattern of given size
 | /P patternsize          search similar blocks
 | /r[erwx][?] sym.printf  analyze opcode reference an offset (/re for esil)

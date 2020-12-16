@@ -169,7 +169,7 @@ Let's see an example of this with a simple [hello_world](https://github.com/rizi
 | 0x000007cf  call sym.imp.strlen         ; size_t strlen(const char *s)
 ```
 
-It also extracts type information from format strings like `printf ("fmt : %s , %u , %d", ...)`, the format specifications are extracted from `anal/d/spec.sdb`
+It also extracts type information from format strings like `printf ("fmt : %s , %u , %d", ...)`, the format specifications are extracted from `analysis/d/spec.sdb`
 
 You could create a new profile for specifying a set of format chars depending on different libraries/operating systems/programming languages like this :
 

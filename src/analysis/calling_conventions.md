@@ -35,7 +35,7 @@ int printf(const char *format)
 char *fgets(char *s, int size, FILE *stream)
 ```
 
-All this information is loaded via sdb under `/libr/anal/d/cc-[arch]-[bits].sdb`
+All this information is loaded via sdb under `/librz/analysis/d/cc-[arch]-[bits].sdb`
 
 ```
 default.cc=amd64
