@@ -296,7 +296,7 @@ local_32h
 | 0x000007cc  mov rdi, rax                ; const char *s
 | 0x000007cf  call sym.imp.strlen         ; size_t strlen(const char *s)
 </code></pre>
-<p>It also extracts type information from format strings like <code>printf (&quot;fmt : %s , %u , %d&quot;, ...)</code>, the format specifications are extracted from <code>anal/d/spec.sdb</code></p>
+<p>It also extracts type information from format strings like <code>printf (&quot;fmt : %s , %u , %d&quot;, ...)</code>, the format specifications are extracted from <code>analysis/d/spec.sdb</code></p>
 <p>You could create a new profile for specifying a set of format chars depending on different libraries/operating systems/programming languages like this :</p>
 <pre><code>win=spec
 spec.win.u32=unsigned int

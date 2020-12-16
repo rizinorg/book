@@ -150,7 +150,6 @@
                         <h1><a class="header" href="#sdb" id="sdb">SDB</a></h1>
 <p>SDB stands for String DataBase. It's a simple key-value database that only operates with strings created by pancake. It is used in many parts of rizin to have a disk and in-memory database which is small and fast to manage using it as a hashtable on steroids.</p>
 <p>SDB is a simple string key/value database based on djb’s cdb disk storage and supports JSON and arrays introspection.</p>
-<p>There’s also the sdbtypes: a vala library that implements several data structures on top of an sdb or a memcache instance.</p>
 <p>SDB supports:</p>
 <ul>
 <li>namespaces (multiple sdb paths)</li>
@@ -215,7 +214,7 @@ $ gcc test.c -o test
 <pre><code>$ rizin -A ./test
 [0x08048320]&gt; k **
 bin
-anal
+analysis
 syscall
 debug
 </code></pre>
@@ -224,8 +223,8 @@ fd.6
 [0x08048320]&gt; k bin/fd.6/*
 archs=0:0:x86:32
 </code></pre>
-<p>The file corresponding to the sixth file descriptor is a x86_32 binary. </p>
-<pre><code>[0x08048320]&gt; k anal/meta/*
+<p>The file corresponding to the sixth file descriptor is a x86_32 binary.</p>
+<pre><code>[0x08048320]&gt; k analysis/meta/*
 meta.s.0x80484d0=12,SGVsbG8gd29ybGQ=
 [...]
 [0x08048320]&gt; ?b64- SGVsbG8gd29ybGQ=
@@ -238,11 +237,11 @@ Hello world
 <pre><code>k **
 </code></pre>
 <p>List sub-namespaces</p>
-<pre><code>k anal/**
+<pre><code>k analysis/**
 </code></pre>
 <p>List keys</p>
 <pre><code>k *
-k anal/*
+k analysis/*
 </code></pre>
 <p>Set a key</p>
 <pre><code>k foo=bar
@@ -254,10 +253,10 @@ k anal/*
 <pre><code>k syscall/*~^0x
 </code></pre>
 <p>List all comments</p>
-<pre><code>k anal/meta/*~.C.
+<pre><code>k analysis/meta/*~.C.
 </code></pre>
 <p>Show a comment at given offset:</p>
-<pre><code>k %anal/meta/[1]meta.C.0x100005000
+<pre><code>k %analysis/meta/[1]meta.C.0x100005000
 </code></pre>
 
                     </main>
