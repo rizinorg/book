@@ -6,9 +6,12 @@ snippets of code to be used for injection in target processes when doing exploit
 rz-gg compiles programs written in a simple high-level language into tiny binaries
 for x86, x86-64, and ARM.
 
+You can also access all the rz-gg commands from the rizin shell. They are present
+under `g`. See `g?` for more information about how to use them.
+
 By default it will compile it's own `rz-gg` language, but you can also compile C
 code using GCC or Clang shellcodes depending on the file extension. Lets create
-C file called `a.c`:
+C file called `helloworld.c`:
 ```c
 int main() {
 	write(1, "Hello World\n", 13);
@@ -16,7 +19,7 @@ int main() {
 }
 ```
 ```
-$ rz-gg -a x86 -b32 a.c
+$ rz-gg -a x86 -b32 helloworld.c
 e900000000488d3516000000bf01000000b80400000248c7c20d0000000f0531c0c348656c6c6f20576f726c640a00
 
 $ rz-asm -a x86 -b 32 -D e900000000488d3516000000bf01000000b80400000248c7c20d0000000f0531c0c348656c6c6f20576f726c640a00
@@ -73,7 +76,56 @@ $ rz-asm -a x86 -b 64 -D 48c7c00200000050488b3c2448c7c0010000000f054883c408c3
 0x00000019   1                       c3  ret
 ```
 
+You can also compile for ARM. For that, specify the architecture as `arm`:
+
+```
+$ rz-gg -a arm -b 32 hello.r
+00482de90200a0e30c008de508109de50170a0e3000000ef0088bde8
+
+$ rz-asm -a arm -b 32 -D 00482de90200a0e30c008de508109de50170a0e3000000ef0088bde8
+0x00000000   4                 00482de9  push {fp, lr}
+0x00000004   4                 0200a0e3  mov r0, 2
+0x00000008   4                 0c008de5  str r0, [sp, 0xc]
+0x0000000c   4                 08109de5  ldr r1, [sp, 8]
+0x00000010   4                 0170a0e3  mov r7, 1
+0x00000014   4                 000000ef  svc 0
+0x00000018   4                 0088bde8  pop {fp, pc}
+```
+
 ## Tiny binaries
 
-You can create them using the `-F` flag in rz-gg, or the `-C` in rz-bin.
+You can create tiny binaries for your code using the `-F` flag in rz-gg,
+or the `-C` in rz-bin.
 
+```c
+$ cat helloworld.r
+int main() {
+	write(1, "Hello World\n", 13);
+	return 0;
+}
+
+$ rz-gg -O -F helloworld.c
+
+$ ./helloworld
+Hello World
+
+$ wc -c < helloworld
+259
+```
+We can see that the size of the binary is just 259 bytes.
+
+## Output format
+
+You can change the output format using the `-f` flag. Here's an example of
+changing it to python:
+
+```
+$ rz-gg -O -F -f python helloworld.r
+
+$ xxd helloworld | head -n 3
+00000000: 696d 706f 7274 2073 7472 7563 740a 6275  import struct.bu
+00000010: 6620 3d20 7374 7275 6374 2e70 6163 6b20  f = struct.pack
+00000020: 2822 3133 3942 222c 202a 5b0a 3078 3535  ("139B", *[.0x55
+```
+
+You can set the output format to C, PE, ELF, Mach-O, raw, python or javascript.
