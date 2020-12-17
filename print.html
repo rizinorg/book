@@ -1250,7 +1250,7 @@ f redo_0 @ 0x4005b4
 | oj[?]                     list opened files in JSON format
 | oL                        list all IO plugins registered
 | om[?]                     create, list, remove IO maps
-| on [file] 0x4000          map raw file at 0x4000 (no r_bin involved)
+| on [file] 0x4000          map raw file at 0x4000 (no rz_bin involved)
 | oo[?]                     reopen current file (kill+fork in debugger)
 | oo+                       reopen current file in read-write
 | ood[r] [args]             reopen in debugger mode (with args)
@@ -3180,7 +3180,7 @@ esil.on('syscall', function(){esil.regset('rip'
 </code></pre>
 <p>For the API, see the functions <code>hook_flag_read()</code>, <code>hook_execute()</code> and <code>hook_mem_read()</code>. A callback should return true or 1 if you want to override the action that it takes. For example, to deny memory reads in a region, or voiding memory writes, effectively making it read-only.
 Return false or 0 if you want to trace ESIL expression parsing.</p>
-<p>Other operations require bindings to external functionalities to work. In this case, <code>r_ref</code> and <code>r_io</code>. This must be defined when initializing the ESIL VM.</p>
+<p>Other operations require bindings to external functionalities to work. In this case, <code>rz_ref</code> and <code>rz_io</code>. This must be defined when initializing the ESIL VM.</p>
 <ul>
 <li>Io Get/Set
 <pre><code>Out ax, 44
@@ -5752,7 +5752,7 @@ remote commands:
 | =                             list all open connections
 | =&lt;[fd] cmd                    send output of local command to remote fd
 | =[fd] cmd                     exec cmd at remote 'fd' (last open is default one)
-| =! cmd                        run command via r_io_system
+| =! cmd                        run command via rz_io_system
 | =+ [proto://]host:port        connect to remote host:port (*rap://, raps://, tcp://, udp://, http://)
 | =-[fd]                        remove all hosts or host 'fd'
 | ==[fd]                        open remote session with host 'fd', 'q' to quit
@@ -6811,8 +6811,8 @@ adA_  8          z80         GPL     Zilog Z80
 </blockquote>
 <h2><a class="header" href="#assembler" id="assembler">Assembler</a></h2>
 <p>Assembling is the action to take a computer instruction in human readable form (using mnemonics) and convert that into a bunch of bytes that can be executed by a machine.</p>
-<p>In rizin, the assembler and disassembler logic is implemented in the r_asm_* API, and can be used with the pa and pad commands from the commandline as well as using <code>rz-asm</code>.</p>
-<p>Rasm2 can be used to quickly copy-paste hexpairs that represent a given machine instruction. The following line is assembling this mov instruction for x86/32.</p>
+<p>In rizin, the assembler and disassembler logic is implemented in the rz_asm_* API, and can be used with the pa and pad commands from the commandline as well as using <code>rz-asm</code>.</p>
+<p>Rz-asm can be used to quickly copy-paste hexpairs that represent a given machine instruction. The following line is assembling this mov instruction for x86/32.</p>
 <pre><code>$ rz-asm -a x86 -b 32 'mov eax, 33'
 b821000000
 </code></pre>
@@ -6824,9 +6824,9 @@ b821000000
 <p>The <code>pa</code> and <code>pad</code> are a subcommands of print, what means they will only print assembly or disassembly. In case you want to actually write the instruction it is required to use <code>wa</code> or <code>wx</code> commands with the assembly string or bytes appended.</p>
 <p>The assembler understands the following input languages and their flavors: <code>x86</code> (Intel and AT&amp;T variants), <code>olly</code> (OllyDBG syntax), <code>powerpc</code> (PowerPC), <code>arm</code> and <code>java</code>. For Intel syntax, rz-asm tries to mimic NASM or GAS.</p>
 <p>There are several examples in the rz-asm source code directory. Consult them to understand how you can assemble a raw binary file from a rz-asm description.</p>
-<p>Lets create an assembly file called <code>selfstop.rasm</code>:</p>
+<p>Lets create an assembly file called <code>selfstop.rzasm</code>:</p>
 <pre><code class="language-asm">;
-; Self-Stop shellcode written in rasm for x86
+; Self-Stop shellcode written in rz-asm for x86
 ;
 ; --pancake
 ;
@@ -6855,7 +6855,7 @@ selfstop:
 </code></pre>
 <p>Now we can assemble it in place:</p>
 <pre><code>[0x00000000]&gt; e asm.bits = 32
-[0x00000000]&gt; wx `!rz-asm -f a.rasm`
+[0x00000000]&gt; wx `!rz-asm -f a.rzasm`
 [0x00000000]&gt; pd 20
 	   0x00000000    6800800408   push 0x8048000 ;  0x08048000
 	   0x00000005    60           pushad
@@ -7382,8 +7382,8 @@ and length:</p>
 <pre><code class="language-makefile">NAME=asm_snes
 RZ_PLUGIN_PATH=$(shell rizin -H RZ_USER_PLUGINS)
 LIBEXT=$(shell rizin -H LIBEXT)
-CFLAGS=-g -fPIC $(shell pkg-config --cflags r_anal)
-LDFLAGS=-shared $(shell pkg-config --libs r_anal)
+CFLAGS=-g -fPIC $(shell pkg-config --cflags rz_analyss)
+LDFLAGS=-shared $(shell pkg-config --libs rz_analysis)
 OBJS=$(NAME).o
 LIB=$(NAME).$(LIBEXT)
 
