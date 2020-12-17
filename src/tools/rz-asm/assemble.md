@@ -2,9 +2,9 @@
 
 Assembling is the action to take a computer instruction in human readable form (using mnemonics) and convert that into a bunch of bytes that can be executed by a machine.
 
-In rizin, the assembler and disassembler logic is implemented in the r_asm_* API, and can be used with the pa and pad commands from the commandline as well as using `rz-asm`.
+In rizin, the assembler and disassembler logic is implemented in the rz_asm_* API, and can be used with the pa and pad commands from the commandline as well as using `rz-asm`.
 
-Rasm2 can be used to quickly copy-paste hexpairs that represent a given machine instruction. The following line is assembling this mov instruction for x86/32.
+Rz-asm can be used to quickly copy-paste hexpairs that represent a given machine instruction. The following line is assembling this mov instruction for x86/32.
 
 ```
 $ rz-asm -a x86 -b 32 'mov eax, 33'
@@ -26,11 +26,11 @@ The assembler understands the following input languages and their flavors: `x86`
 
 There are several examples in the rz-asm source code directory. Consult them to understand how you can assemble a raw binary file from a rz-asm description.
 
-Lets create an assembly file called `selfstop.rasm`:
+Lets create an assembly file called `selfstop.rzasm`:
 
 ```asm
 ;
-; Self-Stop shellcode written in rasm for x86
+; Self-Stop shellcode written in rz-asm for x86
 ;
 ; --pancake
 ;
@@ -62,7 +62,7 @@ Now we can assemble it in place:
 
 ```
 [0x00000000]> e asm.bits = 32
-[0x00000000]> wx `!rz-asm -f a.rasm`
+[0x00000000]> wx `!rz-asm -f a.rzasm`
 [0x00000000]> pd 20
 	   0x00000000    6800800408   push 0x8048000 ;  0x08048000
 	   0x00000005    60           pushad

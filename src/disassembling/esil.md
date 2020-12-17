@@ -383,7 +383,7 @@ esil.on('syscall', function(){esil.regset('rip'
 For the API, see the functions `hook_flag_read()`, `hook_execute()` and `hook_mem_read()`. A callback should return true or 1 if you want to override the action that it takes. For example, to deny memory reads in a region, or voiding memory writes, effectively making it read-only.
 Return false or 0 if you want to trace ESIL expression parsing.
 
-Other operations require bindings to external functionalities to work. In this case, `r_ref` and `r_io`. This must be defined when initializing the ESIL VM.
+Other operations require bindings to external functionalities to work. In this case, `rz_ref` and `rz_io`. This must be defined when initializing the ESIL VM.
 
 * Io Get/Set
   ```

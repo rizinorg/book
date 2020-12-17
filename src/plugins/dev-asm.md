@@ -30,8 +30,8 @@ static int disassemble(RzAsm *a, RzAsmOp *op, const ut8 *buf, int len)
 NAME=asm_snes
 RZ_PLUGIN_PATH=$(shell rizin -H RZ_USER_PLUGINS)
 LIBEXT=$(shell rizin -H LIBEXT)
-CFLAGS=-g -fPIC $(shell pkg-config --cflags r_anal)
-LDFLAGS=-shared $(shell pkg-config --libs r_anal)
+CFLAGS=-g -fPIC $(shell pkg-config --cflags rz_analyss)
+LDFLAGS=-shared $(shell pkg-config --libs rz_analysis)
 OBJS=$(NAME).o
 LIB=$(NAME).$(LIBEXT)
 
