@@ -5,8 +5,8 @@ based on the [radare2 book](https://github.com/radareorg/radare2book)
 
 Check the Github site to add new contents or fix typos:
 
-* Github: https://github.com/rizinorg/book
-* Online: https://book.rizin.re/
+* Github: [https://github.com/rizinorg/book](https://github.com/rizinorg/book)
+* Online: [https://book.rizin.re/](https://book.rizin.re)
 
 ## Offline
 
