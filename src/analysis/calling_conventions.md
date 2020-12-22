@@ -1,14 +1,13 @@
 # Calling Conventions
 
-Rizin uses calling conventions to help in identifying function formal arguments and return types. 
+Rizin uses calling conventions to help in identifying function formal arguments and return types.
 It is used also as a guide for basic function prototype and type propagation.
 
 ```
 [0x00000000]> afc?
-|Usage: afc[agl?]
+Usage: afc[agl?]
 | afc convention  Manually set calling convention for current function
 | afc             Show Calling convention for the Current function
-| afc=([cctype])  Select or show default calling convention
 | afcr[j]         Show register usage for the current function
 | afca            Analyse function for finding the current calling convention
 | afcf[j] [name]  Prints return type function(arg1, arg2...), see afij
@@ -19,14 +18,21 @@ It is used also as a guide for basic function prototype and type propagation.
 [0x00000000]>
 ```
 
-* To list all available calling conventions for current architecture using `afcl` command
+To list all available calling conventions for current architecture using `afcl` command
 
 ```
 [0x00000000]> afcl
+swift
 amd64
+amd64syscall
 ms
+reg
 ```
-* To display function prototype of standard library functions you have `afcf` command 
+
+The default calling convention for particular architecture/binary is defined with
+`analysis.cc` for user-mode calls and `analysis.syscc` for syscalls.
+
+To display function prototype of standard library functions you have `afcf` command
 
 ```
 [0x00000000]> afcf printf
