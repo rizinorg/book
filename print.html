@@ -4186,13 +4186,12 @@ There is one extra optional key</p>
 </code></pre>
 <p>This key is used to mark functions that will not return once called, such as <code>exit</code> and <code>_exit</code>.</p>
 <h1><a class="header" href="#calling-conventions" id="calling-conventions">Calling Conventions</a></h1>
-<p>Rizin uses calling conventions to help in identifying function formal arguments and return types. 
+<p>Rizin uses calling conventions to help in identifying function formal arguments and return types.
 It is used also as a guide for basic function prototype and type propagation.</p>
 <pre><code>[0x00000000]&gt; afc?
-|Usage: afc[agl?]
+Usage: afc[agl?]
 | afc convention  Manually set calling convention for current function
 | afc             Show Calling convention for the Current function
-| afc=([cctype])  Select or show default calling convention
 | afcr[j]         Show register usage for the current function
 | afca            Analyse function for finding the current calling convention
 | afcf[j] [name]  Prints return type function(arg1, arg2...), see afij
@@ -4202,16 +4201,17 @@ It is used also as a guide for basic function prototype and type propagation.</p
 | afcR            Register telescoping using the calling conventions order
 [0x00000000]&gt;
 </code></pre>
-<ul>
-<li>To list all available calling conventions for current architecture using <code>afcl</code> command</li>
-</ul>
+<p>To list all available calling conventions for current architecture using <code>afcl</code> command</p>
 <pre><code>[0x00000000]&gt; afcl
+swift
 amd64
+amd64syscall
 ms
+reg
 </code></pre>
-<ul>
-<li>To display function prototype of standard library functions you have <code>afcf</code> command </li>
-</ul>
+<p>The default calling convention for particular architecture/binary is defined with
+<code>analysis.cc</code> for user-mode calls and <code>analysis.syscc</code> for syscalls.</p>
+<p>To display function prototype of standard library functions you have <code>afcf</code> command</p>
 <pre><code>[0x00000000]&gt; afcf printf
 int printf(const char *format)
 [0x00000000]&gt; afcf fgets
