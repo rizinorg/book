@@ -238,6 +238,9 @@ ADDR BREAK
 <tr><td><strong>*</strong></td><td>src,dst</td><td>MUL</td><td>stack = dst * src</td><td>&gt; &quot;ae 3,4,*&quot;<br>0xc<br>&gt; &quot;ae 5,5,*&quot;<br>0x19</td></tr>
 <tr><td><strong>/</strong></td><td>src,dst</td><td>DIV</td><td>stack = dst / src</td><td>&gt; &quot;ae 2,4,/&quot;<br>0x2<br>&gt; &quot;ae 5,5,/&quot;<br>0x1<br>&gt; &quot;ae 5,9,/&quot;<br>0x1</td></tr>
 <tr><td><strong>%</strong></td><td>src,dst</td><td>MOD</td><td>stack = dst % src</td><td>&gt; &quot;ae 2,4,%&quot;<br>0x0<br>&gt; &quot;ae 5,5,%&quot;<br>0x0<br>&gt; &quot;ae 5,9,%&quot;<br>0x4</td></tr>
+<tr><td><strong>~</strong></td><td>bits,src</td><td>SIGNEXT</td><td>stack = src sign extended</td><td>&gt; &quot;ae 8,0x80,~&quot;<br>0xffffffffffffff80</td></tr>
+<tr><td><strong>~/</strong></td><td>src,dst</td><td>SIGNED DIV</td><td>stack = dst / src (signed)</td><td>&gt; &quot;ae 2,-4,~/&quot;<br>0xfffffffffffffffe</td></tr>
+<tr><td><strong>~%</strong></td><td>src,dst</td><td>SIGNED MOD</td><td>stack = dst % src (signed)</td><td>&gt; &quot;ae 2,-5,~%&quot;<br>0xffffffffffffffff</td></tr>
 <tr><td><strong>!</strong></td><td>src</td><td>NEG</td><td>stack = !!!src</td><td>&gt; &quot;ae 1,!&quot;<br>0x0<br>&gt; &quot;ae 4,!&quot;<br>0x0<br>&gt; &quot;ae 0,!&quot;<br>0x1<br></td></tr>
 <tr><td><strong>++</strong></td><td>src</td><td>INC</td><td>stack = src++</td><td>&gt; ar r_00=0;ar r_00<br>0x00000000<br>&gt; &quot;ae r_00,++&quot;<br>0x1<br>&gt; ar r_00<br>0x00000000<br>&gt; &quot;ae 1,++&quot;<br>0x2</td></tr>
 <tr><td><strong>--</strong></td><td>src</td><td>DEC</td><td>stack = src--</td><td>&gt; ar r_00=5;ar r_00<br>0x00000005<br>&gt; &quot;ae r_00,--&quot;<br>0x4<br>&gt; ar r_00<br>0x00000005<br>&gt; &quot;ae 5,--&quot;<br>0x4</td></tr>
