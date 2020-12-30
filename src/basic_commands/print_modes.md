@@ -8,7 +8,7 @@ Below is a list of available print modes listed by `p?`:
 
 ```
 [0x00005310]> p?
-|Usage: p[=68abcdDfiImrstuxz] [arg|len] [@addr]  
+|Usage: p[=68abcdDfiImrstuxz] [arg|len] [@addr]
 | p[b|B|xb] [len] ([S])   bindump N bits skipping S bytes
 | p[iI][df] [len]         print N ops/bytes (f=func) (see pi? and pdi)
 | p[kK] [len]             print key in randomart (K is for mosaic)
@@ -213,7 +213,7 @@ Use triple-question-mark `pf???` to get some examples using print format strings
 | pf n2                                        print signed short (2 bytes) value. Use N instead of n for printing unsigned values
 | pf [2]? (plop)structname @ 0                 Prints an array of structs
 | pf eqew bigWord beef                         Swap endianness and print with given labels
-| pf.foo rr (eax)reg1 (eip)reg2                Create object referencing to register values 
+| pf.foo rr (eax)reg1 (eip)reg2                Create object referencing to register values
 | pf tt troll plop                             print time stamps with labels troll and plop
 ```
 Some examples are below:
@@ -335,20 +335,29 @@ This can be used to look at the arguments passed to a function. To achieve this,
 A practical example for using `pf` on a binary of a GStreamer plugin:
 
 ```
-$ rizin ~/.gstreamer-0.10/plugins/libgstflumms.so
-[0x000028A0]> seek sym.gst_plugin_desc
-[0x000185E0]> pf iissxsssss major minor name desc _init version \
- license source package origin
-    major : 0x000185e0 = 0
-    minor : 0x000185e4 = 10
-     name : 0x000185e8 = 0x000185e8 flumms
-     desc : 0x000185ec = 0x000185ec Fluendo MMS source
-    _init : 0x000185f0 = 0x00002940
-  version : 0x000185f4 = 0x000185f4 0.10.15.1
-  license : 0x000185f8 = 0x000185f8 unknown
-   source : 0x000185fc = 0x000185fc gst-fluendo-mms
-  package : 0x00018600 = 0x00018600 Fluendo MMS source
-   origin : 0x00018604 = 0x00018604 http://www.fluendo.com
+$ rizin /usr/lib/gstreamer-1.0/libgsttcp.so
+ -- Move the comments to the right changing their margin with asm.cmt.margin
+[0x00005020]> aa; pdf @ sym.gst_plugin_tcp_get_desc
+[x] Analyze all flags starting with sym. and entry0 (aa)
+┌ 8: sym.gst_plugin_tcp_get_desc ();
+│ bp: 0 (vars 0, args 0)
+│ sp: 0 (vars 0, args 0)
+│ rg: 0 (vars 0, args 0)
+│           0x000127f0      lea rax, section..data.rel.ro              ; 0x1d460
+└           0x000127f7      ret
+[0x00005020]> s section..data.rel.ro
+[0x0001d460]> pf ii*z*zp*z*z*z*z*z*z major minor name desc init version license source package origin release_datetime
+            major : 0x0001d460 = 1
+            minor : 0x0001d464 = 18
+             name : (*0x15c8e)0x0001d468 = "tcp"
+             desc : (*0x17c88)0x0001d470 = "transfer data over the network via TCP"
+             init : 0x0001d478 = (qword)0x0000000000011430
+          version : (*0x15d0b)0x0001d480 = "1.18.2"
+          license : (*0x15d3e)0x0001d488 = "LGPL"
+           source : (*0x15d2d)0x0001d490 = "gst-plugins-base"
+          package : (*0x17cb0)0x0001d498 = "GStreamer Base Plugins (Arch Linux)"
+           origin : (*0x15d12)0x0001d4a0 = "https://www.archlinux.org/"
+ release_datetime : (*0x15d43)0x0001d4a8 = "2020-12-06"
 ```
 
 ### Disassembly
