@@ -335,26 +335,29 @@ This can be used to look at the arguments passed to a function. To achieve this,
 A practical example for using `pf` on a binary of a GStreamer plugin:
 
 ```
-$ radare2 /usr/lib/gstreamer-1.0/libgstflv.so
-[0x00006020]> aa; pdf @ sym.gst_plugin_flv_get_desc
+$ rizin /usr/lib/gstreamer-1.0/libgsttcp.so
+ -- Move the comments to the right changing their margin with asm.cmt.margin
+[0x00005020]> aa; pdf @ sym.gst_plugin_tcp_get_desc
 [x] Analyze all flags starting with sym. and entry0 (aa)
-╭ 8: sym.gst_plugin_flv_get_desc ();
-│ [...]
-│           0x00013830      488d0549db0000  lea rax, section..data.rel.ro ; 0x21380
-╰           0x00013837      c3              ret
-[0x00006020]> s section..data.rel.ro
-[0x00021380]> pf ii*z*zp*z*z*z*z*z*z major minor name desc init version license source package origin release_datetime
-            major : 0x00021380 = 1
-            minor : 0x00021384 = 18
-             name : (*0x19cf2)0x00021388 = "flv"
-             desc : (*0x1b358)0x00021390 = "FLV muxing and demuxing plugin"
-             init : 0x00021398 = (qword)0x0000000000013460
-          version : (*0x19cae)0x000213a0 = "1.18.2"
-          license : (*0x19ce1)0x000213a8 = "LGPL"
-           source : (*0x19cd0)0x000213b0 = "gst-plugins-good"
-          package : (*0x1b378)0x000213b8 = "GStreamer Good Plugins (Arch Linux)"
-           origin : (*0x19cb5)0x000213c0 = "https://www.archlinux.org/"
- release_datetime : (*0x19cf6)0x000213c8 = "2020-12-06"
+┌ 8: sym.gst_plugin_tcp_get_desc ();
+│ bp: 0 (vars 0, args 0)
+│ sp: 0 (vars 0, args 0)
+│ rg: 0 (vars 0, args 0)
+│           0x000127f0      lea rax, section..data.rel.ro              ; 0x1d460
+└           0x000127f7      ret
+[0x00005020]> s section..data.rel.ro
+[0x0001d460]> pf ii*z*zp*z*z*z*z*z*z major minor name desc init version license source package origin release_datetime
+            major : 0x0001d460 = 1
+            minor : 0x0001d464 = 18
+             name : (*0x15c8e)0x0001d468 = "tcp"
+             desc : (*0x17c88)0x0001d470 = "transfer data over the network via TCP"
+             init : 0x0001d478 = (qword)0x0000000000011430
+          version : (*0x15d0b)0x0001d480 = "1.18.2"
+          license : (*0x15d3e)0x0001d488 = "LGPL"
+           source : (*0x15d2d)0x0001d490 = "gst-plugins-base"
+          package : (*0x17cb0)0x0001d498 = "GStreamer Base Plugins (Arch Linux)"
+           origin : (*0x15d12)0x0001d4a0 = "https://www.archlinux.org/"
+ release_datetime : (*0x15d43)0x0001d4a8 = "2020-12-06"
 ```
 
 ### Disassembly
