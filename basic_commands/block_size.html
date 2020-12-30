@@ -149,9 +149,8 @@
                     <main>
                         <h2><a class="header" href="#block-size" id="block-size">Block Size</a></h2>
 <p>The block size determines how many bytes rizin commands will process when not given an explicit size argument. You can temporarily change the block size by specifying a numeric argument to the print commands. For example <code>px 20</code>.</p>
-<pre><code>[0xB7F9D810]&gt; b?
-| Usage: b[f] [arg]
-| Get/Set block size
+<pre><code>[0x00000000]&gt; b?
+Usage: b[f] [arg]  # Get/Set block size
 | b 33     set block size to 33
 | b eip+4  numeric argument can be an expression
 | b        display current block size
@@ -163,18 +162,28 @@
 | bm 1M    set max block size
 </code></pre>
 <p>The <code>b</code> command is used to change the block size:</p>
-<pre><code>[0x00000000]&gt; b 0x100   ; block size = 0x100
-[0x00000000]&gt; b+16      ;  ... = 0x110
-[0x00000000]&gt; b-32      ;  ... = 0xf0
+<pre><code>[0x00000000]&gt; b 0x100   # block size = 0x100
+[0x00000000]&gt; b+16      #  ... = 0x110
+[0x00000000]&gt; b-32      #  ... = 0xf0
 </code></pre>
-<p>The <code>bf</code> command is used to change the block size to value specified by a flag. For example, in symbols, the block size of the flag represents the size of the function.</p>
-<pre><code>[0x00000000]&gt; bf sym.main    ; block size = sizeof(sym.main)
-[0x00000000]&gt; pd @ sym.main  ; disassemble sym.main
+<p>The <code>bf</code> command is used to change the block size to value specified by a flag. For example, in symbols, the block size of the flag represents the size of the function. To make that work, you have to either run function analysis <code>af</code> (which is included in <code>aa</code>) or manually seek and define some functions e.g. via <code>Vd</code>.</p>
+<pre><code>[0x00000000]&gt; bf sym.main    # block size = sizeof(sym.main)
+[0x00000000]&gt; pD @ sym.main  # disassemble sym.main
+</code></pre>
+<p>You can combine two operations in a single <code>pdf</code> command. Except that <code>pdf</code> neither uses nor affects global block size.</p>
+<pre><code>[0x00000000]&gt; pdf @ sym.main  # disassemble sym.main
+</code></pre>
+<p>Another way around is to use special variables <code>$FB</code> and <code>$FS</code> which denote Function's Beginning and Size at the current seek. Read more about <a href="../refcard/intro.html#usable-variables-in-expression">Usable variables</a>.</p>
+<pre><code>[0x00000000]&gt; s sym.main + 0x04
+[0x00001ec9]&gt; pD @ $FB !$FS  # disassemble current function
+╭ 211: int main (int argc, char **argv, char **envp);
+│           0x00001ec5      55                 push rbp
+│           0x00001ec6      4889e5             mov rbp, rsp
+│           0x00001ec9      4881ecc0000000     sub rsp, 0xc0
 ...
+╰           0x00001f97      c3                 ret
 </code></pre>
-<p>You can combine two operations in a single one (<code>pdf</code>):</p>
-<pre><code>[0x00000000]&gt; pdf @ sym.main
-</code></pre>
+<p>Note: don't put space after <code>!</code> size designator. See also <a href="../first_steps/command_format.html">Command Format</a>.</p>
 
                     </main>
 

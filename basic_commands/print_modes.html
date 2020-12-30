@@ -152,7 +152,7 @@
 <p>Binary data can be represented as integers, shorts, longs, floats, timestamps, hexpair strings, or more complex formats like C structures, disassembly listings, decompilation listing, be a result of an external processing...</p>
 <p>Below is a list of available print modes listed by <code>p?</code>:</p>
 <pre><code>[0x00005310]&gt; p?
-|Usage: p[=68abcdDfiImrstuxz] [arg|len] [@addr]  
+|Usage: p[=68abcdDfiImrstuxz] [arg|len] [@addr]
 | p[b|B|xb] [len] ([S])   bindump N bits skipping S bytes
 | p[iI][df] [len]         print N ops/bytes (f=func) (see pi? and pdi)
 | p[kK] [len]             print key in randomart (K is for mosaic)
@@ -323,7 +323,7 @@
 | pf n2                                        print signed short (2 bytes) value. Use N instead of n for printing unsigned values
 | pf [2]? (plop)structname @ 0                 Prints an array of structs
 | pf eqew bigWord beef                         Swap endianness and print with given labels
-| pf.foo rr (eax)reg1 (eip)reg2                Create object referencing to register values 
+| pf.foo rr (eax)reg1 (eip)reg2                Create object referencing to register values
 | pf tt troll plop                             print time stamps with labels troll and plop
 </code></pre>
 <p>Some examples are below:</p>
@@ -418,20 +418,29 @@ unsigned char buffer[_BUFFER_SIZE] = {
 }
 </code></pre>
 <p>A practical example for using <code>pf</code> on a binary of a GStreamer plugin:</p>
-<pre><code>$ rizin ~/.gstreamer-0.10/plugins/libgstflumms.so
-[0x000028A0]&gt; seek sym.gst_plugin_desc
-[0x000185E0]&gt; pf iissxsssss major minor name desc _init version \
- license source package origin
-    major : 0x000185e0 = 0
-    minor : 0x000185e4 = 10
-     name : 0x000185e8 = 0x000185e8 flumms
-     desc : 0x000185ec = 0x000185ec Fluendo MMS source
-    _init : 0x000185f0 = 0x00002940
-  version : 0x000185f4 = 0x000185f4 0.10.15.1
-  license : 0x000185f8 = 0x000185f8 unknown
-   source : 0x000185fc = 0x000185fc gst-fluendo-mms
-  package : 0x00018600 = 0x00018600 Fluendo MMS source
-   origin : 0x00018604 = 0x00018604 http://www.fluendo.com
+<pre><code>$ rizin /usr/lib/gstreamer-1.0/libgsttcp.so
+ -- Move the comments to the right changing their margin with asm.cmt.margin
+[0x00005020]&gt; aa; pdf @ sym.gst_plugin_tcp_get_desc
+[x] Analyze all flags starting with sym. and entry0 (aa)
+┌ 8: sym.gst_plugin_tcp_get_desc ();
+│ bp: 0 (vars 0, args 0)
+│ sp: 0 (vars 0, args 0)
+│ rg: 0 (vars 0, args 0)
+│           0x000127f0      lea rax, section..data.rel.ro              ; 0x1d460
+└           0x000127f7      ret
+[0x00005020]&gt; s section..data.rel.ro
+[0x0001d460]&gt; pf ii*z*zp*z*z*z*z*z*z major minor name desc init version license source package origin release_datetime
+            major : 0x0001d460 = 1
+            minor : 0x0001d464 = 18
+             name : (*0x15c8e)0x0001d468 = &quot;tcp&quot;
+             desc : (*0x17c88)0x0001d470 = &quot;transfer data over the network via TCP&quot;
+             init : 0x0001d478 = (qword)0x0000000000011430
+          version : (*0x15d0b)0x0001d480 = &quot;1.18.2&quot;
+          license : (*0x15d3e)0x0001d488 = &quot;LGPL&quot;
+           source : (*0x15d2d)0x0001d490 = &quot;gst-plugins-base&quot;
+          package : (*0x17cb0)0x0001d498 = &quot;GStreamer Base Plugins (Arch Linux)&quot;
+           origin : (*0x15d12)0x0001d4a0 = &quot;https://www.archlinux.org/&quot;
+ release_datetime : (*0x15d43)0x0001d4a8 = &quot;2020-12-06&quot;
 </code></pre>
 <h3><a class="header" href="#disassembly" id="disassembly">Disassembly</a></h3>
 <p>The <code>pd</code> command is used to disassemble code. It accepts a numeric value to specify how many instructions should be disassembled. The <code>pD</code> command is similar but instead of a number of instructions, it decompiles a given number of bytes.</p>
