@@ -1,6 +1,6 @@
 ## Downloading rizin
 
-You can get rizin from the website, [http://rizin.org](http://rizin.org),
+You can get rizin from the website, [http://rizin.re](http://rizin.re),
 or the GitHub repository: [https://github.com/rizinorg/rizin](https://github.com/rizinorg/rizin)
 
 Binary packages will soon be available for most common platforms (e.g. Windows, MacOS, Linux), however you can still compile rizin yourself for many other architectures/operating systems.
