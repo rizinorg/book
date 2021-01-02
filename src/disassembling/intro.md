@@ -44,7 +44,7 @@ You can also pass negative numbers as the numeric argument, if you want to disas
 
 The `pD` command works like `pd` but accepts the number of input bytes as its argument, instead of the number of opcodes.
 
-You can also dissassemble get information about the pointer chains using the command `pdp`. This can be helpful while dealing with ROP chains.
+You can also get information about the pointer chains using the command `pdp`. This can be helpful while dealing with ROP chains.
 
 The "pseudo" syntax may be somewhat easier for a human to understand than the default assembler notations. But it can become annoying if you read lots of code. To play with it:
 
