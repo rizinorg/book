@@ -30,8 +30,21 @@ To see the disassembly, use the `pd` command. It accepts a numeric argument to s
 [0x00000000]> pd 3     ; disassemble 3 opcodes
 [0x00000000]> pD 30    ; disassemble 30 bytes
 ```
+You can also pass negative numbers as the numeric argument, if you want to disassemble something that lies before the current offset:
+
+```
+[0x00005bc0]> pd -2
+            0x00005bb8      ret
+            0x00005bb9      nop dword [rax]
+[0x00005bc0]> pd 2
+            ;-- entry.fini0:
+            0x00005bc0      endbr64
+            0x00005bc4      cmp byte [0x000232c8], 0
+```
 
 The `pD` command works like `pd` but accepts the number of input bytes as its argument, instead of the number of opcodes.
+
+You can also get information about the pointer chains using the command `pdp`. This can be helpful while dealing with ROP chains.
 
 The "pseudo" syntax may be somewhat easier for a human to understand than the default assembler notations. But it can become annoying if you read lots of code. To play with it:
 
@@ -58,3 +71,4 @@ The "pseudo" syntax may be somewhat easier for a human to understand than the de
 		  0x00405e2d    4889d8       mov %rbx, %rax
 ```
 
+And as always, you can print the disassembly in JSON using `pdj` and get more information about the other associated commands by running `pd?`.
