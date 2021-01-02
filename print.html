@@ -294,8 +294,6 @@ $ rz-ax -s 617765736f6d65
 awesome
 </code></pre>
 <h2><a class="header" href="#downloading-rizin" id="downloading-rizin">Downloading rizin</a></h2>
-<p>You can get rizin from the website, <a href="http://rizin.org">http://rizin.org</a>,
-or the GitHub repository: <a href="https://github.com/rizinorg/rizin">https://github.com/rizinorg/rizin</a></p>
 <p>Binary packages will soon be available for most common platforms (e.g. Windows, MacOS, Linux), however you can still compile rizin yourself for many other architectures/operating systems.</p>
 <p>Please have a look at file <a href="https://github.com/rizinorg/rizin/blob/dev/BUILDING.md">BUILDING.md</a> in Rizin repository for more detailed instructions on how to build the tool.</p>
 <h2><a class="header" href="#compilation-and-portability" id="compilation-and-portability">Compilation and Portability</a></h2>
@@ -887,6 +885,8 @@ scr.nkey = fun, hit, flag
 <h3><a class="header" href="#asmarch" id="asmarch">asm.arch</a></h3>
 <p>Defines the target CPU architecture used for disassembling (<code>pd</code>, <code>pD</code> commands) and code analysis (<code>a</code> command). You can find the list of possible values by looking at the result of <code>e asm.arch=?</code> or <code>rz-asm -L</code>.
 It is quite simple to add new architectures for disassembling and analyzing code. There is an interface for that. For x86, it is used to attach a number of third-party disassembler engines, including GNU binutils, Udis86 and a few handmade ones.</p>
+<h3><a class="header" href="#asmcpu" id="asmcpu">asm.cpu</a></h3>
+<p>You can use this configuration variable to define the CPU type. For example, if you had picked the architecture as AVR, you can choose your CPU type (ATmega1281, ATmega2561, etc) using <code>asm.cpu</code>.</p>
 <h3><a class="header" href="#asmbits" id="asmbits">asm.bits</a></h3>
 <p>Determines width in bits of registers for the current architecture. Supported values: 8, 16, 32, 64. Note that not all target architectures support all combinations for asm.bits.</p>
 <h3><a class="header" href="#asmsyntax" id="asmsyntax">asm.syntax</a></h3>
@@ -2785,7 +2785,17 @@ f entropy_section_6 0x00002000 0x0144f374
 [0x00000000]&gt; pd 3     ; disassemble 3 opcodes
 [0x00000000]&gt; pD 30    ; disassemble 30 bytes
 </code></pre>
+<p>You can also pass negative numbers as the numeric argument, if you want to disassemble something that lies before the current offset:</p>
+<pre><code>[0x00005bc0]&gt; pd -2
+            0x00005bb8      ret
+            0x00005bb9      nop dword [rax]
+[0x00005bc0]&gt; pd 2
+            ;-- entry.fini0:
+            0x00005bc0      endbr64
+            0x00005bc4      cmp byte [0x000232c8], 0
+</code></pre>
 <p>The <code>pD</code> command works like <code>pd</code> but accepts the number of input bytes as its argument, instead of the number of opcodes.</p>
+<p>You can also get information about the pointer chains using the command <code>pdp</code>. This can be helpful while dealing with ROP chains.</p>
 <p>The &quot;pseudo&quot; syntax may be somewhat easier for a human to understand than the default assembler notations. But it can become annoying if you read lots of code. To play with it:</p>
 <pre><code>[0x00405e1c]&gt; e asm.pseudo = true
 [0x00405e1c]&gt; pd 3
@@ -2808,6 +2818,7 @@ f entropy_section_6 0x00002000 0x0144f374
 		  0x00405e24    64483314252. xor %fs:0x28, %rdx
 		  0x00405e2d    4889d8       mov %rbx, %rax
 </code></pre>
+<p>And as always, you can print the disassembly in JSON using <code>pdj</code> and get more information about the other associated commands by running <code>pd?</code>.</p>
 <h2><a class="header" href="#adding-metadata-to-disassembly" id="adding-metadata-to-disassembly">Adding Metadata to Disassembly</a></h2>
 <p>The typical work involved in reversing binary files makes powerful annotation capabilities essential.
 Radare offers multiple ways to store and retrieve such metadata.</p>

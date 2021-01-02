@@ -155,6 +155,8 @@
 <h3><a class="header" href="#asmarch" id="asmarch">asm.arch</a></h3>
 <p>Defines the target CPU architecture used for disassembling (<code>pd</code>, <code>pD</code> commands) and code analysis (<code>a</code> command). You can find the list of possible values by looking at the result of <code>e asm.arch=?</code> or <code>rz-asm -L</code>.
 It is quite simple to add new architectures for disassembling and analyzing code. There is an interface for that. For x86, it is used to attach a number of third-party disassembler engines, including GNU binutils, Udis86 and a few handmade ones.</p>
+<h3><a class="header" href="#asmcpu" id="asmcpu">asm.cpu</a></h3>
+<p>You can use this configuration variable to define the CPU type. For example, if you had picked the architecture as AVR, you can choose your CPU type (ATmega1281, ATmega2561, etc) using <code>asm.cpu</code>.</p>
 <h3><a class="header" href="#asmbits" id="asmbits">asm.bits</a></h3>
 <p>Determines width in bits of registers for the current architecture. Supported values: 8, 16, 32, 64. Note that not all target architectures support all combinations for asm.bits.</p>
 <h3><a class="header" href="#asmsyntax" id="asmsyntax">asm.syntax</a></h3>
