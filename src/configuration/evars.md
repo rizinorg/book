@@ -13,6 +13,10 @@ The Visual mode has an eval browser that is accessible through the `Vbe` command
 Defines the target CPU architecture used for disassembling (`pd`, `pD` commands) and code analysis (`a` command). You can find the list of possible values by looking at the result of `e asm.arch=?` or `rz-asm -L`.
 It is quite simple to add new architectures for disassembling and analyzing code. There is an interface for that. For x86, it is used to attach a number of third-party disassembler engines, including GNU binutils, Udis86 and a few handmade ones.
 
+### asm.cpu
+
+You can use this configuration variable to define the CPU type. For example, if you had picked the architecture as AVR, you can choose your CPU type (ATmega1281, ATmega2561, etc) using `asm.cpu`.
+
 ### asm.bits
 
 Determines width in bits of registers for the current architecture. Supported values: 8, 16, 32, 64. Note that not all target architectures support all combinations for asm.bits.
