@@ -259,19 +259,19 @@ Now we can check, what rizin found for us:</p>
 <p>Signatures configuration stored in the <code>zign.</code> config vars' namespace:</p>
 <pre><code>[0x000051c0]&gt; e? zign.
        zign.autoload: Autoload all zignatures located in ~/.local/share/rizin/zigns
-          zign.bytes: Use bytes patterns for matching
    zign.diff.bthresh: Threshold for diffing zign bytes [0, 1] (see zc?)
    zign.diff.gthresh: Threshold for diffing zign graphs [0, 1] (see zc?)
-          zign.graph: Use graph metrics for matching
-           zign.hash: Use Hash for matching
+    zign.match.bytes: Use bytes patterns for matching
+    zign.match.graph: Use graph metrics for matching
+     zign.match.hash: Use Hash for matching
+   zign.match.offset: Use original offset for matching
+     zign.match.refs: Use references for matching
+    zign.match.types: Use types for matching
           zign.maxsz: Maximum zignature length
           zign.mincc: Minimum cyclomatic complexity for matching
           zign.minsz: Minimum zignature length for matching
-         zign.offset: Use original offset for matching
          zign.prefix: Default prefix for zignatures matches
-           zign.refs: Use references for matching
       zign.threshold: Minimum similarity required for inclusion in zb output
-          zign.types: Use types for matching
 [0x000051c0]&gt;
 </code></pre>
 <h2><a class="header" href="#finding-best-matches-zb" id="finding-best-matches-zb">Finding Best Matches <code>zb</code></a></h2>
