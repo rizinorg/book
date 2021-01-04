@@ -101,7 +101,7 @@ This is a boolean variable that can be set to true if you want to align only the
 │       ┌─< 0x000082b0      bgt   0x82c0
 │       │   0x000082b4      mvn   r3,   0
 ```
-In the above example, the opcodes and the arguments are aligned. Now, turning it on would align only the opcodes.
+In the above example, the opcodes and the operands are aligned. Now, turning it on would align only the opcodes.
 ```
 [0x00008290]> e asm.tabs.once=true
 [0x00008290]> pd 10
