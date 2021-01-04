@@ -61,6 +61,7 @@ If your disassembly doesn't fit in your screen or aligns clumsily, `asm.tabs` mi
 
 For example, this is the disassemly with the variable set to 0:
 ```
+[0x000040a7]> e asm.tabs = 0
 [0x000040a7]> pd 6
 │           0x000040a7      push rsp
 │           0x000040a8      mov r12d, edi                              ; argc
@@ -83,10 +84,11 @@ And here's what it would look like after setting it to 6:
 
 ### asm.tabs.once
 
-This is a boolean variable that can be set to true if you want to align only the opcodes, excluding the arguments.
+This is a boolean variable that can be set to true if you want to align only the opcodes, excluding the arguments. This makes sense only if you have set `asm.tabs` on.
 
 ```
-[0x00008290]> e asm.tabs.once =0
+[0x00008290]> e asm.tabs=6
+[0x00008290]> e asm.tabs.once=false
 [0x00008290]> pd 10
 │           0x00008290      mov   ip,   sp
 │           0x00008294      push  {r4,  fp,   ip,   lr,   pc}
@@ -98,7 +100,10 @@ This is a boolean variable that can be set to true if you want to align only the
 │           0x000082ac      cmp   r3,   1
 │       ┌─< 0x000082b0      bgt   0x82c0
 │       │   0x000082b4      mvn   r3,   0
-[0x00008290]> e asm.tabs.once = 1
+```
+In the above example, the opcodes and the arguments are aligned. Now, turning it on would align only the opcodes.
+```
+[0x00008290]> e asm.tabs.once=true
 [0x00008290]> pd 10
 │           0x00008290      mov   ip, sp
 │           0x00008294      push  {r4, fp, ip, lr, pc}
