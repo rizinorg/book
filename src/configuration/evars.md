@@ -55,6 +55,10 @@ Selects a target operating system of currently loaded binary. Usually, OS is aut
 
 If defined to "true", disassembler view will have flags column.
 
+### asm.tabs
+
+If your disassembly doesn't fit in your screen or aligns clumsily, `asm.tabs` might be of help. You can use this variable to control the distance between the operands, by setting the number of tabs, while displaying your disassembly.
+
 ### asm.lines.call
 
 If set to "true", draw lines at the left of the disassemble output (`pd`, `pD` commands) to graphically represent control flow changes (jumps and calls) that are targeted inside current block. Also, see `asm.lines.out`.
