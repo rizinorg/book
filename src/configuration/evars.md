@@ -55,6 +55,68 @@ Selects a target operating system of currently loaded binary. Usually, OS is aut
 
 If defined to "true", disassembler view will have flags column.
 
+### asm.tabs
+
+If your disassembly doesn't fit in your screen or aligns clumsily, `asm.tabs` might be of help. You can use this variable to control the distance between the operands, by setting the number of spaces, while displaying your disassembly.
+
+For example, this is the disassemly with the variable set to 0:
+```
+[0x000040a7]> e asm.tabs = 0
+[0x000040a7]> pd 6
+│           0x000040a7      push rsp
+│           0x000040a8      mov r12d, edi                              ; argc
+│           0x000040ab      push rbp
+│           0x000040ac      mov rbp, rsi                               ; argv
+│           0x000040af      push rbx
+│           0x000040b0      sub rsp, 0x48
+```
+And here's what it would look like after setting it to 6:
+```
+[0x000040a7]> e asm.tabs = 6
+[0x000040a7]> pd 6
+│           0x000040a7      push  rsp
+│           0x000040a8      mov   r12d, edi                            ; argc
+│           0x000040ab      push  rbp
+│           0x000040ac      mov   rbp,  rsi                            ; argv
+│           0x000040af      push  rbx
+│           0x000040b0      sub   rsp,  0x48
+```
+
+### asm.tabs.once
+
+This is a boolean variable that can be set to true if you want to align only the opcodes, excluding the arguments. This makes sense only if you have set `asm.tabs` on.
+
+```
+[0x00008290]> e asm.tabs=6
+[0x00008290]> e asm.tabs.once=false
+[0x00008290]> pd 10
+│           0x00008290      mov   ip,   sp
+│           0x00008294      push  {r4,  fp,   ip,   lr,   pc}
+│           0x00008298      sub   fp,   ip,   4
+│           0x0000829c      sub   sp,   sp,   0x24
+│           0x000082a0      str   r0,   [fp,  -0x28]
+│           0x000082a4      str   r1,   [fp,  -0x2c]
+│           0x000082a8      ldr   r3,   [fp,  -0x28]
+│           0x000082ac      cmp   r3,   1
+│       ┌─< 0x000082b0      bgt   0x82c0
+│       │   0x000082b4      mvn   r3,   0
+```
+In the above example, the opcodes and the operands are aligned. Now, turning it on would align only the opcodes.
+```
+[0x00008290]> e asm.tabs.once=true
+[0x00008290]> pd 10
+│           0x00008290      mov   ip, sp
+│           0x00008294      push  {r4, fp, ip, lr, pc}
+│           0x00008298      sub   fp, ip, 4
+│           0x0000829c      sub   sp, sp, 0x24
+│           0x000082a0      str   r0, [var_28h]
+│           0x000082a4      str   r1, [var_2ch]
+│           0x000082a8      ldr   r3, [var_28h]
+│           0x000082ac      cmp   r3, 1
+│       ┌─< 0x000082b0      bgt   0x82c0
+│       │   0x000082b4      mvn   r3, 0
+```
+
 ### asm.lines.call
 
 If set to "true", draw lines at the left of the disassemble output (`pd`, `pD` commands) to graphically represent control flow changes (jumps and calls) that are targeted inside current block. Also, see `asm.lines.out`.
