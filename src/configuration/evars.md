@@ -232,10 +232,6 @@ A boolen variable to show UTF-8 characters instead of ANSI.
 
 Enables or disables "fortune" messages displayed at each rizin start.
 
-### cfg.fortunes.type
-
-Fortunes are classified by type. This variable determines which types are allowed for displaying when `cfg.fortunes` is `true`, so they can be fine-tuned on what's appropriate for the intended audience. Current types are `tips`, `fun`, `nsfw`, `creepy`.
-
 ### stack.size
 
 This variable lets you set the size of stack in bytes.
