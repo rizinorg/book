@@ -61,7 +61,7 @@ selfstop:
 Now we can assemble it in place:
 
 ```
-[0x00000000]> e asm.bits = 32
+[0x00000000]> e asm.bits=32
 [0x00000000]> wx `!rz-asm -f a.rzasm`
 [0x00000000]> pd 20
 	   0x00000000    6800800408   push 0x8048000 ;  0x08048000

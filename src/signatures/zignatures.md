@@ -123,7 +123,7 @@ Here we can see the comment of `entry0`, which is taken from the ELF parsing, bu
 
 Signatures configuration stored in the `zign.` config vars' namespace:
 ```
-[0x000051c0]> e? zign.
+[0x000051c0]> el zign.
        zign.autoload: Autoload all zignatures located in ~/.local/share/rizin/zigns
    zign.diff.bthresh: Threshold for diffing zign bytes [0, 1] (see zc?)
    zign.diff.gthresh: Threshold for diffing zign graphs [0, 1] (see zc?)

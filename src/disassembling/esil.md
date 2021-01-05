@@ -31,7 +31,7 @@ rizin's visual mode is great to inspect the ESIL evaluations.
 
 There are 3 environment variables that are important for watching what a program does:
 ```
-[0x00000000]> e emu.str = true
+[0x00000000]> e emu.str=true
 ```
 
 `asm.emu` tells rizin if you want ESIL information to be displayed. If it is set to true, you will see comments appear to the right of your disassembly that tell you how the contents of registers and memory addresses are changed by the current instruction. For example, if you have an instruction that subtracts a value from a register it tells you what the value was before and what it becomes after. This is super useful so you don't have to sit there yourself and track which value goes where.
@@ -42,7 +42,7 @@ The third important variable is `asm.esil`. This switches your disassembly to no
 So if you want to take a look at how instructions are expressed in ESIL simply set "asm.esil" to true.
 
 ```
-[0x00000000]> e asm.esil = true
+[0x00000000]> e asm.esil=true
 ```
 
 In visual mode you can also toggle this by simply typing `O`.

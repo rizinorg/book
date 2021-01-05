@@ -1,10 +1,24 @@
 ## Configuration Variables
 
-Below is a list of the most frequently used configuration variables. You can get a complete list by issuing `e` command without arguments. For example, to see all variables defined in the "cfg" namespace, issue `e cfg.` (mind the ending dot). You can get help on any eval configuration variable by using `e? cfg.`
+Below is a list of the most frequently used configuration variables. You can get a complete list by issuing `e` command without arguments. For example, to see all variables defined in the "cfg" namespace, issue `e cfg.` (mind the ending dot). You can get help on any eval configuration variable by using `el cfg.`
 
-The `e??` command to get help on all the evaluable configuration variables of rizin. As long as the output of this command is pretty large you can combine it with the internal grep `~` to filter for what you are looking for:
+The `el` command to get help on all the evaluable configuration variables of rizin. As long as the output of this command is pretty large you can combine it with the internal grep `~` to filter for what you are looking for:
 
-![e??~color](../img/configuration/e--color.png)
+```
+[0x00000000]> el~color
+      graph.gv.graph: Graphviz global style attributes. (bgcolor=white)
+       graph.gv.node: Graphviz node style. (color=gray, style=filled shape=box)
+          log.colors: Should the log output use colors (TODO)
+           scr.color: Enable colors (0: none, 1: ansi, 2: 256 colors, 3: truecolor)
+      scr.color.args: Colorize arguments and variables of functions
+     scr.color.bytes: Colorize bytes that represent the opcodes of the instruction
+      scr.color.grep: Enable colors when using ~grep
+       scr.color.ops: Colorize numbers and registers in opcodes
+      scr.color.pipe: Enable colors when using pipes
+     scr.prompt.mode: Set prompt color based on vi mode
+         scr.rainbow: Shows rainbow colors depending of address
+         scr.randpal: Random color palete or just get the next one from 'eco'
+```
 
 The Visual mode has an eval browser that is accessible through the `Vbe` command.
 
@@ -61,7 +75,7 @@ If your disassembly doesn't fit in your screen or aligns clumsily, `asm.tabs` mi
 
 For example, this is the disassemly with the variable set to 0:
 ```
-[0x000040a7]> e asm.tabs = 0
+[0x000040a7]> e asm.tabs=0
 [0x000040a7]> pd 6
 │           0x000040a7      push rsp
 │           0x000040a8      mov r12d, edi                              ; argc
@@ -72,7 +86,7 @@ For example, this is the disassemly with the variable set to 0:
 ```
 And here's what it would look like after setting it to 6:
 ```
-[0x000040a7]> e asm.tabs = 6
+[0x000040a7]> e asm.tabs=6
 [0x000040a7]> pd 6
 │           0x000040a7      push  rsp
 │           0x000040a8      mov   r12d, edi                            ; argc

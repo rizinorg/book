@@ -74,7 +74,7 @@ To see where this string is called, press `x`, if you want to jump to the locati
 
 ## Function Argument display
 
-To enable this view use this config var `e dbg.funcarg = true`
+To enable this view use this config var `e dbg.funcarg=true`
 
 ![funcarg](funcarg.png)
 
@@ -133,7 +133,7 @@ Following are some example of eval variable related to disassembly.
 You can view the list of all arch using `e asm.arch=?`
 
 ```
-e asm.arch = dalvik
+e asm.arch=dalvik
 0x00404870      31ed4989       cmp-long v237, v73, v137
 0x00404874      d15e4889       rsub-int v14, v5, 0x8948
 0x00404878      e24883e4       ushr-int/lit8 v72, v131, 0xe4
@@ -142,7 +142,7 @@ e asm.arch = dalvik
 ```
 
 ```
-e asm.bits = 16
+e asm.bits=16
 0000:4870      31ed           xor bp, bp
 0000:4872      49             dec cx
 0000:4873      89d1           mov cx, dx
@@ -156,7 +156,7 @@ This latest operation can also be done using `&` in Visual mode.
 #### asm.pseudo: Enable pseudo syntax
 
 ```
-e asm.pseudo = true
+e asm.pseudo=true
 0x00404870      31ed           ebp = 0
 0x00404872      4989d1         r9 = rdx
 0x00404875      5e             pop rsi
@@ -167,7 +167,7 @@ e asm.pseudo = true
 #### asm.syntax: Select assembly syntax (intel, att, masm...)
 
 ```
-e asm.syntax = att
+e asm.syntax=att
 0x00404870      31ed           xor %ebp, %ebp
 0x00404872      4989d1         mov %rdx, %r9
 0x00404875      5e             pop %rsi
@@ -178,7 +178,7 @@ e asm.syntax = att
 #### asm.describe: Show opcode description
 
 ```
-e asm.describe = true
+e asm.describe=true
 0x00404870  xor ebp, ebp   ; logical exclusive or
 0x00404872  mov r9, rdx    ; moves data from src to dst
 0x00404875  pop rsi        ; pops last element of stack and stores the result in argument

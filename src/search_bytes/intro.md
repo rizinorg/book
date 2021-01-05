@@ -5,7 +5,7 @@ The rizin search engine is based on work done by esteve, plus multiple features 
 Search is initiated by `/` command.
 ```
 [0x00000000]> /?
-|Usage: /[!bf] [arg]Search stuff (see 'e??search' for options)
+|Usage: /[!bf] [arg]Search stuff (see 'el search' for options)
 |Use io.va for searching in non virtual addressing spaces
 | / foo\x00               search for string 'foo\0'
 | /j foo\x00              search for string 'foo\0' (json output)

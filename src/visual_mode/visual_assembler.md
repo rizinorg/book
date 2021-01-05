@@ -10,6 +10,6 @@ Notice the preview of the disassembly and arrows:
 ![After](../pics/after.png)
 
 You need to open the file in writing mode (`rizin -w` or `oo+`) in order to patch the file.
-You can also use the cache mode: `e io.cache = true` and `wc?`.
+You can also use the cache mode: `e io.cache=true` and `wc?`.
 
 Remember that patching files in debug mode only patch the memory not the file.
