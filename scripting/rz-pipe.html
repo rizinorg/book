@@ -158,6 +158,7 @@
 python    x     x     -    x    x    x   x
 haskell   x     x     -    x    -    -   x
 ocaml     x     x     -    x    -    -   x
+rust      x     x     x    x    -    -   x
 </code></pre>
 <h1><a class="header" href="#examples" id="examples">Examples</a></h1>
 <h2><a class="header" href="#python" id="python">Python</a></h2>
@@ -188,6 +189,22 @@ main = do
 <pre><code class="language-ocaml">let result = Rz.with_command ~cmd:&quot;/j chown&quot; &quot;/bin/ls&quot;
 Printf.printf &quot;Rizin output is: %s&quot; result
 </code></pre>
+<h2><a class="header" href="#rust" id="rust">Rust</a></h2>
+<pre><pre class="playpen"><code class="language-rust"> #[macro_use]
+ extern crate rzpipe;
+ extern crate serde_json;
+ use rzpipe::RzPipe;
+ fn main() {
+     let path = Some(&quot;/bin/ls&quot;.to_owned());
+     let mut rzp = open_pipe!(path).unwrap();
+     println!(&quot;{}&quot;, rzp.cmd(&quot;?e Hello World&quot;).unwrap());
+     if let Ok(json) = rzp.cmdj(&quot;ij&quot;) {
+         println!(&quot;{}&quot;, serde_json::to_string_pretty(&amp;json).unwrap());
+         println!(&quot;ARCH {}&quot;, json[&quot;bin&quot;][&quot;arch&quot;]);
+     }
+     rzp.close();
+ }
+</code></pre></pre>
 
                     </main>
 
