@@ -195,7 +195,7 @@ str.David_MacKenzie:
 <p>To see where this string is called, press <code>x</code>, if you want to jump to the location where the data is used then press the corresponding number [0-9] on your keyboard. (This functionality is similar to <code>axt</code>)</p>
 <p><code>X</code> corresponds to the reverse operation aka <code>axf</code>.</p>
 <h2><a class="header" href="#function-argument-display" id="function-argument-display">Function Argument display</a></h2>
-<p>To enable this view use this config var <code>e dbg.funcarg = true</code></p>
+<p>To enable this view use this config var <code>e dbg.funcarg=true</code></p>
 <p><img src="funcarg.png" alt="funcarg" /></p>
 <h2><a class="header" href="#add-a-comment" id="add-a-comment">Add a comment</a></h2>
 <p>To add a comment press <code>;</code>.</p>
@@ -224,14 +224,14 @@ If the item is a boolean variable, it will toggle, otherwise you will be prompte
 <h2><a class="header" href="#examples" id="examples">Examples</a></h2>
 <h4><a class="header" href="#asmarch-change-architecture--asmbits-word-size-in-bits-at-assembler" id="asmarch-change-architecture--asmbits-word-size-in-bits-at-assembler">asm.arch: Change Architecture &amp;&amp; asm.bits: Word size in bits at assembler</a></h4>
 <p>You can view the list of all arch using <code>e asm.arch=?</code></p>
-<pre><code>e asm.arch = dalvik
+<pre><code>e asm.arch=dalvik
 0x00404870      31ed4989       cmp-long v237, v73, v137
 0x00404874      d15e4889       rsub-int v14, v5, 0x8948
 0x00404878      e24883e4       ushr-int/lit8 v72, v131, 0xe4
 0x0040487c      f0505449c7c0   +invoke-object-init-range {}, method+18772 ;[0]
 0x00404882      90244100       add-int v36, v65, v0
 </code></pre>
-<pre><code>e asm.bits = 16
+<pre><code>e asm.bits=16
 0000:4870      31ed           xor bp, bp
 0000:4872      49             dec cx
 0000:4873      89d1           mov cx, dx
@@ -241,7 +241,7 @@ If the item is a boolean variable, it will toggle, otherwise you will be prompte
 </code></pre>
 <p>This latest operation can also be done using <code>&amp;</code> in Visual mode.</p>
 <h4><a class="header" href="#asmpseudo-enable-pseudo-syntax" id="asmpseudo-enable-pseudo-syntax">asm.pseudo: Enable pseudo syntax</a></h4>
-<pre><code>e asm.pseudo = true
+<pre><code>e asm.pseudo=true
 0x00404870      31ed           ebp = 0
 0x00404872      4989d1         r9 = rdx
 0x00404875      5e             pop rsi
@@ -249,7 +249,7 @@ If the item is a boolean variable, it will toggle, otherwise you will be prompte
 0x00404879      4883e4f0       rsp &amp;= 0xfffffffffffffff0
 </code></pre>
 <h4><a class="header" href="#asmsyntax-select-assembly-syntax-intel-att-masm" id="asmsyntax-select-assembly-syntax-intel-att-masm">asm.syntax: Select assembly syntax (intel, att, masm...)</a></h4>
-<pre><code>e asm.syntax = att
+<pre><code>e asm.syntax=att
 0x00404870      31ed           xor %ebp, %ebp
 0x00404872      4989d1         mov %rdx, %r9
 0x00404875      5e             pop %rsi
@@ -257,7 +257,7 @@ If the item is a boolean variable, it will toggle, otherwise you will be prompte
 0x00404879      4883e4f0       and $0xfffffffffffffff0, %rsp
 </code></pre>
 <h4><a class="header" href="#asmdescribe-show-opcode-description" id="asmdescribe-show-opcode-description">asm.describe: Show opcode description</a></h4>
-<pre><code>e asm.describe = true
+<pre><code>e asm.describe=true
 0x00404870  xor ebp, ebp   ; logical exclusive or
 0x00404872  mov r9, rdx    ; moves data from src to dst
 0x00404875  pop rsi        ; pops last element of stack and stores the result in argument

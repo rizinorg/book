@@ -156,7 +156,7 @@
 | p[b|B|xb] [len] ([S])   bindump N bits skipping S bytes
 | p[iI][df] [len]         print N ops/bytes (f=func) (see pi? and pdi)
 | p[kK] [len]             print key in randomart (K is for mosaic)
-| p-[?][jh] [mode]        bar|json|histogram blocks (mode: e?search.in)
+| p-[?][jh] [mode]        bar|json|histogram blocks (mode: el search.in)
 | p2 [len]                8x8 2bpp-tiles
 | p3 [file]               print stereogram (3D)
 | p6[de] [len]            base64 decode/encode
@@ -227,10 +227,10 @@
 | ptn  print NTFS time (64 bit `cfg.bigendian`) Since January 1, 1601
 </code></pre>
 <p>For example, you can 'view' the current buffer as timestamps in the ntfs time:</p>
-<pre><code>[0x08048000]&gt; e cfg.bigendian = false
+<pre><code>[0x08048000]&gt; e cfg.bigendian=false
 [0x08048000]&gt; pt 4
 29:04:32948 23:12:36 +0000
-[0x08048000]&gt; e cfg.bigendian = true
+[0x08048000]&gt; e cfg.bigendian=true
 [0x08048000]&gt; pt 4
 20:05:13001 09:29:21 +0000
 </code></pre>
@@ -481,8 +481,8 @@ _d__  _32        lanai       GPL3    LANAI
 ...
 </code></pre>
 <h3><a class="header" href="#configuring-the-disassembler" id="configuring-the-disassembler">Configuring the Disassembler</a></h3>
-<p>There are multiple options which can be used to configure the output of the disassembler. All these options are described in <code>e? asm.</code></p>
-<pre><code>[0x00005310]&gt; e? asm.
+<p>There are multiple options which can be used to configure the output of the disassembler. All these options are described in <code>el asm.</code></p>
+<pre><code>[0x00005310]&gt; el asm.
 asm.anal: Analyze code and refs while disassembling (see analysis.strings)
 asm.arch: Set the arch to be used by asm
 asm.assembler: Set the plugin name to use when assembling
@@ -500,8 +500,8 @@ asm.cmt.fold: Fold comments, toggle with Vz
 <p>Currently there are 136 <code>asm.</code> configuration variables so we do not list them all.</p>
 <h3><a class="header" href="#disassembly-syntax" id="disassembly-syntax">Disassembly Syntax</a></h3>
 <p>The <code>asm.syntax</code> variable is used to change the flavor of the assembly syntax used by a disassembler engine. To switch between Intel and AT&amp;T representations:</p>
-<pre><code>e asm.syntax = intel
-e asm.syntax = att
+<pre><code>e asm.syntax=intel
+e asm.syntax=att
 </code></pre>
 <p>You can also check <code>asm.pseudo</code>, which is an experimental pseudocode view,
 and <code>asm.esil</code> which outputs <a href="../disassembling/esil.html">ESIL</a> ('Evaluable Strings Intermediate Language'). ESIL's goal is to have a human-readable representation of every opcode semantics. Such representations can be evaluated (interpreted) to emulate effects of individual instructions.</p>

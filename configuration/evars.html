@@ -148,9 +148,22 @@
                 <div id="content" class="content">
                     <main>
                         <h2><a class="header" href="#configuration-variables" id="configuration-variables">Configuration Variables</a></h2>
-<p>Below is a list of the most frequently used configuration variables. You can get a complete list by issuing <code>e</code> command without arguments. For example, to see all variables defined in the &quot;cfg&quot; namespace, issue <code>e cfg.</code> (mind the ending dot). You can get help on any eval configuration variable by using <code>e? cfg.</code></p>
-<p>The <code>e??</code> command to get help on all the evaluable configuration variables of rizin. As long as the output of this command is pretty large you can combine it with the internal grep <code>~</code> to filter for what you are looking for:</p>
-<p><img src="../img/configuration/e--color.png" alt="e??~color" /></p>
+<p>Below is a list of the most frequently used configuration variables. You can get a complete list by issuing <code>e</code> command without arguments. For example, to see all variables defined in the &quot;cfg&quot; namespace, issue <code>e cfg.</code> (mind the ending dot). You can get help on any eval configuration variable by using <code>el cfg.</code></p>
+<p>The <code>el</code> command to get help on all the evaluable configuration variables of rizin. As long as the output of this command is pretty large you can combine it with the internal grep <code>~</code> to filter for what you are looking for:</p>
+<pre><code>[0x00000000]&gt; el~color
+      graph.gv.graph: Graphviz global style attributes. (bgcolor=white)
+       graph.gv.node: Graphviz node style. (color=gray, style=filled shape=box)
+          log.colors: Should the log output use colors (TODO)
+           scr.color: Enable colors (0: none, 1: ansi, 2: 256 colors, 3: truecolor)
+      scr.color.args: Colorize arguments and variables of functions
+     scr.color.bytes: Colorize bytes that represent the opcodes of the instruction
+      scr.color.grep: Enable colors when using ~grep
+       scr.color.ops: Colorize numbers and registers in opcodes
+      scr.color.pipe: Enable colors when using pipes
+     scr.prompt.mode: Set prompt color based on vi mode
+         scr.rainbow: Shows rainbow colors depending of address
+         scr.randpal: Random color palete or just get the next one from 'eco'
+</code></pre>
 <p>The Visual mode has an eval browser that is accessible through the <code>Vbe</code> command.</p>
 <h3><a class="header" href="#asmarch" id="asmarch">asm.arch</a></h3>
 <p>Defines the target CPU architecture used for disassembling (<code>pd</code>, <code>pD</code> commands) and code analysis (<code>a</code> command). You can find the list of possible values by looking at the result of <code>e asm.arch=?</code> or <code>rz-asm -L</code>.
@@ -184,7 +197,7 @@ It is quite simple to add new architectures for disassembling and analyzing code
 <h3><a class="header" href="#asmtabs" id="asmtabs">asm.tabs</a></h3>
 <p>If your disassembly doesn't fit in your screen or aligns clumsily, <code>asm.tabs</code> might be of help. You can use this variable to control the distance between the operands, by setting the number of spaces, while displaying your disassembly.</p>
 <p>For example, this is the disassemly with the variable set to 0:</p>
-<pre><code>[0x000040a7]&gt; e asm.tabs = 0
+<pre><code>[0x000040a7]&gt; e asm.tabs=0
 [0x000040a7]&gt; pd 6
 │           0x000040a7      push rsp
 │           0x000040a8      mov r12d, edi                              ; argc
@@ -194,7 +207,7 @@ It is quite simple to add new architectures for disassembling and analyzing code
 │           0x000040b0      sub rsp, 0x48
 </code></pre>
 <p>And here's what it would look like after setting it to 6:</p>
-<pre><code>[0x000040a7]&gt; e asm.tabs = 6
+<pre><code>[0x000040a7]&gt; e asm.tabs=6
 [0x000040a7]&gt; pd 6
 │           0x000040a7      push  rsp
 │           0x000040a8      mov   r12d, edi                            ; argc

@@ -149,14 +149,14 @@
                     <main>
                         <h2><a class="header" href="#configuring-search-options" id="configuring-search-options">Configuring Search Options</a></h2>
 <p>The rizin search engine can be configured through several configuration variables, modifiable with the <code>e</code> command.</p>
-<pre><code>e cmd.hit = x         ; rizin command to execute on every search hit
-e search.distance = 0 ; search string distance
-e search.in = [foo]   ; pecify search boundarie. Supported values are listed under e search.in=??
-e search.align = 4    ; only show search results aligned by specified boundary.
-e search.from = 0     ; start address
-e search.to = 0       ; end address
-e search.asmstr = 0   ; search for string instead of assembly
-e search.flags = true ; if enabled, create flags on hits
+<pre><code>e cmd.hit=x         ; rizin command to execute on every search hit
+e search.distance=0 ; search string distance
+e search.in=foo     ; specify search boundarie. Supported values are listed under e search.in=??
+e search.align=4    ; only show search results aligned by specified boundary.
+e search.from=0     ; start address
+e search.to=0       ; end address
+e search.asmstr=0   ; search for string instead of assembly
+e search.flags=true ; if enabled, create flags on hits
 </code></pre>
 <p>The <code>search.align</code> variable is used to limit valid search hits to certain alignment. For example, with <code>e search.align=4</code> you will see only hits found at 4-bytes aligned offsets.</p>
 <p>The <code>search.flags</code> boolean variable instructs the search engine to flag hits so that they can be referenced later. If a currently running search is interrupted with <code>Ctrl-C</code> keyboard sequence, current search position is flagged with <code>search_stop</code>.</p>

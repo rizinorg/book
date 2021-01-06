@@ -796,7 +796,7 @@ Suggested contributions include:</p>
 <p>To prevent rizin from parsing this file at startup, pass it the <code>-N</code> option.</p>
 <p>All the configuration of rizin is done with the <code>eval</code> commands. A typical startup configuration file looks like this:</p>
 <pre><code class="language-sh">$ cat ~/.rizinrc
-e scr.color = 1
+e scr.color=1
 e dbg.bep   = loader
 </code></pre>
 <p>The configuration can also be changed with <code>-e</code> &lt;config=value&gt; command-line option. This way you can adjust configuration from the command line, keeping the .rizinrc file intact. For example, to start with empty configuration and then adjust <code>scr.color</code> and <code>asm.syntax</code> the following line may be used:</p>
@@ -806,28 +806,19 @@ e dbg.bep   = loader
 <p>To get a list of all configuration variables just type <code>e</code> in the command line
 prompt. To limit the output to a selected namespace, pass it with an ending dot to <code>e</code>. For example, <code>e file.</code> will display all variables defined inside the &quot;file&quot; namespace.</p>
 <p>To get help about <code>e</code> command type <code>e?</code>:</p>
-<pre><code>Usage: e [var[=value]]  Evaluable vars
-| e?asm.bytes     show description
-| e??             list config vars with description
-| e a             get value of var 'a'
-| e a=b           set var 'a' the 'b' value
-| e var=?         print all valid values of var
-| e var=??        print all valid values of var with description
-| e.a=b           same as 'e a=b' but without using a space
-| e,k=v,k=v,k=v   comma separated k[=v]
-| e-              reset config vars
-| e*              dump config vars in r commands
-| e!a             invert the boolean value of 'a' var
-| ec [k] [color]  set color for given key (prompt, offset, ...)
-| eevar           open editor to change the value of var
-| ed              open editor to change the ~/.rizinrc
-| ej              list config vars in JSON
-| env [k[=v]]     get/set environment variable
-| er [key]        set config key as readonly. no way back
-| es [space]      list all eval spaces [or keys]
-| et [key]        show type of given config variable
-| ev [key]        list config vars in verbose format
-| evj [key]       list config vars in verbose format in JSON
+<pre><code>[0x00000000]&gt; e?
+Usage: e[?]   # List/get/set config evaluable vars
+| e &lt;key&gt;[=&lt;val|?&gt;] [&lt;key&gt;[=&lt;val|?&gt;] ...]] # Get/Set value of config variable &lt;key&gt;
+| el[j*qlJ] [&lt;key&gt;]      # List config variables with their descriptions
+| e-                     # Reset config variables
+| e! &lt;key&gt;               # Invert the boolean value of config variable &lt;var&gt;
+| ec[?]                  # Set color for given key (prompt, offset, ...)
+| ee &lt;key&gt;               # Open editor to change the value of config variable &lt;var&gt;
+| ed                     # Open editor to change ~/.rizinrc
+| er &lt;key&gt;               # Set config variable &lt;var&gt; as read-only
+| es [&lt;key&gt;]             # List all config variable spaces or sub-keys/sub-spaces if a &lt;key&gt; is provided
+| et &lt;key&gt;               # Show type of given config variable &lt;var&gt;
+| env [&lt;varname&gt;[=&lt;varvalue&gt;]] # Get/set environment variables
 </code></pre>
 <p>A simpler alternative to the <code>e</code> command is accessible from the visual mode. Type <code>Ve</code> to enter it, use arrows (up, down, left, right) to navigate the configuration, and <code>q</code> to exit it. The start screen for the visual configuration edit looks like this:</p>
 <pre><code>[EvalSpace]
@@ -853,7 +844,7 @@ prompt. To limit the output to a selected namespace, pass it with an ending dot 
 </code></pre>
 <p>For configuration values that can take one of several values, you can use the <code>=?</code> operator to get a list
 of valid values:</p>
-<pre><code>[0x00000000]&gt; e scr.nkey = ?
+<pre><code>[0x00000000]&gt; e scr.nkey=?
 scr.nkey = fun, hit, flag
 </code></pre>
 <h2><a class="header" href="#colors" id="colors">Colors</a></h2>
@@ -878,9 +869,22 @@ scr.nkey = fun, hit, flag
 <p>After selecting one, you can compare between the color scheme of the shell and the current theme by pressing Ctrl-Shift and then right arrow key for the toggle.</p>
 <p>In visual mode use the <code>R</code> key to randomize colors or choose the next theme in the list.</p>
 <h2><a class="header" href="#configuration-variables" id="configuration-variables">Configuration Variables</a></h2>
-<p>Below is a list of the most frequently used configuration variables. You can get a complete list by issuing <code>e</code> command without arguments. For example, to see all variables defined in the &quot;cfg&quot; namespace, issue <code>e cfg.</code> (mind the ending dot). You can get help on any eval configuration variable by using <code>e? cfg.</code></p>
-<p>The <code>e??</code> command to get help on all the evaluable configuration variables of rizin. As long as the output of this command is pretty large you can combine it with the internal grep <code>~</code> to filter for what you are looking for:</p>
-<p><img src="configuration/../img/configuration/e--color.png" alt="e??~color" /></p>
+<p>Below is a list of the most frequently used configuration variables. You can get a complete list by issuing <code>e</code> command without arguments. For example, to see all variables defined in the &quot;cfg&quot; namespace, issue <code>e cfg.</code> (mind the ending dot). You can get help on any eval configuration variable by using <code>el cfg.</code></p>
+<p>The <code>el</code> command to get help on all the evaluable configuration variables of rizin. As long as the output of this command is pretty large you can combine it with the internal grep <code>~</code> to filter for what you are looking for:</p>
+<pre><code>[0x00000000]&gt; el~color
+      graph.gv.graph: Graphviz global style attributes. (bgcolor=white)
+       graph.gv.node: Graphviz node style. (color=gray, style=filled shape=box)
+          log.colors: Should the log output use colors (TODO)
+           scr.color: Enable colors (0: none, 1: ansi, 2: 256 colors, 3: truecolor)
+      scr.color.args: Colorize arguments and variables of functions
+     scr.color.bytes: Colorize bytes that represent the opcodes of the instruction
+      scr.color.grep: Enable colors when using ~grep
+       scr.color.ops: Colorize numbers and registers in opcodes
+      scr.color.pipe: Enable colors when using pipes
+     scr.prompt.mode: Set prompt color based on vi mode
+         scr.rainbow: Shows rainbow colors depending of address
+         scr.randpal: Random color palete or just get the next one from 'eco'
+</code></pre>
 <p>The Visual mode has an eval browser that is accessible through the <code>Vbe</code> command.</p>
 <h3><a class="header" href="#asmarch" id="asmarch">asm.arch</a></h3>
 <p>Defines the target CPU architecture used for disassembling (<code>pd</code>, <code>pD</code> commands) and code analysis (<code>a</code> command). You can find the list of possible values by looking at the result of <code>e asm.arch=?</code> or <code>rz-asm -L</code>.
@@ -914,7 +918,7 @@ It is quite simple to add new architectures for disassembling and analyzing code
 <h3><a class="header" href="#asmtabs" id="asmtabs">asm.tabs</a></h3>
 <p>If your disassembly doesn't fit in your screen or aligns clumsily, <code>asm.tabs</code> might be of help. You can use this variable to control the distance between the operands, by setting the number of spaces, while displaying your disassembly.</p>
 <p>For example, this is the disassemly with the variable set to 0:</p>
-<pre><code>[0x000040a7]&gt; e asm.tabs = 0
+<pre><code>[0x000040a7]&gt; e asm.tabs=0
 [0x000040a7]&gt; pd 6
 │           0x000040a7      push rsp
 │           0x000040a8      mov r12d, edi                              ; argc
@@ -924,7 +928,7 @@ It is quite simple to add new architectures for disassembling and analyzing code
 │           0x000040b0      sub rsp, 0x48
 </code></pre>
 <p>And here's what it would look like after setting it to 6:</p>
-<pre><code>[0x000040a7]&gt; e asm.tabs = 6
+<pre><code>[0x000040a7]&gt; e asm.tabs=6
 [0x000040a7]&gt; pd 6
 │           0x000040a7      push  rsp
 │           0x000040a8      mov   r12d, edi                            ; argc
@@ -1359,7 +1363,7 @@ libc.so.6
 | p[b|B|xb] [len] ([S])   bindump N bits skipping S bytes
 | p[iI][df] [len]         print N ops/bytes (f=func) (see pi? and pdi)
 | p[kK] [len]             print key in randomart (K is for mosaic)
-| p-[?][jh] [mode]        bar|json|histogram blocks (mode: e?search.in)
+| p-[?][jh] [mode]        bar|json|histogram blocks (mode: el search.in)
 | p2 [len]                8x8 2bpp-tiles
 | p3 [file]               print stereogram (3D)
 | p6[de] [len]            base64 decode/encode
@@ -1430,10 +1434,10 @@ libc.so.6
 | ptn  print NTFS time (64 bit `cfg.bigendian`) Since January 1, 1601
 </code></pre>
 <p>For example, you can 'view' the current buffer as timestamps in the ntfs time:</p>
-<pre><code>[0x08048000]&gt; e cfg.bigendian = false
+<pre><code>[0x08048000]&gt; e cfg.bigendian=false
 [0x08048000]&gt; pt 4
 29:04:32948 23:12:36 +0000
-[0x08048000]&gt; e cfg.bigendian = true
+[0x08048000]&gt; e cfg.bigendian=true
 [0x08048000]&gt; pt 4
 20:05:13001 09:29:21 +0000
 </code></pre>
@@ -1684,8 +1688,8 @@ _d__  _32        lanai       GPL3    LANAI
 ...
 </code></pre>
 <h3><a class="header" href="#configuring-the-disassembler" id="configuring-the-disassembler">Configuring the Disassembler</a></h3>
-<p>There are multiple options which can be used to configure the output of the disassembler. All these options are described in <code>e? asm.</code></p>
-<pre><code>[0x00005310]&gt; e? asm.
+<p>There are multiple options which can be used to configure the output of the disassembler. All these options are described in <code>el asm.</code></p>
+<pre><code>[0x00005310]&gt; el asm.
 asm.anal: Analyze code and refs while disassembling (see analysis.strings)
 asm.arch: Set the arch to be used by asm
 asm.assembler: Set the plugin name to use when assembling
@@ -1703,8 +1707,8 @@ asm.cmt.fold: Fold comments, toggle with Vz
 <p>Currently there are 136 <code>asm.</code> configuration variables so we do not list them all.</p>
 <h3><a class="header" href="#disassembly-syntax" id="disassembly-syntax">Disassembly Syntax</a></h3>
 <p>The <code>asm.syntax</code> variable is used to change the flavor of the assembly syntax used by a disassembler engine. To switch between Intel and AT&amp;T representations:</p>
-<pre><code>e asm.syntax = intel
-e asm.syntax = att
+<pre><code>e asm.syntax=intel
+e asm.syntax=att
 </code></pre>
 <p>You can also check <code>asm.pseudo</code>, which is an experimental pseudocode view,
 and <code>asm.esil</code> which outputs <a href="basic_commands/../disassembling/esil.html">ESIL</a> ('Evaluable Strings Intermediate Language'). ESIL's goal is to have a human-readable representation of every opcode semantics. Such representations can be evaluated (interpreted) to emulate effects of individual instructions.</p>
@@ -1941,7 +1945,7 @@ an operator. The command is applied to the current block. Supported operators in
 0x00000050  2b30 4741 422f 382a 1e22 0f17 0f10 3913
 </code></pre>
 <p>You can limit zooming to a range of bytes instead of the whole bytespace. Change <code>zoom.from</code> and <code>zoom.to</code> eval variables:</p>
-<pre><code>[0x00003a04]&gt; e? zoom.
+<pre><code>[0x00003a04]&gt; el zoom.
 zoom.byte: Zoom callback to calculate each byte (See pz? for help)
 zoom.from: Zoom start address
 zoom.in: Specify  boundaries for zoom
@@ -2390,7 +2394,7 @@ str.David_MacKenzie:
 <p>To see where this string is called, press <code>x</code>, if you want to jump to the location where the data is used then press the corresponding number [0-9] on your keyboard. (This functionality is similar to <code>axt</code>)</p>
 <p><code>X</code> corresponds to the reverse operation aka <code>axf</code>.</p>
 <h2><a class="header" href="#function-argument-display" id="function-argument-display">Function Argument display</a></h2>
-<p>To enable this view use this config var <code>e dbg.funcarg = true</code></p>
+<p>To enable this view use this config var <code>e dbg.funcarg=true</code></p>
 <p><img src="visual_mode/funcarg.png" alt="funcarg" /></p>
 <h2><a class="header" href="#add-a-comment" id="add-a-comment">Add a comment</a></h2>
 <p>To add a comment press <code>;</code>.</p>
@@ -2419,14 +2423,14 @@ If the item is a boolean variable, it will toggle, otherwise you will be prompte
 <h2><a class="header" href="#examples-4" id="examples-4">Examples</a></h2>
 <h4><a class="header" href="#asmarch-change-architecture--asmbits-word-size-in-bits-at-assembler" id="asmarch-change-architecture--asmbits-word-size-in-bits-at-assembler">asm.arch: Change Architecture &amp;&amp; asm.bits: Word size in bits at assembler</a></h4>
 <p>You can view the list of all arch using <code>e asm.arch=?</code></p>
-<pre><code>e asm.arch = dalvik
+<pre><code>e asm.arch=dalvik
 0x00404870      31ed4989       cmp-long v237, v73, v137
 0x00404874      d15e4889       rsub-int v14, v5, 0x8948
 0x00404878      e24883e4       ushr-int/lit8 v72, v131, 0xe4
 0x0040487c      f0505449c7c0   +invoke-object-init-range {}, method+18772 ;[0]
 0x00404882      90244100       add-int v36, v65, v0
 </code></pre>
-<pre><code>e asm.bits = 16
+<pre><code>e asm.bits=16
 0000:4870      31ed           xor bp, bp
 0000:4872      49             dec cx
 0000:4873      89d1           mov cx, dx
@@ -2436,7 +2440,7 @@ If the item is a boolean variable, it will toggle, otherwise you will be prompte
 </code></pre>
 <p>This latest operation can also be done using <code>&amp;</code> in Visual mode.</p>
 <h4><a class="header" href="#asmpseudo-enable-pseudo-syntax" id="asmpseudo-enable-pseudo-syntax">asm.pseudo: Enable pseudo syntax</a></h4>
-<pre><code>e asm.pseudo = true
+<pre><code>e asm.pseudo=true
 0x00404870      31ed           ebp = 0
 0x00404872      4989d1         r9 = rdx
 0x00404875      5e             pop rsi
@@ -2444,7 +2448,7 @@ If the item is a boolean variable, it will toggle, otherwise you will be prompte
 0x00404879      4883e4f0       rsp &amp;= 0xfffffffffffffff0
 </code></pre>
 <h4><a class="header" href="#asmsyntax-select-assembly-syntax-intel-att-masm" id="asmsyntax-select-assembly-syntax-intel-att-masm">asm.syntax: Select assembly syntax (intel, att, masm...)</a></h4>
-<pre><code>e asm.syntax = att
+<pre><code>e asm.syntax=att
 0x00404870      31ed           xor %ebp, %ebp
 0x00404872      4989d1         mov %rdx, %r9
 0x00404875      5e             pop %rsi
@@ -2452,7 +2456,7 @@ If the item is a boolean variable, it will toggle, otherwise you will be prompte
 0x00404879      4883e4f0       and $0xfffffffffffffff0, %rsp
 </code></pre>
 <h4><a class="header" href="#asmdescribe-show-opcode-description" id="asmdescribe-show-opcode-description">asm.describe: Show opcode description</a></h4>
-<pre><code>e asm.describe = true
+<pre><code>e asm.describe=true
 0x00404870  xor ebp, ebp   ; logical exclusive or
 0x00404872  mov r9, rdx    ; moves data from src to dst
 0x00404875  pop rsi        ; pops last element of stack and stores the result in argument
@@ -2466,7 +2470,7 @@ For example let's replace the <code>push</code> by a <code>jmp</code>:</p>
 <p>Notice the preview of the disassembly and arrows:</p>
 <p><img src="visual_mode/../pics/after.png" alt="After" /></p>
 <p>You need to open the file in writing mode (<code>rizin -w</code> or <code>oo+</code>) in order to patch the file.
-You can also use the cache mode: <code>e io.cache = true</code> and <code>wc?</code>.</p>
+You can also use the cache mode: <code>e io.cache=true</code> and <code>wc?</code>.</p>
 <p>Remember that patching files in debug mode only patch the memory not the file.</p>
 <h1><a class="header" href="#visual-configuration-editor-1" id="visual-configuration-editor-1">Visual Configuration Editor</a></h1>
 <p><code>Ve</code> or <code>e</code> in visual mode allows you to edit rizin configuration visually.
@@ -2577,7 +2581,7 @@ You can also press <code>&quot;</code> to quickly browse through the different o
 <p>The rizin search engine is based on work done by esteve, plus multiple features implemented on top of it. It supports multiple keyword searches, binary masks, and hexadecimal values. It automatically creates flags for search hit locations ease future referencing.</p>
 <p>Search is initiated by <code>/</code> command.</p>
 <pre><code>[0x00000000]&gt; /?
-|Usage: /[!bf] [arg]Search stuff (see 'e??search' for options)
+|Usage: /[!bf] [arg]Search stuff (see 'el search' for options)
 |Use io.va for searching in non virtual addressing spaces
 | / foo\x00               search for string 'foo\0'
 | /j foo\x00              search for string 'foo\0' (json output)
@@ -2676,14 +2680,14 @@ Searching 8 bytes from 0x00400238 to 0x0040488f: 53 74 61 6c 6c 6d 61 6e
 </code></pre>
 <h2><a class="header" href="#configuring-search-options" id="configuring-search-options">Configuring Search Options</a></h2>
 <p>The rizin search engine can be configured through several configuration variables, modifiable with the <code>e</code> command.</p>
-<pre><code>e cmd.hit = x         ; rizin command to execute on every search hit
-e search.distance = 0 ; search string distance
-e search.in = [foo]   ; pecify search boundarie. Supported values are listed under e search.in=??
-e search.align = 4    ; only show search results aligned by specified boundary.
-e search.from = 0     ; start address
-e search.to = 0       ; end address
-e search.asmstr = 0   ; search for string instead of assembly
-e search.flags = true ; if enabled, create flags on hits
+<pre><code>e cmd.hit=x         ; rizin command to execute on every search hit
+e search.distance=0 ; search string distance
+e search.in=foo     ; specify search boundarie. Supported values are listed under e search.in=??
+e search.align=4    ; only show search results aligned by specified boundary.
+e search.from=0     ; start address
+e search.to=0       ; end address
+e search.asmstr=0   ; search for string instead of assembly
+e search.flags=true ; if enabled, create flags on hits
 </code></pre>
 <p>The <code>search.align</code> variable is used to limit valid search hits to certain alignment. For example, with <code>e search.align=4</code> you will see only hits found at 4-bytes aligned offsets.</p>
 <p>The <code>search.flags</code> boolean variable instructs the search engine to flag hits so that they can be referenced later. If a currently running search is interrupted with <code>Ctrl-C</code> keyboard sequence, current search position is flagged with <code>search_stop</code>.</p>
@@ -2696,7 +2700,7 @@ Here is an example:</p>
 <h2><a class="header" href="#search-automation" id="search-automation">Search Automation</a></h2>
 <p>The <code>cmd.hit</code> configuration variable is used to define a rizin command to be executed when a matching entry is found by the search engine. If you want to run several commands, separate them with <code>;</code>. Alternatively, you can arrange them in a separate script, and then invoke it as a whole with <code>. script-file-name</code> command.
 For example:</p>
-<pre><code>[0x00404888]&gt; e cmd.hit = p8 8
+<pre><code>[0x00404888]&gt; e cmd.hit=&quot;p8 8&quot;
 [0x00404888]&gt; / lib
 Searching 3 bytes from 0x00400000 to 0x0041ae08: 6c 69 62
 hits: 9
@@ -2847,14 +2851,14 @@ f entropy_section_6 0x00002000 0x0144f374
 <p>The <code>pD</code> command works like <code>pd</code> but accepts the number of input bytes as its argument, instead of the number of opcodes.</p>
 <p>You can also get information about the pointer chains using the command <code>pdp</code>. This can be helpful while dealing with ROP chains.</p>
 <p>The &quot;pseudo&quot; syntax may be somewhat easier for a human to understand than the default assembler notations. But it can become annoying if you read lots of code. To play with it:</p>
-<pre><code>[0x00405e1c]&gt; e asm.pseudo = true
+<pre><code>[0x00405e1c]&gt; e asm.pseudo=true
 [0x00405e1c]&gt; pd 3
 		  ; JMP XREF from 0x00405dfa (fcn.00404531)
 		  0x00405e1c    488b9424a80. rdx = [rsp+0x2a8]
 		  0x00405e24    64483314252. rdx ^= [fs:0x28]
 		  0x00405e2d    4889d8       rax = rbx
 
-[0x00405e1c]&gt; e asm.syntax = intel
+[0x00405e1c]&gt; e asm.syntax=intel
 [0x00405e1c]&gt; pd 3
 		  ; JMP XREF from 0x00405dfa (fcn.00404531)
 		  0x00405e1c    488b9424a80. mov rdx, [rsp+0x2a8]
@@ -2976,13 +2980,13 @@ The aim is to be able to express most of the common operations performed by CPUs
 <h2><a class="header" href="#using-esil" id="using-esil">Using ESIL</a></h2>
 <p>rizin's visual mode is great to inspect the ESIL evaluations.</p>
 <p>There are 3 environment variables that are important for watching what a program does:</p>
-<pre><code>[0x00000000]&gt; e emu.str = true
+<pre><code>[0x00000000]&gt; e emu.str=true
 </code></pre>
 <p><code>asm.emu</code> tells rizin if you want ESIL information to be displayed. If it is set to true, you will see comments appear to the right of your disassembly that tell you how the contents of registers and memory addresses are changed by the current instruction. For example, if you have an instruction that subtracts a value from a register it tells you what the value was before and what it becomes after. This is super useful so you don't have to sit there yourself and track which value goes where.</p>
 <p>One problem with this is that it is a lot of information to take in at once and sometimes you simply don't need it. rizin has a nice compromise for this. That is what the <code>emu.str</code> variable is for (<code>asm.emustr</code> on &lt;= 2.2). Instead of this super verbose output with every register value, this only adds really useful information to the output, e.g., strings that are found at addresses a program uses or whether a jump is likely to be taken or not.</p>
 <p>The third important variable is <code>asm.esil</code>. This switches your disassembly to no longer show you the actual disassembled instructions, but instead now shows you corresponding ESIL expressions that describe what the instruction does.
 So if you want to take a look at how instructions are expressed in ESIL simply set &quot;asm.esil&quot; to true.</p>
-<pre><code>[0x00000000]&gt; e asm.esil = true
+<pre><code>[0x00000000]&gt; e asm.esil=true
 </code></pre>
 <p>In visual mode you can also toggle this by simply typing <code>O</code>.</p>
 <h2><a class="header" href="#esil-commands" id="esil-commands">ESIL Commands</a></h2>
@@ -3581,7 +3585,7 @@ age 0x8048337 0x80483e0
 <p>Use <code>axg*</code> to generate rizin commands which will help you to create graphs using <code>agn</code> and <code>age</code> commands, according to the XREFs.</p>
 <p>Apart from predefined algorithms to identify functions there is a way to specify
 a function prelude with a configuration option <code>analysis.prelude</code>. For example, like
-<code>e analysis.prelude = 0x554889e5</code> which means</p>
+<code>e analysis.prelude=0x554889e5</code> which means</p>
 <pre><code>push rbp
 mov rbp, rsp
 </code></pre>
@@ -3957,7 +3961,7 @@ local_32h
 <pre><code>win=spec
 spec.win.u32=unsigned int
 </code></pre>
-<p>Then change your default specification to newly created one using this config variable <code>e analysis.spec = win</code></p>
+<p>Then change your default specification to newly created one using this config variable <code>e analysis.spec=win</code></p>
 <p>For more information about primitive and user-defined types support in rizin refer to <a href="analysis/types.html">types</a> chapter.</p>
 <h1><a class="header" href="#types" id="types">Types</a></h1>
 <p>Rizin supports the C-syntax data types description.
@@ -4031,7 +4035,7 @@ foo
 S1
 </code></pre>
 <p>Also note there is a config option to specify include directories for types parsing</p>
-<pre><code>[0x00000000]&gt; e??~dir.type
+<pre><code>[0x00000000]&gt; el~dir.type
 dir.types: Default path to look for cparse type files
 [0x00000000]&gt; e dir.types
 /usr/include
@@ -4563,7 +4567,7 @@ pdb.useragent = Microsoft-Symbol-Server/6.11.0001.402
 <p>Using the variable <code>pdb.server</code> you can change the address where rizin will try to
 download the PDB file by the GUID stored in the executable header.
 You can make use of multiple symbol servers by separating each URL with a semi-colon:</p>
-<pre><code>e pdb.server = https://msdl.microsoft.com/download/symbols;https://symbols.mozilla.org/
+<pre><code>e pdb.server=https://msdl.microsoft.com/download/symbols;https://symbols.mozilla.org/
 </code></pre>
 <p>On Windows,  you can also use local network share paths (UNC paths) as symbol servers.</p>
 <p>Usually, there is no reason to change default <code>pdb.useragent</code>, but who knows where
@@ -4762,7 +4766,7 @@ Now we can check, what rizin found for us:</p>
 <p>Here we can see the comment of <code>entry0</code>, which is taken from the ELF parsing, but also the
 <code>sign.bytes.entry_0</code>, which is exactly the result of matching signature.</p>
 <p>Signatures configuration stored in the <code>zign.</code> config vars' namespace:</p>
-<pre><code>[0x000051c0]&gt; e? zign.
+<pre><code>[0x000051c0]&gt; el zign.
        zign.autoload: Autoload all zignatures located in ~/.local/share/rizin/zigns
    zign.diff.bthresh: Threshold for diffing zign bytes [0, 1] (see zc?)
    zign.diff.gthresh: Threshold for diffing zign graphs [0, 1] (see zc?)
@@ -6941,7 +6945,7 @@ selfstop:
   ret
 </code></pre>
 <p>Now we can assemble it in place:</p>
-<pre><code>[0x00000000]&gt; e asm.bits = 32
+<pre><code>[0x00000000]&gt; e asm.bits=32
 [0x00000000]&gt; wx `!rz-asm -f a.rzasm`
 [0x00000000]&gt; pd 20
 	   0x00000000    6800800408   push 0x8048000 ;  0x08048000
@@ -6989,7 +6993,7 @@ nop
 <li>asm.ucase - show disasm in uppercase</li>
 <li>...</li>
 </ul>
-<p>Use the <code>e??asm.</code> for more details.</p>
+<p>Use the <code>el asm.</code> for more details.</p>
 <h1><a class="header" href="#rz-gg" id="rz-gg">Rz-gg</a></h1>
 <p>rz-gg stands for <code>rizin egg</code>, this is the basic block to construct relocatable
 snippets of code to be used for injection in target processes when doing exploiting.</p>

@@ -192,7 +192,7 @@ selfstop:
   ret
 </code></pre>
 <p>Now we can assemble it in place:</p>
-<pre><code>[0x00000000]&gt; e asm.bits = 32
+<pre><code>[0x00000000]&gt; e asm.bits=32
 [0x00000000]&gt; wx `!rz-asm -f a.rzasm`
 [0x00000000]&gt; pd 20
 	   0x00000000    6800800408   push 0x8048000 ;  0x08048000

@@ -152,7 +152,7 @@
 <p>To prevent rizin from parsing this file at startup, pass it the <code>-N</code> option.</p>
 <p>All the configuration of rizin is done with the <code>eval</code> commands. A typical startup configuration file looks like this:</p>
 <pre><code class="language-sh">$ cat ~/.rizinrc
-e scr.color = 1
+e scr.color=1
 e dbg.bep   = loader
 </code></pre>
 <p>The configuration can also be changed with <code>-e</code> &lt;config=value&gt; command-line option. This way you can adjust configuration from the command line, keeping the .rizinrc file intact. For example, to start with empty configuration and then adjust <code>scr.color</code> and <code>asm.syntax</code> the following line may be used:</p>
@@ -162,28 +162,19 @@ e dbg.bep   = loader
 <p>To get a list of all configuration variables just type <code>e</code> in the command line
 prompt. To limit the output to a selected namespace, pass it with an ending dot to <code>e</code>. For example, <code>e file.</code> will display all variables defined inside the &quot;file&quot; namespace.</p>
 <p>To get help about <code>e</code> command type <code>e?</code>:</p>
-<pre><code>Usage: e [var[=value]]  Evaluable vars
-| e?asm.bytes     show description
-| e??             list config vars with description
-| e a             get value of var 'a'
-| e a=b           set var 'a' the 'b' value
-| e var=?         print all valid values of var
-| e var=??        print all valid values of var with description
-| e.a=b           same as 'e a=b' but without using a space
-| e,k=v,k=v,k=v   comma separated k[=v]
-| e-              reset config vars
-| e*              dump config vars in r commands
-| e!a             invert the boolean value of 'a' var
-| ec [k] [color]  set color for given key (prompt, offset, ...)
-| eevar           open editor to change the value of var
-| ed              open editor to change the ~/.rizinrc
-| ej              list config vars in JSON
-| env [k[=v]]     get/set environment variable
-| er [key]        set config key as readonly. no way back
-| es [space]      list all eval spaces [or keys]
-| et [key]        show type of given config variable
-| ev [key]        list config vars in verbose format
-| evj [key]       list config vars in verbose format in JSON
+<pre><code>[0x00000000]&gt; e?
+Usage: e[?]   # List/get/set config evaluable vars
+| e &lt;key&gt;[=&lt;val|?&gt;] [&lt;key&gt;[=&lt;val|?&gt;] ...]] # Get/Set value of config variable &lt;key&gt;
+| el[j*qlJ] [&lt;key&gt;]      # List config variables with their descriptions
+| e-                     # Reset config variables
+| e! &lt;key&gt;               # Invert the boolean value of config variable &lt;var&gt;
+| ec[?]                  # Set color for given key (prompt, offset, ...)
+| ee &lt;key&gt;               # Open editor to change the value of config variable &lt;var&gt;
+| ed                     # Open editor to change ~/.rizinrc
+| er &lt;key&gt;               # Set config variable &lt;var&gt; as read-only
+| es [&lt;key&gt;]             # List all config variable spaces or sub-keys/sub-spaces if a &lt;key&gt; is provided
+| et &lt;key&gt;               # Show type of given config variable &lt;var&gt;
+| env [&lt;varname&gt;[=&lt;varvalue&gt;]] # Get/set environment variables
 </code></pre>
 <p>A simpler alternative to the <code>e</code> command is accessible from the visual mode. Type <code>Ve</code> to enter it, use arrows (up, down, left, right) to navigate the configuration, and <code>q</code> to exit it. The start screen for the visual configuration edit looks like this:</p>
 <pre><code>[EvalSpace]
@@ -209,7 +200,7 @@ prompt. To limit the output to a selected namespace, pass it with an ending dot 
 </code></pre>
 <p>For configuration values that can take one of several values, you can use the <code>=?</code> operator to get a list
 of valid values:</p>
-<pre><code>[0x00000000]&gt; e scr.nkey = ?
+<pre><code>[0x00000000]&gt; e scr.nkey=?
 scr.nkey = fun, hit, flag
 </code></pre>
 

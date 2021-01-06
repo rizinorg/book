@@ -171,13 +171,13 @@ The aim is to be able to express most of the common operations performed by CPUs
 <h2><a class="header" href="#using-esil" id="using-esil">Using ESIL</a></h2>
 <p>rizin's visual mode is great to inspect the ESIL evaluations.</p>
 <p>There are 3 environment variables that are important for watching what a program does:</p>
-<pre><code>[0x00000000]&gt; e emu.str = true
+<pre><code>[0x00000000]&gt; e emu.str=true
 </code></pre>
 <p><code>asm.emu</code> tells rizin if you want ESIL information to be displayed. If it is set to true, you will see comments appear to the right of your disassembly that tell you how the contents of registers and memory addresses are changed by the current instruction. For example, if you have an instruction that subtracts a value from a register it tells you what the value was before and what it becomes after. This is super useful so you don't have to sit there yourself and track which value goes where.</p>
 <p>One problem with this is that it is a lot of information to take in at once and sometimes you simply don't need it. rizin has a nice compromise for this. That is what the <code>emu.str</code> variable is for (<code>asm.emustr</code> on &lt;= 2.2). Instead of this super verbose output with every register value, this only adds really useful information to the output, e.g., strings that are found at addresses a program uses or whether a jump is likely to be taken or not.</p>
 <p>The third important variable is <code>asm.esil</code>. This switches your disassembly to no longer show you the actual disassembled instructions, but instead now shows you corresponding ESIL expressions that describe what the instruction does.
 So if you want to take a look at how instructions are expressed in ESIL simply set &quot;asm.esil&quot; to true.</p>
-<pre><code>[0x00000000]&gt; e asm.esil = true
+<pre><code>[0x00000000]&gt; e asm.esil=true
 </code></pre>
 <p>In visual mode you can also toggle this by simply typing <code>O</code>.</p>
 <h2><a class="header" href="#esil-commands" id="esil-commands">ESIL Commands</a></h2>
