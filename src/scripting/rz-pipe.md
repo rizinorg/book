@@ -11,6 +11,7 @@ The rz-pipe module permits interacting with rizin instances in different methods
 python    x     x     -    x    x    x   x
 haskell   x     x     -    x    -    -   x
 ocaml     x     x     -    x    -    -   x
+rust      x     x     x    x    -    -   x
 ```
 
 Examples
@@ -54,4 +55,23 @@ OCaml
 ```ocaml
 let result = Rz.with_command ~cmd:"/j chown" "/bin/ls"
 Printf.printf "Rizin output is: %s" result
+```
+
+Rust
+-----
+```rust
+ #[macro_use]
+ extern crate rzpipe;
+ extern crate serde_json;
+ use rzpipe::RzPipe;
+ fn main() {
+     let path = Some("/bin/ls".to_owned());
+     let mut rzp = open_pipe!(path).unwrap();
+     println!("{}", rzp.cmd("?e Hello World").unwrap());
+     if let Ok(json) = rzp.cmdj("ij") {
+         println!("{}", serde_json::to_string_pretty(&json).unwrap());
+         println!("ARCH {}", json["bin"]["arch"]);
+     }
+     rzp.close();
+ }
 ```
