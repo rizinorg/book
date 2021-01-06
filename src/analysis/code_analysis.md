@@ -315,7 +315,7 @@ Use `axg*` to generate rizin commands which will help you to create graphs using
 
 Apart from predefined algorithms to identify functions there is a way to specify
 a function prelude with a configuration option `analysis.prelude`. For example, like
-`e analysis.prelude = 0x554889e5` which means
+`e analysis.prelude=0x554889e5` which means
 
 ```
 push rbp

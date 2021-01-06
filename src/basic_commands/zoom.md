@@ -67,7 +67,7 @@ Let's see some examples:
 You can limit zooming to a range of bytes instead of the whole bytespace. Change `zoom.from` and `zoom.to` eval variables:
 
 ```
-[0x00003a04]> e? zoom.
+[0x00003a04]> el zoom.
 zoom.byte: Zoom callback to calculate each byte (See pz? for help)
 zoom.from: Zoom start address
 zoom.in: Specify  boundaries for zoom

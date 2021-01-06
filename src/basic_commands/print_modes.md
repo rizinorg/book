@@ -12,7 +12,7 @@ Below is a list of available print modes listed by `p?`:
 | p[b|B|xb] [len] ([S])   bindump N bits skipping S bytes
 | p[iI][df] [len]         print N ops/bytes (f=func) (see pi? and pdi)
 | p[kK] [len]             print key in randomart (K is for mosaic)
-| p-[?][jh] [mode]        bar|json|histogram blocks (mode: e?search.in)
+| p-[?][jh] [mode]        bar|json|histogram blocks (mode: el search.in)
 | p2 [len]                8x8 2bpp-tiles
 | p3 [file]               print stereogram (3D)
 | p6[de] [len]            base64 decode/encode
@@ -104,10 +104,10 @@ Currently supported timestamp output modes are:
 For example, you can 'view' the current buffer as timestamps in the ntfs time:
 
 ```
-[0x08048000]> e cfg.bigendian = false
+[0x08048000]> e cfg.bigendian=false
 [0x08048000]> pt 4
 29:04:32948 23:12:36 +0000
-[0x08048000]> e cfg.bigendian = true
+[0x08048000]> e cfg.bigendian=true
 [0x08048000]> pt 4
 20:05:13001 09:29:21 +0000
 ```
@@ -407,10 +407,10 @@ _d__  _32        lanai       GPL3    LANAI
 
 ### Configuring the Disassembler
 
-There are multiple options which can be used to configure the output of the disassembler. All these options are described in `e? asm.`
+There are multiple options which can be used to configure the output of the disassembler. All these options are described in `el asm.`
 
 ```
-[0x00005310]> e? asm.
+[0x00005310]> el asm.
 asm.anal: Analyze code and refs while disassembling (see analysis.strings)
 asm.arch: Set the arch to be used by asm
 asm.assembler: Set the plugin name to use when assembling
@@ -433,8 +433,8 @@ Currently there are 136 `asm.` configuration variables so we do not list them al
 The `asm.syntax` variable is used to change the flavor of the assembly syntax used by a disassembler engine. To switch between Intel and AT&T representations:
 
 ```
-e asm.syntax = intel
-e asm.syntax = att
+e asm.syntax=intel
+e asm.syntax=att
 ```
 
 You can also check `asm.pseudo`, which is an experimental pseudocode view,

@@ -49,14 +49,14 @@ You can also get information about the pointer chains using the command `pdp`. T
 The "pseudo" syntax may be somewhat easier for a human to understand than the default assembler notations. But it can become annoying if you read lots of code. To play with it:
 
 ```
-[0x00405e1c]> e asm.pseudo = true
+[0x00405e1c]> e asm.pseudo=true
 [0x00405e1c]> pd 3
 		  ; JMP XREF from 0x00405dfa (fcn.00404531)
 		  0x00405e1c    488b9424a80. rdx = [rsp+0x2a8]
 		  0x00405e24    64483314252. rdx ^= [fs:0x28]
 		  0x00405e2d    4889d8       rax = rbx
 
-[0x00405e1c]> e asm.syntax = intel
+[0x00405e1c]> e asm.syntax=intel
 [0x00405e1c]> pd 3
 		  ; JMP XREF from 0x00405dfa (fcn.00404531)
 		  0x00405e1c    488b9424a80. mov rdx, [rsp+0x2a8]

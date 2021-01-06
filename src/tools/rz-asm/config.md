@@ -10,4 +10,4 @@ Those configurations are available through the `e` command. Here there are the m
 * asm.ucase - show disasm in uppercase
 * ...
 
-Use the `e??asm.` for more details.
+Use the `el asm.` for more details.
