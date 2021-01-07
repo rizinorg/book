@@ -246,6 +246,10 @@ A boolen variable to show UTF-8 characters instead of ANSI.
 
 Enables or disables "fortune" messages displayed at each rizin start.
 
+### cfg.fortunes.file
+
+Rizin has two types for fortunes: tips and fun. Fortunes of the type 'tips' are general tips to help you use Rizin better, whereas the other one prints some lighthearted jokes. You can choose which type of fortune to display, using this variable.
+
 ### stack.size
 
 This variable lets you set the size of stack in bytes.
