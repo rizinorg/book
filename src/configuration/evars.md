@@ -246,6 +246,27 @@ A boolen variable to show UTF-8 characters instead of ANSI.
 
 Enables or disables "fortune" messages displayed at each rizin start.
 
+### cfg.fortunes.file
+
+Rizin has two types for fortunes: tips and fun. Fortunes of the type 'tips' are general tips to help you use Rizin better, whereas the other one prints some lighthearted jokes. You can choose which type of fortune to display, using this variable.
+
+```
+[0x00000000]> e cfg.fortunes.file=tips
+[0x00000000]> fo
+ -- Bindiff two files with '$ rz_diff /bin/true /bin/false'
+[0x00000000]> e cfg.fortunes.file=fun
+[0x00000000]> fo
+ -- Welcome to "IDA - the roguelike"
+[0x00000000]>
+```
+Rizin also supports custom fortunes. You can save your fortunes in a file and provide the relative or absolute path to the same variable, to have them displayed at the startup.
+
+```
+[0x00000000]> e cfg.fortunes.file=/path/to/my/fortunes.txt
+```
+
+Please make sure that you add these in your `~/.rizinrc` to preserve the changes when you reopen rizin.
+
 ### stack.size
 
 This variable lets you set the size of stack in bytes.
