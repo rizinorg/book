@@ -250,6 +250,12 @@ Enables or disables "fortune" messages displayed at each rizin start.
 
 Rizin has two types for fortunes: tips and fun. Fortunes of the type 'tips' are general tips to help you use Rizin better, whereas the other one prints some lighthearted jokes. You can choose which type of fortune to display, using this variable.
 
+Rizin also supports custom fortunes. You can save your fortunes in a file and provide the relative or absolute path to the same variable, to have them displayed at the startup.
+
+```
+[0x00000000]> e cfg.fortunes.file = /path/to/my/fortunes.txt
+```
+
 ### stack.size
 
 This variable lets you set the size of stack in bytes.
