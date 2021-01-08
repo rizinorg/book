@@ -1032,6 +1032,20 @@ It is quite simple to add new architectures for disassembling and analyzing code
 <p>A boolen variable to show UTF-8 characters instead of ANSI.</p>
 <h3><a class="header" href="#cfgfortunes" id="cfgfortunes">cfg.fortunes</a></h3>
 <p>Enables or disables &quot;fortune&quot; messages displayed at each rizin start.</p>
+<h3><a class="header" href="#cfgfortunesfile" id="cfgfortunesfile">cfg.fortunes.file</a></h3>
+<p>Rizin has two types for fortunes: tips and fun. Fortunes of the type 'tips' are general tips to help you use Rizin better, whereas the other one prints some lighthearted jokes. You can choose which type of fortune to display, using this variable.</p>
+<pre><code>[0x00000000]&gt; e cfg.fortunes.file=tips
+[0x00000000]&gt; fo
+ -- Bindiff two files with '$ rz_diff /bin/true /bin/false'
+[0x00000000]&gt; e cfg.fortunes.file=fun
+[0x00000000]&gt; fo
+ -- Welcome to &quot;IDA - the roguelike&quot;
+[0x00000000]&gt;
+</code></pre>
+<p>Rizin also supports custom fortunes. You can save your fortunes in a file and provide the relative or absolute path to the same variable, to have them displayed at the startup.</p>
+<pre><code>[0x00000000]&gt; e cfg.fortunes.file=/path/to/my/fortunes.txt
+</code></pre>
+<p>Please make sure that you add these in your <code>~/.rizinrc</code> to preserve the changes when you reopen rizin.</p>
 <h3><a class="header" href="#stacksize" id="stacksize">stack.size</a></h3>
 <p>This variable lets you set the size of stack in bytes.</p>
 <h2><a class="header" href="#files" id="files">Files</a></h2>
