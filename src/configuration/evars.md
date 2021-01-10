@@ -238,7 +238,7 @@ If you have set up any [flagzones](http://book.rada.re/basic_commands/flags.html
 
 A boolen variable to show UTF-8 characters instead of ANSI.
 
-## Shell Configuration
+## General Configuration
 
 ### cfg.bigendian: `bool`
 
@@ -273,6 +273,8 @@ Please make sure that you add these in your `~/.rizinrc` to preserve the changes
 ### cfg.newtab: `bool`
 
 If this variable is enabled, help messages will be displayed along with command names in tab completion for commands.
+
+## Stack Configuration
 
 ### stack.size: `int`
 
