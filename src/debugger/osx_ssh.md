@@ -1,11 +1,11 @@
 # Debugging on MacOS over SSH
 
-If you try to debug a program over SSH, you may experience failures or rizin
+If you are trying to debug a program over SSH, you may experience failures like rizin
 getting stuck while opening the file. This is because the OS is waiting for
-user authentication before allowing the debugging, however since you are over
+user authentication before allowing the debugging. However, since you are over
 SSH the OS has no way of showing the permission window.
 
-To avoid this problem you can either run rizin with `sudo` or you may instruct taskport to not authenticate the user. To do so you can do:
+To avoid this problem you can either run rizin with `sudo` or you may instruct taskport to not authenticate the user by executing the following commands:
 
 ```sh
 security authorizationdb read system.privilege.taskport > taskport.plist
