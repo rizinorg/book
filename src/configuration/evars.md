@@ -59,7 +59,7 @@ A boolean value which changes the direction of control flow analysis. If set to 
 
 ### asm.offset: `bool`
 
-Boolean value which controls the visibility of offsets for individual disassembled instructions.
+Show or hide offsets for individual disassembled instructions.
 
 ### asm.os: `string`
 
@@ -95,7 +95,7 @@ For example, when turned on, it'd display `jal 0x80001a40` as `jal fcn.80001a40`
 
 ### asm.sub.reg: `bool`
 
-A boolean value used to replace register names with arguments or their associated role alias.
+Replace register names with arguments or their associated role alias.
 
 For example, if you have something like this:
 
@@ -117,7 +117,7 @@ This variable changes it to:
 
 ### asm.sub.rel: `bool`
 
-A boolean value which substitutes pc relative expressions in disassembly. When turned on, it shows the references as string references.
+A boolean value that substitutes expressions relative to the Program Counter in the disassembly. When turned on, it shows the references as string references.
 
 For example:
 
@@ -132,7 +132,7 @@ When turned on, this variable lets you display the above instruction as:
 
 ### asm.sub.section: `bool`
 
-Boolean which shows offsets in disassembly prefixed with the name of the section or map.
+Prefix offsets in the disassembly with the name of the section or map.
 
 That means, from something like:
 
@@ -146,7 +146,7 @@ to the one below, when toggled on.
 
 ### asm.sub.varonly: `bool`
 
-Boolean which substitutes the variable expression with the local variable name.
+Substitutes the variable expression with the local variable name.
 
 For example: `var_14h` as `rbp - var_14h`, in the disassembly.
 
@@ -236,7 +236,7 @@ If you have set up any [flagzones](http://book.rada.re/basic_commands/flags.html
 
 ### scr.utf8: `bool`
 
-A boolen variable to show UTF-8 characters instead of ANSI.
+Show UTF-8 characters instead of ANSI.
 
 ## General Configuration
 
