@@ -47,7 +47,7 @@ If defined to "true", disassembler view will have flags column.
 
 ### asm.lines.call: `bool`
 
-If set to "true", draw lines at the left of the disassemble output (`pd`, `pD` commands) to graphically represent control flow changes (jumps and calls) that are targeted inside current block. Also, see `asm.lines.out`.
+If set to "true", draw lines at the left of the disassembly output (`pd`, `pD` commands) to graphically represent control flow changes (jumps and calls) that are targeted inside the current block. Also, see `asm.lines.out`.
 
 ### asm.lines.out: `bool`
 
