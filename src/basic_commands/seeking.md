@@ -60,7 +60,6 @@ Usage: s    # Help for the seek commands. See ?$? to see all variables
 | sf function       Seek to address of specified function
 | sf.               Seek to the beginning of current function
 | sg/sG             Seek begin (sg) or end (sG) of section or file
-| sl[?] [+-]line    Seek to line
 | sn/sp ([nkey])    Seek to next/prev location, as specified by scr.nkey
 | so [N]            Seek to N next opcode(s)
 | sr pc             Seek to register
