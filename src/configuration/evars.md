@@ -43,7 +43,7 @@ You can use this configuration variable to define the CPU type. For example, if 
 
 ### asm.flags: `bool`
 
-If defined to "true", disassembler view will have flags column.
+When set to "true", the disassembler view will have flags column.
 
 ### asm.lines.call: `bool`
 
@@ -51,7 +51,7 @@ If set to "true", draw lines at the left of the disassembly output (`pd`, `pD` c
 
 ### asm.lines.out: `bool`
 
-When defined as "true", the disassembly view will also draw control flow lines that go outside of the block.
+When set to "true", the disassembly view will also draw control flow lines that go outside of the block.
 
 ### asm.linestyle: `bool`
 
