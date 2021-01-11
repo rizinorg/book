@@ -31,11 +31,42 @@ It is quite simple to add new architectures for disassembling and analyzing code
 
 ### asm.bits: `int`
 
-Determines width in bits of registers for the current architecture. Supported values: 8, 16, 32, 64. Note that not all target architectures support all combinations for asm.bits.
+Determines width in bits of registers for the current architecture.
+Supported values:
+
+* 8
+* 16
+* 32
+* 64
+
+Note that not all target architectures support all combinations for asm.bits.
 
 ### asm.bytes: `bool`
 
-A boolean value used to show or hide displaying of raw bytes of instructions.
+Show or hide displaying of raw bytes of instructions. By default, it is turned off, resulting in a dissasembly like:
+
+```
+[0x00005b20]> e asm.bytes
+false
+[0x00005b20]> pd 5
+            0x00005b20      endbr64
+            0x00005b24      xor   ebp, ebp
+            0x00005b26      mov   r9, rdx
+            0x00005b29      pop   rsi
+            0x00005b2a      mov   rdx, rsp
+```
+When turned on, the raw bytes will be displayed along with the instructions:
+```
+[0x00005b20]> e asm.bytes=true
+[0x00005b20]> pd 5
+            ;-- entry0:
+            ;-- rip:
+            0x00005b20      f30f1efa       endbr64
+            0x00005b24      31ed           xor   ebp, ebp
+            0x00005b26      4989d1         mov   r9, rdx
+            0x00005b29      5e             pop   rsi
+            0x00005b2a      4889e2         mov   rdx, rsp
+```
 
 ### asm.cpu: `string`
 
@@ -63,7 +94,7 @@ Show or hide offsets for individual disassembled instructions.
 
 ### asm.os: `string`
 
-Selects a target operating system of currently loaded binary. Usually, OS is automatically detected by `rabin -rI`. Yet, `asm.os` can be used to switch to a different syscall table employed by another OS.
+Selects a target operating system for the currently loaded binary. Usually, OS is automatically detected by Rizin (`rz-bin -rI`). Yet, `asm.os` can be used to switch to a different syscall table employed by another OS.
 
 ### asm.pseudo: `bool`
 
@@ -89,7 +120,7 @@ It can be useful while disassembling obscure architectures.
 
 ### asm.sub.jmp: `bool`
 
-A boolean value used to substitute jump, call and branch targets in disassembly.
+Substitute jump, call and branch targets with function names in the disassembly.
 
 For example, when turned on, it'd display `jal 0x80001a40` as `jal fcn.80001a40` in the disassembly.
 
@@ -224,7 +255,14 @@ A boolean value that controls displaying of tracing information (sequence number
 
 ### scr.color: `int`
 
-This variable specifies the mode for colorized screen output: "false" (or 0) means no colors, "true" (or 1) means 16-colors mode, 2 means 256-colors mode, 3 means 16 million-colors mode. If your favorite theme looks weird, try to bump this up.
+This variable specifies the mode for colorized screen output.
+
+* "false" (or 0) means no colors
+* "true" (or 1) means 16-colors mode
+* 2 means 256-colors mode
+* 3 means 16 million-colors mode.
+
+If your favorite theme looks weird, try to bump this up.
 
 ### scr.seek: `string`
 
