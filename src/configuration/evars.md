@@ -257,9 +257,9 @@ A boolean value that controls displaying of tracing information (sequence number
 
 This variable specifies the mode for colorized screen output.
 
-* "false" (or 0) means no colors
-* "true" (or 1) means 16-colors mode
-* 2 means 256-colors mode
+* 0 means no colors.
+* 1 means 16-colors mode.
+* 2 means 256-colors mode.
 * 3 means 16 million-colors mode.
 
 If your favorite theme looks weird, try to bump this up.
