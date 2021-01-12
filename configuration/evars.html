@@ -165,16 +165,57 @@
          scr.randpal: Random color palete or just get the next one from 'eco'
 </code></pre>
 <p>The Visual mode has an eval browser that is accessible through the <code>Vbe</code> command.</p>
-<h3><a class="header" href="#asmarch" id="asmarch">asm.arch</a></h3>
+<h2><a class="header" href="#assembly-configuration" id="assembly-configuration">Assembly Configuration</a></h2>
+<h3><a class="header" href="#asmarch-string" id="asmarch-string">asm.arch: <code>string</code></a></h3>
 <p>Defines the target CPU architecture used for disassembling (<code>pd</code>, <code>pD</code> commands) and code analysis (<code>a</code> command). You can find the list of possible values by looking at the result of <code>e asm.arch=?</code> or <code>rz-asm -L</code>.
 It is quite simple to add new architectures for disassembling and analyzing code. There is an interface for that. For x86, it is used to attach a number of third-party disassembler engines, including GNU binutils, Udis86 and a few handmade ones.</p>
-<h3><a class="header" href="#asmcpu" id="asmcpu">asm.cpu</a></h3>
+<h3><a class="header" href="#asmbits-int" id="asmbits-int">asm.bits: <code>int</code></a></h3>
+<p>Determines width in bits of registers for the current architecture.
+Supported values:</p>
+<ul>
+<li>8</li>
+<li>16</li>
+<li>32</li>
+<li>64</li>
+</ul>
+<p>Note that not all target architectures support all combinations for asm.bits.</p>
+<h3><a class="header" href="#asmbytes-bool" id="asmbytes-bool">asm.bytes: <code>bool</code></a></h3>
+<p>Show or hide displaying of raw bytes of instructions. By default, it is turned off, resulting in a dissasembly like:</p>
+<pre><code>[0x00005b20]&gt; e asm.bytes
+false
+[0x00005b20]&gt; pd 5
+            0x00005b20      endbr64
+            0x00005b24      xor   ebp, ebp
+            0x00005b26      mov   r9, rdx
+            0x00005b29      pop   rsi
+            0x00005b2a      mov   rdx, rsp
+</code></pre>
+<p>When turned on, the raw bytes will be displayed along with the instructions:</p>
+<pre><code>[0x00005b20]&gt; e asm.bytes=true
+[0x00005b20]&gt; pd 5
+            ;-- entry0:
+            ;-- rip:
+            0x00005b20      f30f1efa       endbr64
+            0x00005b24      31ed           xor   ebp, ebp
+            0x00005b26      4989d1         mov   r9, rdx
+            0x00005b29      5e             pop   rsi
+            0x00005b2a      4889e2         mov   rdx, rsp
+</code></pre>
+<h3><a class="header" href="#asmcpu-string" id="asmcpu-string">asm.cpu: <code>string</code></a></h3>
 <p>You can use this configuration variable to define the CPU type. For example, if you had picked the architecture as AVR, you can choose your CPU type (ATmega1281, ATmega2561, etc) using <code>asm.cpu</code>.</p>
-<h3><a class="header" href="#asmbits" id="asmbits">asm.bits</a></h3>
-<p>Determines width in bits of registers for the current architecture. Supported values: 8, 16, 32, 64. Note that not all target architectures support all combinations for asm.bits.</p>
-<h3><a class="header" href="#asmsyntax" id="asmsyntax">asm.syntax</a></h3>
-<p>Changes syntax flavor for disassembler between Intel and AT&amp;T. At the moment, this setting affects Udis86 disassembler for Intel 32/Intel 64 targets only. Supported values are <code>intel</code> and <code>att</code>.</p>
-<h3><a class="header" href="#asmpseudo" id="asmpseudo">asm.pseudo</a></h3>
+<h3><a class="header" href="#asmflags-bool" id="asmflags-bool">asm.flags: <code>bool</code></a></h3>
+<p>When set to &quot;true&quot;, the disassembler view will have flags column.</p>
+<h3><a class="header" href="#asmlinescall-bool" id="asmlinescall-bool">asm.lines.call: <code>bool</code></a></h3>
+<p>If set to &quot;true&quot;, draw lines at the left of the disassembly output (<code>pd</code>, <code>pD</code> commands) to graphically represent control flow changes (jumps and calls) that are targeted inside the current block. Also, see <code>asm.lines.out</code>.</p>
+<h3><a class="header" href="#asmlinesout-bool" id="asmlinesout-bool">asm.lines.out: <code>bool</code></a></h3>
+<p>When set to &quot;true&quot;, the disassembly view will also draw control flow lines that go outside of the block.</p>
+<h3><a class="header" href="#asmlinestyle-bool" id="asmlinestyle-bool">asm.linestyle: <code>bool</code></a></h3>
+<p>A boolean value which changes the direction of control flow analysis. If set to &quot;false&quot;, it is done from top to bottom of a block; otherwise, it goes from bottom to top. The &quot;false&quot; setting seems to be a better choice for improved readability and is the default one.</p>
+<h3><a class="header" href="#asmoffset-bool" id="asmoffset-bool">asm.offset: <code>bool</code></a></h3>
+<p>Show or hide offsets for individual disassembled instructions.</p>
+<h3><a class="header" href="#asmos-string" id="asmos-string">asm.os: <code>string</code></a></h3>
+<p>Selects a target operating system for the currently loaded binary. Usually, OS is automatically detected by Rizin (<code>rz-bin -rI</code>). Yet, <code>asm.os</code> can be used to switch to a different syscall table employed by another OS.</p>
+<h3><a class="header" href="#asmpseudo-bool" id="asmpseudo-bool">asm.pseudo: <code>bool</code></a></h3>
 <p>A boolean value to set the psuedo syntax in the disassembly. &quot;False&quot; indicates a native one, defined by the current architecture, &quot;true&quot; activates a pseudocode strings format. For example, it'll transform :</p>
 <pre><code>│           0x080483ff      e832000000     call 0x8048436
 │           0x08048404      31c0           xor eax, eax
@@ -190,11 +231,47 @@ It is quite simple to add new architectures for disassembling and analyzing code
 │           0x0804840f      7405           if (!var) goto 0x8048416
 </code></pre>
 <p>It can be useful while disassembling obscure architectures.</p>
-<h3><a class="header" href="#asmos" id="asmos">asm.os</a></h3>
-<p>Selects a target operating system of currently loaded binary. Usually, OS is automatically detected by <code>rabin -rI</code>. Yet, <code>asm.os</code> can be used to switch to a different syscall table employed by another OS.</p>
-<h3><a class="header" href="#asmflags" id="asmflags">asm.flags</a></h3>
-<p>If defined to &quot;true&quot;, disassembler view will have flags column.</p>
-<h3><a class="header" href="#asmtabs" id="asmtabs">asm.tabs</a></h3>
+<h3><a class="header" href="#asmsubjmp-bool" id="asmsubjmp-bool">asm.sub.jmp: <code>bool</code></a></h3>
+<p>Substitute jump, call and branch targets with function names in the disassembly.</p>
+<p>For example, when turned on, it'd display <code>jal 0x80001a40</code> as <code>jal fcn.80001a40</code> in the disassembly.</p>
+<h3><a class="header" href="#asmsubreg-bool" id="asmsubreg-bool">asm.sub.reg: <code>bool</code></a></h3>
+<p>Replace register names with arguments or their associated role alias.</p>
+<p>For example, if you have something like this:</p>
+<pre><code>│           0x080483ea      83c404         add esp, 4
+│           0x080483ed      68989a0408     push 0x8049a98
+│           0x080483f7      e870060000     call sym.imp.scanf
+│           0x080483fc      83c408         add esp, 8
+│           0x08048404      31c0           xor eax, eax
+</code></pre>
+<p>This variable changes it to:</p>
+<pre><code>│           0x080483ea      83c404         add SP, 4
+│           0x080483ed      68989a0408     push 0x8049a98
+│           0x080483f7      e870060000     call sym.imp.scanf
+│           0x080483fc      83c408         add SP, 8
+│           0x08048404      31c0           xor A0, A0
+</code></pre>
+<h3><a class="header" href="#asmsubrel-bool" id="asmsubrel-bool">asm.sub.rel: <code>bool</code></a></h3>
+<p>A boolean value that substitutes expressions relative to the Program Counter in the disassembly. When turned on, it shows the references as string references.</p>
+<p>For example:</p>
+<pre><code>0x5563844a0181      488d3d7c0e00.  lea rdi, [rip + 0xe7c]    ; str.argv__2d_:__s
+</code></pre>
+<p>When turned on, this variable lets you display the above instruction as:</p>
+<pre><code>0x5563844a0181      488d3d7c0e00.  lea rdi, str.argv__2d_:__s    ; 0x5563844a1004 ; &quot;argv[%2d]: %s\n&quot;
+</code></pre>
+<h3><a class="header" href="#asmsubsection-bool" id="asmsubsection-bool">asm.sub.section: <code>bool</code></a></h3>
+<p>Prefix offsets in the disassembly with the name of the section or map.</p>
+<p>That means, from something like:</p>
+<pre><code>0x000067ea      488d0def0c01.  lea rcx, [0x000174e0]
+</code></pre>
+<p>to the one below, when toggled on.</p>
+<pre><code>0x000067ea      488d0def0c01.  lea rcx, [fmap.LOAD1.0x000174e0]
+</code></pre>
+<h3><a class="header" href="#asmsubvaronly-bool" id="asmsubvaronly-bool">asm.sub.varonly: <code>bool</code></a></h3>
+<p>Substitutes the variable expression with the local variable name.</p>
+<p>For example: <code>var_14h</code> as <code>rbp - var_14h</code>, in the disassembly.</p>
+<h3><a class="header" href="#asmsyntax-string" id="asmsyntax-string">asm.syntax: <code>string</code></a></h3>
+<p>Changes syntax flavor for disassembler between Intel and AT&amp;T. At the moment, this setting affects Udis86 disassembler for Intel 32/Intel 64 targets only. Supported values are <code>intel</code> and <code>att</code>.</p>
+<h3><a class="header" href="#asmtabs-int" id="asmtabs-int">asm.tabs: <code>int</code></a></h3>
 <p>If your disassembly doesn't fit in your screen or aligns clumsily, <code>asm.tabs</code> might be of help. You can use this variable to control the distance between the operands, by setting the number of spaces, while displaying your disassembly.</p>
 <p>For example, this is the disassemly with the variable set to 0:</p>
 <pre><code>[0x000040a7]&gt; e asm.tabs=0
@@ -216,7 +293,7 @@ It is quite simple to add new architectures for disassembling and analyzing code
 │           0x000040af      push  rbx
 │           0x000040b0      sub   rsp,  0x48
 </code></pre>
-<h3><a class="header" href="#asmtabsonce" id="asmtabsonce">asm.tabs.once</a></h3>
+<h3><a class="header" href="#asmtabsonce-bool" id="asmtabsonce-bool">asm.tabs.once: <code>bool</code></a></h3>
 <p>This is a boolean variable that can be set to true if you want to align only the opcodes, excluding the arguments. This makes sense only if you have set <code>asm.tabs</code> on.</p>
 <pre><code>[0x00008290]&gt; e asm.tabs=6
 [0x00008290]&gt; e asm.tabs.once=false
@@ -246,72 +323,31 @@ It is quite simple to add new architectures for disassembling and analyzing code
 │       ┌─&lt; 0x000082b0      bgt   0x82c0
 │       │   0x000082b4      mvn   r3, 0
 </code></pre>
-<h3><a class="header" href="#asmlinescall" id="asmlinescall">asm.lines.call</a></h3>
-<p>If set to &quot;true&quot;, draw lines at the left of the disassemble output (<code>pd</code>, <code>pD</code> commands) to graphically represent control flow changes (jumps and calls) that are targeted inside current block. Also, see <code>asm.lines.out</code>.</p>
-<h3><a class="header" href="#asmlinesout" id="asmlinesout">asm.lines.out</a></h3>
-<p>When defined as &quot;true&quot;, the disassembly view will also draw control flow lines that go outside of the block.</p>
-<h3><a class="header" href="#asmlinestyle" id="asmlinestyle">asm.linestyle</a></h3>
-<p>A boolean value which changes the direction of control flow analysis. If set to &quot;false&quot;, it is done from top to bottom of a block; otherwise, it goes from bottom to top. The &quot;false&quot; setting seems to be a better choice for improved readability and is the default one.</p>
-<h3><a class="header" href="#asmoffset" id="asmoffset">asm.offset</a></h3>
-<p>Boolean value which controls the visibility of offsets for individual disassembled instructions.</p>
-<h3><a class="header" href="#asmtrace" id="asmtrace">asm.trace</a></h3>
+<h3><a class="header" href="#asmtrace-bool" id="asmtrace-bool">asm.trace: <code>bool</code></a></h3>
 <p>A boolean value that controls displaying of tracing information (sequence number and counter) at the left of each opcode. It is used to assist with programs trace analysis.</p>
-<h3><a class="header" href="#asmbytes" id="asmbytes">asm.bytes</a></h3>
-<p>A boolean value used to show or hide displaying of raw bytes of instructions.</p>
-<h3><a class="header" href="#asmsubreg" id="asmsubreg">asm.sub.reg</a></h3>
-<p>A boolean value used to replace register names with arguments or their associated role alias.</p>
-<p>For example, if you have something like this:</p>
-<pre><code>│           0x080483ea      83c404         add esp, 4
-│           0x080483ed      68989a0408     push 0x8049a98
-│           0x080483f7      e870060000     call sym.imp.scanf
-│           0x080483fc      83c408         add esp, 8
-│           0x08048404      31c0           xor eax, eax
-</code></pre>
-<p>This variable changes it to:</p>
-<pre><code>│           0x080483ea      83c404         add SP, 4
-│           0x080483ed      68989a0408     push 0x8049a98
-│           0x080483f7      e870060000     call sym.imp.scanf
-│           0x080483fc      83c408         add SP, 8
-│           0x08048404      31c0           xor A0, A0
-</code></pre>
-<h3><a class="header" href="#asmsubjmp" id="asmsubjmp">asm.sub.jmp</a></h3>
-<p>A boolean value used to substitute jump, call and branch targets in disassembly.</p>
-<p>For example, when turned on, it'd display <code>jal 0x80001a40</code> as <code>jal fcn.80001a40</code> in the disassembly.</p>
-<h3><a class="header" href="#asmsubrel" id="asmsubrel">asm.sub.rel</a></h3>
-<p>A boolean value which substitutes pc relative expressions in disassembly. When turned on, it shows the references as string references.</p>
-<p>For example:</p>
-<pre><code>0x5563844a0181      488d3d7c0e00.  lea rdi, [rip + 0xe7c]    ; str.argv__2d_:__s
-</code></pre>
-<p>When turned on, this variable lets you display the above instruction as:</p>
-<pre><code>0x5563844a0181      488d3d7c0e00.  lea rdi, str.argv__2d_:__s    ; 0x5563844a1004 ; &quot;argv[%2d]: %s\n&quot;
-</code></pre>
-<h3><a class="header" href="#asmsubsection" id="asmsubsection">asm.sub.section</a></h3>
-<p>Boolean which shows offsets in disassembly prefixed with the name of the section or map.</p>
-<p>That means, from something like:</p>
-<pre><code>0x000067ea      488d0def0c01.  lea rcx, [0x000174e0]
-</code></pre>
-<p>to the one below, when toggled on.</p>
-<pre><code>0x000067ea      488d0def0c01.  lea rcx, [fmap.LOAD1.0x000174e0]
-</code></pre>
-<h3><a class="header" href="#asmsubvaronly" id="asmsubvaronly">asm.sub.varonly</a></h3>
-<p>Boolean which substitutes the variable expression with the local variable name.</p>
-<p>For example: <code>var_14h</code> as <code>rbp - var_14h</code>, in the disassembly.</p>
-<h3><a class="header" href="#cfgbigendian" id="cfgbigendian">cfg.bigendian</a></h3>
+<h2><a class="header" href="#screen-configuration" id="screen-configuration">Screen Configuration</a></h2>
+<h3><a class="header" href="#scrcolor-int" id="scrcolor-int">scr.color: <code>int</code></a></h3>
+<p>This variable specifies the mode for colorized screen output.</p>
+<ul>
+<li>0 means no colors.</li>
+<li>1 means 16-colors mode.</li>
+<li>2 means 256-colors mode.</li>
+<li>3 means 16 million-colors mode.</li>
+</ul>
+<p>If your favorite theme looks weird, try to bump this up.</p>
+<h3><a class="header" href="#scrseek-string" id="scrseek-string">scr.seek: <code>string</code></a></h3>
+<p>This variable accepts a full-featured expression or a pointer/flag (eg. eip). If set, rizin will set seek position to its value on startup.</p>
+<h3><a class="header" href="#scrscrollbar-bool" id="scrscrollbar-bool">scr.scrollbar: <code>bool</code></a></h3>
+<p>If you have set up any <a href="http://book.rada.re/basic_commands/flags.html#flag-zones">flagzones</a> (<code>fz?</code>), this variable will let you display the scrollbar with the flagzones, in Visual mode. Set it to <code>1</code> to display the scrollbar at the right end, <code>2</code> for the top and <code>3</code> to display it at the bottom.</p>
+<h3><a class="header" href="#scrutf8-bool" id="scrutf8-bool">scr.utf8: <code>bool</code></a></h3>
+<p>Show UTF-8 characters instead of ANSI.</p>
+<h2><a class="header" href="#general-configuration" id="general-configuration">General Configuration</a></h2>
+<h3><a class="header" href="#cfgbigendian-bool" id="cfgbigendian-bool">cfg.bigendian: <code>bool</code></a></h3>
 <p>Change endianness. &quot;true&quot; means big-endian, &quot;false&quot; is for little-endian.
 &quot;file.id&quot; and &quot;file.flag&quot; both to be true.</p>
-<h3><a class="header" href="#cfgnewtab" id="cfgnewtab">cfg.newtab</a></h3>
-<p>If this variable is enabled, help messages will be displayed along with command names in tab completion for commands.</p>
-<h3><a class="header" href="#scrcolor" id="scrcolor">scr.color</a></h3>
-<p>This variable specifies the mode for colorized screen output: &quot;false&quot; (or 0) means no colors, &quot;true&quot; (or 1) means 16-colors mode, 2 means 256-colors mode, 3 means 16 million-colors mode. If your favorite theme looks weird, try to bump this up.</p>
-<h3><a class="header" href="#scrseek" id="scrseek">scr.seek</a></h3>
-<p>This variable accepts a full-featured expression or a pointer/flag (eg. eip). If set, rizin will set seek position to its value on startup.</p>
-<h3><a class="header" href="#scrscrollbar" id="scrscrollbar">scr.scrollbar</a></h3>
-<p>If you have set up any <a href="http://book.rada.re/basic_commands/flags.html#flag-zones">flagzones</a> (<code>fz?</code>), this variable will let you display the scrollbar with the flagzones, in Visual mode. Set it to <code>1</code> to display the scrollbar at the right end, <code>2</code> for the top and <code>3</code> to display it at the bottom.</p>
-<h3><a class="header" href="#scrutf8" id="scrutf8">scr.utf8</a></h3>
-<p>A boolen variable to show UTF-8 characters instead of ANSI.</p>
-<h3><a class="header" href="#cfgfortunes" id="cfgfortunes">cfg.fortunes</a></h3>
+<h3><a class="header" href="#cfgfortunes-bool" id="cfgfortunes-bool">cfg.fortunes: <code>bool</code></a></h3>
 <p>Enables or disables &quot;fortune&quot; messages displayed at each rizin start.</p>
-<h3><a class="header" href="#cfgfortunesfile" id="cfgfortunesfile">cfg.fortunes.file</a></h3>
+<h3><a class="header" href="#cfgfortunesfile-string" id="cfgfortunesfile-string">cfg.fortunes.file: <code>string</code></a></h3>
 <p>Rizin has two types for fortunes: tips and fun. Fortunes of the type 'tips' are general tips to help you use Rizin better, whereas the other one prints some lighthearted jokes. You can choose which type of fortune to display, using this variable.</p>
 <pre><code>[0x00000000]&gt; e cfg.fortunes.file=tips
 [0x00000000]&gt; fo
@@ -325,7 +361,10 @@ It is quite simple to add new architectures for disassembling and analyzing code
 <pre><code>[0x00000000]&gt; e cfg.fortunes.file=/path/to/my/fortunes.txt
 </code></pre>
 <p>Please make sure that you add these in your <code>~/.rizinrc</code> to preserve the changes when you reopen rizin.</p>
-<h3><a class="header" href="#stacksize" id="stacksize">stack.size</a></h3>
+<h3><a class="header" href="#cfgnewtab-bool" id="cfgnewtab-bool">cfg.newtab: <code>bool</code></a></h3>
+<p>If this variable is enabled, help messages will be displayed along with command names in tab completion for commands.</p>
+<h2><a class="header" href="#stack-configuration" id="stack-configuration">Stack Configuration</a></h2>
+<h3><a class="header" href="#stacksize-int" id="stacksize-int">stack.size: <code>int</code></a></h3>
 <p>This variable lets you set the size of stack in bytes.</p>
 
                     </main>
