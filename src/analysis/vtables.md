@@ -1,6 +1,6 @@
 # Virtual Tables
 
-There is a basic support of virtual tables parsing (RTTI and others).
+There is basic support of virtual tables parsing (RTTI and others).
 The most important thing before you start to perform such kind of analysis
 is to check if the `analysis.cpp.abi` option is set correctly, and change if needed.
 
@@ -19,6 +19,6 @@ parsed tables.
 
 The main commands here are `av` and `avr`. `av` lists all virtual tables
 found when rizin opened the file. If you are not happy with the result
-you may want to try to parse virtual table at a particular address with
+you may want to try to parse a virtual table at a particular address with
 `avr` command. `avra` performs the search and parsing of all virtual
 tables in the binary, like rizin does during the file opening.

@@ -12,7 +12,7 @@ For partial emulation (or imprecise full emulation) rizin uses its own
 [ESIL](../disassembling/esil.md) intermediate language and virtual machine.
 
 Rizin supports this kind of partial emulation for all platforms that
-implement ESIL uplifting (x86/x86_64, ARM, arm64, MIPS, powerpc, sparc, AVR, 8051, Gameboy, ...).
+implement ESIL uplifting (x86/x86_64, ARM, arm64, MIPS, PowerPC, Sparc, AVR, 8051, Gameboy, ...).
 
 One of the most common usages of such emulation is to calculate
 indirect jumps and conditional jumps.

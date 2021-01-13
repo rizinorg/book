@@ -29,10 +29,10 @@ ms
 reg
 ```
 
-The default calling convention for particular architecture/binary is defined with
+The default calling convention for a particular architecture/binary is defined with
 `analysis.cc` for user-mode calls and `analysis.syscc` for syscalls.
 
-To display function prototype of standard library functions you have `afcf` command
+To display a function prototype of standard library functions you have the `afcf` command
 
 ```
 [0x00000000]> afcf printf
@@ -58,6 +58,6 @@ cc.ms.ret=rax
 
 `cc.x.argi=rax` is used to set the ith argument of this calling convention to register name `rax`
 
-`cc.x.argn=stack` means that all the arguments (or the rest of them in case there was argi for any i as counting number) will be stored in stack from left to right
+`cc.x.argn=stack` means that all the arguments (or the rest of them in case there was `argi` for any `i` as counting number) will be stored in the stack from left to right
 
 `cc.x.argn=stack_rev` same as `cc.x.argn=stack` except for it means argument are passed right to left

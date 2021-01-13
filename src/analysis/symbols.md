@@ -30,13 +30,13 @@ e pdb.server=https://msdl.microsoft.com/download/symbols;https://symbols.mozilla
 ```
 On Windows,  you can also use local network share paths (UNC paths) as symbol servers.
 
-Usually, there is no reason to change default `pdb.useragent`, but who knows where
+Usually, there is no reason to change the default `pdb.useragent`, but who knows where
 could it be handy?
 
 Because those PDB files are stored as "cab" archives on the server, `pdb.extract=1`
 says to automatically extract them.
 
-Note that for the automatic downloading to work you need "cabextract" tool, and wget/curl installed.
+Note that for the automatic downloading to work you need the "cabextract" tool, and wget/curl installed.
 
 Sometimes you don't need to do that from the rizin itself, thus - two handy
 rz-bin options:

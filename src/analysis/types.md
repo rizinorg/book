@@ -36,7 +36,7 @@ Most of the related commands are located in `t` namespace:
 | tt[?]                      List all loaded typedefs
 ```
 
-Note that the basic (atomic) types are not those from C standard -
+Note that the basic (atomic) types are not those from the C standard -
 not `char`, `_Bool`, or `short`. Because those types can be different
 from one platform to another, rizin uses `definite` types like as
 `int8_t` or `uint64_t` and will convert `int` to `int32_t` or `int64_t`
@@ -80,7 +80,7 @@ foo
 S1
 ```
 
-Also note there is a config option to specify include directories for types parsing
+Also, note there is a config option to specify include directories for types parsing
 
 ```
 [0x00000000]> el~dir.type
@@ -153,7 +153,7 @@ Moreover, the link will be shown in the disassembly output or visual mode:
  0x00005202      mov rbp, rsp
 ```
 
-Once the struct is linked, rizin tries to propagate structure offset in the function at current offset, to run this analysis on whole program or at any targeted functions after all structs are linked you have `aat` command:
+Once the struct is linked, rizin tries to propagate structure offset in the function at the current offset, to run this analysis on the whole program or at any targeted functions after all structs are linked you have `aat` command:
 
 ```
 [0x00000000]> aa?
@@ -184,7 +184,7 @@ The return value of `malloc` may differ between two emulations, so you have to s
 
 There is one more important aspect of using types in rizin - using `aht` you
 can change the immediate in the opcode to the structure offset.
-Lets see a simple example of [R]SI-relative addressing
+Let's see a simple example of [R]SI-relative addressing
 
 ```
 [0x000052f0]> pd 1
@@ -335,7 +335,7 @@ struct.X.b=b_type,b_offset,b_number_of_elements
 ```
 
 The first line is used to define a structure called `X`, the second line
-defines the elements of `X` as comma separated values. After that, we just define each element info.
+defines the elements of `X` as comma-separated values. After that, we just define each element info.
 
 For example. we can have a struct like this one:
 
@@ -355,7 +355,7 @@ struct._FILETIME.dwLowDateTime=DWORD,0,0
 struct._FILETIME.dwHighDateTime=DWORD,4,0
 ```
 
-Note that the number of elements field is used in case of arrays only
+Note that the number of elements field is used in the case of arrays only
 to identify how many elements are in arrays, other than that it is zero by default.
 
 ### Unions
@@ -364,7 +364,7 @@ Unions are defined exactly like structs the only difference is that you will rep
 
 ### Function prototypes
 
-Function prototypes representation is the most detail oriented and the most important one of them all. Actually, this is the one used directly for type matching
+Function prototype representation is the most detail-oriented and the most important one of them all. This is the one used directly for type matching
 
 ```
 X=func

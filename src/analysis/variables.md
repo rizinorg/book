@@ -48,7 +48,7 @@ can improve it. Moreover, after changing something we can rerun variables analys
 [types analysis](types.md), see `afta` command.
 
 The most important aspect of reverse engineering - naming things. Of course, you can rename
-variable too, affecting all places it was referenced. This can be achieved with `afvn` for
+a variable too, affecting all places it was referenced. This can be achieved with `afvn` for
 _any_ type of argument or variable. Or you can simply remove the variable or argument with
 `afv-` command.
 
@@ -177,6 +177,6 @@ You could create a new profile for specifying a set of format chars depending on
 win=spec
 spec.win.u32=unsigned int
 ```
-Then change your default specification to newly created one using this config variable `e analysis.spec=win`
+Then change your default specification to a newly created one using this config variable `e analysis.spec=win`
 
 For more information about primitive and user-defined types support in rizin refer to [types](types.md) chapter.

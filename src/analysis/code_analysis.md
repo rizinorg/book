@@ -66,11 +66,11 @@ Take some time to understand what each command does and the results after runnin
 
 In this example, we analyze the whole file (`aa`) and then print disassembly of the `main()` function (`pdf`).
 The `aa` command belongs to the family of auto analysis commands and performs only the most basic
-auto analysis steps. In rizin there are many different types of the auto analysis commands with a
+auto analysis steps. In rizin there are many different types of auto analysis commands with a
 different analysis depth, including partial emulation: `aa`, `aaa`, `aab`, `aaaa`, ...
 There is also a mapping of those commands to the rizin CLI options: `rizin -A`, `rizin -AA`, and so on.
 
-It is a common sense that completely automated analysis can produce non sequitur results, thus
+It is common sense that completely automated analysis can produce non sequitur results, thus
 rizin provides separate commands for the particular stages of the analysis allowing fine-grained
 control of the analysis process. Moreover, there is a treasure trove of configuration variables
 for controlling the analysis outcomes. You can find them in `analysis.*` and `emu.*`
@@ -80,7 +80,7 @@ cfg variables' namespaces.
 
 One of the most important "basic" analysis commands is the set of `af` subcommands. `af` means
 "analyze function". Using this command you can either allow automatic analysis of the particular
-function or perform completely manual one.
+function or perform a completely manual one.
 
 ```
 [0x00000000]> af?
@@ -128,7 +128,7 @@ For the semi-automatic, you can use `afm <function name>` to merge the current f
 the one specified by name as an argument, `aff` to readjust the function after analysis changes or function edits,
 `afu <address>` to do the resize and analysis of the current function until the specified address.
 
-Apart from those semi-automatic ways to edit/analyze the function, you can hand craft it in the manual mode with `af+` command and edit basic blocks of it using `afb` commands.
+Apart from those semi-automatic ways to edit/analyze the function, you can handcraft it in the manual mode with `af+` command and edit basic blocks of it using `afb` commands.
 Before changing the basic blocks of the function it is recommended to check the already presented ones:
 
 ```
@@ -142,7 +142,7 @@ Before changing the basic blocks of the function it is recommended to check the 
 ```
 
 ### Hand craft function
-before start, let's prepare a binary file first, for example:
+before starting, let's prepare a binary file first, for example:
 ```C
 int code_block()
 {
@@ -224,19 +224,19 @@ check our work:
 
 ![handcraft_one](handcraft_one.png)
 
-There are two very important commands for this: `afc` and `afB`. The latter is a must-know command for some platforms like ARM. It provides a way to change the "bitness" of the particular function. Basically, allowing to select between ARM and Thumb modes.
+There are two very important commands for this: `afc` and `afB`. The latter is a must-know command for some platforms like ARM. It provides a way to change the "bitness" of a particular function. Basically, allowing to select between ARM and Thumb modes.
 
 `afc` on the other side, allows to manually specify function calling convention. You can find more information on its usage in [calling_conventions](calling_conventions.md).
 
 ## Recursive analysis
 
-There are 5 important program wide half-automated analysis commands:
+There are 5 important program-wide half-automated analysis commands:
 
- - `aab` - perform basic-block analysis ("Nucleus" algorithm)
- - `aac` - analyze function calls from one (selected or current function)
- - `aaf` - analyze all function calls
- - `aar` - analyze data references
- - `aad` - analyze pointers to pointers references
+- `aab` - perform basic-block analysis ("Nucleus" algorithm)
+- `aac` - analyze function calls from one (selected or current function)
+- `aaf` - analyze all function calls
+- `aar` - analyze data references
+- `aad` - analyze pointers to pointers references
 
 Those are only generic semi-automated reference searching algorithms. Rizin provides a
 wide choice of manual references' creation of any kind. For this fine-grained control
@@ -326,15 +326,15 @@ on x86\_64 platform. It should be specified _before_ any analysis commands.
 
 ## Configuration
 
-Rizin allows to change the behavior of almost any analysis stages or commands.
-There are different kinds of the configuration options:
+Rizin allows changing the behavior of almost any analysis stages or commands.
+There are different kinds of configuration options:
 
- - Flow control
- - Basic blocks control
- - References control
- - IO/Ranges
- - Jump tables analysis control
- - Platform/target specific options
+- Flow control
+- Basic blocks control
+- References control
+- IO/Ranges
+- Jump tables analysis control
+- Platform/target-specific options
 
 ### Control flow configuration
 
@@ -350,7 +350,7 @@ sequences at a function beginning.
 
 For now, rizin also allows you to change the maximum basic block size with `analysis.bb.maxsize` option
 . The default value just works in most use cases, but it's useful to increase that for example when
-dealing with obfuscated code. Beware that some of basic blocks
+dealing with obfuscated code. Beware that some of the basic block
 control options may disappear in the future in favor of more automated ways to set those.
 
 For some unusual binaries or targets, there is an option `analysis.noncode`. Rizin doesn't try
@@ -360,7 +360,7 @@ binaries for embedded systems, it is often a case. Thus - this option.
 ### Reference control
 
 The most crucial options that change the analysis results drastically. Sometimes some can be
-disabled to save the time and memory when analyzing big binaries.
+disabled to save time and memory when analyzing big binaries.
 
 - `analysis.jmp.ref` - to allow references creation for unconditional jumps
 - `analysis.jmp.cref` - same, but for conditional jumps
@@ -402,11 +402,11 @@ Two more options can affect the jump tables analysis results too:
 ### Platform specific controls
 
 There are two common problems when analyzing embedded targets: ARM/Thumb detection and MIPS GP
-value. In case of ARM binaries rizin supports some auto-detection of ARM/Thumb mode switches, but
+value. In the case of ARM binaries rizin supports some auto-detection of ARM/Thumb mode switches, but
 beware that it uses partial ESIL emulation, thus slowing the analysis process. If you will not
 like the results, particular functions' mode can be overridden with `afB` command.
 
-The MIPS GP problem is even trickier. It is a basic knowledge that GP value can be different not only
+The MIPS GP problem is even trickier. It is basic knowledge that GP value can be different not only
 for the whole program, but also for some functions. To partially solve that there are options
 `analysis.gp` and `analysis.gpfixed`. The first one sets the GP value for the whole program or particular
 function. The latter allows to "constantify" the GP value if some code is willing to change its
@@ -416,7 +416,7 @@ future in favor of more automated analysis.
 ## Visuals
 
 One of the easiest way to see and check the changes of the analysis commands and variables
-is to perform a scrolling in a `Vv` special visual mode, allowing functions preview:
+is to perform scrolling in a `Vv` special visual mode, allowing functions preview:
 
 ![vv](code_analysis_vv.png)
 
