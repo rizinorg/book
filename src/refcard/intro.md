@@ -90,7 +90,7 @@ have to press keys to get the actions happen instead of commands.
 | V              | Enter visual mode                                 |
 | p/P            | Rotate modes (hex, disasm, debug, words, buf)     |
 | c              | Toggle (c)ursor                                   |
-| q              | Back to Radare shell                              |
+| q              | Back to rizin shell                              |
 | hjkl           | Move around (or HJKL) (left-down-up-right)        |
 | Enter          | Follow address of jump/call                       |
 | sS             | Step/step over                                    |
