@@ -200,7 +200,7 @@ use `afb+` command to add it.
 
 note that the basic syntax of `afb+` is `afb+ function_address block_address block_size [jump] [fail]`. the final instruction of this block points to a new address(jmp 0x8000052), thus we add the address of jump target (0x8000052) to reflect the jump info.
 
-the next block (0x08000052 ~ 0x08000056) is more likeyly an if conditional statement which has two branches. It will jump to 0x800004a if `jle-less or equal`, otherwise (the fail condition) jump to next instruction -- 0x08000058.:
+the next block (0x08000052 ~ 0x08000056) is more likely an if conditional statement which has two branches. It will jump to 0x800004a if `jle-less or equal`, otherwise (the fail condition) jump to next instruction -- 0x08000058.:
 
 ```
 [0x08000034]> afb+ code_block 0x8000052 0x8000058-0x8000052 0x800004a 0x8000058

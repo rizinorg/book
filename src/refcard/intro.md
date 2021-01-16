@@ -120,7 +120,7 @@ have to press keys to get the actions happen instead of commands.
 | uU             | Undo/redo seek                                    |
 | x              | Show xrefs of current func from/to data/code      |
 | yY             | Copy and paste selection                          |
-| z              | fold/unfold comments in diassembly                |
+| z              | fold/unfold comments in disassembly                |
 
 
 ## Searching
