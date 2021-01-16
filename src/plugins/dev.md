@@ -12,17 +12,30 @@ The most basic feature you usually want to support from a specific architecture 
 
 Bear in mind that plugins can be compiled static or dynamically, this means that the arch will be embedded inside the core libraries or it will distributed as a separated shared library.
 
-To configure which plugins you want to compile use the `./configure-plugins` script which accepts the flags --shared and --static to specify them. You can also add it manually inside the `plugins.def.cfg` and then remove the `plugins.cfg` and run `./configure-plugins` again to update the `libr/config.mk` and `libr/config.h`.
-
 You may find some examples of external plugins in [rizin-extras](https://github.com/rizinorg/rizin-extras) repository.
 
 ## Writing the rz_asm plugin
 
 The official way to make third-party plugins is to distribute them into a separate repository. This is a sample disasm plugin:
 
+`meson.build` file:
+```meson
+project('rizin-mycpu', 'c')
+
+plugins_dir = join_paths(get_option('prefix'), 'plugins')
+
+rz_asm_lib = dependency('rz_asm')
+
+library('asm_mycpu', ['mycpu.c'],
+    dependencies: [rz_asm_lib],
+    install: true,
+    install_dir: plugins_dir,
+    soversion: rz_asm_lib.version()
+)
+```
+
+`Makefile` file:
 ```Makefile
-$ cd my-cpu
-$ cat Makefile
 NAME=mycpu
 RZ_PLUGIN_PATH=$(shell rizin -hh|grep RZ_LIBR_PLUGINS|awk '{print $$2}')
 CFLAGS=-g -fPIC $(shell pkg-config --cflags rz_asm)
@@ -45,9 +58,10 @@ install:
 uninstall:
 	rm -f $(RZ_PLUGIN_PATH)/$(NAME).$(SO_EXT)
 ```
+*Please note, that the Makefile support is deprecated and likely will be removed in the future.*
 
+`mycpu.c` file:
 ```c
-$ cat mycpu.c
 /* example rz_asm plugin by pancake at 2014 */
 
 #include <rz_asm.h>
@@ -129,7 +143,14 @@ struct rz_lib_struct_t rizin_plugin = {
 
 To build and install this plugin just type this:
 
+```sh
+meson build
+ninja -C build && ninja -C build install
 ```
-$ make
-$ sudo make install
+
+Or, in case of using GNU Make:
+
+```sh
+make
+make install
 ```

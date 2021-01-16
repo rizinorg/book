@@ -38,7 +38,7 @@ def mycpu(a):
 4. Make a function with 2 subfunctions - `set_reg_profile` and `op` and returning plugin structure - for RzAnalysis plugin
 
 ```python
-def mycpu_anal(a):
+def mycpu_analysis(a):
        def set_reg_profile():
         profile = "=PC	pc\n" + \
 		"=SP	sp\n" + \
@@ -53,8 +53,8 @@ def mycpu_anal(a):
         return profile
 
     def op(memview, pc):
-		analop = {
-            "type" : R.R_ANAL_OP_TYPE_NULL,
+		analysisop = {
+            "type" : R.RZ_ANALYSIS_OP_TYPE_NULL,
             "cycles" : 0,
             "stackop" : 0,
             "stackptr" : 0,
@@ -68,12 +68,12 @@ def mycpu_anal(a):
             opcode = get_opcode(memview) # https://docs.python.org/3/library/stdtypes.html#memoryview
             esilstr = optbl[opcode][2]
             if optbl[opcode][0] == "J": # it's jump
-                analop["type"] = RZ.RZ_ANAL_OP_TYPE_JMP
-                analop["jump"] = decode_jump(opcode, j_mask)
+                analysisop["type"] = RZ.RZ_ANALYSIS_OP_TYPE_JMP
+                analysisop["jump"] = decode_jump(opcode, j_mask)
                 esilstr = jump_esil(esilstr, opcode, j_mask)
 
         except:
-            result = analop
+            result = analysisop
 		# Don't forget to return proper instruction size!
         return [4, result]
 
@@ -86,13 +86,13 @@ def mycpu_anal(a):
             "arch" : "mycpu",
             "bits" : 32,
             "license" : "GPL",
-            "desc" : "MYCPU anal",
+            "desc" : "MYCPU analysis",
             "esil" : 1,
             "set_reg_profile" : set_reg_profile,
             "op" : op,
     }
 ```
-6. Then register those using `rzlang.plugin("asm")` and `rzlang.plugin("anal")` respectively
+6. Then register those using `rzlang.plugin("asm")` and `rzlang.plugin("analysis")` respectively
 
 ```python
 print("Registering MYCPU disasm plugin...")
@@ -106,11 +106,6 @@ You can combine everything in one file and load it using `-i` option:
 rizin -I mycpu.py some_file.bin
 ```
 Or you can load it from the rizin shell: `#!python mycpu.py`
-
-See also:
-
-* [Python](https://github.com/rizinorg/rizin-bindings/blob/master/libr/lang/p/test-py-asm.py)
-* [Javascript](https://github.com/rizinorg/rizin-bindings/blob/master/libr/lang/p/dukasm.js)
 
 ### Implementing new format plugin in Python
 
