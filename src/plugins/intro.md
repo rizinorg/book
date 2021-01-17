@@ -8,7 +8,7 @@ This section aims to explain what are the plugins, how to write them and use the
 
 ## Types of plugins
 ```
-$ ls libr/*/p | grep : | awk -F / '{ print $2 }'
+$ ls librz/*/p | grep : | awk -F / '{ print $2 }'
 analysis  # analysis plugins
 asm       # assembler/disassembler plugins
 bin       # binary format parsing plugins
@@ -17,7 +17,6 @@ core      # core plugins (implement new commands)
 crypto    # encrypt/decrypt/hash/...
 debug     # debugger backends
 egg       # shellcode encoders, etc
-fs        # filesystems and partition tables
 io        # io plugins
 lang      # embedded scripting languages
 parse     # disassembler parsing plugins
@@ -42,7 +41,6 @@ Those are some of the commands:
 L          # list core plugins
 iL         # list bin plugins
 dL         # list debug plugins
-mL         # list fs plugins
 ph         # print support hash algoriths
 ```
 

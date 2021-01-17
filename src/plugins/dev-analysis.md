@@ -111,7 +111,7 @@ After compiling rizin will list this plugin in the output:
 _dA_  _8_16      snes        LGPL3   SuperNES CPU
 ```
 
-**snes_op_table**.h: https://github.com/rizinorg/rizin/blob/master/libr/asm/arch/snes/snes_op_table.h
+**snes_op_table**.h: https://github.com/rizinorg/rizin/blob/master/librz/asm/arch/snes/snes_op_table.h
 
 Example:
 
