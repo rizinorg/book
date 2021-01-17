@@ -779,7 +779,7 @@ For a more compact register value representation you might use <code>dr=</code> 
 You can also manipulate the hardware and the extended/floating point registers.</p>
 <h2><a class="header" href="#contributing" id="contributing">Contributing</a></h2>
 <h3><a class="header" href="#rizin-book" id="rizin-book">Rizin Book</a></h3>
-<p>If you want to contribute to the Rizin book, you can do it at the <a href="https://github.com/rizinorg/rizinbook">Github repository</a>.
+<p>If you want to contribute to the Rizin book, you can do it at the <a href="https://github.com/rizinorg/book">Github repository</a>.
 Suggested contributions include:</p>
 <ul>
 <li>Crackme writeups</li>
@@ -901,7 +901,7 @@ Supported values:</p>
 </ul>
 <p>Note that not all target architectures support all combinations for asm.bits.</p>
 <h3><a class="header" href="#asmbytes-bool" id="asmbytes-bool">asm.bytes: <code>bool</code></a></h3>
-<p>Show or hide displaying of raw bytes of instructions. By default, it is turned off, resulting in a dissasembly like:</p>
+<p>Show or hide displaying of raw bytes of instructions. By default, it is turned off, resulting in a disassembly like:</p>
 <pre><code>[0x00005b20]&gt; e asm.bytes
 false
 [0x00005b20]&gt; pd 5
@@ -992,7 +992,7 @@ false
 <p>Changes syntax flavor for disassembler between Intel and AT&amp;T. At the moment, this setting affects Udis86 disassembler for Intel 32/Intel 64 targets only. Supported values are <code>intel</code> and <code>att</code>.</p>
 <h3><a class="header" href="#asmtabs-int" id="asmtabs-int">asm.tabs: <code>int</code></a></h3>
 <p>If your disassembly doesn't fit in your screen or aligns clumsily, <code>asm.tabs</code> might be of help. You can use this variable to control the distance between the operands, by setting the number of spaces, while displaying your disassembly.</p>
-<p>For example, this is the disassemly with the variable set to 0:</p>
+<p>For example, this is the disassembly with the variable set to 0:</p>
 <pre><code>[0x000040a7]&gt; e asm.tabs=0
 [0x000040a7]&gt; pd 6
 │           0x000040a7      push rsp
@@ -1165,7 +1165,7 @@ main 0x1181 [DATA] lea rdi, str.argv__2d_:__s
 </code></pre>
 <h2><a class="header" href="#seeking" id="seeking">Seeking</a></h2>
 <p>To move around the file we are inspecting we will need to change the offset at which we are using the <code>s</code> command.</p>
-<p>The argument is a math expression that can contain flag names, parenthesis, addition, substraction, multiplication of immediates of contents of memory using brackets.</p>
+<p>The argument is a math expression that can contain flag names, parenthesis, addition, subtraction, multiplication of immediates of contents of memory using brackets.</p>
 <p>Some example commands:</p>
 <pre><code>[0x00000000]&gt; s 0x10
 [0x00000010]&gt; s+4
@@ -1849,7 +1849,7 @@ to have the flags, for example inside the functions, with simple and ubiquitous 
 <p>Set <code>scr.scrollbar=1</code> and go to the Visual mode, to see your flag zone appear on the scrollbar on the right end of the window.</p>
 <p>See <code>fz?</code> for more information.</p>
 <h2><a class="header" href="#writing-data" id="writing-data">Writing Data</a></h2>
-<p>Radare can manipulate a loaded binary file in many ways. You can resize the file, move and copy/paste bytes, insert new bytes (shifting data to the end of the block or file), or simply overwrite bytes. New data may be given as a wide-string, assembler instructions, or the data may be read in from another file.</p>
+<p>Rizin can manipulate a loaded binary file in many ways. You can resize the file, move and copy/paste bytes, insert new bytes (shifting data to the end of the block or file), or simply overwrite bytes. New data may be given as a wide-string, assembler instructions, or the data may be read in from another file.</p>
 <p>Resize the file using the <code>r</code> command. It accepts a numeric argument. A positive value sets a new size for the file. A negative one will truncate the file to the current seek position minus N bytes.</p>
 <pre><code>r 1024      ; resize the file to 1024 bytes
 r -10 @ 33  ; strip 10 bytes at offset 33
@@ -2925,7 +2925,7 @@ f entropy_section_6 0x00002000 0x0144f374
 <p>And as always, you can print the disassembly in JSON using <code>pdj</code> and get more information about the other associated commands by running <code>pd?</code>.</p>
 <h2><a class="header" href="#adding-metadata-to-disassembly" id="adding-metadata-to-disassembly">Adding Metadata to Disassembly</a></h2>
 <p>The typical work involved in reversing binary files makes powerful annotation capabilities essential.
-Radare offers multiple ways to store and retrieve such metadata.</p>
+Rizin offers multiple ways to store and retrieve such metadata.</p>
 <p>By following common basic UNIX principles, it is easy to write a small utility in a scripting language which uses <code>objdump</code>, <code>otool</code> or any other existing utility to obtain information from a binary and to import it into rizin. For example, take a look at <a href="https://github.com/williballenthin/python-idb">python-idb</a>-based <code>ida2rz.py</code> which opens IDB files directly without IDA Pro installed. You can load the resulting file with the <code>.</code> (dot) command into the rizin:</p>
 <pre><code>[0x00000000]&gt; . file.rz
 </code></pre>
@@ -2966,7 +2966,7 @@ Radare offers multiple ways to store and retrieve such metadata.</p>
 ;      this guy seems legit
 0x00000002    0000         add [rax], al
 </code></pre>
-<p>The <code>C?</code> family of commands lets you mark a range as one of several kinds of types. Three basic types are: code (disassembly is done using asm.arch), data (an array of data elements) or string. Use the <code>Cs</code> comand to define a string, use the <code>Cd</code> command for defining an array of data elements, and use the <code>Cf</code> command to define more complex data structures like structs.</p>
+<p>The <code>C?</code> family of commands lets you mark a range as one of several kinds of types. Three basic types are: code (disassembly is done using asm.arch), data (an array of data elements) or string. Use the <code>Cs</code> command to define a string, use the <code>Cd</code> command for defining an array of data elements, and use the <code>Cf</code> command to define more complex data structures like structs.</p>
 <p>Annotating data types is most easily done in visual mode, using the &quot;d&quot; key, short for &quot;data type change&quot;. First, use the cursor to select a range of bytes (press <code>c</code> key to toggle cursor mode and use HJKL keys to expand selection), then press 'd' to get a menu of possible actions/types. For example, to mark the range as a string, use the 's' option from the menu. You can achieve the same result from the shell using the <code>Cs</code> command:</p>
 <pre><code>[0x00000000]&gt; f string_foo @ 0x800
 [0x00000000]&gt; Cs 10 @ string_foo
@@ -3202,7 +3202,7 @@ equalsTo(&quot;&quot;)    -&gt; empty string, aka nop (wrong, if we append pc+=x
 <ul>
 <li>Check dstreg</li>
 <li>Check srcreg</li>
-<li>Get destinaion</li>
+<li>Get destination</li>
 <li>Is jump</li>
 <li>Is conditional</li>
 <li>Evaluate</li>
@@ -3544,7 +3544,7 @@ use <code>afb+</code> command to add it.</p>
 <pre><code>[0x08000034]&gt; afb+ code_block 0x8000034 0x800004a-0x8000034 0x8000052
 </code></pre>
 <p>note that the basic syntax of <code>afb+</code> is <code>afb+ function_address block_address block_size [jump] [fail]</code>. the final instruction of this block points to a new address(jmp 0x8000052), thus we add the address of jump target (0x8000052) to reflect the jump info.</p>
-<p>the next block (0x08000052 ~ 0x08000056) is more likeyly an if conditional statement which has two branches. It will jump to 0x800004a if <code>jle-less or equal</code>, otherwise (the fail condition) jump to next instruction -- 0x08000058.:</p>
+<p>the next block (0x08000052 ~ 0x08000056) is more likely an if conditional statement which has two branches. It will jump to 0x800004a if <code>jle-less or equal</code>, otherwise (the fail condition) jump to next instruction -- 0x08000058.:</p>
 <pre><code>[0x08000034]&gt; afb+ code_block 0x8000052 0x8000058-0x8000052 0x800004a 0x8000058
 </code></pre>
 <p>follow the control flow and create the remaining two blocks (two branches) :</p>
@@ -5488,7 +5488,7 @@ oo+                reopen current file in read-write
 <tr><td><strong>Project Related</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>open project</td><td></td><td><code>Po [file]</code></td><td></td><td>?</td><td></td></tr>
 <tr><td>save project</td><td>automatic</td><td><code>Ps [file]</code></td><td></td><td>?</td><td></td></tr>
-<tr><td>show project informations</td><td></td><td><code>Pi [file]</code></td><td></td><td>?</td><td></td></tr>
+<tr><td>show project information</td><td></td><td><code>Pi [file]</code></td><td></td><td>?</td><td></td></tr>
 <tr><td><strong>Miscellaneous</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>Dump byte char array</td><td><code>N/A</code></td><td><code>pc?</code> (json, C, char, etc.)</td><td>Vpppp</td><td>x/<N>bc</td><td>db</td></tr>
 <tr><td>options</td><td>option menu</td><td><code>e?</code></td><td><code>e</code></td><td></td><td></td></tr>
@@ -5865,7 +5865,7 @@ In ESIL mode, program state can be managed by <code>aets</code> commands.</p>
 </code></pre>
 <p>In addition to the native reverse debugging capabilities in rizin, it's also possible to
 use gdb's remote protocol to reverse debug a target gdbserver that supports it.
-<code>=!dsb</code> and <code>=!dcb</code> are available as <code>dsb</code> and <code>dcb</code> replacementments for this purpose,
+<code>=!dsb</code> and <code>=!dcb</code> are available as <code>dsb</code> and <code>dcb</code> replacements for this purpose,
 see <a href="debugger/remote_gdb.html">remote gdb's documentation</a> for more information.</p>
 <h1><a class="header" href="#windows-messages" id="windows-messages">Windows Messages</a></h1>
 <p>On Windows, you can use <code>dbW</code> while debugging to set a breakpoint for the message handler of a specific window.</p>
@@ -6193,7 +6193,7 @@ Child-SP          RetAddr           Call Site
 <h1><a class="header" href="#tools" id="tools">Tools</a></h1>
 <p>Rizin is not just the only tool provided by the rizin project. The rest if chapters in this book are focused on explaining the use of the rizin tool, this chapter will focus on explaining all the other companion tools that are shipped inside the rizin project.</p>
 <p>All the functionalities provided by the different APIs and plugins have also different tools to allow to use them from the commandline and integrate them with shellscripts easily.</p>
-<p>Thanks to the ortogonal design of the framework it is possible to do all the things that rizin is able from different places:</p>
+<p>Thanks to the orthogonal design of the framework it is possible to do all the things that rizin is able from different places:</p>
 <ul>
 <li>these companion tools</li>
 <li>native library apis</li>
@@ -6206,7 +6206,7 @@ Child-SP          RetAddr           Call Site
 <p>Inside rizin, the functionality of rz-ax is available under the ? command. For example:</p>
 <pre><code>[0x00000000]&gt; ? 3+4
 </code></pre>
-<p>As you can see, the numeric expressions can contain mathematical expressions like addition, substraction, .. as well as group operations with parenthesis.</p>
+<p>As you can see, the numeric expressions can contain mathematical expressions like addition, subtraction, .. as well as group operations with parenthesis.</p>
 <p>The syntax in which the numbers are represented define the base, for example:</p>
 <ul>
 <li>3 : decimal, base 10</li>
@@ -7032,7 +7032,7 @@ selfstop:
 <h3><a class="header" href="#visual-mode-1" id="visual-mode-1">Visual mode</a></h3>
 <p>Assembling also is accessible in rizin visual mode through pressing <code>A</code> key to insert the assembly in the current offset.</p>
 <p>The cool thing of writing assembly using the visual assembler interface that the changes are done in memory until you press enter.</p>
-<p>So you can check the size of the code and which instructions is overlapping before commiting the changes.</p>
+<p>So you can check the size of the code and which instructions is overlapping before committing the changes.</p>
 <h2><a class="header" href="#disassembler" id="disassembler">Disassembler</a></h2>
 <p>Disassembling is the inverse action of assembling. Rasm2 takes hexpair as an input (but can also take a file in binary form) and show the human readable form.</p>
 <p>To do this we can use the <code>-d</code> option of rz-asm like this:</p>
@@ -7264,7 +7264,7 @@ $ xxd helloworld | head -n 3
 <p>'trace' architecture to get a arch-backend call trace:</p>
 <p><code> $ rz-gg -a trace -s yourprogram.r</code></p>
 <h3><a class="header" href="#pointers" id="pointers">Pointers</a></h3>
-<p>TODO: Theorically '*' is used to get contents of a memory pointer.</p>
+<p>TODO: Theoretically '*' is used to get contents of a memory pointer.</p>
 <h3><a class="header" href="#virtual-registers" id="virtual-registers">Virtual registers</a></h3>
 <p>TODO: a0, a1, a2, a3, sp, fp, bp, pc</p>
 <h3><a class="header" href="#math-operations" id="math-operations">Math operations</a></h3>
@@ -8168,7 +8168,7 @@ RZPM_END
 <p>Crackmes (from &quot;crack me&quot; challenge) are the training ground for reverse engineering people. This section will go over tutorials on how to defeat various crackmes using rizin.</p>
 <h1><a class="header" href="#ioli-crackmes" id="ioli-crackmes">IOLI CrackMes</a></h1>
 <p>The IOLI crackme is a good starting point for learning rizin. This is a set of tutorials based on the tutorial at <a href="http://dustri.org/b/defeating-ioli-with-rizin.html">dustri</a></p>
-<p>The IOLI crackmes are available at a locally hosted <a href="https://github.com/rizinorg/rizinbook/raw/master/src/crackmes/ioli/IOLI-crackme.tar.gz">mirror</a></p>
+<p>The IOLI crackmes are available at a locally hosted <a href="https://github.com/rizinorg/book/raw/master/src/crackmes/ioli/IOLI-crackme.tar.gz">mirror</a></p>
 <h1><a class="header" href="#ioli-0x00" id="ioli-0x00">IOLI 0x00</a></h1>
 <p>This is the first IOLI crackme, and the easiest one.</p>
 <pre><code>$ ./crackme0x00
@@ -8338,7 +8338,7 @@ nth paddr      vaddr      len size section type  string
 2   0x0000056f 0x0804856f 15  16   .rodata ascii Password OK :)\n
 3   0x0000057f 0x0804857f 18  19   .rodata ascii Invalid Password!\n
 </code></pre>
-<p>similar to 0x01, no explicity password string here. so it's time to analyze it with rizin.</p>
+<p>similar to 0x01, no explicit password string here. so it's time to analyze it with rizin.</p>
 <pre><code>[0x08048330]&gt; aa
 [x] Analyze all flags starting with sym. and entry0 (aa)
 [0x08048330]&gt; pdf@main
@@ -8392,7 +8392,7 @@ nth paddr      vaddr      len size section type  string
 <pre><code>[0x08048330]&gt; pdf@main | grep cmp
 |           0x0804844e      3b45f4         cmp eax, dword [var_ch]
 </code></pre>
-<p>Unfortunately, the variable compared to eax is stored in the stack. we can't check the value of this variable directly. It's a common case in reverse engineerning that we have to derive the value of the variable from the previous sequence. As the amount of code is relatively small, it's possible.</p>
+<p>Unfortunately, the variable compared to eax is stored in the stack. we can't check the value of this variable directly. It's a common case in reverse engineering that we have to derive the value of the variable from the previous sequence. As the amount of code is relatively small, it's possible.</p>
 <p>for example:</p>
 <pre><code>|           0x080483ed      b800000000     mov eax, 0
 |           0x080483f2      83c00f         add eax, 0xf                ; 15
@@ -9600,7 +9600,7 @@ you can use <em>o</em> to seek.</p>
 <p>Lets read main node-by-node! The first block looks like this:</p>
 <p><img src="crackmes/avatao/01-reverse4/img/main/bb-0c63.png" alt="main bb-0c63" /></p>
 <p>We can see that the program reads a word (2 bytes) into the local variable named
-<em>local_10_6</em>, and than compares it to 0xbb8. Thats 3000 in decimal:</p>
+<em>local_10_6</em>, and than compares it to 0xbb8. That's 3000 in decimal:</p>
 <pre><code>[0x00400c63]&gt; ? 0xbb8
 3000 0xbb8 05670 2.9K 0000:0bb8 3000 10111000 3000.0 0.000000f 0.000000
 </code></pre>
@@ -10183,7 +10183,7 @@ you could just reverse engineer the quick'n'dirty one I've used during the CTF:<
 </code></pre>
 <p>Keep in mind though, that it was written on-the-fly, parallel to the reversing
 phase - for example there are parts that was written without the knowledge of
-all possible instructions. This means that the code is ugly and unefficient.</p>
+all possible instructions. This means that the code is ugly and inefficient.</p>
 <h2><a class="header" href="#outro" id="outro">.outro</a></h2>
 <p>Well, what can I say? Such VM, much reverse! :)</p>
 <p>What started out as a simple writeup for a simple crackme, became a rather
@@ -10259,7 +10259,7 @@ have to press keys to get the actions happen instead of commands.</p>
 <tr><td align="left">V</td><td align="left">Enter visual mode</td></tr>
 <tr><td align="left">p/P</td><td align="left">Rotate modes (hex, disasm, debug, words, buf)</td></tr>
 <tr><td align="left">c</td><td align="left">Toggle (c)ursor</td></tr>
-<tr><td align="left">q</td><td align="left">Back to Radare shell</td></tr>
+<tr><td align="left">q</td><td align="left">Back to rizin shell</td></tr>
 <tr><td align="left">hjkl</td><td align="left">Move around (or HJKL) (left-down-up-right)</td></tr>
 <tr><td align="left">Enter</td><td align="left">Follow address of jump/call</td></tr>
 <tr><td align="left">sS</td><td align="left">Step/step over</td></tr>
@@ -10289,7 +10289,7 @@ have to press keys to get the actions happen instead of commands.</p>
 <tr><td align="left">uU</td><td align="left">Undo/redo seek</td></tr>
 <tr><td align="left">x</td><td align="left">Show xrefs of current func from/to data/code</td></tr>
 <tr><td align="left">yY</td><td align="left">Copy and paste selection</td></tr>
-<tr><td align="left">z</td><td align="left">fold/unfold comments in diassembly</td></tr>
+<tr><td align="left">z</td><td align="left">fold/unfold comments in disassembly</td></tr>
 </tbody></table>
 <h2><a class="header" href="#searching" id="searching">Searching</a></h2>
 <p>There are many situations where we need to find a value inside a binary

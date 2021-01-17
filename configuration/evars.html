@@ -180,7 +180,7 @@ Supported values:</p>
 </ul>
 <p>Note that not all target architectures support all combinations for asm.bits.</p>
 <h3><a class="header" href="#asmbytes-bool" id="asmbytes-bool">asm.bytes: <code>bool</code></a></h3>
-<p>Show or hide displaying of raw bytes of instructions. By default, it is turned off, resulting in a dissasembly like:</p>
+<p>Show or hide displaying of raw bytes of instructions. By default, it is turned off, resulting in a disassembly like:</p>
 <pre><code>[0x00005b20]&gt; e asm.bytes
 false
 [0x00005b20]&gt; pd 5
@@ -271,7 +271,7 @@ false
 <p>Changes syntax flavor for disassembler between Intel and AT&amp;T. At the moment, this setting affects Udis86 disassembler for Intel 32/Intel 64 targets only. Supported values are <code>intel</code> and <code>att</code>.</p>
 <h3><a class="header" href="#asmtabs-int" id="asmtabs-int">asm.tabs: <code>int</code></a></h3>
 <p>If your disassembly doesn't fit in your screen or aligns clumsily, <code>asm.tabs</code> might be of help. You can use this variable to control the distance between the operands, by setting the number of spaces, while displaying your disassembly.</p>
-<p>For example, this is the disassemly with the variable set to 0:</p>
+<p>For example, this is the disassembly with the variable set to 0:</p>
 <pre><code>[0x000040a7]&gt; e asm.tabs=0
 [0x000040a7]&gt; pd 6
 │           0x000040a7      push rsp

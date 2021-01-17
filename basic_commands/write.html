@@ -148,7 +148,7 @@
                 <div id="content" class="content">
                     <main>
                         <h2><a class="header" href="#writing-data" id="writing-data">Writing Data</a></h2>
-<p>Radare can manipulate a loaded binary file in many ways. You can resize the file, move and copy/paste bytes, insert new bytes (shifting data to the end of the block or file), or simply overwrite bytes. New data may be given as a wide-string, assembler instructions, or the data may be read in from another file.</p>
+<p>Rizin can manipulate a loaded binary file in many ways. You can resize the file, move and copy/paste bytes, insert new bytes (shifting data to the end of the block or file), or simply overwrite bytes. New data may be given as a wide-string, assembler instructions, or the data may be read in from another file.</p>
 <p>Resize the file using the <code>r</code> command. It accepts a numeric argument. A positive value sets a new size for the file. A negative one will truncate the file to the current seek position minus N bytes.</p>
 <pre><code>r 1024      ; resize the file to 1024 bytes
 r -10 @ 33  ; strip 10 bytes at offset 33

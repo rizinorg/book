@@ -315,7 +315,7 @@ use <code>afb+</code> command to add it.</p>
 <pre><code>[0x08000034]&gt; afb+ code_block 0x8000034 0x800004a-0x8000034 0x8000052
 </code></pre>
 <p>note that the basic syntax of <code>afb+</code> is <code>afb+ function_address block_address block_size [jump] [fail]</code>. the final instruction of this block points to a new address(jmp 0x8000052), thus we add the address of jump target (0x8000052) to reflect the jump info.</p>
-<p>the next block (0x08000052 ~ 0x08000056) is more likeyly an if conditional statement which has two branches. It will jump to 0x800004a if <code>jle-less or equal</code>, otherwise (the fail condition) jump to next instruction -- 0x08000058.:</p>
+<p>the next block (0x08000052 ~ 0x08000056) is more likely an if conditional statement which has two branches. It will jump to 0x800004a if <code>jle-less or equal</code>, otherwise (the fail condition) jump to next instruction -- 0x08000058.:</p>
 <pre><code>[0x08000034]&gt; afb+ code_block 0x8000052 0x8000058-0x8000052 0x800004a 0x8000058
 </code></pre>
 <p>follow the control flow and create the remaining two blocks (two branches) :</p>

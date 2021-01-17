@@ -164,7 +164,7 @@ nth paddr      vaddr      len size section type  string
 2   0x0000056f 0x0804856f 15  16   .rodata ascii Password OK :)\n
 3   0x0000057f 0x0804857f 18  19   .rodata ascii Invalid Password!\n
 </code></pre>
-<p>similar to 0x01, no explicity password string here. so it's time to analyze it with rizin.</p>
+<p>similar to 0x01, no explicit password string here. so it's time to analyze it with rizin.</p>
 <pre><code>[0x08048330]&gt; aa
 [x] Analyze all flags starting with sym. and entry0 (aa)
 [0x08048330]&gt; pdf@main
@@ -218,7 +218,7 @@ nth paddr      vaddr      len size section type  string
 <pre><code>[0x08048330]&gt; pdf@main | grep cmp
 |           0x0804844e      3b45f4         cmp eax, dword [var_ch]
 </code></pre>
-<p>Unfortunately, the variable compared to eax is stored in the stack. we can't check the value of this variable directly. It's a common case in reverse engineerning that we have to derive the value of the variable from the previous sequence. As the amount of code is relatively small, it's possible.</p>
+<p>Unfortunately, the variable compared to eax is stored in the stack. we can't check the value of this variable directly. It's a common case in reverse engineering that we have to derive the value of the variable from the previous sequence. As the amount of code is relatively small, it's possible.</p>
 <p>for example:</p>
 <pre><code>|           0x080483ed      b800000000     mov eax, 0
 |           0x080483f2      83c00f         add eax, 0xf                ; 15

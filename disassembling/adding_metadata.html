@@ -149,7 +149,7 @@
                     <main>
                         <h2><a class="header" href="#adding-metadata-to-disassembly" id="adding-metadata-to-disassembly">Adding Metadata to Disassembly</a></h2>
 <p>The typical work involved in reversing binary files makes powerful annotation capabilities essential.
-Radare offers multiple ways to store and retrieve such metadata.</p>
+Rizin offers multiple ways to store and retrieve such metadata.</p>
 <p>By following common basic UNIX principles, it is easy to write a small utility in a scripting language which uses <code>objdump</code>, <code>otool</code> or any other existing utility to obtain information from a binary and to import it into rizin. For example, take a look at <a href="https://github.com/williballenthin/python-idb">python-idb</a>-based <code>ida2rz.py</code> which opens IDB files directly without IDA Pro installed. You can load the resulting file with the <code>.</code> (dot) command into the rizin:</p>
 <pre><code>[0x00000000]&gt; . file.rz
 </code></pre>
@@ -190,7 +190,7 @@ Radare offers multiple ways to store and retrieve such metadata.</p>
 ;      this guy seems legit
 0x00000002    0000         add [rax], al
 </code></pre>
-<p>The <code>C?</code> family of commands lets you mark a range as one of several kinds of types. Three basic types are: code (disassembly is done using asm.arch), data (an array of data elements) or string. Use the <code>Cs</code> comand to define a string, use the <code>Cd</code> command for defining an array of data elements, and use the <code>Cf</code> command to define more complex data structures like structs.</p>
+<p>The <code>C?</code> family of commands lets you mark a range as one of several kinds of types. Three basic types are: code (disassembly is done using asm.arch), data (an array of data elements) or string. Use the <code>Cs</code> command to define a string, use the <code>Cd</code> command for defining an array of data elements, and use the <code>Cf</code> command to define more complex data structures like structs.</p>
 <p>Annotating data types is most easily done in visual mode, using the &quot;d&quot; key, short for &quot;data type change&quot;. First, use the cursor to select a range of bytes (press <code>c</code> key to toggle cursor mode and use HJKL keys to expand selection), then press 'd' to get a menu of possible actions/types. For example, to mark the range as a string, use the 's' option from the menu. You can achieve the same result from the shell using the <code>Cs</code> command:</p>
 <pre><code>[0x00000000]&gt; f string_foo @ 0x800
 [0x00000000]&gt; Cs 10 @ string_foo
