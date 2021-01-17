@@ -153,7 +153,7 @@ libraries support plugins to extend the capabilities of the library or add
 support for different targets.</p>
 <p>This section aims to explain what are the plugins, how to write them and use them</p>
 <h2><a class="header" href="#types-of-plugins" id="types-of-plugins">Types of plugins</a></h2>
-<pre><code>$ ls libr/*/p | grep : | awk -F / '{ print $2 }'
+<pre><code>$ ls librz/*/p | grep : | awk -F / '{ print $2 }'
 analysis  # analysis plugins
 asm       # assembler/disassembler plugins
 bin       # binary format parsing plugins
@@ -162,7 +162,6 @@ core      # core plugins (implement new commands)
 crypto    # encrypt/decrypt/hash/...
 debug     # debugger backends
 egg       # shellcode encoders, etc
-fs        # filesystems and partition tables
 io        # io plugins
 lang      # embedded scripting languages
 parse     # disassembler parsing plugins
@@ -182,7 +181,6 @@ done by using the <code>L</code> suffix.</p>
 <pre><code>L          # list core plugins
 iL         # list bin plugins
 dL         # list debug plugins
-mL         # list fs plugins
 ph         # print support hash algoriths
 </code></pre>
 <p>You can use the <code>?</code> as value to get the possible values in the associated eval vars.</p>

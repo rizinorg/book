@@ -186,7 +186,7 @@ for the sake of readability!</p>
 <ol start="4">
 <li>Make a function with 2 subfunctions - <code>set_reg_profile</code> and <code>op</code> and returning plugin structure - for RzAnalysis plugin</li>
 </ol>
-<pre><code class="language-python">def mycpu_anal(a):
+<pre><code class="language-python">def mycpu_analysis(a):
        def set_reg_profile():
         profile = &quot;=PC	pc\n&quot; + \
 		&quot;=SP	sp\n&quot; + \
@@ -201,8 +201,8 @@ for the sake of readability!</p>
         return profile
 
     def op(memview, pc):
-		analop = {
-            &quot;type&quot; : R.R_ANAL_OP_TYPE_NULL,
+		analysisop = {
+            &quot;type&quot; : R.RZ_ANALYSIS_OP_TYPE_NULL,
             &quot;cycles&quot; : 0,
             &quot;stackop&quot; : 0,
             &quot;stackptr&quot; : 0,
@@ -216,12 +216,12 @@ for the sake of readability!</p>
             opcode = get_opcode(memview) # https://docs.python.org/3/library/stdtypes.html#memoryview
             esilstr = optbl[opcode][2]
             if optbl[opcode][0] == &quot;J&quot;: # it's jump
-                analop[&quot;type&quot;] = RZ.RZ_ANAL_OP_TYPE_JMP
-                analop[&quot;jump&quot;] = decode_jump(opcode, j_mask)
+                analysisop[&quot;type&quot;] = RZ.RZ_ANALYSIS_OP_TYPE_JMP
+                analysisop[&quot;jump&quot;] = decode_jump(opcode, j_mask)
                 esilstr = jump_esil(esilstr, opcode, j_mask)
 
         except:
-            result = analop
+            result = analysisop
 		# Don't forget to return proper instruction size!
         return [4, result]
 
@@ -234,14 +234,14 @@ for the sake of readability!</p>
             &quot;arch&quot; : &quot;mycpu&quot;,
             &quot;bits&quot; : 32,
             &quot;license&quot; : &quot;GPL&quot;,
-            &quot;desc&quot; : &quot;MYCPU anal&quot;,
+            &quot;desc&quot; : &quot;MYCPU analysis&quot;,
             &quot;esil&quot; : 1,
             &quot;set_reg_profile&quot; : set_reg_profile,
             &quot;op&quot; : op,
     }
 </code></pre>
 <ol start="6">
-<li>Then register those using <code>rzlang.plugin(&quot;asm&quot;)</code> and <code>rzlang.plugin(&quot;anal&quot;)</code> respectively</li>
+<li>Then register those using <code>rzlang.plugin(&quot;asm&quot;)</code> and <code>rzlang.plugin(&quot;analysis&quot;)</code> respectively</li>
 </ol>
 <pre><code class="language-python">print(&quot;Registering MYCPU disasm plugin...&quot;)
 print(rzlang.plugin(&quot;asm&quot;, mycpu))
@@ -252,11 +252,6 @@ print(rzlang.plugin(&quot;analysis&quot;, mycpu_analysis))
 <pre><code>rizin -I mycpu.py some_file.bin
 </code></pre>
 <p>Or you can load it from the rizin shell: <code>#!python mycpu.py</code></p>
-<p>See also:</p>
-<ul>
-<li><a href="https://github.com/rizinorg/rizin-bindings/blob/master/libr/lang/p/test-py-asm.py">Python</a></li>
-<li><a href="https://github.com/rizinorg/rizin-bindings/blob/master/libr/lang/p/dukasm.js">Javascript</a></li>
-</ul>
 <h3><a class="header" href="#implementing-new-format-plugin-in-python" id="implementing-new-format-plugin-in-python">Implementing new format plugin in Python</a></h3>
 <p>Note - in the following examples there are missing functions of the actual decoding
 for the sake of readability!</p>

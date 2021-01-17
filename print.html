@@ -7466,7 +7466,7 @@ libraries support plugins to extend the capabilities of the library or add
 support for different targets.</p>
 <p>This section aims to explain what are the plugins, how to write them and use them</p>
 <h2><a class="header" href="#types-of-plugins" id="types-of-plugins">Types of plugins</a></h2>
-<pre><code>$ ls libr/*/p | grep : | awk -F / '{ print $2 }'
+<pre><code>$ ls librz/*/p | grep : | awk -F / '{ print $2 }'
 analysis  # analysis plugins
 asm       # assembler/disassembler plugins
 bin       # binary format parsing plugins
@@ -7475,7 +7475,6 @@ core      # core plugins (implement new commands)
 crypto    # encrypt/decrypt/hash/...
 debug     # debugger backends
 egg       # shellcode encoders, etc
-fs        # filesystems and partition tables
 io        # io plugins
 lang      # embedded scripting languages
 parse     # disassembler parsing plugins
@@ -7495,7 +7494,6 @@ done by using the <code>L</code> suffix.</p>
 <pre><code>L          # list core plugins
 iL         # list bin plugins
 dL         # list debug plugins
-mL         # list fs plugins
 ph         # print support hash algoriths
 </code></pre>
 <p>You can use the <code>?</code> as value to get the possible values in the associated eval vars.</p>
@@ -7759,7 +7757,7 @@ RZ_API RzLibStruct rizin_plugin = {
 <p>After compiling rizin will list this plugin in the output:</p>
 <pre><code>_dA_  _8_16      snes        LGPL3   SuperNES CPU
 </code></pre>
-<p><strong>snes_op_table</strong>.h: https://github.com/rizinorg/rizin/blob/master/libr/asm/arch/snes/snes_op_table.h</p>
+<p><strong>snes_op_table</strong>.h: https://github.com/rizinorg/rizin/blob/master/librz/asm/arch/snes/snes_op_table.h</p>
 <p>Example:</p>
 <ul>
 <li><strong>6502</strong>: https://github.com/rizinorg/rizin/commit/64636e9505f9ca8b408958d3c01ac8e3ce254a9b</li>
@@ -7932,7 +7930,7 @@ for the sake of readability!</p>
 <ol start="4">
 <li>Make a function with 2 subfunctions - <code>set_reg_profile</code> and <code>op</code> and returning plugin structure - for RzAnalysis plugin</li>
 </ol>
-<pre><code class="language-python">def mycpu_anal(a):
+<pre><code class="language-python">def mycpu_analysis(a):
        def set_reg_profile():
         profile = &quot;=PC	pc\n&quot; + \
 		&quot;=SP	sp\n&quot; + \
@@ -7947,8 +7945,8 @@ for the sake of readability!</p>
         return profile
 
     def op(memview, pc):
-		analop = {
-            &quot;type&quot; : R.R_ANAL_OP_TYPE_NULL,
+		analysisop = {
+            &quot;type&quot; : R.RZ_ANALYSIS_OP_TYPE_NULL,
             &quot;cycles&quot; : 0,
             &quot;stackop&quot; : 0,
             &quot;stackptr&quot; : 0,
@@ -7962,12 +7960,12 @@ for the sake of readability!</p>
             opcode = get_opcode(memview) # https://docs.python.org/3/library/stdtypes.html#memoryview
             esilstr = optbl[opcode][2]
             if optbl[opcode][0] == &quot;J&quot;: # it's jump
-                analop[&quot;type&quot;] = RZ.RZ_ANAL_OP_TYPE_JMP
-                analop[&quot;jump&quot;] = decode_jump(opcode, j_mask)
+                analysisop[&quot;type&quot;] = RZ.RZ_ANALYSIS_OP_TYPE_JMP
+                analysisop[&quot;jump&quot;] = decode_jump(opcode, j_mask)
                 esilstr = jump_esil(esilstr, opcode, j_mask)
 
         except:
-            result = analop
+            result = analysisop
 		# Don't forget to return proper instruction size!
         return [4, result]
 
@@ -7980,14 +7978,14 @@ for the sake of readability!</p>
             &quot;arch&quot; : &quot;mycpu&quot;,
             &quot;bits&quot; : 32,
             &quot;license&quot; : &quot;GPL&quot;,
-            &quot;desc&quot; : &quot;MYCPU anal&quot;,
+            &quot;desc&quot; : &quot;MYCPU analysis&quot;,
             &quot;esil&quot; : 1,
             &quot;set_reg_profile&quot; : set_reg_profile,
             &quot;op&quot; : op,
     }
 </code></pre>
 <ol start="6">
-<li>Then register those using <code>rzlang.plugin(&quot;asm&quot;)</code> and <code>rzlang.plugin(&quot;anal&quot;)</code> respectively</li>
+<li>Then register those using <code>rzlang.plugin(&quot;asm&quot;)</code> and <code>rzlang.plugin(&quot;analysis&quot;)</code> respectively</li>
 </ol>
 <pre><code class="language-python">print(&quot;Registering MYCPU disasm plugin...&quot;)
 print(rzlang.plugin(&quot;asm&quot;, mycpu))
@@ -7998,11 +7996,6 @@ print(rzlang.plugin(&quot;analysis&quot;, mycpu_analysis))
 <pre><code>rizin -I mycpu.py some_file.bin
 </code></pre>
 <p>Or you can load it from the rizin shell: <code>#!python mycpu.py</code></p>
-<p>See also:</p>
-<ul>
-<li><a href="https://github.com/rizinorg/rizin-bindings/blob/master/libr/lang/p/test-py-asm.py">Python</a></li>
-<li><a href="https://github.com/rizinorg/rizin-bindings/blob/master/libr/lang/p/dukasm.js">Javascript</a></li>
-</ul>
 <h3><a class="header" href="#implementing-new-format-plugin-in-python" id="implementing-new-format-plugin-in-python">Implementing new format plugin in Python</a></h3>
 <p>Note - in the following examples there are missing functions of the actual decoding
 for the sake of readability!</p>
