@@ -22,7 +22,7 @@ nth paddr      vaddr      len size section type  string
 3   0x0000057f 0x0804857f 18  19   .rodata ascii Invalid Password!\n
 ```
 
-similar to 0x01, no explicity password string here. so it's time to analyze it with rizin.
+similar to 0x01, no explicit password string here. so it's time to analyze it with rizin.
 ```
 [0x08048330]> aa
 [x] Analyze all flags starting with sym. and entry0 (aa)
@@ -80,7 +80,7 @@ with the experience of solving crackme0x02, we first locate the position of `cmp
 |           0x0804844e      3b45f4         cmp eax, dword [var_ch]
 ```
 
-Unfortunately, the variable compared to eax is stored in the stack. we can't check the value of this variable directly. It's a common case in reverse engineerning that we have to derive the value of the variable from the previous sequence. As the amount of code is relatively small, it's possible.
+Unfortunately, the variable compared to eax is stored in the stack. we can't check the value of this variable directly. It's a common case in reverse engineering that we have to derive the value of the variable from the previous sequence. As the amount of code is relatively small, it's possible.
 
 for example:
 ```

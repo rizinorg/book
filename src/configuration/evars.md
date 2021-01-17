@@ -43,7 +43,7 @@ Note that not all target architectures support all combinations for asm.bits.
 
 ### asm.bytes: `bool`
 
-Show or hide displaying of raw bytes of instructions. By default, it is turned off, resulting in a dissasembly like:
+Show or hide displaying of raw bytes of instructions. By default, it is turned off, resulting in a disassembly like:
 
 ```
 [0x00005b20]> e asm.bytes
@@ -185,7 +185,7 @@ Changes syntax flavor for disassembler between Intel and AT&T. At the moment, th
 
 If your disassembly doesn't fit in your screen or aligns clumsily, `asm.tabs` might be of help. You can use this variable to control the distance between the operands, by setting the number of spaces, while displaying your disassembly.
 
-For example, this is the disassemly with the variable set to 0:
+For example, this is the disassembly with the variable set to 0:
 ```
 [0x000040a7]> e asm.tabs=0
 [0x000040a7]> pd 6

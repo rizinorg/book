@@ -10,7 +10,7 @@ Inside rizin, the functionality of rz-ax is available under the ? command. For e
 [0x00000000]> ? 3+4
 ```
 
-As you can see, the numeric expressions can contain mathematical expressions like addition, substraction, .. as well as group operations with parenthesis.
+As you can see, the numeric expressions can contain mathematical expressions like addition, subtraction, .. as well as group operations with parenthesis.
 
 The syntax in which the numbers are represented define the base, for example:
 

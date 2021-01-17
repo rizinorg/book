@@ -112,7 +112,7 @@ To get `#!python` and much more, just build [rizin-bindings](https://github.com/
 |**Project Related**   |        |                |                  |
 |open project |                 |`Po [file]`     |                  | ?
 |save project | automatic       |`Ps [file]`     |                  | ?
-|show project informations |    |`Pi [file]`     |                  | ?
+|show project information |    |`Pi [file]`     |                  | ?
 |**Miscellaneous**   |               |                |             |
 |Dump byte char array        | `N/A`    |`pc?` (json, C, char, etc.)            | Vpppp              | x/<N>bc | db
 |options        |option menu    |`e?`            | `e`              |

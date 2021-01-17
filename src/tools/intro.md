@@ -4,7 +4,7 @@ Rizin is not just the only tool provided by the rizin project. The rest if chapt
 
 All the functionalities provided by the different APIs and plugins have also different tools to allow to use them from the commandline and integrate them with shellscripts easily.
 
-Thanks to the ortogonal design of the framework it is possible to do all the things that rizin is able from different places:
+Thanks to the orthogonal design of the framework it is possible to do all the things that rizin is able from different places:
 
 * these companion tools
 * native library apis

@@ -2,7 +2,7 @@
 
 ### Rizin Book
 
-If you want to contribute to the Rizin book, you can do it at the [Github repository](https://github.com/rizinorg/rizinbook).
+If you want to contribute to the Rizin book, you can do it at the [Github repository](https://github.com/rizinorg/book).
 Suggested contributions include:
 
 * Crackme writeups

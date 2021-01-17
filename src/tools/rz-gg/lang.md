@@ -192,7 +192,7 @@ Sometimes r\_egg programs will break or just not work as expected. Use the
 
 ### Pointers
 
-TODO: Theorically '\*' is used to get contents of a memory pointer.
+TODO: Theoretically '\*' is used to get contents of a memory pointer.
 
 ### Virtual registers
 

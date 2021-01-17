@@ -244,7 +244,7 @@ equalsTo("")    -> empty string, aka nop (wrong, if we append pc+=x)
 Common operations:
  * Check dstreg
  * Check srcreg
- * Get destinaion
+ * Get destination
  * Is jump
  * Is conditional
  * Evaluate
