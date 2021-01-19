@@ -49,6 +49,6 @@ f entropy_section_5 0x00002000 0x0144d374
 f entropy_section_6 0x00002000 0x0144f374
 ```
 
-The blocksize is increased to 4096 bytes from the default 100 bytes so that the entropy search `/s` can work on reasonably sized chunks for entropy analysis. The sections flags can be applied with the dot operator, `./s*` and then looped through `px 32 @@ entropy*`.
+The blocksize is increased to 4096 bytes from the default 100 bytes so that the entropy search `/s` can work on reasonably sized chunks for entropy analysis. The sections flags can be applied with the dot operator, `./s*` and then looped through `px 32 @@f:entropy*`.
 
 Moreover AES keys might be referenced from strings or pointed from the imports, for instance, so the `/` and other search-related commands can come in handy in this regard.
