@@ -27,6 +27,14 @@ You can search for wide-char strings (e.g., unicode letters) using the `/w` comm
     [0x00000000]> /w Hello
     0 results found.
 
+Using Rizin, you can also automatically search for magic signatures in the file. This can be done using `/m`. The offset and the file format will be displayed after the search.
+
+    [0x00000000]> /m
+	-- 0 b1606
+	0x00000000 1 JPEG image , EXIF standard
+	0x0000000c 1 TIFF image data, big-endian
+	0x000b1510 1 7-zip archive data, version 0.3
+
 To perform a case-insensitive search for strings use `/i`:
 
     [0x0040488f]> /i Stallman
