@@ -172,6 +172,13 @@ lseek
 <pre><code>[0x00000000]&gt; /w Hello
 0 results found.
 </code></pre>
+<p>Using Rizin, you can also automatically search for magic signatures in the file. This can be done using <code>/m</code>. The offset and the file format will be displayed after the search.</p>
+<pre><code>[0x00000000]&gt; /m
+-- 0 b1606
+0x00000000 1 JPEG image , EXIF standard
+0x0000000c 1 TIFF image data, big-endian
+0x000b1510 1 7-zip archive data, version 0.3
+</code></pre>
 <p>To perform a case-insensitive search for strings use <code>/i</code>:</p>
 <pre><code>[0x0040488f]&gt; /i Stallman
 Searching 8 bytes from 0x00400238 to 0x0040488f: 53 74 61 6c 6c 6d 61 6e
