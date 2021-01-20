@@ -49,7 +49,7 @@ simple scripting situations. To create a macro that takes arguments you simply a
 
 ```
 [0x00404800]
-[0x004047d0]> (foo x y; pd $0; s +$1)
+[0x004047d0]> (foo x y; pd $0; sd +$1)
 [0x004047d0]> .(foo 5 6)
 ;-- entry0:
 0x004047d0      xor ebp, ebp
