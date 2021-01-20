@@ -171,10 +171,10 @@
 <pre><code>&gt; p8 10 @ 0x4010  ; show 10 bytes at offset 0x4010
 &gt; f patata @ 0x10 ; set 'patata' flag at offset 0x10
 </code></pre>
-<p>Using <code>@@</code> you can execute a single command on a list of flags matching the glob. You can think of this as a foreach operation:</p>
+<p>Using <code>@@</code> sub-commands you can execute a single command on a list of flags, functions, symbols, etc.. You can think of these as foreach operations:</p>
 <pre><code>&gt; s 0
 &gt; / lib             ; search 'lib' string
-&gt; p8 20 @@ hit0_*   ; show 20 hexpairs at each search hit
+&gt; p8 20 @@f:hit0_*   ; show 20 hexpairs at each search hit
 </code></pre>
 <p>The <code>&gt;</code> operation is used to redirect the output of a command into a file (overwriting it if it already exists).</p>
 <pre><code>&gt; pr &gt; dump.bin   ; dump 'raw' bytes of current block to file named 'dump.bin'

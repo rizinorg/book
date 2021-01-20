@@ -163,7 +163,7 @@
 <pre><code>ds                    ; call the debugger's 'step' command
 px 200 @ esp          ; show 200 hex bytes at esp
 pc &gt; file.c           ; dump buffer as a C byte array to file.c
-wx 90 @@ sym.*        ; write a nop on every symbol
+wx 90 @@is            ; write a nop on every symbol
 pd 2000 | grep eax    ; grep opcodes that use the 'eax' register
 px 20 ; pd 3 ; px 40  ; multiple commands in a single line
 </code></pre>

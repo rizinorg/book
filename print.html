@@ -622,7 +622,7 @@ Usage: rizin [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i fil
 <pre><code>ds                    ; call the debugger's 'step' command
 px 200 @ esp          ; show 200 hex bytes at esp
 pc &gt; file.c           ; dump buffer as a C byte array to file.c
-wx 90 @@ sym.*        ; write a nop on every symbol
+wx 90 @@is            ; write a nop on every symbol
 pd 2000 | grep eax    ; grep opcodes that use the 'eax' register
 px 20 ; pd 3 ; px 40  ; multiple commands in a single line
 </code></pre>
@@ -1140,10 +1140,10 @@ but appending <code>.rz</code> to it.</p>
 <pre><code>&gt; p8 10 @ 0x4010  ; show 10 bytes at offset 0x4010
 &gt; f patata @ 0x10 ; set 'patata' flag at offset 0x10
 </code></pre>
-<p>Using <code>@@</code> you can execute a single command on a list of flags matching the glob. You can think of this as a foreach operation:</p>
+<p>Using <code>@@</code> sub-commands you can execute a single command on a list of flags, functions, symbols, etc.. You can think of these as foreach operations:</p>
 <pre><code>&gt; s 0
 &gt; / lib             ; search 'lib' string
-&gt; p8 20 @@ hit0_*   ; show 20 hexpairs at each search hit
+&gt; p8 20 @@f:hit0_*   ; show 20 hexpairs at each search hit
 </code></pre>
 <p>The <code>&gt;</code> operation is used to redirect the output of a command into a file (overwriting it if it already exists).</p>
 <pre><code>&gt; pr &gt; dump.bin   ; dump 'raw' bytes of current block to file named 'dump.bin'
@@ -2871,7 +2871,7 @@ f entropy_section_4 0x00001000 0x0144c374
 f entropy_section_5 0x00002000 0x0144d374
 f entropy_section_6 0x00002000 0x0144f374
 </code></pre>
-<p>The blocksize is increased to 4096 bytes from the default 100 bytes so that the entropy search <code>/s</code> can work on reasonably sized chunks for entropy analysis. The sections flags can be applied with the dot operator, <code>./s*</code> and then looped through <code>px 32 @@ entropy*</code>.</p>
+<p>The blocksize is increased to 4096 bytes from the default 100 bytes so that the entropy search <code>/s</code> can work on reasonably sized chunks for entropy analysis. The sections flags can be applied with the dot operator, <code>./s*</code> and then looped through <code>px 32 @@f:entropy*</code>.</p>
 <p>Moreover AES keys might be referenced from strings or pointed from the imports, for instance, so the <code>/</code> and other search-related commands can come in handy in this regard.</p>
 <h1><a class="header" href="#disassembling" id="disassembling">Disassembling</a></h1>
 <p>Disassembling in rizin is just a way to represent an array of bytes. It is handled as a special print mode within <code>p</code> command.</p>
@@ -5012,9 +5012,10 @@ commands</p>
 easily, like the <code>$v</code> &quot;immediate value&quot; variable, or the <code>$m</code> opcode memory reference variable.</p>
 <h1><a class="header" href="#loops" id="loops">Loops</a></h1>
 <p>One of the most common task in automation is looping through something,
-there are multiple ways to do this in rizin.</p>
+there are multiple ways to do this in rizin. You can find all these loops
+under <code>@@?</code>.</p>
 <p>We can loop over flags:</p>
-<pre><code>@@ flagname-regex
+<pre><code>@@f:flagname-regex
 </code></pre>
 <p>For example, we want to see function information with <code>afi</code> command:</p>
 <pre><code>[0x004047d6]&gt; afi
@@ -5042,12 +5043,12 @@ diff: type: new
 </code></pre>
 <p>Now let's say, for example, that we'd like see a particular field from this output for all functions found by analysis. We can do that with a loop over all function flags (whose names begin with <code>fcn.</code>):</p>
 <pre><code>[0x004047d6]&gt; fs functions
-[0x004047d6]&gt; afi @@ fcn.* ~name
+[0x004047d6]&gt; afi @@f:fcn.* ~name
 </code></pre>
 <p>This command will extract the <code>name</code> field from the <code>afi</code> output of every flag with a name
 matching the regexp <code>fcn.*</code>.
-There are also a predefined loop called <code>@@f</code>, which runs your command on every functions found by rizin:</p>
-<pre><code>[0x004047d6]&gt; afi @@f ~name
+There are also other loops, for example one called <code>@@F</code> runs your command on every functions found by rizin:</p>
+<pre><code>[0x004047d6]&gt; afi @@F ~name
 </code></pre>
 <p>We can also loop over a list of offsets, using the following syntax:</p>
 <pre><code>@@=1 2 3 ... N
@@ -5092,67 +5093,55 @@ one offset per line.</p>
 xor ebp, ebp
 mov r9, rdx
 </code></pre>
-<p>rizin also offers various <code>foreach</code> constructs for looping. One of the most useful is for looping through all the instructions of a function:</p>
-<pre><code>[0x004047d0]&gt; pdf
-╒ (fcn) entry0 42
-│; UNKNOWN XREF from 0x00400018 (unk)
-│; DATA XREF from 0x004064bf (sub.strlen_460)
-│; DATA XREF from 0x00406511 (sub.strlen_460)
-│; DATA XREF from 0x0040b080 (unk)
-│; DATA XREF from 0x0040b0ef (unk)
-│0x004047d0  xor ebp, ebp
-│0x004047d2  mov r9, rdx
-│0x004047d5  pop rsi
-│0x004047d6  mov rdx, rsp
-│0x004047d9  and rsp, 0xfffffffffffffff0
-│0x004047dd  push rax
-│0x004047de  push rsp
-│0x004047df  mov r8, 0x4136c0
-│0x004047e6  mov rcx, 0x413660      ; &quot;AWA..AVI..AUI..ATL.%.. &quot;
-0A..AVI..AUI.
-│0x004047ed  mov rdi, main          ; &quot;AWAVAUATUH..S..H....&quot; @
-0
-│0x004047f4  call sym.imp.__libc_start_main
-╘0x004047f9  hlt
-[0x004047d0]&gt; pi 1 @@i
-mov r9, rdx
-pop rsi
-mov rdx, rsp
-and rsp, 0xfffffffffffffff0
-push rax
-push rsp
-mov r8, 0x4136c0
-mov rcx, 0x413660
-mov rdi, main
-call sym.imp.__libc_start_main
-hlt
+<p>If you want to iterate over all instructions of a basic block, you can do:</p>
+<pre><code>[0x004047d0]&gt; pi 1 @@i
+endbr64
+push rbx
+test rdi, rdi
+je 0x14635
 </code></pre>
-<p>In this example the command <code>pi 1</code> runs over all the instructions in the current function (entry0).
-There are other options too (not complete list, check <code>@@?</code> for more information):</p>
-<ul>
-<li><code>@@k sdbquery</code> - iterate over all offsets returned by that sdbquery</li>
-<li><code>@@t</code>- iterate over on all threads (see dp)</li>
-<li><code>@@b</code> - iterate over all basic blocks of current function (see afb)</li>
-<li><code>@@f</code> - iterate over all functions (see aflq)</li>
-</ul>
-<p>The last kind of looping lets you loop through predefined iterator types:</p>
-<ul>
-<li>symbols</li>
-<li>imports</li>
-<li>registers</li>
-<li>threads</li>
-<li>comments</li>
-<li>functions</li>
-<li>flags</li>
-</ul>
-<p>This is done using the <code>@@@</code> command. The previous example of listing information about functions can also be done using the <code>@@@</code> command:</p>
-<pre><code>[0x004047d6]&gt; afi @@@ functions ~name
+<p>In this example the command <code>pi 1</code> runs over all the instructions in the current basic block.</p>
+<p>If you want to iterate over all instructions of all basic blocks of the current function, you can do:</p>
+<pre><code>[0x004047d0]&gt; pi 1 @@i @@b
+endbr64     
+push rbx            
+test rdi, rdi
+je 0x14635
+mov esi, 0x2f    
+mov rbx, rdi
+[... cut for example ...]
+mov rbx, r8                                                                                    
+jmp 0x1461a         
+mov rax, qword [reloc.stderr]
+mov edx, 0x37     
+mov esi, 1            
+lea rdi, str.A_NULL_argv_0__was_passed_through_an_exec_system_call.                            
+mov rcx, qword [rax]
+call sym.imp.fwrite
+call sym.imp.abort
 </code></pre>
-<p>This will extract <code>name</code> field from <code>afi</code> output and will output a huge list of
-function names. We can choose only the second column, to remove the redundant <code>name:</code> on every line:</p>
-<pre><code>[0x004047d6]&gt; afi @@@ functions ~name[1]
+<p>Or if you want to make the split between basic blocks clearer:</p>
+<pre><code>[0x004047d0]&gt; (_;pi 1 @@i; ?e)() @@b
+endbr64     
+push rbx            
+test rdi, rdi
+je 0x14635
+
+mov esi, 0x2f    
+mov rbx, rdi
+[... cut for example ...]
+mov rbx, r8                                                                                    
+jmp 0x1461a         
+
+mov rax, qword [reloc.stderr]
+mov edx, 0x37     
+mov esi, 1            
+lea rdi, str.A_NULL_argv_0__was_passed_through_an_exec_system_call.                            
+mov rcx, qword [rax]
+call sym.imp.fwrite
+call sym.imp.abort
+
 </code></pre>
-<p><strong>Beware, @@@ is not compatible with JSON commands.</strong></p>
 <h1><a class="header" href="#macros" id="macros">Macros</a></h1>
 <p>Apart from simple sequencing and looping, rizin allows to write
 simple macros, using this construction:</p>
