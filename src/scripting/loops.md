@@ -1,11 +1,12 @@
 # Loops
 
 One of the most common task in automation is looping through something,
-there are multiple ways to do this in rizin.
+there are multiple ways to do this in rizin. You can find all these loops
+under `@@?`.
 
 We can loop over flags:
 ```
-@@ flagname-regex
+@@f:flagname-regex
 ```
 
 For example, we want to see function information with `afi` command:
@@ -36,13 +37,13 @@ diff: type: new
 Now let's say, for example, that we'd like see a particular field from this output for all functions found by analysis. We can do that with a loop over all function flags (whose names begin with `fcn.`):
 ```
 [0x004047d6]> fs functions
-[0x004047d6]> afi @@ fcn.* ~name
+[0x004047d6]> afi @@f:fcn.* ~name
 ```
 This command will extract the `name` field from the `afi` output of every flag with a name
 matching the regexp `fcn.*`.
-There are also a predefined loop called `@@f`, which runs your command on every functions found by rizin:
+There are also other loops, for example one called `@@F` runs your command on every functions found by rizin:
 ```
-[0x004047d6]> afi @@f ~name
+[0x004047d6]> afi @@F ~name
 ```  
 
 We can also loop over a list of offsets, using the following syntax:
@@ -94,69 +95,57 @@ xor ebp, ebp
 mov r9, rdx
 ```
 
-rizin also offers various `foreach` constructs for looping. One of the most useful is for looping through all the instructions of a function:
+If you want to iterate over all instructions of a basic block, you can do:
 ```
-[0x004047d0]> pdf
-╒ (fcn) entry0 42
-│; UNKNOWN XREF from 0x00400018 (unk)
-│; DATA XREF from 0x004064bf (sub.strlen_460)
-│; DATA XREF from 0x00406511 (sub.strlen_460)
-│; DATA XREF from 0x0040b080 (unk)
-│; DATA XREF from 0x0040b0ef (unk)
-│0x004047d0  xor ebp, ebp
-│0x004047d2  mov r9, rdx
-│0x004047d5  pop rsi
-│0x004047d6  mov rdx, rsp
-│0x004047d9  and rsp, 0xfffffffffffffff0
-│0x004047dd  push rax
-│0x004047de  push rsp
-│0x004047df  mov r8, 0x4136c0
-│0x004047e6  mov rcx, 0x413660      ; "AWA..AVI..AUI..ATL.%.. "
-0A..AVI..AUI.
-│0x004047ed  mov rdi, main          ; "AWAVAUATUH..S..H...." @
-0
-│0x004047f4  call sym.imp.__libc_start_main
-╘0x004047f9  hlt
 [0x004047d0]> pi 1 @@i
-mov r9, rdx
-pop rsi
-mov rdx, rsp
-and rsp, 0xfffffffffffffff0
-push rax
-push rsp
-mov r8, 0x4136c0
-mov rcx, 0x413660
-mov rdi, main
-call sym.imp.__libc_start_main
-hlt
+endbr64
+push rbx
+test rdi, rdi
+je 0x14635
 ```
-In this example the command `pi 1` runs over all the instructions in the current function (entry0).
-There are other options too (not complete list, check `@@?` for more information):
- - `@@k sdbquery` - iterate over all offsets returned by that sdbquery
- - `@@t`- iterate over on all threads (see dp)
- - `@@b` - iterate over all basic blocks of current function (see afb)
- - `@@f` - iterate over all functions (see aflq)
+In this example the command `pi 1` runs over all the instructions in the current basic block.
 
-The last kind of looping lets you loop through predefined iterator types:
-
- - symbols
- - imports
- - registers
- - threads
- - comments
- - functions
- - flags
-
-This is done using the `@@@` command. The previous example of listing information about functions can also be done using the `@@@` command:
-
+If you want to iterate over all instructions of all basic blocks of the current function, you can do:
 ```
-[0x004047d6]> afi @@@ functions ~name
-```
-This will extract `name` field from `afi` output and will output a huge list of
-function names. We can choose only the second column, to remove the redundant `name:` on every line:
-```
-[0x004047d6]> afi @@@ functions ~name[1]
+[0x004047d0]> pi 1 @@i @@b
+endbr64     
+push rbx            
+test rdi, rdi
+je 0x14635
+mov esi, 0x2f    
+mov rbx, rdi
+[... cut for example ...]
+mov rbx, r8                                                                                    
+jmp 0x1461a         
+mov rax, qword [reloc.stderr]
+mov edx, 0x37     
+mov esi, 1            
+lea rdi, str.A_NULL_argv_0__was_passed_through_an_exec_system_call.                            
+mov rcx, qword [rax]
+call sym.imp.fwrite
+call sym.imp.abort
 ```
 
-**Beware, @@@ is not compatible with JSON commands.**
+Or if you want to make the split between basic blocks clearer:
+```
+[0x004047d0]> (_;pi 1 @@i; ?e)() @@b
+endbr64     
+push rbx            
+test rdi, rdi
+je 0x14635
 
+mov esi, 0x2f    
+mov rbx, rdi
+[... cut for example ...]
+mov rbx, r8                                                                                    
+jmp 0x1461a         
+
+mov rax, qword [reloc.stderr]
+mov edx, 0x37     
+mov esi, 1            
+lea rdi, str.A_NULL_argv_0__was_passed_through_an_exec_system_call.                            
+mov rcx, qword [rax]
+call sym.imp.fwrite
+call sym.imp.abort
+
+```

@@ -42,12 +42,12 @@ The `@` sign is used to specify a temporary offset location or a seek position a
 > f patata @ 0x10 ; set 'patata' flag at offset 0x10
 ```
 
-Using `@@` you can execute a single command on a list of flags matching the glob. You can think of this as a foreach operation:
+Using `@@` sub-commands you can execute a single command on a list of flags, functions, symbols, etc.. You can think of these as foreach operations:
 
 ```
 > s 0
 > / lib             ; search 'lib' string
-> p8 20 @@ hit0_*   ; show 20 hexpairs at each search hit
+> p8 20 @@f:hit0_*   ; show 20 hexpairs at each search hit
 ```
 
 The `>` operation is used to redirect the output of a command into a file (overwriting it if it already exists).
