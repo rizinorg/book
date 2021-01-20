@@ -152,16 +152,16 @@
 <p>The argument is a math expression that can contain flag names, parenthesis, addition, subtraction, multiplication of immediates of contents of memory using brackets.</p>
 <p>Some example commands:</p>
 <pre><code>[0x00000000]&gt; s 0x10
-[0x00000010]&gt; s+4
-[0x00000014]&gt; s-
-[0x00000010]&gt; s+
+[0x00000010]&gt; sd +4
+[0x00000014]&gt; sHu
+[0x00000010]&gt; sHr
 [0x00000014]&gt;
 </code></pre>
 <p>Observe how the prompt offset changes. The first line moves the current offset to the address 0x10.</p>
 <p>The second does a relative seek 4 bytes forward.</p>
-<p>And finally, the last 2 commands are undoing, and redoing the last seek operations.</p>
+<p>And finally, the last 2 commands are undoing, and redoing the last seek operations in the seek history.</p>
 <p>Instead of using just numbers, we can use complex expressions, or basic arithmetic operations to represent the address to seek.</p>
-<p>To do this, check the ?$? Help message which describes the internal variables that can be used in the expressions. For example, this is the same as doing s+4 .</p>
+<p>To do this, check the ?$? Help message which describes the internal variables that can be used in the expressions. For example, this is the same as doing <code>sd +4</code> .</p>
 <pre><code>[0x00000000]&gt; s $$+4
 </code></pre>
 <p>From the debugger (or when emulating) we can also use the register names as references. They are loaded as flags with the <code>.dr*</code> command, which happens under the hood.</p>
@@ -169,32 +169,27 @@
 </code></pre>
 <p>Here's the full help of the <code>s</code> command. We will explain in more detail below.</p>
 <pre><code>[0x00000000]&gt; s?
-Usage: s    # Help for the seek commands. See ?$? to see all variables
-| s                 Print current address
-| s.hexoff          Seek honoring a base from core-&gt;offset
-| s:pad             Print current address with N padded zeros (defaults to 8)
-| s addr            Seek to address
-| s-                Undo seek
-| s-*               Reset undo seek history
-| s- n              Seek n bytes backward
-| s--[n]            Seek blocksize bytes backward (/=n)
-| s+                Redo seek
-| s+ n              Seek n bytes forward
-| s++[n]            Seek blocksize bytes forward (/=n)
-| s[j*=!]           List undo seek history (JSON, =list, *rizin, !=names, s==)
-| s/ DATA           Search for next occurrence of 'DATA'
-| s/x 9091          Search for next occurrence of \x90\x91
-| sa [[+-]a] [asz]  Seek asz (or bsize) aligned to addr
-| sb                Seek aligned to bb start
-| sC[?] string      Seek to comment matching given string
-| sf                Seek to next function (f-&gt;addr+f-&gt;size)
-| sf function       Seek to address of specified function
-| sf.               Seek to the beginning of current function
-| sg/sG             Seek begin (sg) or end (sG) of section or file
-| sn/sp ([nkey])    Seek to next/prev location, as specified by scr.nkey
-| so [N]            Seek to N next opcode(s)
-| sr pc             Seek to register
-| ss                Seek silently (without adding an entry to the seek history)
+Usage: s[?]   # Seek commands
+| s [&lt;addr&gt;]          # Print current address / Seek to address
+| s: [&lt;n&gt;]            # Print current address with &lt;n&gt; padded zeros (defaults to 8)
+| s. &lt;hex_offset&gt;     # Seek honoring a base from core-&gt;offset
+| sd &lt;delta&gt;          # Seek to a delta relative to current offset
+| s-- [&lt;n&gt;]           # Seek blocksize bytes backward (/=n)
+| s++ [&lt;n&gt;]           # Seek blocksize bytes forward (/=n)
+| sH[j*ru-]           # Seek history commands
+| s/[?]               # Seek to the first hit of a search
+| sa &lt;align&gt; [&lt;addr&gt;] # Seek to current offset (or &lt;addr&gt;) aligned to &lt;align&gt;
+| sb                  # Seek aligned to bb start
+| sf [&lt;fcn&gt;]          # Seek to next function / Seek to specific function
+| sf.                 # Seek to the beginning of current function
+| sg                  # Seek to begin of section/file
+| sG                  # Seek to end of section/file
+| sn [&lt;type&gt;]         # Seek to next location of the given &lt;type&gt; or scr.nkey otherwise
+| sp [&lt;type&gt;]         # Seek to prev location
+| so [&lt;n&gt;]            # Seek to &lt;n&gt; next opcodes
+| sr &lt;reg&gt;            # Seek to register
+| sleep &lt;seconds&gt;     # Sleep for the specified amount of seconds
+
 
 &gt; 3s++        ; 3 times block-seeking
 &gt; s 10+0x80   ; seek at 0x80+10
@@ -228,22 +223,29 @@ such as hex, octal, binary or decimal.</p>
 </code></pre>
 <p>There is an alternate way to print current position: <code>?v $$</code>.</p>
 <p>Seek N positions forward, space is optional:</p>
-<pre><code>[0x00000000]&gt; s+ 128
+<pre><code>[0x00000000]&gt; sd 128
 [0x00000080]&gt;
 </code></pre>
 <p>Undo last two seeks to return to the initial address:</p>
-<pre><code>[0x00000080]&gt; s-
-[0x00000000]&gt; s-
+<pre><code>[0x00000080]&gt; sHu
+[0x00000000]&gt; sHu
 [0x00400410]&gt;
 </code></pre>
 <p>We are back at <em>0x00400410</em>.</p>
 <p>There's also a command to show the seek history:</p>
-<pre><code>[0x00400410]&gt; s*
+<pre><code>[0x00400410]&gt; sH
+0x400410 
+0x40041a 
+0x400410 
+0x400411 
+0x400410  # current seek
+0x4005b4  # redo
+[0x00400410]&gt; sH*
 f undo_3 @ 0x400410
 f undo_2 @ 0x40041a
 f undo_1 @ 0x400410
 f undo_0 @ 0x400411
-# Current undo/redo position.
+# Current seek @ 0x400410
 f redo_0 @ 0x4005b4
 </code></pre>
 
