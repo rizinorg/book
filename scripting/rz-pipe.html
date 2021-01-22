@@ -205,6 +205,18 @@ Printf.printf &quot;Rizin output is: %s&quot; result
      rzp.close();
  }
 </code></pre></pre>
+<h2><a class="header" href="#ruby" id="ruby">Ruby</a></h2>
+<pre><code class="language-ruby">require './rzpipe'
+
+begin
+  rzp = RzPipe.new
+rescue Exception =&gt; e
+  rzp = RzPipe.new '/bin/ls'
+end
+  puts rzp.cmd 'a'
+  puts rzp.cmd 'pd 10 main'
+  rzp.quit
+</code></pre>
 
                     </main>
 
