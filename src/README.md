@@ -1,6 +1,6 @@
 # Introduction
 
-This book is a book about [Rizin](https://rizin.re) reverse engineering framework and it's originally
+This is a book about [Rizin](https://rizin.re) reverse engineering framework and it's originally
 based on the [radare2 book](https://github.com/radareorg/radare2book)
 
 Check the Github site to add new contents or fix typos:
