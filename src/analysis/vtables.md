@@ -2,7 +2,7 @@
 
 There is basic support of virtual tables parsing (RTTI and others).
 The most important thing before you start to perform such kind of analysis
-is to check if the `analysis.cpp.abi` option is set correctly, and change if needed.
+is to check if the `analysis.cpp.abi` option is set correctly and change it if needed.
 
 All commands to work with virtual tables are located in the `av` namespace.
 Currently, the support is very basic, allowing you only to inspect

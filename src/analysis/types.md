@@ -157,7 +157,7 @@ Once the struct is linked, rizin tries to propagate structure offset in the func
 
 ```
 [0x00000000]> aa?
-| aat [fcn]           Analyze all/given function to convert immediate to linked structure offsets (see tl?)
+| aat [fcn]           Analyze all functions or a given function to convert immediate to linked structure offsets (see tl?)
 ```
 
 Note sometimes the emulation may not be accurate, for example as below :
@@ -177,7 +177,7 @@ The return value of `malloc` may differ between two emulations, so you have to s
 
 ```
 [0x000006da]> ah?
-| ahr val            set hint for return value of a function
+| ahr val            set hint for the return value of a function
 ```
 
 ### Structure Immediates
@@ -258,28 +258,28 @@ Defining primitive types requires an understanding of basic `pf` formats,
 you can find the whole list of format specifier in `pf??`:
 
 ```
------------------------------------------------------
-| format | explanation                              |
-|---------------------------------------------------|
-|  b     |  byte (unsigned)                         |
-|  c     |  char (signed byte)                      |
-|  d     |  0x%%08x hexadecimal value (4 bytes)     |
-|  f     |  float value (4 bytes)                   |
-|  i     |  %%i integer value (4 bytes)             |
-|  o     |  0x%%08o octal value (4 byte)            |
-|  p     |  pointer reference (2, 4 or 8 bytes)     |
-|  q     |  quadword (8 bytes)                      |
-|  s     |  32bit pointer to string (4 bytes)       |
-|  S     |  64bit pointer to string (8 bytes)       |
-|  t     |  UNIX timestamp (4 bytes)                |
-|  T     |  show Ten first bytes of buffer          |
-|  u     |  uleb128 (variable length)               |
-|  w     |  word (2 bytes unsigned short in hex)    |
-|  x     |  0x%%08x hex value and flag (fd @ addr)  |
-|  X     |  show formatted hexpairs                 |
-|  z     |  \0 terminated string                    |
-|  Z     |  \0 terminated wide string               |
------------------------------------------------------
+---------------------------------------------------
+| format | explanation                            |
+| ------ | -------------------------------------- |
+| b      | byte (unsigned)                        |
+| c      | char (signed byte)                     |
+| d      | 0x%%08x hexadecimal value (4 bytes)    |
+| f      | float value (4 bytes)                  |
+| i      | %%i integer value (4 bytes)            |
+| o      | 0x%%08o octal value (4 byte)           |
+| p      | pointer reference (2, 4 or 8 bytes)    |
+| q      | quadword (8 bytes)                     |
+| s      | 32bit pointer to string (4 bytes)      |
+| S      | 64bit pointer to string (8 bytes)      |
+| t      | UNIX timestamp (4 bytes)               |
+| T      | show Ten first bytes of buffer         |
+| u      | uleb128 (variable length)              |
+| w      | word (2 bytes unsigned short in hex)   |
+| x      | 0x%%08x hex value and flag (fd @ addr) |
+| X      | show formatted hexpairs                |
+| z      | \0 terminated string                   |
+| Z      | \0 terminated wide string              |
+---------------------------------------------------
 
 ```
 there are basically 3 mandatory keys for defining basic data types:

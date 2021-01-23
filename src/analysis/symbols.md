@@ -65,7 +65,7 @@ manipulated by the `id` commands:
 ```
 
 Where `idpi` is basically the same as `rz-bin -P`.
-Note that `idp` can be also used not only in the static analysis mode, but also
+Note that `idp` can be also used not only in the static analysis mode but also
 in the debugging mode, even if connected via WinDbg.
 
 For simplifying the loading PDBs, especially for the processes with many linked DLLs,

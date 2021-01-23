@@ -122,8 +122,8 @@ There's also `afl=`, which displays ASCII-art bars with function ranges.
 
 You can find the rest of them under `afl?`.
 
-Some of the most challenging tasks while performing a function analysis are merge, crop and resize.
-As with other analysis commands you have two modes: semi-automatic and manual.
+Some of the most challenging tasks while performing a function analysis are merge, crop, and resize.
+As with other analysis commands, you have two modes: semi-automatic and manual.
 For the semi-automatic, you can use `afm <function name>` to merge the current function with
 the one specified by name as an argument, `aff` to readjust the function after analysis changes or function edits,
 `afu <address>` to do the resize and analysis of the current function until the specified address.
@@ -141,7 +141,7 @@ Before changing the basic blocks of the function it is recommended to check the 
 0x00003ba8 0x00003bf9 00:0000 81
 ```
 
-### Hand craft function
+### Handcraft function
 before starting, let's prepare a binary file first, for example:
 ```C
 int code_block()
@@ -181,7 +181,7 @@ p: Cannot find function at 0x08000034
             0x0800005c      c3             ret
 
 ```
-our goal is to hand craft a function with the following structure
+our goal is to handcraft a function with the following structure
 
 ![analyze_one](analyze_one.png)
 
@@ -224,7 +224,7 @@ check our work:
 
 ![handcraft_one](handcraft_one.png)
 
-There are two very important commands for this: `afc` and `afB`. The latter is a must-know command for some platforms like ARM. It provides a way to change the "bitness" of a particular function. Basically, allowing to select between ARM and Thumb modes.
+There are two very important commands for this: `afc` and `afB`. The latter is a must-know command for some platforms like ARM. It provides a way to change the "bitness" of a particular function by allowing to select between ARM and Thumb modes.
 
 `afc` on the other side, allows to manually specify function calling convention. You can find more information on its usage in [calling_conventions](calling_conventions.md).
 
@@ -239,7 +239,7 @@ There are 5 important program-wide half-automated analysis commands:
 - `aad` - analyze pointers to pointers references
 
 Those are only generic semi-automated reference searching algorithms. Rizin provides a
-wide choice of manual references' creation of any kind. For this fine-grained control
+wide choice of manual references' creation of any kind. For this fine-grained control,
 you can use `ax` commands.
 
 ```
@@ -268,7 +268,7 @@ Usage: ax[?d-l*]   # see also 'afx?'
 ```
 
 The most commonly used `ax` commands are `axt` and `axf`, especially as a part of various rz-pipe
-scripts. Lets say we see the string in the data or a code section and want to find all places
+scripts. Let's say we see the string in the data or a code section and want to find all places
 it was referenced from, we should use `axt`:
 
 ```
@@ -338,7 +338,7 @@ There are different kinds of configuration options:
 
 ### Control flow configuration
 
-Two most commonly used options for changing the behavior of control flow analysis in rizin are
+The two most commonly used options for changing the behavior of control flow analysis in rizin are
 `analysis.hasnext` and `analysis.jmp.after`. The first one allows forcing rizin to continue the analysis
 after the end of the function, even if the next chunk of the code wasn't called anywhere, thus
 analyzing all of the available functions. The latter one allows forcing rizin to continue
@@ -393,7 +393,7 @@ Jump tables are one of the trickiest targets in binary reverse engineering. Ther
 of different types, the end result depending on the compiler/linker and LTO stages of optimization.
 Thus rizin allows enabling some experimental jump tables detection algorithms using `analysis.jmp.tbl`
 option. Eventually, algorithms moved into the default analysis loops once they start to work on
-every supported platform/target/testcase.
+every supported platform/target/test-case.
 Two more options can affect the jump tables analysis results too:
 
 - `analysis.jmp.indir` - follow the indirect jumps, some jump tables rely on them
@@ -407,7 +407,7 @@ beware that it uses partial ESIL emulation, thus slowing the analysis process. I
 like the results, particular functions' mode can be overridden with `afB` command.
 
 The MIPS GP problem is even trickier. It is basic knowledge that GP value can be different not only
-for the whole program, but also for some functions. To partially solve that there are options
+for the whole program but also for some functions. To partially solve that there are options
 `analysis.gp` and `analysis.gpfixed`. The first one sets the GP value for the whole program or particular
 function. The latter allows to "constantify" the GP value if some code is willing to change its
 value, always resetting it if the case. Those are heavily experimental and might be changed in the
@@ -421,12 +421,12 @@ is to perform scrolling in a `Vv` special visual mode, allowing functions previe
 ![vv](code_analysis_vv.png)
 
 When we want to check how analysis changes affect the result in the case of big functions, we can
-use minimap instead, allowing to see a bigger flow graph on the same screen size. To get into
+use minimap instead, allowing us to see a bigger flow graph on the same screen size. To get into
 the minimap mode type `VV` then press `p` twice:
 
 ![vv2](code_analysis_vv2.png)
 
-This mode allows you to see the disassembly of each node separately, just navigate between them using `Tab` key.
+This mode allows you to see the disassembly of each node separately, just navigate between them using the `Tab` key.
 
 ## Analysis hints
 
@@ -439,26 +439,26 @@ string. These commands are located under `ah` namespace:
 Usage: ah[lba-]  Analysis Hints
 | ah?                show this help
 | ah? offset         show hint of given offset
-| ah                 list hints in human-readable format
+| ah                 list hints in a human-readable format
 | ah.                list hints in human-readable format from current offset
 | ah-                remove all hints
-| ah- offset [size]  remove hints at given offset
+| ah- offset [size]  remove hints at the given offset
 | ah* offset         list hints in rizin commands format
-| aha ppc @ 0x42     force arch ppc for all addrs >= 0x42 or until the next hint
-| aha 0 @ 0x84       disable the effect of arch hints for all addrs >= 0x84 or until the next hint
-| ahb 16 @ 0x42      force 16bit for all addrs >= 0x42 or until the next hint
-| ahb 0 @ 0x84       disable the effect of bits hints for all addrs >= 0x84 or until the next hint
+| aha ppc @ 0x42     force arch ppc for all address >= 0x42 or until the next hint
+| aha 0 @ 0x84       disable the effect of arch hints for all address >= 0x84 or until the next hint
+| ahb 16 @ 0x42      force 16bit for all address >= 0x42 or until the next hint
+| ahb 0 @ 0x84       disable the effect of bits hints for all address >= 0x84 or until the next hint
 | ahc 0x804804       override call/jump address
 | ahd foo a0,33      replace opcode string
 | ahe 3,eax,+=       set vm analysis string
 | ahf 0x804840       override fallback address for call
-| ahF 0x10           set stackframe size at current offset
+| ahF 0x10           set stackframe size at the current offset
 | ahh 0x804840       highlight this address offset in disasm
 | ahi[?] 10          define numeric base for immediates (2, 8, 10, 10u, 16, i, p, S, s)
 | ahj                list hints in JSON
 | aho call           change opcode type (see aho?) (deprecated, moved to "ahd")
 | ahp addr           set pointer hint
-| ahr val            set hint for return value of a function
+| ahr val            set hint for the return value of a function
 | ahs 4              set opcode size=4
 | ahS jz             set asm.syntax=jz for this opcode
 | aht [?] <type>     Mark immediate as a type offset (deprecated, moved to "aho")

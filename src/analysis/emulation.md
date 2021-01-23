@@ -1,18 +1,18 @@
 # Emulation
 
 One of the most important things to remember in reverse engineering is
-a core difference between static analysis and dynamic analysis. As many already
+the core difference between static analysis and dynamic analysis. As many already
 know, static analysis suffers from the path explosion problem, which is impossible
 to solve even in the most basic way without at least a partial emulation.
 
 Thus many professional reverse engineering tools use code emulation while
-performing an analysis of binary code, and rizin is no difference here.
+performing an analysis of binary code, and rizin is no different here.
 
 For partial emulation (or imprecise full emulation) rizin uses its own
 [ESIL](../disassembling/esil.md) intermediate language and virtual machine.
 
 Rizin supports this kind of partial emulation for all platforms that
-implement ESIL uplifting (x86/x86_64, ARM, arm64, MIPS, PowerPC, Sparc, AVR, 8051, Gameboy, ...).
+implement ESIL uplifting (x86/x86_64, ARM, arm64, MIPS, PowerPC, SPARC, AVR, 8051, Gameboy, ...).
 
 One of the most common usages of such emulation is to calculate
 indirect jumps and conditional jumps.
@@ -71,7 +71,7 @@ emulate only a small chunk of the code, like encryption/decryption, unpacking or
 calculating something.
 
 After we successfully set up the ESIL VM we can interact with it like with a usual debugging mode.
-Commands interface for ESIL VM is almost identical to the debugging one:
+The commands interface for ESIL VM is almost identical to the debugging one:
 
 - `aes` to step (or `s` key in visual mode)
 - `aesi` to step over the function calls

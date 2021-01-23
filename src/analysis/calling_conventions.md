@@ -13,7 +13,7 @@ Usage: afc[agl?]
 | afcf[j] [name]  Prints return type function(arg1, arg2...), see afij
 | afck            List SDB details of call loaded calling conventions
 | afcl            List all available calling conventions
-| afco path       Open Calling Convention sdb profile from given path
+| afco path       Open Calling Convention sdb profile from the given path
 | afcR            Register telescoping using the calling conventions order
 [0x00000000]>
 ```
