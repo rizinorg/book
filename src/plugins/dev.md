@@ -34,32 +34,6 @@ library('asm_mycpu', ['mycpu.c'],
 )
 ```
 
-`Makefile` file:
-```Makefile
-NAME=mycpu
-RZ_PLUGIN_PATH=$(shell rizin -hh|grep RZ_LIBR_PLUGINS|awk '{print $$2}')
-CFLAGS=-g -fPIC $(shell pkg-config --cflags rz_asm)
-LDFLAGS=-shared $(shell pkg-config --libs rz_asm)
-OBJS=$(NAME).o
-SO_EXT=$(shell uname|grep -q Darwin && echo dylib || echo so)
-LIB=$(NAME).$(SO_EXT)
-
-all: $(LIB)
-
-clean:
-	rm -f $(LIB) $(OBJS)
-
-$(LIB): $(OBJS)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) -o $(LIB)
-
-install:
-	cp -f $(NAME).$(SO_EXT) $(RZ_PLUGIN_PATH)
-
-uninstall:
-	rm -f $(RZ_PLUGIN_PATH)/$(NAME).$(SO_EXT)
-```
-*Please note, that the Makefile support is deprecated and likely will be removed in the future.*
-
 `mycpu.c` file:
 ```c
 /* example rz_asm plugin by pancake at 2014 */
@@ -146,11 +120,4 @@ To build and install this plugin just type this:
 ```sh
 meson build
 ninja -C build && ninja -C build install
-```
-
-Or, in case of using GNU Make:
-
-```sh
-make
-make install
 ```

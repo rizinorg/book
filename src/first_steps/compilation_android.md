@@ -84,21 +84,3 @@ DEVICE:/data/local/tmp $ ./android-dir/bin/rizin
 Usage: rizin [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i file]
           [-s addr] [-B baddr] [-m maddr] [-c cmd] [-e k=v] file|pid|-|--|=
 ```
-
-#### Make (deprecated)
-
-##### Specify NDK base path
-
-```
-$ echo NDK=/tmp/android-ndk  > ~/.rzandroidrc
-```
-
-##### Compile + create tar.gz + push it to connected android device
-
-```
-./sys/android-build.sh arm64-static
-```
-
-You can build for different architectures by changing the argument to
-`./sys/android-build.sh`. Run the script without any argument to see the
-accepted values.
