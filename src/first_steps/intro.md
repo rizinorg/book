@@ -22,7 +22,7 @@ To be allowed to write files, specify the `-w` option to rizin when opening a fi
 ```
 
 Appending a `?` to a command will show its help message, for example, `p?`.
-Appending `?*` will show commands starting with the given string, e.g. `p?*`.
+Using `?* <command>` will show all commands starting with the given string, e.g. `?* p`.
 
 To enter visual mode, press `V<enter>`. Use `q` to quit visual mode and return to the prompt.
 
