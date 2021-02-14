@@ -92,7 +92,7 @@ for example:
 |           0x080483fe      29c4           sub esp, eax
 ```
 
-we can easily get the value of eax. it's 0x16.
+we can easily get the value of eax. it's 16.
 
 It gets hard when the scale of program grows. rizin provides a pseudo disassembler output in C-like syntax. It may be useful.
 ```
