@@ -8444,7 +8444,7 @@ nth paddr      vaddr      len size section type  string
 |           0x080483fb      c1e004         shl eax, 4
 |           0x080483fe      29c4           sub esp, eax
 </code></pre>
-<p>we can easily get the value of eax. it's 0x16.</p>
+<p>we can easily get the value of eax. it's 16.</p>
 <p>It gets hard when the scale of program grows. rizin provides a pseudo disassembler output in C-like syntax. It may be useful.</p>
 <pre><code>[0x08048330]&gt; pdc@main
 function main () {
