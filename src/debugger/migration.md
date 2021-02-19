@@ -53,8 +53,8 @@ To get `#!python` and much more, just build [rizin-bindings](https://github.com/
 |imports        |`alt + 6`      |`ii`            | `:ii`            |N/A              |N/A
 |exports        |`alt + 7`      |`is~FUNC`       | ?                |N/A              |N/A
 |follow jmp/call|`enter`        |`s offset`      |`enter` or `0`-`9`|N/A              |N/A
-|undo seek      |`esc`          |`sHu`            | `u`              |N/A              |N/A
-|redo seek      |`ctrl+enter`   |`sHr`            | `U`              |N/A              |N/A
+|undo seek      |`esc`          |`shu`            | `u`              |N/A              |N/A
+|redo seek      |`ctrl+enter`   |`shr`            | `U`              |N/A              |N/A
 |show graph     |`space`        |`agv`           | `V`              |N/A              |N/A
 |**Edit**       |               |                |
 |rename         |`n`            |`afn`| `dr`            |N/A              |N/A

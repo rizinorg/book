@@ -9,8 +9,8 @@ Some example commands:
 ```
 [0x00000000]> s 0x10
 [0x00000010]> sd +4
-[0x00000014]> sHu
-[0x00000010]> sHr
+[0x00000014]> shu
+[0x00000010]> shr
 [0x00000014]>
 ```
 
@@ -45,7 +45,7 @@ Usage: s[?]   # Seek commands
 | sd <delta>          # Seek to a delta relative to current offset
 | s-- [<n>]           # Seek blocksize bytes backward (/=n)
 | s++ [<n>]           # Seek blocksize bytes forward (/=n)
-| sH[j*ru-]           # Seek history commands
+| sh[j*ru-]           # Seek history commands
 | s/[?]               # Seek to the first hit of a search
 | sa <align> [<addr>] # Seek to current offset (or <addr>) aligned to <align>
 | sb                  # Seek aligned to bb start
@@ -123,8 +123,8 @@ Seek N positions forward, space is optional:
 Undo last two seeks to return to the initial address:
 
 ```
-[0x00000080]> sHu
-[0x00000000]> sHu
+[0x00000080]> shu
+[0x00000000]> shu
 [0x00400410]>
 ```
 
@@ -133,14 +133,14 @@ We are back at _0x00400410_.
 There's also a command to show the seek history:
 
 ```
-[0x00400410]> sH
+[0x00400410]> sh
 0x400410 
 0x40041a 
 0x400410 
 0x400411 
 0x400410  # current seek
 0x4005b4  # redo
-[0x00400410]> sH*
+[0x00400410]> sh*
 f undo_3 @ 0x400410
 f undo_2 @ 0x40041a
 f undo_1 @ 0x400410
