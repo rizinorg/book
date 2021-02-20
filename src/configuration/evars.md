@@ -313,3 +313,24 @@ If this variable is enabled, help messages will be displayed along with command 
 ### stack.size: `int`
 
 This variable lets you set the size of stack in bytes.
+
+## Command Configuration
+
+## cmd.repeat: `bool`
+
+Sometimes, you may need to run the same commmand repeatedly and that is what `cmd.repeat` is for. When set to `true`, pressing Return key (Enter key) will run the previous command again.
+
+For example:
+```
+[0x00005bc0]> e cmd.repeat=true
+[0x00005bc0]> pd 2
+            ;-- entry.fini0:
+            0x00005bc0      endbr64
+            0x00005bc4      cmp   byte [0x000232c8], 0
+```
+When turned on, you'd just need to press Enter key to run `pd 2`
+```
+[0x00005bc0]>
+            0x00005bce      cmp   qword [reloc.__cxa_finalize], 0
+            0x00005bd6      mov   rbp, rsp
+```
