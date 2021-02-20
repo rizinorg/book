@@ -153,8 +153,8 @@
 <p>Some example commands:</p>
 <pre><code>[0x00000000]&gt; s 0x10
 [0x00000010]&gt; sd +4
-[0x00000014]&gt; sHu
-[0x00000010]&gt; sHr
+[0x00000014]&gt; shu
+[0x00000010]&gt; shr
 [0x00000014]&gt;
 </code></pre>
 <p>Observe how the prompt offset changes. The first line moves the current offset to the address 0x10.</p>
@@ -176,7 +176,7 @@ Usage: s[?]   # Seek commands
 | sd &lt;delta&gt;          # Seek to a delta relative to current offset
 | s-- [&lt;n&gt;]           # Seek blocksize bytes backward (/=n)
 | s++ [&lt;n&gt;]           # Seek blocksize bytes forward (/=n)
-| sH[j*ru-]           # Seek history commands
+| sh[j*ru-]           # Seek history commands
 | s/[?]               # Seek to the first hit of a search
 | sa &lt;align&gt; [&lt;addr&gt;] # Seek to current offset (or &lt;addr&gt;) aligned to &lt;align&gt;
 | sb                  # Seek aligned to bb start
@@ -227,20 +227,20 @@ such as hex, octal, binary or decimal.</p>
 [0x00000080]&gt;
 </code></pre>
 <p>Undo last two seeks to return to the initial address:</p>
-<pre><code>[0x00000080]&gt; sHu
-[0x00000000]&gt; sHu
+<pre><code>[0x00000080]&gt; shu
+[0x00000000]&gt; shu
 [0x00400410]&gt;
 </code></pre>
 <p>We are back at <em>0x00400410</em>.</p>
 <p>There's also a command to show the seek history:</p>
-<pre><code>[0x00400410]&gt; sH
+<pre><code>[0x00400410]&gt; sh
 0x400410 
 0x40041a 
 0x400410 
 0x400411 
 0x400410  # current seek
 0x4005b4  # redo
-[0x00400410]&gt; sH*
+[0x00400410]&gt; sh*
 f undo_3 @ 0x400410
 f undo_2 @ 0x40041a
 f undo_1 @ 0x400410

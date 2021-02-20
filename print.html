@@ -1159,8 +1159,8 @@ main 0x1181 [DATA] lea rdi, str.argv__2d_:__s
 <p>Some example commands:</p>
 <pre><code>[0x00000000]&gt; s 0x10
 [0x00000010]&gt; sd +4
-[0x00000014]&gt; sHu
-[0x00000010]&gt; sHr
+[0x00000014]&gt; shu
+[0x00000010]&gt; shr
 [0x00000014]&gt;
 </code></pre>
 <p>Observe how the prompt offset changes. The first line moves the current offset to the address 0x10.</p>
@@ -1182,7 +1182,7 @@ Usage: s[?]   # Seek commands
 | sd &lt;delta&gt;          # Seek to a delta relative to current offset
 | s-- [&lt;n&gt;]           # Seek blocksize bytes backward (/=n)
 | s++ [&lt;n&gt;]           # Seek blocksize bytes forward (/=n)
-| sH[j*ru-]           # Seek history commands
+| sh[j*ru-]           # Seek history commands
 | s/[?]               # Seek to the first hit of a search
 | sa &lt;align&gt; [&lt;addr&gt;] # Seek to current offset (or &lt;addr&gt;) aligned to &lt;align&gt;
 | sb                  # Seek aligned to bb start
@@ -1233,20 +1233,20 @@ such as hex, octal, binary or decimal.</p>
 [0x00000080]&gt;
 </code></pre>
 <p>Undo last two seeks to return to the initial address:</p>
-<pre><code>[0x00000080]&gt; sHu
-[0x00000000]&gt; sHu
+<pre><code>[0x00000080]&gt; shu
+[0x00000000]&gt; shu
 [0x00400410]&gt;
 </code></pre>
 <p>We are back at <em>0x00400410</em>.</p>
 <p>There's also a command to show the seek history:</p>
-<pre><code>[0x00400410]&gt; sH
+<pre><code>[0x00400410]&gt; sh
 0x400410 
 0x40041a 
 0x400410 
 0x400411 
 0x400410  # current seek
 0x4005b4  # redo
-[0x00400410]&gt; sH*
+[0x00400410]&gt; sh*
 f undo_3 @ 0x400410
 f undo_2 @ 0x40041a
 f undo_1 @ 0x400410
@@ -5429,8 +5429,8 @@ oo+                reopen current file in read-write
 <tr><td>imports</td><td><code>alt + 6</code></td><td><code>ii</code></td><td><code>:ii</code></td><td>N/A</td><td>N/A</td></tr>
 <tr><td>exports</td><td><code>alt + 7</code></td><td><code>is~FUNC</code></td><td>?</td><td>N/A</td><td>N/A</td></tr>
 <tr><td>follow jmp/call</td><td><code>enter</code></td><td><code>s offset</code></td><td><code>enter</code> or <code>0</code>-<code>9</code></td><td>N/A</td><td>N/A</td></tr>
-<tr><td>undo seek</td><td><code>esc</code></td><td><code>sHu</code></td><td><code>u</code></td><td>N/A</td><td>N/A</td></tr>
-<tr><td>redo seek</td><td><code>ctrl+enter</code></td><td><code>sHr</code></td><td><code>U</code></td><td>N/A</td><td>N/A</td></tr>
+<tr><td>undo seek</td><td><code>esc</code></td><td><code>shu</code></td><td><code>u</code></td><td>N/A</td><td>N/A</td></tr>
+<tr><td>redo seek</td><td><code>ctrl+enter</code></td><td><code>shr</code></td><td><code>U</code></td><td>N/A</td><td>N/A</td></tr>
 <tr><td>show graph</td><td><code>space</code></td><td><code>agv</code></td><td><code>V</code></td><td>N/A</td><td>N/A</td></tr>
 <tr><td><strong>Edit</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>rename</td><td><code>n</code></td><td><code>afn</code></td><td><code>dr</code></td><td>N/A</td><td>N/A</td></tr>
