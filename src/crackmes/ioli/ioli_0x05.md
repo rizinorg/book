@@ -5,7 +5,7 @@ check again, it uses `scanf()` to get our input and pass it to `check()` as para
 
 ```C
 [0x080483d0]> pdd@main
-/* r2dec pseudo code output */
+/* jsdec pseudo code output */
 /* ./crackme0x05 @ 0x8048540 */
 #include <stdint.h>
 
@@ -31,7 +31,7 @@ int32_t main (void) {
 the check() function:
 
 ```C
-/* r2dec pseudo code output */
+/* jsdec pseudo code output */
 /* ./crackme0x05 @ 0x80484c8 */
 #include <stdint.h>
 
@@ -99,7 +99,7 @@ The if condition becomes `var_8h == 0x10`. In addition, a new function call - `p
 ```C
 [0x08048484]> s sym.parell
 [0x08048484]> pdd@sym.parell
-/* r2dec pseudo code output */
+/* jsdec pseudo code output */
 /* ./crackme0x05 @ 0x8048484 */
 #include <stdint.h>
 

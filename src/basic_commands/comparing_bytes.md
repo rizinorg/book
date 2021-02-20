@@ -23,9 +23,10 @@ Usage: c[?dfx] [argument]   # Compare
 | cc [at]                  Compares in two hexdump columns of block size
 | ccc [at]                 Same as above, but only showing different lines
 | ccd [at]                 Compares in two disasm columns of block size
-| ccdd [at]                Compares decompiler output (e cmd.pdc=pdg|pdd)
+| cd [dir]                 chdir
 | cf [file]                Compare contents of file at current seek
 | cg[?] [o] [file]         Graphdiff current file and [file]
+| cl|cls|clear             Clear screen, (clear0 to goto 0, 0 only)
 | cu[?] [addr] @at         Compare memory hexdumps of $$ and dst in unified diff
 | cud [addr] @at           Unified diff disasm from $$ and given address
 | cv[1248] [hexpairs] @at  Compare 1,2,4,8-byte (silent return in $?)
@@ -34,8 +35,6 @@ Usage: c[?dfx] [argument]   # Compare
 | cx [hexpair]             Compare hexpair string (use '.' as nibble wildcard)
 | cx* [hexpair]            Compare hexpair string (output rizin commands)
 | cX [addr]                Like 'cc' but using hexdiff output
-| cd [dir]                 chdir
-| cl|cls|clear             Clear screen, (clear0 to goto 0, 0 only)
 ```
 
 To compare memory contents at current seek position against a given string of values, use `cx`:

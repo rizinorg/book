@@ -92,81 +92,17 @@ for example:
 |           0x080483fe      29c4           sub esp, eax
 ```
 
-we can easily get the value of eax. it's 16.
+We can easily get the value of eax. it's 16.
 
-It gets hard when the scale of program grows. rizin provides a pseudo disassembler output in C-like syntax. It may be useful.
+Directly looking at the disassembly gets hard when the scale of program grows. Decompiler plugins like [jsdec](https://github.com/rizinorg/jsdec) can generate the pseudo C code and might be of help here. You can install it easily:
 ```
-[0x08048330]> pdc@main
-function main () {
-    //  4 basic blocks
-
-    loc_0x80483e4:
-
-         //DATA XREF from entry0 @ 0x8048347
-       push ebp
-       ebp = esp
-       esp -= 0x18
-       esp &= 0xfffffff0
-       eax = 0
-       eax += 0xf               //15
-       eax += 0xf               //15
-       eax >>>= 4
-       eax <<<= 4
-       esp -= eax
-       dword [esp] = "IOLI Crackme Level 0x02\n" //[0x8048548:4]=0x494c4f49 ; str.IOLI_Crackme_Level_0x02 ; const char *format
-
-       int printf("IOLI Crackme Level 0x02\n")
-       dword [esp] = "Password: " //[0x8048561:4]=0x73736150 ; str.Password: ; const char *format
-
-       int printf("Password: ")
-       eax = var_4h
-       dword [var_sp_4h] = eax
-       dword [esp] = 0x804856c  //[0x804856c:4]=0x50006425 ; const char *format
-       int scanf("%d")
-                               //sym.imp.scanf ()
-       dword [var_8h] = 0x5a    //'Z' ; 90
-       dword [var_ch] = 0x1ec   //492
-       edx = dword [var_ch]
-       eax = var_8h             //"Z"
-       dword [eax] += edx
-       eax = dword [var_8h]
-       eax = eax * dword [var_8h]
-       dword [var_ch] = eax
-       eax = dword [var_4h]
-       var = eax - dword [var_ch]
-       if (var) goto 0x8048461  //likely
-       {
-        loc_0x8048461:
-
-           //CODE XREF from main @ 0x8048451
-           dword [esp] = s"Invalid Password!\n"//[0x804857f:4]=0x61766e49 ; str.Invalid_Password ; const char *format
-
-           int printf("Invalid ")
-       do
-       {
-            loc_0x804846d:
-
-               //CODE XREF from main @ 0x804845f
-               eax = 0
-               leave                    //(pstr 0x0804857f) "Invalid Password!\n" ebp ; str.Invalid_Password
-               return
-           } while (?);
-       } while (?);
-      }
-      return;
-
-}
-```
-
-The `pdc` command is unreliable especially in processing loops (while, for, etc.). So I prefer to use the [r2dec](https://github.com/rizinorg/r2dec-js) plugin in rizin repo to generate the pseudo C code. you can install it easily:
-```
-rz-pm install r2dec
+rz-pm install jsdec
 ```
 
 decompile `main()` with the following command (like `F5` in IDA):
 ```C
 [0x08048330]> pdd@main
-/* r2dec pseudo code output */
+/* jsdec pseudo code output */
 /* ./crackme0x02 @ 0x80483e4 */
 #include <stdint.h>
 
@@ -213,7 +149,7 @@ we can:
 [0x0804856c]> ps
 %d
 ```
-it's exactly the format string of `scanf()`. But r2dec does not recognize the second argument (eax) which is a pointer. it points to var_4h and means out input will store in var_4h.
+it's exactly the format string of `scanf()`. But jsdec does not recognize the second argument (eax) which is a pointer. it points to var_4h and means out input will store in var_4h.
 
 we can easily write out pseudo code here.
 ```C
