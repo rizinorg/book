@@ -1075,6 +1075,21 @@ false
 <h2><a class="header" href="#stack-configuration" id="stack-configuration">Stack Configuration</a></h2>
 <h3><a class="header" href="#stacksize-int" id="stacksize-int">stack.size: <code>int</code></a></h3>
 <p>This variable lets you set the size of stack in bytes.</p>
+<h2><a class="header" href="#command-configuration" id="command-configuration">Command Configuration</a></h2>
+<h2><a class="header" href="#cmdrepeat-bool" id="cmdrepeat-bool">cmd.repeat: <code>bool</code></a></h2>
+<p>Sometimes, you may need to run the same commmand repeatedly and that is what <code>cmd.repeat</code> is for. When set to <code>true</code>, pressing Return key (Enter key) will run the previous command again.</p>
+<p>For example:</p>
+<pre><code>[0x00005bc0]&gt; e cmd.repeat=true
+[0x00005bc0]&gt; pd 2
+            ;-- entry.fini0:
+            0x00005bc0      endbr64
+            0x00005bc4      cmp   byte [0x000232c8], 0
+</code></pre>
+<p>When turned on, you'd just need to press Enter key to run <code>pd 2</code></p>
+<pre><code>[0x00005bc0]&gt;
+            0x00005bce      cmp   qword [reloc.__cxa_finalize], 0
+            0x00005bd6      mov   rbp, rsp
+</code></pre>
 <h2><a class="header" href="#files" id="files">Files</a></h2>
 <p>Use <code>rizin -H</code> to list all the environment variables that matter to know where it will
 be looking for files. Those paths depend on the way (and operating system) you have
