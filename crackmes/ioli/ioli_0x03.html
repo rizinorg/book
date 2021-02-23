@@ -151,7 +151,7 @@
 <p>crackme 0x03, let's skip the string check part and analyze it directly.</p>
 <pre><code class="language-C">[0x08048360]&gt; aaa
 [0x08048360]&gt; pdd@sym.main
-/* r2dec pseudo code output */
+/* jsdec pseudo code output */
 /* ./crackme0x03 @ 0x8048498 */
 #include &lt;stdint.h&gt;
 
@@ -201,7 +201,7 @@ Password: 338724
 Password OK!!! :)
 </code></pre>
 <p>Take a look at <code>sym.test</code>. It's a two path conditional jump which compares two parameters and then do shift. We can guess that shift is most likely the decryption part (shift cipher, e.g. Caesar cipher).</p>
-<pre><code class="language-C">/* r2dec pseudo code output */
+<pre><code class="language-C">/* jsdec pseudo code output */
 /* ./crackme0x03 @ 0x804846e */
 #include &lt;stdint.h&gt;
 

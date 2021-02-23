@@ -150,7 +150,7 @@
                         <h1><a class="header" href="#ioli-0x05" id="ioli-0x05">IOLI 0x05</a></h1>
 <p>check again, it uses <code>scanf()</code> to get our input and pass it to <code>check()</code> as parameter.</p>
 <pre><code class="language-C">[0x080483d0]&gt; pdd@main
-/* r2dec pseudo code output */
+/* jsdec pseudo code output */
 /* ./crackme0x05 @ 0x8048540 */
 #include &lt;stdint.h&gt;
 
@@ -173,7 +173,7 @@ int32_t main (void) {
 }
 </code></pre>
 <p>the check() function:</p>
-<pre><code class="language-C">/* r2dec pseudo code output */
+<pre><code class="language-C">/* jsdec pseudo code output */
 /* ./crackme0x05 @ 0x80484c8 */
 #include &lt;stdint.h&gt;
 
@@ -235,7 +235,7 @@ int32_t check(char *s)
 <p>The if condition becomes <code>var_8h == 0x10</code>. In addition, a new function call - <code>parell(s)</code> replace the <code>printf(&quot;password OK&quot;)</code>now. The next step is to reverse sym.parell.</p>
 <pre><code class="language-C">[0x08048484]&gt; s sym.parell
 [0x08048484]&gt; pdd@sym.parell
-/* r2dec pseudo code output */
+/* jsdec pseudo code output */
 /* ./crackme0x05 @ 0x8048484 */
 #include &lt;stdint.h&gt;
 

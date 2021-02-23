@@ -178,7 +178,7 @@ va       true
 </code></pre>
 <p>and analyze it then decompile main</p>
 <pre><code class="language-C">[0x08048400]&gt; pdd@main
-/* r2dec pseudo code output */
+/* jsdec pseudo code output */
 /* ./crackme0x06 @ 0x8048607 */
 #include &lt;stdint.h&gt;
 
@@ -287,7 +287,7 @@ uint32_t parell (char * s, char * arg_ch) {
 </code></pre>
 <p>well, there is a new check condition in <code>parell()</code> -- <code>dummy (var_4h, arg_ch) == 0</code>. then reverse dummy!</p>
 <pre><code class="language-C">[0x080484b4]&gt; pdd@sym.dummy
-/* r2dec pseudo code output */
+/* jsdec pseudo code output */
 /* ./crackme0x06 @ 0x80484b4 */
 #include &lt;stdint.h&gt;
 
@@ -323,7 +323,7 @@ label_1:
 </code></pre>
 <p>looks like a loop to process string. we can beautify it.</p>
 <pre><code class="language-C">[0x080484b4]&gt; pdd@sym.dummy
-/* r2dec pseudo code output */
+/* jsdec pseudo code output */
 /* ./crackme0x06 @ 0x80484b4 */
 #include &lt;stdint.h&gt;
 
