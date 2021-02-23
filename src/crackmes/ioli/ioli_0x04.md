@@ -5,7 +5,7 @@ IOLI 0x04
 
 ```C
 [0x080483d0]> pdd@main
-/* r2dec pseudo code output */
+/* jsdec pseudo code output */
 /* ./crackme0x04 @ 0x8048509 */
 #include <stdint.h>
 

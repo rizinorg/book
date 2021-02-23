@@ -36,7 +36,7 @@ and analyze it then decompile main
 
 ```C
 [0x08048400]> pdd@main
-/* r2dec pseudo code output */
+/* jsdec pseudo code output */
 /* ./crackme0x06 @ 0x8048607 */
 #include <stdint.h>
 
@@ -160,7 +160,7 @@ well, there is a new check condition in `parell()` -- `dummy (var_4h, arg_ch) ==
 
 ```C
 [0x080484b4]> pdd@sym.dummy
-/* r2dec pseudo code output */
+/* jsdec pseudo code output */
 /* ./crackme0x06 @ 0x80484b4 */
 #include <stdint.h>
 
@@ -199,7 +199,7 @@ looks like a loop to process string. we can beautify it.
 
 ```C
 [0x080484b4]> pdd@sym.dummy
-/* r2dec pseudo code output */
+/* jsdec pseudo code output */
 /* ./crackme0x06 @ 0x80484b4 */
 #include <stdint.h>
 

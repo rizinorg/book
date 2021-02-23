@@ -6,7 +6,7 @@ crackme 0x03, let's skip the string check part and analyze it directly.
 ```C
 [0x08048360]> aaa
 [0x08048360]> pdd@sym.main
-/* r2dec pseudo code output */
+/* jsdec pseudo code output */
 /* ./crackme0x03 @ 0x8048498 */
 #include <stdint.h>
 
@@ -65,7 +65,7 @@ Password OK!!! :)
 Take a look at `sym.test`. It's a two path conditional jump which compares two parameters and then do shift. We can guess that shift is most likely the decryption part (shift cipher, e.g. Caesar cipher).
 
 ```C
-/* r2dec pseudo code output */
+/* jsdec pseudo code output */
 /* ./crackme0x03 @ 0x804846e */
 #include <stdint.h>
 

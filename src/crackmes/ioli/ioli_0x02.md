@@ -10,7 +10,7 @@ Password: hello
 Invalid Password!
 ```
 
-check it with rz-bin.
+Firstly, let's check it with rz-bin.
 ```
 $ rz-bin -z ./crackme0x02
 [Strings]
@@ -22,7 +22,7 @@ nth paddr      vaddr      len size section type  string
 3   0x0000057f 0x0804857f 18  19   .rodata ascii Invalid Password!\n
 ```
 
-similar to 0x01, no explicit password string here. so it's time to analyze it with rizin.
+Similar to 0x01, there's no explicit password string here. So, it's time to analyze it with Rizin.
 ```
 [0x08048330]> aa
 [x] Analyze all flags starting with sym. and entry0 (aa)
@@ -74,13 +74,13 @@ similar to 0x01, no explicit password string here. so it's time to analyze it wi
 
 ```
 
-with the experience of solving crackme0x02, we first locate the position of `cmp` instruction by using this simple oneliner:
+With the experience of solving crackme0x01, we can first locate the position of `cmp` instruction by using this simple oneliner:
 ```
-[0x08048330]> pdf@main | grep cmp
+[0x08048330]> pdf@main~cmp
 |           0x0804844e      3b45f4         cmp eax, dword [var_ch]
 ```
 
-Unfortunately, the variable compared to eax is stored in the stack. we can't check the value of this variable directly. It's a common case in reverse engineering that we have to derive the value of the variable from the previous sequence. As the amount of code is relatively small, it's possible.
+Unfortunately, the variable compared to `eax` is stored in the stack. We can't check the value of this variable directly. It's a common case in reverse engineering that we have to derive the value of the variable from the previous sequence. As the amount of code is relatively small, it can be easily done.
 
 for example:
 ```
@@ -92,137 +92,52 @@ for example:
 |           0x080483fe      29c4           sub esp, eax
 ```
 
-we can easily get the value of eax. it's 16.
+We can easily get the value of `eax`. It's 16.
 
-It gets hard when the scale of program grows. rizin provides a pseudo disassembler output in C-like syntax. It may be useful.
+Directly looking at the disassembly gets hard when the scale of program grows. Rizin's flagship decompiler [rz-ghidra](https://github.com/rizinorg/rz-ghidra) might be of help, here. You can install it easily:
 ```
-[0x08048330]> pdc@main
-function main () {
-    //  4 basic blocks
-
-    loc_0x80483e4:
-
-         //DATA XREF from entry0 @ 0x8048347
-       push ebp
-       ebp = esp
-       esp -= 0x18
-       esp &= 0xfffffff0
-       eax = 0
-       eax += 0xf               //15
-       eax += 0xf               //15
-       eax >>>= 4
-       eax <<<= 4
-       esp -= eax
-       dword [esp] = "IOLI Crackme Level 0x02\n" //[0x8048548:4]=0x494c4f49 ; str.IOLI_Crackme_Level_0x02 ; const char *format
-
-       int printf("IOLI Crackme Level 0x02\n")
-       dword [esp] = "Password: " //[0x8048561:4]=0x73736150 ; str.Password: ; const char *format
-
-       int printf("Password: ")
-       eax = var_4h
-       dword [var_sp_4h] = eax
-       dword [esp] = 0x804856c  //[0x804856c:4]=0x50006425 ; const char *format
-       int scanf("%d")
-                               //sym.imp.scanf ()
-       dword [var_8h] = 0x5a    //'Z' ; 90
-       dword [var_ch] = 0x1ec   //492
-       edx = dword [var_ch]
-       eax = var_8h             //"Z"
-       dword [eax] += edx
-       eax = dword [var_8h]
-       eax = eax * dword [var_8h]
-       dword [var_ch] = eax
-       eax = dword [var_4h]
-       var = eax - dword [var_ch]
-       if (var) goto 0x8048461  //likely
-       {
-        loc_0x8048461:
-
-           //CODE XREF from main @ 0x8048451
-           dword [esp] = s"Invalid Password!\n"//[0x804857f:4]=0x61766e49 ; str.Invalid_Password ; const char *format
-
-           int printf("Invalid ")
-       do
-       {
-            loc_0x804846d:
-
-               //CODE XREF from main @ 0x804845f
-               eax = 0
-               leave                    //(pstr 0x0804857f) "Invalid Password!\n" ebp ; str.Invalid_Password
-               return
-           } while (?);
-       } while (?);
-      }
-      return;
-
-}
+rz-pm -i rz-ghidra
 ```
 
-The `pdc` command is unreliable especially in processing loops (while, for, etc.). So I prefer to use the [r2dec](https://github.com/rizinorg/r2dec-js) plugin in rizin repo to generate the pseudo C code. you can install it easily:
-```
-rz-pm install r2dec
-```
-
-decompile `main()` with the following command (like `F5` in IDA):
+Decompile `main()` with the following command (like `F5` in IDA):
 ```C
-[0x08048330]> pdd@main
-/* r2dec pseudo code output */
-/* ./crackme0x02 @ 0x80483e4 */
-#include <stdint.h>
-
-int32_t main (void) {
+[0x08048330]> pdg
+undefined4 main(void)
+{
     uint32_t var_ch;
-    int32_t var_8h;
+    undefined4 var_8h;
     int32_t var_4h;
-    int32_t var_sp_4h;
-    eax = 0;
-    eax += 0xf;
-    eax += 0xf;
-    eax >>= 4;
-    eax <<= 4;
-    printf ("IOLI Crackme Level 0x02\n");
-    printf ("Password: ");
-    eax = &var_4h;
-    *((esp + 4)) = eax;
-    scanf (0x804856c);
-    var_8h = 0x5a;
-    var_ch = 0x1ec;
-    edx = 0x1ec;
-    eax = &var_8h;
-    *(eax) += edx;
-    eax = var_8h;
-    eax *= var_8h;
-    var_ch = eax;
-    eax = var_4h;
-    if (eax == var_ch) {
-        printf ("Password OK :)\n");
+    
+    printf("IOLI Crackme Level 0x02\n");
+    printf("Password: ");
+    scanf(0x804856c, &var_4h);
+    if (var_4h == 0x52b24) {
+        printf("Password OK :)\n");
     } else {
-        printf ("Invalid Password!\n");
+        printf("Invalid Password!\n");
     }
-    eax = 0;
-    return eax;
+    return 0;
 }
 ```
 
-It's more human-readable now. To check the string in 0x804856c,
-we can:
-* seek
-* print string
+It's more human-readable now. To check the string in `0x804856c`, we can:
+* Seek
+* Print the string
 ```
 [0x08048330]> s 0x804856c
 [0x0804856c]> ps
 %d
 ```
-it's exactly the format string of `scanf()`. But r2dec does not recognize the second argument (eax) which is a pointer. it points to var_4h and means out input will store in var_4h.
+It's exactly the format string of `scanf()`. And rz-ghidra recognizes that the second argument (eax) is a pointer and it points to `var_4h`. Which means our input will be stored in `var_4h`.
 
-we can easily write out pseudo code here.
+We can easily write out the pseudo code here.
 ```C
 var_ch = (var_8h + var_ch)^2;
 if (var_ch == our_input)
   printf("Password OK :)\n");
 ```
 
-given the initial status that var_8h is 0x5a, var_ch is 0x1ec, we have
+Given the initial status that `var_8h` is `0x5a`, `var_ch` is `0x1ec`, we have
 var_ch = 338724 (0x52b24):
 
 ```
@@ -235,4 +150,4 @@ Password: 338724
 Password OK :)
 ```
 
-and we finish the crackme0x02.
+And we finish the crackme0x02.
