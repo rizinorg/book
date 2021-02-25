@@ -76,6 +76,19 @@ You can use this configuration variable to define the CPU type. For example, if 
 
 When set to "true", the disassembler view will have the flags column.
 
+### asm.fcn.size: `bool`
+
+This variable is used to display the size of the function in the disassembly. By default, it is set to false and turning it on would result in a disassembly like the one below:
+
+```
+┌ 44: int main (char **argv);
+│           ; var int32_t var_4h @ ebp-0x4
+│           ; arg char **argv @ esp+0x24
+│           0x000011cd      lea   ecx, [argv]
+│           0x000011d1      and   esp, 0xfffffff0
+```
+Here, `44` is the size of the function.
+
 ### asm.lines.call: `bool`
 
 If set to "true", draw lines at the left of the disassembly output (`pd`, `pD` commands) to graphically represent control flow changes (jumps and calls) that are targeted inside the current block. Also, see `asm.lines.out`.
