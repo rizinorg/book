@@ -36,7 +36,7 @@ Most of the related commands are located in `t` namespace:
 | tt[?]                      List all loaded typedefs
 ```
 
-Note that the basic (atomic) types are not those from C standard -
+Note that the basic (atomic) types are not those from the C standard -
 not `char`, `_Bool`, or `short`. Because those types can be different
 from one platform to another, rizin uses `definite` types like as
 `int8_t` or `uint64_t` and will convert `int` to `int32_t` or `int64_t`
@@ -80,7 +80,7 @@ foo
 S1
 ```
 
-Also note there is a config option to specify include directories for types parsing
+Also, note there is a config option to specify include directories for types parsing
 
 ```
 [0x00000000]> el~dir.type
@@ -153,11 +153,11 @@ Moreover, the link will be shown in the disassembly output or visual mode:
  0x00005202      mov rbp, rsp
 ```
 
-Once the struct is linked, rizin tries to propagate structure offset in the function at current offset, to run this analysis on whole program or at any targeted functions after all structs are linked you have `aat` command:
+Once the struct is linked, rizin tries to propagate structure offset in the function at the current offset, to run this analysis on the whole program or at any targeted functions after all structs are linked you have `aat` command:
 
 ```
 [0x00000000]> aa?
-| aat [fcn]           Analyze all/given function to convert immediate to linked structure offsets (see tl?)
+| aat [fcn]           Analyze all functions or a given function to convert immediate to linked structure offsets (see tl?)
 ```
 
 Note sometimes the emulation may not be accurate, for example as below :
@@ -177,14 +177,14 @@ The return value of `malloc` may differ between two emulations, so you have to s
 
 ```
 [0x000006da]> ah?
-| ahr val            set hint for return value of a function
+| ahr val            set hint for the return value of a function
 ```
 
 ### Structure Immediates
 
 There is one more important aspect of using types in rizin - using `aht` you
 can change the immediate in the opcode to the structure offset.
-Lets see a simple example of [R]SI-relative addressing
+Let's see a simple example of [R]SI-relative addressing
 
 ```
 [0x000052f0]> pd 1
@@ -258,28 +258,28 @@ Defining primitive types requires an understanding of basic `pf` formats,
 you can find the whole list of format specifier in `pf??`:
 
 ```
------------------------------------------------------
-| format | explanation                              |
-|---------------------------------------------------|
-|  b     |  byte (unsigned)                         |
-|  c     |  char (signed byte)                      |
-|  d     |  0x%%08x hexadecimal value (4 bytes)     |
-|  f     |  float value (4 bytes)                   |
-|  i     |  %%i integer value (4 bytes)             |
-|  o     |  0x%%08o octal value (4 byte)            |
-|  p     |  pointer reference (2, 4 or 8 bytes)     |
-|  q     |  quadword (8 bytes)                      |
-|  s     |  32bit pointer to string (4 bytes)       |
-|  S     |  64bit pointer to string (8 bytes)       |
-|  t     |  UNIX timestamp (4 bytes)                |
-|  T     |  show Ten first bytes of buffer          |
-|  u     |  uleb128 (variable length)               |
-|  w     |  word (2 bytes unsigned short in hex)    |
-|  x     |  0x%%08x hex value and flag (fd @ addr)  |
-|  X     |  show formatted hexpairs                 |
-|  z     |  \0 terminated string                    |
-|  Z     |  \0 terminated wide string               |
------------------------------------------------------
+---------------------------------------------------
+| format | explanation                            |
+| ------ | -------------------------------------- |
+| b      | byte (unsigned)                        |
+| c      | char (signed byte)                     |
+| d      | 0x%%08x hexadecimal value (4 bytes)    |
+| f      | float value (4 bytes)                  |
+| i      | %%i integer value (4 bytes)            |
+| o      | 0x%%08o octal value (4 byte)           |
+| p      | pointer reference (2, 4 or 8 bytes)    |
+| q      | quadword (8 bytes)                     |
+| s      | 32bit pointer to string (4 bytes)      |
+| S      | 64bit pointer to string (8 bytes)      |
+| t      | UNIX timestamp (4 bytes)               |
+| T      | show Ten first bytes of buffer         |
+| u      | uleb128 (variable length)              |
+| w      | word (2 bytes unsigned short in hex)   |
+| x      | 0x%%08x hex value and flag (fd @ addr) |
+| X      | show formatted hexpairs                |
+| z      | \0 terminated string                   |
+| Z      | \0 terminated wide string              |
+---------------------------------------------------
 
 ```
 there are basically 3 mandatory keys for defining basic data types:
@@ -335,7 +335,7 @@ struct.X.b=b_type,b_offset,b_number_of_elements
 ```
 
 The first line is used to define a structure called `X`, the second line
-defines the elements of `X` as comma separated values. After that, we just define each element info.
+defines the elements of `X` as comma-separated values. After that, we just define each element info.
 
 For example. we can have a struct like this one:
 
@@ -355,7 +355,7 @@ struct._FILETIME.dwLowDateTime=DWORD,0,0
 struct._FILETIME.dwHighDateTime=DWORD,4,0
 ```
 
-Note that the number of elements field is used in case of arrays only
+Note that the number of elements field is used in the case of arrays only
 to identify how many elements are in arrays, other than that it is zero by default.
 
 ### Unions
@@ -364,7 +364,7 @@ Unions are defined exactly like structs the only difference is that you will rep
 
 ### Function prototypes
 
-Function prototypes representation is the most detail oriented and the most important one of them all. Actually, this is the one used directly for type matching
+Function prototype representation is the most detail-oriented and the most important one of them all. This is the one used directly for type matching
 
 ```
 X=func

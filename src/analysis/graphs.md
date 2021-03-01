@@ -48,7 +48,7 @@ Here's a short description for every output format available:
 
 Displays the graph directly to stdout using ASCII art to represent blocks and edges.
 
-_Warning: displaying large graphs directly to stdout might prove to be computationally expensive and will make rizin not responsive for some time. In case of a doubt, prefer using the interactive view (explained below)._
+_Warning: displaying large graphs directly to stdout might prove to be computationally expensive and will make rizin not responsive for some time. In case of doubt, prefer using the interactive view (explained below)._
 
 ### Interactive Ascii Art (e.g. `agfv`)
 
@@ -66,7 +66,7 @@ Prints the dot source code representing the graph, which can be interpreted by p
 
 Prints a JSON string representing the graph.
 
-- In case of the `f` format (basic blocks of function), it will have detailed information about the function and will also contain the disassembly of the function (use `J` format for the formatted disassembly.
+- In the case of the `f` format (basic blocks of function), it will have detailed information about the function and will also contain the disassembly of the function (use `J` format for the formatted disassembly.
 
 - In all other cases, it will only have basic information about the nodes of the graph (id, title, body, and edges).
 

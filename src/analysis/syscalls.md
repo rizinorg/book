@@ -1,8 +1,8 @@
 # Syscalls
 
 Rizin allows manual search for assembly code looking like a syscall operation.
-For example on ARM platform usually they are represented by the `svc` instruction,
-on the others can be a different instructions, e.g. `syscall` on x86 PC.
+For example on the ARM platform, usually, these are represented by the `svc` instruction,
+on the others, these can be different instructions, e.g. `syscall` on x86 PC.
 ```
 [0x0001ece0]> /ad/ svc
 ...
@@ -12,7 +12,7 @@ on the others can be a different instructions, e.g. `syscall` on x86 PC.
 ...
 ```
 Syscalls detection is driven by `asm.os`, `asm.bits`, and `asm.arch`. Be sure
-to setup those configuration options accordingly. You can use `asl` command
+to set those configuration options accordingly. You can use `asl` command
 to check if syscalls' support is set up properly and as you expect.
 The command lists syscalls supported for your platform.
 ```

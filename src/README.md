@@ -1,6 +1,6 @@
 # Introduction
 
-This book is a book about [Rizin](https://rizin.re) reverse engineering framework and originally
+This is a book about [Rizin](https://rizin.re) reverse engineering framework and it's originally
 based on the [radare2 book](https://github.com/radareorg/radare2book)
 
 Check the Github site to add new contents or fix typos:
@@ -10,8 +10,8 @@ Check the Github site to add new contents or fix typos:
 
 ## Offline
 
-For the offline use you need to fetch the [mdbook](https://github.com/rust-lang/mdBook) tool and run the build locally:
+For offline use you need to fetch the [mdbook](https://github.com/rust-lang/mdBook) tool and run the build locally:
 ```sh
 mdbook serve
 ```
-After that you can point your Web-browser to `http://localhost:3000` and read it offline.
+After that, you can point your Web-browser to `http://localhost:3000` and read it offline.

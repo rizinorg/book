@@ -2,7 +2,7 @@
 
 Rizin has a very rich set of commands and configuration options to perform data and code analysis,
 to extract useful information from a binary, like pointers, string references,
-basic blocks, opcode data, jump targets, cross references and much more.
+basic blocks, opcode data, jump targets, cross-references, and much more.
 These operations are handled by the `a` (analyze) command family:
 
 ```
