@@ -188,7 +188,7 @@ can improve it. Moreover, after changing something we can rerun variables analys
 <code>afva</code> command. Quite often variables analysis is accompanied with
 <a href="types.html">types analysis</a>, see <code>afta</code> command.</p>
 <p>The most important aspect of reverse engineering - naming things. Of course, you can rename
-variable too, affecting all places it was referenced. This can be achieved with <code>afvn</code> for
+a variable too, affecting all places it was referenced. This can be achieved with <code>afvn</code> for
 <em>any</em> type of argument or variable. Or you can simply remove the variable or argument with
 <code>afv-</code> command.</p>
 <p>As mentioned before the analysis loop relies heavily on types information while performing
@@ -301,7 +301,7 @@ local_32h
 <pre><code>win=spec
 spec.win.u32=unsigned int
 </code></pre>
-<p>Then change your default specification to newly created one using this config variable <code>e analysis.spec=win</code></p>
+<p>Then change your default specification to a newly created one using this config variable <code>e analysis.spec=win</code></p>
 <p>For more information about primitive and user-defined types support in rizin refer to <a href="types.html">types</a> chapter.</p>
 
                     </main>

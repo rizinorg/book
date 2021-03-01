@@ -171,11 +171,11 @@ You can make use of multiple symbol servers by separating each URL with a semi-c
 <pre><code>e pdb.server=https://msdl.microsoft.com/download/symbols;https://symbols.mozilla.org/
 </code></pre>
 <p>On Windows,  you can also use local network share paths (UNC paths) as symbol servers.</p>
-<p>Usually, there is no reason to change default <code>pdb.useragent</code>, but who knows where
+<p>Usually, there is no reason to change the default <code>pdb.useragent</code>, but who knows where
 could it be handy?</p>
 <p>Because those PDB files are stored as &quot;cab&quot; archives on the server, <code>pdb.extract=1</code>
 says to automatically extract them.</p>
-<p>Note that for the automatic downloading to work you need &quot;cabextract&quot; tool, and wget/curl installed.</p>
+<p>Note that for the automatic downloading to work you need the &quot;cabextract&quot; tool, and wget/curl installed.</p>
 <p>Sometimes you don't need to do that from the rizin itself, thus - two handy
 rz-bin options:</p>
 <pre><code> -P              show debug/pdb information
@@ -196,7 +196,7 @@ manipulated by the <code>id</code> commands:</p>
 | idpd             Download pdb file on remote server
 </code></pre>
 <p>Where <code>idpi</code> is basically the same as <code>rz-bin -P</code>.
-Note that <code>idp</code> can be also used not only in the static analysis mode, but also
+Note that <code>idp</code> can be also used not only in the static analysis mode but also
 in the debugging mode, even if connected via WinDbg.</p>
 <p>For simplifying the loading PDBs, especially for the processes with many linked DLLs,
 rizin can autoload all required PDBs automatically - you need just set the

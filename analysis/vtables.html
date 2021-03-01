@@ -148,9 +148,9 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#virtual-tables" id="virtual-tables">Virtual Tables</a></h1>
-<p>There is a basic support of virtual tables parsing (RTTI and others).
+<p>There is basic support of virtual tables parsing (RTTI and others).
 The most important thing before you start to perform such kind of analysis
-is to check if the <code>analysis.cpp.abi</code> option is set correctly, and change if needed.</p>
+is to check if the <code>analysis.cpp.abi</code> option is set correctly and change it if needed.</p>
 <p>All commands to work with virtual tables are located in the <code>av</code> namespace.
 Currently, the support is very basic, allowing you only to inspect
 parsed tables.</p>
@@ -163,7 +163,7 @@ parsed tables.</p>
 </code></pre>
 <p>The main commands here are <code>av</code> and <code>avr</code>. <code>av</code> lists all virtual tables
 found when rizin opened the file. If you are not happy with the result
-you may want to try to parse virtual table at a particular address with
+you may want to try to parse a virtual table at a particular address with
 <code>avr</code> command. <code>avra</code> performs the search and parsing of all virtual
 tables in the binary, like rizin does during the file opening.</p>
 

@@ -150,7 +150,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
-<p>This book is a book about <a href="https://rizin.re">Rizin</a> reverse engineering framework and originally
+<p>This is a book about <a href="https://rizin.re">Rizin</a> reverse engineering framework and it's originally
 based on the <a href="https://github.com/radareorg/radare2book">radare2 book</a></p>
 <p>Check the Github site to add new contents or fix typos:</p>
 <ul>
@@ -158,10 +158,10 @@ based on the <a href="https://github.com/radareorg/radare2book">radare2 book</a>
 <li>Online: <a href="https://book.rizin.re">https://book.rizin.re/</a></li>
 </ul>
 <h2><a class="header" href="#offline" id="offline">Offline</a></h2>
-<p>For the offline use you need to fetch the <a href="https://github.com/rust-lang/mdBook">mdbook</a> tool and run the build locally:</p>
+<p>For offline use you need to fetch the <a href="https://github.com/rust-lang/mdBook">mdbook</a> tool and run the build locally:</p>
 <pre><code class="language-sh">mdbook serve
 </code></pre>
-<p>After that you can point your Web-browser to <code>http://localhost:3000</code> and read it offline.</p>
+<p>After that, you can point your Web-browser to <code>http://localhost:3000</code> and read it offline.</p>
 <h2><a class="header" href="#history" id="history">History</a></h2>
 <p>In 2006, Sergi Àlvarez (aka pancake) was working as a forensic analyst. Since he wasn't allowed to use the company software for his personal needs, he decided to write a small tool-a hexadecimal editor-with very basic characteristics:</p>
 <ul>
@@ -3350,7 +3350,7 @@ Ebp,8,+,:ds,eax,=
 <h1><a class="header" href="#data-and-code-analysis" id="data-and-code-analysis">Data and Code Analysis</a></h1>
 <p>Rizin has a very rich set of commands and configuration options to perform data and code analysis,
 to extract useful information from a binary, like pointers, string references,
-basic blocks, opcode data, jump targets, cross references and much more.
+basic blocks, opcode data, jump targets, cross-references, and much more.
 These operations are handled by the <code>a</code> (analyze) command family:</p>
 <pre><code>|Usage: a[abdefFghoprxstc] [...]
 | aa[?]              analyze all (fcns + bbs) (aa0 to avoid sub renaming)
@@ -3448,10 +3448,10 @@ very different parts of the analysis:</p>
 </code></pre>
 <p>In this example, we analyze the whole file (<code>aa</code>) and then print disassembly of the <code>main()</code> function (<code>pdf</code>).
 The <code>aa</code> command belongs to the family of auto analysis commands and performs only the most basic
-auto analysis steps. In rizin there are many different types of the auto analysis commands with a
+auto analysis steps. In rizin there are many different types of auto analysis commands with a
 different analysis depth, including partial emulation: <code>aa</code>, <code>aaa</code>, <code>aab</code>, <code>aaaa</code>, ...
 There is also a mapping of those commands to the rizin CLI options: <code>rizin -A</code>, <code>rizin -AA</code>, and so on.</p>
-<p>It is a common sense that completely automated analysis can produce non sequitur results, thus
+<p>It is common sense that completely automated analysis can produce non sequitur results, thus
 rizin provides separate commands for the particular stages of the analysis allowing fine-grained
 control of the analysis process. Moreover, there is a treasure trove of configuration variables
 for controlling the analysis outcomes. You can find them in <code>analysis.*</code> and <code>emu.*</code>
@@ -3459,7 +3459,7 @@ cfg variables' namespaces.</p>
 <h2><a class="header" href="#analyze-functions" id="analyze-functions">Analyze functions</a></h2>
 <p>One of the most important &quot;basic&quot; analysis commands is the set of <code>af</code> subcommands. <code>af</code> means
 &quot;analyze function&quot;. Using this command you can either allow automatic analysis of the particular
-function or perform completely manual one.</p>
+function or perform a completely manual one.</p>
 <pre><code>[0x00000000]&gt; af?
 Usage: af
 | af ([name]) ([addr])                  analyze functions (start at addr or $$)
@@ -3495,12 +3495,12 @@ Usage: af
 <p>There are a lot of useful commands under <code>afl</code> such as <code>aflj</code>, which lists the function in JSON format and <code>aflm</code>, which lists the functions in the syntax found in makefiles.</p>
 <p>There's also <code>afl=</code>, which displays ASCII-art bars with function ranges.</p>
 <p>You can find the rest of them under <code>afl?</code>.</p>
-<p>Some of the most challenging tasks while performing a function analysis are merge, crop and resize.
-As with other analysis commands you have two modes: semi-automatic and manual.
+<p>Some of the most challenging tasks while performing a function analysis are merge, crop, and resize.
+As with other analysis commands, you have two modes: semi-automatic and manual.
 For the semi-automatic, you can use <code>afm &lt;function name&gt;</code> to merge the current function with
 the one specified by name as an argument, <code>aff</code> to readjust the function after analysis changes or function edits,
 <code>afu &lt;address&gt;</code> to do the resize and analysis of the current function until the specified address.</p>
-<p>Apart from those semi-automatic ways to edit/analyze the function, you can hand craft it in the manual mode with <code>af+</code> command and edit basic blocks of it using <code>afb</code> commands.
+<p>Apart from those semi-automatic ways to edit/analyze the function, you can handcraft it in the manual mode with <code>af+</code> command and edit basic blocks of it using <code>afb</code> commands.
 Before changing the basic blocks of the function it is recommended to check the already presented ones:</p>
 <pre><code>[0x00003ac0]&gt; afb
 0x00003ac0 0x00003b7f 01:001A 191 f 0x00003b7f
@@ -3510,8 +3510,8 @@ Before changing the basic blocks of the function it is recommended to check the 
 0x00003b92 0x00003ba8 01:0030 22 j 0x00003ba8
 0x00003ba8 0x00003bf9 00:0000 81
 </code></pre>
-<h3><a class="header" href="#hand-craft-function" id="hand-craft-function">Hand craft function</a></h3>
-<p>before start, let's prepare a binary file first, for example:</p>
+<h3><a class="header" href="#handcraft-function" id="handcraft-function">Handcraft function</a></h3>
+<p>before starting, let's prepare a binary file first, for example:</p>
 <pre><code class="language-C">int code_block()
 {
   int result = 0;
@@ -3547,7 +3547,7 @@ p: Cannot find function at 0x08000034
             0x0800005c      c3             ret
 
 </code></pre>
-<p>our goal is to hand craft a function with the following structure</p>
+<p>our goal is to handcraft a function with the following structure</p>
 <p><img src="analysis/analyze_one.png" alt="analyze_one" /></p>
 <p>create a function at 0x8000034 named code_block:</p>
 <pre><code>[0x8000034]&gt; af+ 0x8000034 code_block
@@ -3573,10 +3573,10 @@ use <code>afb+</code> command to add it.</p>
 [0x08000034]&gt; VV
 </code></pre>
 <p><img src="analysis/handcraft_one.png" alt="handcraft_one" /></p>
-<p>There are two very important commands for this: <code>afc</code> and <code>afB</code>. The latter is a must-know command for some platforms like ARM. It provides a way to change the &quot;bitness&quot; of the particular function. Basically, allowing to select between ARM and Thumb modes.</p>
+<p>There are two very important commands for this: <code>afc</code> and <code>afB</code>. The latter is a must-know command for some platforms like ARM. It provides a way to change the &quot;bitness&quot; of a particular function by allowing to select between ARM and Thumb modes.</p>
 <p><code>afc</code> on the other side, allows to manually specify function calling convention. You can find more information on its usage in <a href="analysis/calling_conventions.html">calling_conventions</a>.</p>
 <h2><a class="header" href="#recursive-analysis" id="recursive-analysis">Recursive analysis</a></h2>
-<p>There are 5 important program wide half-automated analysis commands:</p>
+<p>There are 5 important program-wide half-automated analysis commands:</p>
 <ul>
 <li><code>aab</code> - perform basic-block analysis (&quot;Nucleus&quot; algorithm)</li>
 <li><code>aac</code> - analyze function calls from one (selected or current function)</li>
@@ -3585,7 +3585,7 @@ use <code>afb+</code> command to add it.</p>
 <li><code>aad</code> - analyze pointers to pointers references</li>
 </ul>
 <p>Those are only generic semi-automated reference searching algorithms. Rizin provides a
-wide choice of manual references' creation of any kind. For this fine-grained control
+wide choice of manual references' creation of any kind. For this fine-grained control,
 you can use <code>ax</code> commands.</p>
 <pre><code>Usage: ax[?d-l*]   # see also 'afx?'
 | ax              list refs
@@ -3611,7 +3611,7 @@ you can use <code>ax</code> commands.</p>
 | axs addr [at]   add string ref
 </code></pre>
 <p>The most commonly used <code>ax</code> commands are <code>axt</code> and <code>axf</code>, especially as a part of various rz-pipe
-scripts. Lets say we see the string in the data or a code section and want to find all places
+scripts. Let's say we see the string in the data or a code section and want to find all places
 it was referenced from, we should use <code>axt</code>:</p>
 <pre><code>[0x0001783a]&gt; pd 2
 ;-- str.02x:
@@ -3654,18 +3654,18 @@ mov rbp, rsp
 </code></pre>
 <p>on x86_64 platform. It should be specified <em>before</em> any analysis commands.</p>
 <h2><a class="header" href="#configuration-1" id="configuration-1">Configuration</a></h2>
-<p>Rizin allows to change the behavior of almost any analysis stages or commands.
-There are different kinds of the configuration options:</p>
+<p>Rizin allows changing the behavior of almost any analysis stages or commands.
+There are different kinds of configuration options:</p>
 <ul>
 <li>Flow control</li>
 <li>Basic blocks control</li>
 <li>References control</li>
 <li>IO/Ranges</li>
 <li>Jump tables analysis control</li>
-<li>Platform/target specific options</li>
+<li>Platform/target-specific options</li>
 </ul>
 <h3><a class="header" href="#control-flow-configuration" id="control-flow-configuration">Control flow configuration</a></h3>
-<p>Two most commonly used options for changing the behavior of control flow analysis in rizin are
+<p>The two most commonly used options for changing the behavior of control flow analysis in rizin are
 <code>analysis.hasnext</code> and <code>analysis.jmp.after</code>. The first one allows forcing rizin to continue the analysis
 after the end of the function, even if the next chunk of the code wasn't called anywhere, thus
 analyzing all of the available functions. The latter one allows forcing rizin to continue
@@ -3675,14 +3675,14 @@ the analysis even after unconditional jumps.</p>
 sequences at a function beginning.</p>
 <p>For now, rizin also allows you to change the maximum basic block size with <code>analysis.bb.maxsize</code> option
 . The default value just works in most use cases, but it's useful to increase that for example when
-dealing with obfuscated code. Beware that some of basic blocks
+dealing with obfuscated code. Beware that some of the basic block
 control options may disappear in the future in favor of more automated ways to set those.</p>
 <p>For some unusual binaries or targets, there is an option <code>analysis.noncode</code>. Rizin doesn't try
 to analyze data sections as a code by default. But in some cases - malware, packed binaries,
 binaries for embedded systems, it is often a case. Thus - this option.</p>
 <h3><a class="header" href="#reference-control" id="reference-control">Reference control</a></h3>
 <p>The most crucial options that change the analysis results drastically. Sometimes some can be
-disabled to save the time and memory when analyzing big binaries.</p>
+disabled to save time and memory when analyzing big binaries.</p>
 <ul>
 <li><code>analysis.jmp.ref</code> - to allow references creation for unconditional jumps</li>
 <li><code>analysis.jmp.cref</code> - same, but for conditional jumps</li>
@@ -3714,7 +3714,7 @@ disabled to save the time and memory when analyzing big binaries.</p>
 of different types, the end result depending on the compiler/linker and LTO stages of optimization.
 Thus rizin allows enabling some experimental jump tables detection algorithms using <code>analysis.jmp.tbl</code>
 option. Eventually, algorithms moved into the default analysis loops once they start to work on
-every supported platform/target/testcase.
+every supported platform/target/test-case.
 Two more options can affect the jump tables analysis results too:</p>
 <ul>
 <li><code>analysis.jmp.indir</code> - follow the indirect jumps, some jump tables rely on them</li>
@@ -3722,24 +3722,24 @@ Two more options can affect the jump tables analysis results too:</p>
 </ul>
 <h3><a class="header" href="#platform-specific-controls" id="platform-specific-controls">Platform specific controls</a></h3>
 <p>There are two common problems when analyzing embedded targets: ARM/Thumb detection and MIPS GP
-value. In case of ARM binaries rizin supports some auto-detection of ARM/Thumb mode switches, but
+value. In the case of ARM binaries rizin supports some auto-detection of ARM/Thumb mode switches, but
 beware that it uses partial ESIL emulation, thus slowing the analysis process. If you will not
 like the results, particular functions' mode can be overridden with <code>afB</code> command.</p>
-<p>The MIPS GP problem is even trickier. It is a basic knowledge that GP value can be different not only
-for the whole program, but also for some functions. To partially solve that there are options
+<p>The MIPS GP problem is even trickier. It is basic knowledge that GP value can be different not only
+for the whole program but also for some functions. To partially solve that there are options
 <code>analysis.gp</code> and <code>analysis.gpfixed</code>. The first one sets the GP value for the whole program or particular
 function. The latter allows to &quot;constantify&quot; the GP value if some code is willing to change its
 value, always resetting it if the case. Those are heavily experimental and might be changed in the
 future in favor of more automated analysis.</p>
 <h2><a class="header" href="#visuals" id="visuals">Visuals</a></h2>
 <p>One of the easiest way to see and check the changes of the analysis commands and variables
-is to perform a scrolling in a <code>Vv</code> special visual mode, allowing functions preview:</p>
+is to perform scrolling in a <code>Vv</code> special visual mode, allowing functions preview:</p>
 <p><img src="analysis/code_analysis_vv.png" alt="vv" /></p>
 <p>When we want to check how analysis changes affect the result in the case of big functions, we can
-use minimap instead, allowing to see a bigger flow graph on the same screen size. To get into
+use minimap instead, allowing us to see a bigger flow graph on the same screen size. To get into
 the minimap mode type <code>VV</code> then press <code>p</code> twice:</p>
 <p><img src="analysis/code_analysis_vv2.png" alt="vv2" /></p>
-<p>This mode allows you to see the disassembly of each node separately, just navigate between them using <code>Tab</code> key.</p>
+<p>This mode allows you to see the disassembly of each node separately, just navigate between them using the <code>Tab</code> key.</p>
 <h2><a class="header" href="#analysis-hints" id="analysis-hints">Analysis hints</a></h2>
 <p>It is not an uncommon case that analysis results are not perfect even after you tried every single
 configuration option. This is where the &quot;analysis hints&quot; rizin mechanism comes in. It allows
@@ -3748,26 +3748,26 @@ string. These commands are located under <code>ah</code> namespace:</p>
 <pre><code>Usage: ah[lba-]  Analysis Hints
 | ah?                show this help
 | ah? offset         show hint of given offset
-| ah                 list hints in human-readable format
+| ah                 list hints in a human-readable format
 | ah.                list hints in human-readable format from current offset
 | ah-                remove all hints
-| ah- offset [size]  remove hints at given offset
+| ah- offset [size]  remove hints at the given offset
 | ah* offset         list hints in rizin commands format
-| aha ppc @ 0x42     force arch ppc for all addrs &gt;= 0x42 or until the next hint
-| aha 0 @ 0x84       disable the effect of arch hints for all addrs &gt;= 0x84 or until the next hint
-| ahb 16 @ 0x42      force 16bit for all addrs &gt;= 0x42 or until the next hint
-| ahb 0 @ 0x84       disable the effect of bits hints for all addrs &gt;= 0x84 or until the next hint
+| aha ppc @ 0x42     force arch ppc for all address &gt;= 0x42 or until the next hint
+| aha 0 @ 0x84       disable the effect of arch hints for all address &gt;= 0x84 or until the next hint
+| ahb 16 @ 0x42      force 16bit for all address &gt;= 0x42 or until the next hint
+| ahb 0 @ 0x84       disable the effect of bits hints for all address &gt;= 0x84 or until the next hint
 | ahc 0x804804       override call/jump address
 | ahd foo a0,33      replace opcode string
 | ahe 3,eax,+=       set vm analysis string
 | ahf 0x804840       override fallback address for call
-| ahF 0x10           set stackframe size at current offset
+| ahF 0x10           set stackframe size at the current offset
 | ahh 0x804840       highlight this address offset in disasm
 | ahi[?] 10          define numeric base for immediates (2, 8, 10, 10u, 16, i, p, S, s)
 | ahj                list hints in JSON
 | aho call           change opcode type (see aho?) (deprecated, moved to &quot;ahd&quot;)
 | ahp addr           set pointer hint
-| ahr val            set hint for return value of a function
+| ahr val            set hint for the return value of a function
 | ahs 4              set opcode size=4
 | ahS jz             set asm.syntax=jz for this opcode
 | aht [?] &lt;type&gt;     Mark immediate as a type offset (deprecated, moved to &quot;aho&quot;)
@@ -3911,7 +3911,7 @@ can improve it. Moreover, after changing something we can rerun variables analys
 <code>afva</code> command. Quite often variables analysis is accompanied with
 <a href="analysis/types.html">types analysis</a>, see <code>afta</code> command.</p>
 <p>The most important aspect of reverse engineering - naming things. Of course, you can rename
-variable too, affecting all places it was referenced. This can be achieved with <code>afvn</code> for
+a variable too, affecting all places it was referenced. This can be achieved with <code>afvn</code> for
 <em>any</em> type of argument or variable. Or you can simply remove the variable or argument with
 <code>afv-</code> command.</p>
 <p>As mentioned before the analysis loop relies heavily on types information while performing
@@ -4024,7 +4024,7 @@ local_32h
 <pre><code>win=spec
 spec.win.u32=unsigned int
 </code></pre>
-<p>Then change your default specification to newly created one using this config variable <code>e analysis.spec=win</code></p>
+<p>Then change your default specification to a newly created one using this config variable <code>e analysis.spec=win</code></p>
 <p>For more information about primitive and user-defined types support in rizin refer to <a href="analysis/types.html">types</a> chapter.</p>
 <h1><a class="header" href="#types" id="types">Types</a></h1>
 <p>Rizin supports the C-syntax data types description.
@@ -4059,7 +4059,7 @@ the internal SDB, thus are introspectable with <code>k</code> command.</p>
 | tx[f?]                     Type xrefs
 | tt[?]                      List all loaded typedefs
 </code></pre>
-<p>Note that the basic (atomic) types are not those from C standard -
+<p>Note that the basic (atomic) types are not those from the C standard -
 not <code>char</code>, <code>_Bool</code>, or <code>short</code>. Because those types can be different
 from one platform to another, rizin uses <code>definite</code> types like as
 <code>int8_t</code> or <code>uint64_t</code> and will convert <code>int</code> to <code>int32_t</code> or <code>int64_t</code>
@@ -4097,7 +4097,7 @@ struct S1 {
 foo
 S1
 </code></pre>
-<p>Also note there is a config option to specify include directories for types parsing</p>
+<p>Also, note there is a config option to specify include directories for types parsing</p>
 <pre><code>[0x00000000]&gt; el~dir.type
 dir.types: Default path to look for cparse type files
 [0x00000000]&gt; e dir.types
@@ -4152,9 +4152,9 @@ with the chosen type, we can use <code>tl</code> command to store the relationsh
  0x000051ff      cmp rax, rdi
  0x00005202      mov rbp, rsp
 </code></pre>
-<p>Once the struct is linked, rizin tries to propagate structure offset in the function at current offset, to run this analysis on whole program or at any targeted functions after all structs are linked you have <code>aat</code> command:</p>
+<p>Once the struct is linked, rizin tries to propagate structure offset in the function at the current offset, to run this analysis on the whole program or at any targeted functions after all structs are linked you have <code>aat</code> command:</p>
 <pre><code>[0x00000000]&gt; aa?
-| aat [fcn]           Analyze all/given function to convert immediate to linked structure offsets (see tl?)
+| aat [fcn]           Analyze all functions or a given function to convert immediate to linked structure offsets (see tl?)
 </code></pre>
 <p>Note sometimes the emulation may not be accurate, for example as below :</p>
 <pre><code>|0x000006da  push rbp
@@ -4168,12 +4168,12 @@ with the chosen type, we can use <code>tl</code> command to store the relationsh
 </code></pre>
 <p>The return value of <code>malloc</code> may differ between two emulations, so you have to set the hint for return value manually using <code>ahr</code> command, so run <code>tl</code> or <code>aat</code> command after setting up the return value hint.</p>
 <pre><code>[0x000006da]&gt; ah?
-| ahr val            set hint for return value of a function
+| ahr val            set hint for the return value of a function
 </code></pre>
 <h3><a class="header" href="#structure-immediates" id="structure-immediates">Structure Immediates</a></h3>
 <p>There is one more important aspect of using types in rizin - using <code>aht</code> you
 can change the immediate in the opcode to the structure offset.
-Lets see a simple example of [R]SI-relative addressing</p>
+Let's see a simple example of [R]SI-relative addressing</p>
 <pre><code>[0x000052f0]&gt; pd 1
 0x000052f0      mov rax, qword [rsi + 8]    ; [0x8:8]=0
 </code></pre>
@@ -4229,28 +4229,28 @@ struct.S1.z.meta=0
 </code></pre>
 <p>Defining primitive types requires an understanding of basic <code>pf</code> formats,
 you can find the whole list of format specifier in <code>pf??</code>:</p>
-<pre><code>-----------------------------------------------------
-| format | explanation                              |
-|---------------------------------------------------|
-|  b     |  byte (unsigned)                         |
-|  c     |  char (signed byte)                      |
-|  d     |  0x%%08x hexadecimal value (4 bytes)     |
-|  f     |  float value (4 bytes)                   |
-|  i     |  %%i integer value (4 bytes)             |
-|  o     |  0x%%08o octal value (4 byte)            |
-|  p     |  pointer reference (2, 4 or 8 bytes)     |
-|  q     |  quadword (8 bytes)                      |
-|  s     |  32bit pointer to string (4 bytes)       |
-|  S     |  64bit pointer to string (8 bytes)       |
-|  t     |  UNIX timestamp (4 bytes)                |
-|  T     |  show Ten first bytes of buffer          |
-|  u     |  uleb128 (variable length)               |
-|  w     |  word (2 bytes unsigned short in hex)    |
-|  x     |  0x%%08x hex value and flag (fd @ addr)  |
-|  X     |  show formatted hexpairs                 |
-|  z     |  \0 terminated string                    |
-|  Z     |  \0 terminated wide string               |
------------------------------------------------------
+<pre><code>---------------------------------------------------
+| format | explanation                            |
+| ------ | -------------------------------------- |
+| b      | byte (unsigned)                        |
+| c      | char (signed byte)                     |
+| d      | 0x%%08x hexadecimal value (4 bytes)    |
+| f      | float value (4 bytes)                  |
+| i      | %%i integer value (4 bytes)            |
+| o      | 0x%%08o octal value (4 byte)           |
+| p      | pointer reference (2, 4 or 8 bytes)    |
+| q      | quadword (8 bytes)                     |
+| s      | 32bit pointer to string (4 bytes)      |
+| S      | 64bit pointer to string (8 bytes)      |
+| t      | UNIX timestamp (4 bytes)               |
+| T      | show Ten first bytes of buffer         |
+| u      | uleb128 (variable length)              |
+| w      | word (2 bytes unsigned short in hex)   |
+| x      | 0x%%08x hex value and flag (fd @ addr) |
+| X      | show formatted hexpairs                |
+| z      | \0 terminated string                   |
+| Z      | \0 terminated wide string              |
+---------------------------------------------------
 
 </code></pre>
 <p>there are basically 3 mandatory keys for defining basic data types:
@@ -4289,7 +4289,7 @@ struct.X.a=a_type,a_offset,a_number_of_elements
 struct.X.b=b_type,b_offset,b_number_of_elements
 </code></pre>
 <p>The first line is used to define a structure called <code>X</code>, the second line
-defines the elements of <code>X</code> as comma separated values. After that, we just define each element info.</p>
+defines the elements of <code>X</code> as comma-separated values. After that, we just define each element info.</p>
 <p>For example. we can have a struct like this one:</p>
 <pre><code>struct _FILETIME {
 	DWORD dwLowDateTime;
@@ -4302,12 +4302,12 @@ struct._FILETIME=dwLowDateTime,dwHighDateTime
 struct._FILETIME.dwLowDateTime=DWORD,0,0
 struct._FILETIME.dwHighDateTime=DWORD,4,0
 </code></pre>
-<p>Note that the number of elements field is used in case of arrays only
+<p>Note that the number of elements field is used in the case of arrays only
 to identify how many elements are in arrays, other than that it is zero by default.</p>
 <h3><a class="header" href="#unions" id="unions">Unions</a></h3>
 <p>Unions are defined exactly like structs the only difference is that you will replace the word <code>struct</code> with the word <code>union</code>.</p>
 <h3><a class="header" href="#function-prototypes" id="function-prototypes">Function prototypes</a></h3>
-<p>Function prototypes representation is the most detail oriented and the most important one of them all. Actually, this is the one used directly for type matching</p>
+<p>Function prototype representation is the most detail-oriented and the most important one of them all. This is the one used directly for type matching</p>
 <pre><code>X=func
 func.X.args=NumberOfArgs
 func.x.arg0=Arg_type,arg_name
@@ -4346,7 +4346,7 @@ Usage: afc[agl?]
 | afcf[j] [name]  Prints return type function(arg1, arg2...), see afij
 | afck            List SDB details of call loaded calling conventions
 | afcl            List all available calling conventions
-| afco path       Open Calling Convention sdb profile from given path
+| afco path       Open Calling Convention sdb profile from the given path
 | afcR            Register telescoping using the calling conventions order
 [0x00000000]&gt;
 </code></pre>
@@ -4358,9 +4358,9 @@ amd64syscall
 ms
 reg
 </code></pre>
-<p>The default calling convention for particular architecture/binary is defined with
+<p>The default calling convention for a particular architecture/binary is defined with
 <code>analysis.cc</code> for user-mode calls and <code>analysis.syscc</code> for syscalls.</p>
-<p>To display function prototype of standard library functions you have <code>afcf</code> command</p>
+<p>To display a function prototype of standard library functions you have the <code>afcf</code> command</p>
 <pre><code>[0x00000000]&gt; afcf printf
 int printf(const char *format)
 [0x00000000]&gt; afcf fgets
@@ -4379,12 +4379,12 @@ cc.ms.argn=stack
 cc.ms.ret=rax
 </code></pre>
 <p><code>cc.x.argi=rax</code> is used to set the ith argument of this calling convention to register name <code>rax</code></p>
-<p><code>cc.x.argn=stack</code> means that all the arguments (or the rest of them in case there was argi for any i as counting number) will be stored in stack from left to right</p>
+<p><code>cc.x.argn=stack</code> means that all the arguments (or the rest of them in case there was <code>argi</code> for any <code>i</code> as counting number) will be stored in the stack from left to right</p>
 <p><code>cc.x.argn=stack_rev</code> same as <code>cc.x.argn=stack</code> except for it means argument are passed right to left</p>
 <h1><a class="header" href="#virtual-tables" id="virtual-tables">Virtual Tables</a></h1>
-<p>There is a basic support of virtual tables parsing (RTTI and others).
+<p>There is basic support of virtual tables parsing (RTTI and others).
 The most important thing before you start to perform such kind of analysis
-is to check if the <code>analysis.cpp.abi</code> option is set correctly, and change if needed.</p>
+is to check if the <code>analysis.cpp.abi</code> option is set correctly and change it if needed.</p>
 <p>All commands to work with virtual tables are located in the <code>av</code> namespace.
 Currently, the support is very basic, allowing you only to inspect
 parsed tables.</p>
@@ -4397,13 +4397,13 @@ parsed tables.</p>
 </code></pre>
 <p>The main commands here are <code>av</code> and <code>avr</code>. <code>av</code> lists all virtual tables
 found when rizin opened the file. If you are not happy with the result
-you may want to try to parse virtual table at a particular address with
+you may want to try to parse a virtual table at a particular address with
 <code>avr</code> command. <code>avra</code> performs the search and parsing of all virtual
 tables in the binary, like rizin does during the file opening.</p>
 <h1><a class="header" href="#syscalls" id="syscalls">Syscalls</a></h1>
 <p>Rizin allows manual search for assembly code looking like a syscall operation.
-For example on ARM platform usually they are represented by the <code>svc</code> instruction,
-on the others can be a different instructions, e.g. <code>syscall</code> on x86 PC.</p>
+For example on the ARM platform, usually, these are represented by the <code>svc</code> instruction,
+on the others, these can be different instructions, e.g. <code>syscall</code> on x86 PC.</p>
 <pre><code>[0x0001ece0]&gt; /ad/ svc
 ...
 0x000187c2   # 2: svc 0x76
@@ -4412,7 +4412,7 @@ on the others can be a different instructions, e.g. <code>syscall</code> on x86 
 ...
 </code></pre>
 <p>Syscalls detection is driven by <code>asm.os</code>, <code>asm.bits</code>, and <code>asm.arch</code>. Be sure
-to setup those configuration options accordingly. You can use <code>asl</code> command
+to set those configuration options accordingly. You can use <code>asl</code> command
 to check if syscalls' support is set up properly and as you expect.
 The command lists syscalls supported for your platform.</p>
 <pre><code>[0x0001ece0]&gt; asl
@@ -4489,15 +4489,15 @@ exit
 <p>See <code>as?</code> for more information about the utility.</p>
 <h1><a class="header" href="#emulation" id="emulation">Emulation</a></h1>
 <p>One of the most important things to remember in reverse engineering is
-a core difference between static analysis and dynamic analysis. As many already
+the core difference between static analysis and dynamic analysis. As many already
 know, static analysis suffers from the path explosion problem, which is impossible
 to solve even in the most basic way without at least a partial emulation.</p>
 <p>Thus many professional reverse engineering tools use code emulation while
-performing an analysis of binary code, and rizin is no difference here.</p>
+performing an analysis of binary code, and rizin is no different here.</p>
 <p>For partial emulation (or imprecise full emulation) rizin uses its own
 <a href="analysis/../disassembling/esil.html">ESIL</a> intermediate language and virtual machine.</p>
 <p>Rizin supports this kind of partial emulation for all platforms that
-implement ESIL uplifting (x86/x86_64, ARM, arm64, MIPS, powerpc, sparc, AVR, 8051, Gameboy, ...).</p>
+implement ESIL uplifting (x86/x86_64, ARM, arm64, MIPS, PowerPC, SPARC, AVR, 8051, Gameboy, ...).</p>
 <p>One of the most common usages of such emulation is to calculate
 indirect jumps and conditional jumps.</p>
 <p>To see the ESIL representation of the program one can use the <code>ao</code> command or enable the <code>asm.esil</code> configuration
@@ -4550,7 +4550,7 @@ or system calls, along with SIMD instructions. Thus the most common scenario is 
 emulate only a small chunk of the code, like encryption/decryption, unpacking or
 calculating something.</p>
 <p>After we successfully set up the ESIL VM we can interact with it like with a usual debugging mode.
-Commands interface for ESIL VM is almost identical to the debugging one:</p>
+The commands interface for ESIL VM is almost identical to the debugging one:</p>
 <ul>
 <li><code>aes</code> to step (or <code>s</code> key in visual mode)</li>
 <li><code>aesi</code> to step over the function calls</li>
@@ -4633,11 +4633,11 @@ You can make use of multiple symbol servers by separating each URL with a semi-c
 <pre><code>e pdb.server=https://msdl.microsoft.com/download/symbols;https://symbols.mozilla.org/
 </code></pre>
 <p>On Windows,  you can also use local network share paths (UNC paths) as symbol servers.</p>
-<p>Usually, there is no reason to change default <code>pdb.useragent</code>, but who knows where
+<p>Usually, there is no reason to change the default <code>pdb.useragent</code>, but who knows where
 could it be handy?</p>
 <p>Because those PDB files are stored as &quot;cab&quot; archives on the server, <code>pdb.extract=1</code>
 says to automatically extract them.</p>
-<p>Note that for the automatic downloading to work you need &quot;cabextract&quot; tool, and wget/curl installed.</p>
+<p>Note that for the automatic downloading to work you need the &quot;cabextract&quot; tool, and wget/curl installed.</p>
 <p>Sometimes you don't need to do that from the rizin itself, thus - two handy
 rz-bin options:</p>
 <pre><code> -P              show debug/pdb information
@@ -4658,7 +4658,7 @@ manipulated by the <code>id</code> commands:</p>
 | idpd             Download pdb file on remote server
 </code></pre>
 <p>Where <code>idpi</code> is basically the same as <code>rz-bin -P</code>.
-Note that <code>idp</code> can be also used not only in the static analysis mode, but also
+Note that <code>idp</code> can be also used not only in the static analysis mode but also
 in the debugging mode, even if connected via WinDbg.</p>
 <p>For simplifying the loading PDBs, especially for the processes with many linked DLLs,
 rizin can autoload all required PDBs automatically - you need just set the
@@ -4930,7 +4930,7 @@ outputs the custom graph in JSON format.</p>
 <p>Here's a short description for every output format available:</p>
 <h3><a class="header" href="#ascii-art--eg-agf" id="ascii-art--eg-agf">Ascii Art ** (e.g. <code>agf</code>)</a></h3>
 <p>Displays the graph directly to stdout using ASCII art to represent blocks and edges.</p>
-<p><em>Warning: displaying large graphs directly to stdout might prove to be computationally expensive and will make rizin not responsive for some time. In case of a doubt, prefer using the interactive view (explained below).</em></p>
+<p><em>Warning: displaying large graphs directly to stdout might prove to be computationally expensive and will make rizin not responsive for some time. In case of doubt, prefer using the interactive view (explained below).</em></p>
 <h3><a class="header" href="#interactive-ascii-art-eg-agfv" id="interactive-ascii-art-eg-agfv">Interactive Ascii Art (e.g. <code>agfv</code>)</a></h3>
 <p>Displays the ASCII graph in an interactive view similar to <code>VV</code> which allows to move the screen, zoom in / zoom out, ...</p>
 <h3><a class="header" href="#tiny-ascii-art-eg-agft" id="tiny-ascii-art-eg-agft">Tiny Ascii Art (e.g. <code>agft</code>)</a></h3>
@@ -4941,7 +4941,7 @@ outputs the custom graph in JSON format.</p>
 <p>Prints a JSON string representing the graph.</p>
 <ul>
 <li>
-<p>In case of the <code>f</code> format (basic blocks of function), it will have detailed information about the function and will also contain the disassembly of the function (use <code>J</code> format for the formatted disassembly.</p>
+<p>In the case of the <code>f</code> format (basic blocks of function), it will have detailed information about the function and will also contain the disassembly of the function (use <code>J</code> format for the formatted disassembly.</p>
 </li>
 <li>
 <p>In all other cases, it will only have basic information about the nodes of the graph (id, title, body, and edges).</p>

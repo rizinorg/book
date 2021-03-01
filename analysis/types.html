@@ -180,7 +180,7 @@ the internal SDB, thus are introspectable with <code>k</code> command.</p>
 | tx[f?]                     Type xrefs
 | tt[?]                      List all loaded typedefs
 </code></pre>
-<p>Note that the basic (atomic) types are not those from C standard -
+<p>Note that the basic (atomic) types are not those from the C standard -
 not <code>char</code>, <code>_Bool</code>, or <code>short</code>. Because those types can be different
 from one platform to another, rizin uses <code>definite</code> types like as
 <code>int8_t</code> or <code>uint64_t</code> and will convert <code>int</code> to <code>int32_t</code> or <code>int64_t</code>
@@ -218,7 +218,7 @@ struct S1 {
 foo
 S1
 </code></pre>
-<p>Also note there is a config option to specify include directories for types parsing</p>
+<p>Also, note there is a config option to specify include directories for types parsing</p>
 <pre><code>[0x00000000]&gt; el~dir.type
 dir.types: Default path to look for cparse type files
 [0x00000000]&gt; e dir.types
@@ -273,9 +273,9 @@ with the chosen type, we can use <code>tl</code> command to store the relationsh
  0x000051ff      cmp rax, rdi
  0x00005202      mov rbp, rsp
 </code></pre>
-<p>Once the struct is linked, rizin tries to propagate structure offset in the function at current offset, to run this analysis on whole program or at any targeted functions after all structs are linked you have <code>aat</code> command:</p>
+<p>Once the struct is linked, rizin tries to propagate structure offset in the function at the current offset, to run this analysis on the whole program or at any targeted functions after all structs are linked you have <code>aat</code> command:</p>
 <pre><code>[0x00000000]&gt; aa?
-| aat [fcn]           Analyze all/given function to convert immediate to linked structure offsets (see tl?)
+| aat [fcn]           Analyze all functions or a given function to convert immediate to linked structure offsets (see tl?)
 </code></pre>
 <p>Note sometimes the emulation may not be accurate, for example as below :</p>
 <pre><code>|0x000006da  push rbp
@@ -289,12 +289,12 @@ with the chosen type, we can use <code>tl</code> command to store the relationsh
 </code></pre>
 <p>The return value of <code>malloc</code> may differ between two emulations, so you have to set the hint for return value manually using <code>ahr</code> command, so run <code>tl</code> or <code>aat</code> command after setting up the return value hint.</p>
 <pre><code>[0x000006da]&gt; ah?
-| ahr val            set hint for return value of a function
+| ahr val            set hint for the return value of a function
 </code></pre>
 <h3><a class="header" href="#structure-immediates" id="structure-immediates">Structure Immediates</a></h3>
 <p>There is one more important aspect of using types in rizin - using <code>aht</code> you
 can change the immediate in the opcode to the structure offset.
-Lets see a simple example of [R]SI-relative addressing</p>
+Let's see a simple example of [R]SI-relative addressing</p>
 <pre><code>[0x000052f0]&gt; pd 1
 0x000052f0      mov rax, qword [rsi + 8]    ; [0x8:8]=0
 </code></pre>
@@ -350,28 +350,28 @@ struct.S1.z.meta=0
 </code></pre>
 <p>Defining primitive types requires an understanding of basic <code>pf</code> formats,
 you can find the whole list of format specifier in <code>pf??</code>:</p>
-<pre><code>-----------------------------------------------------
-| format | explanation                              |
-|---------------------------------------------------|
-|  b     |  byte (unsigned)                         |
-|  c     |  char (signed byte)                      |
-|  d     |  0x%%08x hexadecimal value (4 bytes)     |
-|  f     |  float value (4 bytes)                   |
-|  i     |  %%i integer value (4 bytes)             |
-|  o     |  0x%%08o octal value (4 byte)            |
-|  p     |  pointer reference (2, 4 or 8 bytes)     |
-|  q     |  quadword (8 bytes)                      |
-|  s     |  32bit pointer to string (4 bytes)       |
-|  S     |  64bit pointer to string (8 bytes)       |
-|  t     |  UNIX timestamp (4 bytes)                |
-|  T     |  show Ten first bytes of buffer          |
-|  u     |  uleb128 (variable length)               |
-|  w     |  word (2 bytes unsigned short in hex)    |
-|  x     |  0x%%08x hex value and flag (fd @ addr)  |
-|  X     |  show formatted hexpairs                 |
-|  z     |  \0 terminated string                    |
-|  Z     |  \0 terminated wide string               |
------------------------------------------------------
+<pre><code>---------------------------------------------------
+| format | explanation                            |
+| ------ | -------------------------------------- |
+| b      | byte (unsigned)                        |
+| c      | char (signed byte)                     |
+| d      | 0x%%08x hexadecimal value (4 bytes)    |
+| f      | float value (4 bytes)                  |
+| i      | %%i integer value (4 bytes)            |
+| o      | 0x%%08o octal value (4 byte)           |
+| p      | pointer reference (2, 4 or 8 bytes)    |
+| q      | quadword (8 bytes)                     |
+| s      | 32bit pointer to string (4 bytes)      |
+| S      | 64bit pointer to string (8 bytes)      |
+| t      | UNIX timestamp (4 bytes)               |
+| T      | show Ten first bytes of buffer         |
+| u      | uleb128 (variable length)              |
+| w      | word (2 bytes unsigned short in hex)   |
+| x      | 0x%%08x hex value and flag (fd @ addr) |
+| X      | show formatted hexpairs                |
+| z      | \0 terminated string                   |
+| Z      | \0 terminated wide string              |
+---------------------------------------------------
 
 </code></pre>
 <p>there are basically 3 mandatory keys for defining basic data types:
@@ -410,7 +410,7 @@ struct.X.a=a_type,a_offset,a_number_of_elements
 struct.X.b=b_type,b_offset,b_number_of_elements
 </code></pre>
 <p>The first line is used to define a structure called <code>X</code>, the second line
-defines the elements of <code>X</code> as comma separated values. After that, we just define each element info.</p>
+defines the elements of <code>X</code> as comma-separated values. After that, we just define each element info.</p>
 <p>For example. we can have a struct like this one:</p>
 <pre><code>struct _FILETIME {
 	DWORD dwLowDateTime;
@@ -423,12 +423,12 @@ struct._FILETIME=dwLowDateTime,dwHighDateTime
 struct._FILETIME.dwLowDateTime=DWORD,0,0
 struct._FILETIME.dwHighDateTime=DWORD,4,0
 </code></pre>
-<p>Note that the number of elements field is used in case of arrays only
+<p>Note that the number of elements field is used in the case of arrays only
 to identify how many elements are in arrays, other than that it is zero by default.</p>
 <h3><a class="header" href="#unions" id="unions">Unions</a></h3>
 <p>Unions are defined exactly like structs the only difference is that you will replace the word <code>struct</code> with the word <code>union</code>.</p>
 <h3><a class="header" href="#function-prototypes" id="function-prototypes">Function prototypes</a></h3>
-<p>Function prototypes representation is the most detail oriented and the most important one of them all. Actually, this is the one used directly for type matching</p>
+<p>Function prototype representation is the most detail-oriented and the most important one of them all. This is the one used directly for type matching</p>
 <pre><code>X=func
 func.X.args=NumberOfArgs
 func.x.arg0=Arg_type,arg_name

@@ -149,15 +149,15 @@
                     <main>
                         <h1><a class="header" href="#emulation" id="emulation">Emulation</a></h1>
 <p>One of the most important things to remember in reverse engineering is
-a core difference between static analysis and dynamic analysis. As many already
+the core difference between static analysis and dynamic analysis. As many already
 know, static analysis suffers from the path explosion problem, which is impossible
 to solve even in the most basic way without at least a partial emulation.</p>
 <p>Thus many professional reverse engineering tools use code emulation while
-performing an analysis of binary code, and rizin is no difference here.</p>
+performing an analysis of binary code, and rizin is no different here.</p>
 <p>For partial emulation (or imprecise full emulation) rizin uses its own
 <a href="../disassembling/esil.html">ESIL</a> intermediate language and virtual machine.</p>
 <p>Rizin supports this kind of partial emulation for all platforms that
-implement ESIL uplifting (x86/x86_64, ARM, arm64, MIPS, powerpc, sparc, AVR, 8051, Gameboy, ...).</p>
+implement ESIL uplifting (x86/x86_64, ARM, arm64, MIPS, PowerPC, SPARC, AVR, 8051, Gameboy, ...).</p>
 <p>One of the most common usages of such emulation is to calculate
 indirect jumps and conditional jumps.</p>
 <p>To see the ESIL representation of the program one can use the <code>ao</code> command or enable the <code>asm.esil</code> configuration
@@ -210,7 +210,7 @@ or system calls, along with SIMD instructions. Thus the most common scenario is 
 emulate only a small chunk of the code, like encryption/decryption, unpacking or
 calculating something.</p>
 <p>After we successfully set up the ESIL VM we can interact with it like with a usual debugging mode.
-Commands interface for ESIL VM is almost identical to the debugging one:</p>
+The commands interface for ESIL VM is almost identical to the debugging one:</p>
 <ul>
 <li><code>aes</code> to step (or <code>s</code> key in visual mode)</li>
 <li><code>aesi</code> to step over the function calls</li>

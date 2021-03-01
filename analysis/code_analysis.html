@@ -206,10 +206,10 @@
 </code></pre>
 <p>In this example, we analyze the whole file (<code>aa</code>) and then print disassembly of the <code>main()</code> function (<code>pdf</code>).
 The <code>aa</code> command belongs to the family of auto analysis commands and performs only the most basic
-auto analysis steps. In rizin there are many different types of the auto analysis commands with a
+auto analysis steps. In rizin there are many different types of auto analysis commands with a
 different analysis depth, including partial emulation: <code>aa</code>, <code>aaa</code>, <code>aab</code>, <code>aaaa</code>, ...
 There is also a mapping of those commands to the rizin CLI options: <code>rizin -A</code>, <code>rizin -AA</code>, and so on.</p>
-<p>It is a common sense that completely automated analysis can produce non sequitur results, thus
+<p>It is common sense that completely automated analysis can produce non sequitur results, thus
 rizin provides separate commands for the particular stages of the analysis allowing fine-grained
 control of the analysis process. Moreover, there is a treasure trove of configuration variables
 for controlling the analysis outcomes. You can find them in <code>analysis.*</code> and <code>emu.*</code>
@@ -217,7 +217,7 @@ cfg variables' namespaces.</p>
 <h2><a class="header" href="#analyze-functions" id="analyze-functions">Analyze functions</a></h2>
 <p>One of the most important &quot;basic&quot; analysis commands is the set of <code>af</code> subcommands. <code>af</code> means
 &quot;analyze function&quot;. Using this command you can either allow automatic analysis of the particular
-function or perform completely manual one.</p>
+function or perform a completely manual one.</p>
 <pre><code>[0x00000000]&gt; af?
 Usage: af
 | af ([name]) ([addr])                  analyze functions (start at addr or $$)
@@ -253,12 +253,12 @@ Usage: af
 <p>There are a lot of useful commands under <code>afl</code> such as <code>aflj</code>, which lists the function in JSON format and <code>aflm</code>, which lists the functions in the syntax found in makefiles.</p>
 <p>There's also <code>afl=</code>, which displays ASCII-art bars with function ranges.</p>
 <p>You can find the rest of them under <code>afl?</code>.</p>
-<p>Some of the most challenging tasks while performing a function analysis are merge, crop and resize.
-As with other analysis commands you have two modes: semi-automatic and manual.
+<p>Some of the most challenging tasks while performing a function analysis are merge, crop, and resize.
+As with other analysis commands, you have two modes: semi-automatic and manual.
 For the semi-automatic, you can use <code>afm &lt;function name&gt;</code> to merge the current function with
 the one specified by name as an argument, <code>aff</code> to readjust the function after analysis changes or function edits,
 <code>afu &lt;address&gt;</code> to do the resize and analysis of the current function until the specified address.</p>
-<p>Apart from those semi-automatic ways to edit/analyze the function, you can hand craft it in the manual mode with <code>af+</code> command and edit basic blocks of it using <code>afb</code> commands.
+<p>Apart from those semi-automatic ways to edit/analyze the function, you can handcraft it in the manual mode with <code>af+</code> command and edit basic blocks of it using <code>afb</code> commands.
 Before changing the basic blocks of the function it is recommended to check the already presented ones:</p>
 <pre><code>[0x00003ac0]&gt; afb
 0x00003ac0 0x00003b7f 01:001A 191 f 0x00003b7f
@@ -268,8 +268,8 @@ Before changing the basic blocks of the function it is recommended to check the 
 0x00003b92 0x00003ba8 01:0030 22 j 0x00003ba8
 0x00003ba8 0x00003bf9 00:0000 81
 </code></pre>
-<h3><a class="header" href="#hand-craft-function" id="hand-craft-function">Hand craft function</a></h3>
-<p>before start, let's prepare a binary file first, for example:</p>
+<h3><a class="header" href="#handcraft-function" id="handcraft-function">Handcraft function</a></h3>
+<p>before starting, let's prepare a binary file first, for example:</p>
 <pre><code class="language-C">int code_block()
 {
   int result = 0;
@@ -305,7 +305,7 @@ p: Cannot find function at 0x08000034
             0x0800005c      c3             ret
 
 </code></pre>
-<p>our goal is to hand craft a function with the following structure</p>
+<p>our goal is to handcraft a function with the following structure</p>
 <p><img src="analyze_one.png" alt="analyze_one" /></p>
 <p>create a function at 0x8000034 named code_block:</p>
 <pre><code>[0x8000034]&gt; af+ 0x8000034 code_block
@@ -331,10 +331,10 @@ use <code>afb+</code> command to add it.</p>
 [0x08000034]&gt; VV
 </code></pre>
 <p><img src="handcraft_one.png" alt="handcraft_one" /></p>
-<p>There are two very important commands for this: <code>afc</code> and <code>afB</code>. The latter is a must-know command for some platforms like ARM. It provides a way to change the &quot;bitness&quot; of the particular function. Basically, allowing to select between ARM and Thumb modes.</p>
+<p>There are two very important commands for this: <code>afc</code> and <code>afB</code>. The latter is a must-know command for some platforms like ARM. It provides a way to change the &quot;bitness&quot; of a particular function by allowing to select between ARM and Thumb modes.</p>
 <p><code>afc</code> on the other side, allows to manually specify function calling convention. You can find more information on its usage in <a href="calling_conventions.html">calling_conventions</a>.</p>
 <h2><a class="header" href="#recursive-analysis" id="recursive-analysis">Recursive analysis</a></h2>
-<p>There are 5 important program wide half-automated analysis commands:</p>
+<p>There are 5 important program-wide half-automated analysis commands:</p>
 <ul>
 <li><code>aab</code> - perform basic-block analysis (&quot;Nucleus&quot; algorithm)</li>
 <li><code>aac</code> - analyze function calls from one (selected or current function)</li>
@@ -343,7 +343,7 @@ use <code>afb+</code> command to add it.</p>
 <li><code>aad</code> - analyze pointers to pointers references</li>
 </ul>
 <p>Those are only generic semi-automated reference searching algorithms. Rizin provides a
-wide choice of manual references' creation of any kind. For this fine-grained control
+wide choice of manual references' creation of any kind. For this fine-grained control,
 you can use <code>ax</code> commands.</p>
 <pre><code>Usage: ax[?d-l*]   # see also 'afx?'
 | ax              list refs
@@ -369,7 +369,7 @@ you can use <code>ax</code> commands.</p>
 | axs addr [at]   add string ref
 </code></pre>
 <p>The most commonly used <code>ax</code> commands are <code>axt</code> and <code>axf</code>, especially as a part of various rz-pipe
-scripts. Lets say we see the string in the data or a code section and want to find all places
+scripts. Let's say we see the string in the data or a code section and want to find all places
 it was referenced from, we should use <code>axt</code>:</p>
 <pre><code>[0x0001783a]&gt; pd 2
 ;-- str.02x:
@@ -412,18 +412,18 @@ mov rbp, rsp
 </code></pre>
 <p>on x86_64 platform. It should be specified <em>before</em> any analysis commands.</p>
 <h2><a class="header" href="#configuration" id="configuration">Configuration</a></h2>
-<p>Rizin allows to change the behavior of almost any analysis stages or commands.
-There are different kinds of the configuration options:</p>
+<p>Rizin allows changing the behavior of almost any analysis stages or commands.
+There are different kinds of configuration options:</p>
 <ul>
 <li>Flow control</li>
 <li>Basic blocks control</li>
 <li>References control</li>
 <li>IO/Ranges</li>
 <li>Jump tables analysis control</li>
-<li>Platform/target specific options</li>
+<li>Platform/target-specific options</li>
 </ul>
 <h3><a class="header" href="#control-flow-configuration" id="control-flow-configuration">Control flow configuration</a></h3>
-<p>Two most commonly used options for changing the behavior of control flow analysis in rizin are
+<p>The two most commonly used options for changing the behavior of control flow analysis in rizin are
 <code>analysis.hasnext</code> and <code>analysis.jmp.after</code>. The first one allows forcing rizin to continue the analysis
 after the end of the function, even if the next chunk of the code wasn't called anywhere, thus
 analyzing all of the available functions. The latter one allows forcing rizin to continue
@@ -433,14 +433,14 @@ the analysis even after unconditional jumps.</p>
 sequences at a function beginning.</p>
 <p>For now, rizin also allows you to change the maximum basic block size with <code>analysis.bb.maxsize</code> option
 . The default value just works in most use cases, but it's useful to increase that for example when
-dealing with obfuscated code. Beware that some of basic blocks
+dealing with obfuscated code. Beware that some of the basic block
 control options may disappear in the future in favor of more automated ways to set those.</p>
 <p>For some unusual binaries or targets, there is an option <code>analysis.noncode</code>. Rizin doesn't try
 to analyze data sections as a code by default. But in some cases - malware, packed binaries,
 binaries for embedded systems, it is often a case. Thus - this option.</p>
 <h3><a class="header" href="#reference-control" id="reference-control">Reference control</a></h3>
 <p>The most crucial options that change the analysis results drastically. Sometimes some can be
-disabled to save the time and memory when analyzing big binaries.</p>
+disabled to save time and memory when analyzing big binaries.</p>
 <ul>
 <li><code>analysis.jmp.ref</code> - to allow references creation for unconditional jumps</li>
 <li><code>analysis.jmp.cref</code> - same, but for conditional jumps</li>
@@ -472,7 +472,7 @@ disabled to save the time and memory when analyzing big binaries.</p>
 of different types, the end result depending on the compiler/linker and LTO stages of optimization.
 Thus rizin allows enabling some experimental jump tables detection algorithms using <code>analysis.jmp.tbl</code>
 option. Eventually, algorithms moved into the default analysis loops once they start to work on
-every supported platform/target/testcase.
+every supported platform/target/test-case.
 Two more options can affect the jump tables analysis results too:</p>
 <ul>
 <li><code>analysis.jmp.indir</code> - follow the indirect jumps, some jump tables rely on them</li>
@@ -480,24 +480,24 @@ Two more options can affect the jump tables analysis results too:</p>
 </ul>
 <h3><a class="header" href="#platform-specific-controls" id="platform-specific-controls">Platform specific controls</a></h3>
 <p>There are two common problems when analyzing embedded targets: ARM/Thumb detection and MIPS GP
-value. In case of ARM binaries rizin supports some auto-detection of ARM/Thumb mode switches, but
+value. In the case of ARM binaries rizin supports some auto-detection of ARM/Thumb mode switches, but
 beware that it uses partial ESIL emulation, thus slowing the analysis process. If you will not
 like the results, particular functions' mode can be overridden with <code>afB</code> command.</p>
-<p>The MIPS GP problem is even trickier. It is a basic knowledge that GP value can be different not only
-for the whole program, but also for some functions. To partially solve that there are options
+<p>The MIPS GP problem is even trickier. It is basic knowledge that GP value can be different not only
+for the whole program but also for some functions. To partially solve that there are options
 <code>analysis.gp</code> and <code>analysis.gpfixed</code>. The first one sets the GP value for the whole program or particular
 function. The latter allows to &quot;constantify&quot; the GP value if some code is willing to change its
 value, always resetting it if the case. Those are heavily experimental and might be changed in the
 future in favor of more automated analysis.</p>
 <h2><a class="header" href="#visuals" id="visuals">Visuals</a></h2>
 <p>One of the easiest way to see and check the changes of the analysis commands and variables
-is to perform a scrolling in a <code>Vv</code> special visual mode, allowing functions preview:</p>
+is to perform scrolling in a <code>Vv</code> special visual mode, allowing functions preview:</p>
 <p><img src="code_analysis_vv.png" alt="vv" /></p>
 <p>When we want to check how analysis changes affect the result in the case of big functions, we can
-use minimap instead, allowing to see a bigger flow graph on the same screen size. To get into
+use minimap instead, allowing us to see a bigger flow graph on the same screen size. To get into
 the minimap mode type <code>VV</code> then press <code>p</code> twice:</p>
 <p><img src="code_analysis_vv2.png" alt="vv2" /></p>
-<p>This mode allows you to see the disassembly of each node separately, just navigate between them using <code>Tab</code> key.</p>
+<p>This mode allows you to see the disassembly of each node separately, just navigate between them using the <code>Tab</code> key.</p>
 <h2><a class="header" href="#analysis-hints" id="analysis-hints">Analysis hints</a></h2>
 <p>It is not an uncommon case that analysis results are not perfect even after you tried every single
 configuration option. This is where the &quot;analysis hints&quot; rizin mechanism comes in. It allows
@@ -506,26 +506,26 @@ string. These commands are located under <code>ah</code> namespace:</p>
 <pre><code>Usage: ah[lba-]  Analysis Hints
 | ah?                show this help
 | ah? offset         show hint of given offset
-| ah                 list hints in human-readable format
+| ah                 list hints in a human-readable format
 | ah.                list hints in human-readable format from current offset
 | ah-                remove all hints
-| ah- offset [size]  remove hints at given offset
+| ah- offset [size]  remove hints at the given offset
 | ah* offset         list hints in rizin commands format
-| aha ppc @ 0x42     force arch ppc for all addrs &gt;= 0x42 or until the next hint
-| aha 0 @ 0x84       disable the effect of arch hints for all addrs &gt;= 0x84 or until the next hint
-| ahb 16 @ 0x42      force 16bit for all addrs &gt;= 0x42 or until the next hint
-| ahb 0 @ 0x84       disable the effect of bits hints for all addrs &gt;= 0x84 or until the next hint
+| aha ppc @ 0x42     force arch ppc for all address &gt;= 0x42 or until the next hint
+| aha 0 @ 0x84       disable the effect of arch hints for all address &gt;= 0x84 or until the next hint
+| ahb 16 @ 0x42      force 16bit for all address &gt;= 0x42 or until the next hint
+| ahb 0 @ 0x84       disable the effect of bits hints for all address &gt;= 0x84 or until the next hint
 | ahc 0x804804       override call/jump address
 | ahd foo a0,33      replace opcode string
 | ahe 3,eax,+=       set vm analysis string
 | ahf 0x804840       override fallback address for call
-| ahF 0x10           set stackframe size at current offset
+| ahF 0x10           set stackframe size at the current offset
 | ahh 0x804840       highlight this address offset in disasm
 | ahi[?] 10          define numeric base for immediates (2, 8, 10, 10u, 16, i, p, S, s)
 | ahj                list hints in JSON
 | aho call           change opcode type (see aho?) (deprecated, moved to &quot;ahd&quot;)
 | ahp addr           set pointer hint
-| ahr val            set hint for return value of a function
+| ahr val            set hint for the return value of a function
 | ahs 4              set opcode size=4
 | ahS jz             set asm.syntax=jz for this opcode
 | aht [?] &lt;type&gt;     Mark immediate as a type offset (deprecated, moved to &quot;aho&quot;)

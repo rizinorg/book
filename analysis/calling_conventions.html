@@ -159,7 +159,7 @@ Usage: afc[agl?]
 | afcf[j] [name]  Prints return type function(arg1, arg2...), see afij
 | afck            List SDB details of call loaded calling conventions
 | afcl            List all available calling conventions
-| afco path       Open Calling Convention sdb profile from given path
+| afco path       Open Calling Convention sdb profile from the given path
 | afcR            Register telescoping using the calling conventions order
 [0x00000000]&gt;
 </code></pre>
@@ -171,9 +171,9 @@ amd64syscall
 ms
 reg
 </code></pre>
-<p>The default calling convention for particular architecture/binary is defined with
+<p>The default calling convention for a particular architecture/binary is defined with
 <code>analysis.cc</code> for user-mode calls and <code>analysis.syscc</code> for syscalls.</p>
-<p>To display function prototype of standard library functions you have <code>afcf</code> command</p>
+<p>To display a function prototype of standard library functions you have the <code>afcf</code> command</p>
 <pre><code>[0x00000000]&gt; afcf printf
 int printf(const char *format)
 [0x00000000]&gt; afcf fgets
@@ -192,7 +192,7 @@ cc.ms.argn=stack
 cc.ms.ret=rax
 </code></pre>
 <p><code>cc.x.argi=rax</code> is used to set the ith argument of this calling convention to register name <code>rax</code></p>
-<p><code>cc.x.argn=stack</code> means that all the arguments (or the rest of them in case there was argi for any i as counting number) will be stored in stack from left to right</p>
+<p><code>cc.x.argn=stack</code> means that all the arguments (or the rest of them in case there was <code>argi</code> for any <code>i</code> as counting number) will be stored in the stack from left to right</p>
 <p><code>cc.x.argn=stack_rev</code> same as <code>cc.x.argn=stack</code> except for it means argument are passed right to left</p>
 
                     </main>
