@@ -49,14 +49,14 @@ endian = 'little'
 
 Now setup the build directory with meson as usual:
 ```
-$ CFLAGS="-static" LDFLAGS="-static" meson --default-library static --prefix=/tmp/android-dir -Dblob=true build --cross-file ./meson-android.ini
+$ meson --default-library static -Dstatic_runtime=true --prefix=/tmp/android-dir -Dblob=true build --cross-file ./meson-android.ini
 ```
 
 A bit of explanation about all the options:
-* `CFLAGS="-static"`, `LDFLAGS="-static"`, `--default-library static`: this
-  ensure that libraries and binaries are statically compiled, so you do not need
-  to properly set LD_* environment variables in your Android environment to make
-  it find the right libraries. Binaries have everything they need inside.
+* `--default-library static -Dstatic_runtime=true`: this ensure that libraries
+  and binaries are statically compiled, so you do not need to properly set LD_*
+  environment variables in your Android environment to make it find the right
+  libraries. Binaries have everything they need inside.
 * `-Dblob=true`: it tells meson to compile just one binary with all the needed
   code for running `rizin`, `rz-bin`, `rz-asm`, etc. and creates symbolic links to
   those names. This avoids creating many statically compiled large binaries and
