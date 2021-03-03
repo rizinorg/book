@@ -205,6 +205,15 @@ false
 <p>You can use this configuration variable to define the CPU type. For example, if you had picked the architecture as AVR, you can choose your CPU type (ATmega1281, ATmega2561, etc) using <code>asm.cpu</code>.</p>
 <h3><a class="header" href="#asmflags-bool" id="asmflags-bool">asm.flags: <code>bool</code></a></h3>
 <p>When set to &quot;true&quot;, the disassembler view will have the flags column.</p>
+<h3><a class="header" href="#asmfcnsize-bool" id="asmfcnsize-bool">asm.fcn.size: <code>bool</code></a></h3>
+<p>This variable is used to display the size of the function in the disassembly. By default, it is set to false and turning it on would result in a disassembly like the one below:</p>
+<pre><code>┌ 44: int main (char **argv);
+│           ; var int32_t var_4h @ ebp-0x4
+│           ; arg char **argv @ esp+0x24
+│           0x000011cd      lea   ecx, [argv]
+│           0x000011d1      and   esp, 0xfffffff0
+</code></pre>
+<p>Here, <code>44</code> is the size of the function.</p>
 <h3><a class="header" href="#asmlinescall-bool" id="asmlinescall-bool">asm.lines.call: <code>bool</code></a></h3>
 <p>If set to &quot;true&quot;, draw lines at the left of the disassembly output (<code>pd</code>, <code>pD</code> commands) to graphically represent control flow changes (jumps and calls) that are targeted inside the current block. Also, see <code>asm.lines.out</code>.</p>
 <h3><a class="header" href="#asmlinesout-bool" id="asmlinesout-bool">asm.lines.out: <code>bool</code></a></h3>
