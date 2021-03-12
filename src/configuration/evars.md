@@ -285,6 +285,28 @@ If you have set up any [flagzones](http://book.rada.re/basic_commands/flags.html
 
 Show UTF-8 characters instead of ANSI.
 
+### scr.utf8.curvy: `bool`
+
+This variable lets you display curved corners in places like function graphs. This variable requires `scr.utf8` to be turned on.
+
+```
+[0x0000415c]> pd 4
+│           0x0000415c      cmp   eax, 2
+│       ┌─< 0x0000415f      je    0x5001
+│       │   0x00004165      cmp   eax, 3
+│      ┌──< 0x00004168      jne   0x4348
+[0x0000415c]> e scr.utf8.curvy=1
+[0x0000415c]> pd 4
+│           0x0000415c      cmp   eax, 2
+│       ╭─< 0x0000415f      je    0x5001
+│       │   0x00004165      cmp   eax, 3
+│      ╭──< 0x00004168      jne   0x4348
+```
+
+### scr.wheel: `bool`
+
+This variable lets you enable the mouse in Visual mode. Turning this variable on will be useful when you want to use your mouse to scroll through your disassembly or copy something in the Visual mode.
+
 ## General Configuration
 
 ### cfg.bigendian: `bool`
