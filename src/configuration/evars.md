@@ -287,7 +287,7 @@ Show UTF-8 characters instead of ANSI.
 
 ### scr.utf8.curvy: `bool`
 
-`scr.utf8.curvy` lets you display curved corners in places like function graphs. This variable requires `scr.utf8` to be turned on.
+This variable lets you display curved corners in places like function graphs. This variable requires `scr.utf8` to be turned on.
 
 ```
 [0x0000415c]> pd 4
@@ -305,7 +305,7 @@ Show UTF-8 characters instead of ANSI.
 
 ### scr.wheel: `bool`
 
-This variable lets you toggle the mouse wheel in visual mode. Turning this variable off will be useful when you want to use your mouse to right click and copy something from the Visual mode.
+This variable lets you enable the mouse in Visual mode. Turning this variable on will be useful when you want to use your mouse to scroll through your disassembly or copy something in the Visual mode.
 
 ## General Configuration
 
