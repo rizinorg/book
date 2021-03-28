@@ -5,22 +5,36 @@
         <meta charset="UTF-8">
         <title>ESIL - The Official Rizin Book</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="The Official Rizin Book">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
+        
         <link rel="stylesheet" href="../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -116,9 +130,11 @@
                     <h1 class="menu-title">The Official Rizin Book</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -147,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#esil" id="esil">ESIL</a></h1>
+                        <h1 id="esil"><a class="header" href="#esil">ESIL</a></h1>
 <p>ESIL stands for 'Evaluable Strings Intermediate Language'. It aims to describe a <a href="https://en.wikipedia.org/wiki/Forth_%28programming_language%29">Forth</a>-like representation for every target CPU opcode semantics. ESIL representations can be evaluated (interpreted) in order to emulate individual instructions. Each command of an ESIL expression is separated by a comma. Its virtual machine can be described as this:</p>
 <pre><code>   while ((word=haveCommand())) {
      if (word.isOperator()) {
@@ -168,7 +184,7 @@
 </code></pre>
 <p>We can see that this corresponds to the x86 instruction <code>push ebp</code>! Isn't that cool?
 The aim is to be able to express most of the common operations performed by CPUs, like binary arithmetic operations, memory loads and stores, processing syscalls. This way if we can transform the instructions to ESIL we can see what a program does while it is running even for the most cryptic architectures you definitely don't have a device to debug on for.</p>
-<h2><a class="header" href="#using-esil" id="using-esil">Using ESIL</a></h2>
+<h2 id="using-esil"><a class="header" href="#using-esil">Using ESIL</a></h2>
 <p>rizin's visual mode is great to inspect the ESIL evaluations.</p>
 <p>There are 3 environment variables that are important for watching what a program does:</p>
 <pre><code>[0x00000000]&gt; e emu.str=true
@@ -180,7 +196,7 @@ So if you want to take a look at how instructions are expressed in ESIL simply s
 <pre><code>[0x00000000]&gt; e asm.esil=true
 </code></pre>
 <p>In visual mode you can also toggle this by simply typing <code>O</code>.</p>
-<h2><a class="header" href="#esil-commands" id="esil-commands">ESIL Commands</a></h2>
+<h2 id="esil-commands"><a class="header" href="#esil-commands">ESIL Commands</a></h2>
 <ul>
 <li>&quot;ae&quot; : Evaluate ESIL expression.</li>
 </ul>
@@ -215,7 +231,7 @@ ADDR BREAK
 0x00001035
 [0x00001019]&gt;
 </code></pre>
-<h3><a class="header" href="#esil-instruction-set" id="esil-instruction-set">ESIL Instruction Set</a></h3>
+<h3 id="esil-instruction-set"><a class="header" href="#esil-instruction-set">ESIL Instruction Set</a></h3>
 <p>Here is the complete instruction set used by the ESIL VM:</p>
 <table><thead><tr><th>ESIL Opcode</th><th>Operands</th><th>Name</th><th>Operation</th><th>example</th></tr></thead><tbody>
 <tr><td>TRAP</td><td>src</td><td>Trap</td><td>Trap signal</td><td></td></tr>
@@ -272,7 +288,7 @@ ADDR BREAK
 <tr><td>GOTO</td><td>n</td><td>Goto</td><td>Jumps to Nth ESIL word</td><td>GOTO 5</td></tr>
 <tr><td>TODO</td><td></td><td>To Do</td><td>Stops execution<br> (reason: ESIL expression not completed)</td><td>TODO</td></tr>
 </tbody></table>
-<h3><a class="header" href="#esil-flags" id="esil-flags">ESIL Flags</a></h3>
+<h3 id="esil-flags"><a class="header" href="#esil-flags">ESIL Flags</a></h3>
 <p>ESIL VM has an internal state flags that are read-only and can be used to export those values to the underlying target CPU flags. It is because the ESIL VM always calculates all flag changes, while target CPUs only update flags under certain conditions or at specific instructions.</p>
 <p>Internal flags are prefixed with <code>$</code> character.</p>
 <pre><code>z      - zero flag, only set if the result of an operation is 0
@@ -289,7 +305,7 @@ js     - jump target set
          i.e. setting esil_cur, esil_old and esil_lastsz.
          (example: &quot;$0,of,=&quot; to reset the overflow flag)
 </code></pre>
-<h2><a class="header" href="#syntax-and-commands" id="syntax-and-commands">Syntax and Commands</a></h2>
+<h2 id="syntax-and-commands"><a class="header" href="#syntax-and-commands">Syntax and Commands</a></h2>
 <p>A target opcode is translated into a comma separated list of ESIL expressions.</p>
 <pre><code>xor eax, eax    -&gt;    0,eax,=,1,zf,=
 </code></pre>
@@ -314,16 +330,16 @@ jz eax        -&gt;   zf,?{,eax,eip,=,}
 <pre><code>esil = r_str_replace (esil, &quot; &quot;, &quot;&quot;, R_TRUE);
 </code></pre>
 <p>Syscalls need special treatment. They are indicated by '$' at the beginning of an expression. You can pass an optional numeric value to specify a number of syscall. An ESIL emulator must handle syscalls. See (r_esil_syscall).</p>
-<h2><a class="header" href="#arguments-order-for-non-associative-operations" id="arguments-order-for-non-associative-operations">Arguments Order for Non-associative Operations</a></h2>
+<h2 id="arguments-order-for-non-associative-operations"><a class="header" href="#arguments-order-for-non-associative-operations">Arguments Order for Non-associative Operations</a></h2>
 <p>As discussed on IRC, the current implementation works like this:</p>
 <pre><code>a,b,-      b - a
 a,b,/=     b /= a
 </code></pre>
 <p>This approach is more readable, but it is less stack-friendly.</p>
-<h3><a class="header" href="#special-instructions" id="special-instructions">Special Instructions</a></h3>
+<h3 id="special-instructions"><a class="header" href="#special-instructions">Special Instructions</a></h3>
 <p>NOPs are represented as empty strings. As it was said previously, syscalls are marked by '$' command. For example, '0x80,$'. It delegates emulation from the ESIL machine to a callback which implements syscalls for a specific OS/kernel.</p>
 <p>Traps are implemented with the <code>TRAP</code> command. They are used to throw exceptions for invalid instructions, division by zero, memory read error, or any other needed by specific architectures.</p>
-<h3><a class="header" href="#quick-analysis" id="quick-analysis">Quick Analysis</a></h3>
+<h3 id="quick-analysis"><a class="header" href="#quick-analysis">Quick Analysis</a></h3>
 <p>Here is a list of some quick checks to retrieve information from an ESIL string. Relevant information will be probably found in the first expression of the list.</p>
 <pre><code>indexOf('[')    -&gt; have memory references
 indexOf(&quot;=[&quot;)   -&gt; write in memory
@@ -349,9 +365,9 @@ equalsTo(&quot;&quot;)    -&gt; empty string, aka nop (wrong, if we append pc+=x
 <li>Evaluate</li>
 <li>Is syscall</li>
 </ul>
-<h3><a class="header" href="#cpu-flags" id="cpu-flags">CPU Flags</a></h3>
+<h3 id="cpu-flags"><a class="header" href="#cpu-flags">CPU Flags</a></h3>
 <p>CPU flags are usually defined as single bit registers in the RReg profile. They are sometimes found under the 'flg' register type.</p>
-<h3><a class="header" href="#variables" id="variables">Variables</a></h3>
+<h3 id="variables"><a class="header" href="#variables">Variables</a></h3>
 <p>Properties of the VM variables:</p>
 <ol>
 <li>
@@ -370,9 +386,9 @@ equalsTo(&quot;&quot;)    -&gt; empty string, aka nop (wrong, if we append pc+=x
 <p>Each ESIL backend should have an associated RReg profile to describe the ESIL register specs.</p>
 </li>
 </ol>
-<h3><a class="header" href="#bit-arrays" id="bit-arrays">Bit Arrays</a></h3>
+<h3 id="bit-arrays"><a class="header" href="#bit-arrays">Bit Arrays</a></h3>
 <p>What to do with them? What about bit arithmetics if use variables instead of registers?</p>
-<h3><a class="header" href="#arithmetics" id="arithmetics">Arithmetics</a></h3>
+<h3 id="arithmetics"><a class="header" href="#arithmetics">Arithmetics</a></h3>
 <ol>
 <li>ADD (&quot;+&quot;)</li>
 <li>MUL (&quot;*&quot;)</li>
@@ -380,7 +396,7 @@ equalsTo(&quot;&quot;)    -&gt; empty string, aka nop (wrong, if we append pc+=x
 <li>DIV (&quot;/&quot;)</li>
 <li>MOD (&quot;%&quot;)</li>
 </ol>
-<h3><a class="header" href="#bit-arithmetics" id="bit-arithmetics">Bit Arithmetics</a></h3>
+<h3 id="bit-arithmetics"><a class="header" href="#bit-arithmetics">Bit Arithmetics</a></h3>
 <ol>
 <li>AND  &quot;&amp;&quot;</li>
 <li>OR   &quot;|&quot;</li>
@@ -391,9 +407,9 @@ equalsTo(&quot;&quot;)    -&gt; empty string, aka nop (wrong, if we append pc+=x
 <li>ROR  &quot;&gt;&gt;&gt;&quot;</li>
 <li>NEG  &quot;!&quot;</li>
 </ol>
-<h3><a class="header" href="#floating-point-unit-support" id="floating-point-unit-support">Floating Point Unit Support</a></h3>
+<h3 id="floating-point-unit-support"><a class="header" href="#floating-point-unit-support">Floating Point Unit Support</a></h3>
 <p>At the moment of this writing, ESIL does not yet support FPU. But you can implement support for unsupported instructions using rz-pipe. Eventually we will get proper support for multimedia and floating point.</p>
-<h3><a class="header" href="#handling-x86-rep-prefix-in-esil" id="handling-x86-rep-prefix-in-esil">Handling x86 REP Prefix in ESIL</a></h3>
+<h3 id="handling-x86-rep-prefix-in-esil"><a class="header" href="#handling-x86-rep-prefix-in-esil">Handling x86 REP Prefix in ESIL</a></h3>
 <p>ESIL specifies that the parsing control-flow commands must be uppercase. Bear in mind that some architectures have uppercase register names. The corresponding register profile should take care not to reuse any of the following:</p>
 <pre><code>3,SKIP   - skip N instructions. used to make relative forward GOTOs
 3,GOTO   - goto instruction 3
@@ -402,15 +418,15 @@ BREAK    - stop evaluating the expression
 STACK    - dump stack contents to screen
 CLEAR    - clear stack
 </code></pre>
-<h4><a class="header" href="#usage-example" id="usage-example">Usage Example:</a></h4>
+<h4 id="usage-example"><a class="header" href="#usage-example">Usage Example:</a></h4>
 <p>rep cmpsb</p>
 <pre><code>cx,!,?{,BREAK,},esi,[1],edi,[1],==,?{,BREAK,},esi,++,edi,++,cx,--,0,GOTO
 </code></pre>
-<h3><a class="header" href="#unimplementedunhandled-instructions" id="unimplementedunhandled-instructions">Unimplemented/Unhandled Instructions</a></h3>
+<h3 id="unimplementedunhandled-instructions"><a class="header" href="#unimplementedunhandled-instructions">Unimplemented/Unhandled Instructions</a></h3>
 <p>Those are expressed with the 'TODO' command. They act as a 'BREAK', but displays a warning message describing that an instruction is not implemented and will not be emulated. For example:</p>
 <pre><code>fmulp ST(1), ST(0)      =&gt;      TODO,fmulp ST(1),ST(0)
 </code></pre>
-<h3><a class="header" href="#esil-disassembly-example" id="esil-disassembly-example">ESIL Disassembly Example:</a></h3>
+<h3 id="esil-disassembly-example"><a class="header" href="#esil-disassembly-example">ESIL Disassembly Example:</a></h3>
 <pre><code>[0x1000010f8]&gt; e asm.esil=true
 [0x1000010f8]&gt; pd $r @ entry0
 0x1000010f8    55           8,rsp,-=,rbp,rsp,=[8]
@@ -440,7 +456,7 @@ CLEAR    - clear stack
 0x100001143    488b4938     rcx,56,+,[8],rcx,=
 0x100001147    48394a38     rdx,56,+,[8],rcx,==,cz,?=
 </code></pre>
-<h3><a class="header" href="#introspection" id="introspection">Introspection</a></h3>
+<h3 id="introspection"><a class="header" href="#introspection">Introspection</a></h3>
 <p>To ease ESIL parsing we should have a way to express introspection expressions to extract the data that we want. For example, we may want to get the target address of a jump. The parser for ESIL expressions should offer an API to make it possible to extract information by analyzing the expressions easily.</p>
 <pre><code>&gt;  ao~esil,opcode
 opcode: jmp 0x10000465a
@@ -454,7 +470,7 @@ esil: 0x10000465a,rip,=
 <li>all regs modified (write)</li>
 <li>all regs accessed (read)</li>
 </ul>
-<h3><a class="header" href="#api-hooks" id="api-hooks">API HOOKS</a></h3>
+<h3 id="api-hooks"><a class="header" href="#api-hooks">API HOOKS</a></h3>
 <p>It is important for emulation to be able to setup hooks in the parser, so we can extend it to implement analysis without having to change it again and again. That is, every time an operation is about to be executed, a user hook is called. It can be used for example to determine if <code>RIP</code> is going to change, or if the instruction updates the stack.
 Later, we can split that callback into several ones to have an event-based analysis API that may be extended in JavaScript like this:</p>
 <pre><code>esil.on('regset', function(){..
@@ -518,10 +534,10 @@ Ebp,8,+,:ds,eax,=
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 

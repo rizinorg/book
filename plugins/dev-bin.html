@@ -5,22 +5,36 @@
         <meta charset="UTF-8">
         <title>Bin plugins - The Official Rizin Book</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="The Official Rizin Book">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
+        
         <link rel="stylesheet" href="../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -116,9 +130,11 @@
                     <h1 class="menu-title">The Official Rizin Book</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -147,10 +163,10 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2><a class="header" href="#implementing-a-new-format" id="implementing-a-new-format">Implementing a new format</a></h2>
-<h3><a class="header" href="#to-enable-virtual-addressing" id="to-enable-virtual-addressing">To enable virtual addressing</a></h3>
+                        <h2 id="implementing-a-new-format"><a class="header" href="#implementing-a-new-format">Implementing a new format</a></h2>
+<h3 id="to-enable-virtual-addressing"><a class="header" href="#to-enable-virtual-addressing">To enable virtual addressing</a></h3>
 <p>In <code>info</code> add <code>et-&gt;has_va = 1;</code> and <code>ptr-&gt;srwx</code> with the <code>RZ_BIN_SCN_MAP;</code> attribute</p>
-<h3><a class="header" href="#create-a-folder-with-file-format-name-in-librzbinformat" id="create-a-folder-with-file-format-name-in-librzbinformat">Create a folder with file format name in librz/bin/format</a></h3>
+<h3 id="create-a-folder-with-file-format-name-in-librzbinformat"><a class="header" href="#create-a-folder-with-file-format-name-in-librzbinformat">Create a folder with file format name in librz/bin/format</a></h3>
 <p><strong>Makefile:</strong></p>
 <pre><code class="language-Makefile">NAME=bin_nes
 RZ_PLUGIN_PATH=$(shell rizin -H RZ_USER_PLUGINS)
@@ -238,7 +254,7 @@ RZ_API RzLibStruct rizin_plugin = {
 #endif
 
 </code></pre>
-<h3><a class="header" href="#some-examples" id="some-examples">Some Examples</a></h3>
+<h3 id="some-examples"><a class="header" href="#some-examples">Some Examples</a></h3>
 <ul>
 <li>XBE - https://github.com/rizinorg/rizin/pull/972</li>
 <li>COFF - https://github.com/rizinorg/rizin/pull/645</li>
@@ -289,10 +305,10 @@ RZ_API RzLibStruct rizin_plugin = {
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 

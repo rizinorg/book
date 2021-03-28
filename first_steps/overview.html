@@ -5,22 +5,36 @@
         <meta charset="UTF-8">
         <title>The Framework - The Official Rizin Book</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="The Official Rizin Book">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
+        
         <link rel="stylesheet" href="../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -116,9 +130,11 @@
                     <h1 class="menu-title">The Official Rizin Book</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -147,17 +163,17 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2><a class="header" href="#the-framework" id="the-framework">The Framework</a></h2>
+                        <h2 id="the-framework"><a class="header" href="#the-framework">The Framework</a></h2>
 <p>The Rizin project is a set of small command-line utilities that can be used together or independently.</p>
 <p>This chapter will give you a quick understanding of them, but you can check the dedicated sections for each tool at the end of this book.</p>
-<h3><a class="header" href="#rizin" id="rizin">rizin</a></h3>
+<h3 id="rizin"><a class="header" href="#rizin">rizin</a></h3>
 <p>The main tool of the whole framework. It uses the core of the hexadecimal editor and debugger. rizin allows you to open a number of input/output sources as if they were simple, plain files, including disks, network connections, kernel drivers, processes under debugging, and so on.</p>
 <p>It implements an advanced command line interface for moving around a file, analyzing data, disassembling, binary patching, data comparison, searching, replacing, and visualizing. It can be scripted with a variety of languages, including Python, Haskell, OCaml, JavaScript, and others.</p>
-<h3><a class="header" href="#rz-bin" id="rz-bin">rz-bin</a></h3>
+<h3 id="rz-bin"><a class="header" href="#rz-bin">rz-bin</a></h3>
 <p>A program to extract information from executable binaries, such as ELF, PE, Java CLASS, Mach-O, plus any format supported by rizin plugins. rz-bin is used by the core to get data like exported symbols, imports, file information, cross references (xrefs), library dependencies, and sections.</p>
-<h3><a class="header" href="#rz-asm" id="rz-asm">rz-asm</a></h3>
+<h3 id="rz-asm"><a class="header" href="#rz-asm">rz-asm</a></h3>
 <p>A command line assembler and disassembler for multiple architectures (including Intel x86 and x86-64, MIPS, ARM, PowerPC, Java, and myriad of others).</p>
-<h4><a class="header" href="#examples" id="examples">Examples</a></h4>
+<h4 id="examples"><a class="header" href="#examples">Examples</a></h4>
 <pre><code>$ rz-asm -a java 'nop'
 00
 </code></pre>
@@ -170,23 +186,23 @@ b821000000
 <pre><code>$ echo 'push eax;nop;nop' | rz-asm -f -
 509090
 </code></pre>
-<h3><a class="header" href="#rz-hash" id="rz-hash">rz-hash</a></h3>
+<h3 id="rz-hash"><a class="header" href="#rz-hash">rz-hash</a></h3>
 <p>An implementation of a block-based hash tool. From small text strings to large disks, rz-hash supports multiple algorithms, including MD4, MD5, CRC16, CRC32, SHA1, SHA256, and others.
 rz-hash can be used to check the integrity or track changes of big files, memory dumps, or disks.</p>
-<h3><a class="header" href="#examples-1" id="examples-1">Examples</a></h3>
+<h3 id="examples-1"><a class="header" href="#examples-1">Examples</a></h3>
 <pre><code>$ rz-hash file
 file: 0x00000000-0x00000007 sha256: 887cfbd0d44aaff69f7bdbedebd282ec96191cce9d7fa7336298a18efc3c7a5a
 </code></pre>
 <pre><code>$ rz-hash -a md5 file
 file: 0x00000000-0x00000007 md5: d1833805515fc34b46c2b9de553f599d
 </code></pre>
-<h3><a class="header" href="#rz-diff" id="rz-diff">rz-diff</a></h3>
+<h3 id="rz-diff"><a class="header" href="#rz-diff">rz-diff</a></h3>
 <p>A binary diffing utility that implements multiple algorithms. It supports byte-level or delta diffing for binary files, and code-analysis diffing to find changes in basic code blocks obtained from the rizin code analysis.</p>
-<h3><a class="header" href="#rz-find" id="rz-find">rz-find</a></h3>
+<h3 id="rz-find"><a class="header" href="#rz-find">rz-find</a></h3>
 <p>A program to find byte patterns in files.</p>
-<h3><a class="header" href="#rz-egg" id="rz-egg">rz-egg</a></h3>
+<h3 id="rz-egg"><a class="header" href="#rz-egg">rz-egg</a></h3>
 <p>A frontend for r_egg. rz-egg compiles programs written in a simple high-level language into tiny binaries for x86, x86-64, and ARM.</p>
-<h4><a class="header" href="#examples-2" id="examples-2">Examples</a></h4>
+<h4 id="examples-2"><a class="header" href="#examples-2">Examples</a></h4>
 <pre><code>$ cat hi.r
 /* hello world in r_egg */
 write@syscall(4); //x64 write@syscall(1);
@@ -210,7 +226,7 @@ $ rz-egg hi.c
 $ ./hi.c.bin
 Hello
 </code></pre>
-<h3><a class="header" href="#rz-run" id="rz-run">rz-run</a></h3>
+<h3 id="rz-run"><a class="header" href="#rz-run">rz-run</a></h3>
 <p>A launcher for running programs within different environments, with different arguments,
 permissions, directories, and overridden default file descriptors. rz-run is useful for:</p>
 <ul>
@@ -218,7 +234,7 @@ permissions, directories, and overridden default file descriptors. rz-run is use
 <li>Fuzzing</li>
 <li>Test suites</li>
 </ul>
-<h4><a class="header" href="#sample-rz-run-script" id="sample-rz-run-script">Sample rz-run script</a></h4>
+<h4 id="sample-rz-run-script"><a class="header" href="#sample-rz-run-script">Sample rz-run script</a></h4>
 <pre><code>$ cat foo.rrz
 #!/usr/bin/rz-run
 program=./pp400
@@ -228,11 +244,11 @@ chdir=/tmp
 #chroot=.
 ./foo.rrz
 </code></pre>
-<h4><a class="header" href="#connecting-a-program-with-a-socket" id="connecting-a-program-with-a-socket">Connecting a Program with a Socket</a></h4>
+<h4 id="connecting-a-program-with-a-socket"><a class="header" href="#connecting-a-program-with-a-socket">Connecting a Program with a Socket</a></h4>
 <pre><code>$ nc -l 9999
 $ rz-run program=/bin/ls connect=localhost:9999
 </code></pre>
-<h4><a class="header" href="#debugging-a-program-redirecting-the-stdio-into-another-terminal" id="debugging-a-program-redirecting-the-stdio-into-another-terminal">Debugging a Program Redirecting the stdio into Another Terminal</a></h4>
+<h4 id="debugging-a-program-redirecting-the-stdio-into-another-terminal"><a class="header" href="#debugging-a-program-redirecting-the-stdio-into-another-terminal">Debugging a Program Redirecting the stdio into Another Terminal</a></h4>
 <p>1 - open a new terminal and type 'tty' to get a terminal name:</p>
 <pre><code>$ tty ; clear ; sleep 999999
 /dev/ttyS010
@@ -245,9 +261,9 @@ stdio=/dev/ttys010
 <p>3 - Launch the following rizin command:</p>
 <pre><code>rizin -r foo.rrz -d /bin/ls
 </code></pre>
-<h3><a class="header" href="#rz-ax" id="rz-ax">rz-ax</a></h3>
+<h3 id="rz-ax"><a class="header" href="#rz-ax">rz-ax</a></h3>
 <p>A minimalistic mathematical expression evaluator for the shell that is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ASCII, octal to integer, and more. It also supports endianness settings and can be used as an interactive shell if no arguments are given.</p>
-<h4><a class="header" href="#examples-3" id="examples-3">Examples</a></h4>
+<h4 id="examples-3"><a class="header" href="#examples-3">Examples</a></h4>
 <pre><code>$ rz-ax 1337
 0x539
 
@@ -306,10 +322,10 @@ awesome
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 

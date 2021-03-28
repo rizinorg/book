@@ -5,22 +5,36 @@
         <meta charset="UTF-8">
         <title>Visual Disassembly - The Official Rizin Book</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="The Official Rizin Book">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
+        
         <link rel="stylesheet" href="../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -116,9 +130,11 @@
                     <h1 class="menu-title">The Official Rizin Book</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -147,14 +163,14 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#visual-disassembly" id="visual-disassembly">Visual Disassembly</a></h1>
-<h2><a class="header" href="#navigation" id="navigation">Navigation</a></h2>
+                        <h1 id="visual-disassembly"><a class="header" href="#visual-disassembly">Visual Disassembly</a></h1>
+<h2 id="navigation"><a class="header" href="#navigation">Navigation</a></h2>
 <p>Move within the Disassembly using arrow keys or <code>hjkl</code>. Use <code>g</code> to seek directly to a flag or an offset, type it when requested by the prompt: <code>[offset]&gt;</code>.
 Follow a jump or a call using the <code>number</code> of your keyboard <code>[0-9]</code> and the number on the right in disassembly to follow a call or a jump. In this example typing <code>1</code> on the keyboard would follow the call to <code>sym.imp.__libc_start_main</code> and therefore, seek at the offset of this symbol.</p>
 <pre><code>0x00404894      e857dcffff     call sym.imp.__libc_start_main ;[1]
 </code></pre>
 <p>Seek back to the previous location using <code>u</code>, <code>U</code> will allow you to redo the seek.</p>
-<h2><a class="header" href="#d-as-define" id="d-as-define"><code>d</code> as define</a></h2>
+<h2 id="d-as-define"><a class="header" href="#d-as-define"><code>d</code> as define</a></h2>
 <p><code>d</code> can be used to change the type of data of the current block, several basic types/structures are available as well as more advanced one using <code>pf</code> template:</p>
 <pre><code>d → ...
 0x004048f7      48c1e83f       shr rax, 0x3f
@@ -175,7 +191,7 @@ d → i →  10
 d → i →  2
 0x004048f7      48c1e83f       shr rax, '?'
 </code></pre>
-<h3><a class="header" href="#usage-of-the-cursor-for-insertingpatching" id="usage-of-the-cursor-for-insertingpatching">Usage of the Cursor for Inserting/Patching...</a></h3>
+<h3 id="usage-of-the-cursor-for-insertingpatching"><a class="header" href="#usage-of-the-cursor-for-insertingpatching">Usage of the Cursor for Inserting/Patching...</a></h3>
 <p>Remember that, to be able to actually edit files loaded in rizin, you have to start it with the <code>-w</code> option. Otherwise a file is opened in read-only mode.</p>
 <p>Pressing lowercase <code>c</code> toggles the cursor mode. When this mode is active, the currently selected byte (or byte range) is highlighted.</p>
 <p><img src="cursor.png" alt="Cursor at 0x00404896" /></p>
@@ -187,33 +203,33 @@ If the file was opened in write mode using the <code>-w</code> flag or the <code
 <p>The 10 bytes you have selected will be changed to &quot;12 34 12 34 12 ...&quot;.</p>
 <p>The Visual Assembler is a feature that provides a live-preview while you type in new instructions to patch
 into the disassembly. To use it, seek or place the cursor at the wanted location and hit the 'A' key. To provide multiple instructions, separate them with semicolons, <code>;</code>.</p>
-<h2><a class="header" href="#xref" id="xref">XREF</a></h2>
+<h2 id="xref"><a class="header" href="#xref">XREF</a></h2>
 <p>When rizin has discovered a XREF during the analysis, it will show you the information in the Visual Disassembly using <code>XREF</code> tag:</p>
 <pre><code>; DATA XREF from 0x00402e0e (unk)
 str.David_MacKenzie:
 </code></pre>
 <p>To see where this string is called, press <code>x</code>, if you want to jump to the location where the data is used then press the corresponding number [0-9] on your keyboard. (This functionality is similar to <code>axt</code>)</p>
 <p><code>X</code> corresponds to the reverse operation aka <code>axf</code>.</p>
-<h2><a class="header" href="#function-argument-display" id="function-argument-display">Function Argument display</a></h2>
+<h2 id="function-argument-display"><a class="header" href="#function-argument-display">Function Argument display</a></h2>
 <p>To enable this view use this config var <code>e dbg.funcarg=true</code></p>
 <p><img src="funcarg.png" alt="funcarg" /></p>
-<h2><a class="header" href="#add-a-comment" id="add-a-comment">Add a comment</a></h2>
+<h2 id="add-a-comment"><a class="header" href="#add-a-comment">Add a comment</a></h2>
 <p>To add a comment press <code>;</code>.</p>
-<h2><a class="header" href="#type-other-commands" id="type-other-commands">Type other commands</a></h2>
+<h2 id="type-other-commands"><a class="header" href="#type-other-commands">Type other commands</a></h2>
 <p>Quickly type commands using <code>:</code>.</p>
-<h2><a class="header" href="#search" id="search">Search</a></h2>
+<h2 id="search"><a class="header" href="#search">Search</a></h2>
 <p><code>/</code>: allows highlighting of strings in the current display.
 <code>:cmd</code> allows you to use one of the &quot;/?&quot; commands that perform more specialized searches.</p>
-<h2><a class="header" href="#the-huds" id="the-huds">The HUDS</a></h2>
-<h3><a class="header" href="#the-userfriendly-hud" id="the-userfriendly-hud">The &quot;UserFriendly HUD&quot;</a></h3>
+<h2 id="the-huds"><a class="header" href="#the-huds">The HUDS</a></h2>
+<h3 id="the-userfriendly-hud"><a class="header" href="#the-userfriendly-hud">The &quot;UserFriendly HUD&quot;</a></h3>
 <p>The &quot;UserFriendly HUD&quot; can be accessed using the <code>??</code> key-combination. This HUD acts as an interactive Cheat Sheet that one can use to more easily find and execute commands. This HUD is particularly useful for new-comers. For experienced users, the other HUDS which are more activity-specific may be more useful.</p>
-<h3><a class="header" href="#the-flagcommentfunctions-hud" id="the-flagcommentfunctions-hud">The &quot;flag/comment/functions/.. HUD&quot;</a></h3>
+<h3 id="the-flagcommentfunctions-hud"><a class="header" href="#the-flagcommentfunctions-hud">The &quot;flag/comment/functions/.. HUD&quot;</a></h3>
 <p>This HUD can be displayed using the <code>_</code> key, it shows a list of all the flags defined and lets you jump to them. Using the keyboard you can quickly filter the list down to a flag that contains a specific pattern.</p>
 <p>Hud input mode can be closed using ^C. It will also exit when backspace is pressed when the user input string is empty.</p>
-<h2><a class="header" href="#tweaking-the-disassembly" id="tweaking-the-disassembly">Tweaking the Disassembly</a></h2>
+<h2 id="tweaking-the-disassembly"><a class="header" href="#tweaking-the-disassembly">Tweaking the Disassembly</a></h2>
 <p>The disassembly's look-and-feel is controlled using the &quot;asm.* configuration keys, which can be
 changed using the <code>e</code> command. All configuration keys can also be edited through the Visual Configuration Editor.</p>
-<h2><a class="header" href="#visual-configuration-editor" id="visual-configuration-editor">Visual Configuration Editor</a></h2>
+<h2 id="visual-configuration-editor"><a class="header" href="#visual-configuration-editor">Visual Configuration Editor</a></h2>
 <p>This HUD can be accessed using the <code>e</code> key in visual mode. The editor allows you to easily examine and change rizin's configuration. For example, if you want to change something about the disassembly display, select <code>asm</code> from the list, navigate to the item you wish to modify it, then select it by hitting <code>Enter</code>.
 If the item is a boolean variable, it will toggle, otherwise you will be prompted to provide a new value.</p>
 <p><img src="select_asm.png" alt="First Select asm" /></p>
@@ -221,8 +237,8 @@ If the item is a boolean variable, it will toggle, otherwise you will be prompte
 <p><img src="pseudo_disable.png" alt="Pseudo disassembly disabled" /></p>
 <p><img src="pseudo_enable.png" alt="Pseudo disassembly enabled" /></p>
 <p>Following are some example of eval variable related to disassembly.</p>
-<h2><a class="header" href="#examples" id="examples">Examples</a></h2>
-<h4><a class="header" href="#asmarch-change-architecture--asmbits-word-size-in-bits-at-assembler" id="asmarch-change-architecture--asmbits-word-size-in-bits-at-assembler">asm.arch: Change Architecture &amp;&amp; asm.bits: Word size in bits at assembler</a></h4>
+<h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
+<h4 id="asmarch-change-architecture--asmbits-word-size-in-bits-at-assembler"><a class="header" href="#asmarch-change-architecture--asmbits-word-size-in-bits-at-assembler">asm.arch: Change Architecture &amp;&amp; asm.bits: Word size in bits at assembler</a></h4>
 <p>You can view the list of all arch using <code>e asm.arch=?</code></p>
 <pre><code>e asm.arch=dalvik
 0x00404870      31ed4989       cmp-long v237, v73, v137
@@ -240,7 +256,7 @@ If the item is a boolean variable, it will toggle, otherwise you will be prompte
 0000:4877      89e2           mov dx, sp
 </code></pre>
 <p>This latest operation can also be done using <code>&amp;</code> in Visual mode.</p>
-<h4><a class="header" href="#asmpseudo-enable-pseudo-syntax" id="asmpseudo-enable-pseudo-syntax">asm.pseudo: Enable pseudo syntax</a></h4>
+<h4 id="asmpseudo-enable-pseudo-syntax"><a class="header" href="#asmpseudo-enable-pseudo-syntax">asm.pseudo: Enable pseudo syntax</a></h4>
 <pre><code>e asm.pseudo=true
 0x00404870      31ed           ebp = 0
 0x00404872      4989d1         r9 = rdx
@@ -248,7 +264,7 @@ If the item is a boolean variable, it will toggle, otherwise you will be prompte
 0x00404876      4889e2         rdx = rsp
 0x00404879      4883e4f0       rsp &amp;= 0xfffffffffffffff0
 </code></pre>
-<h4><a class="header" href="#asmsyntax-select-assembly-syntax-intel-att-masm" id="asmsyntax-select-assembly-syntax-intel-att-masm">asm.syntax: Select assembly syntax (intel, att, masm...)</a></h4>
+<h4 id="asmsyntax-select-assembly-syntax-intel-att-masm"><a class="header" href="#asmsyntax-select-assembly-syntax-intel-att-masm">asm.syntax: Select assembly syntax (intel, att, masm...)</a></h4>
 <pre><code>e asm.syntax=att
 0x00404870      31ed           xor %ebp, %ebp
 0x00404872      4989d1         mov %rdx, %r9
@@ -256,7 +272,7 @@ If the item is a boolean variable, it will toggle, otherwise you will be prompte
 0x00404876      4889e2         mov %rsp, %rdx
 0x00404879      4883e4f0       and $0xfffffffffffffff0, %rsp
 </code></pre>
-<h4><a class="header" href="#asmdescribe-show-opcode-description" id="asmdescribe-show-opcode-description">asm.describe: Show opcode description</a></h4>
+<h4 id="asmdescribe-show-opcode-description"><a class="header" href="#asmdescribe-show-opcode-description">asm.describe: Show opcode description</a></h4>
 <pre><code>e asm.describe=true
 0x00404870  xor ebp, ebp   ; logical exclusive or
 0x00404872  mov r9, rdx    ; moves data from src to dst
@@ -307,10 +323,10 @@ If the item is a boolean variable, it will toggle, otherwise you will be prompte
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 

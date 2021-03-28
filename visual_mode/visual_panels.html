@@ -5,22 +5,36 @@
         <meta charset="UTF-8">
         <title>Visual Panels - The Official Rizin Book</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="The Official Rizin Book">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
+        
         <link rel="stylesheet" href="../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -116,9 +130,11 @@
                     <h1 class="menu-title">The Official Rizin Book</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -147,8 +163,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#visual-panels" id="visual-panels">Visual Panels</a></h1>
-<h2><a class="header" href="#concept" id="concept">Concept</a></h2>
+                        <h1 id="visual-panels"><a class="header" href="#visual-panels">Visual Panels</a></h1>
+<h2 id="concept"><a class="header" href="#concept">Concept</a></h2>
 <p>Visual Panels is characterized by the following core functionalities:</p>
 <ol>
 <li>Split Screen</li>
@@ -157,9 +173,9 @@
 </ol>
 <p>CUI met some useful GUI as the menu, that is Visual Panels.</p>
 <p>Panels can be accessed by using <code>v</code> or by using <code>!</code> from the visual mode.</p>
-<h2><a class="header" href="#overview" id="overview">Overview</a></h2>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
 <p><img src="panels_overview.png" alt="Panels Overview" /></p>
-<h2><a class="header" href="#commands" id="commands">Commands</a></h2>
+<h2 id="commands"><a class="header" href="#commands">Commands</a></h2>
 <pre><code>|Visual Ascii Art Panels:
 | |      split the current panel vertically
 | -      split the current panel horizontally
@@ -208,17 +224,17 @@
 | xX     show xrefs/refs of current function from/to data/code
 | z      swap current panel with the first one
 </code></pre>
-<h2><a class="header" href="#basic-usage" id="basic-usage">Basic Usage</a></h2>
+<h2 id="basic-usage"><a class="header" href="#basic-usage">Basic Usage</a></h2>
 <p>Use <code>tab</code> to move around the panels until you get to the targeted panel. Then, use <code>hjkl</code>, just like in vim, to scroll the panel you are currently on.
 Use <code>S</code> and <code>s</code> to step over/in, and all the panels should be updated dynamically while you are debugging.
 Either in the Registers or Stack panels, you can edit the values by inserting hex. This will be explained later.
 While hitting <code>tab</code> can help you moving between panels, it is highly recommended to use <code>m</code> to open the menu.
 As usual, you can use <code>hjkl</code> to move around the menu and will find tons of useful stuff there.
 You can also press <code>&quot;</code> to quickly browse through the different options View offers and change the contents of the selected panel.</p>
-<h2><a class="header" href="#split-screen" id="split-screen">Split Screen</a></h2>
+<h2 id="split-screen"><a class="header" href="#split-screen">Split Screen</a></h2>
 <p><code>|</code> is for the vertical and <code>-</code> is for the horizontal split. You can delete any panel by pressing <code>X</code>.</p>
 <p>Split panels can be resized from Window Mode, which is accessed with <code>w</code>.</p>
-<h2><a class="header" href="#window-mode-commands" id="window-mode-commands">Window Mode Commands</a></h2>
+<h2 id="window-mode-commands"><a class="header" href="#window-mode-commands">Window Mode Commands</a></h2>
 <pre><code>|Panels Window mode help:
 | ?      show this help
 | ??     show the user-friendly hud
@@ -229,14 +245,14 @@ You can also press <code>&quot;</code> to quickly browse through the different o
 | HL     resize panels horizontally
 | q      quit Window mode
 </code></pre>
-<h2><a class="header" href="#edit-values" id="edit-values">Edit Values</a></h2>
+<h2 id="edit-values"><a class="header" href="#edit-values">Edit Values</a></h2>
 <p>Either in the Register or Stack panel, you can edit the values. Use <code>c</code> to activate cursor mode and you can move the cursor by pressing <code>hjkl</code>, as usual. Then, hit <code>i</code>, just like the insert mode of vim, to insert a value.</p>
-<h2><a class="header" href="#tabs" id="tabs">Tabs</a></h2>
+<h2 id="tabs"><a class="header" href="#tabs">Tabs</a></h2>
 <p>Visual Panels also offer tabs to quickly access multiple forms of information easily. Press <code>t</code> to enter Tab Mode. All the tabs numbers will be visible in the top right corner.</p>
 <p>By default you will have one tab and you can press <code>t</code> to create a new tab with the same panels and <code>T</code> to create a new panel from scratch.</p>
 <p>For traversing through the tabs, you can type in the tab number while in Tab Mode.</p>
 <p>And pressing <code>-</code> deletes the tab you are in.</p>
-<h2><a class="header" href="#saving-layouts" id="saving-layouts">Saving layouts</a></h2>
+<h2 id="saving-layouts"><a class="header" href="#saving-layouts">Saving layouts</a></h2>
 <p>You can save your custom layout of your visual panels either by picking the option 'Save Layout' from the File menu of the menu bar or by running:</p>
 <pre><code>v= test
 </code></pre>
@@ -288,10 +304,10 @@ You can also press <code>&quot;</code> to quickly browse through the different o
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 

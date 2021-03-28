@@ -5,22 +5,36 @@
         <meta charset="UTF-8">
         <title>Disassemble - The Official Rizin Book</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="The Official Rizin Book">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../../favicon.png">
+        
         <link rel="stylesheet" href="../../css/variables.css">
         <link rel="stylesheet" href="../../css/general.css">
         <link rel="stylesheet" href="../../css/chrome.css">
+        
         <link rel="stylesheet" href="../../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../../highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -116,9 +130,11 @@
                     <h1 class="menu-title">The Official Rizin Book</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -147,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2><a class="header" href="#disassembler" id="disassembler">Disassembler</a></h2>
+                        <h2 id="disassembler"><a class="header" href="#disassembler">Disassembler</a></h2>
 <p>Disassembling is the inverse action of assembling. Rasm2 takes hexpair as an input (but can also take a file in binary form) and show the human readable form.</p>
 <p>To do this we can use the <code>-d</code> option of rz-asm like this:</p>
 <pre><code>$ rz-asm -a x86 -b 32 -d '90'
@@ -156,13 +172,13 @@ nop
 <p>Rasm2 also have the <code>-D</code> flag to show the disassembly like <code>-d</code> does, but includes offset and bytes.</p>
 <p>In rizin there are many commands to perform a disassembly from a specific place in memory.</p>
 <p>You might be interested in trying if you want different outputs for later parsing with your scripts, or just grep to find what you are looking for:</p>
-<h3><a class="header" href="#pd-n" id="pd-n">pd N</a></h3>
+<h3 id="pd-n"><a class="header" href="#pd-n">pd N</a></h3>
 <p>Disassemble N instructions</p>
-<h3><a class="header" href="#pd-n-1" id="pd-n-1">pD N</a></h3>
+<h3 id="pd-n-1"><a class="header" href="#pd-n-1">pD N</a></h3>
 <p>Disassemble N bytes</p>
-<h3><a class="header" href="#pda" id="pda">pda</a></h3>
+<h3 id="pda"><a class="header" href="#pda">pda</a></h3>
 <p>Disassemble all instructions (seeking 1 byte, or the minimum alignment instruction size), which can be useful for ROP</p>
-<h2><a class="header" href="#pi-pi" id="pi-pi">pi, pI</a></h2>
+<h2 id="pi-pi"><a class="header" href="#pi-pi">pi, pI</a></h2>
 <p>Same as <code>pd</code> and <code>pD</code>, but using a simpler output.</p>
 
                     </main>
@@ -207,10 +223,10 @@ nop
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 

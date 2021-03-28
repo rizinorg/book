@@ -5,22 +5,36 @@
         <meta charset="UTF-8">
         <title>Flags - The Official Rizin Book</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="The Official Rizin Book">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
+        
         <link rel="stylesheet" href="../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -116,9 +130,11 @@
                     <h1 class="menu-title">The Official Rizin Book</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -147,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2><a class="header" href="#flags" id="flags">Flags</a></h2>
+                        <h2 id="flags"><a class="header" href="#flags">Flags</a></h2>
 <p>Flags are conceptually similar to bookmarks. They associate a name with a given offset in a file. Flags can be grouped into 'flag spaces'. A flag space is a namespace for flags, grouping together flags of similar characteristics or type. Examples for flag spaces: sections, registers, symbols.</p>
 <p>To create a flag:</p>
 <pre><code>[0x4A13B8C0]&gt; f flag_name @ offset
@@ -191,7 +207,7 @@
 [0x4A13B8C0]&gt; f-myflag  ; delete the flag called 'myflag'
 </code></pre>
 <p>You can rename flags with <code>fr</code>.</p>
-<h3><a class="header" href="#local-flags" id="local-flags">Local flags</a></h3>
+<h3 id="local-flags"><a class="header" href="#local-flags">Local flags</a></h3>
 <p>Every flag name should be unique for addressing reasons. But it is quite a common need
 to have the flags, for example inside the functions, with simple and ubiquitous names like <code>loop</code> or <code>return</code>. For this purpose you can use so called &quot;local&quot; flags, which are tied to the function where they reside. It is possible to add them using <code>f.</code> command:</p>
 <pre><code>[0x00003a04]&gt; pd 10
@@ -227,7 +243,7 @@ to have the flags, for example inside the functions, with simple and ubiquitous 
 ││`──&gt; 0x00003a32      be07000000     mov esi, 7
 [0x00003a04]&gt;
 </code></pre>
-<h3><a class="header" href="#flag-zones" id="flag-zones">Flag Zones</a></h3>
+<h3 id="flag-zones"><a class="header" href="#flag-zones">Flag Zones</a></h3>
 <p>rizin offers flag zones, which lets you label different offsets on the scrollbar, for making it easier to navigate through large binaries. You can set a flag zone on the current seek using:</p>
 <pre><code>[0x00003a04]&gt; fz flag-zone-name
 </code></pre>
@@ -276,10 +292,10 @@ to have the flags, for example inside the functions, with simple and ubiquitous 
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 

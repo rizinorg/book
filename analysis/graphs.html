@@ -5,22 +5,36 @@
         <meta charset="UTF-8">
         <title>Graph commands - The Official Rizin Book</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="The Official Rizin Book">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
+        
         <link rel="stylesheet" href="../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -116,9 +130,11 @@
                     <h1 class="menu-title">The Official Rizin Book</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -147,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#graph-commands" id="graph-commands">Graph commands</a></h1>
+                        <h1 id="graph-commands"><a class="header" href="#graph-commands">Graph commands</a></h1>
 <p>When analyzing data it is usually handy to have different ways to represent it in order to get new perspectives to allow the analyst to understand how different parts of the program interact.</p>
 <p>Representing basic block edges, function calls, string references as graphs show a very clear view of this information.</p>
 <p>Rizin supports various types of graph available through commands starting with <code>ag</code>:</p>
@@ -184,16 +200,16 @@ Output formats:
 <p>For example, <code>agid</code> displays the imports graph in dot format, while <code>aggj</code>
 outputs the custom graph in JSON format.</p>
 <p>Here's a short description for every output format available:</p>
-<h3><a class="header" href="#ascii-art--eg-agf" id="ascii-art--eg-agf">Ascii Art ** (e.g. <code>agf</code>)</a></h3>
+<h3 id="ascii-art--eg-agf"><a class="header" href="#ascii-art--eg-agf">Ascii Art ** (e.g. <code>agf</code>)</a></h3>
 <p>Displays the graph directly to stdout using ASCII art to represent blocks and edges.</p>
 <p><em>Warning: displaying large graphs directly to stdout might prove to be computationally expensive and will make rizin not responsive for some time. In case of doubt, prefer using the interactive view (explained below).</em></p>
-<h3><a class="header" href="#interactive-ascii-art-eg-agfv" id="interactive-ascii-art-eg-agfv">Interactive Ascii Art (e.g. <code>agfv</code>)</a></h3>
+<h3 id="interactive-ascii-art-eg-agfv"><a class="header" href="#interactive-ascii-art-eg-agfv">Interactive Ascii Art (e.g. <code>agfv</code>)</a></h3>
 <p>Displays the ASCII graph in an interactive view similar to <code>VV</code> which allows to move the screen, zoom in / zoom out, ...</p>
-<h3><a class="header" href="#tiny-ascii-art-eg-agft" id="tiny-ascii-art-eg-agft">Tiny Ascii Art (e.g. <code>agft</code>)</a></h3>
+<h3 id="tiny-ascii-art-eg-agft"><a class="header" href="#tiny-ascii-art-eg-agft">Tiny Ascii Art (e.g. <code>agft</code>)</a></h3>
 <p>Displays the ASCII graph directly to stdout in tiny mode (which is the same as reaching the maximum zoom out level in the interactive view).</p>
-<h3><a class="header" href="#graphviz-dot-eg-agfd" id="graphviz-dot-eg-agfd">Graphviz dot	(e.g. <code>agfd</code>)</a></h3>
+<h3 id="graphviz-dot-eg-agfd"><a class="header" href="#graphviz-dot-eg-agfd">Graphviz dot	(e.g. <code>agfd</code>)</a></h3>
 <p>Prints the dot source code representing the graph, which can be interpreted by programs such as <a href="https://graphviz.gitlab.io/download/">graphviz</a> or online viewers like <a href="http://www.webgraphviz.com/">this</a></p>
-<h3><a class="header" href="#json-eg-agfj" id="json-eg-agfj">JSON	(e.g. <code>agfj</code>)</a></h3>
+<h3 id="json-eg-agfj"><a class="header" href="#json-eg-agfj">JSON	(e.g. <code>agfj</code>)</a></h3>
 <p>Prints a JSON string representing the graph.</p>
 <ul>
 <li>
@@ -203,15 +219,15 @@ outputs the custom graph in JSON format.</p>
 <p>In all other cases, it will only have basic information about the nodes of the graph (id, title, body, and edges).</p>
 </li>
 </ul>
-<h3><a class="header" href="#graph-modelling-language-eg-agfg" id="graph-modelling-language-eg-agfg">Graph Modelling Language (e.g. <code>agfg</code>)</a></h3>
+<h3 id="graph-modelling-language-eg-agfg"><a class="header" href="#graph-modelling-language-eg-agfg">Graph Modelling Language (e.g. <code>agfg</code>)</a></h3>
 <p>Prints the GML source code representing the graph, which can be interpreted by programs such as <a href="https://www.yworks.com/products/yed/download">yEd</a></p>
-<h3><a class="header" href="#sdb-key-value-eg-agfk" id="sdb-key-value-eg-agfk">SDB key-value (e.g. <code>agfk</code>)</a></h3>
+<h3 id="sdb-key-value-eg-agfk"><a class="header" href="#sdb-key-value-eg-agfk">SDB key-value (e.g. <code>agfk</code>)</a></h3>
 <p>Prints key-value strings representing the graph that was stored by sdb (rizin's string database).</p>
-<h3><a class="header" href="#r2-custom-graph-commands-eg-agf" id="r2-custom-graph-commands-eg-agf">R2 custom graph commands (e.g. <code>agf*</code>)</a></h3>
+<h3 id="r2-custom-graph-commands-eg-agf"><a class="header" href="#r2-custom-graph-commands-eg-agf">R2 custom graph commands (e.g. <code>agf*</code>)</a></h3>
 <p>Prints rizin commands that would recreate the desired graph. The commands to construct the graph are <code>agn [title] [body]</code> to add a node and <code>age [title1] [title2]</code> to add an edge.
 The <code>[body]</code> field can be expressed in base64 to include special formatting (such as newlines).</p>
 <p>To easily execute the printed commands, it is possible to prepend a dot to the command (<code>.agf*</code>).</p>
-<h3><a class="header" href="#web--image-eg-agfw" id="web--image-eg-agfw">Web / image	(e.g. <code>agfw</code>)</a></h3>
+<h3 id="web--image-eg-agfw"><a class="header" href="#web--image-eg-agfw">Web / image	(e.g. <code>agfw</code>)</a></h3>
 <p>Rizin will convert the graph to dot format, use the <code>dot</code> program to convert it to a <code>.gif</code> image and then try to find an already installed viewer on your system (<code>xdg-open</code>, <code>open</code>, ...) and display the graph there.</p>
 <p>The extension of the output image can be set with the <code>graph.extension</code> config variable. Available extensions are <code>png, jpg, gif, pdf, ps</code>.</p>
 <p><em>Note: for particularly large graphs, the most recommended extension is <code>svg</code> as it will produce images of much smaller size</em></p>
@@ -260,10 +276,10 @@ disabled by default.</em>)</p>
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 

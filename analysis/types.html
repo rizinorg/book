@@ -5,22 +5,36 @@
         <meta charset="UTF-8">
         <title>Types - The Official Rizin Book</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="The Official Rizin Book">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
+        
         <link rel="stylesheet" href="../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -116,9 +130,11 @@
                     <h1 class="menu-title">The Official Rizin Book</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -147,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#types" id="types">Types</a></h1>
+                        <h1 id="types"><a class="header" href="#types">Types</a></h1>
 <p>Rizin supports the C-syntax data types description.
 Those types are parsed by a C11-compatible parser and stored in
 the internal SDB, thus are introspectable with <code>k</code> command.</p>
@@ -199,7 +215,7 @@ long
 long long
 ...
 </code></pre>
-<h3><a class="header" href="#loading-types" id="loading-types">Loading types</a></h3>
+<h3 id="loading-types"><a class="header" href="#loading-types">Loading types</a></h3>
 <p>There are three easy ways to define a new type:</p>
 <ul>
 <li>Directly from the string using <code>td</code> command</li>
@@ -224,7 +240,7 @@ dir.types: Default path to look for cparse type files
 [0x00000000]&gt; e dir.types
 /usr/include
 </code></pre>
-<h3><a class="header" href="#printing-types" id="printing-types">Printing types</a></h3>
+<h3 id="printing-types"><a class="header" href="#printing-types">Printing types</a></h3>
 <p>Notice below we have used <code>ts</code> command, which basically converts
 the C type description (or to be precise it's SDB representation)
 into the sequence of <code>pf</code> commands. See more about <a href="../basic_commands/print_modes.html">print format</a>.</p>
@@ -243,7 +259,7 @@ pf zd a b
  a : 0x000051c0 = AAAAD.....B
  b : 0x000051cc = 16
 </code></pre>
-<h3><a class="header" href="#linking-types" id="linking-types">Linking Types</a></h3>
+<h3 id="linking-types"><a class="header" href="#linking-types">Linking Types</a></h3>
 <p>The <code>tp</code> command just performs a temporary cast. But if we want to link some address or variable
 with the chosen type, we can use <code>tl</code> command to store the relationship in SDB.</p>
 <pre><code>[0x000051c0]&gt; tl S1 = 0x51cf
@@ -291,7 +307,7 @@ with the chosen type, we can use <code>tl</code> command to store the relationsh
 <pre><code>[0x000006da]&gt; ah?
 | ahr val            set hint for the return value of a function
 </code></pre>
-<h3><a class="header" href="#structure-immediates" id="structure-immediates">Structure Immediates</a></h3>
+<h3 id="structure-immediates"><a class="header" href="#structure-immediates">Structure Immediates</a></h3>
 <p>There is one more important aspect of using types in rizin - using <code>aht</code> you
 can change the immediate in the opcode to the structure offset.
 Let's see a simple example of [R]SI-relative addressing</p>
@@ -318,7 +334,7 @@ the current address:</p>
 [0x000052f0]&gt; pd 1
 0x000052f0      488b4608       mov rax, qword [rsi + ms1.member1]    ; [0x8:8]=0
 </code></pre>
-<h3><a class="header" href="#managing-enums" id="managing-enums">Managing enums</a></h3>
+<h3 id="managing-enums"><a class="header" href="#managing-enums">Managing enums</a></h3>
 <ul>
 <li>Printing all fields in enum using <code>te</code> command</li>
 </ul>
@@ -335,7 +351,7 @@ COW
 [0x00000000]&gt; teb Foo COW
 0x1
 </code></pre>
-<h2><a class="header" href="#internal-representation" id="internal-representation">Internal representation</a></h2>
+<h2 id="internal-representation"><a class="header" href="#internal-representation">Internal representation</a></h2>
 <p>To see the internal representation of the types you can use <code>tk</code> command:</p>
 <pre><code>[0x000051c0]&gt; tk~S1
 S1=struct
@@ -402,7 +418,7 @@ internals will be proprietary, and we will not have a clean representation for i
 </code></pre>
 <p>This entry is for integration with C parser and carries the type class information:
 integer size, signed/unsigned, etc.</p>
-<h3><a class="header" href="#structures" id="structures">Structures</a></h3>
+<h3 id="structures"><a class="header" href="#structures">Structures</a></h3>
 <p>Those are the basic keys for structs (with just two elements):</p>
 <pre><code>X=struct
 struct.X=a,b
@@ -425,9 +441,9 @@ struct._FILETIME.dwHighDateTime=DWORD,4,0
 </code></pre>
 <p>Note that the number of elements field is used in the case of arrays only
 to identify how many elements are in arrays, other than that it is zero by default.</p>
-<h3><a class="header" href="#unions" id="unions">Unions</a></h3>
+<h3 id="unions"><a class="header" href="#unions">Unions</a></h3>
 <p>Unions are defined exactly like structs the only difference is that you will replace the word <code>struct</code> with the word <code>union</code>.</p>
-<h3><a class="header" href="#function-prototypes" id="function-prototypes">Function prototypes</a></h3>
+<h3 id="function-prototypes"><a class="header" href="#function-prototypes">Function prototypes</a></h3>
 <p>Function prototype representation is the most detail-oriented and the most important one of them all. This is the one used directly for type matching</p>
 <pre><code>X=func
 func.X.args=NumberOfArgs
@@ -498,10 +514,10 @@ There is one extra optional key</p>
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 

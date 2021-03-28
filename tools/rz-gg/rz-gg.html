@@ -5,22 +5,36 @@
         <meta charset="UTF-8">
         <title>Rz-gg - The Official Rizin Book</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="The Official Rizin Book">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../../favicon.png">
+        
         <link rel="stylesheet" href="../../css/variables.css">
         <link rel="stylesheet" href="../../css/general.css">
         <link rel="stylesheet" href="../../css/chrome.css">
+        
         <link rel="stylesheet" href="../../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../../highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -116,9 +130,11 @@
                     <h1 class="menu-title">The Official Rizin Book</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -147,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#rz-gg" id="rz-gg">Rz-gg</a></h1>
+                        <h1 id="rz-gg"><a class="header" href="#rz-gg">Rz-gg</a></h1>
 <p>rz-gg stands for <code>rizin egg</code>, this is the basic block to construct relocatable
 snippets of code to be used for injection in target processes when doing exploiting.</p>
 <p>rz-gg compiles programs written in a simple high-level language into tiny binaries
@@ -184,7 +200,7 @@ $ rz-asm -a x86 -b 32 -D e900000000488d3516000000bf01000000b80400000248c7c20d000
 0x0000002a   2                     726c  jb 0x98
 0x0000002c   3                   640a00  or al, byte fs:[eax]
 </code></pre>
-<h2><a class="header" href="#compiling-rz-gg-example" id="compiling-rz-gg-example">Compiling rz-gg example</a></h2>
+<h2 id="compiling-rz-gg-example"><a class="header" href="#compiling-rz-gg-example">Compiling rz-gg example</a></h2>
 <pre><code>$ cat hello.r
 exit@syscall(1);
 
@@ -228,7 +244,7 @@ $ rz-asm -a arm -b 32 -D 00482de90200a0e30c008de508109de50170a0e3000000ef0088bde
 0x00000014   4                 000000ef  svc 0
 0x00000018   4                 0088bde8  pop {fp, pc}
 </code></pre>
-<h2><a class="header" href="#tiny-binaries" id="tiny-binaries">Tiny binaries</a></h2>
+<h2 id="tiny-binaries"><a class="header" href="#tiny-binaries">Tiny binaries</a></h2>
 <p>You can create tiny binaries for your code using the <code>-F</code> flag in rz-gg,
 or the <code>-C</code> in rz-bin.</p>
 <pre><code class="language-c">$ cat helloworld.r
@@ -246,7 +262,7 @@ $ wc -c &lt; helloworld
 259
 </code></pre>
 <p>We can see that the size of the binary is just 259 bytes.</p>
-<h2><a class="header" href="#output-format" id="output-format">Output format</a></h2>
+<h2 id="output-format"><a class="header" href="#output-format">Output format</a></h2>
 <p>You can change the output format using the <code>-f</code> flag. Here's an example of
 changing it to python:</p>
 <pre><code>$ rz-gg -O -F -f python helloworld.r
@@ -300,10 +316,10 @@ $ xxd helloworld | head -n 3
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 

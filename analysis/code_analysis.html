@@ -5,22 +5,36 @@
         <meta charset="UTF-8">
         <title>Code Analysis - The Official Rizin Book</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="The Official Rizin Book">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
+        
         <link rel="stylesheet" href="../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -116,9 +130,11 @@
                     <h1 class="menu-title">The Official Rizin Book</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -147,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#code-analysis" id="code-analysis">Code Analysis</a></h1>
+                        <h1 id="code-analysis"><a class="header" href="#code-analysis">Code Analysis</a></h1>
 <p>Code analysis is a common technique used to extract information from assembly code.</p>
 <p>Rizin has different code analysis techniques implemented in the core and available in different commands.</p>
 <p>As long as the whole functionalities of rizin are available with the API as well as using commands. This gives you the ability to implement your own analysis loops using any programming language, even with rizin oneliners, shellscripts, or analysis or core native plugins.</p>
@@ -214,7 +230,7 @@ rizin provides separate commands for the particular stages of the analysis allow
 control of the analysis process. Moreover, there is a treasure trove of configuration variables
 for controlling the analysis outcomes. You can find them in <code>analysis.*</code> and <code>emu.*</code>
 cfg variables' namespaces.</p>
-<h2><a class="header" href="#analyze-functions" id="analyze-functions">Analyze functions</a></h2>
+<h2 id="analyze-functions"><a class="header" href="#analyze-functions">Analyze functions</a></h2>
 <p>One of the most important &quot;basic&quot; analysis commands is the set of <code>af</code> subcommands. <code>af</code> means
 &quot;analyze function&quot;. Using this command you can either allow automatic analysis of the particular
 function or perform a completely manual one.</p>
@@ -268,7 +284,7 @@ Before changing the basic blocks of the function it is recommended to check the 
 0x00003b92 0x00003ba8 01:0030 22 j 0x00003ba8
 0x00003ba8 0x00003bf9 00:0000 81
 </code></pre>
-<h3><a class="header" href="#handcraft-function" id="handcraft-function">Handcraft function</a></h3>
+<h3 id="handcraft-function"><a class="header" href="#handcraft-function">Handcraft function</a></h3>
 <p>before starting, let's prepare a binary file first, for example:</p>
 <pre><code class="language-C">int code_block()
 {
@@ -333,7 +349,7 @@ use <code>afb+</code> command to add it.</p>
 <p><img src="handcraft_one.png" alt="handcraft_one" /></p>
 <p>There are two very important commands for this: <code>afc</code> and <code>afB</code>. The latter is a must-know command for some platforms like ARM. It provides a way to change the &quot;bitness&quot; of a particular function by allowing to select between ARM and Thumb modes.</p>
 <p><code>afc</code> on the other side, allows to manually specify function calling convention. You can find more information on its usage in <a href="calling_conventions.html">calling_conventions</a>.</p>
-<h2><a class="header" href="#recursive-analysis" id="recursive-analysis">Recursive analysis</a></h2>
+<h2 id="recursive-analysis"><a class="header" href="#recursive-analysis">Recursive analysis</a></h2>
 <p>There are 5 important program-wide half-automated analysis commands:</p>
 <ul>
 <li><code>aab</code> - perform basic-block analysis (&quot;Nucleus&quot; algorithm)</li>
@@ -411,7 +427,7 @@ a function prelude with a configuration option <code>analysis.prelude</code>. Fo
 mov rbp, rsp
 </code></pre>
 <p>on x86_64 platform. It should be specified <em>before</em> any analysis commands.</p>
-<h2><a class="header" href="#configuration" id="configuration">Configuration</a></h2>
+<h2 id="configuration"><a class="header" href="#configuration">Configuration</a></h2>
 <p>Rizin allows changing the behavior of almost any analysis stages or commands.
 There are different kinds of configuration options:</p>
 <ul>
@@ -422,7 +438,7 @@ There are different kinds of configuration options:</p>
 <li>Jump tables analysis control</li>
 <li>Platform/target-specific options</li>
 </ul>
-<h3><a class="header" href="#control-flow-configuration" id="control-flow-configuration">Control flow configuration</a></h3>
+<h3 id="control-flow-configuration"><a class="header" href="#control-flow-configuration">Control flow configuration</a></h3>
 <p>The two most commonly used options for changing the behavior of control flow analysis in rizin are
 <code>analysis.hasnext</code> and <code>analysis.jmp.after</code>. The first one allows forcing rizin to continue the analysis
 after the end of the function, even if the next chunk of the code wasn't called anywhere, thus
@@ -438,7 +454,7 @@ control options may disappear in the future in favor of more automated ways to s
 <p>For some unusual binaries or targets, there is an option <code>analysis.noncode</code>. Rizin doesn't try
 to analyze data sections as a code by default. But in some cases - malware, packed binaries,
 binaries for embedded systems, it is often a case. Thus - this option.</p>
-<h3><a class="header" href="#reference-control" id="reference-control">Reference control</a></h3>
+<h3 id="reference-control"><a class="header" href="#reference-control">Reference control</a></h3>
 <p>The most crucial options that change the analysis results drastically. Sometimes some can be
 disabled to save time and memory when analyzing big binaries.</p>
 <ul>
@@ -449,7 +465,7 @@ disabled to save time and memory when analyzing big binaries.</p>
 <li><code>analysis.strings</code> - search for strings and creating references</li>
 </ul>
 <p>Note that strings references control is disabled by default because it increases the analysis time.</p>
-<h3><a class="header" href="#analysis-ranges" id="analysis-ranges">Analysis ranges</a></h3>
+<h3 id="analysis-ranges"><a class="header" href="#analysis-ranges">Analysis ranges</a></h3>
 <p>There are a few options for this:</p>
 <ul>
 <li><code>analysis.limits</code> - enables the range limits for analysis operations</li>
@@ -467,7 +483,7 @@ disabled to save time and memory when analyzing big binaries.</p>
 </li>
 </ul>
 <p>Please see <code>e analysis.in=??</code> for the complete list.</p>
-<h3><a class="header" href="#jump-tables" id="jump-tables">Jump tables</a></h3>
+<h3 id="jump-tables"><a class="header" href="#jump-tables">Jump tables</a></h3>
 <p>Jump tables are one of the trickiest targets in binary reverse engineering. There are hundreds
 of different types, the end result depending on the compiler/linker and LTO stages of optimization.
 Thus rizin allows enabling some experimental jump tables detection algorithms using <code>analysis.jmp.tbl</code>
@@ -478,7 +494,7 @@ Two more options can affect the jump tables analysis results too:</p>
 <li><code>analysis.jmp.indir</code> - follow the indirect jumps, some jump tables rely on them</li>
 <li><code>analysis.datarefs</code> - follow the data references, some jump tables use those</li>
 </ul>
-<h3><a class="header" href="#platform-specific-controls" id="platform-specific-controls">Platform specific controls</a></h3>
+<h3 id="platform-specific-controls"><a class="header" href="#platform-specific-controls">Platform specific controls</a></h3>
 <p>There are two common problems when analyzing embedded targets: ARM/Thumb detection and MIPS GP
 value. In the case of ARM binaries rizin supports some auto-detection of ARM/Thumb mode switches, but
 beware that it uses partial ESIL emulation, thus slowing the analysis process. If you will not
@@ -489,7 +505,7 @@ for the whole program but also for some functions. To partially solve that there
 function. The latter allows to &quot;constantify&quot; the GP value if some code is willing to change its
 value, always resetting it if the case. Those are heavily experimental and might be changed in the
 future in favor of more automated analysis.</p>
-<h2><a class="header" href="#visuals" id="visuals">Visuals</a></h2>
+<h2 id="visuals"><a class="header" href="#visuals">Visuals</a></h2>
 <p>One of the easiest way to see and check the changes of the analysis commands and variables
 is to perform scrolling in a <code>Vv</code> special visual mode, allowing functions preview:</p>
 <p><img src="code_analysis_vv.png" alt="vv" /></p>
@@ -498,7 +514,7 @@ use minimap instead, allowing us to see a bigger flow graph on the same screen s
 the minimap mode type <code>VV</code> then press <code>p</code> twice:</p>
 <p><img src="code_analysis_vv2.png" alt="vv2" /></p>
 <p>This mode allows you to see the disassembly of each node separately, just navigate between them using the <code>Tab</code> key.</p>
-<h2><a class="header" href="#analysis-hints" id="analysis-hints">Analysis hints</a></h2>
+<h2 id="analysis-hints"><a class="header" href="#analysis-hints">Analysis hints</a></h2>
 <p>It is not an uncommon case that analysis results are not perfect even after you tried every single
 configuration option. This is where the &quot;analysis hints&quot; rizin mechanism comes in. It allows
 to override some basic opcode or meta-information properties, or even to rewrite the whole opcode
@@ -671,10 +687,10 @@ like:</p>
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 

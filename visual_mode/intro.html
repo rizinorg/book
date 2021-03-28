@@ -5,22 +5,36 @@
         <meta charset="UTF-8">
         <title>Visual mode - The Official Rizin Book</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="The Official Rizin Book">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
+        
         <link rel="stylesheet" href="../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -116,9 +130,11 @@
                     <h1 class="menu-title">The Official Rizin Book</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -147,21 +163,21 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#visual-mode" id="visual-mode">Visual Mode</a></h1>
+                        <h1 id="visual-mode"><a class="header" href="#visual-mode">Visual Mode</a></h1>
 <p>The visual mode is a more user-friendly interface alternative to rizin's command-line prompt. It allows easy navigation, has a cursor mode for selecting bytes, and offers numerous key bindings to simplify debugger use.
 To enter visual mode, use <code>V</code> command. To exit from it back to command line, press <code>q</code>.</p>
-<h2><a class="header" href="#navigation" id="navigation">Navigation</a></h2>
+<h2 id="navigation"><a class="header" href="#navigation">Navigation</a></h2>
 <p>Navigation can be done using HJKL or arrow keys and PgUp/PgDown keys. It also understands usual Home/End keys.
 Like in Vim the movements can be repeated by preceding the navigation key with the number, for
 example <code>5j</code> will move down for 5 lines, or <code>2l</code> will move 2 characters right.</p>
 <p><img src="visualmode.png" alt="Visual Mode" /></p>
-<h2><a class="header" href="#print-modes-aka-panels" id="print-modes-aka-panels">print modes aka panels</a></h2>
+<h2 id="print-modes-aka-panels"><a class="header" href="#print-modes-aka-panels">print modes aka panels</a></h2>
 <p>The Visual mode uses &quot;print modes&quot; which are basically different panel that you can rotate. By default those are:</p>
 <p>↻ <strong>Hexdump panel</strong> -&gt; <strong>Disassembly panel</strong> → <strong>Debugger panel</strong> → <strong>Hexadecimal words dump panel</strong> → <strong>Hex-less hexdump panel</strong> → <strong>Op analysis color map panel</strong> → <strong>Annotated hexdump panel</strong> ↺.</p>
 <p>Notice that the top of the panel contains the command which is used, for example for the disassembly panel:</p>
 <pre><code>[0x00404890 16% 120 /bin/ls]&gt; pd $r @ entry0
 </code></pre>
-<h2><a class="header" href="#getting-help" id="getting-help">Getting Help</a></h2>
+<h2 id="getting-help"><a class="header" href="#getting-help">Getting Help</a></h2>
 <p>To see help on all key bindings defined for visual mode, press <code>?</code>:</p>
 <pre><code>Visual mode help:
  ?        show this help
@@ -264,10 +280,10 @@ Function Keys: (See 'e key.'), defaults to:
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 

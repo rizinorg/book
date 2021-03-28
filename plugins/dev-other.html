@@ -5,22 +5,36 @@
         <meta charset="UTF-8">
         <title>Other plugins - The Official Rizin Book</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="The Official Rizin Book">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
+        
         <link rel="stylesheet" href="../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -116,9 +130,11 @@
                     <h1 class="menu-title">The Official Rizin Book</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -147,14 +163,14 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2><a class="header" href="#write-a-debugger-plugin" id="write-a-debugger-plugin">Write a debugger plugin</a></h2>
+                        <h2 id="write-a-debugger-plugin"><a class="header" href="#write-a-debugger-plugin">Write a debugger plugin</a></h2>
 <ul>
 <li>Adding the debugger registers profile into the shlr/gdb/src/core.c</li>
 <li>Adding the registers profile and architecture support in the librz/debug/p/debug_native.c and librz/debug/p/debug_gdb.c</li>
 <li>Add the code to apply the profiles into the function <code>rz_debug_gdb_attach(RzDebug *dbg, int pid)</code></li>
 </ul>
 <p>If you want to add support for the gdb, you can see the register profile in the active gdb session using command <code>maint print registers</code>.</p>
-<h2><a class="header" href="#more-to-come" id="more-to-come">More to come..</a></h2>
+<h2 id="more-to-come"><a class="header" href="#more-to-come">More to come..</a></h2>
 <ul>
 <li>Related article: http://rizin.today/posts/extending-r2-with-new-plugins/</li>
 </ul>
@@ -173,7 +189,7 @@
 <li>V810: https://github.com/rizinorg/rizin/pull/2899</li>
 <li>TMS320: https://github.com/rizinorg/rizin/pull/596</li>
 </ul>
-<h2><a class="header" href="#implementing-a-new-pseudo-architecture" id="implementing-a-new-pseudo-architecture">Implementing a new pseudo architecture</a></h2>
+<h2 id="implementing-a-new-pseudo-architecture"><a class="header" href="#implementing-a-new-pseudo-architecture">Implementing a new pseudo architecture</a></h2>
 <p>This is an simple plugin for z80 that you may use as example:</p>
 <p>https://github.com/rizinorg/rizin/commit/8ff6a92f65331cf8ad74cd0f44a60c258b137a06</p>
 
@@ -219,10 +235,10 @@
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 

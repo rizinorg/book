@@ -5,22 +5,36 @@
         <meta charset="UTF-8">
         <title>Print Modes - The Official Rizin Book</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="The Official Rizin Book">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
+        
         <link rel="stylesheet" href="../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -116,9 +130,11 @@
                     <h1 class="menu-title">The Official Rizin Book</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -147,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2><a class="header" href="#print-modes" id="print-modes">Print Modes</a></h2>
+                        <h2 id="print-modes"><a class="header" href="#print-modes">Print Modes</a></h2>
 <p>One of the key features of rizin is displaying information in many formats. The goal is to offer a selection of display choices to interpret binary data in the best possible way.</p>
 <p>Binary data can be represented as integers, shorts, longs, floats, timestamps, hexpair strings, or more complex formats like C structures, disassembly listings, decompilation listing, be a result of an external processing...</p>
 <p>Below is a list of available print modes listed by <code>p?</code>:</p>
@@ -205,18 +221,18 @@
 ]
 </code></pre>
 <p>For more on the magical powers of <code>~</code> see the help in <code>?@?</code>, and the <a href="../first_steps/command_format.html">Command Format</a> chapter earlier in the book.</p>
-<h3><a class="header" href="#hexadecimal-view" id="hexadecimal-view">Hexadecimal View</a></h3>
+<h3 id="hexadecimal-view"><a class="header" href="#hexadecimal-view">Hexadecimal View</a></h3>
 <p><code>px</code> gives a user-friendly output showing 16 pairs of numbers per row with offsets and raw representations:</p>
 <p><img src="print_modes_px.png" alt="hexprint" /></p>
-<h4><a class="header" href="#show-hexadecimal-words-dump-32-bits" id="show-hexadecimal-words-dump-32-bits">Show Hexadecimal Words Dump (32 bits)</a></h4>
+<h4 id="show-hexadecimal-words-dump-32-bits"><a class="header" href="#show-hexadecimal-words-dump-32-bits">Show Hexadecimal Words Dump (32 bits)</a></h4>
 <p><img src="print_modes_pxw.png" alt="wordprint" /></p>
-<h4><a class="header" href="#8-bits-hexpair-list-of-bytes" id="8-bits-hexpair-list-of-bytes">8 bits Hexpair List of Bytes</a></h4>
+<h4 id="8-bits-hexpair-list-of-bytes"><a class="header" href="#8-bits-hexpair-list-of-bytes">8 bits Hexpair List of Bytes</a></h4>
 <pre><code>[0x00404888]&gt; p8 16
 31ed4989d15e4889e24883e4f0505449
 </code></pre>
-<h4><a class="header" href="#show-hexadecimal-quad-words-dump-64-bits" id="show-hexadecimal-quad-words-dump-64-bits">Show Hexadecimal Quad-words Dump (64 bits)</a></h4>
+<h4 id="show-hexadecimal-quad-words-dump-64-bits"><a class="header" href="#show-hexadecimal-quad-words-dump-64-bits">Show Hexadecimal Quad-words Dump (64 bits)</a></h4>
 <p><img src="print_modes_pxq.png" alt="pxq" /></p>
-<h3><a class="header" href="#datetime-formats" id="datetime-formats">Date/Time Formats</a></h3>
+<h3 id="datetime-formats"><a class="header" href="#datetime-formats">Date/Time Formats</a></h3>
 <p>Currently supported timestamp output modes are:</p>
 <pre><code>[0x00404888]&gt; pt?
 |Usage: pt [dn]  print timestamps
@@ -258,7 +274,7 @@
 %z  The +hhmm or -hhmm numeric timezone (that is, the hour and minute offset from UTC). (SU)
 %Z  The timezone name or abbreviation.
 </code></pre>
-<h3><a class="header" href="#basic-types" id="basic-types">Basic Types</a></h3>
+<h3 id="basic-types"><a class="header" href="#basic-types">Basic Types</a></h3>
 <p>There are print modes available for all basic types. If you are interested in a more complex structure, type <code>pf??</code> for format characters and <code>pf???</code> for examples:</p>
 <pre><code>[0x00499999]&gt; pf??
 |pf: pf[.k[.f[=v]]|[v]]|[n]|[0|cnt][fmt] [a0 a1 ...]
@@ -333,7 +349,7 @@
 <pre><code>[0x4A13B8C0]&gt; pf
 0x00404888 = 837634432.000000
 </code></pre>
-<h3><a class="header" href="#high-level-languages-views" id="high-level-languages-views">High-level Languages Views</a></h3>
+<h3 id="high-level-languages-views"><a class="header" href="#high-level-languages-views">High-level Languages Views</a></h3>
 <p>Valid print code formats for human-readable languages are:</p>
 <ul>
 <li><code>pc</code>     C</li>
@@ -368,7 +384,7 @@ unsigned char buffer[_BUFFER_SIZE] = {
 <pre><code>[0x7fcd6a891630]&gt; pcs
 &quot;\x48\x89\xe7\xe8\x68\x39\x00\x00\x49\x89\xc4\x8b\x05\xef\x16\x22\x00\x5a\x48\x8d\x24\xc4\x29\xc2\x52\x48\x89\xd6\x49\x89\xe5\x48\x83\xe4\xf0\x48\x8b\x3d\x06\x1a
 </code></pre>
-<h3><a class="header" href="#strings" id="strings">Strings</a></h3>
+<h3 id="strings"><a class="header" href="#strings">Strings</a></h3>
 <p>Strings are probably one of the most important entry points when starting to reverse engineer a program because they usually reference information about functions' actions (asserts, debug or info messages...). Therefore, rizin supports various string formats:</p>
 <pre><code>[0x00000000]&gt; ps?
 |Usage: ps[bijqpsuwWxz+] [N]  Print String
@@ -398,7 +414,7 @@ unsigned char buffer[_BUFFER_SIZE] = {
 [0x4A13B8C0]&gt; psz @ 0x4a151c91
 /etc/ld.so.cache
 </code></pre>
-<h3><a class="header" href="#print-memory-contents" id="print-memory-contents">Print Memory Contents</a></h3>
+<h3 id="print-memory-contents"><a class="header" href="#print-memory-contents">Print Memory Contents</a></h3>
 <p>It is also possible to print various packed data types using the <code>pf</code> command:</p>
 <pre><code>[0xB7F08810]&gt; pf xxS @ rsp
 0x7fff0d29da30 = 0x00000001
@@ -442,7 +458,7 @@ unsigned char buffer[_BUFFER_SIZE] = {
            origin : (*0x15d12)0x0001d4a0 = &quot;https://www.archlinux.org/&quot;
  release_datetime : (*0x15d43)0x0001d4a8 = &quot;2020-12-06&quot;
 </code></pre>
-<h3><a class="header" href="#disassembly" id="disassembly">Disassembly</a></h3>
+<h3 id="disassembly"><a class="header" href="#disassembly">Disassembly</a></h3>
 <p>The <code>pd</code> command is used to disassemble code. It accepts a numeric value to specify how many instructions should be disassembled. The <code>pD</code> command is similar but instead of a number of instructions, it decompiles a given number of bytes.</p>
 <ul>
 <li><code>d</code> : disassembly N opcodes   count of opcodes</li>
@@ -452,7 +468,7 @@ unsigned char buffer[_BUFFER_SIZE] = {
 			;-- entry0:
 			0x00404888    31ed         xor ebp, ebp
 </code></pre>
-<h3><a class="header" href="#selecting-target-architecture" id="selecting-target-architecture">Selecting Target Architecture</a></h3>
+<h3 id="selecting-target-architecture"><a class="header" href="#selecting-target-architecture">Selecting Target Architecture</a></h3>
 <p>The architecture flavor for the disassembler is defined by the <code>asm.arch</code> eval variable. You can use <code>e asm.arch=??</code> to list all available architectures.</p>
 <pre><code>[0x00005310]&gt; e asm.arch=??
 _dAe  _8_16      6502        LGPL3   6502/NES/C64/Tamagotchi/T-1000 CPU
@@ -480,7 +496,7 @@ adA_  _32        java        Apache  Java bytecode
 _d__  _32        lanai       GPL3    LANAI
 ...
 </code></pre>
-<h3><a class="header" href="#configuring-the-disassembler" id="configuring-the-disassembler">Configuring the Disassembler</a></h3>
+<h3 id="configuring-the-disassembler"><a class="header" href="#configuring-the-disassembler">Configuring the Disassembler</a></h3>
 <p>There are multiple options which can be used to configure the output of the disassembler. All these options are described in <code>el asm.</code></p>
 <pre><code>[0x00005310]&gt; el asm.
 asm.anal: Analyze code and refs while disassembling (see analysis.strings)
@@ -498,7 +514,7 @@ asm.cmt.fold: Fold comments, toggle with Vz
 ...
 </code></pre>
 <p>Currently there are 136 <code>asm.</code> configuration variables so we do not list them all.</p>
-<h3><a class="header" href="#disassembly-syntax" id="disassembly-syntax">Disassembly Syntax</a></h3>
+<h3 id="disassembly-syntax"><a class="header" href="#disassembly-syntax">Disassembly Syntax</a></h3>
 <p>The <code>asm.syntax</code> variable is used to change the flavor of the assembly syntax used by a disassembler engine. To switch between Intel and AT&amp;T representations:</p>
 <pre><code>e asm.syntax=intel
 e asm.syntax=att
@@ -548,10 +564,10 @@ and <code>asm.esil</code> which outputs <a href="../disassembling/esil.html">ESI
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 

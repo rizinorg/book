@@ -5,22 +5,36 @@
         <meta charset="UTF-8">
         <title>Reference Card - The Official Rizin Book</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="The Official Rizin Book">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
+        
         <link rel="stylesheet" href="../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -116,9 +130,11 @@
                     <h1 class="menu-title">The Official Rizin Book</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -147,12 +163,12 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#rizin-reference-card" id="rizin-reference-card">Rizin Reference Card</a></h1>
+                        <h1 id="rizin-reference-card"><a class="header" href="#rizin-reference-card">Rizin Reference Card</a></h1>
 <p>This chapter is based on the Radare 2 reference card by Thanat0s, which is under the GNU GPL. Original license is as follows:</p>
 <pre><code>This card may be freely distributed under the terms of the GNU
 general public licence — Copyright by Thanat0s - v0.1 -
 </code></pre>
-<h2><a class="header" href="#survival-guide" id="survival-guide">Survival Guide</a></h2>
+<h2 id="survival-guide"><a class="header" href="#survival-guide">Survival Guide</a></h2>
 <p>Those are the basic commands you will want to know and use for moving
 around a binary and getting information about it.</p>
 <table><thead><tr><th align="left">Command</th><th align="left">Description</th></tr></thead><tbody>
@@ -166,7 +182,7 @@ around a binary and getting information about it.</p>
 <tr><td align="left">psz [offset]~grep</td><td align="left">Print strings and grep for one</td></tr>
 <tr><td align="left">axF [flag]</td><td align="left">Find cross reference for a flag</td></tr>
 </tbody></table>
-<h2><a class="header" href="#flags" id="flags">Flags</a></h2>
+<h2 id="flags"><a class="header" href="#flags">Flags</a></h2>
 <p>Flags are like bookmarks, but they carry some extra information like size, tags or associated flagspace. Use the <code>f</code> command to list, set, get them.</p>
 <table><thead><tr><th align="left">Command</th><th align="left">Description</th></tr></thead><tbody>
 <tr><td align="left">f</td><td align="left">List flags</td></tr>
@@ -176,7 +192,7 @@ around a binary and getting information about it.</p>
 <tr><td align="left">fx [flagname]</td><td align="left">Show hexdump of flag</td></tr>
 <tr><td align="left">fC [name] [comment]</td><td align="left">Set flag comment</td></tr>
 </tbody></table>
-<h2><a class="header" href="#flagspaces" id="flagspaces">Flagspaces</a></h2>
+<h2 id="flagspaces"><a class="header" href="#flagspaces">Flagspaces</a></h2>
 <p>Flags are created into a flagspace, by default none is selected,
 and listing flags will list them all. To display a subset of flags
 you can use the <code>fs</code> command to restrict it.</p>
@@ -185,7 +201,7 @@ you can use the <code>fs</code> command to restrict it.</p>
 <tr><td align="left">fs *</td><td align="left">Select all flagspaces</td></tr>
 <tr><td align="left">fs [space]</td><td align="left">Select one flagspace</td></tr>
 </tbody></table>
-<h2><a class="header" href="#information" id="information">Information</a></h2>
+<h2 id="information"><a class="header" href="#information">Information</a></h2>
 <p>Binary files have information stored inside the headers. The <code>i</code>
 command uses the RzBin api and allows us to the same things rz-bin
 do. Those are the most common ones.</p>
@@ -197,7 +213,7 @@ do. Those are the most common ones.</p>
 <tr><td align="left">ir</td><td align="left">Display relocations</td></tr>
 <tr><td align="left">iz</td><td align="left">List strings (izz, izzz)</td></tr>
 </tbody></table>
-<h2><a class="header" href="#print-string" id="print-string">Print string</a></h2>
+<h2 id="print-string"><a class="header" href="#print-string">Print string</a></h2>
 <p>There are different ways to represent a string in memory. The <code>ps</code> command
 allows us to print it in utf-16, pascal, zero terminated, .. formats.</p>
 <table><thead><tr><th align="left">Command</th><th align="left">Description</th></tr></thead><tbody>
@@ -207,7 +223,7 @@ allows us to print it in utf-16, pascal, zero terminated, .. formats.</p>
 <tr><td align="left">psp [offset]</td><td align="left">Print pascal string</td></tr>
 <tr><td align="left">psw [offset]</td><td align="left">Print wide string</td></tr>
 </tbody></table>
-<h2><a class="header" href="#visual-mode" id="visual-mode">Visual mode</a></h2>
+<h2 id="visual-mode"><a class="header" href="#visual-mode">Visual mode</a></h2>
 <p>The visual mode is the standard interactive interface of rizin.</p>
 <p>To enter in visual mode use the <code>v</code> or <code>V</code> command, and then you'll only
 have to press keys to get the actions happen instead of commands.</p>
@@ -247,7 +263,7 @@ have to press keys to get the actions happen instead of commands.</p>
 <tr><td align="left">yY</td><td align="left">Copy and paste selection</td></tr>
 <tr><td align="left">z</td><td align="left">fold/unfold comments in disassembly</td></tr>
 </tbody></table>
-<h2><a class="header" href="#searching" id="searching">Searching</a></h2>
+<h2 id="searching"><a class="header" href="#searching">Searching</a></h2>
 <p>There are many situations where we need to find a value inside a binary
 or in some specific regions. Use the <code>e search.in=?</code> command to choose
 where the <code>/</code> command may search for the given value.</p>
@@ -276,7 +292,7 @@ where the <code>/</code> command may search for the given value.</p>
 <tr><td align="left">/z min max</td><td align="left">Search for strings of given size</td></tr>
 <tr><td align="left">/v[?248] num</td><td align="left">Look for a asm.bigendian 32bit value</td></tr>
 </tbody></table>
-<h2><a class="header" href="#usable-variables-in-expression" id="usable-variables-in-expression">Usable variables in expression</a></h2>
+<h2 id="usable-variables-in-expression"><a class="header" href="#usable-variables-in-expression">Usable variables in expression</a></h2>
 <p>The <code>?$?</code> command will display the variables that can be used in any math
 operation inside the rizin shell. For example, using the <code>? $$</code> command to evaluate
 a number or <code>?v</code> to just the value in one format.</p>
@@ -368,10 +384,10 @@ a number or <code>?v</code> to just the value in one format.</p>
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 

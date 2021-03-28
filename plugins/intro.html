@@ -5,22 +5,36 @@
         <meta charset="UTF-8">
         <title>Plugins - The Official Rizin Book</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="The Official Rizin Book">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
+        
         <link rel="stylesheet" href="../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -116,9 +130,11 @@
                     <h1 class="menu-title">The Official Rizin Book</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -147,12 +163,12 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#plugins" id="plugins">Plugins</a></h1>
+                        <h1 id="plugins"><a class="header" href="#plugins">Plugins</a></h1>
 <p>rizin is implemented on top of a bunch of libraries, almost every of those
 libraries support plugins to extend the capabilities of the library or add
 support for different targets.</p>
 <p>This section aims to explain what are the plugins, how to write them and use them</p>
-<h2><a class="header" href="#types-of-plugins" id="types-of-plugins">Types of plugins</a></h2>
+<h2 id="types-of-plugins"><a class="header" href="#types-of-plugins">Types of plugins</a></h2>
 <pre><code>$ ls librz/*/p | grep : | awk -F / '{ print $2 }'
 analysis  # analysis plugins
 asm       # assembler/disassembler plugins
@@ -167,7 +183,7 @@ lang      # embedded scripting languages
 parse     # disassembler parsing plugins
 reg       # arch register logic
 </code></pre>
-<h2><a class="header" href="#listing-plugins" id="listing-plugins">Listing plugins</a></h2>
+<h2 id="listing-plugins"><a class="header" href="#listing-plugins">Listing plugins</a></h2>
 <p>Some rizin tools have the <code>-L</code> flag to list all the plugins associated to the
 functionality.</p>
 <pre><code>rz-asm -L   # list asm plugins
@@ -187,7 +203,7 @@ ph         # print support hash algoriths
 <pre><code>e asm.arch=?   # list assembler/disassembler plugins
 e analysis.arch=?  # list analysis plugins
 </code></pre>
-<h2><a class="header" href="#notes" id="notes">Notes</a></h2>
+<h2 id="notes"><a class="header" href="#notes">Notes</a></h2>
 <p>Note there are some inconsistencies that most likely will be fixed in the future rizin versions.</p>
 
                     </main>
@@ -232,10 +248,10 @@ e analysis.arch=?  # list analysis plugins
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 

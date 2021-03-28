@@ -5,22 +5,36 @@
         <meta charset="UTF-8">
         <title>Language - The Official Rizin Book</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="The Official Rizin Book">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../../favicon.png">
+        
         <link rel="stylesheet" href="../../css/variables.css">
         <link rel="stylesheet" href="../../css/general.css">
         <link rel="stylesheet" href="../../css/chrome.css">
+        
         <link rel="stylesheet" href="../../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../../highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -116,9 +130,11 @@
                     <h1 class="menu-title">The Official Rizin Book</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -147,7 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#syntax-of-the-language" id="syntax-of-the-language">Syntax of the language</a></h1>
+                        <h1 id="syntax-of-the-language"><a class="header" href="#syntax-of-the-language">Syntax of the language</a></h1>
 <p>The code of rz_egg is compiled as in a flow. It is a one-pass compiler;</p>
 <p>this means that you have to define the proper stackframe size at the</p>
 <p>beginning of the function, and you have to define the functions in</p>
@@ -160,24 +176,24 @@
 <p>on-disk binaries.</p>
 <p>The generated code is not yet optimized, but it's safe to be executed</p>
 <p>at any place in the code.</p>
-<h2><a class="header" href="#preprocessor" id="preprocessor">Preprocessor</a></h2>
-<h3><a class="header" href="#aliases" id="aliases">Aliases</a></h3>
+<h2 id="preprocessor"><a class="header" href="#preprocessor">Preprocessor</a></h2>
+<h3 id="aliases"><a class="header" href="#aliases">Aliases</a></h3>
 <p>Sometimes you just need to replace at compile time a single entity on</p>
 <p>multiple places. Aliases are translated into 'equ' statements in assembly</p>
 <p>language. This is just an assembler-level keyword redefinition.</p>
 <p><code> AF_INET@alias(2);</code></p>
 <p><code> printf@alias(0x8053940);</code></p>
-<h3><a class="header" href="#includes" id="includes">Includes</a></h3>
+<h3 id="includes"><a class="header" href="#includes">Includes</a></h3>
 <p>Use <code>cat(1)</code> or the preprocessor to concatenate multiple files to be compiled.</p>
 <p><code> INCDIR@alias(&quot;/usr/include/rz-gg&quot;);</code></p>
 <p><code> sys-osx.r@include(INCDIR);</code></p>
-<h3><a class="header" href="#hashbang" id="hashbang">Hashbang</a></h3>
+<h3 id="hashbang"><a class="header" href="#hashbang">Hashbang</a></h3>
 <p>eggs can use a hashbang to make them executable.</p>
 <p><code>$ head -n1 hello.r</code></p>
 <p><code> #!/usr/bin/rz-gg -X</code></p>
 <p><code> $ ./hello.r</code></p>
 <p><code> Hello World!</code></p>
-<h3><a class="header" href="#main" id="main">Main</a></h3>
+<h3 id="main"><a class="header" href="#main">Main</a></h3>
 <p>The execution of the code is done as in a flow. The first function to be</p>
 <p>defined will be the first one to be executed. If you want to run main()</p>
 <p>just do like this:</p>
@@ -186,24 +202,24 @@
 <p><code> ...</code></p>
 <p><code> main@global(128,64) {</code></p>
 <p><code> ...</code></p>
-<h3><a class="header" href="#function-definition" id="function-definition">Function definition</a></h3>
+<h3 id="function-definition"><a class="header" href="#function-definition">Function definition</a></h3>
 <p>You may like to split up your code into several code blocks. Those blocks</p>
 <p>are bound to a label followed by root brackets '{ ... }'</p>
-<h3><a class="header" href="#function-signatures" id="function-signatures">Function signatures</a></h3>
+<h3 id="function-signatures"><a class="header" href="#function-signatures">Function signatures</a></h3>
 <p><code>name@type(stackframesize,staticframesize) { body }</code></p>
 <p><code>name</code> : name of the function to define</p>
 <p><code>type</code> : see function types below</p>
 <p><code>stackframesize</code> : get space from stack to store local variables</p>
 <p><code>staticframesize</code> : get space from stack to store static variables (strings)</p>
 <p><code>body</code> : code of the function</p>
-<h3><a class="header" href="#function-types" id="function-types">Function types</a></h3>
+<h3 id="function-types"><a class="header" href="#function-types">Function types</a></h3>
 <p><code>alias</code>   Used to create aliases</p>
 <p><code>data</code> ; the body of the block is defined in .data</p>
 <p><code>inline</code> ; the function body is inlined when called</p>
 <p><code>global</code> ; make the symbol global</p>
 <p><code>fastcall</code> ; function that is called using the fast calling convention</p>
 <p><code>syscall</code>  ; define syscall calling convention signature</p>
-<h3><a class="header" href="#syscalls" id="syscalls">Syscalls</a></h3>
+<h3 id="syscalls"><a class="header" href="#syscalls">Syscalls</a></h3>
 <p>r_egg offers a syntax sugar for defining syscalls. The syntax is like this:</p>
 <p><code> exit@syscall(1);</code></p>
 <p><code> @syscall() {</code></p>
@@ -213,13 +229,13 @@
 <p><code> main@global() {</code></p>
 <p><code> exit (0);</code></p>
 <p><code> }</code></p>
-<h3><a class="header" href="#libraries" id="libraries">Libraries</a></h3>
+<h3 id="libraries"><a class="header" href="#libraries">Libraries</a></h3>
 <p>At the moment there is no support for linking r_egg programs to system</p>
 <p>libraries. but if you inject the code into a program (disk/memory) you</p>
 <p>can define the address of each function using the @alias syntax.</p>
-<h3><a class="header" href="#core-library" id="core-library">Core library</a></h3>
+<h3 id="core-library"><a class="header" href="#core-library">Core library</a></h3>
 <p>There's a work-in-progress libc-like library written completely in r_egg</p>
-<h3><a class="header" href="#variables" id="variables">Variables</a></h3>
+<h3 id="variables"><a class="header" href="#variables">Variables</a></h3>
 <p><code>.arg</code></p>
 <p><code>.arg0</code></p>
 <p><code>.arg1</code></p>
@@ -233,21 +249,21 @@
 <p><code>.sp</code></p>
 <p><strong>Attention:</strong> All the numbers after <code>.var</code> and <code>.arg</code> mean the offset with the</p>
 <p>top of stack, not variable symbols.</p>
-<h3><a class="header" href="#arrays" id="arrays">Arrays</a></h3>
+<h3 id="arrays"><a class="header" href="#arrays">Arrays</a></h3>
 <p>Supported as raw pointers. TODO: enhance this feature</p>
-<h3><a class="header" href="#tracing" id="tracing">Tracing</a></h3>
+<h3 id="tracing"><a class="header" href="#tracing">Tracing</a></h3>
 <p>Sometimes r_egg programs will break or just not work as expected. Use the</p>
 <p>'trace' architecture to get a arch-backend call trace:</p>
 <p><code> $ rz-gg -a trace -s yourprogram.r</code></p>
-<h3><a class="header" href="#pointers" id="pointers">Pointers</a></h3>
+<h3 id="pointers"><a class="header" href="#pointers">Pointers</a></h3>
 <p>TODO: Theoretically '*' is used to get contents of a memory pointer.</p>
-<h3><a class="header" href="#virtual-registers" id="virtual-registers">Virtual registers</a></h3>
+<h3 id="virtual-registers"><a class="header" href="#virtual-registers">Virtual registers</a></h3>
 <p>TODO: a0, a1, a2, a3, sp, fp, bp, pc</p>
-<h3><a class="header" href="#math-operations" id="math-operations">Math operations</a></h3>
+<h3 id="math-operations"><a class="header" href="#math-operations">Math operations</a></h3>
 <p>rz-gg supports local variables assignment by math operating, including</p>
 <p>the following operators:</p>
 <p><code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>&amp;</code> <code>|</code> <code>^</code></p>
-<h3><a class="header" href="#return-values" id="return-values">Return values</a></h3>
+<h3 id="return-values"><a class="header" href="#return-values">Return values</a></h3>
 <p>The return value is stored in the a0 register, this register is set when</p>
 <p>calling a function or when typing a variable name without assignment.</p>
 <pre><code>$ cat test.r
@@ -265,28 +281,28 @@ $ ./test
 $ echo $?
 7
 </code></pre>
-<h3><a class="header" href="#traps" id="traps">Traps</a></h3>
+<h3 id="traps"><a class="header" href="#traps">Traps</a></h3>
 <p>Each architecture have a different instruction to break the execution of</p>
 <p>the program. RzEgg language captures calls to 'break()' to run the emit_trap</p>
 <p>callback of the selected arch. The</p>
 <p><code> break()</code>; --&gt; compiles into 'int3' on x86</p>
 <p><code> break;</code> --&gt; compiles into 'int3' on x86</p>
-<h3><a class="header" href="#inline-assembly" id="inline-assembly">Inline assembly</a></h3>
+<h3 id="inline-assembly"><a class="header" href="#inline-assembly">Inline assembly</a></h3>
 <p>Lines prefixed with ':' char are just inlined in the output assembly.</p>
 <p><code> : jmp 0x8048400</code></p>
 <p><code> : .byte 33,44</code></p>
-<h3><a class="header" href="#labels" id="labels">Labels</a></h3>
+<h3 id="labels"><a class="header" href="#labels">Labels</a></h3>
 <p>You can define labels using the <code>:</code> keyword like this:</p>
 <p><code> :label_name:</code></p>
 <p><code> /* loop forever */</code></p>
 <p><code> goto(label_name</code>)</p>
-<h3><a class="header" href="#control-flow" id="control-flow">Control flow</a></h3>
+<h3 id="control-flow"><a class="header" href="#control-flow">Control flow</a></h3>
 <p><code> goto (addr)</code> -- branch execution</p>
 <p><code> while (cond)</code></p>
 <p><code> if (cond)</code></p>
 <p><code> if (cond) { body } else { body }</code></p>
 <p><code> break ()</code> -- executes a trap instruction</p>
-<h3><a class="header" href="#comments" id="comments">Comments</a></h3>
+<h3 id="comments"><a class="header" href="#comments">Comments</a></h3>
 <p>Supported syntax for comments are:</p>
 <p><code> /* multiline comment */'</code></p>
 <p><code> // single line comment</code></p>
@@ -334,10 +350,10 @@ $ echo $?
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 

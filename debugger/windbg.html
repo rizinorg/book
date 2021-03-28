@@ -5,22 +5,36 @@
         <meta charset="UTF-8">
         <title>Remote WinDbg - The Official Rizin Book</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="The Official Rizin Book">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
+        
         <link rel="stylesheet" href="../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -116,9 +130,11 @@
                     <h1 class="menu-title">The Official Rizin Book</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -147,18 +163,18 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#windbg-kernel-mode-debugging-kd" id="windbg-kernel-mode-debugging-kd">WinDBG Kernel-mode Debugging (KD)</a></h1>
+                        <h1 id="windbg-kernel-mode-debugging-kd"><a class="header" href="#windbg-kernel-mode-debugging-kd">WinDBG Kernel-mode Debugging (KD)</a></h1>
 <p>The WinDBG KD interface support for rizin allows you to attach to VM running
 Windows and debug its kernel over a serial port or network.</p>
 <p>It is also possible to use the remote GDB interface to connect and
 debug Windows kernels without depending on Windows capabilities.</p>
 <p>Bear in mind that WinDBG KD support is still work-in-progress, and this is
 just an initial implementation which will get better in time.</p>
-<h2><a class="header" href="#setting-up-kd-on-windows" id="setting-up-kd-on-windows">Setting Up KD on Windows</a></h2>
+<h2 id="setting-up-kd-on-windows"><a class="header" href="#setting-up-kd-on-windows">Setting Up KD on Windows</a></h2>
 <blockquote>
 <p>For a complete walkthrough, refer to Microsoft's <a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/setting-up-kernel-mode-debugging-in-windbg--cdb--or-ntsd">documentation</a>.</p>
 </blockquote>
-<h3><a class="header" href="#serial-port" id="serial-port">Serial Port</a></h3>
+<h3 id="serial-port"><a class="header" href="#serial-port">Serial Port</a></h3>
 <p>Enable KD over a serial port on Windows Vista and higher like this:</p>
 <pre><code>bcdedit /debug on
 bcdedit /dbgsettings serial debugport:1 baudrate:115200
@@ -194,7 +210,7 @@ multi(0)disk(0)rdisk(0)partition(1)\WINDOWS=&quot;Debugging with Cable&quot; /fa
      path=/tmp/winkd.pipe,nowait,server \
      -serial chardev:serial0 -hda Windows7-VM.vdi
 </code></pre>
-<h3><a class="header" href="#network" id="network">Network</a></h3>
+<h3 id="network"><a class="header" href="#network">Network</a></h3>
 <p>Enable KD over network (KDNet) on Windows 7 or later likes this:</p>
 <pre><code>bcdedit /debug on
 bcdedit /dbgsettings net hostip:w.x.y.z port:n
@@ -204,8 +220,8 @@ for every boot, but it is possible to always show the advanced boot options,
 which allows to enable kernel debugging:</p>
 <pre><code>bcedit /set {globalsettings} advancedoptions true
 </code></pre>
-<h2><a class="header" href="#connecting-to-kd-interface-on-rizin" id="connecting-to-kd-interface-on-rizin">Connecting to KD interface on rizin</a></h2>
-<h3><a class="header" href="#serial-port-1" id="serial-port-1">Serial Port</a></h3>
+<h2 id="connecting-to-kd-interface-on-rizin"><a class="header" href="#connecting-to-kd-interface-on-rizin">Connecting to KD interface on rizin</a></h2>
+<h3 id="serial-port-1"><a class="header" href="#serial-port-1">Serial Port</a></h3>
 <p>Rizin will use the <code>winkd</code> io plugin to connect to a socket file
 created by virtualbox or qemu. Also, the <code>winkd</code> debugger plugin and
 we should specify the x86-32 too. (32 and 64 bit debugging is supported)</p>
@@ -214,10 +230,10 @@ we should specify the x86-32 too. (32 and 64 bit debugging is supported)</p>
 <p>On Windows you should run the following line:</p>
 <pre><code>$ rizin -D winkd winkd://\\.\pipe\com_1
 </code></pre>
-<h3><a class="header" href="#network-1" id="network-1">Network</a></h3>
+<h3 id="network-1"><a class="header" href="#network-1">Network</a></h3>
 <pre><code>$ rizin -a x86 -b 32 -d winkd://&lt;hostip&gt;:&lt;port&gt;:w.x.y.z
 </code></pre>
-<h2><a class="header" href="#using-kd" id="using-kd">Using KD</a></h2>
+<h2 id="using-kd"><a class="header" href="#using-kd">Using KD</a></h2>
 <p>When connecting to a KD interface, rizin will send a breakin packet to interrupt
 the target and we will get stuck here:</p>
 <pre><code>[0x828997b8]&gt; pd 20
@@ -240,7 +256,7 @@ attach again to get back to control the kernel.</p>
 <p>In addition, the <code>dp</code> command can be used to list all processes, and
 <code>dpa</code> or <code>dp=</code> to attach to the process. This will display the base
 address of the process in the physical memory layout.</p>
-<h1><a class="header" href="#windbg-backend-for-windows-dbgeng" id="windbg-backend-for-windows-dbgeng">WinDBG Backend for Windows (DbgEng)</a></h1>
+<h1 id="windbg-backend-for-windows-dbgeng"><a class="header" href="#windbg-backend-for-windows-dbgeng">WinDBG Backend for Windows (DbgEng)</a></h1>
 <p>On Windows, rizin can use <code>DbgEng.dll</code> as a debugging backend,
 allowing it to make use of WinDBG's capabilities, supporting dump files,
 local and remote user and kernel mode debugging.</p>
@@ -251,7 +267,7 @@ local and remote user and kernel mode debugging.</p>
 <blockquote>
 <p>rizin will try to load <code>dbgeng.dll</code> from the <code>_NT_DEBUGGER_EXTENSION_PATH</code> environment variable before using Windows' default library search path.</p>
 </blockquote>
-<h2><a class="header" href="#using-the-plugin" id="using-the-plugin">Using the plugin</a></h2>
+<h2 id="using-the-plugin"><a class="header" href="#using-the-plugin">Using the plugin</a></h2>
 <p>To use the <code>windbg</code> plugin, pass the same command-line options as you would for <code>WinDBG</code> or <code>kd</code> (see Microsoft's <a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/windbg-command-line-options">documentation</a>), quoting/escaping when necessary:</p>
 <pre><code>&gt; rizin -d &quot;windbg://-remote tcp:server=Server,port=Socket&quot;
 </code></pre>
@@ -318,10 +334,10 @@ Child-SP          RetAddr           Call Site
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 

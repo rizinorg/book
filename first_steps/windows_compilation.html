@@ -5,22 +5,36 @@
         <meta charset="UTF-8">
         <title>Compilation on Windows - The Official Rizin Book</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="The Official Rizin Book">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
+        
         <link rel="stylesheet" href="../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -116,9 +130,11 @@
                     <h1 class="menu-title">The Official Rizin Book</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -147,20 +163,20 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2><a class="header" href="#windows" id="windows">Windows</a></h2>
+                        <h2 id="windows"><a class="header" href="#windows">Windows</a></h2>
 <p>Rizin relies on the Meson build system generator to support compilation on all platforms, including Windows. Meson will generate a Visual Studio Solution, all the necessary project files, and wire up the Microsoft Visual C++ compiler for you.</p>
 <blockquote>
 <p><strong>tip</strong> You can download nightly binaries from https://ci.appveyor.com/project/rizinorg/rizin/history. Be sure to download only from <code>master</code> branch!</p>
 </blockquote>
-<h3><a class="header" href="#prerequisites" id="prerequisites">Prerequisites</a></h3>
+<h3 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h3>
 <ul>
 <li>Visual Studio 2015 (or higher)</li>
 <li>Python 3</li>
 <li>Meson</li>
 <li>Git</li>
 </ul>
-<h3><a class="header" href="#step-by-step" id="step-by-step">Step-by-Step</a></h3>
-<h4><a class="header" href="#install-visual-studio-2015-or-higher" id="install-visual-studio-2015-or-higher">Install Visual Studio 2015 (or higher)</a></h4>
+<h3 id="step-by-step"><a class="header" href="#step-by-step">Step-by-Step</a></h3>
+<h4 id="install-visual-studio-2015-or-higher"><a class="header" href="#install-visual-studio-2015-or-higher">Install Visual Studio 2015 (or higher)</a></h4>
 <p>Visual Studio must be installed with a Visual C++ compiler, supporting C++ libraries, and the appropriate Windows SDK for the target platform version.</p>
 <ul>
 <li>In the Visual Studio 2015 installer, ensure <code>Programming Languages &gt; Visual C++</code> is selected</li>
@@ -172,14 +188,14 @@
 <li><a href="https://visualstudio.microsoft.com/downloads/">Download Visual Studio 2017 Community</a></li>
 <li><a href="https://visualstudio.microsoft.com/downloads/">Download Visual Studio 2019 Community</a></li>
 </ul>
-<h4><a class="header" href="#install-python-3-and-mesonninja-via-conda" id="install-python-3-and-mesonninja-via-conda">Install Python 3 and Meson/Ninja via Conda</a></h4>
+<h4 id="install-python-3-and-mesonninja-via-conda"><a class="header" href="#install-python-3-and-mesonninja-via-conda">Install Python 3 and Meson/Ninja via Conda</a></h4>
 <p>It is strongly recommended you install Conda — a Python environment management system — when working with Python on the Windows platform. This will isolate the Rizin build environment from other installed Python versions and minimize potential conflicts.</p>
-<h5><a class="header" href="#set-up-conda" id="set-up-conda">Set Up Conda:</a></h5>
+<h5 id="set-up-conda"><a class="header" href="#set-up-conda">Set Up Conda:</a></h5>
 <ol>
 <li>Download the appropriate Conda (Python 3.x) for your platform (https://conda.io/miniconda.html)</li>
 <li>Install Conda with the recommended defaults</li>
 </ol>
-<h5><a class="header" href="#create-a-python-environment-for-rizin" id="create-a-python-environment-for-rizin">Create a Python Environment for Rizin</a></h5>
+<h5 id="create-a-python-environment-for-rizin"><a class="header" href="#create-a-python-environment-for-rizin">Create a Python Environment for Rizin</a></h5>
 <p>Follow these steps to create and activate a Conda environment named <em>rizin</em>. All instructions from this point on will assume this name matches your environment, but you may change this if desired.</p>
 <ol>
 <li>Start &gt; Anaconda Prompt</li>
@@ -187,14 +203,14 @@
 <li><code>activate rizin</code></li>
 </ol>
 <p>Any time you wish to enter this environment, open the Anaconda Prompt and re-issue <code>activate rizin</code>. Conversely, <code>deactivate</code> will leave the environment.</p>
-<h5><a class="header" href="#install-meson--ninja" id="install-meson--ninja">Install Meson + Ninja</a></h5>
+<h5 id="install-meson--ninja"><a class="header" href="#install-meson--ninja">Install Meson + Ninja</a></h5>
 <ol>
 <li>Enter the Rizin Conda environment, if needed (<code>activate rizin</code>)</li>
 <li>Download meson + ninja</li>
 <li><code>pip install meson ninja</code></li>
 <li>Verify Meson is version 0.50 or higher (<code>meson -v</code>)</li>
 </ol>
-<h4><a class="header" href="#install-git-for-windows" id="install-git-for-windows">Install Git for Windows</a></h4>
+<h4 id="install-git-for-windows"><a class="header" href="#install-git-for-windows">Install Git for Windows</a></h4>
 <p>All Rizin code is managed via the Git version control system and <a href="https://github.com/rizin">hosted on GitHub</a>.</p>
 <p>Follow these steps to install Git for Windows.</p>
 <ol>
@@ -210,13 +226,13 @@
 <li>Close any previously open console windows and re-open them to ensure they receive the new PATH</li>
 <li>Ensure <code>git --version</code> works</li>
 </ol>
-<h4><a class="header" href="#get-rizin-code" id="get-rizin-code">Get Rizin Code</a></h4>
+<h4 id="get-rizin-code"><a class="header" href="#get-rizin-code">Get Rizin Code</a></h4>
 <p>Follow these steps to clone the Rizin git repository.</p>
 <ol>
 <li>In your Rizin Conda environment, navigate to a location where the code will be saved and compiled. This location needs approximately <strong>3-4GiB</strong> of space</li>
 <li>Clone the repository with <code>git clone --recurse-submodules https://github.com/rizinorg/rizin.git</code></li>
 </ol>
-<h4><a class="header" href="#compile-rizin-code" id="compile-rizin-code">Compile Rizin Code</a></h4>
+<h4 id="compile-rizin-code"><a class="header" href="#compile-rizin-code">Compile Rizin Code</a></h4>
 <p>Follow these steps to compile the Rizin Code.</p>
 <p>Compiled binaries will be installed into the <code>dest</code> folder.</p>
 <ol>
@@ -264,7 +280,7 @@
 <li>Install into your destination folder: <code>ninja -C build install</code></li>
 <li>Check your Rizin version: <code>dest\bin\rizin.exe -v</code></li>
 </ol>
-<h4><a class="header" href="#check-that-rizin-runs-from-all-locations" id="check-that-rizin-runs-from-all-locations">Check That Rizin Runs From All Locations</a></h4>
+<h4 id="check-that-rizin-runs-from-all-locations"><a class="header" href="#check-that-rizin-runs-from-all-locations">Check That Rizin Runs From All Locations</a></h4>
 <ol>
 <li>In the file explorer go to the folder Rizin was just installed in.</li>
 <li>From this folder go to <code>dest</code> &gt; <code>bin</code> and keep this window open.</li>
@@ -319,10 +335,10 @@
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 

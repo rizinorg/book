@@ -5,22 +5,36 @@
         <meta charset="UTF-8">
         <title>Compilation on Android - The Official Rizin Book</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="The Official Rizin Book">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
         <link rel="shortcut icon" href="../favicon.png">
+        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
+        
         <link rel="stylesheet" href="../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -36,7 +50,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -116,9 +130,11 @@
                     <h1 class="menu-title">The Official Rizin Book</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -147,9 +163,9 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2><a class="header" href="#android" id="android">Android</a></h2>
+                        <h2 id="android"><a class="header" href="#android">Android</a></h2>
 <p>Rizin can be cross-compiled for other architectures/systems as well, like Android.</p>
-<h3><a class="header" href="#prerequisites" id="prerequisites">Prerequisites</a></h3>
+<h3 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h3>
 <ul>
 <li>Python 3</li>
 <li>Meson</li>
@@ -157,12 +173,12 @@
 <li>Git</li>
 <li>Android NDK</li>
 </ul>
-<h3><a class="header" href="#step-by-step" id="step-by-step">Step-by-step</a></h3>
-<h4><a class="header" href="#download-and-extract-the-android-ndk" id="download-and-extract-the-android-ndk">Download and extract the Android NDK</a></h4>
+<h3 id="step-by-step"><a class="header" href="#step-by-step">Step-by-step</a></h3>
+<h4 id="download-and-extract-the-android-ndk"><a class="header" href="#download-and-extract-the-android-ndk">Download and extract the Android NDK</a></h4>
 <p>Download the Android NDK from the <a href="https://developer.android.com/ndk">official site</a> and extract it somewhere on your system (e.g. <code>/tmp/android-ndk</code>)</p>
-<h4><a class="header" href="#meson" id="meson">Meson</a></h4>
+<h4 id="meson"><a class="header" href="#meson">Meson</a></h4>
 <p>See also <a href="https://github.com/rizinorg/rizin/blob/dev/BUILDING.md#cross-compilation-for-android">BUILDING.md</a>.</p>
-<h5><a class="header" href="#create-a-cross-file-for-meson" id="create-a-cross-file-for-meson">Create a cross-file for meson</a></h5>
+<h5 id="create-a-cross-file-for-meson"><a class="header" href="#create-a-cross-file-for-meson">Create a cross-file for meson</a></h5>
 <p>Meson needs a configuration file that describes the cross compilation environment (e.g. <code>meson-android.ini</code>).
 You can adjust it as necessary, but something like the following should be a good starting point:</p>
 <pre><code>[binaries]
@@ -184,7 +200,7 @@ cpu_family = 'arm'
 cpu = 'aarch64'
 endian = 'little'
 </code></pre>
-<h5><a class="header" href="#compile-with-meson--ninja" id="compile-with-meson--ninja">Compile with meson + ninja</a></h5>
+<h5 id="compile-with-meson--ninja"><a class="header" href="#compile-with-meson--ninja">Compile with meson + ninja</a></h5>
 <p>Now setup the build directory with meson as usual:</p>
 <pre><code>$ meson --default-library static -Dstatic_runtime=true --prefix=/tmp/android-dir -Dblob=true build --cross-file ./meson-android.ini
 </code></pre>
@@ -205,7 +221,7 @@ just create one that provides all features. You will still have <code>rz-bin</co
 <pre><code>$ ninja -C build
 $ ninja -C build install
 </code></pre>
-<h5><a class="header" href="#move-files-to-your-android-device-and-enjoy" id="move-files-to-your-android-device-and-enjoy">Move files to your android device and enjoy</a></h5>
+<h5 id="move-files-to-your-android-device-and-enjoy"><a class="header" href="#move-files-to-your-android-device-and-enjoy">Move files to your android device and enjoy</a></h5>
 <p>At this point you can copy the generated files in /tmp/android-dir to your Android device and running rizin from it.
 For example:</p>
 <pre><code>$ cd /tmp &amp;&amp; tar -cvf rizin-android.tar.gz android-dir
@@ -260,10 +276,10 @@ Usage: rizin [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i fil
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 
