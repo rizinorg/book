@@ -263,10 +263,10 @@
 <tr><td>search</td><td>search menu</td><td><code>/?</code></td><td>Select the zone with the cursor <code>c</code> then <code>/</code></td><td></td><td><code>s</code></td></tr>
 </tbody></table>
 <h2 id="equivalent-of-set-follow-fork-mode-gdb-command"><a class="header" href="#equivalent-of-set-follow-fork-mode-gdb-command">Equivalent of &quot;set-follow-fork-mode&quot; gdb command</a></h2>
-<p>This can be done using 2 commands:</p>
+<p>This can be done in two ways:</p>
 <ol>
-<li><code>dcf</code> - until a fork happen</li>
-<li>then use <code>dp</code> to select what process you want to debug.</li>
+<li>Use the configuration variable <code>dbg.follow.child</code> to choose the process (parent or child) you want to follow.</li>
+<li>Use <code>dcf</code> to debug until a fork and then use <code>dp</code> to select what process you want to debug.</li>
 </ol>
 <h1 id="common-features"><a class="header" href="#common-features">Common features</a></h1>
 <ul>
