@@ -40,7 +40,7 @@ Here's the full help of the `s` command. We will explain in more detail below.
 [0x00000000]> s?
 Usage: s[?]   # Seek commands
 | s [<addr>]          # Print current address / Seek to address
-| s: [<n>]            # Print current address with <n> padded zeros (defaults to 8)
+| spad [<n>]          # Print current address with <n> padded zeros (defaults to 8)
 | s. <hex_offset>     # Seek honoring a base from core->offset
 | sd <delta>          # Seek to a delta relative to current offset
 | s-- [<n>]           # Seek blocksize bytes backward (/=n)
