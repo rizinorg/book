@@ -260,6 +260,12 @@ In the above example, the opcodes and the operands are aligned. Now, turning it 
 
 A boolean value that controls displaying of tracing information (sequence number and counter) at the left of each opcode. It is used to assist with programs trace analysis.
 
+## Debug Configuration
+
+### dbg.follow.child: `bool`
+
+This variable lets you follow the child procoess, when a fork (system call) is encountered during debugging. By default, it is set to `false` and the parent process is traced.
+
 ## Screen Configuration
 
 ### scr.color: `int`

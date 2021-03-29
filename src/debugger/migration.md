@@ -119,10 +119,10 @@ To get `#!python` and much more, just build [rizin-bindings](https://github.com/
 |search         |search menu    |`/?`            | Select the zone with the cursor `c` then `/`              | | `s`
 
 ## Equivalent of "set-follow-fork-mode" gdb command
-This can be done using 2 commands:
+This can be done in two ways:
 
-1. `dcf` - until a fork happen
-2. then use `dp` to select what process you want to debug.
+1. Use the configuration variable `dbg.follow.child` to choose the process (parent or child) you want to follow.
+2. Use `dcf` to debug until a fork and then use `dp` to select what process you want to debug.
 
 # Common features
 - rizin accepts FLIRT signatures
