@@ -1236,7 +1236,7 @@ main 0x1181 [DATA] lea rdi, str.argv__2d_:__s
 <pre><code>[0x00000000]&gt; s?
 Usage: s[?]   # Seek commands
 | s [&lt;addr&gt;]          # Print current address / Seek to address
-| s: [&lt;n&gt;]            # Print current address with &lt;n&gt; padded zeros (defaults to 8)
+| spad [&lt;n&gt;]          # Print current address with &lt;n&gt; padded zeros (defaults to 8)
 | s. &lt;hex_offset&gt;     # Seek honoring a base from core-&gt;offset
 | sd &lt;delta&gt;          # Seek to a delta relative to current offset
 | s-- [&lt;n&gt;]           # Seek blocksize bytes backward (/=n)
@@ -6005,35 +6005,21 @@ sudo security authorizationdb write system.privilege.taskport &lt; taskport.plis
 rizin process. This is possible because everything uses rizin's IO subsystem which abstracts access to system(), cmd() and all basic IO operations so to work over a network.</p>
 <p>Help for commands useful for remote access to rizin:</p>
 <pre><code>[0x00405a04]&gt; =?
-Usage:  =[:!+-=ghH] [...]   # connect with other instances of rizin
-
-remote commands:
-| =                             list all open connections
-| =&lt;[fd] cmd                    send output of local command to remote fd
-| =[fd] cmd                     exec cmd at remote 'fd' (last open is default one)
-| =! cmd                        run command via rz_io_system
-| =+ [proto://]host:port        connect to remote host:port (*rap://, raps://, tcp://, udp://, http://)
-| =-[fd]                        remove all hosts or host 'fd'
-| ==[fd]                        open remote session with host 'fd', 'q' to quit
-| =!=                           disable remote cmd mode
-| !=!                           enable remote cmd mode
-
-servers:
-| .:9000                        start the tcp server (echo x|nc ::1 9090 or curl ::1:9090/cmd/x)
-| =:port                        start the rap server (o rap://9999)
-| =g[?]                         start the gdbserver
-| =h[?]                         start the http webserver
-| =H[?]                         start the http webserver (and launch the web browser)
-
-other:
-| =&amp;:port                       start rap server in background (same as '&amp;_=h')
-| =:host:port cmd               run 'cmd' command on remote server
-
-examples:
-| =+tcp://localhost:9090/       connect to: rizin -c.:9090 ./bin
-| =+rap://localhost:9090/       connect to: rizin rap://:9090
-| =+http://localhost:9090/cmd/  connect to: rizin -c'=h 9090' bin
-| o rap://:9090/                start the rap server on tcp port 9090
+Usage: =[?]   # Connect with other instances of rizin
+| = [[&lt;fd&gt;] &lt;cmd&gt;]        # List all open connections / Exec &lt;cmd&gt; at remote &lt;fd&gt;
+| =&lt; [&lt;fd&gt; &lt;cmd&gt;]         # Send output of local &lt;cmd&gt; to remote &lt;fd&gt;
+| =![&lt;cmd&gt;]               # Run &lt;cmd&gt; via rz_io_system
+| =+ &lt;[proto://]host:port&gt; # Connect to remote host:port
+| =- [&lt;fd&gt;]               # remove all hosts or host 'fd'
+| == &lt;fd&gt;                 # Open remote session with host 'fd', 'q' to quit
+| =!= &lt;fd&gt;=0              # Enable remote cmd mode, sending commands to remote &lt;fd&gt; server
+| !=!                     # Disable remote cmd mode
+| =r &lt;[host:]port&gt; [&lt;cmd&gt;] # Start the rap server (o rap://9999) / Execute &lt;cmd&gt; on rap server
+| =g[?]                   # Start the gdbserver
+| =h[?]                   # Start the http webserver
+| =H[?]                   # Start the http webserver (and launch the web browser)
+| =t &lt;[host:]port&gt; [&lt;cmd&gt;] # Start the tcp server
+| =&amp;r &lt;port&gt;              # Start rap server in background (same as '&amp;_=h')
 </code></pre>
 <p>You can learn rizin remote capabilities by displaying the list of supported IO plugins: <code>rizin -L</code>.</p>
 <p>A little example should make this clearer. A typical remote session might look like this:</p>
