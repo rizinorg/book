@@ -1,6 +1,6 @@
 # Rz-find
 
-Rz-find is the command line fronted of the `rz_search` library. Which allows you to search for strings, sequences of bytes with binary masks, etc
+`rz-find` is the command line frontend of the `rz_search` library. Which allows you to search for strings, sequences of bytes with binary masks, etc
 
 ```
 $ rz-find -h
