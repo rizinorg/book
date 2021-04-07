@@ -1,10 +1,6 @@
-## Implementing a new format
+# Implementing a new format
 
-### To enable virtual addressing
-
-In `info` add `et->has_va = 1;` and `ptr->srwx` with the `RZ_BIN_SCN_MAP;` attribute
-
-### Create a folder with file format name in librz/bin/format
+## Create a folder with file format name in librz/bin/format
 
 **Makefile:**
 
