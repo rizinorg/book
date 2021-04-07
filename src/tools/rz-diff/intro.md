@@ -1,6 +1,6 @@
-# Radiff2
+# rz-diff
 
-Radiff2 is a tool designed to compare binary files, similar to how regular `diff` compares text files.
+rz-diff is a tool designed to compare binary files, similar to how regular `diff` compares text files.
 ```
 $ rz-diff -h
 Usage: rz-diff [-abBcCdjrspOxuUvV] [-A[A]] [-g sym] [-m graph_mode][-t %] [file] [file]
