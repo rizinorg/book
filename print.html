@@ -6287,7 +6287,7 @@ Child-SP          RetAddr           Call Site
 <li>scripting with rz-pipe</li>
 <li>the rizin shell</li>
 </ul>
-<h2 id="rz-ax-1"><a class="header" href="#rz-ax-1">Rz-ax</a></h2>
+<h1 id="rz-ax-1"><a class="header" href="#rz-ax-1">Rz-ax</a></h1>
 <p>The <code>rz-ax</code> utility comes with the rizin framework and aims to be a minimalistic expression evaluator for the shell. It is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ascii, octal to integer. It supports endianness and can be used as a shell if no arguments are given.</p>
 <p>This is the help message of rz-ax, this tool can be used in the command-line or interactively (reading the values from stdin), so it can be used as a multi-base calculator.</p>
 <p>Inside rizin, the functionality of rz-ax is available under the ? command. For example:</p>
@@ -6388,7 +6388,7 @@ AB
 |                 |
 +-----------------+
 </code></pre>
-<h1 id="rz-find-1"><a class="header" href="#rz-find-1">rz-find</a></h1>
+<h1 id="rz-find-1"><a class="header" href="#rz-find-1">Rz-find</a></h1>
 <p>Rz-find is the command line fronted of the <code>rz_search</code> library. Which allows you to search for strings, sequences of bytes with binary masks, etc</p>
 <pre><code>$ rz-find -h
 Usage: rz-find [-mXnzZhqv] [-a align] [-b sz] [-f/t from/to] [-[e|s|S] str] [-x hex] -|file|dir ..
@@ -6846,7 +6846,7 @@ fs sections
 &quot;f section..gnu.version 1 0x00001574&quot;
 &quot;f section..gnu.version_r 1 0x00001678&quot;
 </code></pre>
-<h1 id="rz-diff-1"><a class="header" href="#rz-diff-1">rz-diff</a></h1>
+<h1 id="rz-diff-1"><a class="header" href="#rz-diff-1">Rz-diff</a></h1>
 <p>rz-diff is a tool designed to compare binary files, similar to how regular <code>diff</code> compares text files.</p>
 <pre><code>$ rz-diff -h
 Usage: rz-diff [-abBcCdjrspOxuUvV] [-A[A]] [-g sym] [-m graph_mode][-t %] [file] [file]
@@ -6950,8 +6950,8 @@ This is the result:</p>
 <p>Binary diffing is an important feature for reverse engineering. It can be used to analyze <a href="https://en.wikipedia.org/wiki/Patch_Tuesday">security updates</a>, infected binaries, firmware changes and more...</p>
 <p>We have only shown the code analysis diffing functionality, but rizin supports additional types of diffing between two binaries: at byte level, deltified similarities, and more to come.</p>
 <p>We have plans to implement more kinds of bindiffing algorithms into rizin, and why not, add support for ASCII art graph diffing and better integration with the rest of the toolkit.</p>
-<h1 id="rasm2"><a class="header" href="#rasm2">Rasm2</a></h1>
-<p><code>rz-asm</code> is an inline assembler/disassembler. Initially, <code>rasm</code> tool was designed to be used for binary patching. Its main function is to get bytes corresponding to given machine instruction opcode.</p>
+<h1 id="rz-asm-1"><a class="header" href="#rz-asm-1">Rz-asm</a></h1>
+<p><code>rz-asm</code> is an inline assembler/disassembler. Its main function is to get bytes corresponding to given machine instruction opcode.</p>
 <pre><code>$ rz-asm -h
 Usage: rz-asm [-ACdDehLBvw] [-a arch] [-b bits] [-o addr] [-s syntax]
              [-f file] [-F fil:ter] [-i skip] [-l len] 'code'|hex|-
@@ -7402,7 +7402,7 @@ $ echo $?
 <p><code> /* multiline comment */'</code></p>
 <p><code> // single line comment</code></p>
 <p><code> # single line comment</code></p>
-<h1 id="rz-hash-1"><a class="header" href="#rz-hash-1">rz-hash</a></h1>
+<h1 id="rz-hash-1"><a class="header" href="#rz-hash-1">Rz-hash</a></h1>
 <p>The rz-hash tool can be used to compute checksums of files, disk devices or strings. By block or entirely using many different hash algorithms.</p>
 <p>This tool is also capable of doing some encoding/decoding operations like base64 and xor encryption.</p>
 <p>This is an example usage:</p>
