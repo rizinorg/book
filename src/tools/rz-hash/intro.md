@@ -1,4 +1,4 @@
-# rz-hash
+# Rz-hash
 
 The rz-hash tool can be used to compute checksums of files, disk devices or strings. By block or entirely using many different hash algorithms.
 

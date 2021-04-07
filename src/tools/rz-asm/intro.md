@@ -1,6 +1,6 @@
-# Rasm2
+# Rz-asm
 
-`rz-asm` is an inline assembler/disassembler. Initially, `rasm` tool was designed to be used for binary patching. Its main function is to get bytes corresponding to given machine instruction opcode.
+`rz-asm` is an inline assembler/disassembler. Its main function is to get bytes corresponding to given machine instruction opcode.
 
 ```
 $ rz-asm -h

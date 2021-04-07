@@ -1,4 +1,4 @@
-## Rz-ax
+# Rz-ax
 
 The `rz-ax` utility comes with the rizin framework and aims to be a minimalistic expression evaluator for the shell. It is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ascii, octal to integer. It supports endianness and can be used as a shell if no arguments are given.
 
