@@ -101,9 +101,5 @@ RZ_API RzLibStruct rizin_plugin = {
 
 ### Some Examples
 
-* XBE - https://github.com/rizinorg/rizin/pull/972
-* COFF - https://github.com/rizinorg/rizin/pull/645
-* TE - https://github.com/rizinorg/rizin/pull/61
-* Zimgz - https://github.com/rizinorg/rizin/commit/d1351cf836df3e2e63043a6dc728e880316f00eb
-* OMF - https://github.com/rizinorg/rizin/commit/44fd8b2555a0446ea759901a94c06f20566bbc40
+* Java - https://github.com/rizinorg/rizin/commit/7cfddb1da8204587cdc1ba1a26bc07c9fee403dc
 
