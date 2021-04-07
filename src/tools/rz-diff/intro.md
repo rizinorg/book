@@ -1,4 +1,4 @@
-# rz-diff
+# Rz-diff
 
 rz-diff is a tool designed to compare binary files, similar to how regular `diff` compares text files.
 ```
