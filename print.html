@@ -7850,10 +7850,8 @@ RZ_API RzLibStruct rizin_plugin = {
 <li><strong>6502</strong>: https://github.com/rizinorg/rizin/commit/64636e9505f9ca8b408958d3c01ac8e3ce254a9b</li>
 <li><strong>SNES</strong>: https://github.com/rizinorg/rizin/commit/60d6e5a1b9d244c7085b22ae8985d00027624b49</li>
 </ul>
-<h2 id="implementing-a-new-format"><a class="header" href="#implementing-a-new-format">Implementing a new format</a></h2>
-<h3 id="to-enable-virtual-addressing"><a class="header" href="#to-enable-virtual-addressing">To enable virtual addressing</a></h3>
-<p>In <code>info</code> add <code>et-&gt;has_va = 1;</code> and <code>ptr-&gt;srwx</code> with the <code>RZ_BIN_SCN_MAP;</code> attribute</p>
-<h3 id="create-a-folder-with-file-format-name-in-librzbinformat"><a class="header" href="#create-a-folder-with-file-format-name-in-librzbinformat">Create a folder with file format name in librz/bin/format</a></h3>
+<h1 id="implementing-a-new-format"><a class="header" href="#implementing-a-new-format">Implementing a new format</a></h1>
+<h2 id="create-a-folder-with-file-format-name-in-librzbinformat"><a class="header" href="#create-a-folder-with-file-format-name-in-librzbinformat">Create a folder with file format name in librz/bin/format</a></h2>
 <p><strong>Makefile:</strong></p>
 <pre><code class="language-Makefile">NAME=bin_nes
 RZ_PLUGIN_PATH=$(shell rizin -H RZ_USER_PLUGINS)
