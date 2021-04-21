@@ -9,7 +9,7 @@ _d  mycpu        My CPU disassembler  (LGPL3)
 Let's open an empty file using the 'mycpu' arch and write some random code there.
 
 ```
-$ rizin -
+$ rizin =
  -- I endians swap
 [0x00000000]> e asm.arch=mycpu
 [0x00000000]> woR
@@ -28,6 +28,6 @@ $ rizin -
 Yay! it works.. and the mandatory oneliner too!
 
 ```
-rizin -nqamycpu -cwoR -cpd' 10' -
+rizin -nqamycpu -cwoR -cpd' 10' =
 ```
 
