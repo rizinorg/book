@@ -30,7 +30,7 @@ arg1=/bin
 # arg5=:!ragg2 -p n50 -d 10:0x8048123
 # arg6=@arg.txt
 # arg7=@300@ABCD # 300 chars filled with ABCD pattern
-# system=rizin -
+# system=rizin =
 # aslr=no
 setenv=FOO=BAR
 # unsetenv=FOO
