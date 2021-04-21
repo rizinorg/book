@@ -14,11 +14,11 @@ For example,
 > 3s +1024    ; seeks three times 1024 from the current seek
 ```
 
-If a command starts with `=!`, the rest of the string is passed to the currently loaded IO plugin (a debugger, for example). Most plugins provide help messages with `=!?` or `=!help`.
+If a command starts with `R!`, the rest of the string is passed to the currently loaded IO plugin (a debugger, for example). Most plugins provide help messages with `R!?` or `R!help`.
 
 ```
 $ rizin -d /bin/ls
-> =!help      ; handled by the IO plugin
+> R!help      ; handled by the IO plugin
 ```
 
 If a command starts with `!`, posix_system() is called to pass the command to your shell. Check `!?` for more options and usage examples.
