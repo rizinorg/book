@@ -11,17 +11,17 @@ There are different backends for many target architectures and operating systems
 
 Process memory is treated as a plain file. All mapped memory pages of a debugged program and its libraries can be read and interpreted as code or data structures.
 
-Communication between rizin and the debugger IO layer is wrapped into `system()` calls, which accept a string as an argument, and executes it as a command. An answer is then buffered in the output console, its contents can be additionally processed by a script. Access to the IO system is achieved with `=!`. Most IO plugins provide help with `=!?` or `=!help`. For example:
+Communication between rizin and the debugger IO layer is wrapped into `system()` calls, which accept a string as an argument, and executes it as a command. An answer is then buffered in the output console, its contents can be additionally processed by a script. Access to the IO system is achieved with `R!`. Most IO plugins provide help with `R!?` or `R!help`. For example:
 
 ```
 $ rizin -d /bin/ls
 ...
-[0x7fc15afa3cc0]> =!help
-Usage: =!cmd args
- =!ptrace   - use ptrace io
- =!mem      - use /proc/pid/mem io if possible
- =!pid      - show targeted pid
- =!pid <#>  - select new pid
+[0x7fc15afa3cc0]> R!help
+Usage: R!cmd args
+ R!ptrace   - use ptrace io
+ R!mem      - use /proc/pid/mem io if possible
+ R!pid      - show targeted pid
+ R!pid <#>  - select new pid
 ```
 
 In general, debugger commands are portable between architectures and operating systems. Still, as rizin tries to support the same functionality for all target architectures and operating systems, certain things have to be handled separately. They include injecting shellcodes and handling exceptions. For example, in MIPS targets there is no hardware-supported single-stepping feature. In this case, rizin provides its own implementation for single-step by using a mix of code analysis and software breakpoints.
