@@ -12,7 +12,7 @@ px    # run px
 3px   # run px 3 times
 ```
 
-The `!` prefix is used to execute a command in shell context. If you want to use the cmd callback from the I/O plugin you must prefix with `=!`.
+The `!` prefix is used to execute a command in shell context. If you want to use the cmd callback from the I/O plugin you must prefix with `R!`.
 
 Note that a single exclamation mark will run the command and print the output through the RCons API. This means that the execution will be blocking and not interactive. Use double exclamation marks -- `!!` -- to run a standard system call.
 

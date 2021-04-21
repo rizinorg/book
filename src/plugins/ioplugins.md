@@ -20,7 +20,7 @@ $ rizin rap://<host>:1234//bin/ls
 ```
 $ rizin malloc://512<br />
 shortcut for
-$ rizin -
+$ rizin =
 ```
 You can get a list of the rizin IO plugins by typing `rizin -L`:
 ```
