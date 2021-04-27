@@ -3,10 +3,10 @@
 As mentioned before, this tool also provide the tooling needed to encode and decode between different encodings
 
 ```
-$ rz-hash -L | grep ^e
-e  base64
-e  base91
-e  punycode
+$ rz-hash -L | grep "^..e"
+__ed__ base64         LGPL-3     rakholiyajenish.07
+__ed__ base91         LGPL-3     rakholiyajenish.07
+__ed__ punycode       LGPL-3     pancake
 ```
 
 For example, to encode a string into base64 use the following line:
@@ -22,25 +22,26 @@ You can decode it by using the -D flag instead of -E.
 For encrypting data check the crypto hash plugins:
 
 ```
-$ rz-hash -L | grep ^c
-c  rc2
-c  rc4
-c  rc6
-c  aes-ecb
-c  aes-cbc
-c  ror
-c  rol
-c  rot
-c  blowfish
-c  cps2
-c  des-ecb
-c  xor
-c  serpent-ecb
+$ rz-hash -L | grep "^E\|^_D"
+ED____ aes-ecb        MS-PL      Karl Malbrain
+ED____ aes-cbc        LGPL-3     rakholiyajenish.07
+ED____ blowfish       LGPL3      kishorbhat
+ED____ cps2           LGPL-3     pancake,esanfelix,pof
+ED____ des-ecb        LGPL-3     deroad
+ED____ rc2            LGPL-3     lionaneesh
+ED____ rc4            LGPL-3     pancake
+ED____ rc6            LGPL-3     rakholiyajenish.07
+E_____ rol            LGPL-3     pancake
+_D____ ror            LGPL-3     pancake
+ED____ rot            LGPL-3     pancake
+ED____ serpent-ecb    LGPL-3     NicsTr
+ED____ xor            LGPL-3     pancake
 ```
 
 Here's an example usage to encrypt a string using rz-hash:
 
 ```
-$ rz-hash -E xor -S s:password -s hello | hexdump -C
-00000000  18 04 1f 1f 18
+$ rz-hash -qqE xor -K s:password -s hello | hexdump -C
+00000000  18 04 1f 1f 18                                    |.....|
+00000005
 ```
