@@ -10,7 +10,7 @@ This is an example usage:
 $ rz-hash -a md5 -s "hello world"
 ```
 
-Note that rz-hash also permits to read from stdin in a stream, so you don't need 4GB of ram to compute the hash of a 4GB file.
+Note that rz-hash also permits to read from files in a stream, so you don't need 4GB of ram to compute the hash of a 4GB file.
 
 ## Hashing by blocks
 
@@ -23,7 +23,7 @@ It can also be used to find which blocks have changed between more than one samp
 This can be useful when analyzing ram dumps from a virtual machine for example. Use this command for this:
 
 ```
-$ rz-hash -B 1M -b -a sha256 /bin/ls
+$ rz-hash -b 1M -B -a sha256 /bin/ls
 ```
 
 ## Hashing with rz-bin
@@ -49,44 +49,75 @@ You can use all hashing algorithms supported by `rz-hash`:
 
 ```
 [0x00000000]> ph?
-md5
-sha1
-sha256
-sha384
-sha512
-md4
-xor
-xorpair
-parity
-entropy
-hamdist
-pcprint
-mod255
-xxhash
-adler32
-luhn
-crc8smbus
-crc15can
-crc16
-crc16hdlc
-crc16usb
-crc16citt
-crc24
-crc32
-crc32c
-crc32ecma267
-crc32bzip2
-crc32d
-crc32mpeg2
-crc32posix
-crc32q
-crc32jamcrc
-crc32xfer
-crc64
-crc64ecma
-crc64we
-crc64xz
-crc64iso
+algorithm      license    author
+md4            LGPL3      deroad
+md5            RSA-MD     RSA Data Security, Inc.
+sha1           LGPL3      deroad
+sha256         BSD-3      Aaron D. Gifford
+sha384         BSD-3      Aaron D. Gifford
+sha512         BSD-3      Aaron D. Gifford
+fletcher8      LGPL3      deroad
+fletcher16     LGPL3      deroad
+fletcher32     LGPL3      deroad
+fletcher64     LGPL3      deroad
+adler32        LGPL3      deroad
+crc8smbus      LGPL3      deroad
+crc8cdma2000   LGPL3      deroad
+crc8darc       LGPL3      deroad
+crc8dvbs2      LGPL3      deroad
+crc8ebu        LGPL3      deroad
+crc8icode      LGPL3      deroad
+crc8itu        LGPL3      deroad
+crc8maxim      LGPL3      deroad
+crc8rohc       LGPL3      deroad
+crc8wcdma      LGPL3      deroad
+crc15can       LGPL3      deroad
+crc16          LGPL3      deroad
+crc16citt      LGPL3      deroad
+crc16usb       LGPL3      deroad
+crc16hdlc      LGPL3      deroad
+crc16augccitt  LGPL3      deroad
+crc16buypass   LGPL3      deroad
+crc16cdma2000  LGPL3      deroad
+crc16dds110    LGPL3      deroad
+crc16dectr     LGPL3      deroad
+crc16dectx     LGPL3      deroad
+crc16dnp       LGPL3      deroad
+crc16en13757   LGPL3      deroad
+crc16genibus   LGPL3      deroad
+crc16maxim     LGPL3      deroad
+crc16mcrf4xx   LGPL3      deroad
+crc16riello    LGPL3      deroad
+crc16t10dif    LGPL3      deroad
+crc16teledisk  LGPL3      deroad
+crc16tms37157  LGPL3      deroad
+crca           LGPL3      deroad
+crc16kermit    LGPL3      deroad
+crc16modbus    LGPL3      deroad
+crc16x25       LGPL3      deroad
+crc16xmodem    LGPL3      deroad
+crc24          LGPL3      deroad
+crc32          LGPL3      deroad
+crc32ecma267   LGPL3      deroad
+crc32c         LGPL3      deroad
+crc32bzip2     LGPL3      deroad
+crc32d         LGPL3      deroad
+crc32mpeg2     LGPL3      deroad
+crc32posix     LGPL3      deroad
+crc32q         LGPL3      deroad
+crc32jamcrc    LGPL3      deroad
+crc32xfer      LGPL3      deroad
+crc64          LGPL3      deroad
+crc64ecma182   LGPL3      deroad
+crc64we        LGPL3      deroad
+crc64xz        LGPL3      deroad
+crc64iso       LGPL3      deroad
+xor8           LGPL3      deroad
+xor16          LGPL3      deroad
+xxhash32       LGPL3      deroad
+parity         LGPL3      deroad
+entropy        LGPL3      deroad
+entropy_fract  LGPL3      deroad
 ```
 
 The `ph` command accepts an optional numeric argument to specify length of byte range to be hashed, instead of default block size. For example:

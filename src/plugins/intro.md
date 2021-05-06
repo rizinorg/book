@@ -41,7 +41,8 @@ Those are some of the commands:
 L          # list core plugins
 iL         # list bin plugins
 dL         # list debug plugins
-ph         # print support hash algoriths
+ph         # print support hash algorithms
+woD?/woE?  # print support crypto/encoding algorithms
 ```
 
 You can use the `?` as value to get the possible values in the associated eval vars.
