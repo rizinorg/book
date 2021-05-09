@@ -83,7 +83,7 @@ The `Cf` command is used to define a memory format string (the same syntax used 
 
 The `[sz]` argument to `Cf` is used to define how many bytes the struct should take up in the disassembly, and is completely independent from the size of the data structure defined by the format string. This may seem confusing, but has several uses. For example, you may want to see the formatted structure displayed in the disassembly, but still have those locations be visible as offsets and with raw bytes. Sometimes, you find large structures, but only identified a few fields, or only interested in specific fields. Then, you can tell rizin to display only those fields, using the format string and using 'skip' fields, and also have the disassembly continue after the entire structure, by giving it full size using the `sz` argument.
 
-Using `Cf`, it's easy to define complex structures with simple oneliners. See `pf?` for more information.
+Using `Cf`, it's easy to define complex structures with simple one-liners. See `pf?` for more information.
 Remember that all these `C` commands can also be accessed from the visual mode by pressing the `d` (data conversion) key.
 Note that unlike [`t`](../analysis/types.md) commands `Cf` doesn't change analysis results. It is only
 a visual boon.
