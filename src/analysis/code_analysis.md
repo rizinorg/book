@@ -4,7 +4,7 @@ Code analysis is a common technique used to extract information from assembly co
 
 Rizin has different code analysis techniques implemented in the core and available in different commands.
 
-As long as the whole functionalities of rizin are available with the API as well as using commands. This gives you the ability to implement your own analysis loops using any programming language, even with rizin oneliners, shellscripts, or analysis or core native plugins.
+As long as the whole functionalities of rizin are available with the API as well as using commands. This gives you the ability to implement your own analysis loops using any programming language, even with rizin one-liners, shellscripts, or analysis or core native plugins.
 
 The analysis will show up the internal data structures to identify basic blocks, function trees and to extract opcode-level information.
 

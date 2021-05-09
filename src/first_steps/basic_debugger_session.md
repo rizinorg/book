@@ -11,7 +11,7 @@ $ rizin -a arm -b 16 -d gdb://192.168.1.43:9090
 ...
 ```
 
-In the second case, the debugger will fork and load the debugee `ls` program in memory.
+In the second case, the debugger will fork and load the debuggee `ls` program in memory.
 
 It will pause its execution early in `ld.so` dynamic linker. As a result, you will not yet see the entrypoint or any shared libraries at this point.
 

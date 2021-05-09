@@ -270,9 +270,9 @@ Properties of the VM variables:
 
 ### Bit Arrays
 
-What to do with them? What about bit arithmetics if use variables instead of registers?
+What to do with them? What about bit arithmetic if use variables instead of registers?
 
-### Arithmetics
+### Arithmetic
 
 1. ADD ("+")
 2. MUL ("\*")
@@ -281,7 +281,7 @@ What to do with them? What about bit arithmetics if use variables instead of reg
 5. MOD ("%")
 
 
-### Bit Arithmetics
+### Bit Arithmetic
 
 1. AND  "&"
 2. OR   "|"

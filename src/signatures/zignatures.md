@@ -87,7 +87,7 @@ hits: 1
 ```
 Note that `z.` command just checks the signatures against the current address.
 To search signatures across the all file we need to do a bit different thing.
-There is an important moment though, if we just run it "as is" - it wont find anything:
+There is an important moment though, if we just run it "as is" - it won't find anything:
 ```
 [0x000051c0]> z/
 [+] searching 0x0021dfd0 - 0x002203e8

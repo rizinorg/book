@@ -37,5 +37,5 @@ Each user in the system can have its own rizin scripts to run on startup to sele
 
 ### Target file
 
-If you want to run a script everytime you open a file, just create a file with the same name of the file
+If you want to run a script every time you open a file, just create a file with the same name of the file
 but appending `.rz` to it.

@@ -31,7 +31,7 @@ family: cpu
 [0x00404800]>
 ```
 
-To list available macroses simply call `(*`:
+To list available macros simply call `(*`:
 ```
 [0x00404800]> (*
 (qwe ; pd 4; ao)

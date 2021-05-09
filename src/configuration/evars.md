@@ -17,7 +17,7 @@ The `el` command to get help on all the evaluable configuration variables of riz
       scr.color.pipe: Enable colors when using pipes
      scr.prompt.mode: Set prompt color based on vi mode
          scr.rainbow: Shows rainbow colors depending of address
-         scr.randpal: Random color palete or just get the next one from 'eco'
+         scr.randpal: Random color palette or just get the next one from 'eco'
 ```
 
 The Visual mode has an eval browser that is accessible through the `Vbe` command.
@@ -107,7 +107,7 @@ Selects a target operating system for the currently loaded binary. Usually, OS i
 
 ### asm.pseudo: `bool`
 
-A boolean value to set the psuedo syntax in the disassembly. "False" indicates a native one, defined by the current architecture, "true" activates a pseudocode strings format. For example, it'll transform :
+A boolean value to set the pseudo syntax in the disassembly. "False" indicates a native one, defined by the current architecture, "true" activates a pseudocode strings format. For example, it'll transform :
 
 ```
 │           0x080483ff      e832000000     call 0x8048436
@@ -264,7 +264,7 @@ A boolean value that controls displaying of tracing information (sequence number
 
 ### dbg.follow.child: `bool`
 
-This variable lets you follow the child procoess, when a fork (system call) is encountered during debugging. By default, it is set to `false` and the parent process is traced.
+This variable lets you follow the child process, when a fork (system call) is encountered during debugging. By default, it is set to `false` and the parent process is traced.
 
 ## Screen Configuration
 
@@ -359,7 +359,7 @@ This variable lets you set the size of stack in bytes.
 
 ## cmd.repeat: `bool`
 
-Sometimes, you may need to run the same commmand repeatedly and that is what `cmd.repeat` is for. When set to `true`, pressing Return key (Enter key) will run the previous command again.
+Sometimes, you may need to run the same command repeatedly and that is what `cmd.repeat` is for. When set to `true`, pressing Return key (Enter key) will run the previous command again.
 
 For example:
 ```
