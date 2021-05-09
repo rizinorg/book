@@ -229,7 +229,7 @@ Rizin offers multiple ways to store and retrieve such metadata.</p>
 0x7fd9f13ae638    4989c4       mov r12, rax
 </code></pre>
 <p>The <code>[sz]</code> argument to <code>Cf</code> is used to define how many bytes the struct should take up in the disassembly, and is completely independent from the size of the data structure defined by the format string. This may seem confusing, but has several uses. For example, you may want to see the formatted structure displayed in the disassembly, but still have those locations be visible as offsets and with raw bytes. Sometimes, you find large structures, but only identified a few fields, or only interested in specific fields. Then, you can tell rizin to display only those fields, using the format string and using 'skip' fields, and also have the disassembly continue after the entire structure, by giving it full size using the <code>sz</code> argument.</p>
-<p>Using <code>Cf</code>, it's easy to define complex structures with simple oneliners. See <code>pf?</code> for more information.
+<p>Using <code>Cf</code>, it's easy to define complex structures with simple one-liners. See <code>pf?</code> for more information.
 Remember that all these <code>C</code> commands can also be accessed from the visual mode by pressing the <code>d</code> (data conversion) key.
 Note that unlike <a href="../analysis/types.html"><code>t</code></a> commands <code>Cf</code> doesn't change analysis results. It is only
 a visual boon.</p>

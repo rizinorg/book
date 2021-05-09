@@ -178,7 +178,7 @@
       scr.color.pipe: Enable colors when using pipes
      scr.prompt.mode: Set prompt color based on vi mode
          scr.rainbow: Shows rainbow colors depending of address
-         scr.randpal: Random color palete or just get the next one from 'eco'
+         scr.randpal: Random color palette or just get the next one from 'eco'
 </code></pre>
 <p>The Visual mode has an eval browser that is accessible through the <code>Vbe</code> command.</p>
 <h2 id="assembly-configuration"><a class="header" href="#assembly-configuration">Assembly Configuration</a></h2>
@@ -239,7 +239,7 @@ false
 <h3 id="asmos-string"><a class="header" href="#asmos-string">asm.os: <code>string</code></a></h3>
 <p>Selects a target operating system for the currently loaded binary. Usually, OS is automatically detected by Rizin (<code>rz-bin -rI</code>). Yet, <code>asm.os</code> can be used to switch to a different syscall table employed by another OS.</p>
 <h3 id="asmpseudo-bool"><a class="header" href="#asmpseudo-bool">asm.pseudo: <code>bool</code></a></h3>
-<p>A boolean value to set the psuedo syntax in the disassembly. &quot;False&quot; indicates a native one, defined by the current architecture, &quot;true&quot; activates a pseudocode strings format. For example, it'll transform :</p>
+<p>A boolean value to set the pseudo syntax in the disassembly. &quot;False&quot; indicates a native one, defined by the current architecture, &quot;true&quot; activates a pseudocode strings format. For example, it'll transform :</p>
 <pre><code>│           0x080483ff      e832000000     call 0x8048436
 │           0x08048404      31c0           xor eax, eax
 │           0x08048406      0205849a0408   add al, byte [0x8049a84]
@@ -350,7 +350,7 @@ false
 <p>A boolean value that controls displaying of tracing information (sequence number and counter) at the left of each opcode. It is used to assist with programs trace analysis.</p>
 <h2 id="debug-configuration"><a class="header" href="#debug-configuration">Debug Configuration</a></h2>
 <h3 id="dbgfollowchild-bool"><a class="header" href="#dbgfollowchild-bool">dbg.follow.child: <code>bool</code></a></h3>
-<p>This variable lets you follow the child procoess, when a fork (system call) is encountered during debugging. By default, it is set to <code>false</code> and the parent process is traced.</p>
+<p>This variable lets you follow the child process, when a fork (system call) is encountered during debugging. By default, it is set to <code>false</code> and the parent process is traced.</p>
 <h2 id="screen-configuration"><a class="header" href="#screen-configuration">Screen Configuration</a></h2>
 <h3 id="scrcolor-int"><a class="header" href="#scrcolor-int">scr.color: <code>int</code></a></h3>
 <p>This variable specifies the mode for colorized screen output.</p>
@@ -410,7 +410,7 @@ false
 <p>This variable lets you set the size of stack in bytes.</p>
 <h2 id="command-configuration"><a class="header" href="#command-configuration">Command Configuration</a></h2>
 <h2 id="cmdrepeat-bool"><a class="header" href="#cmdrepeat-bool">cmd.repeat: <code>bool</code></a></h2>
-<p>Sometimes, you may need to run the same commmand repeatedly and that is what <code>cmd.repeat</code> is for. When set to <code>true</code>, pressing Return key (Enter key) will run the previous command again.</p>
+<p>Sometimes, you may need to run the same command repeatedly and that is what <code>cmd.repeat</code> is for. When set to <code>true</code>, pressing Return key (Enter key) will run the previous command again.</p>
 <p>For example:</p>
 <pre><code>[0x00005bc0]&gt; e cmd.repeat=true
 [0x00005bc0]&gt; pd 2

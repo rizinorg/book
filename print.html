@@ -742,7 +742,7 @@ $ rizin -d /bin/ls
 $ rizin -a arm -b 16 -d gdb://192.168.1.43:9090
 ...
 </code></pre>
-<p>In the second case, the debugger will fork and load the debugee <code>ls</code> program in memory.</p>
+<p>In the second case, the debugger will fork and load the debuggee <code>ls</code> program in memory.</p>
 <p>It will pause its execution early in <code>ld.so</code> dynamic linker. As a result, you will not yet see the entrypoint or any shared libraries at this point.</p>
 <p>You can override this behavior by setting another name for an entry breakpoint. To do this, add a rizin command
 <code>e dbg.bep=entry</code> or <code>e dbg.bep=main</code> to your startup script, usually it is <code>~/.config/rizin/rizinrc</code>.</p>
@@ -889,7 +889,7 @@ scr.nkey = fun, hit, flag
       scr.color.pipe: Enable colors when using pipes
      scr.prompt.mode: Set prompt color based on vi mode
          scr.rainbow: Shows rainbow colors depending of address
-         scr.randpal: Random color palete or just get the next one from 'eco'
+         scr.randpal: Random color palette or just get the next one from 'eco'
 </code></pre>
 <p>The Visual mode has an eval browser that is accessible through the <code>Vbe</code> command.</p>
 <h2 id="assembly-configuration"><a class="header" href="#assembly-configuration">Assembly Configuration</a></h2>
@@ -950,7 +950,7 @@ false
 <h3 id="asmos-string"><a class="header" href="#asmos-string">asm.os: <code>string</code></a></h3>
 <p>Selects a target operating system for the currently loaded binary. Usually, OS is automatically detected by Rizin (<code>rz-bin -rI</code>). Yet, <code>asm.os</code> can be used to switch to a different syscall table employed by another OS.</p>
 <h3 id="asmpseudo-bool"><a class="header" href="#asmpseudo-bool">asm.pseudo: <code>bool</code></a></h3>
-<p>A boolean value to set the psuedo syntax in the disassembly. &quot;False&quot; indicates a native one, defined by the current architecture, &quot;true&quot; activates a pseudocode strings format. For example, it'll transform :</p>
+<p>A boolean value to set the pseudo syntax in the disassembly. &quot;False&quot; indicates a native one, defined by the current architecture, &quot;true&quot; activates a pseudocode strings format. For example, it'll transform :</p>
 <pre><code>│           0x080483ff      e832000000     call 0x8048436
 │           0x08048404      31c0           xor eax, eax
 │           0x08048406      0205849a0408   add al, byte [0x8049a84]
@@ -1061,7 +1061,7 @@ false
 <p>A boolean value that controls displaying of tracing information (sequence number and counter) at the left of each opcode. It is used to assist with programs trace analysis.</p>
 <h2 id="debug-configuration"><a class="header" href="#debug-configuration">Debug Configuration</a></h2>
 <h3 id="dbgfollowchild-bool"><a class="header" href="#dbgfollowchild-bool">dbg.follow.child: <code>bool</code></a></h3>
-<p>This variable lets you follow the child procoess, when a fork (system call) is encountered during debugging. By default, it is set to <code>false</code> and the parent process is traced.</p>
+<p>This variable lets you follow the child process, when a fork (system call) is encountered during debugging. By default, it is set to <code>false</code> and the parent process is traced.</p>
 <h2 id="screen-configuration"><a class="header" href="#screen-configuration">Screen Configuration</a></h2>
 <h3 id="scrcolor-int"><a class="header" href="#scrcolor-int">scr.color: <code>int</code></a></h3>
 <p>This variable specifies the mode for colorized screen output.</p>
@@ -1121,7 +1121,7 @@ false
 <p>This variable lets you set the size of stack in bytes.</p>
 <h2 id="command-configuration"><a class="header" href="#command-configuration">Command Configuration</a></h2>
 <h2 id="cmdrepeat-bool"><a class="header" href="#cmdrepeat-bool">cmd.repeat: <code>bool</code></a></h2>
-<p>Sometimes, you may need to run the same commmand repeatedly and that is what <code>cmd.repeat</code> is for. When set to <code>true</code>, pressing Return key (Enter key) will run the previous command again.</p>
+<p>Sometimes, you may need to run the same command repeatedly and that is what <code>cmd.repeat</code> is for. When set to <code>true</code>, pressing Return key (Enter key) will run the previous command again.</p>
 <p>For example:</p>
 <pre><code>[0x00005bc0]&gt; e cmd.repeat=true
 [0x00005bc0]&gt; pd 2
@@ -1163,7 +1163,7 @@ USER_ZIGNS=/home/user/.local/share/rizin/zigns
 <li>~/.config/rizin/rizinrc.d/</li>
 </ul>
 <h3 id="target-file"><a class="header" href="#target-file">Target file</a></h3>
-<p>If you want to run a script everytime you open a file, just create a file with the same name of the file
+<p>If you want to run a script every time you open a file, just create a file with the same name of the file
 but appending <code>.rz</code> to it.</p>
 <h1 id="basic-commands"><a class="header" href="#basic-commands">Basic Commands</a></h1>
 <p>Most command names in rizin are derived from action names. They should be easy to remember, as they are short. Actually, all commands are single letters. Subcommands or related commands are specified using the second character of the command name. For example, <code>/ foo</code> is a command to search plain string, while <code>/x 90 90</code> is used to look for hexadecimal pairs.</p>
@@ -1956,7 +1956,7 @@ an operator. The command is applied to the current block. Supported operators in
 |Supported operations:
 |  wow  ==  write looped value (alias for 'wb')
 |  woa  +=  addition
-|  wos  -=  substraction
+|  wos  -=  subtraction
 |  wom  *=  multiply
 |  wod  /=  divide
 |  wox  ^=  xor
@@ -2393,7 +2393,7 @@ example <code>5j</code> will move down for 5 lines, or <code>2l</code> will move
  ??       show the user-friendly hud
  %        in cursor mode finds matching pair, or toggle autoblocksz
  @        redraw screen every 1s (multi-user view)
- ^        seek to the begining of the function
+ ^        seek to the beginning of the function
  !        enter into the visual panels mode
  _        enter the flag/comment/functions/.. hud (same as VF_)
  =        set cmd.vprompt (top row)
@@ -2478,7 +2478,7 @@ d → i →  2
 <p>Remember that, to be able to actually edit files loaded in rizin, you have to start it with the <code>-w</code> option. Otherwise a file is opened in read-only mode.</p>
 <p>Pressing lowercase <code>c</code> toggles the cursor mode. When this mode is active, the currently selected byte (or byte range) is highlighted.</p>
 <p><img src="visual_mode/cursor.png" alt="Cursor at 0x00404896" /></p>
-<p>The cursor is used to select a range of bytes or simply to point to a byte. You can use the cursor to create a named flag at specifc location. To do so, seek to the required position, then press <code>f</code> and enter a name for a flag.
+<p>The cursor is used to select a range of bytes or simply to point to a byte. You can use the cursor to create a named flag at specific location. To do so, seek to the required position, then press <code>f</code> and enter a name for a flag.
 If the file was opened in write mode using the <code>-w</code> flag or the <code>o+</code> command, you can also use the cursor to overwrite a selected range with new values. To do so, select a range of bytes (with HJKL and SHIFT key pressed), then press <code>i</code> and enter the hexpair values for the new data. The data will be repeated as needed to fill the range selected. For example:</p>
 <pre><code>&lt;select 10 bytes in visual mode using SHIFT+HJKL&gt;
 &lt;press 'i' and then enter '12 34'&gt;
@@ -2904,7 +2904,7 @@ hits: 0
 [0x00000000]&gt; is~AES
 010 0x000096d4 0x000196d4 GLOBAL    OBJ   16 AES_KEY
 </code></pre>
-<p>Other than that, AES keys might show up in different ways in the binary: encrypted, hidden by another encrypting routine, so there's no absolute way other than understanding the binary being analized. For instance, <code>p=e</code> might give some hints if high(er) entropy sections are found trying to cover up a hardcoded secret. As an example on entropy searching, since rizin 3.2.0, there's the possibility to delimit entropy sections for later use like so:</p>
+<p>Other than that, AES keys might show up in different ways in the binary: encrypted, hidden by another encrypting routine, so there's no absolute way other than understanding the binary being analyzed. For instance, <code>p=e</code> might give some hints if high(er) entropy sections are found trying to cover up a hardcoded secret. As an example on entropy searching, since rizin 3.2.0, there's the possibility to delimit entropy sections for later use like so:</p>
 <pre><code>[0x00000000]&gt; b
 0x100
 [0x00000000]&gt; b 4096
@@ -3046,7 +3046,7 @@ Rizin offers multiple ways to store and retrieve such metadata.</p>
 0x7fd9f13ae638    4989c4       mov r12, rax
 </code></pre>
 <p>The <code>[sz]</code> argument to <code>Cf</code> is used to define how many bytes the struct should take up in the disassembly, and is completely independent from the size of the data structure defined by the format string. This may seem confusing, but has several uses. For example, you may want to see the formatted structure displayed in the disassembly, but still have those locations be visible as offsets and with raw bytes. Sometimes, you find large structures, but only identified a few fields, or only interested in specific fields. Then, you can tell rizin to display only those fields, using the format string and using 'skip' fields, and also have the disassembly continue after the entire structure, by giving it full size using the <code>sz</code> argument.</p>
-<p>Using <code>Cf</code>, it's easy to define complex structures with simple oneliners. See <code>pf?</code> for more information.
+<p>Using <code>Cf</code>, it's easy to define complex structures with simple one-liners. See <code>pf?</code> for more information.
 Remember that all these <code>C</code> commands can also be accessed from the visual mode by pressing the <code>d</code> (data conversion) key.
 Note that unlike <a href="disassembling/../analysis/types.html"><code>t</code></a> commands <code>Cf</code> doesn't change analysis results. It is only
 a visual boon.</p>
@@ -3287,8 +3287,8 @@ equalsTo(&quot;&quot;)    -&gt; empty string, aka nop (wrong, if we append pc+=x
 </li>
 </ol>
 <h3 id="bit-arrays"><a class="header" href="#bit-arrays">Bit Arrays</a></h3>
-<p>What to do with them? What about bit arithmetics if use variables instead of registers?</p>
-<h3 id="arithmetics"><a class="header" href="#arithmetics">Arithmetics</a></h3>
+<p>What to do with them? What about bit arithmetic if use variables instead of registers?</p>
+<h3 id="arithmetic"><a class="header" href="#arithmetic">Arithmetic</a></h3>
 <ol>
 <li>ADD (&quot;+&quot;)</li>
 <li>MUL (&quot;*&quot;)</li>
@@ -3296,7 +3296,7 @@ equalsTo(&quot;&quot;)    -&gt; empty string, aka nop (wrong, if we append pc+=x
 <li>DIV (&quot;/&quot;)</li>
 <li>MOD (&quot;%&quot;)</li>
 </ol>
-<h3 id="bit-arithmetics"><a class="header" href="#bit-arithmetics">Bit Arithmetics</a></h3>
+<h3 id="bit-arithmetic"><a class="header" href="#bit-arithmetic">Bit Arithmetic</a></h3>
 <ol>
 <li>AND  &quot;&amp;&quot;</li>
 <li>OR   &quot;|&quot;</li>
@@ -3436,7 +3436,7 @@ very different parts of the analysis:</p>
 <h1 id="code-analysis"><a class="header" href="#code-analysis">Code Analysis</a></h1>
 <p>Code analysis is a common technique used to extract information from assembly code.</p>
 <p>Rizin has different code analysis techniques implemented in the core and available in different commands.</p>
-<p>As long as the whole functionalities of rizin are available with the API as well as using commands. This gives you the ability to implement your own analysis loops using any programming language, even with rizin oneliners, shellscripts, or analysis or core native plugins.</p>
+<p>As long as the whole functionalities of rizin are available with the API as well as using commands. This gives you the ability to implement your own analysis loops using any programming language, even with rizin one-liners, shellscripts, or analysis or core native plugins.</p>
 <p>The analysis will show up the internal data structures to identify basic blocks, function trees and to extract opcode-level information.</p>
 <p>The most common rizin analysis command sequence is <code>aa</code>, which stands for &quot;analyze all&quot;. That all is referring to all symbols and entry-points. If your binary is stripped you will need to use other commands like <code>aaa</code>, <code>aab</code>, <code>aar</code>, <code>aac</code> or so.</p>
 <p>Take some time to understand what each command does and the results after running them to find the best one for your needs.</p>
@@ -4842,7 +4842,7 @@ hits: 1
 </code></pre>
 <p>Note that <code>z.</code> command just checks the signatures against the current address.
 To search signatures across the all file we need to do a bit different thing.
-There is an important moment though, if we just run it &quot;as is&quot; - it wont find anything:</p>
+There is an important moment though, if we just run it &quot;as is&quot; - it won't find anything:</p>
 <pre><code>[0x000051c0]&gt; z/
 [+] searching 0x0021dfd0 - 0x002203e8
 [+] searching function metrics
@@ -5224,7 +5224,7 @@ stack: null
 family: cpu
 [0x00404800]&gt;
 </code></pre>
-<p>To list available macroses simply call <code>(*</code>:</p>
+<p>To list available macros simply call <code>(*</code>:</p>
 <pre><code>[0x00404800]&gt; (*
 (qwe ; pd 4; ao)
 </code></pre>
@@ -7581,7 +7581,7 @@ done by using the <code>L</code> suffix.</p>
 <pre><code>L          # list core plugins
 iL         # list bin plugins
 dL         # list debug plugins
-ph         # print support hash algoriths
+ph         # print support hash algorithms
 </code></pre>
 <p>You can use the <code>?</code> as value to get the possible values in the associated eval vars.</p>
 <pre><code>e asm.arch=?   # list assembler/disassembler plugins
@@ -9548,7 +9548,7 @@ d 0x400db4 mov edi, str.You_won__The_flag_is:__s_n
 d 0x400dd2 mov edi, str.Your_getting_closer_
 </code></pre>
 <blockquote>
-<p><em><strong>rizin tip</strong></em>: We can list crossreferences to addresses using the <em>axt [addr]</em>
+<p><em><strong>rizin tip</strong></em>: We can list cross-references to addresses using the <em>axt [addr]</em>
 command (similarly, we can use <em>axf</em> to list references from the address).
 The <em>@@</em> is an iterator, it just runs the command once for every arguments
 listed.</p>
@@ -9878,7 +9878,7 @@ of <em>vmloop</em>.</p>
 <p><img src="crackmes/avatao/01-reverse4/img/vmloop/vmloop-full.png" alt="vmloop full" /></p>
 <p>As I've mentioned previously, the function itself is pretty short, and easy to
 read, especially with our annotations. But a promise is a promise, so here is
-how we can create the missing bacic blocks for the instructions:</p>
+how we can create the missing basic blocks for the instructions:</p>
 <pre><code>[0x00400ec0]&gt; afb+ 0x00400a45 0x00400a80 0x00400ab6-0x00400a80 0x400c15
 [0x00400ec0]&gt; afb+ 0x00400a45 0x00400ab6 0x00400aec-0x00400ab6 0x400c15
 [0x00400ec0]&gt; afb+ 0x00400a45 0x00400aec 0x00400b17-0x00400aec 0x400c15

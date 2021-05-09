@@ -172,7 +172,7 @@ $ rizin -d /bin/ls
 $ rizin -a arm -b 16 -d gdb://192.168.1.43:9090
 ...
 </code></pre>
-<p>In the second case, the debugger will fork and load the debugee <code>ls</code> program in memory.</p>
+<p>In the second case, the debugger will fork and load the debuggee <code>ls</code> program in memory.</p>
 <p>It will pause its execution early in <code>ld.so</code> dynamic linker. As a result, you will not yet see the entrypoint or any shared libraries at this point.</p>
 <p>You can override this behavior by setting another name for an entry breakpoint. To do this, add a rizin command
 <code>e dbg.bep=entry</code> or <code>e dbg.bep=main</code> to your startup script, usually it is <code>~/.config/rizin/rizinrc</code>.</p>

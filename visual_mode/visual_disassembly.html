@@ -195,7 +195,7 @@ d → i →  2
 <p>Remember that, to be able to actually edit files loaded in rizin, you have to start it with the <code>-w</code> option. Otherwise a file is opened in read-only mode.</p>
 <p>Pressing lowercase <code>c</code> toggles the cursor mode. When this mode is active, the currently selected byte (or byte range) is highlighted.</p>
 <p><img src="cursor.png" alt="Cursor at 0x00404896" /></p>
-<p>The cursor is used to select a range of bytes or simply to point to a byte. You can use the cursor to create a named flag at specifc location. To do so, seek to the required position, then press <code>f</code> and enter a name for a flag.
+<p>The cursor is used to select a range of bytes or simply to point to a byte. You can use the cursor to create a named flag at specific location. To do so, seek to the required position, then press <code>f</code> and enter a name for a flag.
 If the file was opened in write mode using the <code>-w</code> flag or the <code>o+</code> command, you can also use the cursor to overwrite a selected range with new values. To do so, select a range of bytes (with HJKL and SHIFT key pressed), then press <code>i</code> and enter the hexpair values for the new data. The data will be repeated as needed to fill the range selected. For example:</p>
 <pre><code>&lt;select 10 bytes in visual mode using SHIFT+HJKL&gt;
 &lt;press 'i' and then enter '12 34'&gt;
