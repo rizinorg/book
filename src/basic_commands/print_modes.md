@@ -443,6 +443,7 @@ and `asm.esil` which outputs [ESIL](../disassembling/esil.md) ('Evaluable String
 ### Print gadgets
 
 In Rizin, visual gadgets allows the users to cast or display the output of a particular Rizin command anywhere on the screen while in Visual mode.
+This command is unrelated with displaying [ROP Gadgets](https://book.rizin.re/refcard/intro.html#searching).
 
 Using the commands under `pg` (print gadgets), we can add, remove and change the location of these visual gadgets. You can add a gadget using `pg`:
 ```
