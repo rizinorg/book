@@ -8,8 +8,8 @@ $ rizin -h
 Usage: rizin [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i file]
           [-s addr] [-B baddr] [-m maddr] [-c cmd] [-e k=v] file|pid|-|--|=
  --           run rizin without opening any file
- -            same as 'rizin malloc://512'
- =            read file from stdin (use -i and -c to run cmds)
+ =            same as 'rizin malloc://512'
+ -            read file from stdin (use -i and -c to run cmds)
  -=           perform !=! command to run all commands remotely
  -0           print \x00 after init and every command
  -2           close stderr file descriptor (silent warning messages)
@@ -62,7 +62,11 @@ $ rizin -nw file
 ```
 Quickly get into an rizin shell without opening any file.
 ```
-$ rizin -
+$ rizin 
+```
+Quickly get into an rizin shell with malloc://512
+```
+$ rizin = 
 ```
 Specify which sub-binary you want to select when opening a fatbin file:
 ```
