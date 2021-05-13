@@ -439,3 +439,17 @@ e asm.syntax=att
 
 You can also check `asm.pseudo`, which is an experimental pseudocode view,
 and `asm.esil` which outputs [ESIL](../disassembling/esil.md) ('Evaluable Strings Intermediate Language'). ESIL's goal is to have a human-readable representation of every opcode semantics. Such representations can be evaluated (interpreted) to emulate effects of individual instructions.
+
+### Print gadgets
+
+In Rizin, visual gadgets allows the users to cast or display the output of a particular Rizin command anywhere on the screen while in Visual mode.
+This command is unrelated with displaying [ROP Gadgets](https://book.rizin.re/refcard/intro.html#searching).
+
+Using the commands under `pg` (print gadgets), we can add, remove and change the location of these visual gadgets. You can add a gadget using `pg`:
+```
+pg 10 10 10 10 ddr
+```
+This will add the output of the Rizin command `ddr` be printed on the screen. The four arguments to be passed are the position (like coordinates) and
+the height and width of the gadget you would like to see. This command requires the configuration variable `scr.gadgets` to be turned on.
+
+See `pg?` for more information.
