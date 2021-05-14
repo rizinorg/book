@@ -1,7 +1,6 @@
 # Summary
 
 * [Introduction](README.md)
-   * [History](first_steps/history.md)
    * [The Framework](first_steps/overview.md)
    * [Downloading rizin](first_steps/getting_rizin.md)
    * [Compilation and Portability](first_steps/compilation_portability.md)
