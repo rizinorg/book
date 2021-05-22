@@ -1,7 +1,8 @@
 # Visual Assembler
 
-You can use Visual Mode to assemble code using `A`.
-For example let's replace the `push` by a `jmp`:
+You can use Visual Mode to assemble code (patch) using `A`.
+For example, let's `xor` the EAX register instead of EBP register, here.
+To assemble, seek to the location you want to patch and press `A`.
 
 ![Before](../pics/before.png)
 
