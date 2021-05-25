@@ -28,7 +28,7 @@ def mycpu(a):
             "name" : "mycpu",
             "arch" : "mycpu",
             "bits" : 32,
-            "endian" : R.R_SYS_ENDIAN_LITTLE,
+            "endian" : RZ.RZ_SYS_ENDIAN_LITTLE,
             "license" : "GPL",
             "desc" : "MYCPU disasm",
             "assemble" : assemble,
@@ -54,7 +54,7 @@ def mycpu_analysis(a):
 
     def op(memview, pc):
 		analysisop = {
-            "type" : R.RZ_ANALYSIS_OP_TYPE_NULL,
+            "type" : RZ.RZ_ANALYSIS_OP_TYPE_NULL,
             "cycles" : 0,
             "stackop" : 0,
             "stackptr" : 0,
