@@ -42,7 +42,7 @@ A simpler alternative to the `e` command is accessible from the visual mode. Typ
 ```
 [EvalSpace]
 
-    >  anal
+    >  analysis
        asm
        scr
        asm
