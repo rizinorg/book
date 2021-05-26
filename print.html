@@ -2549,14 +2549,17 @@ If the item is a boolean variable, it will toggle, otherwise you will be prompte
 0x00404879  and rsp, -0xf  ; binary and operation between src and dst, stores result on dst
 </code></pre>
 <h1 id="visual-assembler"><a class="header" href="#visual-assembler">Visual Assembler</a></h1>
-<p>You can use Visual Mode to assemble code using <code>A</code>.
-For example let's replace the <code>push</code> by a <code>jmp</code>:</p>
+<p>You can use Visual Mode to assemble code (patch) using <code>A</code>.
+For example, let's <code>xor</code> the EAX register instead of EBP register, here.
+To assemble, seek to the location you want to patch and press <code>A</code>.</p>
 <p><img src="visual_mode/../pics/before.png" alt="Before" /></p>
-<p>Notice the preview of the disassembly and arrows:</p>
+<p>Notice the preview of the disassembly and arrows. After assembling the instruction,
+you can see that the branch reference lines have been changed, and it is now pointing to 
+the offset of the newly assembled <code>jne</code> instruction:</p>
 <p><img src="visual_mode/../pics/after.png" alt="After" /></p>
 <p>You need to open the file in writing mode (<code>rizin -w</code> or <code>oo+</code>) in order to patch the file.
 You can also use the cache mode: <code>e io.cache=true</code> and <code>wc?</code>.</p>
-<p>Remember that patching files in debug mode only patch the memory not the file.</p>
+<p>Remember that patching files in debug mode only patches the memory, not the file.</p>
 <h1 id="visual-configuration-editor-1"><a class="header" href="#visual-configuration-editor-1">Visual Configuration Editor</a></h1>
 <p><code>Ve</code> or <code>e</code> in visual mode allows you to edit rizin configuration visually.
 For example, if you want to change the assembly display just select <code>asm</code> in the list and choose your assembly display flavor.</p>
