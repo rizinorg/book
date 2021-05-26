@@ -68,7 +68,7 @@ uninstall:
 #include <rz_analysis.h>
 #include "snes_op_table.h"
 
-static int snes_anop(RzAnalysis *anal, RzAnalysisOp *op, ut64 addr, const ut8 *data, int len) {
+static int snes_anop(RzAnalysis *analysis, RzAnalysisOp *op, ut64 addr, const ut8 *data, int len) {
 	memset (op, '\0', sizeof (RzAnalysisOp));
 	op->size = snes_op[data[0]].len;
 	op->addr = addr;
