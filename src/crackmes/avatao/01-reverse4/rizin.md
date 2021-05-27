@@ -71,7 +71,5 @@ use the git version!
 
 Some highly recommended reading materials:
 
-- [Cheatsheet by pwntester](https://github.com/pwntester/cheatsheets/blob/master/rizin.md)
 - [Rizin Book](https://www.gitbook.com/book/rizinorg/rizinbook/details)
-- [Rizin Blog](http://rizin.today)
-- [Rizin Wiki](https://github.com/rizinorg/rizin/wiki)
+- [Rizin Blog](https://rizin.re/posts/)
