@@ -14,5 +14,5 @@ Suggested contributions include:
 
 Please get permission to port any content you do not own/did not create before you put it in the Rizin book.
 
-See <https://github.com/rizinorg/rizin/blob/master/DEVELOPERS.md> for general help on contributing to rizin.
+See <https://github.com/rizinorg/rizin/blob/dev/CONTRIBUTING.md> for general help on contributing to rizin.
 
