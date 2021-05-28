@@ -44,22 +44,25 @@ A simpler alternative to the `e` command is accessible from the visual mode. Typ
 
     >  analysis
        asm
-       scr
-       asm
        bin
        cfg
+       cmd
+       dbg
        diff
        dir
-       dbg
-       cmd
-       fs
+       emu
+       esil
+       file
+       graph
        hex
        http
-       graph
        hud
-       scr
-       search
        io
+       key
+       log
+       magic
+       pdb
+       ...
 ```
 
 For configuration values that can take one of several values, you can use the `=?` operator to get a list
