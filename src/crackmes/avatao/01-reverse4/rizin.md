@@ -71,5 +71,5 @@ use the git version!
 
 Some highly recommended reading materials:
 
-- [Rizin Book](https://www.gitbook.com/book/rizinorg/rizinbook/details)
+- [Rizin Book](https://book.rizin.re)
 - [Rizin Blog](https://rizin.re/posts/)
