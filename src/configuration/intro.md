@@ -61,7 +61,8 @@ A simpler alternative to the `e` command is accessible from the visual mode. Typ
        key
        log
        magic
-       pdf
+       pdb
+       ...
 ```
 
 For configuration values that can take one of several values, you can use the `=?` operator to get a list
