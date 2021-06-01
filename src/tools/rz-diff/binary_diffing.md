@@ -7,7 +7,6 @@ For bulk processing, you may want to have a higher-level overview of differences
 
 ```
  -d --------> myers (myers algorithm)
-       |
        |----> leven (levenstein algorithm)
 ```
 
@@ -59,31 +58,18 @@ distance: 2046
 
 ```
  -t --------> bytes (raw bytes in the files)
-       |
        |----> lines (compares text files)
-       |
        |----> functions (compares functions found in the files)
-       |
        |----> classes (compares classes found in the files)
-       |
        |----> command (compares command output returned when executed)
-       |
        |----> entries (compares entries found in the files)
-       |
        |----> fields (compares fields found in the files)
-       |
        |----> graphs (compares 2 functions and outputs in graphviz/dot      format)
-       |
        |----> format (compares text files)
-       |
        |----> imports (compares imports found in the files)
-       |
        |----> libraries (compares libraries found in the files)
-       |
        |----> sections (compares sections found in the files)
-       |
        |----> strings (compares sections found in the files)
-       |
        |----> symbols (compares symbols found in the files)
 
 ```
