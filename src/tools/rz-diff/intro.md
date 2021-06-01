@@ -4,48 +4,44 @@
 
 ```
 $ rz-diff -h
-Usage: rz-diff [-abBcCdjrspOxuUvV] [-A[A]] [-g sym] [-m graph_mode][-t %] [file] [file]
-  -a [arch]  specify architecture plugin to use (x86, arm, ..)
-  -A [-A]    run aaa or aaaa after loading each binary (see -C)
-  -b [bits]  specify register size for arch (16 (thumb), 32, 64, ..)
-  -B         output in binary diff (GDIFF)
-  -c         count of changes
-  -C         graphdiff code (columns: off-A, match-ratio, off-B) (see -A)
-  -d         use delta diffing
-  -D         show disasm instead of hexpairs
-  -e [k=v]   set eval config var value for all RzCore instances
-  -g [sym|off1,off2]   graph diff of given symbol, or between two offsets
-  -G [cmd]   run an rizin command on every RzCore instance created
-  -i         diff imports of target files (see -u, -U and -z)
-  -j         output in json format
-  -n         print bare addresses only (diff.bare=1)
-  -m [aditsjJ]  choose the graph output mode
-  -O         code diffing with opcode bytes only
-  -p         use physical addressing (io.va=0)
-  -q         quiet mode (disable colors, reduce output)
-  -r         output in rizin commands
-  -s         compute edit distance (no substitution, Eugene W. Myers' O(ND) diff algorithm)
-  -ss        compute Levenshtein edit distance (substitution is allowed, O(N^2))
-  -S [name]  sort code diff (name, namelen, addr, size, type, dist) (only for -C or -g)
-  -t [0-100] set threshold for code diff (default is 70%)
-  -x         show two column hexdump diffing
-  -X         show two column hexII diffing
-  -u         unified output (---+++)
-  -U         unified output using system 'diff'
-  -v         show version information
-  -V         be verbose (current only for -s)
-  -z         diff on extracted strings
-  -Z         diff code comparing zignatures
-
-Graph Output formats: (-m [mode])
-  <blank/a>  Ascii art
-  s          rizin commands
-  d          Graphviz dot
-  g          Graph Modelling Language (gml)
-  j          json
-  J          json with disarm
-  k          SDB key-value
-  t          Tiny ascii art
-  i          Interactive ascii art
+Usage: rz-diff [options] <file0> <file1>
+  -a [arch] specify architecture plugin to use (x86, arm, ..)
+  -b [bits] specify register size for arch (16 (thumb), 32, 64, ..)
+  -d [algo] compute edit distance based on the choosen algorithm:
+              myers | Eugene W. Myers' O(ND) algorithm (no substitution)
+              leven | Levenshtein O(N^2) algorithm (with substitution)
+  -H        hexadecimal visual mode
+  -h        this help message
+  -j        json output
+  -q        quite output
+  -v        show version information
+  -A        compare virtual and physical addresses
+  -C        disable colors
+  -T        show timestamp information
+  -S [WxH]  sets the width and height of the terminal for visual mode
+  -0 [cmd]  input for file0 when option -t 'commands' is given.
+            the same value will be set for file1, if -1 is not set.
+  -1 [cmd]  input for file1 when option -t 'commands' is given.
+  -t [type] compute the difference between two files based on its type:
+              bytes      | compares raw bytes in the files (only for small files)
+              lines      | compares text files
+              functions  | compares functions found in the files
+              classes    | compares classes found in the files
+              command    | compares command output returned when executed in both files
+                         | requires -0 <cmd> and -1 <cmd> is optional
+              entries    | compares entries found in the files
+              fields     | compares fields found in the files
+              graphs     | compares 2 functions and outputs in graphviz/dot format
+                         | requires -0 <fcn name|offset> and -1 <fcn name|offset> is optional
+              imports    | compares imports found in the files
+              libraries  | compares libraries found in the files
+              sections   | compares sections found in the files
+              strings    | compares strings found in the files
+              symbols    | compares symbols found in the files
+  palette colors can be changed by adding the following lines
+          inside the $HOME/.rizinrc file
+  ec diff.unknown blue   | offset color
+  ec diff.match   green  | match color
+  ec diff.unmatch red    | mismatch color
 ```
 
