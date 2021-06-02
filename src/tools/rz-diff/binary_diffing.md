@@ -52,7 +52,13 @@ distance: 2046
 
 ```
 
-## File Type Based Diffing
+`-S` mode allows you to adjust the window size of the Hexadecimal view.
+
+Example : `rz-diff -HS 120x20 /bin/true /bin/false`
+
+Minimmum: `W = 120 H = 20`
+
+### File Type Based Diffing
 
 `t` option computes the difference between two files based on its type.
 
