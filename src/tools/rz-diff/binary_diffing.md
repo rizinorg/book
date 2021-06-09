@@ -1,16 +1,23 @@
-# Binary Diffing
+# Rz-Diff (binary and text diffing utility)
 
+[Diffing](https://en.wikipedia.org/wiki/Diff) is to show you the differences between two different versions of the same code. Rz-diff provides diffing several matrices Eg. distance, delta, percentage of similarity and even a hexadecimal diff.
 
 ## Distance
+
 For bulk processing, you may want to have a higher-level overview of differences.
-`d` option serves to calculate the distance between the two binaries using either myers algorithm or the levenstine algorithm.
+
+The `-d` option serves to calculate the distance between the two binaries using either myers algorithm or the levenshtine algorithm.
 
 ```
  -d --------> myers (myers algorithm)
-       |----> leven (levenstein algorithm)
+       |----> leven (levenshtein algorithm)
 ```
 
 ### Myers algorithm:
+
+In the [Myers](https://epubs.siam.org/doi/10.1137/S0097539794264810) algorithm for edit distance, the cost of an insertion or deletion is 1 and the cost of a replacement is 2. 
+The theorem leads directly to an O(k) algorithm for incrementally computing a new solution from an old one, as contrasts the O(k2 ) time required to compute a solution from scratch.
+Thus the algorithm performs well when the two strings are similar. 
 
 `rz-diff -d myers /bin/true /bin/false`
 
@@ -19,8 +26,13 @@ output:
 similarity: 0.974
 distance: 2046
 ```
+
 ### Levenshtein distance:
+
+[Levenshtein](https://en.wikipedia.org/wiki/Levenshtein_distance) distance is a string metric for measuring the difference between two sequences. Informally, the Levenshtein distance between two words is the minimum number of single-character edits (insertions, deletions or substitutions) required to change one word into the other.  
+
 `rz-diff -d leven /bin/true /bin/false`
+
 output:
 ```
 similarity: 0.974
@@ -29,34 +41,46 @@ distance: 2046
 
 ## Hexadecimal Diffing:
 
-`-H` mode gives split view of hexdump of the files with fully functional navigation keys. (A, Z, D, C, G, B, N, M, <, >)
+`-H` The hexadecimal displays the hexdump of file0 vs file1 in a side-by-side window. Navigational keys allows easily parsing through the hexdump of the files individually.
 
-`rz-diff -H /bin/true /bin/false`
+ - `1` and `2` : parsing both binaries simultaneously, 0x320 bytes a time.
+ - `Z` and `A` : allows parsing forward and backward through file0, byte by byte. 
+ - `C` and `D` : allows parsing forward and backward through file1, byte by byte.
+ - `G` and `B` : seeks the end and beginning of the files.
+ - `N` and `M` : takes you to the Next and the Previous differing byte in the files respectively.
+ - `/` and `\` : parsing both binaries simultaneously, 16 bytes a time.
+ - `<` and `>` : parsing both binaries simultaneously, by 1 byte.
+ - `: <seek address in hex/decimal>` : seeks the address provided and bring the window to start dump from the seeked address.
+ - `?` : shows the help screen in the visual mode which can be exited with 'q'/esc keys.
+
+The bytes that differ are: `rz-diff -H /bin/true /bin/false`
 
 ```
-.------------ [   0 | 9958]( true )--------------- [   0 | 9958]( false )---------------------------.
-|             0  1  2  3  4  5  6  7                                     0  1  2  3  4  5  6  7     |
-|x0000000000000000 | 7f 45 4c 46 02 01 01 00  | .ELF.... | 0x0000000000000000 | 7f 45 4c 46 02 01 01|
-|x0000000000000008 | 00 00 00 00 00 00 00 00  | ........ | 0x0000000000000008 | 00 00 00 00 00 00 00|
-|x0000000000000010 | 03 00 3e 00 01 00 00 00  | ..>..... | 0x0000000000000010 | 03 00 3e 00 01 00 00|
-|x0000000000000018 | 10 26 00 00 00 00 00 00  | .&...... | 0x0000000000000018 | 20 26 00 00 00 00 00|
-|x0000000000000020 | 40 00 00 00 00 00 00 00  | @....... | 0x0000000000000020 | 40 00 00 00 00 00 00|
-|x0000000000000028 | d8 91 00 00 00 00 00 00  | ........ | 0x0000000000000028 | d8 91 00 00 00 00 00|
-|x0000000000000030 | 00 00 00 00 40 00 38 00  | ....@.8. | 0x0000000000000030 | 00 00 00 00 40 00 38|
+.---------- [   0 | 9958]( true )-------------------------------------------------------------------- [   0 | 9958]( false )---------------------------------------------------------.
+|                      0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F                                             0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F                     |
+|0x0000000000000000 | 7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00  | .ELF............ | 0x0000000000000000 | 7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00  | .ELF............ |
+|0x0000000000000010 | 03 00 3e 00 01 00 00 00 10 26 00 00 00 00 00 00  | ..>......&...... | 0x0000000000000010 | 03 00 3e 00 01 00 00 00 20 26 00 00 00 00 00 00  | ..>..... &...... |
+|0x0000000000000020 | 40 00 00 00 00 00 00 00 d8 91 00 00 00 00 00 00  | @............... | 0x0000000000000020 | 40 00 00 00 00 00 00 00 d8 91 00 00 00 00 00 00  | @............... |
+|0x0000000000000030 | 00 00 00 00 40 00 38 00 0d 00 40 00 1e 00 1d 00  | ....@.8...@..... | 0x0000000000000030 | 00 00 00 00 40 00 38 00 0d 00 40 00 1e 00 1d 00  | ....@.8...@..... |
+|0x0000000000000040 | 06 00 00 00 04 00 00 00 40 00 00 00 00 00 00 00  | ........@....... | 0x0000000000000040 | 06 00 00 00 04 00 00 00 40 00 00 00 00 00 00 00  | ........@....... |
+|0x0000000000000050 | 40 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00  | @.......@....... | 0x0000000000000050 | 40 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00  | @.......@....... |
+|0x0000000000000060 | d8 02 00 00 00 00 00 00 d8 02 00 00 00 00 00 00  | ................ | 0x0000000000000060 | d8 02 00 00 00 00 00 00 d8 02 00 00 00 00 00 00  | ................ |
+|0x0000000000000070 | 08 00 00 00 00 00 00 00 03 00 00 00 04 00 00 00  | ................ | 0x0000000000000070 | 08 00 00 00 00 00 00 00 03 00 00 00 04 00 00 00  | ................ |
+|0x0000000000000080 | 18 03 00 00 00 00 00 00 18 03 00 00 00 00 00 00  | ................ | 0x0000000000000080 | 18 03 00 00 00 00 00 00 18 03 00 00 00 00 00 00  | ................ |
+|0x0000000000000090 | 18 03 00 00 00 00 00 00 1c 00 00 00 00 00 00 00  | ................ | 0x0000000000000090 | 18 03 00 00 00 00 00 00 1c 00 00 00 00 00 00 00  | ................ |
+
 ...
-|x0000000000000170 | 30 9c 00 00 00 00 00 00  | 0....... | 0x0000000000000170 | 30 9c 00 00 00 00 00|
-|x0000000000000178 | 50 04 00 00 00 00 00 00  | P....... | 0x0000000000000178 | 50 04 00 00 00 00 00|
-|x0000000000000180 | e8 05 00 00 00 00 00 00  | ........ | 0x0000000000000180 | e8 05 00 00 00 00 00|
-`---------------------------------------------------------------------------------------------------'
- 1 2 -/+0x190 | Z A file0 +/-1 | C D file1 +/-1 | G B end/begin | N M next/prev | \//\ +/-8 | < >  +/
+|0x00000000000002f0 | 30 9c 00 00 00 00 00 00 30 9c 00 00 00 00 00 00  | 0.......0....... | 0x00000000000002f0 | 30 9c 00 00 00 00 00 00 30 9c 00 00 00 00 00 00  | 0.......0....... |
+|0x0000000000000300 | d0 03 00 00 00 00 00 00 d0 03 00 00 00 00 00 00  | ................ | 0x0000000000000300 | d0 03 00 00 00 00 00 00 d0 03 00 00 00 00 00 00  | ................ |
+`------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------'
+ 1 2 -/+0x320 | Z A file0 +/-1 | C D file1 +/-1 | G B end/begin | N M next/prev | \//\ +/-16 | < >  +/-1 | : seek
 
 ```
 
-`-S` mode allows you to adjust the window size of the Hexadecimal view.
+`-S` mode allows you to adjust the window size of the hexadecimal view to your preference.
+Minimmum: `W = 120 H = 20`
 
 Example : `rz-diff -HS 120x20 /bin/true /bin/false`
-
-Minimmum: `W = 120 H = 20`
 
 ### File Type Based Diffing
 
@@ -82,8 +106,7 @@ Minimmum: `W = 120 H = 20`
 
 ### Diffing ASCII-text files:
 
-
-rz-diff -t lines genuine cracked
+` $ rz-diff -t lines genuine cracked`
 ```
 --- genuine
 +++ cracked
@@ -96,7 +119,7 @@ rz-diff -t lines genuine cracked
 
 It this mode, it will give you three columns for all functions: "First file offset", "Percentage of matching" and "Second file offset".
 
-`rz-diff -t functions /bin/true /bin/false`
+` $ rz-diff -t functions /bin/true /bin/false`
 
 ```
          sym.imp.__fprintf_chk   11 0x00000000000024e0 | MATCH   (1.000000) | 0x00000000000024e0    11 sym.imp.__fprintf_chk
@@ -110,7 +133,7 @@ It this mode, it will give you three columns for all functions: "First file offs
                   fcn.00002cd0 4627 0x0000000000002cd0 | SIMILAR (0.993949) | 0x0000000000002ce0  4627 fcn.00002ce0
 ```
 
-### Diffing classes in Binaries:
+### Diffing classes in binaries:
 
 `rz-diff -t functions /bin/true /bin/false`
 ```
@@ -137,7 +160,7 @@ It this mode, it will give you three columns for all functions: "First file offs
 
 ```
 
-### Diffing fields in Binaries:
+### Diffing fields in binaries:
 
 `rz-diff -t fields /bin/true /bin/false `
 
@@ -146,7 +169,7 @@ It this mode, it will give you three columns for all functions: "First file offs
 +++ /bin/false
 ```
 
-### Diffing sections in Binaries:
+### Diffing sections in binaries:
 
 `rz-diff -t sections /bin/true /bin/false`
 ```
@@ -154,7 +177,7 @@ It this mode, it will give you three columns for all functions: "First file offs
 --- /bin/true
 +++ /bin/false
 ```
-### Diffing strings in Binaries:
+### Diffing strings in binaries:
 
 ```rz-diff -t strings /bin/true /bin/false
 --- /bin/true
@@ -179,7 +202,7 @@ It this mode, it will give you three columns for all functions: "First file offs
 -true
 
 ```
-### Diffing symbols in Binaries:
+### Diffing symbols in binaries:
 
 ```rz-diff -t symbols /bin/true /bin/false
 --- /bin/true
