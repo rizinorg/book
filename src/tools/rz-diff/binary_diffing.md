@@ -6,7 +6,7 @@
 
 For bulk processing, you may want to have a higher-level overview of differences.
 
-The `-d` option serves to calculate the distance between the two binaries using either myers algorithm or the levenshtine algorithm.
+The `-d` option serves to calculate the distance between the two binaries using either myers algorithm or the levenshtein algorithm.
 
 ```
  -d --------> myers (myers algorithm)
@@ -136,10 +136,12 @@ It this mode, it will give you three columns for all functions: "First file offs
 ### Diffing classes in binaries:
 
 `rz-diff -t functions /bin/true /bin/false`
+
 ```
 --- /bin/true
 +++ /bin/false
 ```
+
 ### Commands
 
 
@@ -172,14 +174,18 @@ It this mode, it will give you three columns for all functions: "First file offs
 ### Diffing sections in binaries:
 
 `rz-diff -t sections /bin/true /bin/false`
+
 ```
 
 --- /bin/true
 +++ /bin/false
 ```
+
 ### Diffing strings in binaries:
 
-```rz-diff -t strings /bin/true /bin/false
+`rz-diff -t strings /bin/true /bin/false`
+
+```
 --- /bin/true
 +++ /bin/false
 @@ -11,7 +11,7 @@
@@ -202,9 +208,12 @@ It this mode, it will give you three columns for all functions: "First file offs
 -true
 
 ```
+
 ### Diffing symbols in binaries:
 
-```rz-diff -t symbols /bin/true /bin/false
+`rz-diff -t symbols /bin/true /bin/false`
+
+```
 --- /bin/true
 +++ /bin/false
 ```
