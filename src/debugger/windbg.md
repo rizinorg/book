@@ -147,7 +147,7 @@ To use the `windbg` plugin, pass the same command-line options as you would for 
 > rizin -d "windbg://-z MyDumpFile.dmp"
 ```
 
-You can then debug normally (see `d?` command) or interact with the backend shell directly with the `=!` command:
+You can then debug normally (see `d?` command) or interact with the backend shell directly with the `R!` command:
 
 ```
 [0x7ffcac9fcea0]> dcu 0x0007ffc98f42190
@@ -156,7 +156,7 @@ ModLoad: 00007ffc`ab6b0000 00007ffc`ab6e0000   C:\WINDOWS\System32\IMM32.DLL
 Breakpoint 1 hit
 hit breakpoint at: 0x7ffc98f42190
 
-[0x7fffcf232190]> =!k4
+[0x7fffcf232190]> R!k4
 Child-SP          RetAddr           Call Site
 00000033`73b1f618 00007ff6`c67a861d r_main!r_main_rizin
 00000033`73b1f620 00007ff6`c67d0019 rizin!main+0x8d
