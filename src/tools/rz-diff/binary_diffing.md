@@ -1,7 +1,5 @@
 # Rz-Diff (binary and text diffing utility)
 
-[Diffing](https://en.wikipedia.org/wiki/Diff) is to show you the differences between two different versions of the same code. Rz-diff provides diffing several matrices Eg. distance, delta, percentage of similarity and even a hexadecimal diff.
-
 ## Distance
 
 For bulk processing, you may want to have a higher-level overview of differences.
