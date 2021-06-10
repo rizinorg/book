@@ -46,7 +46,7 @@ distance: 2046
  - `C` and `D` : allows parsing forward and backward through file1, byte by byte.
  - `G` and `B` : seeks the end and beginning of the files.
  - `N` and `M` : takes you to the Next and the Previous differing byte in the files respectively.
- - `/` and `\` : parsing both binaries simultaneously, 16 bytes a time.
+ - `/\` and `\/` : parsing both binaries simultaneously, 16 bytes a time.
  - `<` and `>` : parsing both binaries simultaneously, by 1 byte.
  - `: <seek address in hex/decimal>` : seeks the address provided and bring the window to start dump from the seeked address.
  - `?` : shows the help screen in the visual mode which can be exited with 'q'/esc keys.
