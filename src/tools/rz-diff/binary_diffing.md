@@ -41,7 +41,7 @@ distance: 2046
 
 `-H` The hexadecimal displays the hexdump of file0 vs file1 in a side-by-side window. Navigational keys allows easily parsing through the hexdump of the files individually.
 
- - `1` and `2` : parsing both binaries simultaneously, 0x320 bytes a time.
+ - `1` and `2` : to move to the next or previous page.
  - `Z` and `A` : allows parsing forward and backward through file0, byte by byte. 
  - `C` and `D` : allows parsing forward and backward through file1, byte by byte.
  - `G` and `B` : seeks the end and beginning of the files.
