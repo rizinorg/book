@@ -13,19 +13,19 @@ Using 0x400000
 asm.bits 32
 ```
 
-> ***rizin tips:*** We know where is located the "Wrong Password!" at
-> 0x00454200 in the CODE section.
-> To do the same research, we can use the `iz` and `izz`
-> 
 > ```bash
 > [0x7ffeaa1c2630]> iz~Wrong
 > [0x7ffeaa1c2630]> izz~Wrong
 > 5483 0x00053600 0x00454200 15  16   CODE    ascii   Wrong Password!
 > ```
+> ***rizin tips:*** We know where is located the "Wrong Password!" at
+> 0x00454200 in the CODE section.
+> To do the same research, we can use the `iz` and `izz`
+
 
 the tilde filtering the output with "Wrong"
 
-go to 0x00454200 
+go to 0x00454200
 
 ```bash
 [0x7ffeaa1c2630]> s 0x00454200
@@ -33,7 +33,7 @@ go to 0x00454200
 [0x00454200]> aaaa
 ```
 
-We will ask rizin to analyze the program with `aaa` 
+We will ask rizin to analyze the program with `aaa`
 
 ```bash
 [0x00454200]> aaaa

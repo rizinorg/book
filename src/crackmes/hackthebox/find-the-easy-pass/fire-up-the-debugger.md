@@ -1,6 +1,8 @@
 # Fire up the debugger
 
-The next step will be to put a breakpoint at 0x0045412b, press `F2` key
+The next step will be to put a breakpoint at 0x0045412b,
+this address contains probably the right password or our.
+Press `F2` key to put a breakpoint
 
 ![find-the-validation-routine-breakpoint-to-fish-code-1](./img/find-the-validation_routine-15.png)
 
@@ -67,7 +69,7 @@ correct the program jump on the "Wrong Pasword!" message.
 
 Press `F9` key to show the message box.
 
-After that, enter "fortan!" string and repeat the previous step until 
+After that, enter "fortan!" string and repeat the previous step until
 the address 0x0045413d
 
 ![run-the-program-debugged-14](./img/fire-up-the-debugger-14.png)
