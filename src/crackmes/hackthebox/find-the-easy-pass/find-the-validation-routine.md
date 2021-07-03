@@ -67,7 +67,7 @@ Press `p` command to switch on the code view
 
 ![find-the-validation-routine-wrong-password-code-view](./img/find-the-validation_routine-01.png)
 
-Press `x` to display the cross references
+Press `x` to display the cross-references
 
 ![find-the-validation-routine-wrong-password-xref](./img/find-the-validation_routine-02.png)
 
