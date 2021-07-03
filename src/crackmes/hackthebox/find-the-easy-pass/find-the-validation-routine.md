@@ -23,9 +23,12 @@ asm.bits 32
 > To do the same research, we can use the `iz` and `izz`
 
 
-the tilde filtering the output with "Wrong"
+`~` is Rizin's built-in `grep` command which you can use to filter the
+output.
+Here, we've searched for the word "Wrong" in the strings of the data
+section.
 
-go to `0x00454200`
+Seeking to `0x00454200`- the location of the string:
 
 ```bash
 [0x7ffeaa1c2630]> s 0x00454200

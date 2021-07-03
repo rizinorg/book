@@ -1,7 +1,8 @@
 # Bonus
 
-In the previous pages, we discovered the right password
-but is it calculated or hard-coded.
+In the previous pages, we found out the the right password.
+Now, we can figure out whether it is calculated at runtime or
+hard-coded into the binary.
 
 To do this, we will look at what happens from the
 beginning of the current function from the
