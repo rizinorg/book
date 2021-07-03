@@ -36,7 +36,7 @@ Seeking to `0x00454200`- the location of the string:
 [0x00454200]> aaaa
 ```
 
-We will ask rizin to analyze the program with `aaa`
+We will ask rizin to analyze the program with `aaa`.
 
 ```bash
 [0x00454200]> aaaa
@@ -59,31 +59,31 @@ Warning: Invalid range. Use different search.in=? or analysis.in=dbg.maps.x
 [0x00454200]> V
 ```
 
-> ***rizin tips:*** The `V` command triggers the visual mode
+> ***rizin tips:*** The `V` command triggers the visual mode.
 
 ![find-the-validation-routine-wrong-password](./img/find-the-validation_routine-00.png)
 
-Press `p` command to switch on the code view
+Press `p` command to switch on the code view.
 
 ![find-the-validation-routine-wrong-password-code-view](./img/find-the-validation_routine-01.png)
 
-Press `x` to display the cross-references
+Press `x` to display the cross-references.
 
 ![find-the-validation-routine-wrong-password-xref](./img/find-the-validation_routine-02.png)
 
-Press `enter` or `return` to jump of this reference
+Press `enter` or `return` to jump of this reference.
 
 ![find-the-validation-routine-wrong-password-jump-to-xref](./img/find-the-validation_routine-03.png)
 
-rizin allows you to have a graph view by pressing the `space bar`
+Rizin allows you to have a graph view by pressing the `space bar`.
 
 ![find-the-validation-routine-wrong-password-graph-view-not-work](./img/find-the-validation_routine-04.png)
 
 For the graph view to work here, rizin needs a function to be analyzed,
 we will help him by creating it from the beginning of the function
-where the string "Wrong Password!"
+where the string "Wrong Password!".
 
-Scroll up to the address `0x00454078`
+Scroll up to the address `0x00454078`.
 
 ![find-the-validation-routine-wrong-password-prologue-function](./img/find-the-validation_routine-05.png)
 
@@ -92,12 +92,12 @@ Press `d` and `f` to analyze the function.
 
 ![find-the-validation-routine-wrong-password-analyze-function](./img/find-the-validation_routine-06.png)
 
-Now if you press the `space bar`  the graph will be displayed
+Now if you press the `space bar` the graph will be displayed.
 
 ![find-the-validation-routine-wrong-password-graph-view](./img/find-the-validation_routine-07.png)
 
-> ***rizin tips:*** to move around of graph, you can use the same keys like vim :
-> `h`, `j`, `k`, `l`
+> ***rizin tips:*** to move around of graph, you can use the same keys like Vim:
+> `h`, `j`, `k`, `l`.
 
 ![find-the-validation-routine-wrong-password-interesting-code](./img/find-the-validation_routine-08.png)
 
@@ -105,23 +105,24 @@ By deduction, the address `0x00427a30` is the function which popup the messagebo
 
 The right node, print the "Wrong Password!", the left one, probably print the congratulations message.
 
-When to the address `0x404628` is the validation function because it
+When to the address `0x00404628` is the validation function because it
 followed by a conditionnal test that leads either "Wrong Password!" message
 or congratulation message.
 
-Press `g` and the `0x4041dc` to check if the address is the congratulation message
+Press `g` and enter the address `0x004041dc` to check if this one is the
+congratulation message.
 
 ![find-the-validation-routine-wrong-jump-to-congrats](./img/find-the-validation_routine-09.png)
 
-Press `n` to ignore the create function message and press `P`
+Press `n` to ignore the create function message and press `P`.
 
 ![find-the-validation-routine-congrats](./img/find-the-validation_routine-10.png)
 
-Press `x` and `p`
+Press `x` and `p`.
 
 ![find-the-validation-routine-congrats-node](./img/find-the-validation_routine-11.png)
 
-Press `;` to enter a comment
+Press `;` to enter a comment:
 
 ![find-the-validation-routine-congrats-node-comment](./img/find-the-validation_routine-12.png)
 

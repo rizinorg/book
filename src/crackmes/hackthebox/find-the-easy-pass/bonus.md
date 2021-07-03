@@ -8,7 +8,7 @@ To do this, we will look at what happens from the
 beginning of the current function from the
 address `0x00454084`.
 
-go to the address `0x00454084`
+go to the address `0x00454084`.
 
 ![bonus-01](./img/bonus-01.png)
 
@@ -21,7 +21,7 @@ mov edx, Y ; or Y is between 0x00454188  and 0x004541d0
 ```
 
 
-Look the address `0x00454188`
+Look the address `0x00454188`.
 
 ![bonus-02](./img/bonus-02.png)
 

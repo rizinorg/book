@@ -1,7 +1,8 @@
 # identification
 
-After to have uncompressed the `Find The Easy Pass.zip`, a file named `EasyPass.exe` .
-We using rz-bin to identify the executable file.
+After to have uncompressed the `Find The Easy Pass.zip`, a file named `EasyPass.exe`.
+
+We using `rz-bin` to identify the executable file.
 
 ```bash
 C:\Users\User\Desktop\htb>rz-bin -I EasyPass.exe
@@ -42,6 +43,7 @@ va       true
 ```
 
 That's interesting, `EasyPass.exe` is an x86 program, it's a GUI program.
+
 Now, we will run the program to have some clues.
 
 ![identification-run-program](./img/identification-00.PNG)
@@ -58,7 +60,7 @@ C:\Users\User\Desktop\htb>rz-bin -iz EasyPass.exe | findstr /I Wrong
 C:\Users\User\Desktop\htb>
 ```
 
-We're unlucky but don't panic, we will launch a more thorough research :
+We're unlucky but don't panic, we will launch a more thorough research:
 
 ```bash
 C:\Users\User\Desktop\htb>rz-bin -izz EasyPass.exe | findstr /I Wrong
