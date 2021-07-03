@@ -78,7 +78,7 @@ rizin allows you to have a graph view by pressing the `space bar`
 
 For the graph view to work here, rizin needs a function to be analyzed,
 we will help him by creating it from the beginning of the function
-where the string "Wrong Password!
+where the string "Wrong Password!"
 
 Scroll up to the address `0x00454078`
 
