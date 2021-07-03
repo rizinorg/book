@@ -16,7 +16,7 @@ You will see a repeating code sequence :
 
 ```assembly
 mov eax, [ebp - X] ; or X is between 0x8 and 0x24
-mov edx, Y , or Y is between 0x00454188  and 0x004541d0
+mov edx, Y ; or Y is between 0x00454188  and 0x004541d0
 ```
 
 
