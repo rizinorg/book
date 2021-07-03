@@ -1,6 +1,6 @@
 # Find the validation routine
 
-The "Wrong Password!" string is located at 0x00454200 in the CODE section.
+The "Wrong Password!" string is located at `0x00454200` in the CODE section.
 
 In this step, we wish to find the password, our approach will be to debug
 the program based on the information already collected.
@@ -19,13 +19,13 @@ asm.bits 32
 > 5483 0x00053600 0x00454200 15  16   CODE    ascii   Wrong Password!
 > ```
 > ***rizin tips:*** We know where is located the "Wrong Password!" at
-> 0x00454200 in the CODE section.
+> `0x00454200` in the CODE section.
 > To do the same research, we can use the `iz` and `izz`
 
 
 the tilde filtering the output with "Wrong"
 
-go to 0x00454200
+go to `0x00454200`
 
 ```bash
 [0x7ffeaa1c2630]> s 0x00454200
@@ -80,7 +80,7 @@ For the graph view to work here, rizin needs a function to be analyzed,
 we will help him by creating it from the beginning of the function
 where the string "Wrong Password!
 
-Scroll up to the address 0x00454078 
+Scroll up to the address `0x00454078`
 
 ![find-the-validation-routine-wrong-password-prologue-function](./img/find-the-validation_routine-05.png)
 
@@ -98,15 +98,15 @@ Now if you press the `space bar`  the graph will be displayed
 
 ![find-the-validation-routine-wrong-password-interesting-code](./img/find-the-validation_routine-08.png)
 
-By deduction, the address 0x00427a30 is the function which popup the messagebox.
+By deduction, the address `0x00427a30` is the function which popup the messagebox.
 
 The right node, print the "Wrong Password!", the left one, probably print the congratulations message.
 
-When to the address 0x404628 is the validation function because it
+When to the address `0x404628` is the validation function because it
 followed by a conditionnal test that leads either "Wrong Password!" message
 or congratulation message.
 
-Press `g` and the 0x4041dc to check if the address is the congratulation message
+Press `g` and the `0x4041dc` to check if the address is the congratulation message
 
 ![find-the-validation-routine-wrong-jump-to-congrats](./img/find-the-validation_routine-09.png)
 

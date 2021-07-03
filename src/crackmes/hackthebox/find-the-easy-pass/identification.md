@@ -65,7 +65,7 @@ C:\Users\User\Desktop\htb>rz-bin -izz EasyPass.exe | findstr /I Wrong
 5483 0x00053600 0x00454200 15  16   CODE    ascii   Wrong Password!
 ```
 
-The "Wrong Password!" string is located at **0x00454200** in the CODE section.
+The "Wrong Password!" string is located at **`0x00454200`** in the CODE section.
 
 > ***rizin tips:*** The first search (`-iz`) works on some flag spaces but
 > not on the whole file, while the second command (`-izz`) is more exhaustive.

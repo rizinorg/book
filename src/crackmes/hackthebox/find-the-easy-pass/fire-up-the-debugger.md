@@ -1,6 +1,6 @@
 # Fire up the debugger
 
-The next step will be to put a breakpoint at 0x0045412b,
+The next step will be to put a breakpoint at `0x0045412b`,
 this address contains probably the right password or our.
 Press `F2` key to put a breakpoint
 
@@ -64,13 +64,13 @@ Press `F8` key twice
 
 ![run-the-program-debugged-13](./img/fire-up-the-debugger-13.png)
 
-The call at 0x0045413d seems compare the previous password and if not
+The call at `0x0045413d` seems compare the previous password and if not
 correct the program jump on the "Wrong Pasword!" message.
 
 Press `F9` key to show the message box.
 
 After that, enter "fortan!" string and repeat the previous step until
-the address 0x0045413d
+the address `0x0045413d`
 
 ![run-the-program-debugged-14](./img/fire-up-the-debugger-14.png)
 
