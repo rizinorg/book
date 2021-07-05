@@ -1,6 +1,6 @@
 # Find the validation routine
 
-The "Wrong Password!" string is located at `0x00454200` in the CODE section.
+The string "Wrong Password!" is located at `0x00454200` in the CODE section.
 
 In this step, we wish to find the password, our approach will be to debug
 the program based on the information already collected.
@@ -129,7 +129,6 @@ Press `;` to enter a comment:
 ![find-the-validation-routine-congrats-node-comment-1](./img/find-the-validation_routine-13.png)
 
 ![find-the-validation-routine-breakpoint-to-fish-code](./img/find-the-validation_routine-14.png)
-
 
 
 
