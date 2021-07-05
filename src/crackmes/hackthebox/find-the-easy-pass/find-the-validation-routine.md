@@ -36,7 +36,7 @@ Seeking to `0x00454200`- the location of the string:
 [0x00454200]> aaaa
 ```
 
-We will ask rizin to analyze the program with `aaa`.
+We will ask Rizin to analyze the program with `aaa`.
 
 ```bash
 [0x00454200]> aaaa
@@ -129,7 +129,6 @@ Press `;` to enter a comment:
 ![find-the-validation-routine-congrats-node-comment-1](./img/find-the-validation_routine-13.png)
 
 ![find-the-validation-routine-breakpoint-to-fish-code](./img/find-the-validation_routine-14.png)
-
 
 
 
