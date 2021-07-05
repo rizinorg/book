@@ -1,6 +1,7 @@
 # identification
 
-After to have uncompressed the `Find The Easy Pass.zip`, a file named `EasyPass.exe`.
+After un-compressing  the challenge file `Find The Easy Pass.zip`a we can find
+a file named `EasyPass.exe` inside it.
 
 We using `rz-bin` to identify the executable file.
 
@@ -71,5 +72,4 @@ The "Wrong Password!" string is located at **`0x00454200`** in the CODE section.
 
 > ***rizin tips:*** The first search (`-iz`) works on some flag spaces but
 > not on the whole file, while the second command (`-izz`) is more exhaustive.
-
 
