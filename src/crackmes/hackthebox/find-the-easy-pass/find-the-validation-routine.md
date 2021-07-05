@@ -79,9 +79,9 @@ Rizin allows you to have a graph view by pressing the `space bar`.
 
 ![find-the-validation-routine-wrong-password-graph-view-not-work](./img/find-the-validation_routine-04.png)
 
-For the graph view to work here, rizin needs a function to be analyzed,
-we will help him by creating it from the beginning of the function
-where the string "Wrong Password!".
+For the graph view to work here, Rizin needs the function to be analyzed.
+We will help by creating it from the beginning of the function
+where the string "Wrong Password!" is located.
 
 Scroll up to the address `0x00454078`.
 
@@ -129,7 +129,6 @@ Press `;` to enter a comment:
 ![find-the-validation-routine-congrats-node-comment-1](./img/find-the-validation_routine-13.png)
 
 ![find-the-validation-routine-breakpoint-to-fish-code](./img/find-the-validation_routine-14.png)
-
 
 
 
