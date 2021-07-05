@@ -78,6 +78,6 @@ Press `F8`key twice.
 
 ![run-the-program-debugged-15](./img/fire-up-the-debugger-15.png)
 
-it's seems all right ! Press `F9` key to confirm this fact.
+It seems all right! Press `F9` key to confirm this fact.
 
 ![run-the-program-debugged-16](./img/fire-up-the-debugger-16.png)
