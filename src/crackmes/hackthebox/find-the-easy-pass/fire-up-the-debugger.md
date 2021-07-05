@@ -64,8 +64,8 @@ Press `F8` key twice.
 
 ![run-the-program-debugged-13](./img/fire-up-the-debugger-13.png)
 
-The call at `0x0045413d` seems compare the previous password and if not
-correct the program jump on the "Wrong Pasword!" message.
+The call at `0x0045413d` seems to compare the previous password and 
+when unequal, the program jumps to the "Wrong Pasword!" message.
 
 Press `F9` key to show the message box.
 
