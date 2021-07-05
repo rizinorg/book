@@ -105,9 +105,9 @@ By deduction, the address `0x00427a30` is the function which popup the messagebo
 
 The right node, print the "Wrong Password!", the left one, probably prints the congratulations message.
 
-When to the address `0x00404628` is the validation function because it
-followed by a conditionnal test that leads either "Wrong Password!" message
-or congratulation message.
+At `0x00404628` is what which looks like a validation function because it is
+followed by a conditional test that either leads to the "Wrong Password!" message
+or the congratulation message.
 
 Press `g` and enter the address `0x004041dc` to check if this one is the
 congratulation message.
@@ -129,7 +129,6 @@ Press `;` to enter a comment:
 ![find-the-validation-routine-congrats-node-comment-1](./img/find-the-validation_routine-13.png)
 
 ![find-the-validation-routine-breakpoint-to-fish-code](./img/find-the-validation_routine-14.png)
-
 
 
 
