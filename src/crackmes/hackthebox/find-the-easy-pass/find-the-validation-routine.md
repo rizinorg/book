@@ -103,7 +103,7 @@ Now if you press the `space bar` the graph will be displayed.
 
 By deduction, the address `0x00427a30` is the function which popup the messagebox.
 
-The right node, print the "Wrong Password!", the left one, probably print the congratulations message.
+The right node, print the "Wrong Password!", the left one, probably prints the congratulations message.
 
 When to the address `0x00404628` is the validation function because it
 followed by a conditionnal test that leads either "Wrong Password!" message
@@ -129,7 +129,6 @@ Press `;` to enter a comment:
 ![find-the-validation-routine-congrats-node-comment-1](./img/find-the-validation_routine-13.png)
 
 ![find-the-validation-routine-breakpoint-to-fish-code](./img/find-the-validation_routine-14.png)
-
 
 
 
