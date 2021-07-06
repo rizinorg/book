@@ -45,7 +45,7 @@ va       true
 
 That's interesting, `EasyPass.exe` is an x86 program, it's a GUI program.
 
-Now, we will run the program to have some clues.
+Now, we will run the program to have some better idea on what it's doing.
 
 ![identification-run-program](./img/identification-00.PNG)
 
