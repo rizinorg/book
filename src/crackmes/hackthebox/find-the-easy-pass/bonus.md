@@ -30,5 +30,5 @@ Look the address `0x00454188`.
 Pay attention to the previous picture. You can see the password
 broken down letter by letter.
 
-The routine concatenates each letter into a string and compares
+We can see that the routine is concatenating each letter into a string and compares
 it to a user input.
