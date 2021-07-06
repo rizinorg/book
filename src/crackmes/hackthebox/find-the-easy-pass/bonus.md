@@ -8,7 +8,7 @@ To do this, we will look at what happens from the
 beginning of the current function from the
 address `0x00454084`.
 
-go to the address `0x00454084`.
+As a first, we'll go to the address `0x00454084`.
 
 ![bonus-01](./img/bonus-01.png)
 
