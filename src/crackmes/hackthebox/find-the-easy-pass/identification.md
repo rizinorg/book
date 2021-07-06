@@ -1,6 +1,6 @@
 # identification
 
-After un-compressing  the challenge file `Find The Easy Pass.zip`a we can find
+After un-compressing  the challenge file `Find The Easy Pass.zip`, we can find
 a file named `EasyPass.exe` inside it.
 
 We using `rz-bin` to identify the executable file.
