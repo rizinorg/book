@@ -53,7 +53,7 @@ We click on the **Check Password**
 
 ![identification-error-message-printed](./img/identification-01.PNG)
 
-It's interesting, we search **Wrong Password!** in the executable.
+Interesting, let's search for **Wrong Password!** in the executable.
 
 ```bash
 C:\Users\User\Desktop\htb>rz-bin -iz EasyPass.exe | findstr /I Wrong
@@ -72,4 +72,3 @@ The "Wrong Password!" string is located at **`0x00454200`** in the CODE section.
 
 > ***rizin tips:*** The first search (`-iz`) works on some flag spaces but
 > not on the whole file, while the second command (`-izz`) is more exhaustive.
-
