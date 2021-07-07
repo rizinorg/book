@@ -47,11 +47,11 @@ That's interesting, `EasyPass.exe` is an x86 program, it's a GUI program.
 
 Now, we will run the program to have some better idea on what it's doing.
 
-![identification-run-program](./img/identification-00.PNG)
+![identification-run-program](./img/identification-00.png)
 
 We click on the **Check Password**
 
-![identification-error-message-printed](./img/identification-01.PNG)
+![identification-error-message-printed](./img/identification-01.png)
 
 Interesting, let's search for **Wrong Password!** in the executable.
 
