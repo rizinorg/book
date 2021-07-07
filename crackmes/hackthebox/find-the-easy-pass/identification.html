@@ -205,9 +205,9 @@ va       true
 </code></pre>
 <p>That's interesting, <code>EasyPass.exe</code> is an x86 program, it's a GUI program.</p>
 <p>Now, we will run the program to have some better idea on what it's doing.</p>
-<p><img src="./img/identification-00.PNG" alt="identification-run-program" /></p>
+<p><img src="./img/identification-00.png" alt="identification-run-program" /></p>
 <p>We click on the <strong>Check Password</strong></p>
-<p><img src="./img/identification-01.PNG" alt="identification-error-message-printed" /></p>
+<p><img src="./img/identification-01.png" alt="identification-error-message-printed" /></p>
 <p>Interesting, let's search for <strong>Wrong Password!</strong> in the executable.</p>
 <pre><code class="language-bash">C:\Users\User\Desktop\htb&gt;rz-bin -iz EasyPass.exe | findstr /I Wrong
 
