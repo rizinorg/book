@@ -72,6 +72,11 @@ When turned on, the raw bytes will be displayed along with the instructions:
 
 You can use this configuration variable to define the CPU type. For example, if you had picked the architecture as AVR, you can choose your CPU type (ATmega1281, ATmega2561, etc) using `asm.cpu`.
 
+### asm.platform: `string`
+
+You can use this configuration variable to select the platform and it'll load up the corresponding 
+platform profile during analysis. See the section about [CPU and platform profiles](https://book.rizin.re/analysis/cpu_platform_profiles.html) for more information.
+
 ### asm.flags: `bool`
 
 When set to "true", the disassembler view will have the flags column.
