@@ -56,6 +56,7 @@
    * [Symbols information](analysis/symbols.md)
    * [Signatures](signatures/zignatures.md)
    * [Graph commands](analysis/graphs.md)
+   * [CPU and platform profiles](analysis/cpu_platform_profiles.md)
 * [Scripting](scripting/intro.md)
    * [Loops](scripting/loops.md)
    * [Macros](scripting/macros.md)
