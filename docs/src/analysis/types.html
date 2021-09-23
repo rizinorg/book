@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang=""><head>
+  <meta charset="utf-8">
+  <meta name="generator" content="quarto-0.2.165">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="description" content="This is a book about the Rizin reverse engineering framework">
+  <title>The Official Rizin Book – 36&nbsp; Types</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+  <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+  <meta name="quarto:offset" content="../../">
+  <script src="../../site_libs/quarto-search/autocomplete.min.js"></script>
+  <script src="../../site_libs/quarto-search/fuse.min.js"></script>
+  <script src="../../site_libs/quarto-search/quarto-search.js"></script>
+  <link href="../../src/analysis/calling_conventions.html" rel="next">
+  <link href="../../src/analysis/variables.html" rel="prev">
+  <script src="../../site_libs/quarto-html/quarto.js"></script>
+  <script src="../../site_libs/quarto-html/popper.min.js"></script>
+  <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+  <script src="../../site_libs/quarto-html/clipboard.min.js"></script>
+  <script src="../../site_libs/quarto-html/anchor.min.js"></script>
+  <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+  <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+  <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+  <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+  <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div id="quarto-search-results"></div>
+<header id="quarto-header" class="headroom fixed-top">
+<nav class="quarto-secondary-nav py-2 d-lg-none d-md-block " data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <div class="container-fluid d-flex justify-content-between">
+    <h1 class="quarto-secondary-nav-title mb-0 fs-3 d-inline"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Types</span></h1>
+    <button type="button" class="quarto-btn-toggle btn d-lg-none py-0 px-1 d-inline-block border-0 ">
+      <i class="bi bi-chevron-right"></i>
+    </button>
+  </div>
+</nav>
+</header>
+ <!-- /navbar/sidebar -->
+<div class="container-fluid quarto-container d-flex flex-column page-layout-article" id="quarto-content">
+<div class="row flex-fill">
+  <div id="quarto-sidebar" class="col col-12 col-lg-3 d-lg-flex px-0 pt-0 sidebar collapse sidebar-navigation">
+    <nav class="ms-lg-auto floating overflow-auto">
+  <div class="px-3 pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">The Official Rizin Book</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/rizinzorg/book" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+            <i class="bi bi-bi-twitter pe-1"></i>
+          Twitter
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+            <i class="bi bi-bi-facebook pe-1"></i>
+          Facebook
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+            <i class="bi bi-bi-linkedin pe-1"></i>
+          LinkedIn
+          </a>
+        </li>
+    </ul>
+</div>
+    </div>
+  </div>
+    <div class="d-flex px-3 mt-2 flex-shrink-0 align-items-center">
+      <div class="sidebar-search">
+      <form class="d-flex mb-0">
+  <input id="quarto-search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+      </div>
+        <div class="sidebar-tools-collapse">
+    <a href="https://github.com/rizinzorg/book" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+        <li>
+          <a class="dropdown-item sidebar-tools-collapse-item" href="https://twitter.com/intent/tweet?url=|url|">
+            <i class="bi bi-bi-twitter pe-1"></i>
+          Twitter
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-collapse-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+            <i class="bi bi-bi-facebook pe-1"></i>
+          Facebook
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-collapse-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+            <i class="bi bi-bi-linkedin pe-1"></i>
+          LinkedIn
+          </a>
+        </li>
+    </ul>
+</div>
+    </div>
+  <div class="sidebar-menu-container"> 
+  <ul class="list-unstyled mt-1 px-3">
+      <li class="sidebar-item">
+  <a href="../../index.html" class="">Welcome</a>
+</li>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#introduction-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Introduction</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="introduction-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../src/first_steps/overview.html" class=""><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Framework</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/first_steps/getting_rizin.html" class=""><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Downloading Rizin</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/first_steps/compilation_portability.html" class=""><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Compilation and Portability</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/first_steps/windows_compilation.html" class=""><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Windows</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/first_steps/compilation_android.html" class=""><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Android</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#firststeps-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">First Steps</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="firststeps-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../src/first_steps/intro.html" class=""><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Basic Rizin Usage</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/first_steps/commandline_flags.html" class=""><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Command-line Options</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/first_steps/command_format.html" class=""><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Command Format</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/first_steps/expressions.html" class=""><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Expressions</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/first_steps/basic_debugger_session.html" class=""><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Basic Debugger Session</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/first_steps/contributing.html" class=""><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Contributing</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#configuration-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Configuration</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="configuration-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../src/configuration/intro.html" class=""><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Configuration</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/configuration/colors.html" class=""><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Colors</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/configuration/evars.html" class=""><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Configuration Variables</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/configuration/files.html" class=""><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Files</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#basiccommands-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Basic Commands</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="basiccommands-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../src/configuration/intro.html" class=""><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Configuration</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#visualmode-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Visual mode</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="visualmode-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../src/visual_mode/intro.html" class=""><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Visual Mode</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/visual_mode/visual_disassembly.html" class=""><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Visual Disassembly</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/visual_mode/visual_assembler.html" class=""><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Visual Assembler</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/visual_mode/visual_configuration_editor.html" class=""><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visual Configuration Editor</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/visual_mode/visual_panels.html" class=""><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Visual Panels</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#searchingbytes-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Searching bytes</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="searchingbytes-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../src/search_bytes/intro.html" class=""><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Searching for Bytes</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/search_bytes/basic_searches.html" class=""><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Basic Search</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/search_bytes/configurating_the_search.html" class=""><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Configuring Search Options</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/search_bytes/pattern_search.html" class=""><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Pattern Matching Search</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/search_bytes/automation.html" class=""><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Search Automation</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/search_bytes/backward_search.html" class=""><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Searching Backwards</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/search_bytes/search_in_assembly.html" class=""><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Assembler Search</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/search_bytes/searching_aes_keys.html" class=""><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Searching for AES Keys</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#disassembling-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Disassembling</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="disassembling-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../src/disassembling/intro.html" class=""><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Disassembling</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/disassembling/adding_metadata.html" class=""><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Adding Metadata to Disassembly</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/disassembling/esil.html" class=""><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">ESIL</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#analysis-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Analysis</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="analysis-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../src/analysis/intro.html" class=""><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Data and Code Analysis</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/analysis/code_analysis.html" class=""><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Code Analysis</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/analysis/variables.html" class=""><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Managing variables</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/analysis/types.html" class="active"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Types</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/analysis/calling_conventions.html" class=""><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Calling Conventions</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/analysis/vtables.html" class=""><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Virtual Tables</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/analysis/syscalls.html" class=""><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Syscalls</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/analysis/emulation.html" class=""><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Emulation</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/analysis/symbols.html" class=""><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Symbols</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/analysis/graphs.html" class=""><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Graph commands</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/analysis/cpu_platform_profiles.html" class=""><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">CPU and platform profiles</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#scripting-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Scripting</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="scripting-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../src/scripting/intro.html" class=""><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">Scripting</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/scripting/loops.html" class=""><span class="chapter-number">45</span>&nbsp; <span class="chapter-title">Loops</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/scripting/macros.html" class=""><span class="chapter-number">46</span>&nbsp; <span class="chapter-title">Macros</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/scripting/rz-pipe.html" class=""><span class="chapter-number">47</span>&nbsp; <span class="chapter-title">Rz-pipe</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#debugger-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Debugger</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="debugger-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../src/debugger/intro.html" class=""><span class="chapter-number">48</span>&nbsp; <span class="chapter-title">Debugger</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/debugger/getting_started.html" class=""><span class="chapter-number">49</span>&nbsp; <span class="chapter-title">Getting Started</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/debugger/registers.html" class=""><span class="chapter-number">50</span>&nbsp; <span class="chapter-title">Registers</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/debugger/memory_maps.html" class=""><span class="chapter-number">51</span>&nbsp; <span class="chapter-title">Memory Maps</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/debugger/heap.html" class=""><span class="chapter-number">52</span>&nbsp; <span class="chapter-title">Heap</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/debugger/files.html" class=""><span class="chapter-number">53</span>&nbsp; <span class="chapter-title">Files</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/debugger/revdebug.html" class=""><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Reverse Debugging</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/debugger/windows_messages.html" class=""><span class="chapter-number">55</span>&nbsp; <span class="chapter-title">Windows Messages</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/debugger/apple.html" class=""><span class="chapter-number">56</span>&nbsp; <span class="chapter-title">macOS/iOS</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#remoteaccess-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Remote Access</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="remoteaccess-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../src/debugger/remoting_capabilities.html" class=""><span class="chapter-number">57</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/debugger/remote_gdb.html" class=""><span class="chapter-number">58</span>&nbsp; <span class="chapter-title">Debugging with gdbserver</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/debugger/windbg.html" class=""><span class="chapter-number">59</span>&nbsp; <span class="chapter-title">WinDBG Kernel-mode Debugging (KD)</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#commandlinetools-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Command Line Tools</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="commandlinetools-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../src/tools/intro.html" class=""><span class="chapter-number">60</span>&nbsp; <span class="chapter-title">Tools</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/tools/rz-ax/intro.html" class=""><span class="chapter-number">61</span>&nbsp; <span class="chapter-title">Rz-ax</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/tools/rz-find/intro.html" class=""><span class="chapter-number">62</span>&nbsp; <span class="chapter-title">Rz-find</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/tools/rz-run/intro.html" class=""><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Rz-run</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/tools/rz-bin/intro.html" class=""><span class="chapter-number">64</span>&nbsp; <span class="chapter-title">Rz-bin — Show Properties of a Binary</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/tools/rz-bin/file_identification.html" class=""><span class="chapter-number">65</span>&nbsp; <span class="chapter-title">File Properties Identification</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/tools/rz-bin/entrypoints.html" class=""><span class="chapter-number">66</span>&nbsp; <span class="chapter-title">Code Entrypoints</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/tools/rz-bin/imports.html" class=""><span class="chapter-number">67</span>&nbsp; <span class="chapter-title">Imports</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/tools/rz-bin/exports.html" class=""><span class="chapter-number">68</span>&nbsp; <span class="chapter-title">Exports</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/tools/rz-bin/symbols.html" class=""><span class="chapter-number">69</span>&nbsp; <span class="chapter-title">Symbols (Exports)</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/tools/rz-bin/libraries.html" class=""><span class="chapter-number">70</span>&nbsp; <span class="chapter-title">List Libraries</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/tools/rz-bin/strings.html" class=""><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Strings</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/tools/rz-bin/program_sections.html" class=""><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">Program Sections</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/tools/rz-diff/intro.html" class=""><span class="chapter-number">73</span>&nbsp; <span class="chapter-title">Rz-diff</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/tools/rz-diff/binary_diffing.html" class=""><span class="chapter-number">74</span>&nbsp; <span class="chapter-title">Rz-Diff (binary and text diffing utility)</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#plugins-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Plugins</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="plugins-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../src/plugins/intro.html" class=""><span class="chapter-number">75</span>&nbsp; <span class="chapter-title">Plugins</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/plugins/ioplugins.html" class=""><span class="chapter-number">76</span>&nbsp; <span class="chapter-title">IO plugins</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/plugins/dev-asm.html" class=""><span class="chapter-number">77</span>&nbsp; <span class="chapter-title">Implementing a new disassembly plugin</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/plugins/dev-bin.html" class=""><span class="chapter-number">78</span>&nbsp; <span class="chapter-title">Implementing a new format</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/plugins/dev-other.html" class=""><span class="chapter-number">79</span>&nbsp; <span class="chapter-title">Write a debugger plugin</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/plugins/python.html" class=""><span class="chapter-number">80</span>&nbsp; <span class="chapter-title">Python plugins</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/plugins/debug.html" class=""><span class="chapter-number">81</span>&nbsp; <span class="chapter-title">Debugging</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/plugins/testing.html" class=""><span class="chapter-number">82</span>&nbsp; <span class="chapter-title">Testing the plugin</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/plugins/rz-pm.html" class=""><span class="chapter-number">83</span>&nbsp; <span class="chapter-title">Creating an rz-pm package of the plugin</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#crackmes-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Crackmes</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="crackmes-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/intro.html" class=""><span class="chapter-number">84</span>&nbsp; <span class="chapter-title">Crackmes</span></a>
+</li>
+          <ul class="list-unstyled sidebar-section depth2">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 collapsed" data-bs-toggle="collapse" data-bs-target="#ioli-collapse" aria-expanded="false">
+              <div class="me-auto sidebar-item">IOLI</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  " id="ioli-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/ioli/intro.html" class=""><span class="chapter-number">85</span>&nbsp; <span class="chapter-title">IOLI CrackMes</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/ioli/ioli_0x00.html" class=""><span class="chapter-number">86</span>&nbsp; <span class="chapter-title">IOLI 0x00</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/ioli/ioli_0x01.html" class=""><span class="chapter-number">87</span>&nbsp; <span class="chapter-title">IOLI 0x01</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/ioli/ioli_0x02.html" class=""><span class="chapter-number">88</span>&nbsp; <span class="chapter-title">IOLI 0x02</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/ioli/ioli_0x03.html" class=""><span class="chapter-number">89</span>&nbsp; <span class="chapter-title">IOLI 0x03</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/ioli/ioli_0x04.html" class=""><span class="chapter-number">90</span>&nbsp; <span class="chapter-title">IOLI 0x04</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/ioli/ioli_0x05.html" class=""><span class="chapter-number">91</span>&nbsp; <span class="chapter-title">IOLI 0x05</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/ioli/ioli_0x06.html" class=""><span class="chapter-number">92</span>&nbsp; <span class="chapter-title">IOLI 0x06</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/ioli/ioli_0x07.html" class=""><span class="chapter-number">93</span>&nbsp; <span class="chapter-title">IOLI 0x07</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/ioli/ioli_0x08.html" class=""><span class="chapter-number">94</span>&nbsp; <span class="chapter-title">IOLI 0x08</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/ioli/ioli_0x09.html" class=""><span class="chapter-number">95</span>&nbsp; <span class="chapter-title">IOLI 0x09</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+          <ul class="list-unstyled sidebar-section depth2">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 collapsed" data-bs-toggle="collapse" data-bs-target="#avataor3v3rs34-collapse" aria-expanded="false">
+              <div class="me-auto sidebar-item">Avatao R3v3rs3 4</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  " id="avataor3v3rs34-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/avatao/01-reverse4/intro.html" class=""><span class="chapter-number">96</span>&nbsp; <span class="chapter-title">Avatao R3v3rs3 4</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/avatao/01-reverse4/rizin.html" class=""><span class="chapter-number">97</span>&nbsp; <span class="chapter-title">.rizin</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/avatao/01-reverse4/first_steps.html" class=""><span class="chapter-number">98</span>&nbsp; <span class="chapter-title">.first_steps</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/avatao/01-reverse4/main.html" class=""><span class="chapter-number">99</span>&nbsp; <span class="chapter-title">.main</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/avatao/01-reverse4/vmloop.html" class=""><span class="chapter-number">100</span>&nbsp; <span class="chapter-title">.vmloop</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/avatao/01-reverse4/instructionset.html" class=""><span class="chapter-number">101</span>&nbsp; <span class="chapter-title">.instructionset</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/avatao/01-reverse4/bytecode.html" class=""><span class="chapter-number">102</span>&nbsp; <span class="chapter-title">.bytecode</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/avatao/01-reverse4/outro.html" class=""><span class="chapter-number">103</span>&nbsp; <span class="chapter-title">.outro</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+          <ul class="list-unstyled sidebar-section depth2">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 collapsed" data-bs-toggle="collapse" data-bs-target="#hackthebox-collapse" aria-expanded="false">
+              <div class="me-auto sidebar-item">Hack The Box</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  " id="hackthebox-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/hackthebox/intro.html" class=""><span class="chapter-number">104</span>&nbsp; <span class="chapter-title">hackthebox</span></a>
+</li>
+          <ul class="list-unstyled sidebar-section depth3">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 collapsed" data-bs-toggle="collapse" data-bs-target="#findtheeasypass-collapse" aria-expanded="false">
+              <div class="me-auto sidebar-item">Find The Easy Pass</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  " id="findtheeasypass-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/hackthebox/find-the-easy-pass/intro.html" class=""><span class="chapter-number">105</span>&nbsp; <span class="chapter-title">Find The Easy Pass</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/hackthebox/find-the-easy-pass/identification.html" class=""><span class="chapter-number">106</span>&nbsp; <span class="chapter-title">identification</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/hackthebox/find-the-easy-pass/find-the-validation-routine.html" class=""><span class="chapter-number">107</span>&nbsp; <span class="chapter-title">Find the validation routine</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../src/crackmes/hackthebox/find-the-easy-pass/bonus.html" class=""><span class="chapter-number">108</span>&nbsp; <span class="chapter-title">Bonus</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+        </ul>
+      </div>
+    </li>
+  </ul>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#referencecard-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Reference Card</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="referencecard-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../src/refcard/intro.html" class=""><span class="chapter-number">109</span>&nbsp; <span class="chapter-title">Rizin Reference Card</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#acknowledgments-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Acknowledgments</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="acknowledgments-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../src/credits/credits.html" class=""><span class="chapter-number">110</span>&nbsp; <span class="chapter-title">Authors &amp; Contributors</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+  </ul>
+  </div>
+</nav>
+  </div>
+  <div id="quarto-toc-sidebar" class=" pt-0 col col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-toc order-last"><nav id="TOC" role="doc-toc">
+<h2 id="toc-title">On this page</h2>
+<ul>
+<li><a href="#loading-types" class="nav-link active" data-scroll-target="#loading-types"> <span class="header-section-number">36.0.1</span> Loading types</a></li>
+<li><a href="#printing-types" class="nav-link" data-scroll-target="#printing-types"> <span class="header-section-number">36.0.2</span> Printing types</a></li>
+<li><a href="#linking-types" class="nav-link" data-scroll-target="#linking-types"> <span class="header-section-number">36.0.3</span> Linking Types</a></li>
+<li><a href="#structure-immediates" class="nav-link" data-scroll-target="#structure-immediates"> <span class="header-section-number">36.0.4</span> Structure Immediates</a></li>
+<li><a href="#managing-enums" class="nav-link" data-scroll-target="#managing-enums"> <span class="header-section-number">36.0.5</span> Managing enums</a></li>
+<li><a href="#internal-representation" class="nav-link" data-scroll-target="#internal-representation"> <span class="header-section-number">36.1</span> Internal representation</a>
+<ul class="collapse">
+<li><a href="#structures" class="nav-link" data-scroll-target="#structures"> <span class="header-section-number">36.1.1</span> Structures</a></li>
+<li><a href="#unions" class="nav-link" data-scroll-target="#unions"> <span class="header-section-number">36.1.2</span> Unions</a></li>
+<li><a href="#function-prototypes" class="nav-link" data-scroll-target="#function-prototypes"> <span class="header-section-number">36.1.3</span> Function prototypes</a></li>
+</ul></li>
+</ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rizinzorg/book/edit/master/src/analysis/types.md" class="toc-action">Edit this page</a></p></div></div></nav></div>
+  <div class="col mx-auto col-sm-12 col-md-9 col-lg-7 col-xl-7 px-lg-4 pe-xxl-4 ps-xxl-3">
+<main>
+<header id="title-block-header">
+<h1 class="title d-none d-lg-block display-7"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Types</span></h1>
+</header>
+
+<p>Rizin supports the C-syntax data types description. Those types are parsed by a C11-compatible parser and stored in the internal SDB, thus are introspectable with <code>k</code> command.</p>
+<p>Most of the related commands are located in <code>t</code> namespace:</p>
+<pre><code>[0x000051c0]&gt; t?
+| Usage: t   # cparse types commands
+| t                          List all loaded types
+| tj                         List all loaded types as json
+| t &lt;type&gt;                   Show type in 'pf' syntax
+| t*                         List types info in rizin commands
+| t- &lt;name&gt;                  Delete types by its name
+| t-*                        Remove all types
+| tail [filename]            Output the last part of files
+| tc [type.name]             List all/given types in C output format
+| te[?]                      List all loaded enums
+| td[?] &lt;string&gt;             Load types from string
+| tf                         List all loaded functions signatures
+| tk &lt;sdb-query&gt;             Perform sdb query
+| tl[?]                      Show/Link type to an address
+| tn[?] [-][addr]            manage noreturn function attributes and marks
+| to -                       Open cfg.editor to load types
+| to &lt;path&gt;                  Load types from C header file
+| toe [type.name]            Open cfg.editor to edit types
+| tos &lt;path&gt;                 Load types from parsed Sdb database
+| tp  &lt;type&gt; [addr|varname]  cast data at &lt;address&gt; to &lt;type&gt; and print it (XXX: type can contain spaces)
+| tpv &lt;type&gt; @ [value]       Show offset formatted for given type
+| tpx &lt;type&gt; &lt;hexpairs&gt;      Show value for type with specified byte sequence (XXX: type can contain spaces)
+| ts[?]                      Print loaded struct types
+| tu[?]                      Print loaded union types
+| tx[f?]                     Type xrefs
+| tt[?]                      List all loaded typedefs</code></pre>
+<p>Note that the basic (atomic) types are not those from the C standard - not <code>char</code>, <code>_Bool</code>, or <code>short</code>. Because those types can be different from one platform to another, rizin uses <code>definite</code> types like as <code>int8_t</code> or <code>uint64_t</code> and will convert <code>int</code> to <code>int32_t</code> or <code>int64_t</code> depending on the binary or debuggee platform/compiler.</p>
+<p>Basic types can be listed using <code>t</code> command, for the structured types you need to use <code>ts</code>, <code>tu</code> or <code>te</code> for enums:</p>
+<pre><code>[0x000051c0]&gt; t
+char
+char *
+int
+int16_t
+int32_t
+int64_t
+int8_t
+long
+long long
+...</code></pre>
+<section id="loading-types" class="level3" data-number="36.0.1">
+<h3 data-number="36.0.1" class="anchored" data-anchor-id="loading-types"><span class="header-section-number">36.0.1</span> Loading types</h3>
+<p>There are three easy ways to define a new type: * Directly from the string using <code>td</code> command * From the file using <code>to &lt;filename&gt;</code> command * Open an <code>$EDITOR</code> to type the definitions in place using <code>to -</code></p>
+<pre><code>[0x000051c0]&gt; "td struct foo {char* a; int b;}"
+[0x000051c0]&gt; cat ~/rizin-regressions/bins/headers/s3.h
+struct S1 {
+    int x[3];
+    int y[4];
+    int z;
+};
+[0x000051c0]&gt; to ~/rizin-regressions/bins/headers/s3.h
+[0x000051c0]&gt; ts
+foo
+S1</code></pre>
+<p>Also, note there is a config option to specify include directories for types parsing</p>
+<pre><code>[0x00000000]&gt; el~dir.type
+dir.types: Default path to look for cparse type files
+[0x00000000]&gt; e dir.types
+/usr/include</code></pre>
+</section>
+<section id="printing-types" class="level3" data-number="36.0.2">
+<h3 data-number="36.0.2" class="anchored" data-anchor-id="printing-types"><span class="header-section-number">36.0.2</span> Printing types</h3>
+<p>Notice below we have used <code>ts</code> command, which basically converts the C type description (or to be precise it’s SDB representation) into the sequence of <code>pf</code> commands. See more about <a href="../../src/basic_commands/print_modes.html">print format</a>.</p>
+<p>The <code>tp</code> command uses the <code>pf</code> string to print all the members of type at the current offset/given address:</p>
+<pre><code>[0x000051c0]&gt; ts foo
+pf zd a b
+[0x000051c0]&gt; tp foo
+ a : 0x000051c0 = 'hello'
+ b : 0x000051cc = 10
+[0x000051c0]&gt; tp foo 0x000053c0
+ a : 0x000053c0 = 'world'
+ b : 0x000053cc = 20</code></pre>
+<p>Also, you could fill your own data into the struct and print it using <code>tpx</code> command</p>
+<pre><code>[0x000051c0]&gt; tpx foo 4141414144141414141442001000000
+ a : 0x000051c0 = AAAAD.....B
+ b : 0x000051cc = 16</code></pre>
+</section>
+<section id="linking-types" class="level3" data-number="36.0.3">
+<h3 data-number="36.0.3" class="anchored" data-anchor-id="linking-types"><span class="header-section-number">36.0.3</span> Linking Types</h3>
+<p>The <code>tp</code> command just performs a temporary cast. But if we want to link some address or variable with the chosen type, we can use <code>tl</code> command to store the relationship in SDB.</p>
+<pre><code>[0x000051c0]&gt; tl S1 = 0x51cf
+[0x000051c0]&gt; tll
+(S1)
+ x : 0x000051cf = [ 2315619660, 1207959810, 34803085 ]
+ y : 0x000051db = [ 2370306049, 4293315645, 3860201471, 4093649307 ]
+ z : 0x000051eb = 4464399</code></pre>
+<p>Moreover, the link will be shown in the disassembly output or visual mode:</p>
+<pre><code>[0x000051c0 15% 300 /bin/ls]&gt; pd $r @ entry0
+ ;-- entry0:
+ 0x000051c0      xor ebp, ebp
+ 0x000051c2      mov r9, rdx
+ 0x000051c5      pop rsi
+ 0x000051c6      mov rdx, rsp
+ 0x000051c9      and rsp, 0xfffffffffffffff0
+ 0x000051cd      push rax
+ 0x000051ce      push rsp
+(S1)
+ x : 0x000051cf = [ 2315619660, 1207959810, 34803085 ]
+ y : 0x000051db = [ 2370306049, 4293315645, 3860201471, 4093649307 ]
+ z : 0x000051eb = 4464399
+ 0x000051f0      lea rdi, loc._edata         ; 0x21f248
+ 0x000051f7      push rbp
+ 0x000051f8      lea rax, loc._edata         ; 0x21f248
+ 0x000051ff      cmp rax, rdi
+ 0x00005202      mov rbp, rsp</code></pre>
+<p>Once the struct is linked, rizin tries to propagate structure offset in the function at the current offset, to run this analysis on the whole program or at any targeted functions after all structs are linked you have <code>aat</code> command:</p>
+<pre><code>[0x00000000]&gt; aa?
+| aat [fcn]           Analyze all functions or a given function to convert immediate to linked structure offsets (see tl?)</code></pre>
+<p>Note sometimes the emulation may not be accurate, for example as below :</p>
+<pre><code>|0x000006da  push rbp
+|0x000006db  mov rbp, rsp
+|0x000006de  sub rsp, 0x10
+|0x000006e2  mov edi, 0x20               ; "@"
+|0x000006e7  call sym.imp.malloc         ;  void *malloc(size_t size)
+|0x000006ec  mov qword [local_8h], rax
+|0x000006f0  mov rax, qword [local_8h]
+</code></pre>
+<p>The return value of <code>malloc</code> may differ between two emulations, so you have to set the hint for return value manually using <code>ahr</code> command, so run <code>tl</code> or <code>aat</code> command after setting up the return value hint.</p>
+<pre><code>[0x000006da]&gt; ah?
+| ahr val            set hint for the return value of a function</code></pre>
+</section>
+<section id="structure-immediates" class="level3" data-number="36.0.4">
+<h3 data-number="36.0.4" class="anchored" data-anchor-id="structure-immediates"><span class="header-section-number">36.0.4</span> Structure Immediates</h3>
+<p>There is one more important aspect of using types in rizin - using <code>aht</code> you can change the immediate in the opcode to the structure offset. Let’s see a simple example of [R]SI-relative addressing</p>
+<pre><code>[0x000052f0]&gt; pd 1
+0x000052f0      mov rax, qword [rsi + 8]    ; [0x8:8]=0</code></pre>
+<p>Here <code>8</code> - is some offset in the memory, where <code>rsi</code> probably holds some structure pointer. Imagine that we have the following structures</p>
+<pre><code>
+[0x000052f0]&gt; "td struct ms { char b[8]; int member1; int member2; };"
+[0x000052f0]&gt; "td struct ms1 { uint64_t a; int member1; };"
+[0x000052f0]&gt; "td struct ms2 { uint16_t a; int64_t b; int member1; };"</code></pre>
+<p>Now we need to set the proper structure member offset instead of <code>8</code> in this instruction. At first, we need to list available types matching this offset:</p>
+<pre><code>[0x000052f0]&gt; ahts 8
+ms.member1
+ms1.member1</code></pre>
+<p>Note, that <code>ms2</code> is not listed, because it has no members with offset <code>8</code>. After listing available options we can link it to the chosen offset at the current address:</p>
+<pre><code>[0x000052f0]&gt; aht ms1.member1
+[0x000052f0]&gt; pd 1
+0x000052f0      488b4608       mov rax, qword [rsi + ms1.member1]    ; [0x8:8]=0</code></pre>
+</section>
+<section id="managing-enums" class="level3" data-number="36.0.5">
+<h3 data-number="36.0.5" class="anchored" data-anchor-id="managing-enums"><span class="header-section-number">36.0.5</span> Managing enums</h3>
+<ul>
+<li>Printing all fields in enum using <code>te</code> command</li>
+</ul>
+<pre><code>[0x00000000]&gt; "td enum Foo {COW=1,BAR=2};"
+[0x00000000]&gt; te Foo
+COW = 0x1
+BAR = 0x2</code></pre>
+<ul>
+<li>Finding matching enum member for given bitfield and vice-versa</li>
+</ul>
+<pre><code>[0x00000000]&gt; te Foo 0x1
+COW
+[0x00000000]&gt; teb Foo COW
+0x1</code></pre>
+</section>
+<section id="internal-representation" class="level2" data-number="36.1">
+<h2 data-number="36.1" class="anchored" data-anchor-id="internal-representation"><span class="header-section-number">36.1</span> Internal representation</h2>
+<p>To see the internal representation of the types you can use <code>tk</code> command:</p>
+<pre><code>[0x000051c0]&gt; tk~S1
+S1=struct
+struct.S1=x,y,z
+struct.S1.x=int32_t,0,3
+struct.S1.x.meta=4
+struct.S1.y=int32_t,12,4
+struct.S1.y.meta=4
+struct.S1.z=int32_t,28,0
+struct.S1.z.meta=0
+[0x000051c0]&gt;</code></pre>
+<p>Defining primitive types requires an understanding of basic <code>pf</code> formats, you can find the whole list of format specifier in <code>pf??</code>:</p>
+<pre><code>---------------------------------------------------
+| format | explanation                            |
+| ------ | -------------------------------------- |
+| b      | byte (unsigned)                        |
+| c      | char (signed byte)                     |
+| d      | 0x%%08x hexadecimal value (4 bytes)    |
+| f      | float value (4 bytes)                  |
+| i      | %%i integer value (4 bytes)            |
+| o      | 0x%%08o octal value (4 byte)           |
+| p      | pointer reference (2, 4 or 8 bytes)    |
+| q      | quadword (8 bytes)                     |
+| s      | 32bit pointer to string (4 bytes)      |
+| S      | 64bit pointer to string (8 bytes)      |
+| t      | UNIX timestamp (4 bytes)               |
+| T      | show Ten first bytes of buffer         |
+| u      | uleb128 (variable length)              |
+| w      | word (2 bytes unsigned short in hex)   |
+| x      | 0x%%08x hex value and flag (fd @ addr) |
+| X      | show formatted hexpairs                |
+| z      | \0 terminated string                   |
+| Z      | \0 terminated wide string              |
+---------------------------------------------------
+</code></pre>
+<p>there are basically 3 mandatory keys for defining basic data types: <code>X=type</code> <code>type.X=format_specifier</code> <code>type.X.size=size_in_bits</code> For example, let’s define <code>UNIT</code>, according to <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa383751%28v=vs.85%29.aspx#UINT">Microsoft documentation</a> <code>UINT</code> is just equivalent of standard C <code>unsigned int</code> (or <code>uint32_t</code> in terms of TCC engine). It will be defined as:</p>
+<pre><code>UINT=type
+type.UINT=d
+type.UINT.size=32</code></pre>
+<p>Now there is an optional entry:</p>
+<p><code>X.type.pointto=Y</code></p>
+<p>This one may only be used in case of pointer <code>type.X=p</code>, one good example is LPFILETIME definition, it is a pointer to <code>_FILETIME</code> which happens to be a structure. Assuming that we are targeting only 32-bit windows machine, it will be defined as the following:</p>
+<pre><code>LPFILETIME=type
+type.LPFILETIME=p
+type.LPFILETIME.size=32
+type.LPFILETIME.pointto=_FILETIME</code></pre>
+<p>This last field is not mandatory because sometimes the data structure internals will be proprietary, and we will not have a clean representation for it.</p>
+<p>There is also one more optional entry:</p>
+<pre><code>type.UINT.meta=4</code></pre>
+<p>This entry is for integration with C parser and carries the type class information: integer size, signed/unsigned, etc.</p>
+<section id="structures" class="level3" data-number="36.1.1">
+<h3 data-number="36.1.1" class="anchored" data-anchor-id="structures"><span class="header-section-number">36.1.1</span> Structures</h3>
+<p>Those are the basic keys for structs (with just two elements):</p>
+<pre><code>X=struct
+struct.X=a,b
+struct.X.a=a_type,a_offset,a_number_of_elements
+struct.X.b=b_type,b_offset,b_number_of_elements</code></pre>
+<p>The first line is used to define a structure called <code>X</code>, the second line defines the elements of <code>X</code> as comma-separated values. After that, we just define each element info.</p>
+<p>For example. we can have a struct like this one:</p>
+<pre><code>struct _FILETIME {
+    DWORD dwLowDateTime;
+    DWORD dwHighDateTime;
+}</code></pre>
+<p>assuming we have <code>DWORD</code> defined, the struct will look like this</p>
+<pre><code> _FILETIME=struct
+struct._FILETIME=dwLowDateTime,dwHighDateTime
+struct._FILETIME.dwLowDateTime=DWORD,0,0
+struct._FILETIME.dwHighDateTime=DWORD,4,0</code></pre>
+<p>Note that the number of elements field is used in the case of arrays only to identify how many elements are in arrays, other than that it is zero by default.</p>
+</section>
+<section id="unions" class="level3" data-number="36.1.2">
+<h3 data-number="36.1.2" class="anchored" data-anchor-id="unions"><span class="header-section-number">36.1.2</span> Unions</h3>
+<p>Unions are defined exactly like structs the only difference is that you will replace the word <code>struct</code> with the word <code>union</code>.</p>
+</section>
+<section id="function-prototypes" class="level3" data-number="36.1.3">
+<h3 data-number="36.1.3" class="anchored" data-anchor-id="function-prototypes"><span class="header-section-number">36.1.3</span> Function prototypes</h3>
+<p>Function prototype representation is the most detail-oriented and the most important one of them all. This is the one used directly for type matching</p>
+<pre><code>X=func
+func.X.args=NumberOfArgs
+func.x.arg0=Arg_type,arg_name
+.
+.
+.
+func.X.ret=Return_type
+func.X.cc=calling_convention</code></pre>
+<p>It should be self-explanatory. Let’s do strncasecmp as an example for x86 arch for Linux machines. According to man pages, strncasecmp is defined as the following:</p>
+<pre><code>int strcasecmp(const char *s1, const char *s2, size_t n);</code></pre>
+<p>When converting it into its sdb representation it will look like the following:</p>
+<pre><code>strcasecmp=func
+func.strcasecmp.args=3
+func.strcasecmp.arg0=char *,s1
+func.strcasecmp.arg1=char *,s2
+func.strcasecmp.arg2=size_t,n
+func.strcasecmp.ret=int
+func.strcasecmp.cc=cdecl</code></pre>
+<p>Note that the <code>.cc</code> part is optional and if it didn’t exist the default calling-convention for your target architecture will be used instead. There is one extra optional key</p>
+<pre><code>func.x.noreturn=true/false</code></pre>
+<p>This key is used to mark functions that will not return once called, such as <code>exit</code> and <code>_exit</code>.</p>
+
+</section>
+</section>
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    setTimeout(function() {
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    window.tippy(el, {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    }); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      const id = new URL(ref.getAttribute('href')).hash.replace(/^#/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</main>
+<div class="page-navigation ">
+  <div class="nav-page nav-page-previous">
+      <a href="../../src/analysis/variables.html">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Managing variables</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../src/analysis/calling_conventions.html">
+        <span class="nav-page-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Calling Conventions</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</div>
+</div> <!-- /main column -->
+</div> <!-- /row -->
+</div> <!-- /container fluid -->
+
+
+</body></html>
