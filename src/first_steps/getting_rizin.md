@@ -1,4 +1,4 @@
-## Downloading rizin
+## Downloading Rizin
 
 Binary packages are available for most of the common platforms (e.g. Windows, MacOS, Linux), however you can still compile rizin yourself for many other architectures/operating systems.
 
