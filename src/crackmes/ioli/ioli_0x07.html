@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang=""><head>
+  <meta charset="utf-8">
+  <meta name="generator" content="quarto-0.2.168">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="description" content="This is a book about the Rizin reverse engineering framework">
+  <title>The Official Rizin Book – 94&nbsp; IOLI 0x07</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+  <script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+  <meta name="quarto:offset" content="../../../">
+  <script src="../../../site_libs/quarto-search/autocomplete.min.js"></script>
+  <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+  <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+  <link href="../../../src/crackmes/ioli/ioli_0x08.html" rel="next">
+  <link href="../../../src/crackmes/ioli/ioli_0x06.html" rel="prev">
+  <script src="../../../site_libs/quarto-html/quarto.js"></script>
+  <script src="../../../site_libs/quarto-html/popper.min.js"></script>
+  <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+  <script src="../../../site_libs/quarto-html/clipboard.min.js"></script>
+  <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+  <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+  <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+  <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+  <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+  <link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div id="quarto-search-results"></div>
+<header id="quarto-header" class="headroom fixed-top">
+<nav class="quarto-secondary-nav py-2 d-lg-none d-md-block " data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <div class="container-fluid d-flex justify-content-between">
+    <h1 class="quarto-secondary-nav-title mb-0 fs-3 d-inline"><span class="chapter-number">94</span>&nbsp; <span class="chapter-title">IOLI 0x07</span></h1>
+    <button type="button" class="quarto-btn-toggle btn d-lg-none py-0 px-1 d-inline-block border-0 ">
+      <i class="bi bi-chevron-right"></i>
+    </button>
+  </div>
+</nav>
+</header>
+ <!-- /navbar/sidebar -->
+<div class="container-fluid quarto-container d-flex flex-column page-layout-article" id="quarto-content">
+<div class="row flex-fill">
+  <div id="quarto-sidebar" class="col col-12 col-lg-3 d-lg-flex px-0 pt-0 sidebar collapse sidebar-navigation">
+    <nav class="ms-lg-auto floating overflow-auto">
+  <div class="px-3 pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../../">The Official Rizin Book</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/rizinzorg/book" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+            <i class="bi bi-bi-twitter pe-1"></i>
+          Twitter
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+            <i class="bi bi-bi-facebook pe-1"></i>
+          Facebook
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+            <i class="bi bi-bi-linkedin pe-1"></i>
+          LinkedIn
+          </a>
+        </li>
+    </ul>
+</div>
+    </div>
+  </div>
+    <div class="d-flex px-3 mt-2 flex-shrink-0 align-items-center">
+      <div class="sidebar-search">
+      <form class="d-flex mb-0">
+  <input id="quarto-search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+      </div>
+        <div class="sidebar-tools-collapse">
+    <a href="https://github.com/rizinzorg/book" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+        <li>
+          <a class="dropdown-item sidebar-tools-collapse-item" href="https://twitter.com/intent/tweet?url=|url|">
+            <i class="bi bi-bi-twitter pe-1"></i>
+          Twitter
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-collapse-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+            <i class="bi bi-bi-facebook pe-1"></i>
+          Facebook
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-collapse-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+            <i class="bi bi-bi-linkedin pe-1"></i>
+          LinkedIn
+          </a>
+        </li>
+    </ul>
+</div>
+    </div>
+  <div class="sidebar-menu-container"> 
+  <ul class="list-unstyled mt-1 px-3">
+      <li class="sidebar-item">
+  <a href="../../../index.html" class="">Welcome</a>
+</li>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#introduction-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Introduction</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="introduction-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../../src/first_steps/overview.html" class=""><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Framework</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/first_steps/getting_rizin.html" class=""><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Downloading Rizin</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/first_steps/compilation_portability.html" class=""><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Compilation and Portability</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/first_steps/windows_compilation.html" class=""><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Windows</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/first_steps/compilation_android.html" class=""><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Android</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#firststeps-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">First Steps</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="firststeps-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../../src/first_steps/intro.html" class=""><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Basic Rizin Usage</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/first_steps/commandline_flags.html" class=""><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Command-line Options</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/first_steps/command_format.html" class=""><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Command Format</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/first_steps/expressions.html" class=""><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Expressions</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/first_steps/basic_debugger_session.html" class=""><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Basic Debugger Session</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/first_steps/contributing.html" class=""><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Contributing</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#configuration-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Configuration</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="configuration-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../../src/configuration/intro.html" class=""><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Configuration</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/configuration/colors.html" class=""><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Colors</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/configuration/evars.html" class=""><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Configuration Variables</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/configuration/files.html" class=""><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Files</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#basiccommands-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Basic Commands</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="basiccommands-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../../src/configuration/intro.html" class=""><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Configuration</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#visualmode-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Visual mode</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="visualmode-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../../src/visual_mode/intro.html" class=""><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Visual Mode</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/visual_mode/visual_disassembly.html" class=""><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Visual Disassembly</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/visual_mode/visual_assembler.html" class=""><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Visual Assembler</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/visual_mode/visual_configuration_editor.html" class=""><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visual Configuration Editor</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/visual_mode/visual_panels.html" class=""><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Visual Panels</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#searchingbytes-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Searching bytes</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="searchingbytes-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../../src/search_bytes/intro.html" class=""><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Searching for Bytes</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/search_bytes/basic_searches.html" class=""><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Basic Search</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/search_bytes/configurating_the_search.html" class=""><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Configuring Search Options</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/search_bytes/pattern_search.html" class=""><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Pattern Matching Search</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/search_bytes/automation.html" class=""><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Search Automation</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/search_bytes/backward_search.html" class=""><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Searching Backwards</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/search_bytes/search_in_assembly.html" class=""><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Assembler Search</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/search_bytes/searching_aes_keys.html" class=""><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Searching for AES Keys</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#disassembling-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Disassembling</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="disassembling-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../../src/disassembling/intro.html" class=""><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Disassembling</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/disassembling/adding_metadata.html" class=""><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Adding Metadata to Disassembly</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/disassembling/esil.html" class=""><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">ESIL</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#analysis-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Analysis</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="analysis-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../../src/analysis/intro.html" class=""><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Data and Code Analysis</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/analysis/code_analysis.html" class=""><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Code Analysis</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/analysis/variables.html" class=""><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Managing variables</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/analysis/types.html" class=""><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Types</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/analysis/calling_conventions.html" class=""><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Calling Conventions</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/analysis/vtables.html" class=""><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Virtual Tables</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/analysis/syscalls.html" class=""><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Syscalls</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/analysis/emulation.html" class=""><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Emulation</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/analysis/symbols.html" class=""><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Symbols</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/analysis/graphs.html" class=""><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Graph commands</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/analysis/cpu_platform_profiles.html" class=""><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">CPU and platform profiles</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#scripting-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Scripting</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="scripting-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../../src/scripting/intro.html" class=""><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">Scripting</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/scripting/loops.html" class=""><span class="chapter-number">45</span>&nbsp; <span class="chapter-title">Loops</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/scripting/macros.html" class=""><span class="chapter-number">46</span>&nbsp; <span class="chapter-title">Macros</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/scripting/rz-pipe.html" class=""><span class="chapter-number">47</span>&nbsp; <span class="chapter-title">Rz-pipe</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#debugger-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Debugger</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="debugger-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../../src/debugger/intro.html" class=""><span class="chapter-number">48</span>&nbsp; <span class="chapter-title">Debugger</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/debugger/getting_started.html" class=""><span class="chapter-number">49</span>&nbsp; <span class="chapter-title">Getting Started</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/debugger/migration.html" class=""><span class="chapter-number">50</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/debugger/registers.html" class=""><span class="chapter-number">51</span>&nbsp; <span class="chapter-title">Registers</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/debugger/memory_maps.html" class=""><span class="chapter-number">52</span>&nbsp; <span class="chapter-title">Memory Maps</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/debugger/heap.html" class=""><span class="chapter-number">53</span>&nbsp; <span class="chapter-title">Heap</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/debugger/files.html" class=""><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Files</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/debugger/revdebug.html" class=""><span class="chapter-number">55</span>&nbsp; <span class="chapter-title">Reverse Debugging</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/debugger/windows_messages.html" class=""><span class="chapter-number">56</span>&nbsp; <span class="chapter-title">Windows Messages</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/debugger/apple.html" class=""><span class="chapter-number">57</span>&nbsp; <span class="chapter-title">macOS/iOS</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#remoteaccess-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Remote Access</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="remoteaccess-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../../src/debugger/remoting_capabilities.html" class=""><span class="chapter-number">58</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/debugger/remote_gdb.html" class=""><span class="chapter-number">59</span>&nbsp; <span class="chapter-title">Debugging with gdbserver</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/debugger/windbg.html" class=""><span class="chapter-number">60</span>&nbsp; <span class="chapter-title">WinDBG Kernel-mode Debugging (KD)</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#commandlinetools-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Command Line Tools</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="commandlinetools-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../../src/tools/intro.html" class=""><span class="chapter-number">61</span>&nbsp; <span class="chapter-title">Tools</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/tools/rz-ax/intro.html" class=""><span class="chapter-number">62</span>&nbsp; <span class="chapter-title">Rz-ax</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/tools/rz-find/intro.html" class=""><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Rz-find</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/tools/rz-run/intro.html" class=""><span class="chapter-number">64</span>&nbsp; <span class="chapter-title">Rz-run</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/tools/rz-bin/intro.html" class=""><span class="chapter-number">65</span>&nbsp; <span class="chapter-title">Rz-bin — Show Properties of a Binary</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/tools/rz-bin/file_identification.html" class=""><span class="chapter-number">66</span>&nbsp; <span class="chapter-title">File Properties Identification</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/tools/rz-bin/entrypoints.html" class=""><span class="chapter-number">67</span>&nbsp; <span class="chapter-title">Code Entrypoints</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/tools/rz-bin/imports.html" class=""><span class="chapter-number">68</span>&nbsp; <span class="chapter-title">Imports</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/tools/rz-bin/exports.html" class=""><span class="chapter-number">69</span>&nbsp; <span class="chapter-title">Exports</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/tools/rz-bin/symbols.html" class=""><span class="chapter-number">70</span>&nbsp; <span class="chapter-title">Symbols (Exports)</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/tools/rz-bin/libraries.html" class=""><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">List Libraries</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/tools/rz-bin/strings.html" class=""><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">Strings</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/tools/rz-bin/program_sections.html" class=""><span class="chapter-number">73</span>&nbsp; <span class="chapter-title">Program Sections</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/tools/rz-diff/intro.html" class=""><span class="chapter-number">74</span>&nbsp; <span class="chapter-title">Rz-diff</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/tools/rz-diff/binary_diffing.html" class=""><span class="chapter-number">75</span>&nbsp; <span class="chapter-title">Rz-Diff (binary and text diffing utility)</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#plugins-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Plugins</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="plugins-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../../src/plugins/intro.html" class=""><span class="chapter-number">76</span>&nbsp; <span class="chapter-title">Plugins</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/plugins/ioplugins.html" class=""><span class="chapter-number">77</span>&nbsp; <span class="chapter-title">IO plugins</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/plugins/dev-asm.html" class=""><span class="chapter-number">78</span>&nbsp; <span class="chapter-title">Implementing a new disassembly plugin</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/plugins/dev-bin.html" class=""><span class="chapter-number">79</span>&nbsp; <span class="chapter-title">Implementing a new format</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/plugins/dev-other.html" class=""><span class="chapter-number">80</span>&nbsp; <span class="chapter-title">Write a debugger plugin</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/plugins/python.html" class=""><span class="chapter-number">81</span>&nbsp; <span class="chapter-title">Python plugins</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/plugins/debug.html" class=""><span class="chapter-number">82</span>&nbsp; <span class="chapter-title">Debugging</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/plugins/testing.html" class=""><span class="chapter-number">83</span>&nbsp; <span class="chapter-title">Testing the plugin</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/plugins/rz-pm.html" class=""><span class="chapter-number">84</span>&nbsp; <span class="chapter-title">Creating an rz-pm package of the plugin</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#crackmes-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Crackmes</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="crackmes-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/intro.html" class=""><span class="chapter-number">85</span>&nbsp; <span class="chapter-title">Crackmes</span></a>
+</li>
+          <ul class="list-unstyled sidebar-section depth2">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#ioli-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-item">IOLI</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="ioli-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/ioli/intro.html" class=""><span class="chapter-number">86</span>&nbsp; <span class="chapter-title">IOLI CrackMes</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/ioli/ioli_0x00.html" class=""><span class="chapter-number">87</span>&nbsp; <span class="chapter-title">IOLI 0x00</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/ioli/ioli_0x01.html" class=""><span class="chapter-number">88</span>&nbsp; <span class="chapter-title">IOLI 0x01</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/ioli/ioli_0x02.html" class=""><span class="chapter-number">89</span>&nbsp; <span class="chapter-title">IOLI 0x02</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/ioli/ioli_0x03.html" class=""><span class="chapter-number">90</span>&nbsp; <span class="chapter-title">IOLI 0x03</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/ioli/ioli_0x04.html" class=""><span class="chapter-number">91</span>&nbsp; <span class="chapter-title">IOLI 0x04</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/ioli/ioli_0x05.html" class=""><span class="chapter-number">92</span>&nbsp; <span class="chapter-title">IOLI 0x05</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/ioli/ioli_0x06.html" class=""><span class="chapter-number">93</span>&nbsp; <span class="chapter-title">IOLI 0x06</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/ioli/ioli_0x07.html" class="active"><span class="chapter-number">94</span>&nbsp; <span class="chapter-title">IOLI 0x07</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/ioli/ioli_0x08.html" class=""><span class="chapter-number">95</span>&nbsp; <span class="chapter-title">IOLI 0x08</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/ioli/ioli_0x09.html" class=""><span class="chapter-number">96</span>&nbsp; <span class="chapter-title">IOLI 0x09</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+          <ul class="list-unstyled sidebar-section depth2">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 collapsed" data-bs-toggle="collapse" data-bs-target="#avataor3v3rs34-collapse" aria-expanded="false">
+              <div class="me-auto sidebar-item">Avatao R3v3rs3 4</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  " id="avataor3v3rs34-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/avatao/01-reverse4/intro.html" class=""><span class="chapter-number">97</span>&nbsp; <span class="chapter-title">Avatao R3v3rs3 4</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/avatao/01-reverse4/rizin.html" class=""><span class="chapter-number">98</span>&nbsp; <span class="chapter-title">.rizin</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/avatao/01-reverse4/first_steps.html" class=""><span class="chapter-number">99</span>&nbsp; <span class="chapter-title">.first_steps</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/avatao/01-reverse4/main.html" class=""><span class="chapter-number">100</span>&nbsp; <span class="chapter-title">.main</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/avatao/01-reverse4/vmloop.html" class=""><span class="chapter-number">101</span>&nbsp; <span class="chapter-title">.vmloop</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/avatao/01-reverse4/instructionset.html" class=""><span class="chapter-number">102</span>&nbsp; <span class="chapter-title">.instructionset</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/avatao/01-reverse4/bytecode.html" class=""><span class="chapter-number">103</span>&nbsp; <span class="chapter-title">.bytecode</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/avatao/01-reverse4/outro.html" class=""><span class="chapter-number">104</span>&nbsp; <span class="chapter-title">.outro</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+          <ul class="list-unstyled sidebar-section depth2">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 collapsed" data-bs-toggle="collapse" data-bs-target="#hackthebox-collapse" aria-expanded="false">
+              <div class="me-auto sidebar-item">Hack The Box</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  " id="hackthebox-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/hackthebox/intro.html" class=""><span class="chapter-number">105</span>&nbsp; <span class="chapter-title">hackthebox</span></a>
+</li>
+          <ul class="list-unstyled sidebar-section depth3">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 collapsed" data-bs-toggle="collapse" data-bs-target="#findtheeasypass-collapse" aria-expanded="false">
+              <div class="me-auto sidebar-item">Find The Easy Pass</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  " id="findtheeasypass-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/hackthebox/find-the-easy-pass/intro.html" class=""><span class="chapter-number">106</span>&nbsp; <span class="chapter-title">Find The Easy Pass</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/hackthebox/find-the-easy-pass/identification.html" class=""><span class="chapter-number">107</span>&nbsp; <span class="chapter-title">identification</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/hackthebox/find-the-easy-pass/find-the-validation-routine.html" class=""><span class="chapter-number">108</span>&nbsp; <span class="chapter-title">Find the validation routine</span></a>
+</li>
+          <li class="sidebar-item">
+  <a href="../../../src/crackmes/hackthebox/find-the-easy-pass/bonus.html" class=""><span class="chapter-number">109</span>&nbsp; <span class="chapter-title">Bonus</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+        </ul>
+      </div>
+    </li>
+  </ul>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#referencecard-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Reference Card</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="referencecard-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../../src/refcard/intro.html" class=""><span class="chapter-number">110</span>&nbsp; <span class="chapter-title">Rizin Reference Card</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+      <ul class="list-unstyled sidebar-section depth1">
+    <li class="">
+        <div class="me-auto">
+            <a class="sidebar-section-item d-inline-flex text-start w-100 " data-bs-toggle="collapse" data-bs-target="#acknowledgments-collapse" aria-expanded="true">
+              <div class="me-auto sidebar-section-item">Acknowledgments</div>
+            <div><i class="bi bi-chevron-right ms-2"></i></div>
+            </a>
+        </div>
+      <div class="collapse  show" id="acknowledgments-collapse">
+        <ul class="list-unstyled sidebar-item-contents">
+          <li class="sidebar-item">
+  <a href="../../../src/credits/credits.html" class=""><span class="chapter-number">111</span>&nbsp; <span class="chapter-title">Authors &amp; Contributors</span></a>
+</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+  </ul>
+  </div>
+</nav>
+  </div>
+  <div id="quarto-toc-sidebar" class=" pt-0 col col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-toc order-last"></div>
+  <div class="col mx-auto col-sm-12 col-md-9 col-lg-7 col-xl-7 px-lg-4 pe-xxl-4 ps-xxl-3">
+<main>
+<header id="title-block-header">
+<h1 class="title d-none d-lg-block display-7"><span class="chapter-number">94</span>&nbsp; <span class="chapter-title">IOLI 0x07</span></h1>
+</header>
+<p>a weird “wtf?” string.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-bin <span class="at">-z</span> ./crackme0x07</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[Strings]</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">nth</span> paddr      vaddr      len size section type  string</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">―――――――――――――――――――――――――――――――――――――――――――――――――――――――</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span>   0x000007a8 0x080487a8 4   5    .rodata ascii LOLO</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span>   0x000007ad 0x080487ad 20  21   .rodata ascii Password Incorrect!<span class="dt">\n</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span>   0x000007c5 0x080487c5 13  14   .rodata ascii Password OK!<span class="dt">\n</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">3</span>   0x000007d3 0x080487d3 5   6    .rodata ascii wtf<span class="pp">?</span><span class="dt">\n</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">4</span>   0x000007d9 0x080487d9 24  25   .rodata ascii IOLI Crackme Level 0x07<span class="dt">\n</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">5</span>   0x000007f2 0x080487f2 10  11   .rodata ascii Password:</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>again, no password string or compare in <code>main()</code>. I put the simplified pseudo code here. var_78h is likely to a char *pointer (string) .</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode asm code-with-copy"><code class="sourceCode fasm"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>#include <span class="op">&lt;</span>stdint<span class="op">.</span>h<span class="op">&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>int32_t main <span class="op">(</span>int32_t arg_10h<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    printf <span class="op">(</span><span class="st">"IOLI Crackme Level 0x07\n"</span><span class="op">)</span><span class="co">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    printf <span class="op">(</span><span class="st">"Password: "</span><span class="op">)</span><span class="co">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    scanf <span class="op">(%</span>s<span class="op">,</span> <span class="op">&amp;</span>var_78h<span class="op">)</span><span class="co">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    return fcn_080485b9 <span class="op">(&amp;</span>var_78h<span class="op">,</span> arg_10h<span class="op">)</span><span class="co">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>due to the symbol info lost, neither <code>aa</code> nor <code>aaa</code> show the name of functions. we can double check this in “flagspace”. Rizin use fcn_080485b9 as the function name. It’s a common case in reverse engineering that we don’t have any symbol info of the binary.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x080487fd]</span><span class="op">&gt;</span> fs symbols</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x080487fd]</span><span class="op">&gt;</span> f</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">0x08048400</span> 33 entry0</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">0x0804867d</span> 92 main</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">0x080487a4</span> 4 obj._IO_stdin_used</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>decompile the <code>fcn_080485b9()</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span><span class="bn">0x080485b9</span><span class="op">]&gt;</span> pdfc</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>            <span class="op">;</span> CALL XREF from main @ <span class="bn">0x80486d4</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">/</span> <span class="dv">118</span><span class="op">:</span> fcn<span class="fl">.080485</span><span class="er">b9</span> <span class="op">(</span><span class="dt">char</span> <span class="op">*</span>s<span class="op">,</span> <span class="dt">int32_t</span> arg_ch<span class="op">);</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>           <span class="op">;</span> var <span class="dt">char</span> <span class="op">*</span>var_dh @ ebp<span class="op">-</span><span class="bn">0xd</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>           <span class="op">;</span> var <span class="dt">signed</span> <span class="dt">int</span> var_ch  <span class="op">{</span> <span class="op">&gt;=</span> <span class="bn">0xffffffffffffffff</span><span class="op">}</span> @ ebp<span class="op">-</span><span class="bn">0xc</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>           <span class="op">;</span> var <span class="dt">uint32_t</span> var_8h @ ebp<span class="op">-</span><span class="bn">0x8</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>           <span class="op">;</span> var <span class="dt">int32_t</span> var_bp_4h @ ebp<span class="op">-</span><span class="bn">0x4</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>           <span class="op">;</span> arg <span class="dt">char</span> <span class="op">*</span>s @ ebp<span class="op">+</span><span class="bn">0x8</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>           <span class="op">;</span> arg <span class="dt">int32_t</span> arg_ch @ ebp<span class="op">+</span><span class="bn">0xc</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>           <span class="op">;</span> var <span class="dt">char</span> <span class="op">*</span>format @ esp<span class="op">+</span><span class="bn">0x4</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>           <span class="op">;</span> var <span class="dt">int32_t</span> var_sp_8h @ esp<span class="op">+</span><span class="bn">0x8</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>           <span class="bn">0x080485b9</span>      <span class="dv">55</span>             push ebp</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>           <span class="bn">0x080485ba</span>      <span class="fl">89e5</span>           mov ebp<span class="op">,</span> esp</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>           <span class="bn">0x080485bc</span>      <span class="dv">83</span><span class="er">ec28</span>         sub esp<span class="op">,</span> <span class="bn">0x28</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>           <span class="bn">0x080485bf</span>      c745f8000000<span class="op">.</span>  mov dword <span class="op">[</span>var_8h<span class="op">],</span> <span class="dv">0</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>           <span class="bn">0x080485c6</span>      c745f4000000<span class="op">.</span>  mov dword <span class="op">[</span>var_ch<span class="op">],</span> <span class="dv">0</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>           <span class="op">;</span> CODE XREF from fcn<span class="fl">.080485</span><span class="er">b9</span> @ <span class="bn">0x8048628</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>       <span class="op">.-&gt;</span> <span class="bn">0x080485cd</span>      <span class="dv">8</span><span class="er">b4508</span>         mov eax<span class="op">,</span> dword <span class="op">[</span>s<span class="op">]</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>       <span class="op">:</span>   <span class="bn">0x080485d0</span>      <span class="dv">890424</span>         mov dword <span class="op">[</span>esp<span class="op">],</span> eax        <span class="op">;</span> <span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>s</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>       <span class="op">:</span>   <span class="bn">0x080485d3</span>      e8d0fdffff     call sym<span class="op">.</span>imp<span class="op">.</span>strlen         <span class="op">;</span> <span class="dt">size_t</span> strlen<span class="op">(</span><span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>s<span class="op">)</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>       <span class="op">:</span>   <span class="bn">0x080485d8</span>      <span class="dv">3945</span><span class="er">f4</span>         cmp dword <span class="op">[</span>var_ch<span class="op">],</span> eax</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>      <span class="op">,==&lt;</span> <span class="bn">0x080485db</span>      <span class="dv">734</span><span class="er">d</span>           jae <span class="bn">0x804862a</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>      <span class="op">|:</span>   <span class="bn">0x080485dd</span>      <span class="dv">8</span><span class="er">b45f4</span>         mov eax<span class="op">,</span> dword <span class="op">[</span>var_ch<span class="op">]</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>      <span class="op">|:</span>   <span class="bn">0x080485e0</span>      <span class="bn">03450</span><span class="er">8</span>         add eax<span class="op">,</span> dword <span class="op">[</span>s<span class="op">]</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>      <span class="op">|:</span>   <span class="bn">0x080485e3</span>      <span class="dv">0</span><span class="er">fb600</span>         movzx eax<span class="op">,</span> byte <span class="op">[</span>eax<span class="op">]</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>      <span class="op">|:</span>   <span class="bn">0x080485e6</span>      <span class="dv">8845</span><span class="er">f3</span>         mov byte <span class="op">[</span>var_dh<span class="op">],</span> al</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>      <span class="op">|:</span>   <span class="bn">0x080485e9</span>      <span class="dv">8</span><span class="er">d45fc</span>         lea eax<span class="op">,</span> <span class="op">[</span>var_bp_4h<span class="op">]</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>      <span class="op">|:</span>   <span class="bn">0x080485ec</span>      <span class="dv">89442408</span>       mov dword <span class="op">[</span>var_sp_8h<span class="op">],</span> eax  <span class="op">;</span>   <span class="op">...</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>      <span class="op">|:</span>   <span class="bn">0x080485f0</span>      c7442404c287<span class="op">.</span>  mov dword <span class="op">[</span>format<span class="op">],</span> <span class="bn">0x80487c2</span> <span class="op">;</span> <span class="op">[</span><span class="bn">0x80487c2</span><span class="op">:</span><span class="dv">4</span><span class="op">]=</span><span class="bn">0x50006425</span> <span class="op">;</span> <span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>format</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>      <span class="op">|:</span>   <span class="op">;--</span> eip<span class="op">:</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>      <span class="op">|:</span>   <span class="bn">0x080485f8</span>      <span class="dv">8</span><span class="er">d45f3</span>         lea eax<span class="op">,</span> <span class="op">[</span>var_dh<span class="op">]</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>      <span class="op">|:</span>   <span class="bn">0x080485fb</span>      <span class="dv">890424</span>         mov dword <span class="op">[</span>esp<span class="op">],</span> eax        <span class="op">;</span> <span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>s</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>      <span class="op">|:</span>   <span class="bn">0x080485fe</span>      e8c5fdffff     call sym<span class="op">.</span>imp<span class="op">.</span>sscanf         <span class="op">;</span> <span class="dt">int</span> sscanf<span class="op">(</span><span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>s<span class="op">,</span> <span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>format<span class="op">,</span>   <span class="op">...)</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>      <span class="op">|:</span>   <span class="bn">0x08048603</span>      <span class="dv">8</span><span class="er">b55fc</span>         mov edx<span class="op">,</span> dword <span class="op">[</span>var_bp_4h<span class="op">]</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>      <span class="op">|:</span>   <span class="bn">0x08048606</span>      <span class="dv">8</span><span class="er">d45f8</span>         lea eax<span class="op">,</span> <span class="op">[</span>var_8h<span class="op">]</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>      <span class="op">|:</span>   <span class="bn">0x08048609</span>      <span class="bn">0110</span>           add dword <span class="op">[</span>eax<span class="op">],</span> edx</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>      <span class="op">|:</span>   <span class="bn">0x0804860b</span>      <span class="dv">837</span><span class="er">df810</span>       cmp dword <span class="op">[</span>var_8h<span class="op">],</span> <span class="bn">0x10</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>     <span class="op">,===&lt;</span> <span class="bn">0x0804860f</span>      <span class="dv">7512</span>           jne <span class="bn">0x8048623</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>     <span class="op">||:</span>   <span class="bn">0x08048611</span>      <span class="dv">8</span><span class="er">b450c</span>         mov eax<span class="op">,</span> dword <span class="op">[</span>arg_ch<span class="op">]</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>     <span class="op">||:</span>   <span class="bn">0x08048614</span>      <span class="dv">89442404</span>       mov dword <span class="op">[</span>format<span class="op">],</span> eax     <span class="op">;</span> <span class="dt">char</span> <span class="op">*</span>arg_ch</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>     <span class="op">||:</span>   <span class="bn">0x08048618</span>      <span class="dv">8</span><span class="er">b4508</span>         mov eax<span class="op">,</span> dword <span class="op">[</span>s<span class="op">]</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>     <span class="op">||:</span>   <span class="bn">0x0804861b</span>      <span class="dv">890424</span>         mov dword <span class="op">[</span>esp<span class="op">],</span> eax        <span class="op">;</span> <span class="dt">char</span> <span class="op">*</span>s</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>     <span class="op">||:</span>   <span class="bn">0x0804861e</span>      e81fffffff     call fcn<span class="fl">.08048542</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>     <span class="op">||:</span>   <span class="op">;</span> CODE XREF from fcn<span class="fl">.080485</span><span class="er">b9</span> @ <span class="bn">0x804860f</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>     `<span class="op">---&gt;</span> <span class="bn">0x08048623</span>      <span class="dv">8</span><span class="er">d45f4</span>         lea eax<span class="op">,</span> <span class="op">[</span>var_ch<span class="op">]</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>      <span class="op">|:</span>   <span class="bn">0x08048626</span>      ff00           inc dword <span class="op">[</span>eax<span class="op">]</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>      <span class="op">|</span>`<span class="op">=&lt;</span> <span class="bn">0x08048628</span>      eba3           jmp <span class="bn">0x80485cd</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="op">|</span>      <span class="op">|</span>    <span class="op">;</span> CODE XREF from fcn<span class="fl">.080485</span><span class="er">b9</span> @ <span class="bn">0x80485db</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>\      `<span class="op">--&gt;</span> <span class="bn">0x0804862a</span>      e8f5feffff     call fcn<span class="fl">.08048524</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>we got familiar with this code structure in the previous challenges (the check function). It’s not difficult for us even we don’t have the symbol info. you can also use <code>afn</code> command to rename the function name if you like.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int32_t</span> fcn_080485b9 <span class="op">(</span><span class="dt">char</span> <span class="op">*</span> s<span class="op">,</span> <span class="dt">void</span><span class="op">*</span> envp<span class="op">)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    var_ch <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    var_8h <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>var_ch <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> var_ch <span class="op">&lt;</span> strlen<span class="op">(</span>s<span class="op">);</span> <span class="op">++</span>var_ch<span class="op">)</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        var_dh <span class="op">=</span> s<span class="op">[</span>var_ch<span class="op">];</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        sscanf<span class="op">(&amp;</span>var_dh<span class="op">,</span> <span class="op">%</span>d<span class="op">,</span> <span class="op">&amp;</span>var_4h<span class="op">);</span>           <span class="co">// read from string[var_ch], store to var_4h</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        var_8h <span class="op">+=</span> var_4h<span class="op">;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>var_8h <span class="op">==</span> <span class="bn">0x10</span><span class="op">)</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>            fcn_08048542<span class="op">(</span>s<span class="op">,</span> envp<span class="op">);</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fcn_08048524<span class="op">();</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>most part of crackme 0x07 is the same with 0x06. and it can be solved by the same password &amp; environment:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> export LOLAA=help</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./cracke0x07</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">IOLI</span> Crackme Level 0x07</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Password:</span> 12346</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Password</span> OK!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>wait … where is the ‘wtf?’. Often, we would like to find the cross reference (xref) to strings (or data, functions, etc.) in reverse engineering. The related commands in Rizin are under “ax” namespace:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048400]</span><span class="op">&gt;</span> f</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">0x080487a8</span> 5 str.LOLO</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">0x080487ad</span> 21 str.Password_Incorrect</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">0x080487c5</span> 14 str.Password_OK</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">0x080487d3</span> 6 str.wtf</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">0x080487d9</span> 25 str.IOLI_Crackme_Level_0x07</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ex">0x080487f2</span> 11 str.Password:</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048400]</span><span class="op">&gt;</span> axt 0x80487d3</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">nofunc</span><span class="kw">)</span> <span class="ex">0x804865c</span> [DATA] mov dword [esp], str.wtf</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048400]</span><span class="op">&gt;</span> axF str.wtf</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Finding</span> references of flags matching <span class="st">'str.wtf'</span>...</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x001eff28-0x001f0000]</span> <span class="er">(</span><span class="ex">nofunc</span><span class="kw">)</span> <span class="ex">0x804865c</span> [DATA] mov dword [esp], str.wtf</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Macro</span> <span class="st">'findstref'</span> removed.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>the <code>[DATA] mov dword [esp], str.wtf</code> at <code>0x804865c</code> is an instruction of fcn.080485b9. But the analysis in my PC ignores the remained instructions and only display the incomplete assembly. the range of fcn.080485b9 should be <code>0x080485b9 ~ 0x0804867c</code> . we can reset block size and print opcodes.</p>
+<pre><code>[0x08040000]&gt; s 0x080485b9
+[0x080485b9]&gt; b 230
+[0x08048400]&gt; pd
+...
+            0x0804862f      8b450c         mov eax, dword [ebp + 0xc]
+            0x08048632      89442404       mov dword [esp + 4], eax
+            0x08048636      8b45fc         mov eax, dword [ebp - 4]
+            0x08048639      890424         mov dword [esp], eax        ; char **s1
+            0x0804863c      e873feffff     call fcn.080484b4
+            0x08048641      85c0           test eax, eax
+        ,=&lt; 0x08048643      7436           je 0x804867b
+        |   0x08048645      c745f4000000.  mov dword [ebp - 0xc], 0
+        |   ; CODE XREF from fcn.080485b9 @ +0xc0
+       .--&gt; 0x0804864c      837df409       cmp dword [ebp - 0xc], 9
+      ,===&lt; 0x08048650      7f29           jg 0x804867b
+      |:|   0x08048652      8b45fc         mov eax, dword [ebp - 4]
+      |:|   0x08048655      83e001         and eax, 1
+      |:|   0x08048658      85c0           test eax, eax
+     ,====&lt; 0x0804865a      7518           jne 0x8048674
+     ||:|   0x0804865c      c70424d38704.  mov dword [esp], str.wtf    ; [0x80487d3:4]=0x3f667477 ; "wtf?\n" ; const char *format
+     ||:|   0x08048663      e850fdffff     call sym.imp.printf         ; int printf(const char *format)
+     ||:|   0x08048668      c70424000000.  mov dword [esp], 0          ; int status
+     ||:|   0x0804866f      e874fdffff     call sym.imp.exit           ; void exit(int status)
+     ||:|   ; CODE XREF from fcn.080485b9 @ +0xa1
+     `----&gt; 0x08048674      8d45f4         lea eax, [ebp - 0xc]
+      |:|   0x08048677      ff00           inc dword [eax]
+      |`==&lt; 0x08048679      ebd1           jmp 0x804864c
+      | |   ; CODE XREFS from fcn.080485b9 @ +0x8a, +0x97
+      `-`-&gt; 0x0804867b      c9             leave
+            0x0804867c      c3             ret
+</code></pre>
+<p><code>test eax, ea;je 0x804867b</code> will jump to <code>leave; ret</code>, which forever skips the str.wtf part. only use <code>aa</code> to analyze this binary can display the whole function.</p>
+
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    setTimeout(function() {
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    window.tippy(el, {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    }); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      const id = new URL(ref.getAttribute('href')).hash.replace(/^#/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</main>
+<div class="page-navigation ">
+  <div class="nav-page nav-page-previous">
+      <a href="../../../src/crackmes/ioli/ioli_0x06.html">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">93</span>&nbsp; <span class="chapter-title">IOLI 0x06</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../src/crackmes/ioli/ioli_0x08.html">
+        <span class="nav-page-text"><span class="chapter-number">95</span>&nbsp; <span class="chapter-title">IOLI 0x08</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</div>
+</div> <!-- /main column -->
+</div> <!-- /row -->
+</div> <!-- /container fluid -->
+
+
+</body></html>
