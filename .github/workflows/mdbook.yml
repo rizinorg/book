@@ -23,3 +23,9 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs
           cname: book.rizin.re
+
+      - name: Render to PDF and ePub
+        shell: bash
+        run: |
+          quarto render --to pdf
+          quarto render --to epub
