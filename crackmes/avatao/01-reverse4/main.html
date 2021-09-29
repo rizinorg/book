@@ -1,0 +1,440 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>.main - The Official Rizin Book</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="The Official Rizin Book">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../../../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../../../favicon.png">
+        
+        <link rel="stylesheet" href="../../../css/variables.css">
+        <link rel="stylesheet" href="../../../css/general.css">
+        <link rel="stylesheet" href="../../../css/chrome.css">
+        
+        <link rel="stylesheet" href="../../../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../../../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../../highlight.css">
+        <link rel="stylesheet" href="../../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../../index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../first_steps/overview.html"><strong aria-hidden="true">1.1.</strong> The Framework</a></li><li class="chapter-item expanded "><a href="../../../first_steps/getting_rizin.html"><strong aria-hidden="true">1.2.</strong> Downloading rizin</a></li><li class="chapter-item expanded "><a href="../../../first_steps/compilation_portability.html"><strong aria-hidden="true">1.3.</strong> Compilation and Portability</a></li><li class="chapter-item expanded "><a href="../../../first_steps/windows_compilation.html"><strong aria-hidden="true">1.4.</strong> Compilation on Windows</a></li><li class="chapter-item expanded "><a href="../../../first_steps/compilation_android.html"><strong aria-hidden="true">1.5.</strong> Compilation on Android</a></li></ol></li><li class="chapter-item expanded "><a href="../../../first_steps/intro.html"><strong aria-hidden="true">2.</strong> First Steps</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../first_steps/commandline_flags.html"><strong aria-hidden="true">2.1.</strong> Command-line Flags</a></li><li class="chapter-item expanded "><a href="../../../first_steps/command_format.html"><strong aria-hidden="true">2.2.</strong> Command Format</a></li><li class="chapter-item expanded "><a href="../../../first_steps/expressions.html"><strong aria-hidden="true">2.3.</strong> Expressions</a></li><li class="chapter-item expanded "><a href="../../../first_steps/basic_debugger_session.html"><strong aria-hidden="true">2.4.</strong> Basic Debugger Session</a></li><li class="chapter-item expanded "><a href="../../../first_steps/contributing.html"><strong aria-hidden="true">2.5.</strong> Contributing to rizin</a></li></ol></li><li class="chapter-item expanded "><a href="../../../configuration/intro.html"><strong aria-hidden="true">3.</strong> Configuration</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../configuration/colors.html"><strong aria-hidden="true">3.1.</strong> Colors</a></li><li class="chapter-item expanded "><a href="../../../configuration/evars.html"><strong aria-hidden="true">3.2.</strong> Configuration Variables</a></li><li class="chapter-item expanded "><a href="../../../configuration/files.html"><strong aria-hidden="true">3.3.</strong> Files</a></li></ol></li><li class="chapter-item expanded "><a href="../../../basic_commands/intro.html"><strong aria-hidden="true">4.</strong> Basic Commands</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../basic_commands/seeking.html"><strong aria-hidden="true">4.1.</strong> Seeking</a></li><li class="chapter-item expanded "><a href="../../../basic_commands/block_size.html"><strong aria-hidden="true">4.2.</strong> Block Size</a></li><li class="chapter-item expanded "><a href="../../../basic_commands/sections.html"><strong aria-hidden="true">4.3.</strong> Sections</a></li><li class="chapter-item expanded "><a href="../../../basic_commands/mapping_files.html"><strong aria-hidden="true">4.4.</strong> Mapping Files</a></li><li class="chapter-item expanded "><a href="../../../basic_commands/print_modes.html"><strong aria-hidden="true">4.5.</strong> Print Modes</a></li><li class="chapter-item expanded "><a href="../../../basic_commands/flags.html"><strong aria-hidden="true">4.6.</strong> Flags</a></li><li class="chapter-item expanded "><a href="../../../basic_commands/write.html"><strong aria-hidden="true">4.7.</strong> Write</a></li><li class="chapter-item expanded "><a href="../../../basic_commands/zoom.html"><strong aria-hidden="true">4.8.</strong> Zoom</a></li><li class="chapter-item expanded "><a href="../../../basic_commands/yank_paste.html"><strong aria-hidden="true">4.9.</strong> Yank/Paste</a></li><li class="chapter-item expanded "><a href="../../../basic_commands/comparing_bytes.html"><strong aria-hidden="true">4.10.</strong> Comparing Bytes</a></li><li class="chapter-item expanded "><a href="../../../basic_commands/sdb.html"><strong aria-hidden="true">4.11.</strong> SDB</a></li><li class="chapter-item expanded "><a href="../../../basic_commands/dietline.html"><strong aria-hidden="true">4.12.</strong> Dietline</a></li></ol></li><li class="chapter-item expanded "><a href="../../../visual_mode/intro.html"><strong aria-hidden="true">5.</strong> Visual mode</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../visual_mode/visual_disassembly.html"><strong aria-hidden="true">5.1.</strong> Visual Disassembly</a></li><li class="chapter-item expanded "><a href="../../../visual_mode/visual_assembler.html"><strong aria-hidden="true">5.2.</strong> Visual Assembler</a></li><li class="chapter-item expanded "><a href="../../../visual_mode/visual_configuration_editor.html"><strong aria-hidden="true">5.3.</strong> Visual Configuration Editor</a></li><li class="chapter-item expanded "><a href="../../../visual_mode/visual_panels.html"><strong aria-hidden="true">5.4.</strong> Visual Panels</a></li></ol></li><li class="chapter-item expanded "><a href="../../../search_bytes/intro.html"><strong aria-hidden="true">6.</strong> Searching bytes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../search_bytes/basic_searches.html"><strong aria-hidden="true">6.1.</strong> Basic Searches</a></li><li class="chapter-item expanded "><a href="../../../search_bytes/configurating_the_search.html"><strong aria-hidden="true">6.2.</strong> Configurating the Search</a></li><li class="chapter-item expanded "><a href="../../../search_bytes/pattern_search.html"><strong aria-hidden="true">6.3.</strong> Pattern Search</a></li><li class="chapter-item expanded "><a href="../../../search_bytes/automation.html"><strong aria-hidden="true">6.4.</strong> Automation</a></li><li class="chapter-item expanded "><a href="../../../search_bytes/backward_search.html"><strong aria-hidden="true">6.5.</strong> Backward Search</a></li><li class="chapter-item expanded "><a href="../../../search_bytes/search_in_assembly.html"><strong aria-hidden="true">6.6.</strong> Search in Assembly</a></li><li class="chapter-item expanded "><a href="../../../search_bytes/searching_aes_keys.html"><strong aria-hidden="true">6.7.</strong> Searching for AES Keys</a></li></ol></li><li class="chapter-item expanded "><a href="../../../disassembling/intro.html"><strong aria-hidden="true">7.</strong> Disassembling</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../disassembling/adding_metadata.html"><strong aria-hidden="true">7.1.</strong> Adding Metadata</a></li><li class="chapter-item expanded "><a href="../../../disassembling/esil.html"><strong aria-hidden="true">7.2.</strong> ESIL</a></li></ol></li><li class="chapter-item expanded "><a href="../../../analysis/intro.html"><strong aria-hidden="true">8.</strong> Analysis</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../analysis/code_analysis.html"><strong aria-hidden="true">8.1.</strong> Code Analysis</a></li><li class="chapter-item expanded "><a href="../../../analysis/variables.html"><strong aria-hidden="true">8.2.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../../../analysis/types.html"><strong aria-hidden="true">8.3.</strong> Types</a></li><li class="chapter-item expanded "><a href="../../../analysis/calling_conventions.html"><strong aria-hidden="true">8.4.</strong> Calling Conventions</a></li><li class="chapter-item expanded "><a href="../../../analysis/vtables.html"><strong aria-hidden="true">8.5.</strong> Virtual Tables</a></li><li class="chapter-item expanded "><a href="../../../analysis/syscalls.html"><strong aria-hidden="true">8.6.</strong> Syscalls</a></li><li class="chapter-item expanded "><a href="../../../analysis/emulation.html"><strong aria-hidden="true">8.7.</strong> Emulation</a></li><li class="chapter-item expanded "><a href="../../../analysis/symbols.html"><strong aria-hidden="true">8.8.</strong> Symbols information</a></li><li class="chapter-item expanded "><a href="../../../signatures/zignatures.html"><strong aria-hidden="true">8.9.</strong> Signatures</a></li><li class="chapter-item expanded "><a href="../../../analysis/graphs.html"><strong aria-hidden="true">8.10.</strong> Graph commands</a></li></ol></li><li class="chapter-item expanded "><a href="../../../scripting/intro.html"><strong aria-hidden="true">9.</strong> Scripting</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../scripting/loops.html"><strong aria-hidden="true">9.1.</strong> Loops</a></li><li class="chapter-item expanded "><a href="../../../scripting/macros.html"><strong aria-hidden="true">9.2.</strong> Macros</a></li><li class="chapter-item expanded "><a href="../../../scripting/rz-pipe.html"><strong aria-hidden="true">9.3.</strong> Rz-pipe</a></li></ol></li><li class="chapter-item expanded "><a href="../../../debugger/intro.html"><strong aria-hidden="true">10.</strong> Debugger</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../debugger/getting_started.html"><strong aria-hidden="true">10.1.</strong> Getting Started</a></li><li class="chapter-item expanded "><a href="../../../debugger/migration.html"><strong aria-hidden="true">10.2.</strong> Migration from ida, GDB or WinDBG</a></li><li class="chapter-item expanded "><a href="../../../debugger/registers.html"><strong aria-hidden="true">10.3.</strong> Registers</a></li><li class="chapter-item expanded "><a href="../../../debugger/memory_maps.html"><strong aria-hidden="true">10.4.</strong> Memory Maps</a></li><li class="chapter-item expanded "><a href="../../../debugger/heap.html"><strong aria-hidden="true">10.5.</strong> Heap</a></li><li class="chapter-item expanded "><a href="../../../debugger/files.html"><strong aria-hidden="true">10.6.</strong> Files</a></li><li class="chapter-item expanded "><a href="../../../debugger/revdebug.html"><strong aria-hidden="true">10.7.</strong> Reverse Debugging</a></li><li class="chapter-item expanded "><a href="../../../debugger/windows_messages.html"><strong aria-hidden="true">10.8.</strong> Windows Messages</a></li><li class="chapter-item expanded "><a href="../../../debugger/apple.html"><strong aria-hidden="true">10.9.</strong> macOS/iOS</a></li></ol></li><li class="chapter-item expanded "><a href="../../../debugger/remoting_capabilities.html"><strong aria-hidden="true">11.</strong> Remote Access</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../debugger/remote_gdb.html"><strong aria-hidden="true">11.1.</strong> Remote GDB</a></li><li class="chapter-item expanded "><a href="../../../debugger/windbg.html"><strong aria-hidden="true">11.2.</strong> Remote WinDbg</a></li></ol></li><li class="chapter-item expanded "><a href="../../../tools/intro.html"><strong aria-hidden="true">12.</strong> Command Line Tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../tools/rz-ax/intro.html"><strong aria-hidden="true">12.1.</strong> Rz-ax</a></li><li class="chapter-item expanded "><a href="../../../tools/rz-find/intro.html"><strong aria-hidden="true">12.2.</strong> Rz-find</a></li><li class="chapter-item expanded "><a href="../../../tools/rz-run/intro.html"><strong aria-hidden="true">12.3.</strong> Rz-run</a></li><li class="chapter-item expanded "><a href="../../../tools/rz-bin/intro.html"><strong aria-hidden="true">12.4.</strong> Rz-bin</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../tools/rz-bin/file_identification.html"><strong aria-hidden="true">12.4.1.</strong> File Identification</a></li><li class="chapter-item expanded "><a href="../../../tools/rz-bin/entrypoints.html"><strong aria-hidden="true">12.4.2.</strong> Entrypoint</a></li><li class="chapter-item expanded "><a href="../../../tools/rz-bin/imports.html"><strong aria-hidden="true">12.4.3.</strong> Imports</a></li><li class="chapter-item expanded "><a href="../../../tools/rz-bin/exports.html"><strong aria-hidden="true">12.4.4.</strong> Exports</a></li><li class="chapter-item expanded "><a href="../../../tools/rz-bin/symbols.html"><strong aria-hidden="true">12.4.5.</strong> Symbols (exports)</a></li><li class="chapter-item expanded "><a href="../../../tools/rz-bin/libraries.html"><strong aria-hidden="true">12.4.6.</strong> Libraries</a></li><li class="chapter-item expanded "><a href="../../../tools/rz-bin/strings.html"><strong aria-hidden="true">12.4.7.</strong> Strings</a></li><li class="chapter-item expanded "><a href="../../../tools/rz-bin/program_sections.html"><strong aria-hidden="true">12.4.8.</strong> Program Sections</a></li></ol></li><li class="chapter-item expanded "><a href="../../../tools/rz-diff/intro.html"><strong aria-hidden="true">12.5.</strong> Rz-diff</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../tools/rz-diff/binary_diffing.html"><strong aria-hidden="true">12.5.1.</strong> Binary Diffing</a></li></ol></li><li class="chapter-item expanded "><a href="../../../tools/rz-asm/intro.html"><strong aria-hidden="true">12.6.</strong> Rz-asm</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../tools/rz-asm/assemble.html"><strong aria-hidden="true">12.6.1.</strong> Assemble</a></li><li class="chapter-item expanded "><a href="../../../tools/rz-asm/disassemble.html"><strong aria-hidden="true">12.6.2.</strong> Disassemble</a></li><li class="chapter-item expanded "><a href="../../../tools/rz-asm/config.html"><strong aria-hidden="true">12.6.3.</strong> Configuration</a></li></ol></li><li class="chapter-item expanded "><a href="../../../tools/rz-gg/rz-gg.html"><strong aria-hidden="true">12.7.</strong> Rz-gg</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../tools/rz-gg/lang.html"><strong aria-hidden="true">12.7.1.</strong> Language</a></li></ol></li><li class="chapter-item expanded "><a href="../../../tools/rz-hash/intro.html"><strong aria-hidden="true">12.8.</strong> Rz-hash</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../tools/rz-hash/rz-hash_tool.html"><strong aria-hidden="true">12.8.1.</strong> Rz-hash Tool</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../../plugins/intro.html"><strong aria-hidden="true">13.</strong> Plugins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../plugins/ioplugins.html"><strong aria-hidden="true">13.1.</strong> IO plugins</a></li><li class="chapter-item expanded "><a href="../../../plugins/dev-asm.html"><strong aria-hidden="true">13.2.</strong> Asm plugins</a></li><li class="chapter-item expanded "><a href="../../../plugins/dev-analysis.html"><strong aria-hidden="true">13.3.</strong> Analysis plugins</a></li><li class="chapter-item expanded "><a href="../../../plugins/dev-bin.html"><strong aria-hidden="true">13.4.</strong> Bin plugins</a></li><li class="chapter-item expanded "><a href="../../../plugins/dev-other.html"><strong aria-hidden="true">13.5.</strong> Other plugins</a></li><li class="chapter-item expanded "><a href="../../../plugins/python.html"><strong aria-hidden="true">13.6.</strong> Python plugins</a></li><li class="chapter-item expanded "><a href="../../../plugins/debug.html"><strong aria-hidden="true">13.7.</strong> Debugging</a></li><li class="chapter-item expanded "><a href="../../../plugins/testing.html"><strong aria-hidden="true">13.8.</strong> Testing</a></li><li class="chapter-item expanded "><a href="../../../plugins/rz-pm.html"><strong aria-hidden="true">13.9.</strong> Packaging</a></li></ol></li><li class="chapter-item expanded "><a href="../../../crackmes/intro.html"><strong aria-hidden="true">14.</strong> Crackmes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../crackmes/ioli/intro.html"><strong aria-hidden="true">14.1.</strong> IOLI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../crackmes/ioli/ioli_0x00.html"><strong aria-hidden="true">14.1.1.</strong> IOLI 0x00</a></li><li class="chapter-item expanded "><a href="../../../crackmes/ioli/ioli_0x01.html"><strong aria-hidden="true">14.1.2.</strong> IOLI 0x01</a></li><li class="chapter-item expanded "><a href="../../../crackmes/ioli/ioli_0x02.html"><strong aria-hidden="true">14.1.3.</strong> IOLI 0x02</a></li><li class="chapter-item expanded "><a href="../../../crackmes/ioli/ioli_0x03.html"><strong aria-hidden="true">14.1.4.</strong> IOLI 0x03</a></li><li class="chapter-item expanded "><a href="../../../crackmes/ioli/ioli_0x04.html"><strong aria-hidden="true">14.1.5.</strong> IOLI 0x04</a></li><li class="chapter-item expanded "><a href="../../../crackmes/ioli/ioli_0x05.html"><strong aria-hidden="true">14.1.6.</strong> IOLI 0x05</a></li><li class="chapter-item expanded "><a href="../../../crackmes/ioli/ioli_0x06.html"><strong aria-hidden="true">14.1.7.</strong> IOLI 0x06</a></li><li class="chapter-item expanded "><a href="../../../crackmes/ioli/ioli_0x07.html"><strong aria-hidden="true">14.1.8.</strong> IOLI 0x07</a></li><li class="chapter-item expanded "><a href="../../../crackmes/ioli/ioli_0x08.html"><strong aria-hidden="true">14.1.9.</strong> IOLI 0x08</a></li><li class="chapter-item expanded "><a href="../../../crackmes/ioli/ioli_0x09.html"><strong aria-hidden="true">14.1.10.</strong> IOLI 0x09</a></li></ol></li><li class="chapter-item expanded "><a href="../../../crackmes/avatao/01-reverse4/intro.html"><strong aria-hidden="true">14.2.</strong> Avatao R3v3rs3 4</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../crackmes/avatao/01-reverse4/rizin.html"><strong aria-hidden="true">14.2.1.</strong> .rizin</a></li><li class="chapter-item expanded "><a href="../../../crackmes/avatao/01-reverse4/first_steps.html"><strong aria-hidden="true">14.2.2.</strong> .first_steps</a></li><li class="chapter-item expanded "><a href="../../../crackmes/avatao/01-reverse4/main.html" class="active"><strong aria-hidden="true">14.2.3.</strong> .main</a></li><li class="chapter-item expanded "><a href="../../../crackmes/avatao/01-reverse4/vmloop.html"><strong aria-hidden="true">14.2.4.</strong> .vmloop</a></li><li class="chapter-item expanded "><a href="../../../crackmes/avatao/01-reverse4/instructionset.html"><strong aria-hidden="true">14.2.5.</strong> .instructionset</a></li><li class="chapter-item expanded "><a href="../../../crackmes/avatao/01-reverse4/bytecode.html"><strong aria-hidden="true">14.2.6.</strong> .bytecode</a></li><li class="chapter-item expanded "><a href="../../../crackmes/avatao/01-reverse4/outro.html"><strong aria-hidden="true">14.2.7.</strong> .outro</a></li></ol></li><li class="chapter-item expanded "><a href="../../../crackmes/hackthebox/intro.html"><strong aria-hidden="true">14.3.</strong> Hack The Box</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../crackmes/hackthebox/find-the-easy-pass/intro.html"><strong aria-hidden="true">14.3.1.</strong> Find The Easy Pass</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../crackmes/hackthebox/find-the-easy-pass/identification.html"><strong aria-hidden="true">14.3.1.1.</strong> identification</a></li><li class="chapter-item expanded "><a href="../../../crackmes/hackthebox/find-the-easy-pass/find-the-validation-routine.html"><strong aria-hidden="true">14.3.1.2.</strong> find-the-valiation-routine</a></li><li class="chapter-item expanded "><a href="../../../crackmes/hackthebox/find-the-easy-pass/fire-up-the-debugger.html"><strong aria-hidden="true">14.3.1.3.</strong> fire-up-the-debugger</a></li><li class="chapter-item expanded "><a href="../../../crackmes/hackthebox/find-the-easy-pass/bonus.html"><strong aria-hidden="true">14.3.1.4.</strong> bonus</a></li></ol></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../../refcard/intro.html"><strong aria-hidden="true">15.</strong> Reference Card</a></li><li class="chapter-item expanded "><a href="../../../credits/credits.html"><strong aria-hidden="true">16.</strong> Acknowledgments</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">The Official Rizin Book</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="main"><a class="header" href="#main">.main</a></h2>
+<p>As I was saying, I usually take a look at the entry point, so let's just do
+that:</p>
+<pre><code>[0x00400720]&gt; s main
+[0x00400c63]&gt;
+</code></pre>
+<blockquote>
+<p><em><strong>rizin tip:</strong></em> You can go to any offset, flag, expression, etc. in the
+executable using the <em>s</em> command (seek). You can use references, like <em>$$</em>
+(current offset), you can undo (<em>s-</em>) or redo (<em>s+</em>) seeks, search strings
+(<em>s/ [string]</em>) or hex values (<em>s/x 4142</em>), and a lot of other useful stuff.
+Make sure to check out <em>s?</em>!</p>
+</blockquote>
+<p>Now that we are at the beginning of the main function, we could use <em>p</em> to show
+a disassembly (<em>pd</em>, <em>pdf</em>), but rizin can do something much cooler: it has a
+visual mode, and it can display graphs similar to IDA, but way cooler, since
+they are ASCII-art graphs :)</p>
+<blockquote>
+<p><em><strong>rizin tip:</strong></em> The command family <em>p</em> is used to print stuff. For example it can
+show disassembly (<em>pd</em>), disassembly of the current function (<em>pdf</em>), print
+strings (<em>ps</em>), hexdump (<em>px</em>), base64 encode/decode data (<em>p6e</em>, <em>p6d</em>), or
+print raw bytes (<em>pr</em>) so you can for example dump parts of the binary to other
+files. There are many more functionalities, check <em>?</em>!</p>
+</blockquote>
+<p>R2 also has a minimap view which is incredibly useful for getting an overall
+look at a function:</p>
+<p><img src="img/main/main_minimap.png" alt="main functions's minimap" /></p>
+<blockquote>
+<p><em><strong>rizin tip:</strong></em> With command <em>V</em> you can enter the so-called visual mode, which
+has several views. You can switch between them using <em>p</em> and <em>P</em>. The graph
+view can be displayed by hitting <em>V</em> in visual mode (or using <em>VV</em> at the
+prompt).</p>
+<p>Hitting <em>p</em> in graph view will bring up the minimap. It displays the
+basic blocks and the connections between them in the current function, and it
+also shows the disassembly of the currently selected block (marked with @@@@@
+on the minimap). You can select the next or the previous block using the
+*&lt;TAB&gt;* and the *&lt;SHIFT&gt;&lt;TAB&gt;* keys respectively. You can also
+select the true or the false branches using the <em>t</em> and the <em>f</em> keys.</p>
+<p>It is possible to bring up the prompt in visual mode using the <em>:</em> key, and
+you can use <em>o</em> to seek.</p>
+</blockquote>
+<p>Lets read main node-by-node! The first block looks like this:</p>
+<p><img src="img/main/bb-0c63.png" alt="main bb-0c63" /></p>
+<p>We can see that the program reads a word (2 bytes) into the local variable named
+<em>local_10_6</em>, and than compares it to 0xbb8. That's 3000 in decimal:</p>
+<pre><code>[0x00400c63]&gt; ? 0xbb8
+3000 0xbb8 05670 2.9K 0000:0bb8 3000 10111000 3000.0 0.000000f 0.000000
+</code></pre>
+<blockquote>
+<p><em><strong>rizin tip</strong></em>: yep, <em>?</em> will evaluate expressions, and print the result in
+various formats.</p>
+</blockquote>
+<p>If the value is greater than 3000, then it will be forced to be 3000:</p>
+<p><img src="img/main/bb-0ca6.png" alt="main bb-0ca6" /></p>
+<p>There are a few things happening in the next block:</p>
+<p><img src="img/main/bb-0cac.png" alt="main bb-0cac" /></p>
+<p>First, the &quot;Size of data: &quot; message we saw when we run the program is printed.
+So now we know that the local variable <em>local_10_6</em> is the size of the input
+data - so lets name it accordingly (remember, you can open the rizin shell from
+visual mode using the <em>:</em> key!):</p>
+<pre><code>:&gt; afvn local_10_6 input_size
+</code></pre>
+<blockquote>
+<p><em><strong>rizin tip</strong></em>: The <em>af</em> command family is used to analyze functions. This
+includes manipulating arguments and local variables too, which is accessible
+via the <em>afv</em> commands. You can list function arguments (<em>afa</em>),  local
+variables (<em>afv</em>), or you can even rename them (<em>afan</em>, <em>afvn</em>). Of course
+there are lots of other features too - as usual: use the &quot;?&quot;, Luke!</p>
+</blockquote>
+<p>After this an <em>input_size</em> bytes long memory chunk is allocated, and filled with
+data from the standard input. The address of this memory chunk is stored in
+<em>local_10</em> - time to use <em>afvn</em> again:</p>
+<pre><code>:&gt; afvn local_10 input_data
+</code></pre>
+<p>We've almost finished with this block, there are only two things remained.
+First, an 512 (0x200) bytes memory chunk is zeroed out at offset 0x00602120.
+A quick glance at XREFS to this address reveals that this memory is indeed used
+somewhere in the application:</p>
+<pre><code>:&gt; axt 0x00602120
+d 0x400cfe mov edi, 0x602120
+d 0x400d22 mov edi, 0x602120
+d 0x400dde mov edi, 0x602120
+d 0x400a51 mov qword [rbp - 8], 0x602120
+</code></pre>
+<p>Since it probably will be important later on, we should label it:</p>
+<pre><code>:&gt; f sym.memory 0x200 0x602120
+</code></pre>
+<blockquote>
+<p><em><strong>rizin tip</strong></em>: Flags can be managed using the <em>f</em> command family. We've just
+added the flag sym.memory to a 0x200 bytes long memory area at 0x602120. It is
+also possible to remove (<em>f-name</em>), rename (<em>fr [old] [new]</em>), add comment
+(<em>fC [name] [cmt]</em>) or even color (<em>fc [name] [color]</em>) flags.</p>
+</blockquote>
+<p>While we are here, we should also declare that memory chunk as data, so it will
+show up as a hexdump in disassembly view:</p>
+<pre><code>:&gt; Cd 0x200 @ sym.memory
+</code></pre>
+<blockquote>
+<p><em><strong>rizin tip</strong></em>: The command family <em>C</em> is used to manage metadata. You can set
+(<em>CC</em>) or edit (<em>CC</em>) comments, declare memory areas as data (<em>Cd</em>), strings
+(<em>Cs</em>), etc. These commands can also be issued via a menu in visual mode
+invoked by pressing <em>d</em>.</p>
+</blockquote>
+<p>The only remaining thing in this block is a function call to 0x400a45 with the
+input data as an argument. The function's return value is compared to &quot;*&quot;, and
+a conditional jump is executed depending on the result.</p>
+<p>Earlier I told you that this crackme is probably based on a virtual machine.
+Well, with that information in mind, one can guess that this function will be
+the VM's main loop, and the input data is the instructions the VM will execute.
+Based on this hunch, I've named this function <em>vmloop</em>, and renamed
+<em>input_data</em> to <em>bytecode</em> and <em>input_size</em> to <em>bytecode_length</em>. This is not
+really necessary in a small project like this, but it's a good practice to name
+stuff according to their purpose (just like when you are writing programs).</p>
+<pre><code>:&gt; af vmloop 0x400a45
+:&gt; afvn input_size bytecode_length
+:&gt; afvn input_data bytecode
+</code></pre>
+<blockquote>
+<p><em><strong>rizin tip</strong></em>: The <em>af</em> command is used to analyze a function with a given name
+at the given address. The other two commands should be familiar from earlier.</p>
+</blockquote>
+<p>After renaming local variables, flagging that memory area, and renaming the VM
+loop function the disassembly looks like this:</p>
+<p><img src="img/main/bb-0cac_meta.png" alt="main bb-0cac_meta" /></p>
+<p>So, back to that conditional jump. If <em>vmloop</em> returns anything else than &quot;*&quot;,
+the program just exits without giving us our flag. Obviously we don't want that,
+so we follow the false branch.</p>
+<p><img src="img/main/bb-0d1d.png" alt="main bb-0d1d" /></p>
+<p>Now we see that a string in that 512 bytes memory area (<em>sym.memory</em>) gets
+compared to &quot;Such VM! MuCH reV3rse!&quot;. If they are not equal, the program prints
+the bytecode, and exits:</p>
+<p><img src="img/main/bb-0dde.png" alt="main bb-0dde" /></p>
+<p>OK, so now we know that we have to supply a bytecode that will generate that
+string when executed. As we can see on the minimap, there are still a few more
+branches ahead, which probably means more conditions to meet. Lets investigate
+them before we delve into <em>vmloop</em>!</p>
+<p>If you take a look at the minimap of the whole function, you can probably
+recognize that there is some kind of loop starting at block <em>[<em>0d34</em>]</em>, and it
+involves the following nodes:</p>
+<ul>
+<li>[<em>0d34</em>]</li>
+<li>[<em>0d65</em>]</li>
+<li>[<em>0d3d</em>]</li>
+<li>[<em>0d61</em>]</li>
+</ul>
+<p>Here are the assembly listings for those blocks. The first one puts 0 into local
+variable <em>local_10_4</em>:</p>
+<p><img src="img/main/bb-0d34.png" alt="main bb-0d34" /></p>
+<p>And this one compares <em>local_10_4</em> to 8, and executing a conditional jump based
+on the result:</p>
+<p><img src="img/main/bb-0d65.png" alt="main bb-0d65" /></p>
+<p>It's pretty obvious that <em>local_10_4</em> is the loop counter, so lets name it
+accordingly:</p>
+<pre><code>:&gt; afvn local_10_4 i
+</code></pre>
+<p>Next block is the actual loop body:</p>
+<p><img src="img/main/bb-0d3d.png" alt="main bb-0d3d" /></p>
+<p>The memory area at 0x6020e0 is treated as an array of dwords (4 byte values),
+and checked if the ith value of it is zero. If it is not, the loop simply
+continues:</p>
+<p><img src="img/main/bb-0d61.png" alt="main bb-0d61" /></p>
+<p>If the value is zero, the loop breaks and this block is executed before exiting:</p>
+<p><img src="img/main/bb-0d4d.png" alt="main bb-0d4d" /></p>
+<p>It prints the following message: Use everything!&quot; As we've established earlier,
+we are dealing with a virtual machine. In that context, this message probably
+means that we have to use every available instructions. Whether we executed an
+instruction or not is stored at 0x6020e0 - so lets flag that memory area:</p>
+<pre><code>:&gt; f sym.instr_dirty 4*9 0x6020e0
+</code></pre>
+<p>Assuming we don't break out and the loop completes, we are moving on to some
+more checks:</p>
+<p><img src="img/main/bb-0d6b.png" alt="main bb-0d6b" /></p>
+<p>This piece of code may look a bit strange if you are not familiar with x86_64
+specific stuff. In particular, we are talking about RIP-relative addressing,
+where offsets are described as displacements from the current instruction
+pointer, which makes implementing PIE easier. Anyways, rizin is nice enough to
+display the actual address (0x602104). Got the address, flag it!</p>
+<pre><code>:&gt; f sym.good_if_ne_zero 4 0x602104
+</code></pre>
+<p>Keep in mind though, that if RIP-relative addressing is used, flags won't appear
+directly in the disassembly, but rizin displays them as comments:</p>
+<p><img src="img/main/bb-0d6b_meta.png" alt="main bb-0d6b_meta" /></p>
+<p>If <em>sym.good_if_ne_zero</em> is zero, we get a message (&quot;Your getting closer!&quot;), and
+then the program exits. If it is non-zero, we move to the last check:</p>
+<p><img src="img/main/bb-0d75.png" alt="main bb-0d75" /></p>
+<p>Here the program compares a dword at 0x6020f0 (again, RIP-relative addressing)
+to 9. If its greater than 9, we get the same &quot;Your getting closer!&quot; message, but
+if it's lesser, or equal to 9, we finally reach our destination, and get the flag:</p>
+<p><img src="img/main/bb-0d80.png" alt="main bb-0d80" /></p>
+<p>As usual, we should flag 0x6020f0:</p>
+<pre><code>:&gt; f sym.good_if_le_9 4 0x6020f0
+</code></pre>
+<p>Well, it seems that we have fully reversed the main function. To summarize it:
+the program reads a bytecode from the standard input, and feeds it to a virtual
+machine. After VM execution, the program's state have to satisfy these
+conditions in order to reach the goodboy code:</p>
+<ul>
+<li><em>vmloop</em>'s return value has to be &quot;*&quot;</li>
+<li><em>sym.memory</em> has to contain the string &quot;Such VM! MuCH reV3rse!&quot;</li>
+<li>all 9 elements of <em>sym.instr_dirty</em> array should not be zero (probably means
+that all instructions had to be used at least once)</li>
+<li><em>sym.good_if_ne_zero</em> should not be zero</li>
+<li><em>sym.good_if_le_9</em> has to be lesser or equal to 9</li>
+</ul>
+<p>This concludes our analysis of the main function, we can now move on to the VM
+itself.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../../../crackmes/avatao/01-reverse4/first_steps.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../../../crackmes/avatao/01-reverse4/vmloop.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../../../crackmes/avatao/01-reverse4/first_steps.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../../../crackmes/avatao/01-reverse4/vmloop.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
