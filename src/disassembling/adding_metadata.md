@@ -3,7 +3,7 @@
 The typical work involved in reversing binary files makes powerful annotation capabilities essential.
 Rizin offers multiple ways to store and retrieve such metadata.
 
-By following common basic UNIX principles, it is easy to write a small utility in a scripting language which uses `objdump`, `otool` or any other existing utility to obtain information from a binary and to import it into rizin. For example, take a look at [python-idb](https://github.com/williballenthin/python-idb)-based [`ida2rz.py`](https://github.com/rizinorg/rizin-extras/blob/master/rz-ida/rz-ida.py) which opens IDB files directly without IDA Pro installed. You can load the resulting file with the `.` (dot) command into the rizin:
+By following common basic UNIX principles, it is easy to write a small utility in a scripting language which uses `objdump`, `otool` or any other existing utility to obtain information from a binary and to import it into rizin. For example, take a look at [python-idb](https://github.com/williballenthin/python-idb)-based [`rz-ida.py`](https://github.com/rizinorg/rizin-extras/blob/master/rz-ida/rz-ida.py) which opens IDB files directly without IDA Pro installed. You can load the resulting file with the `.` (dot) command into the rizin:
 ```
 [0x00000000]> . file.rz
 ```
