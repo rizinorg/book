@@ -9,4 +9,12 @@ Check the Github site to add new contents or fix typos:
 
 ## Offline
 
-This book can be read offline by cloning the repository and by simply opening the HTML files.
+The ePub and PDF versions of the Rizin book are avaiable for offline use and it can be found under the
+section 'Artifacts' on the [Github Actions CI](https://github.com/rizinorg/book/actions/).
+
+This book can also be read offline by cloning the repository and rendering it using
+[quarto](https://quarto.org).
+
+`$ quarto render /path/to/rizin-book/`
+
+The static HTML files will be generated in a folder named `docs`.
