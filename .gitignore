@@ -9,3 +9,5 @@ _book/*
 .*.swo
 *.un~
 *.snippets
+
+/.quarto/

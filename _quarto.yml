@@ -1,0 +1,197 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "The Official Rizin Book"
+  author: "Rizin Organization"
+  description: |
+    This is a book about the Rizin reverse engineering framework
+  site-url: https://book.rizin.re/
+  repo-url: https://github.com/rizinorg/book
+  repo-branch: master
+  repo-actions: edit
+  sharing: [twitter, facebook, linkedin]
+  chapters:
+      - index.md
+      - part: Introduction
+        chapters:
+         - src/first_steps/overview.md
+         - src/first_steps/getting_rizin.md
+         - src/first_steps/compilation_portability.md
+         - src/first_steps/windows_compilation.md
+         - src/first_steps/compilation_android.md
+
+      - part: First Steps
+        chapters:
+         - src/first_steps/intro.md
+         - src/first_steps/commandline_flags.md
+         - src/first_steps/command_format.md
+         - src/first_steps/expressions.md
+         - src/first_steps/basic_debugger_session.md
+         - src/first_steps/contributing.md
+
+      - part: Configuration
+        chapters:
+         - src/configuration/intro.md
+         - src/configuration/colors.md
+         - src/configuration/evars.md
+         - src/configuration/files.md
+
+      - part: Basic Commands
+        chapters:
+         - src/configuration/intro.md
+         - src/configuration/seeking.md
+         - src/configuration/block_size.md
+         - src/configuration/sections.md
+         - src/configuration/mapping_files.md
+         - src/configuration/print_modes.md
+         - src/configuration/flags.md
+         - src/configuration/write.md
+         - src/configuration/zoom.md
+         - src/configuration/yank_paste.md
+         - src/configuration/comparing_bytes.md
+         - src/configuration/sdb.md
+         - src/configuration/dietline.md
+
+      - part: Visual mode
+        chapters:
+         - src/visual_mode/intro.md
+         - src/visual_mode/visual_disassembly.md
+         - src/visual_mode/visual_assembler.md
+         - src/visual_mode/visual_configuration_editor.md
+         - src/visual_mode/visual_panels.md
+
+      - part: Searching bytes
+        chapters:
+         - src/search_bytes/intro.md
+         - src/search_bytes/basic_searches.md
+         - src/search_bytes/configurating_the_search.md
+         - src/search_bytes/pattern_search.md
+         - src/search_bytes/automation.md
+         - src/search_bytes/backward_search.md
+         - src/search_bytes/search_in_assembly.md
+         - src/search_bytes/searching_aes_keys.md
+      - part: Disassembling
+        chapters:
+         - src/disassembling/intro.md
+         - src/disassembling/adding_metadata.md
+         - src/disassembling/esil.md
+      - part: Analysis
+        chapters:
+         - src/analysis/intro.md
+         - src/analysis/code_analysis.md
+         - src/analysis/variables.md
+         - src/analysis/types.md
+         - src/analysis/calling_conventions.md
+         - src/analysis/vtables.md
+         - src/analysis/syscalls.md
+         - src/analysis/emulation.md
+         - src/analysis/symbols.md
+         - signatures/zignatures.md
+         - src/analysis/graphs.md
+         - src/analysis/cpu_platform_profiles.md
+      - part: Scripting
+        chapters:
+         - src/scripting/intro.md
+         - src/scripting/loops.md
+         - src/scripting/macros.md
+         - src/scripting/rz-pipe.md
+      - part: Debugger
+        chapters:
+         - src/debugger/intro.md
+         - src/debugger/getting_started.md
+         - src/debugger/migration.md
+         - src/debugger/registers.md
+         - src/debugger/memory_maps.md
+         - src/debugger/heap.md
+         - src/debugger/files.md
+         - src/debugger/revdebug.md
+         - src/debugger/windows_messages.md
+         - src/debugger/apple.md
+      - part: Remote Access
+        chapters:
+         - src/debugger/remoting_capabilities.md
+         - src/debugger/remote_gdb.md
+         - src/debugger/windbg.md
+
+      - part: Command Line Tools
+        chapters:
+         - src/tools/intro.md
+         - src/tools/rz-ax/intro.md
+         - src/tools/rz-find/intro.md
+         - src/tools/rz-run/intro.md
+         - src/tools/rz-bin/intro.md
+         - src/tools/rz-bin/file_identification.md
+         - src/tools/rz-bin/entrypoints.md
+         - src/tools/rz-bin/imports.md
+         - src/tools/rz-bin/exports.md
+         - src/tools/rz-bin/symbols.md
+         - src/tools/rz-bin/libraries.md
+         - src/tools/rz-bin/strings.md
+         - src/tools/rz-bin/program_sections.md
+         - src/tools/rz-diff/intro.md
+         - src/tools/rz-diff/binary_diffing.md
+         - src/tools/rz-asm/intro.md
+            - src/tools/rz-asm/assemble.md
+            - src/tools/rz-asm/disassemble.md
+            - src/tools/rz-asm/config.md
+         - src/tools/rz-gg/rz-gg.md
+            -  src/tools/rz-gg/lang.md
+         - src/tools/rz-hash/intro.md
+            - src/tools/rz-hash/rz-hash_tool.md
+
+      - part: Plugins
+        chapters:
+         - src/plugins/intro.md
+         - src/plugins/ioplugins.md
+         - src/plugins/dev-asm.md
+         - src/plugins/dev-src/analysis.md
+         - src/plugins/dev-bin.md
+         - src/plugins/dev-other.md
+         - src/plugins/python.md
+         - src/plugins/debug.md
+         - src/plugins/testing.md
+         -  src/plugins/rz-pm.md
+      - part: Crackmes
+        chapters:
+         - src/crackmes/intro.md
+         - part: IOLI
+           chapters:
+             - src/crackmes/ioli/intro.md
+             - src/crackmes/ioli/ioli_0x00.md
+             - src/crackmes/ioli/ioli_0x01.md
+             - src/crackmes/ioli/ioli_0x02.md
+             - src/crackmes/ioli/ioli_0x03.md
+             - src/crackmes/ioli/ioli_0x04.md
+             - src/crackmes/ioli/ioli_0x05.md
+             - src/crackmes/ioli/ioli_0x06.md
+             - src/crackmes/ioli/ioli_0x07.md
+             - src/crackmes/ioli/ioli_0x08.md
+             - src/crackmes/ioli/ioli_0x09.md
+         - part: Avatao R3v3rs3 4
+           chapters:
+             - src/crackmes/avatao/01-reverse4/intro.md
+             - src/crackmes/avatao/01-reverse4/rizin.md
+             - src/crackmes/avatao/01-reverse4/first_steps.md
+             - src/crackmes/avatao/01-reverse4/main.md
+             - src/crackmes/avatao/01-reverse4/vmloop.md
+             - src/crackmes/avatao/01-reverse4/instructionset.md
+             - src/crackmes/avatao/01-reverse4/bytecode.md
+             - src/crackmes/avatao/01-reverse4/outro.md
+         - part: Hack The Box
+           chapters:
+             - src/crackmes/hackthebox/intro.md
+             - part: Find The Easy Pass
+               chapters:
+                - src/crackmes/hackthebox/find-the-easy-pass/intro.md
+                - src/crackmes/hackthebox/find-the-easy-pass/identification.md
+                - src/crackmes/hackthebox/find-the-easy-pass/find-the-validation-routine.md
+                - src/crackmes/hackthebox/find-the-easy-pass/fire-up-the-src/debugger.md
+                - src/crackmes/hackthebox/find-the-easy-pass/bonus.md
+      - part: Reference Card
+        chapters:
+          - src/refcard/intro.md
+      - part: Acknowledgments
+        chapters:
+          - src/credits/credits.md
