@@ -8,7 +8,7 @@ book:
   description: |
     This is a book about the Rizin reverse engineering framework
   site-url: https://book.rizin.re/
-  repo-url: https://github.com/rizinzorg/book
+  repo-url: https://github.com/rizinorg/book
   repo-branch: master
   repo-actions: edit
   sharing: [twitter, facebook, linkedin]
