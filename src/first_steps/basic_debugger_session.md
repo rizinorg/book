@@ -31,7 +31,7 @@ Below is a list of most common commands used with debugger:
 > d?            ; get help on debugger commands
 > ds 3          ; step 3 times
 > db @ 0x8048920  ; setup a breakpoint
-> db @ -0x8048920 ; remove a breakpoint
+> db- @ 0x8048920 ; remove a breakpoint
 > dc            ; continue process execution
 > dcs           ; continue until syscall
 > dd            ; manipulate file descriptors
