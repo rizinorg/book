@@ -30,8 +30,8 @@ Below is a list of most common commands used with debugger:
 ```
 > d?            ; get help on debugger commands
 > ds 3          ; step 3 times
-> db 0x8048920  ; setup a breakpoint
-> db -0x8048920 ; remove a breakpoint
+> db @ 0x8048920  ; setup a breakpoint
+> db- @ 0x8048920 ; remove a breakpoint
 > dc            ; continue process execution
 > dcs           ; continue until syscall
 > dd            ; manipulate file descriptors
@@ -69,4 +69,3 @@ exit the help view, press `q`.
 A frequently used command is `dr`, which is used to read or write values of the target's general purpose registers.
 For a more compact register value representation you might use `dr=` command.
 You can also manipulate the hardware and the extended/floating point registers.
-
