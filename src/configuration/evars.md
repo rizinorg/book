@@ -277,12 +277,26 @@ This variable lets you follow the child process, when a fork (system call) is en
 
 This variable specifies the mode for colorized screen output.
 
-* 0 means no colors.
-* 1 means 16-colors mode.
-* 2 means 256-colors mode.
-* 3 means 16 million-colors mode.
+* `0` means no colors.
+* `1` means 16-colors mode.
+* `2` means 256-colors mode.
+* `3` means 16 million-colors mode.
 
 If your favorite theme looks weird, try to bump this up.
+
+### scr.visual.mode: `int`
+
+`scr.visual.mode` lets you set a default view for the visual mode. The variable
+accepts an integer as its value and it gets mapped to the following modes:
+
+* `0` - Hexadecimal view
+* `1` - Disassembly view
+* `2` - Debug mode
+* `3` - Color blocks (entropy)
+* `4` - Print in string format
+
+So, if you want to have the disassembly view everytime you open up visual mode, you can
+have `e scr.visual.mode=1` put on your `~/.rizinrc`.
 
 ### scr.seek: `string`
 
