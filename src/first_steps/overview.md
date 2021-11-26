@@ -1,12 +1,14 @@
-## The Framework
+## The Rizin Framework
 
-The Rizin project is a set of small command-line utilities that can be used together or independently.
+Rizin is a free and open source reverse engineering framework which provides a complete binary analysis experience. The project is a fork of radare2 with a focus on usability, stability, and working features, which strives to provide a welcoming environment for developers and users alike.
 
-This chapter will give you a quick understanding of them, but you can check the dedicated sections for each tool at the end of this book.
+At its core, Rizin is a set of small command-line utilities. They can be used in tandem with Rizin or can be used independently according to its specefic purposes.
+
+This chapter will give you a brief introduction about these tools, but you can check the dedicated sections for each tool at the end of this book.
 
 ### rizin
 
-The main tool of the whole framework. It uses the core of the hexadecimal editor and debugger. rizin allows you to open a number of input/output sources as if they were simple, plain files, including disks, network connections, kernel drivers, processes under debugging, and so on.
+The main tool of the whole framework. It has the hexadecimal editor and debugger at its core. Rizin allows you to open a number of input/output sources as if they were simple, plain files, including disks, network connections, kernel drivers, processes under debugging, and so on.
 
 It implements an advanced command line interface for moving around a file, analyzing data, disassembling, binary patching, data comparison, searching, replacing, and visualizing. It can be scripted with a variety of languages, including Python, Haskell, OCaml, JavaScript, and others.
 
@@ -98,6 +100,8 @@ permissions, directories, and overridden default file descriptors. rz-run is use
 * Fuzzing
 * Test suites
 
+A lot can be done using `rz-run`, here are a few examples demonstrating its capabilities:
+
 #### Sample rz-run script
 ```
 $ cat foo.rrz
@@ -110,15 +114,15 @@ chdir=/tmp
 ./foo.rrz
 ```
 
-#### Connecting a Program with a Socket
+#### Connecting a program with a socket
 ```
 $ nc -l 9999
 $ rz-run program=/bin/ls connect=localhost:9999
 ```
 
-#### Debugging a Program Redirecting the stdio into Another Terminal
+#### Debugging a program redirecting STDIO into another terminal
 
-1 - open a new terminal and type 'tty' to get a terminal name:
+1 - Open a new terminal and type 'tty' to get a terminal name:
 
 ```
 $ tty ; clear ; sleep 999999
