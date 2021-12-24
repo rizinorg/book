@@ -88,7 +88,7 @@ book:
          - src/analysis/syscalls.md
          - src/analysis/emulation.md
          - src/analysis/symbols.md
-         - signatures/zignatures.md
+         - signatures/signatures.md
          - src/analysis/graphs.md
          - src/analysis/cpu_platform_profiles.md
       - part: Scripting
