@@ -27,7 +27,7 @@ $ pip install rzpipe
 ```python
 import rzpipe
 
-rz = rz-pipe.open("/bin/ls")
+rz = rzpipe.open("/bin/ls")
 rz.cmd('aa')
 print(rz.cmd("afl"))
 print(rz.cmdj("aflj"))  # evaluates JSONs and returns an object
