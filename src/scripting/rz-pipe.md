@@ -21,7 +21,7 @@ Python
 ------
 
 ```
-$ pip install rz-pipe
+$ pip install rzpipe
 ```
 
 ```python
