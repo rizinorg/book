@@ -37,10 +37,10 @@ For Example:
 [0x0040100]> om 4 0x00000100 0x00400000 0x0001ae08 rwx test
 ```
 
-You can also use `om` command to view information about mapped sections:
+You can also use `oml` command to view information about mapped sections:
 
 ```
-[0x00401000]> om
+[0x00401000]> oml
  6 fd: 4 +0x0001ae08 0x00000100 - 0x004000ff rwx test
  5 fd: 3 +0x00000000 0x00000000 - 0x0000055f r-- fmap.LOAD0
  4 fd: 3 +0x00001000 0x00001000 - 0x000011e4 r-x fmap.LOAD1
@@ -48,11 +48,11 @@ You can also use `om` command to view information about mapped sections:
  2 fd: 3 +0x00002de8 0x00003de8 - 0x0000402f r-- fmap.LOAD3
  1 fd: 4 +0x00000000 0x00004030 - 0x00004037 rw- mmap.LOAD3
  ```
-Use `om?` to get all the possible subcommands. To list all the defined maps use `om` (or `omj` to get the json format or `om*` to get the rizin commands format). To get the ascii art view use `om=`. 
+Use `om?` to get all the possible subcommands. To list all the defined maps use `oml` (or `omlj` to get the json format). To get the ascii art view use `oml=`. 
 
-It is also possible to delete the mapped section using the `om-mapid` command.
+It is also possible to delete the mapped section using the `om- mapid` command.
 
 For Example:
 ```
-[0x00401000]> om-6
+[0x00401000]> om- 6
 ```
