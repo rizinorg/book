@@ -190,8 +190,8 @@
 <p>For Example:</p>
 <pre><code>[0x0040100]&gt; om 4 0x00000100 0x00400000 0x0001ae08 rwx test
 </code></pre>
-<p>You can also use <code>om</code> command to view information about mapped sections:</p>
-<pre><code>[0x00401000]&gt; om
+<p>You can also use <code>oml</code> command to view information about mapped sections:</p>
+<pre><code>[0x00401000]&gt; oml
  6 fd: 4 +0x0001ae08 0x00000100 - 0x004000ff rwx test
  5 fd: 3 +0x00000000 0x00000000 - 0x0000055f r-- fmap.LOAD0
  4 fd: 3 +0x00001000 0x00001000 - 0x000011e4 r-x fmap.LOAD1
@@ -199,10 +199,10 @@
  2 fd: 3 +0x00002de8 0x00003de8 - 0x0000402f r-- fmap.LOAD3
  1 fd: 4 +0x00000000 0x00004030 - 0x00004037 rw- mmap.LOAD3
 </code></pre>
-<p>Use <code>om?</code> to get all the possible subcommands. To list all the defined maps use <code>om</code> (or <code>omj</code> to get the json format or <code>om*</code> to get the rizin commands format). To get the ascii art view use <code>om=</code>. </p>
-<p>It is also possible to delete the mapped section using the <code>om-mapid</code> command.</p>
+<p>Use <code>om?</code> to get all the possible subcommands. To list all the defined maps use <code>oml</code> (or <code>omlj</code> to get the json format). To get the ascii art view use <code>oml=</code>. </p>
+<p>It is also possible to delete the mapped section using the <code>om- mapid</code> command.</p>
 <p>For Example:</p>
-<pre><code>[0x00401000]&gt; om-6
+<pre><code>[0x00401000]&gt; om- 6
 </code></pre>
 
                     </main>
