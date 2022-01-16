@@ -12,10 +12,10 @@ Calling the macro using syntax `.(macro)` is simple:
 ```
 [0x00404800]> (qwe; pd 4; ao)
 [0x00404800]> .(qwe)
-0x00404800  mov eax, 0x61e627      ; "tab"
-0x00404805  push rbp
-0x00404806  sub rax, section_end.LOAD1
-0x0040480c  mov rbp, rsp
+0x00404800      mov eax, 0x61e627      ; "tab"
+0x00404805      push rbp
+0x00404806      sub rax, section_end.LOAD1
+0x0040480c      mov rbp, rsp
 
 address: 0x404800
 opcode: mov eax, 0x61e627
@@ -48,18 +48,31 @@ Moreover, it's possible to create a macro that takes arguments, which comes in h
 simple scripting situations. To create a macro that takes arguments you simply add them to macro definition.
 
 ```
-[0x00404800]
+[0x00404800]> s entry0
 [0x004047d0]> (foo x y; pd $0; sd +$1)
 [0x004047d0]> .(foo 5 6)
 ;-- entry0:
 0x004047d0      xor ebp, ebp
 0x004047d2      mov r9, rdx
 0x004047d5      pop rsi
-0x004047d6	mov rdx, rsp
-0x004047d9	and rsp, 0xfffffffffffffff0
+0x004047d6      mov rdx, rsp
+0x004047d9      and rsp, 0xfffffffffffffff0
 [0x004047d6]>
 ```
 As you can see, the arguments are named by index, starting from 0: $0, $1, ...
+
+To run a macro multiple times with different arguments, a convenient way is to use `..(`:
+```
+[0x004047d6]> s entry0
+[0x004047d0]> ..(foo 3 5 2 4)
+;-- entry0:
+0x004047d0      xor ebp, ebp
+0x004047d2      mov r9, rdx
+0x004047d5      pop rsi
+0x004047d5      pop rsi
+0x004047d6      mov rdx, rsp
+[0x004047d9]>
+```
 
 # Aliases
 
