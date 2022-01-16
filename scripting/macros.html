@@ -172,10 +172,10 @@ simple macros, using this construction:</p>
 Calling the macro using syntax <code>.(macro)</code> is simple:</p>
 <pre><code>[0x00404800]&gt; (qwe; pd 4; ao)
 [0x00404800]&gt; .(qwe)
-0x00404800  mov eax, 0x61e627      ; &quot;tab&quot;
-0x00404805  push rbp
-0x00404806  sub rax, section_end.LOAD1
-0x0040480c  mov rbp, rsp
+0x00404800      mov eax, 0x61e627      ; &quot;tab&quot;
+0x00404805      push rbp
+0x00404806      sub rax, section_end.LOAD1
+0x0040480c      mov rbp, rsp
 
 address: 0x404800
 opcode: mov eax, 0x61e627
@@ -201,18 +201,29 @@ Macro 'qwe' removed.
 </code></pre>
 <p>Moreover, it's possible to create a macro that takes arguments, which comes in handy in some
 simple scripting situations. To create a macro that takes arguments you simply add them to macro definition.</p>
-<pre><code>[0x00404800]
+<pre><code>[0x00404800]&gt; s entry0
 [0x004047d0]&gt; (foo x y; pd $0; sd +$1)
 [0x004047d0]&gt; .(foo 5 6)
 ;-- entry0:
 0x004047d0      xor ebp, ebp
 0x004047d2      mov r9, rdx
 0x004047d5      pop rsi
-0x004047d6	mov rdx, rsp
-0x004047d9	and rsp, 0xfffffffffffffff0
+0x004047d6      mov rdx, rsp
+0x004047d9      and rsp, 0xfffffffffffffff0
 [0x004047d6]&gt;
 </code></pre>
 <p>As you can see, the arguments are named by index, starting from 0: $0, $1, ...</p>
+<p>To run a macro multiple times with different arguments, a convenient way is to use <code>..(</code>:</p>
+<pre><code>[0x004047d6]&gt; s entry0
+[0x004047d0]&gt; ..(foo 3 5 2 4)
+;-- entry0:
+0x004047d0      xor ebp, ebp
+0x004047d2      mov r9, rdx
+0x004047d5      pop rsi
+0x004047d5      pop rsi
+0x004047d6      mov rdx, rsp
+[0x004047d9]&gt;
+</code></pre>
 <h1 id="aliases"><a class="header" href="#aliases">Aliases</a></h1>
 <p>rizin also offers aliases which might help you save time by quickly executing your most used commands. They are under <code>$?</code></p>
 <p>The general usage of the feature is: <code>$alias=cmd</code></p>
