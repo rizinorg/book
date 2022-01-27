@@ -40,19 +40,19 @@ book:
 
       - part: Basic Commands
         chapters:
-         - src/configuration/intro.md
-         - src/configuration/seeking.md
-         - src/configuration/block_size.md
-         - src/configuration/sections.md
-         - src/configuration/mapping_files.md
-         - src/configuration/print_modes.md
-         - src/configuration/flags.md
-         - src/configuration/write.md
-         - src/configuration/zoom.md
-         - src/configuration/yank_paste.md
-         - src/configuration/comparing_bytes.md
-         - src/configuration/sdb.md
-         - src/configuration/dietline.md
+         - src/basic_commands/intro.md
+         - src/basic_commands/seeking.md
+         - src/basic_commands/block_size.md
+         - src/basic_commands/sections.md
+         - src/basic_commands/mapping_files.md
+         - src/basic_commands/print_modes.md
+         - src/basic_commands/flags.md
+         - src/basic_commands/write.md
+         - src/basic_commands/zoom.md
+         - src/basic_commands/yank_paste.md
+         - src/basic_commands/comparing_bytes.md
+         - src/basic_commands/sdb.md
+         - src/basic_commands/dietline.md
 
       - part: Visual mode
         chapters:
@@ -88,7 +88,7 @@ book:
          - src/analysis/syscalls.md
          - src/analysis/emulation.md
          - src/analysis/symbols.md
-         - signatures/signatures.md
+         - src/signatures/signatures.md
          - src/analysis/graphs.md
          - src/analysis/cpu_platform_profiles.md
       - part: Scripting
