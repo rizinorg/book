@@ -12,6 +12,8 @@ To evaluate mathematical expressions prepend them with command `?`:
 134512674
 [0xb7f9d810]> ?vi 0x8048000+0x34
 134512692
+[0x00000000]> ?vi 2**10
+1024
 [0xb7f9d810]> ? 1+2+3-4*3
 hex     0xfffffffffffffffa
 octal   01777777777777777777772
@@ -34,6 +36,7 @@ Supported arithmetic operations are:
  *  % : modulus
  *  \> : shift right
  *  < : shift left
+ * \*\* : power
 
 ```
 [0x00000000]> ?vi 1+2+3
