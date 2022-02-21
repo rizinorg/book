@@ -96,15 +96,15 @@ RZ_API RzLibStruct rizin_plugin = {
 
 After compiling rizin will list this plugin in the rz-asm output:
 ```
-$ ./build/binrz/rz-asm/rz-asm -L |grep myc
-_d__  _8_32      mycpu        LGPL3   MYCPU
+$ rz-asm -L |grep myc
+_d__  _8_32      mycpu        LGPL3   MYCPU disassembly plugin
 ```
 
 ### Moving plugin into the tree
 
 Pushing a new architecture into the main branch of rizin requires to modify several files in order to make it fit into the way the rest of plugins are built.
 
-List of affected files:
+__List of affected files:__
 
 * `librz/asm/p/asm_mycpu.c`
 That's where most of our code will be, the key part is to declare a `RzAsmPlugin` containing a valid `disassemble` field, a function pointer to the actual disassembler function.
@@ -143,10 +143,8 @@ Make Rizin aware of our plugin by defining our struct :
 
 Check out how the NIOS II CPU disassembly plugin was implemented by reading those commits:
 
-Implement RzAsm plugin:
-https://github.com/rizinorg/rizin/commit/933dc0ef6ddfe44c88bbb261165bf8f8b531476b
+[The RzAsm plugin](https://github.com/rizinorg/rizin/commit/933dc0ef6ddfe44c88bbb261165bf8f8b531476b)
 
-Implement RzAnalysis plugin:
-https://github.com/rizinorg/rizin/commit/ad430f0d52fbe933e0830c49ee607e9b0e4ac8f2
+[The RzAnalysis plugin](https://github.com/rizinorg/rizin/commit/ad430f0d52fbe933e0830c49ee607e9b0e4ac8f2)
 
 
