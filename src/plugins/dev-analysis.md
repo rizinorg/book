@@ -81,7 +81,6 @@ static mycpu_op_t mycpu_op[] = {
 }
 
 static int mycpu_anop(RzAnalysis *analysis, RzAnalysisOp *op, ut64 addr, const ut8 *data, int len) {
-	memset (op, '\0', sizeof (RzAnalysisOp));
 	if (data[0] < NB_INST) {
 		op->size = mycpu_op[data[0]].len;
 		op->addr = addr;
