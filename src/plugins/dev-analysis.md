@@ -33,7 +33,7 @@ emulation - register profile, like in debugger, which is set within `set_reg_pro
 **Makefile**
 
 ```makefile
-NAME=analysis_snes
+NAME=analysis_mycpu
 RZ_PLUGIN_PATH=$(shell rizin -H RZ_USER_PLUGINS)
 LIBEXT=$(shell rizin -H LIBEXT)
 CFLAGS=-g -fPIC $(shell pkg-config --cflags rz_analysis)
@@ -50,46 +50,63 @@ $(LIB): $(OBJS)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) -o $(LIB)
 
 install:
-	cp -f analysis_snes.$(SO_EXT) $(RZ_PLUGIN_PATH)
+	cp -f analysis_mycpu.$(SO_EXT) $(RZ_PLUGIN_PATH)
 
 uninstall:
-	rm -f $(RZ_PLUGIN_PATH)/analysis_snes.$(SO_EXT)
+	rm -f $(RZ_PLUGIN_PATH)/analysis_mycpu.$(SO_EXT)
 ```
 
-**analysis_snes.c:**
+**analysis_mycpu.c:**
+This is a dummy example please go check real life examples [in the source](https://github.com/rizinorg/rizin/blob/dev/librz/analysis/p/analysis_snes.c).
 
 ```c
-/* rizin - LGPL - Copyright 2015 - condret */
+/* rizin - LGPL - Copyright 2022 - user */
 
 #include <string.h>
 #include <rz_types.h>
 #include <rz_lib.h>
 #include <rz_asm.h>
 #include <rz_analysis.h>
-#include "snes_op_table.h"
 
-static int snes_anop(RzAnalysis *analysis, RzAnalysisOp *op, ut64 addr, const ut8 *data, int len) {
-	memset (op, '\0', sizeof (RzAnalysisOp));
-	op->size = snes_op[data[0]].len;
-	op->addr = addr;
-	op->type = RZ_ANALYSIS_OP_TYPE_UNK;
-	switch (data[0]) {
-		case 0xea:
-			op->type = RZ_ANALYSIS_OP_TYPE_NOP;
-			break;
-	}
-	return op->size;
+#define NB_INST 2
+
+typedef struct {
+	const char *name;
+	ut8 len;
+} mycpu_op_t;
+
+static mycpu_op_t mycpu_op[] = {
+	/*00*/	{ "nop",	2 }, //enough
+	/*01*/	{ "ret",	2 },
 }
 
-struct rz_analysis_plugin_t rz_analysis_plugin_snes = {
-	.name = "snes",
-	.desc = "SNES analysis plugin",
+static int mycpu_anop(RzAnalysis *analysis, RzAnalysisOp *op, ut64 addr, const ut8 *data, int len) {
+	memset (op, '\0', sizeof (RzAnalysisOp));
+	if (data[0] < NB_INST) {
+		op->size = mycpu_op[data[0]].len;
+		op->addr = addr;
+		op->type = RZ_ANALYSIS_OP_TYPE_UNK;
+		switch (data[0]) {
+			case 0x00:
+				op->type = RZ_ANALYSIS_OP_TYPE_NOP;
+				break;
+			case 0x01:
+				op->type = RZ_ANALYSIS_OP_TYPE_RET;
+				break;
+		}
+		return op->size;
+	}
+}
+
+struct rz_analysis_plugin_t rz_analysis_plugin_mycpu = {
+	.name = "mycpu",
+	.desc = "MYCPU analysis plugin",
 	.license = "LGPL3",
 	.arch = RZ_SYS_ARCH_NONE,
 	.bits = 16,
 	.init = NULL,
 	.fini = NULL,
-	.op = &snes_anop,
+	.op = &mycpu_anop,
 	.set_reg_profile = NULL,
 	.fingerprint_bb = NULL,
 	.fingerprint_fcn = NULL,
@@ -101,20 +118,19 @@ struct rz_analysis_plugin_t rz_analysis_plugin_snes = {
 #ifndef RZ_PLUGIN_INCORE
 RZ_API RzLibStruct rizin_plugin = {
 	.type = RZ_LIB_TYPE_ANALYSIS,
-	.data = &rz_analysis_plugin_snes,
+	.data = &rz_analysis_plugin_mycpu,
 	.version = RZ_VERSION
 };
 #endif
 ```
-After compiling rizin will list this plugin in the output:
+After compiling rizin will list this plugin in the rz-asm output:
 ```
-_dA_  _8_16      snes        LGPL3   SuperNES CPU
+_dA_  _8_16      mycpu        LGPL3   MYCPU disassembly plugin
 ```
+Note the `A` just appeared on the left column (a=asm, d=disasm, A=analyze, e=ESIL).
 
-**snes_op_table**.h: https://github.com/rizinorg/rizin/blob/master/librz/asm/arch/snes/snes_op_table.h
+Examples:
 
-Example:
-
-* **6502**: https://github.com/rizinorg/rizin/commit/64636e9505f9ca8b408958d3c01ac8e3ce254a9b
-* **SNES**: https://github.com/rizinorg/rizin/commit/60d6e5a1b9d244c7085b22ae8985d00027624b49
+* [RzAnalysis plugin for 6502](https://github.com/rizinorg/rizin/commit/64636e9505f9ca8b408958d3c01ac8e3ce254a9b)
+* [RzAnalysis plugin for SNES](https://github.com/rizinorg/rizin/commit/60d6e5a1b9d244c7085b22ae8985d00027624b49)
 
