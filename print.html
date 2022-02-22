@@ -7940,7 +7940,7 @@ and length:</p>
 <pre><code class="language-c">static int disassemble(RzAsm *a, RzAsmOp *op, const ut8 *buf, int len)
 </code></pre>
 <p><strong>Makefile</strong></p>
-<pre><code class="language-makefile">NAME=asm_snes
+<pre><code class="language-makefile">NAME=asm_mycpu
 RZ_PLUGIN_PATH=$(shell rizin -H RZ_USER_PLUGINS)
 LIBEXT=$(shell rizin -H LIBEXT)
 CFLAGS=-g -fPIC $(shell pkg-config --cflags rz_analyss)
@@ -8003,23 +8003,54 @@ RZ_API RzLibStruct rizin_plugin = {
 };
 #endif
 </code></pre>
-<p>After compiling rizin will list this plugin in the output:</p>
-<pre><code>_d__  _8_32      mycpu        LGPL3   MYCPU
+<p>After compiling rizin will list this plugin in the rz-asm output:</p>
+<pre><code>$ rz-asm -L |grep myc
+_d__  _8_32      mycpu        LGPL3   MYCPU disassembly plugin
 </code></pre>
 <h3 id="moving-plugin-into-the-tree"><a class="header" href="#moving-plugin-into-the-tree">Moving plugin into the tree</a></h3>
 <p>Pushing a new architecture into the main branch of rizin requires to modify several files in order to make it fit into the way the rest of plugins are built.</p>
-<p>List of affected files:</p>
+<p><strong>List of affected files:</strong></p>
 <ul>
-<li><code>plugins.def.cfg</code> : add the <code>asm.mycpu</code> plugin name string in there</li>
-<li><code>librz/asm/p/mycpu.mk</code> : build instructions</li>
-<li><code>librz/asm/p/asm_mycpu.c</code> : implementation</li>
-<li><code>librz/include/rz_asm.h</code> : add the struct definition in there</li>
+<li>
+<p><code>librz/asm/p/asm_mycpu.c</code>
+That's where most of our code will be, the key part is to declare a <code>RzAsmPlugin</code> containing a valid <code>disassemble</code> field, a function pointer to the actual disassembler function.</p>
+</li>
+<li>
+<p><code>librz/asm/meson.build</code>
+The build is handled by meson, we have to add our plugin to the list of things to be compiled :</p>
+</li>
 </ul>
+<pre><code class="language-diff">@@ -49,6 +49,7 @@ asm_plugins = [
+   'x86_nz',
+   'xap',
+   'xcore_cs',
++  'mycpu',
+ ]
+
+@@ -129,6 +130,7 @@ rz_asm_sources = [
+   #'p/asm_x86_vm.c',
+   'p/asm_xap.c',
+   'p/asm_xcore_cs.c',
++  'p/asm_mycpu.c',
+   #'arch/6502/6502dis.c',
+   'arch/amd29k/amd29k.c',
+   #'arch/8051/8051_disas.c',
+</code></pre>
+<ul>
+<li><code>librz/include/rz_asm.h</code>
+Make Rizin aware of our plugin by defining our struct :</li>
+</ul>
+<pre><code class="language-diff">@@ -265,6 +265,7 @@ extern RzAsmPlugin rz_asm_plugin_xcore_cs;
+ extern RzAsmPlugin rz_asm_plugin_xtensa;
+ extern RzAsmPlugin rz_asm_plugin_z80;
+ extern RzAsmPlugin rz_asm_plugin_pyc;
++extern RzAsmPlugin rz_asm_plugin_mycpu;
+
+ #endif
+</code></pre>
 <p>Check out how the NIOS II CPU disassembly plugin was implemented by reading those commits:</p>
-<p>Implement RzAsm plugin:
-https://github.com/rizinorg/rizin/commit/933dc0ef6ddfe44c88bbb261165bf8f8b531476b</p>
-<p>Implement RzAnalysis plugin:
-https://github.com/rizinorg/rizin/commit/ad430f0d52fbe933e0830c49ee607e9b0e4ac8f2</p>
+<p><a href="https://github.com/rizinorg/rizin/commit/933dc0ef6ddfe44c88bbb261165bf8f8b531476b">The RzAsm plugin</a></p>
+<p><a href="https://github.com/rizinorg/rizin/commit/ad430f0d52fbe933e0830c49ee607e9b0e4ac8f2">The RzAnalysis plugin</a></p>
 <h2 id="implementing-a-new-analysis-plugin"><a class="header" href="#implementing-a-new-analysis-plugin">Implementing a new analysis plugin</a></h2>
 <p>After implementing disassembly plugin, you might have noticed that output
 is far from being good - no proper highlighting, no reference lines
@@ -8047,7 +8078,7 @@ ESIL, which is enabled in <code>.esil = true</code> statement. Thus, <code>mycpu
 corresponding RzAnalysisOp ESIL field for the opcodes. Second important thing for ESIL uplifting and
 emulation - register profile, like in debugger, which is set within <code>set_reg_profile</code> function.</p>
 <p><strong>Makefile</strong></p>
-<pre><code class="language-makefile">NAME=analysis_snes
+<pre><code class="language-makefile">NAME=analysis_mycpu
 RZ_PLUGIN_PATH=$(shell rizin -H RZ_USER_PLUGINS)
 LIBEXT=$(shell rizin -H LIBEXT)
 CFLAGS=-g -fPIC $(shell pkg-config --cflags rz_analysis)
@@ -8064,43 +8095,59 @@ $(LIB): $(OBJS)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) -o $(LIB)
 
 install:
-	cp -f analysis_snes.$(SO_EXT) $(RZ_PLUGIN_PATH)
+	cp -f analysis_mycpu.$(SO_EXT) $(RZ_PLUGIN_PATH)
 
 uninstall:
-	rm -f $(RZ_PLUGIN_PATH)/analysis_snes.$(SO_EXT)
+	rm -f $(RZ_PLUGIN_PATH)/analysis_mycpu.$(SO_EXT)
 </code></pre>
-<p><strong>analysis_snes.c:</strong></p>
-<pre><code class="language-c">/* rizin - LGPL - Copyright 2015 - condret */
+<p><strong>analysis_mycpu.c:</strong>
+This is a dummy example please go check real life examples <a href="https://github.com/rizinorg/rizin/blob/dev/librz/analysis/p/analysis_snes.c">in the source</a>.</p>
+<pre><code class="language-c">/* rizin - LGPL - Copyright 2022 - user */
 
 #include &lt;string.h&gt;
 #include &lt;rz_types.h&gt;
 #include &lt;rz_lib.h&gt;
 #include &lt;rz_asm.h&gt;
 #include &lt;rz_analysis.h&gt;
-#include &quot;snes_op_table.h&quot;
 
-static int snes_anop(RzAnalysis *analysis, RzAnalysisOp *op, ut64 addr, const ut8 *data, int len) {
-	memset (op, '\0', sizeof (RzAnalysisOp));
-	op-&gt;size = snes_op[data[0]].len;
-	op-&gt;addr = addr;
-	op-&gt;type = RZ_ANALYSIS_OP_TYPE_UNK;
-	switch (data[0]) {
-		case 0xea:
-			op-&gt;type = RZ_ANALYSIS_OP_TYPE_NOP;
-			break;
-	}
-	return op-&gt;size;
+#define NB_INST 2
+
+typedef struct {
+	const char *name;
+	ut8 len;
+} mycpu_op_t;
+
+static mycpu_op_t mycpu_op[] = {
+	/*00*/	{ &quot;nop&quot;,	2 }, //enough
+	/*01*/	{ &quot;ret&quot;,	2 },
 }
 
-struct rz_analysis_plugin_t rz_analysis_plugin_snes = {
-	.name = &quot;snes&quot;,
-	.desc = &quot;SNES analysis plugin&quot;,
+static int mycpu_anop(RzAnalysis *analysis, RzAnalysisOp *op, ut64 addr, const ut8 *data, int len) {
+	if (data[0] &lt; NB_INST) {
+		op-&gt;size = mycpu_op[data[0]].len;
+		op-&gt;addr = addr;
+		op-&gt;type = RZ_ANALYSIS_OP_TYPE_UNK;
+		switch (data[0]) {
+			case 0x00:
+				op-&gt;type = RZ_ANALYSIS_OP_TYPE_NOP;
+				break;
+			case 0x01:
+				op-&gt;type = RZ_ANALYSIS_OP_TYPE_RET;
+				break;
+		}
+		return op-&gt;size;
+	}
+}
+
+struct rz_analysis_plugin_t rz_analysis_plugin_mycpu = {
+	.name = &quot;mycpu&quot;,
+	.desc = &quot;MYCPU analysis plugin&quot;,
 	.license = &quot;LGPL3&quot;,
 	.arch = RZ_SYS_ARCH_NONE,
 	.bits = 16,
 	.init = NULL,
 	.fini = NULL,
-	.op = &amp;snes_anop,
+	.op = &amp;mycpu_anop,
 	.set_reg_profile = NULL,
 	.fingerprint_bb = NULL,
 	.fingerprint_fcn = NULL,
@@ -8112,19 +8159,19 @@ struct rz_analysis_plugin_t rz_analysis_plugin_snes = {
 #ifndef RZ_PLUGIN_INCORE
 RZ_API RzLibStruct rizin_plugin = {
 	.type = RZ_LIB_TYPE_ANALYSIS,
-	.data = &amp;rz_analysis_plugin_snes,
+	.data = &amp;rz_analysis_plugin_mycpu,
 	.version = RZ_VERSION
 };
 #endif
 </code></pre>
-<p>After compiling rizin will list this plugin in the output:</p>
-<pre><code>_dA_  _8_16      snes        LGPL3   SuperNES CPU
+<p>After compiling rizin will list this plugin in the rz-asm output:</p>
+<pre><code>_dA_  _8_16      mycpu        LGPL3   MYCPU disassembly plugin
 </code></pre>
-<p><strong>snes_op_table</strong>.h: https://github.com/rizinorg/rizin/blob/master/librz/asm/arch/snes/snes_op_table.h</p>
-<p>Example:</p>
+<p>Note the <code>A</code> just appeared on the left column (a=asm, d=disasm, A=analyze, e=ESIL).</p>
+<p>Examples:</p>
 <ul>
-<li><strong>6502</strong>: https://github.com/rizinorg/rizin/commit/64636e9505f9ca8b408958d3c01ac8e3ce254a9b</li>
-<li><strong>SNES</strong>: https://github.com/rizinorg/rizin/commit/60d6e5a1b9d244c7085b22ae8985d00027624b49</li>
+<li><a href="https://github.com/rizinorg/rizin/commit/64636e9505f9ca8b408958d3c01ac8e3ce254a9b">RzAnalysis plugin for 6502</a></li>
+<li><a href="https://github.com/rizinorg/rizin/commit/60d6e5a1b9d244c7085b22ae8985d00027624b49">RzAnalysis plugin for SNES</a></li>
 </ul>
 <h1 id="implementing-a-new-format"><a class="header" href="#implementing-a-new-format">Implementing a new format</a></h1>
 <h2 id="create-a-folder-with-file-format-name-in-librzbinformat"><a class="header" href="#create-a-folder-with-file-format-name-in-librzbinformat">Create a folder with file format name in librz/bin/format</a></h2>
