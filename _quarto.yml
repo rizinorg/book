@@ -3,6 +3,7 @@ project:
   output-dir: docs
 
 book:
+  reader-mode: true
   title: "The Official Rizin Book"
   author: "Rizin Organization"
   description: |
@@ -62,7 +63,7 @@ book:
          - src/visual_mode/visual_configuration_editor.md
          - src/visual_mode/visual_panels.md
 
-      - part: Searching bytes
+      - part: Searching
         chapters:
          - src/search_bytes/intro.md
          - src/search_bytes/basic_searches.md
