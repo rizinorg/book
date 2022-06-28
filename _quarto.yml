@@ -15,7 +15,7 @@ book:
   sharing: [twitter, facebook, linkedin]
   chapters:
       - index.md
-      - part: Introduction
+      - part: "Introduction"
         chapters:
          - src/first_steps/overview.md
          - src/first_steps/getting_rizin.md
@@ -23,7 +23,7 @@ book:
          - src/first_steps/windows_compilation.md
          - src/first_steps/compilation_android.md
 
-      - part: First Steps
+      - part: "First Steps"
         chapters:
          - src/first_steps/intro.md
          - src/first_steps/commandline_flags.md
@@ -32,14 +32,14 @@ book:
          - src/first_steps/basic_debugger_session.md
          - src/first_steps/contributing.md
 
-      - part: Configuration
+      - part: "Configuration"
         chapters:
          - src/configuration/intro.md
          - src/configuration/colors.md
          - src/configuration/evars.md
          - src/configuration/files.md
 
-      - part: Basic Commands
+      - part: "Basic Commands"
         chapters:
          - src/basic_commands/intro.md
          - src/basic_commands/seeking.md
@@ -55,7 +55,7 @@ book:
          - src/basic_commands/sdb.md
          - src/basic_commands/dietline.md
 
-      - part: Visual mode
+      - part: "Visual mode"
         chapters:
          - src/visual_mode/intro.md
          - src/visual_mode/visual_disassembly.md
@@ -63,7 +63,7 @@ book:
          - src/visual_mode/visual_configuration_editor.md
          - src/visual_mode/visual_panels.md
 
-      - part: Searching
+      - part: "Searching"
         chapters:
          - src/search_bytes/intro.md
          - src/search_bytes/basic_searches.md
@@ -73,12 +73,12 @@ book:
          - src/search_bytes/backward_search.md
          - src/search_bytes/search_in_assembly.md
          - src/search_bytes/searching_aes_keys.md
-      - part: Disassembling
+      - part: "Disassembling"
         chapters:
          - src/disassembling/intro.md
          - src/disassembling/adding_metadata.md
          - src/disassembling/esil.md
-      - part: Analysis
+      - part: "Analysis"
         chapters:
          - src/analysis/intro.md
          - src/analysis/code_analysis.md
@@ -92,13 +92,13 @@ book:
          - src/signatures/signatures.md
          - src/analysis/graphs.md
          - src/analysis/cpu_platform_profiles.md
-      - part: Scripting
+      - part: "Scripting"
         chapters:
          - src/scripting/intro.md
          - src/scripting/loops.md
          - src/scripting/macros.md
          - src/scripting/rz-pipe.md
-      - part: Debugger
+      - part: "Debugger"
         chapters:
          - src/debugger/intro.md
          - src/debugger/getting_started.md
@@ -110,13 +110,13 @@ book:
          - src/debugger/revdebug.md
          - src/debugger/windows_messages.md
          - src/debugger/apple.md
-      - part: Remote Access
+      - part: "Remote Access"
         chapters:
          - src/debugger/remoting_capabilities.md
          - src/debugger/remote_gdb.md
          - src/debugger/windbg.md
 
-      - part: Command Line Tools
+      - part: "Command Line Tools"
         chapters:
          - src/tools/intro.md
          - src/tools/rz-ax/intro.md
@@ -142,7 +142,7 @@ book:
          - src/tools/rz-hash/intro.md
          - src/tools/rz-hash/rz-hash_tool.md
 
-      - part: Plugins
+      - part: "Plugins"
         chapters:
          - src/plugins/intro.md
          - src/plugins/ioplugins.md
@@ -154,45 +154,41 @@ book:
          - src/plugins/debug.md
          - src/plugins/testing.md
          - src/plugins/rz-pm.md
-      - part: Crackmes
+      - part: "Crackmes"
         chapters:
          - src/crackmes/intro.md
-         - part: IOLI
-           chapters:
-             - src/crackmes/ioli/intro.md
-             - src/crackmes/ioli/ioli_0x00.md
-             - src/crackmes/ioli/ioli_0x01.md
-             - src/crackmes/ioli/ioli_0x02.md
-             - src/crackmes/ioli/ioli_0x03.md
-             - src/crackmes/ioli/ioli_0x04.md
-             - src/crackmes/ioli/ioli_0x05.md
-             - src/crackmes/ioli/ioli_0x06.md
-             - src/crackmes/ioli/ioli_0x07.md
-             - src/crackmes/ioli/ioli_0x08.md
-             - src/crackmes/ioli/ioli_0x09.md
-         - part: Avatao R3v3rs3 4
-           chapters:
-             - src/crackmes/avatao/01-reverse4/intro.md
-             - src/crackmes/avatao/01-reverse4/rizin.md
-             - src/crackmes/avatao/01-reverse4/first_steps.md
-             - src/crackmes/avatao/01-reverse4/main.md
-             - src/crackmes/avatao/01-reverse4/vmloop.md
-             - src/crackmes/avatao/01-reverse4/instructionset.md
-             - src/crackmes/avatao/01-reverse4/bytecode.md
-             - src/crackmes/avatao/01-reverse4/outro.md
-         - part: Hack The Box
-           chapters:
-             - src/crackmes/hackthebox/intro.md
-             - part: Find The Easy Pass
-               chapters:
-                - src/crackmes/hackthebox/find-the-easy-pass/intro.md
-                - src/crackmes/hackthebox/find-the-easy-pass/identification.md
-                - src/crackmes/hackthebox/find-the-easy-pass/find-the-validation-routine.md
-                - src/crackmes/hackthebox/find-the-easy-pass/fire-up-the-debugger.md
-                - src/crackmes/hackthebox/find-the-easy-pass/bonus.md
-      - part: Reference Card
+         # - part: "IOLI"
+         - src/crackmes/ioli/intro.md
+         - src/crackmes/ioli/ioli_0x00.md
+         - src/crackmes/ioli/ioli_0x01.md
+         - src/crackmes/ioli/ioli_0x02.md
+         - src/crackmes/ioli/ioli_0x03.md
+         - src/crackmes/ioli/ioli_0x04.md
+         - src/crackmes/ioli/ioli_0x05.md
+         - src/crackmes/ioli/ioli_0x06.md
+         - src/crackmes/ioli/ioli_0x07.md
+         - src/crackmes/ioli/ioli_0x08.md
+         - src/crackmes/ioli/ioli_0x09.md
+         # - part: "Avatao R3v3rs3 4"
+         - src/crackmes/avatao/01-reverse4/intro.md
+         - src/crackmes/avatao/01-reverse4/rizin.md
+         - src/crackmes/avatao/01-reverse4/first_steps.md
+         - src/crackmes/avatao/01-reverse4/main.md
+         - src/crackmes/avatao/01-reverse4/vmloop.md
+         - src/crackmes/avatao/01-reverse4/instructionset.md
+         - src/crackmes/avatao/01-reverse4/bytecode.md
+         - src/crackmes/avatao/01-reverse4/outro.md
+         # - part: "Hack The Box"
+         - src/crackmes/hackthebox/intro.md
+         # - part: "Find The Easy Pass"
+         - src/crackmes/hackthebox/find-the-easy-pass/intro.md
+         - src/crackmes/hackthebox/find-the-easy-pass/identification.md
+         - src/crackmes/hackthebox/find-the-easy-pass/find-the-validation-routine.md
+         - src/crackmes/hackthebox/find-the-easy-pass/fire-up-the-debugger.md
+         - src/crackmes/hackthebox/find-the-easy-pass/bonus.md
+      - part: "Reference Card"
         chapters:
           - src/refcard/intro.md
-      - part: Acknowledgments
+      - part: "Acknowledgments"
         chapters:
           - src/credits/credits.md
