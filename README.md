@@ -10,8 +10,13 @@ Check the Github site to add new contents or fix typos:
 
 ## Offline
 
-For offline use you need to fetch the [mdbook](https://github.com/rust-lang/mdBook) tool and run the build locally:
+For offline use you need to fetch the [Quarto](https://quarto.org) tool and run the build locally:
 ```sh
-mdbook serve
+quarto preview
 ```
-After that, you can point your Web-browser to `http://localhost:3000` and read it offline.
+It will open your Web-browser pointing to `http://localhost:[some port]` to read it offline.
+
+Another option is to render the book to any of the formats that are supported by Quarto:
+```sh
+quarto render . --to pdf --toc
+```
