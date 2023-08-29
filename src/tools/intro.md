@@ -6,7 +6,7 @@ All the functionalities provided by the different APIs and plugins have also dif
 
 Thanks to the orthogonal design of the framework it is possible to do all the things that rizin is able from different places:
 
-* these companion tools
-* native library apis
-* scripting with rz-pipe
-* the rizin shell
+* These companion tools
+* Native library apis
+* Scripting with `rz-pipe`
+* The rizin shell
