@@ -54,11 +54,22 @@ We can see that the program reads a word (2 bytes) into the local variable named
 *local_10_6*, and than compares it to 0xbb8. That's 3000 in decimal:
 
 ```
-[0x00400c63]> ? 0xbb8
-3000 0xbb8 05670 2.9K 0000:0bb8 3000 10111000 3000.0 0.000000f 0.000000
+[0x00400c63]> % 0xbb8
+int32   3000
+uint32  3000
+hex     0xbb8
+octal   05670
+unit    2.9K
+segment 0000:0bb8
+string  "\xb8\v"
+fvalue  3000.0
+float   3000.000000f
+double  3000.000000
+binary  0b0000101110111000
+trits   0t11010010
 ```
 
-> ***rizin tip***: yep, *?* will evaluate expressions, and print the result in
+> ***rizin tip***: yep, *%* will evaluate expressions, and print the result in
 > various formats.
 
 If the value is greater than 3000, then it will be forced to be 3000:

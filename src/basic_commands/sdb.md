@@ -94,13 +94,13 @@ fd.6
 [0x08048320]> k bin/fd.6/*
 archs=0:0:x86:32
 ```
-The file corresponding to the sixth file descriptor is a x86_32 binary.
+The file corresponding to the sixth file descriptor is a x86\_32 binary.
 
 ```
 [0x08048320]> k analysis/meta/*
 meta.s.0x80484d0=12,SGVsbG8gd29ybGQ=
 [...]
-[0x08048320]> ?b64- SGVsbG8gd29ybGQ=
+[0x08048320]> %b64- SGVsbG8gd29ybGQ=
 Hello world
 ```
 Strings are stored encoded in base64.

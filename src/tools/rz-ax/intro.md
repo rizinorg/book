@@ -4,13 +4,13 @@ The `rz-ax` utility comes with the rizin framework and aims to be a minimalistic
 
 This is the help message of rz-ax, this tool can be used in the command-line or interactively (reading the values from stdin), so it can be used as a multi-base calculator.
 
-Inside rizin, the functionality of rz-ax is available under the ? command. For example:
+Inside rizin, the functionality of rz-ax is available under the `%` command. For example:
 
 ```
-[0x00000000]> ? 3+4
+[0x00000000]> % 3+4
 ```
 
-As you can see, the numeric expressions can contain mathematical expressions like addition, subtraction, .. as well as group operations with parenthesis.
+As you can see, the numeric expressions can contain mathematical expressions like addition, subtraction, as well as group operations with parenthesis.
 
 The syntax in which the numbers are represented define the base, for example:
 

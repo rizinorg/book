@@ -65,7 +65,7 @@ commands
 [0x00404800]> px 10 @ `ao~ptr[1]` >> example.txt
 ```
 
-The `?$?` command describes several helpful variables you can use to do similar actions even more
+The `%$?` command describes several helpful variables you can use to do similar actions even more
 easily, like the `$v` "immediate value" variable, or the `$m` opcode memory reference variable.
 
 
