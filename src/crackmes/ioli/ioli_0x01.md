@@ -87,10 +87,10 @@ If you look carefully, you'll see a `cmp` instruction, with a constant, 0x149a. 
 0x0804842b    817dfc9a140. cmp dword [ebp + 0xfffffffc], 0x149a
 ```
 
-You can use rizin's `?` command to display 0x149a in another numeric base.
+You can use rizin's `%` command to display 0x149a in another numeric base.
 
 ```
-[0x08048330]> ? 0x149a
+[0x08048330]> % 0x149a
 int32   5274
 uint32  5274
 hex     0x149a
@@ -98,9 +98,9 @@ octal   012232
 unit    5.2K
 segment 0000:049a
 string  "\x9a\x14"
-fvalue: 5274.0
-float:  0.000000f
-double: 0.000000
+fvalue  5274.0
+float   5274.000000f
+double  5274.000000
 binary  0b0001010010011010
 trits   0t21020100
 ```

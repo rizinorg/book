@@ -157,53 +157,61 @@ where the `/` command may search for the given value.
 
 ## Usable variables in expression
 
-The `?$?` command will display the variables that can be used in any math
-operation inside the rizin shell. For example, using the `? $$` command to evaluate
-a number or `?v` to just the value in one format.
+The `%$?` command will display the variables that can be used in any math
+operation inside the rizin shell. For example, using the `% $$` command to evaluate
+a number or `%v` to just the value in one format.
 
 All commands in rizin that accept a number supports the use of those variables.
 
-| Command       | Description                                      |
-|:--------------|:-------------------------------------------------|
-| $$            | here (current virtual seek)|
-| $$$           | current non-temporary virtual seek|
-| $?            | last comparison value|
-| $alias=value  | alias commands (simple macros)|
-| $b            | block size|
-| $B            | base address (aligned lowest map address)|
-| $f            | jump fail address (e.g. jz 0x10 => next instruction)|
-| $fl           | flag length (size) at current address (fla; pD $l @ entry0)|
-| $F            | current function size|
-| $FB           | begin of function|
-| $Fb           | address of the current basic block|
-| $Fs           | size of the current basic block|
-| $FE           | end of function|
-| $FS           | function size|
-| $Fj           | function jump destination|
-| $Ff           | function false destination|
-| $FI           | function instructions|
-| $c,$r         | get width and height of terminal|
-| $Cn           | get nth call of function|
-| $Dn           | get nth data reference in function|
-| $D            | current debug map base address ?v $D @ rsp|
-| $DD           | current debug map size|
-| $e            | 1 if end of block, else 0|
-| $j            | jump address (e.g. jmp 0x10, jz 0x10 => 0x10)|
-| $Ja           | get nth jump of function|
-| $Xn           | get nth xref of function|
-| $l            | opcode length|
-| $m            | opcode memory reference (e.g. mov eax,[0x10] => 0x10)|
-| $M            | map address (lowest map address)|
-| $o            | here (current disk io offset)|
-| $p            | getpid()|
-| $P            | pid of children (only in debug)|
-| $s            | file size|
-| $S            | section offset|
-| $SS           | section size|
-| $v            | opcode immediate value (e.g. lui a0,0x8010 => 0x8010)|
-| $w            | get word size, 4 if asm.bits=32, 8 if 64, ...|
-| ${ev}         | get value of eval config variable|
-| $r{reg}       | get value of named register|
-| $k{kv}        | get value of an sdb query value|
-| $s{flag}      | get size of flag|
-| RzNum        | $variables usable in math expressions|
+| Command       | Description                                                 |
+|:--------------|:------------------------------------------------------------|
+| $$            | here (current virtual seek)                                 |
+| $$$           | current non-temporary virtual seek                          |
+| $?            | last comparison value                                       |
+| $B            | base address (aligned lowest map address)                   |
+| $b            | block size                                                  |
+| $c            | get terminal width in character columns                     |
+| $Cn           | get nth call of function                                    |
+| $D            | current debug map base address ?v $D @ rsp                  |
+| $DB           | same as dbg.baddr, progam base address                      |
+| $DD           | current debug map size                                      |
+| $Dn           | get nth data reference in function                          |
+| $e            | 1 if end of block, else 0                                   |
+| $f            | jump fail address (e.g. jz 0x10 => next instruction)        |
+| $F            | Same as $FB                                                 |
+| $Fb           | begin of basic block                                        |
+| $FB           | begin of function                                           |
+| $Fe           | end of basic block                                          |
+| $FE           | end of function                                             |
+| $Ff           | function false destination                                  |
+| $Fi           | basic block instructions                                    |
+| $FI           | function instructions                                       |
+| $Fj           | function jump destination                                   |
+| $fl           | flag length (size) at current address (fla; pD $l @ entry0) |
+| $FS           | function size (linear length)                               |
+| $Fs           | size of the current basic block                             |
+| $FSS          | function size (sum bb sizes)                                |
+| $j            | jump address (e.g. jmp 0x10, jz 0x10 => 0x10)               |
+| $Ja           | get nth jump of function                                    |
+| $l            | opcode length                                               |
+| $M            | map address (lowest map address)                            |
+| $m            | opcode memory reference (e.g. mov eax,[0x10] => 0x10)       |
+| $MM           | map size (lowest map address)                               |
+| $O            | cursor here (current offset pointed by the cursor)          |
+| $o            | here (current disk io offset)                               |
+| $p            | getpid()                                                    |
+| $P            | pid of children (only in debug)                             |
+| $r            | get console height (in rows, see $c for columns)            |
+| $s            | file size                                                   |
+| $S            | section offset                                              |
+| $SS           | section size                                                |
+| $v            | opcode immediate value (e.g. lui a0,0x8010 => 0x8010)       |
+| $w            | get word size, 4 if asm.bits=32, 8 if 64, ...               |
+| $Xn           | get nth xref of function                                    |
+| flag          | offset of flag                                              |
+| ${ev}         | get value of eval <config variable <ev>                     |
+| $alias        | alias commands (simple macros)                              |
+| $e{flag}      | end of <flag> (flag->offset + flag->size)                   |
+| $k{kv}        | get value of an sdb query value                             |
+| $r{reg}       | get value of named register <reg>                           |
+| $s{flag}      | get size of <flag>                                          |
