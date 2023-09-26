@@ -27,14 +27,12 @@ Usage: e[?]   # List/get/set config evaluable vars
 | e <key>[=<val|?>] [<key>[=<val|?>] ...]] # Get/Set value of config variable <key>
 | el[j*qlJ] [<key>]      # List config variables with their descriptions
 | e-                     # Reset config variables
-| e! <key>               # Invert the boolean value of config variable <var>
+| e! <key>               # Invert the boolean value of config variable <key>
 | ec[?]                  # Set color for given key (prompt, offset, ...)
-| ee <key>               # Open editor to change the value of config variable <var>
-| ed                     # Open editor to change ~/.rizinrc
-| er <key>               # Set config variable <var> as read-only
+| ee <key>               # Open editor to change the value of config variable <key>
+| er <key>               # Set config variable <key> as read-only
 | es [<key>]             # List all config variable spaces or sub-keys/sub-spaces if a <key> is provided
-| et <key>               # Show type of given config variable <var>
-| env [<varname>[=<varvalue>]] # Get/set environment variables
+| et <key>               # Show type of given config variable <key>
 ```
 
 A simpler alternative to the `e` command is accessible from the visual mode. Type `Ve` to enter it, use arrows (up, down, left, right) to navigate the configuration, and `q` to exit it. The start screen for the visual configuration edit looks like this:
