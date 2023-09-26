@@ -6,11 +6,11 @@ To prevent rizin from parsing this file at startup, pass it the `-N` option.
 
 All the configuration of rizin is done with the `eval` commands. A typical startup configuration file looks like this:
 ```sh
-$ cat ~/.rizinrc
+$ cat ~/.config/rizin/rizinrc
 e scr.color=1
 e dbg.bep   = loader
 ```
-The configuration can also be changed with `-e` <config=value> command-line option. This way you can adjust configuration from the command line, keeping the .rizinrc file intact. For example, to start with empty configuration and then adjust `scr.color` and `asm.syntax` the following line may be used:
+The configuration can also be changed with `-e` <config=value> command-line option. This way you can adjust configuration from the command line, keeping the `~/.config/rizin/rizinrc` file intact. For example, to start with empty configuration and then adjust `scr.color` and `asm.syntax` the following line may be used:
 ```sh
 $ rizin -N -e scr.color=1 -e asm.syntax=intel -d /bin/ls
 ```
