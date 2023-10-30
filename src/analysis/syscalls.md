@@ -93,12 +93,10 @@ child stopped with signal 133
 rizin also has a syscall name to syscall number utility. You can return the syscall name of a given syscall number or vice versa, without leaving the shell.
 
 ```
-[0x08048436]> asl 1
+[0x08048436]> asr 1
 exit
-[0x08048436]> asl write
+[0x08048436]> asn write
 4
-[0x08048436]> ask write
-0x80,4,3,iZi
 ```
 
 See `as?` for more information about the utility.
