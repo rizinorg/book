@@ -97,6 +97,7 @@
       * [Language](tools/rz-gg/lang.md)
    * [Rz-hash](tools/rz-hash/intro.md)
       * [Rz-hash Tool](tools/rz-hash/rz-hash_tool.md)
+   * [Rz-pm](tools/rz-pm/intro.md)
 * [Plugins](plugins/intro.md)
    * [IO plugins](plugins/ioplugins.md)
    * [Asm plugins](plugins/dev-asm.md)
