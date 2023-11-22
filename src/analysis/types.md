@@ -1,10 +1,6 @@
 # Types
 
-Rizin supports the C-syntax data types description.
-Those types are parsed by a C11-compatible parser and stored in
-the internal SDB, thus are introspectable with `k` command.
-
-Most of the related commands are located in `t` namespace:
+Rizin supports C-syntax data type definitions. Most of the related commands are located in `t` namespace:
 
 ```
 [0x000051c0]> t?
@@ -80,9 +76,9 @@ dir.types: Default path to look for cparse type files
 
 ### Printing types
 
-Notice below we have used `ts` command, which basically converts
-the C type description (or to be precise it's SDB representation)
-into the sequence of `pf` commands. See more about [print format](../basic_commands/print_modes.md).
+Notice below we have used `ts` command, which basically converts the C type 
+description into the sequence of `pf` commands. See more about 
+[print format](../basic_commands/print_modes.md).
 
 The `tp` command uses the `pf` string to print all the members of type at the current offset/given address:
 
@@ -139,7 +135,9 @@ Moreover, the link will be shown in the disassembly output or visual mode:
  0x00005202      mov rbp, rsp
 ```
 
-Once the struct is linked, rizin tries to propagate structure offset in the function at the current offset, to run this analysis on the whole program or at any targeted functions after all structs are linked you have `aat` command:
+Once the struct is linked, rizin tries to propagate structure offset in the function at the current 
+offset, to run this analysis on the whole program or at any targeted functions after all structs are 
+linked you have `aat` command:
 
 ```
 [0x00000000]> aa?
@@ -159,7 +157,8 @@ Note sometimes the emulation may not be accurate, for example as below :
 
 ````
 
-The return value of `malloc` may differ between two emulations, so you have to set the hint for return value manually using `ahr` command, so run `tl` or `aat` command after setting up the return value hint.
+The return value of `malloc` may differ between two emulations, so you have to set the hint for return 
+value manually using `ahr` command, so run `tl` or `aat` command after setting up the return value hint.
 
 ```
 [0x000006da]> ah?
@@ -222,167 +221,3 @@ COW
 [0x00000000]> teb Foo COW
 0x1
 ```
-
-## Internal representation
-
-Use the `ts`, `te`, and `tu` commands to view the internal representation of defined types:
-
-```
-[0x000051c0]> ts S1
-pf [3]d[4]dd x y z
-[0x000051c0]> te Foo
-COW = 0x1
-BAR = 0x2
-[0x000051c0]> tu sigval
-pf dp sival_int sival_ptr
-```
-
-Defining primitive types requires an understanding of basic `pf` formats,
-you can find the whole list of format specifier in `pf??`:
-
-```
----------------------------------------------------
-| format | explanation                            |
-| ------ | -------------------------------------- |
-| b      | byte (unsigned)                        |
-| c      | char (signed byte)                     |
-| d      | 0x%%08x hexadecimal value (4 bytes)    |
-| f      | float value (4 bytes)                  |
-| i      | %%i integer value (4 bytes)            |
-| o      | 0x%%08o octal value (4 byte)           |
-| p      | pointer reference (2, 4 or 8 bytes)    |
-| q      | quadword (8 bytes)                     |
-| s      | 32bit pointer to string (4 bytes)      |
-| S      | 64bit pointer to string (8 bytes)      |
-| t      | UNIX timestamp (4 bytes)               |
-| T      | show Ten first bytes of buffer         |
-| u      | uleb128 (variable length)              |
-| w      | word (2 bytes unsigned short in hex)   |
-| x      | 0x%%08x hex value and flag (fd @ addr) |
-| X      | show formatted hexpairs                |
-| z      | \0 terminated string                   |
-| Z      | \0 terminated wide string              |
----------------------------------------------------
-
-```
-there are basically 3 mandatory keys for defining basic data types:
-`X=type`
-`type.X=format_specifier`
-`type.X.size=size_in_bits`
-For example, let's define `UNIT`, according to [Microsoft documentation](https://msdn.microsoft.com/en-us/library/windows/desktop/aa383751%28v=vs.85%29.aspx#UINT)
-`UINT` is just equivalent of standard C `unsigned int` (or `uint32_t` in terms of TCC engine).
-It will be defined as:
-
-```
-UINT=type
-type.UINT=d
-type.UINT.size=32
-```
-
-Now there is an optional entry:
-
-`X.type.pointto=Y`
-
-This one may only be used in case of pointer `type.X=p`, one good example is LPFILETIME definition,
-it is a pointer to `_FILETIME` which happens to be a structure.
-Assuming that we are targeting only 32-bit windows machine, it will be defined as the following:
-
-```
-LPFILETIME=type
-type.LPFILETIME=p
-type.LPFILETIME.size=32
-type.LPFILETIME.pointto=_FILETIME
-```
-
-This last field is not mandatory because sometimes the data structure
-internals will be proprietary, and we will not have a clean representation for it.
-
-There is also one more optional entry:
-
-```
-type.UINT.meta=4
-```
-
-This entry is for integration with C parser and carries the type class information:
-integer size, signed/unsigned, etc.
-
-### Structures
-
-Those are the basic keys for structs (with just two elements):
-
-```
-X=struct
-struct.X=a,b
-struct.X.a=a_type,a_offset,a_number_of_elements
-struct.X.b=b_type,b_offset,b_number_of_elements
-```
-
-The first line is used to define a structure called `X`, the second line
-defines the elements of `X` as comma-separated values. After that, we just define each element info.
-
-For example. we can have a struct like this one:
-
-```
-struct _FILETIME {
-	DWORD dwLowDateTime;
-	DWORD dwHighDateTime;
-}
-```
-
-assuming we have `DWORD` defined, the struct will look like this
-
-```
- _FILETIME=struct
-struct._FILETIME=dwLowDateTime,dwHighDateTime
-struct._FILETIME.dwLowDateTime=DWORD,0,0
-struct._FILETIME.dwHighDateTime=DWORD,4,0
-```
-
-Note that the number of elements field is used in the case of arrays only
-to identify how many elements are in arrays, other than that it is zero by default.
-
-### Unions
-
-Unions are defined exactly like structs the only difference is that you will replace the word `struct` with the word `union`.
-
-### Function prototypes
-
-Function prototype representation is the most detail-oriented and the most important one of them all. This is the one used directly for type matching
-
-```
-X=func
-func.X.args=NumberOfArgs
-func.x.arg0=Arg_type,arg_name
-.
-.
-.
-func.X.ret=Return_type
-func.X.cc=calling_convention
-```
-
-It should be self-explanatory. Let's do strncasecmp as an example for x86 arch for Linux machines. According to man pages, strncasecmp is defined as the following:
-
-```
-int strcasecmp(const char *s1, const char *s2, size_t n);
-```
-
-When converting it into its sdb representation it will look like the following:
-
-```
-strcasecmp=func
-func.strcasecmp.args=3
-func.strcasecmp.arg0=char *,s1
-func.strcasecmp.arg1=char *,s2
-func.strcasecmp.arg2=size_t,n
-func.strcasecmp.ret=int
-func.strcasecmp.cc=cdecl
-```
-
-Note that the `.cc` part is optional and if it didn't exist the default calling-convention for your target architecture will be used instead.
-There is one extra optional key
-
-```
-func.x.noreturn=true/false
-```
-
-This key is used to mark functions that will not return once called, such as `exit` and `_exit`.
