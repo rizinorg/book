@@ -8,32 +8,21 @@ Most of the related commands are located in `t` namespace:
 
 ```
 [0x000051c0]> t?
-| Usage: t   # cparse types commands
-| t                          List all loaded types
-| tj                         List all loaded types as json
-| t <type>                   Show type in 'pf' syntax
-| t*                         List types info in rizin commands
-| t- <name>                  Delete types by its name
-| t-*                        Remove all types
-| tail [filename]            Output the last part of files
-| tc [type.name]             List all/given types in C output format
-| te[?]                      List all loaded enums
-| td[?] <string>             Load types from string
-| tf                         List all loaded functions signatures
-| tk <sdb-query>             Perform sdb query
-| tl[?]                      Show/Link type to an address
-| tn[?] [-][addr]            manage noreturn function attributes and marks
-| to -                       Open cfg.editor to load types
-| to <path>                  Load types from C header file
-| toe [type.name]            Open cfg.editor to edit types
-| tos <path>                 Load types from parsed Sdb database
-| tp  <type> [addr|varname]  cast data at <address> to <type> and print it (XXX: type can contain spaces)
-| tpv <type> @ [value]       Show offset formatted for given type
-| tpx <type> <hexpairs>      Show value for type with specified byte sequence (XXX: type can contain spaces)
-| ts[?]                      Print loaded struct types
-| tu[?]                      Print loaded union types
-| tx[f?]                     Type xrefs
-| tt[?]                      List all loaded typedefs
+Usage: t[?]   # Types, noreturn, signatures, C parser and more
+| t[j*] [<type>] # List all types / Show type information
+| t- <type>      # Remove the type
+| t-*            # Remove all types
+| tc[dc]         # List loaded types in C format
+| td <type>      # Define type from C definition
+| te[jbcdf]      # List loaded enums
+| tf[j-c?]       # List loaded functions definitions
+| tn[j-?]        # Manage noreturn function attributes and marks
+| to[es]         # Open C header file and load types from it
+| tp[vx]         # Print formatted type casted to the address
+| ts[jlcd]       # List loaded structures
+| tt[jc]         # List loaded typedefs
+| tu[jlcd]       # List loaded unions
+| tx[fgl]        # Type xrefs
 ```
 
 Note that the basic (atomic) types are not those from the C standard -
@@ -42,8 +31,8 @@ from one platform to another, rizin uses `definite` types like as
 `int8_t` or `uint64_t` and will convert `int` to `int32_t` or `int64_t`
 depending on the binary or debuggee platform/compiler.
 
-Basic types can be listed using `t` command, for the structured types
-you need to use `ts`, `tu` or `te` for enums:
+Basic types can be listed using the `t` command. For structured types, you 
+can use `ts`, `tu`, or `te` for structs, unions, and enums, respectively:
 
 ```
 [0x000051c0]> t
@@ -62,12 +51,12 @@ long long
 ### Loading types
 
 There are three easy ways to define a new type:
-* Directly from the string using `td` command
-* From the file using `to <filename>` command
-* Open  an `$EDITOR` to type the definitions in place using `to -`
+* Passing a string to the `td` command
+* Passing a file with the `to <filename>` command
+* Using your defined `cfg.editor` by calling the the `to -` command
 
 ```
-[0x000051c0]> "td struct foo {char* a; int b;}"
+[0x000051c0]> td "struct foo {char* a; int b;}"
 [0x000051c0]> cat ~/rizin-regressions/bins/headers/s3.h
 struct S1 {
     int x[3];
@@ -118,16 +107,13 @@ Also, you could fill your own data into the struct and print it using `tpx` comm
 
 ### Linking Types
 
-The `tp` command just performs a temporary cast. But if we want to link some address or variable
-with the chosen type, we can use `tl` command to store the relationship in SDB.
+The `tp` command only performs a temporary cast. We can use the `avga` command to 
+define a global variable of a specified type, which is linked to an address.
 
 ```
-[0x000051c0]> tl S1 = 0x51cf
-[0x000051c0]> tll
-(S1)
- x : 0x000051cf = [ 2315619660, 1207959810, 34803085 ]
- y : 0x000051db = [ 2370306049, 4293315645, 3860201471, 4093649307 ]
- z : 0x000051eb = 4464399
+[0x000051c0]> avga struct_1 S1 @ 0x51cf
+[0x000051c0]> avg
+global struct S1 struct_1 @ 0x000051cf
 ```
 
 Moreover, the link will be shown in the disassembly output or visual mode:
@@ -142,7 +128,7 @@ Moreover, the link will be shown in the disassembly output or visual mode:
  0x000051c9      and rsp, 0xfffffffffffffff0
  0x000051cd      push rax
  0x000051ce      push rsp
-(S1)
+(S1 struct_1)
  x : 0x000051cf = [ 2315619660, 1207959810, 34803085 ]
  y : 0x000051db = [ 2370306049, 4293315645, 3860201471, 4093649307 ]
  z : 0x000051eb = 4464399
@@ -157,7 +143,7 @@ Once the struct is linked, rizin tries to propagate structure offset in the func
 
 ```
 [0x00000000]> aa?
-| aat [fcn]           Analyze all functions or a given function to convert immediate to linked structure offsets (see tl?)
+| aat [<func_name>] # Analyze all/given function to convert immediate to linked structure offsets
 ```
 
 Note sometimes the emulation may not be accurate, for example as below :
@@ -177,7 +163,7 @@ The return value of `malloc` may differ between two emulations, so you have to s
 
 ```
 [0x000006da]> ah?
-| ahr val            set hint for the return value of a function
+| ahr <return>         # Set function return value hint
 ```
 
 ### Structure Immediates
@@ -194,9 +180,9 @@ Here `8` - is some offset in the memory, where `rsi` probably holds
 some structure pointer. Imagine that we have the following structures
 ```
 
-[0x000052f0]> "td struct ms { char b[8]; int member1; int member2; };"
-[0x000052f0]> "td struct ms1 { uint64_t a; int member1; };"
-[0x000052f0]> "td struct ms2 { uint16_t a; int64_t b; int member1; };"
+[0x000052f0]> td "struct ms { char b[8]; int member1; int member2; };"
+[0x000052f0]> td "struct ms1 { uint64_t a; int member1; };"
+[0x000052f0]> td "struct ms2 { uint16_t a; int64_t b; int member1; };"
 ```
 Now we need to set the proper structure member offset instead of `8` in this instruction.
 At first, we need to list available types matching this offset:
@@ -222,7 +208,7 @@ the current address:
 * Printing all fields in enum using `te` command
 
 ```
-[0x00000000]> "td enum Foo {COW=1,BAR=2};"
+[0x00000000]> td "enum Foo {COW=1,BAR=2};"
 [0x00000000]> te Foo
 COW = 0x1
 BAR = 0x2
@@ -239,19 +225,16 @@ COW
 
 ## Internal representation
 
-To see the internal representation of the types you can use `tk` command:
+Use the `ts`, `te`, and `tu` commands to view the internal representation of defined types:
 
 ```
-[0x000051c0]> tk~S1
-S1=struct
-struct.S1=x,y,z
-struct.S1.x=int32_t,0,3
-struct.S1.x.meta=4
-struct.S1.y=int32_t,12,4
-struct.S1.y.meta=4
-struct.S1.z=int32_t,28,0
-struct.S1.z.meta=0
-[0x000051c0]>
+[0x000051c0]> ts S1
+pf [3]d[4]dd x y z
+[0x000051c0]> te Foo
+COW = 0x1
+BAR = 0x2
+[0x000051c0]> tu sigval
+pf dp sival_int sival_ptr
 ```
 
 Defining primitive types requires an understanding of basic `pf` formats,
