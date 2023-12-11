@@ -348,7 +348,7 @@ Rizin also supports custom fortunes. You can save your fortunes in a file and pr
 [0x00000000]> e cfg.fortunes.file=/path/to/my/fortunes.txt
 ```
 
-Please make sure that you add these in your `~/.rizinrc` to preserve the changes when you reopen rizin.
+Please make sure that you add these in your `~/.config/rizin/rizinrc` to preserve the changes when you reopen rizin.
 
 ### cfg.newtab: `bool`
 

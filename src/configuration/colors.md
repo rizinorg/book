@@ -4,7 +4,7 @@ Console access is wrapped in API that permits to show the output of any command 
 
 To enable colors support by default, add a corresponding configuration option to the .rizin configuration file:
 ```
-$ echo 'e scr.color=1' >> ~/.rizinrc
+$ echo 'e scr.color=1' >> ~/.config/rizin/rizinrc
 ```
 Note that enabling colors is not a boolean option. Instead, it is a number because there are different color depth levels. This is:
 
