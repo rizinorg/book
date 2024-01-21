@@ -1,19 +1,17 @@
 ## Welcome {.unnumbered}
 
-This is a book about Rizin reverse engineering framework and it's originally based on the radare2 book
+This book covers the Rizin reverse engineering framework.
 
-Check the Github site to add new contents or fix typos:
+Visit the links below to contribute new content or address any typos that might be present in this book.
 
     Github: https://github.com/rizinorg/book
     Online: https://book.rizin.re/
 
 ## Offline
 
-The ePub and PDF versions of the Rizin book are avaiable for offline use and it can be found under the
-section 'Artifacts' on the [Github Actions CI](https://github.com/rizinorg/book/actions/).
+The ePub and PDF versions of the Rizin book are accessible for offline use, and you can locate them in the 'Artifacts' section on the [GitHub Actions CI](https://github.com/rizinorg/book/actions/) page.
 
-This book can also be read offline by cloning the repository and rendering it using
-[quarto](https://quarto.org).
+This book can also be read offline by cloning the repository and rendering it using [quarto](https://quarto.org).
 
 `$ quarto render /path/to/rizin-book/`
 

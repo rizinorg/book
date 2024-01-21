@@ -1,24 +1,65 @@
 ## The Rizin Framework
 
-Rizin is a free and open source reverse engineering framework which provides a complete binary analysis experience. The project is a fork of radare2 with a focus on usability, stability, and working features, which strives to provide a welcoming environment for developers and users alike.
 
-At its core, Rizin is a set of small command-line utilities. They can be used in tandem with Rizin or can be used independently according to its specefic purposes.
+Rizin is a free and open-source reverse engineering framework that delivers a comprehensive binary analysis experience. It focuses on usability, stability, and functional features, striving to create a welcoming environment for developers and users.
 
-This chapter will give you a brief introduction about these tools, but you can check the dedicated sections for each tool at the end of this book.
+At its core, Rizin consists of a set of small command-line utilities. These utilities can be used in tandem with Rizin or independently, each serving specific purposes. While this chapter provides a brief introduction to these tools, dedicated sections for each tool can be found at the end of this book for more detailed information.
 
 ### rizin
 
-The main tool of the whole framework. It has the hexadecimal editor and debugger at its core. Rizin allows you to open a number of input/output sources as if they were simple, plain files, including disks, network connections, kernel drivers, processes under debugging, and so on.
+The primary command line tool within the framework is `rizin`. It encompasses various features such as a disassembler, hexadecimal editor, and debugger. Rizin enables you to treat multiple input/output sources, such as plain text files, executables, kernel drivers, processes, etc., as if they were straightforward text files.
 
-It implements an advanced command line interface for moving around a file, analyzing data, disassembling, binary patching, data comparison, searching, replacing, and visualizing. It can be scripted with a variety of languages, including Python, Haskell, OCaml, JavaScript, and others.
+It incorporates a sophisticated command line interface for navigating through the accessed resource, analyzing data, disassembling, patching binaries, comparing data, searching, replacing, and visualizing. Furthermore, scripting capabilities are available with a range of languages, including Python, Haskell, OCaml, JavaScript, and others.
 
 ### rz-bin
 
-A program to extract information from executable binaries, such as ELF, PE, Java CLASS, Mach-O, plus any format supported by rizin plugins. rz-bin is used by the core to get data like exported symbols, imports, file information, cross references (xrefs), library dependencies, and sections.
+The `rz-bin` utility serves the purpose of extracting information from executable binaries, encompassing formats like ELF, PE, Java CLASS, Mach-O, and any other format supported by rizin plugins. Within the core functionality, `rz-bin` plays a crucial role in obtaining data such as exported symbols, imports, file details, cross references, library dependencies, and sections.
+
+#### Examples
+```
+$ rz-bin -I unknown.bin
+[Info]
+arch     x86
+cpu      N/A
+baddr    0x00000000
+binsz    0x000213b3
+bintype  elf
+bits     64
+class    ELF64
+compiler GCC: (GNU) 13.2.1 20230801
+dbg_file N/A
+endian   LE
+hdr.csum N/A
+guid     N/A
+intrp    /lib64/ld-linux-x86-64.so.2
+laddr    0x00000000
+lang     c
+machine  AMD x86-64 architecture
+maxopsz  16
+minopsz  1
+os       linux
+cc       N/A
+pcalign  0
+relro    full
+rpath    NONE
+subsys   linux
+stripped true
+crypto   false
+havecode true
+va       true
+sanitiz  false
+static   false
+linenum  false
+lsyms    false
+canary   true
+PIE      true
+RELROCS  false
+NX       true
+```
 
 ### rz-asm
 
-A command line assembler and disassembler for multiple architectures (including Intel x86 and x86-64, MIPS, ARM, PowerPC, Java, and myriad of others).
+The `rz-asm` tool operates as a command line assembler and disassembler, catering to various architectures such as Intel x86 and x86-64, MIPS, ARM, PowerPC, Java, and numerous others.
 
 #### Examples
 ```
@@ -40,29 +81,31 @@ $ echo 'push eax;nop;nop' | rz-asm -f -
 
 ### rz-hash
 
-An implementation of a block-based hash tool. From small text strings to large disks, rz-hash supports multiple algorithms, including MD4, MD5, CRC16, CRC32, SHA1, SHA256, and others.
-rz-hash can be used to check the integrity or track changes of big files, memory dumps, or disks.
+`rz-hash` stands as an implementation of a block-based hash tool. It offers support for a range of algorithms, including `MD4`, `MD5`, `CRC`, `SHA1`, `SHA256`, and more, accommodating both small text strings and large files. Its utility extends to checking the integrity or monitoring changes in substantial files and memory dumps.
 
 ### Examples
 ```
-$ rz-hash file
+$ rz-hash file.bin
 file: 0x00000000-0x00000007 sha256: 887cfbd0d44aaff69f7bdbedebd282ec96191cce9d7fa7336298a18efc3c7a5a
 ```
 ```
-$ rz-hash -a md5 file
+$ rz-hash -a md5 file.bin
 file: 0x00000000-0x00000007 md5: d1833805515fc34b46c2b9de553f599d
 ```
 ### rz-diff
 
-A binary diffing utility that implements multiple algorithms. It supports byte-level or delta diffing for binary files, and code-analysis diffing to find changes in basic code blocks obtained from the rizin code analysis.
+
+The `rz-diff` utility serves as a binary diffing tool, implementing various algorithms. It facilitates byte-level or delta diffing for binary files and code-analysis diffing to identify alterations in fundamental code blocks derived from the rizin code analysis.
+
+This tool optimally leverages multi-threading to enhance performance, particularly on CPU-intensive and time-consuming tasks.
 
 ### rz-find
 
-A program to find byte patterns in files.
+`rz-find` operates as a program designed to locate byte patterns in files. It provides the capability to search for various types of signatures, including strings in different encodings such as ASCII, UTF-8, wide, and more, across multiple encoding types.
 
-### rz-egg
+### rz-gg
 
-A frontend for r_egg. rz-egg compiles programs written in a simple high-level language into tiny binaries for x86, x86-64, and ARM.
+`rz-gg` is a tool designed to compile programs written in a simple high-level language into compact binaries suitable for x86, x86-64, and ARM architectures.
 
 #### Examples
 
@@ -77,7 +120,7 @@ main@global(128) {
  write(1,.var0, 4);
  exit(0);
 }
-$ rz-egg -O -F hi.r
+$ rz-gg -O -F hi.r
 $ ./hi
 hi!
 
@@ -86,21 +129,16 @@ main@global(0,6) {
  write(1, "Hello0", 6);
  exit(0);
 }
-$ rz-egg hi.c
+$ rz-gg hi.c
 $ ./hi.c.bin
 Hello
 ```
 
 ### rz-run
 
-A launcher for running programs within different environments, with different arguments,
-permissions, directories, and overridden default file descriptors. rz-run is useful for:
+`rz-run` functions as a launcher for executing programs within diverse environments, allowing customization of various aspects such as arguments, permissions, directories, and overridden default file descriptors. This utility proves beneficial for activities like solving crackmes, fuzzing, and running test suites.
 
-* Solving crackmes
-* Fuzzing
-* Test suites
-
-A lot can be done using `rz-run`, here are a few examples demonstrating its capabilities:
+The versatility of `rz-run` is evident in its capabilities. Here are a few examples illustrating how it can be utilized:
 
 #### Sample rz-run script
 ```
@@ -115,6 +153,7 @@ chdir=/tmp
 ```
 
 #### Connecting a program with a socket
+
 ```
 $ nc -l 9999
 $ rz-run program=/bin/ls connect=localhost:9999
@@ -130,6 +169,7 @@ $ tty ; clear ; sleep 999999
 ```
 
 2 - Create a new file containing the following rz-run profile named foo.rrz:
+
 ```
 #!/usr/bin/rz-run
 program=/bin/ls
@@ -137,13 +177,14 @@ stdio=/dev/ttys010
 ```
 
 3 - Launch the following rizin command:
+
 ```
 rizin -r foo.rrz -d /bin/ls
 ```
 
 ### rz-ax
 
-A minimalistic mathematical expression evaluator for the shell that is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ASCII, octal to integer, and more. It also supports endianness settings and can be used as an interactive shell if no arguments are given.
+`rz-ax` stands out as a minimalistic mathematical expression evaluator tailored for the shell. Its utility extends to facilitating base conversions between floating-point values, hexadecimal representations, hexpair strings to ASCII, octal to integer, and more. Notably, it supports endianness settings and can serve as an interactive shell when invoked without arguments.
 
 #### Examples
 
