@@ -108,12 +108,17 @@ To enable file writing, specify the `-w` option when opening a file with rizin. 
 
 Examples:
 
-```
+```bash
+# Open `foo.bin` in write mode
 $ rizin -w foo.bin
-[0x00000000]> w hello world     # string
-[0x00000000]> wx 90 90 90 90    # hexpairs
-[0x00000000]> wa jmp 0x8048140  # assemble
-[0x00000000]> wff inline.bin    # write contents of file
+# writes a string at the current address
+[0x00000000]> w "hello world"
+# writes some hexpairs at the current address
+[0x00000000]> wx 90 90 90 90
+# assemble instructions and writes them at the current address
+[0x00000000]> wa "jmp 0x8048140 ; nop"
+# writes contents of file at the current address
+[0x00000000]> wff /path/to/file.bin
 ```
 
 ### Visual mode and panels
