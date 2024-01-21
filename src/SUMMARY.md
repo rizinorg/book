@@ -7,7 +7,7 @@
    * [Compilation on Windows](first_steps/windows_compilation.md)
    * [Compilation on Android](first_steps/compilation_android.md)
 * [First Steps](first_steps/intro.md)
-   * [Command-line Flags](first_steps/commandline_flags.md)
+   * [Command-line Options](first_steps/commandline_options.md)
    * [Command Format](first_steps/command_format.md)
    * [Expressions](first_steps/expressions.md)
    * [Basic Debugger Session](first_steps/basic_debugger_session.md)
