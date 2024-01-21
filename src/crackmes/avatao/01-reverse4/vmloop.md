@@ -59,14 +59,14 @@ series of qwords:
 
 ```
 [0x00400a74]> s 0x00400ec0
-[0x00400ec0]> Cd 8 @@=`?s $$ $$+8*0x17 8`
+[0x00400ec0]> Cd 8 @@=`%s $$ $$+8*0x17 8`
 ```
 
-> ***rizin tip***: Except for the *?s*, all parts of this command should be
+> ***rizin tip***: Except for the *%s*, all parts of this command should be
 > familiar now, but lets recap it! *Cd* defines a memory area as data, and 8 is
 > the size of that memory area. *@@* is an iterator that make the preceding
 > command run for every element that *@@* holds. In this example it holds a
-> series generated using the *?s* command. *?s* simply generates a series from
+> series generated using the *%s* command. *%s* simply generates a series from
 > the current seek (*$$*) to current seek + 8*0x17 (*$$+8*0x17*) with a step
 > of 8.
 
