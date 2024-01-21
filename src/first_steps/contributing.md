@@ -2,22 +2,12 @@
 
 ### Rizin Book
 
-If you want to contribute to the Rizin book, you can do it at the [Github repository](https://github.com/rizinorg/book).
+To contribute to this book, you're welcome to open merge requests on the [Github repository](https://github.com/rizinorg/book).
 
-Suggested contributions include:
-* CTF or crackme writeups
-* Documentation on how to use Rizin: missing commands, outdated usage format or anything that's helpful!
-* Documentation on developing Rizin
-* Conference presentations/workshops using Rizin
+The recommended contributions must be related to Rizin and include Capture The Flag or crackme writeups, documentation (like covering missing commands, outdated usage formats, or any helpful information which might be currently missing), documentation related to development of plugins, and conference presentations or workshops involving Rizin.
 
-Please get the permission to port any content you do not own/did not create before you put it in the Rizin book.
-
-You may also join the dedicated channel for Documentation at Rizin Organization's [Mattermost](https://im.rizin.re/) server.
+Ensure you obtain permission to transfer any content that you didn't create before adding it to the Rizin book. Additionally, you can engage with the RizinOrg team on the [Rizin Organization's Mattermost server](https://im.rizin.re/).
 
 ## Rizin
 
-We’d love to have you contribute to Rizin. We strive to create a friendly developer environment,
-so please view our [Code of Conduct](https://rizin.re/code-of-conduct) first. You can 
-see [CONTRIBUTING.md](https://github.com/rizinorg/rizin/blob/dev/CONTRIBUTING.md) for 
-getting started with the code and join our communities on [Mattermost](https://im.rizin.re)
-and other chat platforms for getting in touch with the developer community.
+We welcome your contribution to Rizin and aim to maintain a friendly developer environment. Before participating, please review our [Code of Conduct](https://rizin.re/code-of-conduct). To begin with the code, refer to [CONTRIBUTING.md](https://github.com/rizinorg/rizin/blob/dev/CONTRIBUTING.md). Connect with the developer community through our [Mattermost](https://im.rizin.re) channel and other chat platforms. We look forward to your involvement!
