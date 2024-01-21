@@ -98,7 +98,7 @@ Feel free to explore the rest of this book to gain insights into how certain non
 
 Navigation, inspection, and modification of a loaded binary file involve three straightforward actions: seek (to position), print (buffer), and alternate (write, append).
 
-The 'seek' command is abbreviated as `s` and takes an expression as its argument. The expression can be something like `10`, `+0x25`, or `[0x100+ptr_table]`. When dealing with block-based files, you might prefer setting the block size to a required value with the `b` command and navigating forward or backward with positions aligned to it using `s++` and `s--` commands.
+The 'seek' command is abbreviated as `s` and takes an expression as its argument. The expression can be something like `10`, `+0x25`, or `[0x100+ptr_table]`. When dealing with block-based files, you might prefer setting the block size to a required value with the `b` command and navigating forward or backward with positions aligned to it using `sd +1` and `sd -1` commands.
 
 When rizin opens an executable file, it defaults to Virtual Addressing (VA) mode, mapping sections to their virtual addresses. In VA mode, seeking is based on the virtual address, and the starting position is set to the entry point of the executable. You can use the `-n` option to suppress this default behavior and open the file in non-VA mode. In non-VA mode, seeking is based on the offset from the beginning of the file.
 
