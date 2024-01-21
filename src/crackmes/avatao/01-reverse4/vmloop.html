@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="This is a book about the Rizin reverse engineering framework">
+
+<title>The Official Rizin Book - 123&nbsp; .vmloop</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../src/crackmes/avatao/01-reverse4/instructionset.html" rel="next">
+<link href="../../../../src/crackmes/avatao/01-reverse4/main.html" rel="prev">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">123</span>&nbsp; <span class="chapter-title">.vmloop</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../../../">The Official Rizin Book</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/rizinorg/book" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+            <i class="bi bi-bi-twitter pe-1"></i>
+          Twitter
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+            <i class="bi bi-bi-facebook pe-1"></i>
+          Facebook
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+            <i class="bi bi-bi-linkedin pe-1"></i>
+          LinkedIn
+          </a>
+        </li>
+    </ul>
+  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../index.html" class="sidebar-item-text sidebar-link">Welcome</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Introduction</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/first_steps/overview.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Rizin Framework</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/first_steps/getting_rizin.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Rizin</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/first_steps/compilation_portability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Compilation and Portability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/first_steps/windows_compilation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Windows</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/first_steps/compilation_android.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Android</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">First Steps</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/first_steps/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Basic Rizin Usage</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/first_steps/commandline_flags.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Command-line Options</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/first_steps/command_format.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Command Format</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/first_steps/expressions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Expressions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/first_steps/basic_debugger_session.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Basic Debugger Session</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/first_steps/contributing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Contributing</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Configuration</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/configuration/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Configuration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/configuration/colors.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Colors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/configuration/evars.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Configuration Variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/configuration/files.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Files</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Basic Commands</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/basic_commands/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Basic Commands</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/basic_commands/seeking.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Seeking</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/basic_commands/block_size.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Block Size</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/basic_commands/sections.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Sections</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/basic_commands/mapping_files.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Mapping Files</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/basic_commands/print_modes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Print Modes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/basic_commands/flags.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Flags</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/basic_commands/write.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Writing Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/basic_commands/zoom.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Zoom</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/basic_commands/yank_paste.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Yank/Paste</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/basic_commands/comparing_bytes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Comparing Bytes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/basic_commands/sdb.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">SDB</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/basic_commands/dietline.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Dietline</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Visual mode</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/visual_mode/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Visual Mode</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/visual_mode/visual_disassembly.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Visual Disassembly</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/visual_mode/visual_assembler.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Visual Assembler</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/visual_mode/visual_configuration_editor.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Visual Configuration Editor</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/visual_mode/visual_panels.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Visual Panels</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">Searching</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/search_bytes/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Searching for Bytes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/search_bytes/basic_searches.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Basic Search</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/search_bytes/configurating_the_search.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Configuring Search Options</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/search_bytes/pattern_search.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Pattern Matching Search</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/search_bytes/automation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Search Automation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/search_bytes/backward_search.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Searching Backwards</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/search_bytes/search_in_assembly.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Assembler Search</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/search_bytes/searching_aes_keys.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Searching for AES Keys</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">Disassembling</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/disassembling/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Disassembling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/disassembling/adding_metadata.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">Adding Metadata to Disassembly</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/disassembling/esil.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">ESIL</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">Analysis</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/analysis/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">45</span>&nbsp; <span class="chapter-title">Data and Code Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/analysis/code_analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">46</span>&nbsp; <span class="chapter-title">Code Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/analysis/variables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">47</span>&nbsp; <span class="chapter-title">Managing variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/analysis/types.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">48</span>&nbsp; <span class="chapter-title">Types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/analysis/calling_conventions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">49</span>&nbsp; <span class="chapter-title">Calling Conventions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/analysis/vtables.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">50</span>&nbsp; <span class="chapter-title">Virtual Tables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/analysis/syscalls.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">51</span>&nbsp; <span class="chapter-title">Syscalls</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/analysis/emulation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">52</span>&nbsp; <span class="chapter-title">Emulation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/analysis/symbols.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">53</span>&nbsp; <span class="chapter-title">Symbols</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/signatures/signatures.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Signatures</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/analysis/graphs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">55</span>&nbsp; <span class="chapter-title">Graph commands</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/analysis/cpu_platform_profiles.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">56</span>&nbsp; <span class="chapter-title">CPU and platform profiles</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">Scripting</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/scripting/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">57</span>&nbsp; <span class="chapter-title">Scripting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/scripting/loops.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">58</span>&nbsp; <span class="chapter-title">Loops</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/scripting/macros.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">59</span>&nbsp; <span class="chapter-title">Macros</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/scripting/rz-pipe.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">60</span>&nbsp; <span class="chapter-title">Rz-pipe</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">Debugger</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/debugger/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">61</span>&nbsp; <span class="chapter-title">Debugger</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/debugger/getting_started.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">62</span>&nbsp; <span class="chapter-title">Getting Started</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/debugger/migration.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/debugger/registers.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">64</span>&nbsp; <span class="chapter-title">Registers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/debugger/memory_maps.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">65</span>&nbsp; <span class="chapter-title">Memory Maps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/debugger/heap.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">66</span>&nbsp; <span class="chapter-title">Heap</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/debugger/files.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">67</span>&nbsp; <span class="chapter-title">Files</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/debugger/revdebug.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">68</span>&nbsp; <span class="chapter-title">Reverse Debugging</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/debugger/windows_messages.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">69</span>&nbsp; <span class="chapter-title">Windows Messages</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/debugger/apple.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">70</span>&nbsp; <span class="chapter-title">macOS/iOS</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">Remote Access</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/debugger/remoting_capabilities.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/debugger/remote_gdb.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">Debugging with gdbserver</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/debugger/windbg.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title">WinDBG Kernel-mode Debugging (KD)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">Command Line Tools</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">74</span>&nbsp; <span class="chapter-title">Tools</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-ax/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">75</span>&nbsp; <span class="chapter-title">Rz-ax</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-find/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">76</span>&nbsp; <span class="chapter-title">Rz-find</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-run/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">77</span>&nbsp; <span class="chapter-title">Rz-run</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-bin/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">78</span>&nbsp; <span class="chapter-title">Rz-bin — Show Properties of a Binary</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-bin/file_identification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">79</span>&nbsp; <span class="chapter-title">File Properties Identification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-bin/entrypoints.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">80</span>&nbsp; <span class="chapter-title">Code Entrypoints</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-bin/imports.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">81</span>&nbsp; <span class="chapter-title">Imports</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-bin/exports.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">82</span>&nbsp; <span class="chapter-title">Exports</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-bin/symbols.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">83</span>&nbsp; <span class="chapter-title">Symbols (Exports)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-bin/libraries.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">84</span>&nbsp; <span class="chapter-title">List Libraries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-bin/strings.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">85</span>&nbsp; <span class="chapter-title">Strings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-bin/program_sections.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">86</span>&nbsp; <span class="chapter-title">Program Sections</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-diff/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">87</span>&nbsp; <span class="chapter-title">Rz-diff</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-diff/binary_diffing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">88</span>&nbsp; <span class="chapter-title">Rz-Diff (binary and text diffing utility)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-asm/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">89</span>&nbsp; <span class="chapter-title">Rz-asm</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-asm/assemble.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">90</span>&nbsp; <span class="chapter-title">Assembler</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-asm/disassemble.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">91</span>&nbsp; <span class="chapter-title">Disassembler</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-asm/config.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">92</span>&nbsp; <span class="chapter-title">Disassembler Configuration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-gg/rz-gg.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">93</span>&nbsp; <span class="chapter-title">Rz-gg</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-gg/lang.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">94</span>&nbsp; <span class="chapter-title">Syntax of the language</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-hash/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">95</span>&nbsp; <span class="chapter-title">Rz-hash</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/tools/rz-hash/rz-hash_tool.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">96</span>&nbsp; <span class="chapter-title">Examples</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">Plugins</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/plugins/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">97</span>&nbsp; <span class="chapter-title">Plugins</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/plugins/ioplugins.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">98</span>&nbsp; <span class="chapter-title">IO plugins</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/plugins/dev-asm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">99</span>&nbsp; <span class="chapter-title">Implementing a new disassembly plugin</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/plugins/dev-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">100</span>&nbsp; <span class="chapter-title">Implementing a new analysis plugin</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/plugins/dev-bin.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">101</span>&nbsp; <span class="chapter-title">Implementing a new format</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/plugins/dev-other.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">102</span>&nbsp; <span class="chapter-title">Write a debugger plugin</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/plugins/python.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">103</span>&nbsp; <span class="chapter-title">Python plugins</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/plugins/debug.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">104</span>&nbsp; <span class="chapter-title">Debugging</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/plugins/testing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">105</span>&nbsp; <span class="chapter-title">Testing the plugin</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/plugins/rz-pm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">106</span>&nbsp; <span class="chapter-title">Creating an rz-pm package of the plugin</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="true">Crackmes</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">107</span>&nbsp; <span class="chapter-title">Crackmes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/ioli/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">108</span>&nbsp; <span class="chapter-title">IOLI CrackMes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/ioli/ioli_0x00.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">109</span>&nbsp; <span class="chapter-title">IOLI 0x00</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/ioli/ioli_0x01.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">110</span>&nbsp; <span class="chapter-title">IOLI 0x01</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/ioli/ioli_0x02.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">111</span>&nbsp; <span class="chapter-title">IOLI 0x02</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/ioli/ioli_0x03.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">112</span>&nbsp; <span class="chapter-title">IOLI 0x03</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/ioli/ioli_0x04.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">113</span>&nbsp; <span class="chapter-title">IOLI 0x04</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/ioli/ioli_0x05.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">114</span>&nbsp; <span class="chapter-title">IOLI 0x05</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/ioli/ioli_0x06.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">115</span>&nbsp; <span class="chapter-title">IOLI 0x06</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/ioli/ioli_0x07.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">116</span>&nbsp; <span class="chapter-title">IOLI 0x07</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/ioli/ioli_0x08.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">117</span>&nbsp; <span class="chapter-title">IOLI 0x08</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/ioli/ioli_0x09.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">118</span>&nbsp; <span class="chapter-title">IOLI 0x09</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/avatao/01-reverse4/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">119</span>&nbsp; <span class="chapter-title">Avatao R3v3rs3 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/avatao/01-reverse4/rizin.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">120</span>&nbsp; <span class="chapter-title">.rizin</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/avatao/01-reverse4/first_steps.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">121</span>&nbsp; <span class="chapter-title">.first_steps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/avatao/01-reverse4/main.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">122</span>&nbsp; <span class="chapter-title">.main</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/avatao/01-reverse4/vmloop.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">123</span>&nbsp; <span class="chapter-title">.vmloop</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/avatao/01-reverse4/instructionset.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">124</span>&nbsp; <span class="chapter-title">.instructionset</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/avatao/01-reverse4/bytecode.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">125</span>&nbsp; <span class="chapter-title">.bytecode</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/avatao/01-reverse4/outro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">126</span>&nbsp; <span class="chapter-title">.outro</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/hackthebox/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">127</span>&nbsp; <span class="chapter-title">hackthebox</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/hackthebox/find-the-easy-pass/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">128</span>&nbsp; <span class="chapter-title">Find The Easy Pass</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/hackthebox/find-the-easy-pass/identification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">129</span>&nbsp; <span class="chapter-title">identification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/hackthebox/find-the-easy-pass/find-the-validation-routine.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">130</span>&nbsp; <span class="chapter-title">Find the validation routine</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/hackthebox/find-the-easy-pass/fire-up-the-debugger.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">131</span>&nbsp; <span class="chapter-title">Fire up the debugger</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/crackmes/hackthebox/find-the-easy-pass/bonus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">132</span>&nbsp; <span class="chapter-title">Bonus</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="true">Reference Card</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/refcard/intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">133</span>&nbsp; <span class="chapter-title">Rizin Reference Card</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" aria-expanded="true">Acknowledgments</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../src/credits/credits.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">134</span>&nbsp; <span class="chapter-title">Authors &amp; Contributors</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">123</span>&nbsp; <span class="chapter-title">.vmloop</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<pre><code>[offset]&gt; fcn.vmloop</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/vmloop/bb-0a45.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">vmloop bb-0a45</figcaption><p></p>
+</figure>
+</div>
+<p>Well, that seems disappointingly short, but no worries, we have plenty to reverse yet. The thing is that this function uses a jump table at 0x00400a74,</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/vmloop/bb-0a74.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">vmloop bb-0a74</figcaption><p></p>
+</figure>
+</div>
+<p>and rizin can’t yet recognize jump tables (<a href="https://github.com/rizinorg/rizin/issues/3201">Issue 3201</a>), so the analysis of this function is a bit incomplete. This means that we can’t really use the graph view now, so either we just use visual mode, or fix those basic blocks. The entire function is just 542 bytes long, so we certainly could reverse it without the aid of the graph mode, but since this writeup aims to include as much rizin wisdom as possible, I’m going to show you how to define basic blocks.</p>
+<p>First, lets analyze what we already have! First, <em>rdi</em> is put into local_3. Since the application is a 64bit Linux executable, we know that <em>rdi</em> is the first function argument (as you may have recognized, the automatic analysis of arguments and local variables was not entirely correct), and we also know that <em>vmloop</em>’s first argument is the bytecode. So lets rename local_3:</p>
+<pre><code>:&gt; afvn local_3 bytecode</code></pre>
+<p>Next, <em>sym.memory</em> is put into another local variable at <em>rbp-8</em> that rizin did not recognize. So let’s define it!</p>
+<pre><code>:&gt; afv 8 memory qword</code></pre>
+<blockquote class="blockquote">
+<p><strong><em>rizin tip</em></strong>: The <em>afv [idx] [name] [type]</em> command is used to define local variable at [frame pointer - idx] with the name [name] and type [type]. You can also remove local variables using the <em>afv- [idx]</em> command.</p>
+</blockquote>
+<p>In the next block, the program checks one byte of bytecode, and if it is 0, the function returns with 1.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/vmloop/bb-0c4d.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">vmloop bb-0c4d</figcaption><p></p>
+</figure>
+</div>
+<p>If that byte is not zero, the program subtracts 0x41 from it, and compares the result to 0x17. If it is above 0x17, we get the dreaded “Wrong!” message, and the function returns with 0. This basically means that valid bytecodes are ASCII characters in the range of “A” (0x41) through “X” (0x41 + 0x17). If the bytecode is valid, we arrive at the code piece that uses the jump table:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/vmloop/bb-0a74.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">vmloop bb-0a74</figcaption><p></p>
+</figure>
+</div>
+<p>The jump table’s base is at 0x400ec0, so lets define that memory area as a series of qwords:</p>
+<pre><code>[0x00400a74]&gt; s 0x00400ec0
+[0x00400ec0]&gt; Cd 8 @@=`%s $$ $$+8*0x17 8`</code></pre>
+<blockquote class="blockquote">
+<p><strong><em>rizin tip</em></strong>: Except for the <em>%s</em>, all parts of this command should be familiar now, but lets recap it! <em>Cd</em> defines a memory area as data, and 8 is the size of that memory area. <em>@<span class="citation" data-cites="*">@*</span> is an iterator that make the preceding command run for every element that </em>@<span class="citation" data-cites="*">@*</span> holds. In this example it holds a series generated using the <em>%s</em> command. <em>%s</em> simply generates a series from the current seek (<em><span class="math display">\[*) to current seek + 8*0x17 (*\]</span>+8</em>0x17*) with a step of 8.</p>
+</blockquote>
+<p>This is how the disassembly looks like after we add this metadata:</p>
+<pre><code>[0x00400ec0]&gt; pd 0x18
+            ; DATA XREF from 0x00400a76 (unk)
+            0x00400ec0 .qword 0x0000000000400a80
+            0x00400ec8 .qword 0x0000000000400c04
+            0x00400ed0 .qword 0x0000000000400b6d
+            0x00400ed8 .qword 0x0000000000400b17
+            0x00400ee0 .qword 0x0000000000400c04
+            0x00400ee8 .qword 0x0000000000400c04
+            0x00400ef0 .qword 0x0000000000400c04
+            0x00400ef8 .qword 0x0000000000400c04
+            0x00400f00 .qword 0x0000000000400aec
+            0x00400f08 .qword 0x0000000000400bc1
+            0x00400f10 .qword 0x0000000000400c04
+            0x00400f18 .qword 0x0000000000400c04
+            0x00400f20 .qword 0x0000000000400c04
+            0x00400f28 .qword 0x0000000000400c04
+            0x00400f30 .qword 0x0000000000400c04
+            0x00400f38 .qword 0x0000000000400b42
+            0x00400f40 .qword 0x0000000000400c04
+            0x00400f48 .qword 0x0000000000400be5
+            0x00400f50 .qword 0x0000000000400ab6
+            0x00400f58 .qword 0x0000000000400c04
+            0x00400f60 .qword 0x0000000000400c04
+            0x00400f68 .qword 0x0000000000400c04
+            0x00400f70 .qword 0x0000000000400c04
+            0x00400f78 .qword 0x0000000000400b99</code></pre>
+<p>As we can see, the address 0x400c04 is used a lot, and besides that there are 9 different addresses. Lets see that 0x400c04 first!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/vmloop/bb-0c04.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">vmloop bb-0c04</figcaption><p></p>
+</figure>
+</div>
+<p>We get the message “Wrong!”, and the function just returns 0. This means that those are not valid instructions (they are valid bytecode though, they can be e.g.&nbsp;parameters!) We should flag 0x400c04 accordingly:</p>
+<pre><code>[0x00400ec0]&gt; f not_instr @ 0x0000000000400c04</code></pre>
+<p>As for the other offsets, they all seem to be doing something meaningful, so we can assume they belong to valid instructions. I’m going to flag them using the instructions’ ASCII values:</p>
+<pre><code>[0x00400ec0]&gt; f instr_A @ 0x0000000000400a80
+[0x00400ec0]&gt; f instr_C @ 0x0000000000400b6d
+[0x00400ec0]&gt; f instr_D @ 0x0000000000400b17
+[0x00400ec0]&gt; f instr_I @ 0x0000000000400aec
+[0x00400ec0]&gt; f instr_J @ 0x0000000000400bc1
+[0x00400ec0]&gt; f instr_P @ 0x0000000000400b42
+[0x00400ec0]&gt; f instr_R @ 0x0000000000400be5
+[0x00400ec0]&gt; f instr_S @ 0x0000000000400ab6
+[0x00400ec0]&gt; f instr_X @ 0x0000000000400b99</code></pre>
+<p>Ok, so these offsets were not on the graph, so it is time to define basic blocks for them!</p>
+<blockquote class="blockquote">
+<p><strong><em>rizin tip</em></strong>: You can define basic blocks using the <em>afb+</em> command. You have to supply what function the block belongs to, where does it start, and what is its size. If the block ends in a jump, you have to specify where does it jump too. If the jump is a conditional jump, the false branch’s destination address should be specified too.</p>
+</blockquote>
+<p>We can get the start and end addresses of these basic blocks from the full disasm of <em>vmloop</em>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/vmloop/vmloop-full.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">vmloop full</figcaption><p></p>
+</figure>
+</div>
+<p>As I’ve mentioned previously, the function itself is pretty short, and easy to read, especially with our annotations. But a promise is a promise, so here is how we can create the missing basic blocks for the instructions:</p>
+<pre><code>[0x00400ec0]&gt; afb+ 0x00400a45 0x00400a80 0x00400ab6-0x00400a80 0x400c15
+[0x00400ec0]&gt; afb+ 0x00400a45 0x00400ab6 0x00400aec-0x00400ab6 0x400c15
+[0x00400ec0]&gt; afb+ 0x00400a45 0x00400aec 0x00400b17-0x00400aec 0x400c15
+[0x00400ec0]&gt; afb+ 0x00400a45 0x00400b17 0x00400b42-0x00400b17 0x400c15
+[0x00400ec0]&gt; afb+ 0x00400a45 0x00400b42 0x00400b6d-0x00400b42 0x400c15
+[0x00400ec0]&gt; afb+ 0x00400a45 0x00400b6d 0x00400b99-0x00400b6d 0x400c15
+[0x00400ec0]&gt; afb+ 0x00400a45 0x00400b99 0x00400bc1-0x00400b99 0x400c15
+[0x00400ec0]&gt; afb+ 0x00400a45 0x00400bc1 0x00400be5-0x00400bc1 0x400c15
+[0x00400ec0]&gt; afb+ 0x00400a45 0x00400be5 0x00400c04-0x00400be5 0x400c15</code></pre>
+<p>It is also apparent from the disassembly that besides the instructions there are three more basic blocks. Lets create them too!</p>
+<pre><code>[0x00400ec0]&gt; afb+ 0x00400a45 0x00400c15 0x00400c2d-0x00400c15 0x400c3c 0x00400c2d
+[0x00400ec0]&gt; afb+ 0x00400a45 0x00400c2d 0x00400c3c-0x00400c2d 0x400c4d 0x00400c3c
+[0x00400ec0]&gt; afb+ 0x00400a45 0x00400c3c 0x00400c4d-0x00400c3c 0x400c61</code></pre>
+<p>Note that the basic blocks starting at 0x00400c15 and 0x00400c2d ending in a conditional jump, so we had to set the false branch’s destination too!</p>
+<p>And here is the graph in its full glory after a bit of manual restructuring:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/vmloop/vmloop-graph-reconstructed_full.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">vmloop graph</figcaption><p></p>
+</figure>
+</div>
+<p>I think it worth it, don’t you? :) (Well, the restructuring did not really worth it, because it is apparently not stored when you save the project.)</p>
+<blockquote class="blockquote">
+<p><strong><em>rizin tip</em></strong>: You can move the selected node around in graph view using the HJKL keys.</p>
+</blockquote>
+<p>By the way, here is how IDA’s graph of this same function looks like for comparison:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/vmloop_ida.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">IDA graph</figcaption><p></p>
+</figure>
+</div>
+<p>As we browse through the disassembly of the <em>instr_LETTER</em> basic blocks, we should realize a few things. The first: all of the instructions starts with a sequence like these:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/vmloop/bb-0a80.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">vmloop bb-0a80</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/vmloop/bb-0ab6.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">vmloop bb-0ab6</figcaption><p></p>
+</figure>
+</div>
+<p>It became clear now that the 9 dwords at <em>sym.instr_dirty</em> are not simply indicators that an instruction got executed, but they are used to count how many times an instruction got called. Also I should have realized earlier that <em>sym.good_if_le_9</em> (0x6020f0) is part of this 9 dword array, but yeah, well, I didn’t, I have to live with it… Anyways, what the condition “<em>sym.good_if_le_9</em> have to be lesser or equal 9” really means is that <em>instr_P</em> can not be executed more than 9 times:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/vmloop/bb-0b42.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">vmloop bb-0b42</figcaption><p></p>
+</figure>
+</div>
+<p>Another similarity of the instructions is that 7 of them calls a function with either one or two parameters, where the parameters are the next, or the next two bytecodes. One parameter example:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/vmloop/bb-0aec.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">vmloop bb-0aec</figcaption><p></p>
+</figure>
+</div>
+<p>And a two parameters example:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/vmloop/bb-0a80_full.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">vmloop bb-0a80_full</figcaption><p></p>
+</figure>
+</div>
+<p>We should also realize that these blocks put the number of bytes they eat up of the bytecode (1 byte instruction + 1 or 2 bytes arguments = 2 or 3) into a local variable at 0xc. rizin did not recognize this local var, so lets do it manually!</p>
+<pre><code>:&gt; afv 0xc instr_ptr_step dword</code></pre>
+<p>If we look at <em>instr_J</em> we can see that this is an exception to the above rule, since it puts the return value of the called function into <em>instr_ptr_step</em> instead of a constant 2 or 3:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/vmloop/bb-0bc1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">vmloop bb-0bc1</figcaption><p></p>
+</figure>
+</div>
+<p>And speaking of exceptions, here are the two instructions that do not call functions:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/vmloop/bb-0be5.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">vmloop bb-0be5</figcaption><p></p>
+</figure>
+</div>
+<p>This one simply puts the next bytecode (the first the argument) into <em>eax</em>, and jumps to the end of <em>vmloop</em>. So this is the VM’s <em>ret</em> instruction, and we know that <em>vmloop</em> has to return “*”, so “R*” should be the last two bytes of our bytecode.</p>
+<p>The next one that does not call a function:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/vmloop/bb-0b6d.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">vmloop bb-0b6d</figcaption><p></p>
+</figure>
+</div>
+<p>This is a one argument instruction, and it puts its argument to 0x6020c0. Flag that address!</p>
+<pre><code>:&gt; f sym.written_by_instr_C 4 @ 0x6020c0</code></pre>
+<p>Oh, and by the way, I do have a hunch that <em>instr_C</em> also had a function call in the original code, but it got inlined by the compiler. Anyways, so far we have these two instructions:</p>
+<ul>
+<li><em>instr_R(a1):</em> returns with <em>a1</em></li>
+<li><em>instr_C(a1):</em> writes <em>a1</em> to <em>sym.written_by_instr_C</em></li>
+</ul>
+<p>And we also know that these accept one argument,</p>
+<ul>
+<li>instr_I</li>
+<li>instr_D</li>
+<li>instr_P</li>
+<li>instr_X</li>
+<li>instr_J</li>
+</ul>
+<p>and these accept two:</p>
+<ul>
+<li>instr_A</li>
+<li>instr_S</li>
+</ul>
+<p>What remains is the reversing of the seven functions that are called by the instructions, and finally the construction of a valid bytecode that gives us the flag.</p>
+<p>###instr_A</p>
+<p>The function this instruction calls is at offset 0x40080d, so lets seek there!</p>
+<pre><code>[offset]&gt; 0x40080d</code></pre>
+<blockquote class="blockquote">
+<p><strong><em>rizin tip:</em></strong> In visual mode you can just hit &lt;Enter&gt; when the current line is a jump or a call, and rizin will seek to the destination address.</p>
+</blockquote>
+<p>If we seek to that address from the graph mode, we are presented with a message that says “Not in a function. Type ‘df’ to define it here. This is because the function is called from a basic block rizin did not recognize, so rizin could not find the function either. Lets obey, and type <em>df</em>! A function is indeed created, but we want some meaningful name for it. So press <em>dr</em> while still in visual mode, and name this function <em>instr_A</em>!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/instr_A/instr_A_minimap.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">instr_A minimap</figcaption><p></p>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p><strong><em>rizin tip:</em></strong> You should realize that these commands are all part of the same menu system in visual mode I was talking about when we first used <em>Cd</em> to declare <em>sym.memory</em> as data.</p>
+</blockquote>
+<p>Ok, now we have our shiny new <em>fcn.instr_A</em>, lets reverse it! We can see from the shape of the minimap that probably there is some kind cascading if-then-elif, or a switch-case statement involved in this function. This is one of the reasons the minimap is so useful: you can recognize some patterns at a glance, which can help you in your analysis (remember the easily recognizable for loop from a few paragraphs before?) So, the minimap is cool and useful, but I’ve just realized that I did not yet show you the full graph mode, so I’m going to do this using full graph. The first basic blocks:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/instr_A/bb-080d.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">instr_A bb-080d</figcaption><p></p>
+</figure>
+</div>
+<p>The two function arguments (<em>rdi</em> and <em>rsi</em>) are stored in local variables, and the first is compared to 0. If it is, the function returns (you can see it on the minimap), otherwise the same check is executed on the second argument. The function returns from here too, if the argument is zero. Although this function is really tiny, I am going to stick with my methodology, and rename the local vars:</p>
+<pre><code>:&gt; afvn local_1 arg1
+:&gt; afvn local_2 arg2</code></pre>
+<p>And we have arrived to the predicted switch-case statement, and we can see that <em>arg1</em>’s value is checked against “M”, “P”, and “C”.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/instr_A/switch-values.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">instr_A switch values</figcaption><p></p>
+</figure>
+</div>
+<p>This is the “M” branch:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/instr_A/switch-M.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">instr_A switch-M</figcaption><p></p>
+</figure>
+</div>
+<p>It basically loads an address from offset 0x602088 and adds <em>arg2</em> to the byte at that address. As rizin kindly shows us in a comment, 0x602088 initially holds the address of <em>sym.memory</em>, the area where we have to construct the “Such VM! MuCH reV3rse!” string. It is safe to assume that somehow we will be able to modify the value stored at 0x602088, so this “M” branch will be able to modify bytes other than the first. Based on this assumption, I’ll flag 0x602088 as <em>sym.current_memory_ptr</em>:</p>
+<pre><code>:&gt; f sym.current_memory_ptr 8 @ 0x602088</code></pre>
+<p>Moving on to the “P” branch:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/instr_A/switch-P.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">instr_A switch-P</figcaption><p></p>
+</figure>
+</div>
+<p>Yes, this is the piece of code that allows us to modify <em>sym.current_memory_ptr</em>: it adds <em>arg2</em> to it.</p>
+<p>Finally, the “C” branch:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/instr_A/switch-C.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">instr_A switch-C</figcaption><p></p>
+</figure>
+</div>
+<p>Well, it turned out that <em>instr_C</em> is not the only instruction that modifies <em>sym.written_by_instr_C</em>: this piece of code adds <em>arg2</em> to it.</p>
+<p>And that was <em>instr_A</em>, lets summarize it! Depending on the first argument, this instruction does the following:</p>
+<ul>
+<li><em>arg1</em> == “M”: adds <em>arg2</em> to the byte at <em>sym.current_memory_ptr</em>.</li>
+<li><em>arg1</em> == “P”: steps <em>sym.current_memory_ptr</em> by <em>arg2</em> bytes.</li>
+<li><em>arg1</em> == “C”: adds <em>arg2</em> to the value at <em>sym.written_by_instr_C</em>.</li>
+</ul>
+<p>###instr_S</p>
+<p>This function is not recognized either, so we have to manually define it like we did with <em>instr_A</em>. After we do, and take a look at the minimap, scroll through the basic blocks, it is pretty obvious that these two functions are very-very similar. We can use <em>rz-diff</em> to see the difference.</p>
+<blockquote class="blockquote">
+<p><strong><em>rizin tip:</em></strong> rz-diff is used to compare binary files. There’s a few options we can control the type of binary diffing the tool does, and to what kind of output format we want. One of the cool features is that it can generate <a href="http://www.darungrim.org/">DarumGrim</a>-style bindiff graphs using the <em>-g</em> option.</p>
+</blockquote>
+<p>Since now we want to diff two functions from the same binary, we specify the offsets with <em>-g</em>, and use reverse4 for both binaries. Also, we create the graphs for comparing <em>instr_A</em> to <em>instr_S</em> and for comparing <em>instr_S</em> to <em>instr_A</em>.</p>
+<pre><code>[0x00 ~]$ rz-diff -g 0x40080d,0x40089f  reverse4 reverse4 | xdot -</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/instr_S/graph1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">instr_S graph1</figcaption><p></p>
+</figure>
+</div>
+<pre><code>[0x00 ~]$ rz-diff -g 0x40089f,0x40080d  reverse4 reverse4 | xdot -</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/instr_S/graph2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">instr_S graph2</figcaption><p></p>
+</figure>
+</div>
+<p>A sad truth reveals itself after a quick glance at these graphs: rz-diff is a liar! In theory, grey boxes should be identical, yellow ones should differ only at some offsets, and red ones should differ seriously. Well this is obviously not the case here - e.g.&nbsp;the larger grey boxes are clearly not identical. This is something I’m definitely going to take a deeper look at after I’ve finished this writeup.</p>
+<p>Anyways, after we get over the shock of being lied to, we can easily recognize that <em>instr_S</em> is basically a reverse-<em>instr_A</em>: where the latter does addition, the former does subtraction. To summarize this:</p>
+<ul>
+<li><em>arg1</em> == “M”: subtracts <em>arg2</em> from the byte at <em>sym.current_memory_ptr</em>.</li>
+<li><em>arg1</em> == “P”: steps <em>sym.current_memory_ptr</em> backwards by <em>arg2</em> bytes.</li>
+<li><em>arg1</em> == “C”: subtracts <em>arg2</em> from the value at <em>sym.written_by_instr_C</em>.</li>
+</ul>
+<p>###instr_I</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/instr_I/instr_I.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">instr_I</figcaption><p></p>
+</figure>
+</div>
+<p>This one is simple, it just calls <em>instr_A(arg1, 1)</em>. As you may have noticed the function call looks like <code>call fcn.0040080d</code> instead of <code>call fcn.instr_A</code>. This is because when you save and open a project, function names get lost - another thing to examine and patch in rizin!</p>
+<p>###instr_D</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/instr_D/instr_D.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">instr_D</figcaption><p></p>
+</figure>
+</div>
+<p>Again, simple: it calls <em>instr_S(arg1, 1)</em>.</p>
+<p>###instr_P</p>
+<p>It’s local var rename time again!</p>
+<pre><code>:&gt; afvn local_0_1 const_M
+:&gt; afvn local_0_2 const_P
+:&gt; afvn local_3 arg1</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/instr_P/instr_P.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">instr_P</figcaption><p></p>
+</figure>
+</div>
+<p>This function is pretty straightforward also, but there is one oddity: const_M is never used. I don’t know why it is there - maybe it is supposed to be some kind of distraction? Anyways, this function simply writes <em>arg1</em> to <em>sym.current_memory_ptr</em>, and than calls <em>instr_I(“P”)</em>. This basically means that <em>instr_P</em> is used to write one byte, and put the pointer to the next byte. So far this would seem the ideal instruction to construct most of the “Such VM! MuCH reV3rse!” string, but remember, this is also the one that can be used only 9 times!</p>
+<p>###instr_X</p>
+<p>Another simple one, rename local vars anyways!</p>
+<pre><code>:&gt; afvn local_1 arg1</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/instr_X/instr_X.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">instr_X</figcaption><p></p>
+</figure>
+</div>
+<p>This function XORs the value at <em>sym.current_memory_ptr</em> with <em>arg1</em>.</p>
+<p>###instr_J</p>
+<p>This one is not as simple as the previous ones, but it’s not that complicated either. Since I’m obviously obsessed with variable renaming:</p>
+<pre><code>:&gt; afvn local_3 arg1
+:&gt; afvn local_0_4 arg1_and_0x3f</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/instr_J/instr_J.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">instr_J</figcaption><p></p>
+</figure>
+</div>
+<p>After the result of <em>arg1 &amp; 0x3f</em> is put into a local variable, <em>arg1 &amp; 0x40</em> is checked against 0. If it isn’t zero, <em>arg1_and_0x3f</em> is negated:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/instr_J/bb-09e1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">instr_J bb-09e1</figcaption><p></p>
+</figure>
+</div>
+<p>The next branching: if <em>arg1</em> &gt;= 0, then the function returns <em>arg1_and_0x3f</em>,</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/instr_J/bb-09e4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">instr_J bb-09e4</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/instr_J/bb-0a1a.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">instr_J bb-0a1a</figcaption><p></p>
+</figure>
+</div>
+<p>else the function branches again, based on the value of <em>sym.written_by_instr_C</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/instr_J/bb-09ef.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">instr_J bb-09ef</figcaption><p></p>
+</figure>
+</div>
+<p>If it is zero, the function returns 2,</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/instr_J/bb-0a13.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">instr_J bb-0a13</figcaption><p></p>
+</figure>
+</div>
+<p>else it is checked if <em>arg1_and_0x3f</em> is a negative number,</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/instr_J/bb-09f9.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">instr_J bb-09f9</figcaption><p></p>
+</figure>
+</div>
+<p>and if it is, <em>sym.good_if_ne_zero</em> is incremented by 1:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/instr_J/bb-09ff.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">instr_J bb-09ff</figcaption><p></p>
+</figure>
+</div>
+<p>After all this, the function returns with <em>arg1_and_0x3f</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/instr_J/bb-0a0e.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">instr_J bb-0a0e</figcaption><p></p>
+</figure>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../../../src/crackmes/avatao/01-reverse4/main.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">122</span>&nbsp; <span class="chapter-title">.main</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../../src/crackmes/avatao/01-reverse4/instructionset.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">124</span>&nbsp; <span class="chapter-title">.instructionset</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
