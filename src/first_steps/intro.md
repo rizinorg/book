@@ -2,20 +2,31 @@
 
 The initial learning curve tends to be relatively steep. However, within an hour of usage, you should grasp the workings of most features and learn how to effectively utilize the different tools provided by `rizin`.
 
-For a quick introduction to basic commands, execute `rizin` on the command line and enter `?` to obtain an overview.
+For a quick introduction to basic commands, execute `rizin` on the command line and enter `help` (and press enter) to obtain an overview.
 
 ```bash
-[0x00000000]> ?
-| ![!]                  # Run given commands as in system(3) or shows command history (see !?? for more details)
-...
-| a[?]                  # Analysis commands
-...
-| p[?]                  # Print commands
-...
+[0x00000000]> help
+Welcome to Rizin!
 
+Type ? for a list of commands available.
+Append ? to any command to get the list of sub-commands or more details about a specific command.
+Append ?? to any command to get the full description of a command, e.g. with examples.
+
+Commands output can be redirected as in a regular shell, see >? for more info.
+You can grep commands output with the 'internal grep', see ~? for more info.
+You can pipe an internal Rizin command to a system program, see |? for more info.
+
+Chain multiple commands with ;.
+Temporary modifiers are your friends, see @? for more info, but here some useful ones:
+ - @  temporarily switch to a different address
+ - @a:<arch> temporarily switch to a different architecture
+ - @e:<varname>=<varvalue> temporarily change an eval variable
+
+There are a lot of settings that customize Rizin's behaviour, see them with el. Have a look at e? to know how to interact with them.
+You can save your preferred settings in ~/.rizinrc.
 ```
 
-**Note**: You have the option to add a `?` before any command to access its help.
+**Note**: You have the option to add a `?` after any command to access its help, or for more in depth help (which may include examples) you can append `??`.
 
 Additionally, remember that a comprehensive search for _all_ commands, settings, and their descriptions can be performed by typing `?*`.
 
@@ -31,8 +42,8 @@ For instance, the subsequent command displays all the print commands (`p`) and s
 
 ```bash
 [0x00000000]> ?* p~base64
-| p6e                  # Base64 encoding
-| p6d                  # Base64 decoding
+| p6e      # Base64 encoding
+| p6d      # Base64 decoding
 ```
 
 Is possible to achieve the same outcome by listing all available commands using the `?*` command and then filtering the lines containing a specific keyword using `~`, as previously explained.
@@ -41,9 +52,9 @@ The following example lists all the commands and shows only those containing the
 
 ```bash
 ?*~summarize
-| pds [<n_bytes>]      # Summarize N bytes
-| pdsf                 # Summarize the current function
-| pdsb                 # Summarize current block
+| pds [<n_bytes>]  # Summarize N bytes
+| pdsf             # Summarize the current function
+| pdsb             # Summarize current block
 ```
 
 Similarly, you can perform the same action for listing all environment variables and selectively displaying lines that may contain the specified keyword. Use `el*` and apply the `~` filter as previously described.
@@ -98,10 +109,11 @@ To enable file writing, specify the `-w` option when opening a file with rizin. 
 Examples:
 
 ```
-> w hello world         # string
-> wx 90 90 90 90        # hexpairs
-> wa jmp 0x8048140      # assemble
-> wf inline.bin         # write contents of file
+$ rizin -w foo.bin
+[0x00000000]> w hello world     # string
+[0x00000000]> wx 90 90 90 90    # hexpairs
+[0x00000000]> wa jmp 0x8048140  # assemble
+[0x00000000]> wff inline.bin    # write contents of file
 ```
 
 ### Visual mode and panels

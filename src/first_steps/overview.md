@@ -86,11 +86,11 @@ $ echo 'push eax;nop;nop' | rz-asm -f -
 ### Examples
 ```
 $ rz-hash file.bin
-file: 0x00000000-0x00000007 sha256: 887cfbd0d44aaff69f7bdbedebd282ec96191cce9d7fa7336298a18efc3c7a5a
+file.bin: 0x00000000-0x00000007 sha256: 887cfbd0d44aaff69f7bdbedebd282ec96191cce9d7fa7336298a18efc3c7a5a
 ```
 ```
 $ rz-hash -a md5 file.bin
-file: 0x00000000-0x00000007 md5: d1833805515fc34b46c2b9de553f599d
+file.bin: 0x00000000-0x00000007 md5: d1833805515fc34b46c2b9de553f599d
 ```
 ### rz-diff
 
