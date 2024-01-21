@@ -83,8 +83,6 @@ If you are searching for descriptions of Rizin environment variables and want to
 
 Feel free to explore the rest of this book to gain insights into how certain non-trivial concepts operate and enhance your skills over time.
 
-![learning_curve](learning_curve.png)
-
 ### Navigate and print
 
 Navigation, inspection, and modification of a loaded binary file involve three straightforward actions: seek (to position), print (buffer), and alternate (write, append).
