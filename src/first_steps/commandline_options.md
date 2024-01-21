@@ -1,6 +1,6 @@
-## Command-line Options
+## Shell Command-line Options
 
-The `rizin` command line tool supports various options from the command line.
+The `rizin` command line tool supports various options from the shell command line.
 
 Here is the usage help message:
 

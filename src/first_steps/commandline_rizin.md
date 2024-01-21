@@ -1,4 +1,4 @@
-## Command Format
+## Rizin Command-line
 
 A general format for rizin commands is as follows:
 ```
