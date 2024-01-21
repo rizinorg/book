@@ -1,8 +1,54 @@
 ## Basic Rizin Usage
 
-The learning curve is usually somewhat steep at the beginning. Although after an hour of using it you should easily understand how most things work, and how to combine the various tools rizin offers. You are encouraged to read the rest of this book to understand how some non-trivial things work, and to ultimately improve your skills.
+The learning curve is usually somewhat steep at the beginning. Although after an hour of using it you should easily understand how most things work, and how to combine the various tools rizin offers.
+
+To get a first overview over the basic commands just run Rizin and type `?`:
+
+```bash
+> ?
+| ![!]                  # Run given commands as in system(3) or shows command history
+...
+| a[?]                  # Analysis commands
+...
+| p[cdghtm?]            # Print commands
+...
+
+```
+
+**Note**: you can prepend a `?` after any command to see it's help.
+
+Also keep in mind that you can search _all_ commands, settings and their descriptions.
+
+```bash
+# The "~" in these commands is Rizin's internal grep.
+# and "?* <cmd>" lists all possible combinations of a command.
+
+# Search all commands containing `<keyword>` (`<cmd>` is optional).
+> ?* <cmd>~<keyword>
+
+# Search all commands for the keyword "Summarize".
+?*~Summarize
+| pds [<n_bytes>]      # Summarize N bytes
+...
+
+# Seach all analysis commands for the keyword "strings".
+> ?* a~strings
+| aalg                 # Recovers and analyze all Golang functions and strings
+...
+
+# List all Rizin settings and grep for "<keyword>":
+el*~<keyword>
+
+# Search for a setting which affects the endianess:
+> el*~endian
+e cfg.bigendian=false
+```
+
+You are encouraged to read the rest of this book to understand how some non-trivial things work, and to ultimately improve your skills.
 
 ![learning_curve](learning_curve.png)
+
+### Navigate and print
 
 Navigation, inspection and modification of a loaded binary file is performed using three simple actions: seek (to position), print (buffer), and alternate (write, append).
 

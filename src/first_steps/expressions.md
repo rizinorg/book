@@ -53,14 +53,13 @@ Some examples:
 [0x00000000]> % 1+2+3-4*3
 hex     0xfffffffffffffffa
 octal   01777777777777777777772
-unit    17179869184.0G
+unit    16E
 segment fffff000:0ffa
-int64   -6
 string  "\xfa\xff\xff\xff\xff\xff\xff\xff"
+fvalue  -6.0
+float   -6.000000f
+double  -6.000000
 binary  0b1111111111111111111111111111111111111111111111111111111111111010
-fvalue: -6.0
-float:  nanf
-double: nan
 trits   0t11112220022122120101211020120210210211201
 ```
 
@@ -80,7 +79,8 @@ Supported arithmetic operations are:
 6
 ```
 
-To use of logical OR, you should quote command arguments or escape the character to avoid executing the `|` pipe:
+Enclose the expression with double quotes to evaluate `|` as logical OR instead of pipe command.
+
 ```
 [0x00000000]> % "1 | 2"
 int32   3
@@ -100,6 +100,7 @@ trits   0t10
 ```
 
 Numbers can be displayed in several formats:
+
 ```
 0x033   : hexadecimal can be displayed
 3334    : decimal
@@ -110,7 +111,8 @@ sym.fo  : resolve flag offset
 
 You can also use variables and seek positions to build complex expressions.
 
-Use the `%$?` command to list all the available commands or read the refcard chapter of this book. Some important variables:
+Use the `%$?` command to list all the available commands or read the refcard chapter of this book.
+
 ```
 $$    here (the current virtual seek)
 $l    opcode length
@@ -122,9 +124,10 @@ $b    block size
 ```
 
 Some more examples:
+
 ```
-[0x4A13B8C0]> %vx $m + $l
-0x7f98b45df4a4
+[0x4A13B8C0]> % $m + $l
+140293837812900 0x7f98b45df4a4 03771426427372244 130658.0G 8b45d000:04a4 140293837812900 10100100 140293837812900.0 -0.000000
 ```
 ```
 [0x4A13B8C0]> pd 1 @ +$l

@@ -30,7 +30,7 @@ until desired point.
 Or you can also try continue back:
 
 ```
-[0x004028a0]> db 0x004028a2
+[0x004028a0]> db @ 0x004028a2
 [0x004028a0]> 10dso
 [0x004028a0]> dr rip
 0x004028b9
