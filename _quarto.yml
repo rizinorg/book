@@ -26,7 +26,7 @@ book:
       - part: "First Steps"
         chapters:
          - src/first_steps/intro.md
-         - src/first_steps/commandline_flags.md
+         - src/first_steps/commandline_options.md
          - src/first_steps/command_format.md
          - src/first_steps/expressions.md
          - src/first_steps/basic_debugger_session.md
