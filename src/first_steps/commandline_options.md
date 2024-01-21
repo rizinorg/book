@@ -4,7 +4,7 @@ The `rizin` command line tool supports various options from the shell command li
 
 Here is the usage help message:
 
-```
+```bash
 $ rizin -h
 Usage: rizin [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i file]
              [-s addr] [-B baddr] [-m maddr] [-c cmd] [-e k=v] file|pid|-|--|=
@@ -57,54 +57,54 @@ Usage: rizin [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i fil
 
 - To open a file in write mode without parsing the file format headers, use the following command:
 
-```
+```bash
 $ rizin -nw file
 ```
 
 - To quickly enter an Rizin shell without opening any file, you can use the following command:
 
-```
+```bash
 $ rizin 
 ```
 
 - To quickly enter an Rizin shell and allocate 512 bytes of writable buffer (equivalent of `malloc://512`), you can use the following command:
 
-```
+```bash
 $ rizin = 
 ```
 
 - To specify which architecture and bits you want to open the file with, you can use the following command:
 
-```
+```bash
 $ rizin -a ppc -b 32 ls.fat
 ```
 
 - To run a script **before** before the file is opened, you can use the `-i` option followed by the path to your script. Here's an example:
 
-```
+```bash
 $ rizin -i /path/to/patch.rz target.bin
 ```
 
 - To execute a command and quit without entering the interactive mode in Rizin, you can use the `-qc` option followed by the command you want to execute. Here's an example:
 
-```
+```bash
 $ rizin -qc 'iij' hi.bin > imports.json
 ```
 
 - To set a environment variable in Rizin, you can use the `-e` option followed by the environment variable assignment. Here's an example:
 
-```
+```bash
 $ rizin -e "pdb.server=https://msdl.microsoft.com/download/symbols" blah.bin
 ```
 
-To debug a program using Rizin, you can use the following option:
+- To debug a program using Rizin, you can use the following option:
 
-```
+```bash
 $ rizin -d /bin/ls
 ```
 
-To use an existing project file in Rizin, you can specify the project file when opening Rizin. Here's an example:
+- To use an existing project file in Rizin, you can specify the project file when opening Rizin. Here's an example:
 
-```
+```bash
 $ rizin -p test.rzdb
 ```
