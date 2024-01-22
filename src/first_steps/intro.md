@@ -123,12 +123,20 @@ $ rizin -w foo.bin
 
 ### Visual mode and panels
 
-Rizin also offers visual mode via `V` and visual panels via `v`.
+Rizin also offers visual mode via `V`, visual panels via `v`.
 
 Once you enter visual mode/panel, you can use `q` to exit visual mode and return to the prompt, and `?` to toggle the help message explaining how to navigate within visual mode.
 
-In visual mode, the HJKL keys are used for navigation (left, down, up, and right, respectively). These keys are applicable in cursor mode, toggled by the `c` key. To select a byte range in cursor mode, hold down the `SHIFT` key and press the navigation keys HJKL to mark your selection.
+#### Visual mode `V`
 
-While in visual mode, you can overwrite bytes by pressing `i`. Press `TAB` to switch between the hex (middle) and string (right) columns. Pressing `q` inside the hex panel returns you to visual mode. By pressing `p` or `P`, you can scroll through different representations in visual mode. Another significant visual mode is the curses-like panels interface, accessible with the `V!` command.
+In visual mode (activated with the `V` command), the HJKL keys serve for navigation, corresponding to left, down, up, and right, respectively. These keys are effective in cursor mode, toggled by the `c` key. To select a byte range in cursor mode, hold down the `SHIFT` key and use the navigation keys HJKL to mark your selection.
 
-In visual panel, you can use the mouse cursor and keyboard arrows to move around.
+While in visual mode, you can overwrite bytes by pressing `i`. Press `TAB` to switch between the hex (middle) and string (right) columns. Exiting the hex panel and returning to visual mode can be done by pressing `q`. Additionally, you can scroll through different representations in visual mode by pressing `p` or `P`. Another notable feature in visual mode is the curses-like panels interface, accessible with the `V!` command.
+
+To enter visual management mode, press `v` while already in visual mode or use the command line with `Vv`. This extension of visual mode enables analysis, seeking, viewing cross-references, and more within the same panel.
+
+#### Visual panel `v`
+
+In the visual panel, you can utilize both the mouse cursor and keyboard arrows for navigation.
+
+Unlike `V` and `Vv`, this mode provides a GUI-like experience within the terminal emulator. It includes a menu and tabs, enabling the display of multiple pieces of information in the same terminal.
