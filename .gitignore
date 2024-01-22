@@ -13,3 +13,4 @@ _book/*
 index.log
 index.tex
 /.quarto/
+/site_libs/
