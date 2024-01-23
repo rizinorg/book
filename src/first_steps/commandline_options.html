@@ -8,7 +8,7 @@
 
 <meta name="description" content="This book focuses on the Rizin reverse engineering framework">
 
-<title>The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework - 71&nbsp; Remote Access Capabilities</title>
+<title>The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework - 7&nbsp; Shell Command-line Options</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -31,8 +65,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../src/debugger/remote_gdb.html" rel="next">
-<link href="../../src/debugger/apple.html" rel="prev">
+<link href="../../src/first_steps/commandline_rizin.html" rel="next">
+<link href="../../src/first_steps/intro.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -76,7 +110,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/debugger/remoting_capabilities.html">Remote Access</a></li><li class="breadcrumb-item"><a href="../../src/debugger/remoting_capabilities.html"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/first_steps/intro.html">First Steps</a></li><li class="breadcrumb-item"><a href="../../src/first_steps/commandline_options.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Shell Command-line Options</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -196,7 +230,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/commandline_options.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/first_steps/commandline_options.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Shell Command-line Options</span></span></a>
   </div>
 </li>
@@ -679,7 +713,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/remoting_capabilities.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../src/debugger/remoting_capabilities.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></span></a>
   </div>
 </li>
@@ -1124,14 +1158,20 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#common-usage-patterns" id="toc-common-usage-patterns" class="nav-link active" data-scroll-target="#common-usage-patterns"><span class="header-section-number">7.0.1</span> Common usage patterns</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rizinorg/book/edit/master/src/first_steps/commandline_options.md" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Shell Command-line Options</span></h1>
 </div>
 
 
@@ -1146,63 +1186,95 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Rizin can be run locally, or it can be started as a server process which is controlled by a local rizin process. This is possible because everything uses rizin’s IO subsystem which abstracts access to system(), cmd() and all basic IO operations so to work over a network.</p>
-<p>Help for commands useful for remote access to rizin:</p>
-<pre><code>[0x00000000]&gt; R?
-Usage: R[?]   # Connect with other instances of rizin
-| R [[&lt;fd&gt;] &lt;cmd&gt;]        # List all open connections / Exec &lt;cmd&gt; at remote &lt;fd&gt;
-| R&lt; [&lt;fd&gt; &lt;cmd&gt;]         # Send output of local &lt;cmd&gt; to remote &lt;fd&gt;
-| R![&lt;cmd&gt;]               # Run &lt;cmd&gt; via rz_io_system
-| R+ &lt;[proto://]host:port&gt; # Connect to remote host:port
-| R- [&lt;fd&gt;]               # remove all hosts or host 'fd'
-| R= &lt;fd&gt;                 # Open remote session with host 'fd', 'q' to quit
-| R!= &lt;fd&gt;=0              # Enable remote cmd mode, sending commands to remote &lt;fd&gt; server
-| R=!                     # Disable remote cmd mode
-| Rr &lt;[host:]port&gt; [&lt;cmd&gt;] # Start the rap server (o rap://9999) / Execute &lt;cmd&gt; on rap server
-| Rg[?]                   # Start the gdbserver
-| Rh[?]                   # Start the http webserver
-| RH[?]                   # Start the http webserver (and launch the web browser)
-| Rt &lt;[host:]port&gt; [&lt;cmd&gt;] # Start the tcp server
-| R&amp;r &lt;port&gt;              # Start rap server in background (same as '&amp;_=h')</code></pre>
-<p>You can learn rizin remote capabilities by displaying the list of supported IO plugins: <code>rizin -L</code>.</p>
-<p>A little example should make this clearer. A typical remote session might look like this:</p>
-<p>At the remote host1:</p>
-<pre><code>$ rizin rap://:1234</code></pre>
-<p>At the remote host2:</p>
-<pre><code>$ rizin rap://:1234</code></pre>
-<p>At localhost:</p>
-<pre><code>$ rizin =</code></pre>
-<p>Add hosts</p>
-<pre><code>[0x004048c5]&gt; R+ rap://&lt;host1&gt;:1234//bin/ls
-Connected to: &lt;host1&gt; at port 1234
-waiting... ok
+<p>The <code>rizin</code> command line tool supports various options from the shell command line.</p>
+<p>Here is the usage help message:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin <span class="at">-h</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> rizin <span class="pp">[-</span><span class="ss">ACdfLMnNqStuvwzX</span><span class="pp">]</span> [-P patch] [-p prj] [-a arch] [-b bits] [-i file]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>             <span class="ex">[-s</span> addr] [-B baddr] [-m maddr] [-c cmd] [-e k=v] file<span class="kw">|</span><span class="ex">pid</span><span class="kw">|</span><span class="ex">-</span><span class="kw">|</span><span class="ex">--</span><span class="kw">|</span><span class="ex">=</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">--</span>           run rizin without opening any file</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">=</span>            same as <span class="st">'rizin malloc://512</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st"> -            read file from stdin</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st"> -=           perform R=! command to run all commands remotely</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st"> -0           print \x00 after init and every command</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st"> -2           close stderr file descriptor (silent warning messages)</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st"> -a [arch]    set asm.arch</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st"> -A           run '</span>aaa<span class="st">' command to analyze all referenced code</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="st"> -b [bits]    set asm.bits</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="st"> -B [baddr]   set base address for PIE binaries</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="st"> -c '</span>cmd..<span class="st">'   execute rizin command</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="st"> -C           file is host:port (alias for -cR+http://%%s/cmd/)</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="st"> -d           debug the executable '</span>file<span class="st">' or running process '</span>pid</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a> <span class="ex">-D</span> <span class="pp">[</span><span class="ss">backend</span><span class="pp">]</span> enable debug mode <span class="er">(</span><span class="ex">e</span> cfg.debug=true<span class="kw">)</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a> <span class="ex">-e</span> k=v       evaluate config var</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a> <span class="ex">-f</span>           block size = file size</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a> <span class="ex">-F</span> <span class="pp">[</span><span class="ss">binplug</span><span class="pp">]</span> force to use that rbin plugin</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a> <span class="ex">-h,</span> <span class="at">-hh</span>      show help message, <span class="at">-hh</span> for long</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a> <span class="ex">-H</span> <span class="er">(</span><span class="ex">[var]</span><span class="kw">)</span>   <span class="ex">display</span> variable</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a> <span class="ex">-i</span> <span class="pp">[</span><span class="ss">file</span><span class="pp">]</span>    run script file</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a> <span class="ex">-I</span> <span class="pp">[</span><span class="ss">file</span><span class="pp">]</span>    run script file before the file is opened</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a> <span class="ex">-k</span> <span class="pp">[</span><span class="ss">OS/kern</span><span class="pp">]</span> set asm.os <span class="er">(</span><span class="ex">linux,</span> macos, w32, netbsd, ...<span class="kw">)</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a> <span class="ex">-l</span> <span class="pp">[</span><span class="ss">lib</span><span class="pp">]</span>     load plugin file</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a> <span class="ex">-L</span>           list supported IO plugins</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a> <span class="ex">-m</span> <span class="pp">[</span><span class="ss">addr</span><span class="pp">]</span>    map file at given address <span class="er">(</span><span class="ex">loadaddr</span><span class="kw">)</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a> <span class="ex">-M</span>           do not demangle symbol names</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a> <span class="ex">-n,</span> <span class="at">-nn</span>      do not load RzBin info <span class="er">(</span><span class="ex">-nn</span> only load bin structures<span class="kw">)</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a> <span class="ex">-N</span>           do not load user settings and scripts</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a> <span class="ex">-NN</span>          do not load any script or plugin</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a> <span class="ex">-q</span>           quiet mode <span class="er">(</span><span class="ex">no</span> prompt<span class="kw">)</span> <span class="ex">and</span> quit after <span class="at">-i</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a> <span class="ex">-qq</span>          quit after running all <span class="at">-c</span> and <span class="at">-i</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a> <span class="ex">-Q</span>           quiet mode <span class="er">(</span><span class="ex">no</span> prompt<span class="kw">)</span> <span class="ex">and</span> quit faster <span class="er">(</span><span class="va">quickLeak</span><span class="op">=</span>true<span class="kw">)</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a> <span class="ex">-p</span> <span class="pp">[</span><span class="ss">p.rzdb</span><span class="pp">]</span>  load project file</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a> <span class="ex">-r</span> <span class="pp">[</span><span class="ss">rz</span><span class="pp">-</span><span class="ss">run</span><span class="pp">]</span>  specify rz-run profile to load <span class="er">(</span><span class="ex">same</span> as <span class="at">-e</span> dbg.profile=X<span class="kw">)</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a> <span class="ex">-R</span> <span class="pp">[</span><span class="ss">rule</span><span class="pp">]</span>    specify custom rz-run directive</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a> <span class="ex">-s</span> <span class="pp">[</span><span class="ss">addr</span><span class="pp">]</span>    initial seek</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a> <span class="ex">-T</span>           do not compute file hashes</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a> <span class="ex">-u</span>           set bin.filter=false to get raw sym/sec/cls names</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a> <span class="ex">-v,</span> <span class="at">-V</span>       show rizin version <span class="er">(</span><span class="ex">-V</span> show lib versions<span class="kw">)</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a> <span class="ex">-w</span>           open file in write mode</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a> <span class="ex">-x</span>           open without exec-flag <span class="er">(</span><span class="ex">asm.emu</span> will not work<span class="kw">)</span><span class="ex">,</span> See io.exec</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a> <span class="ex">-X</span>           same as <span class="at">-e</span> bin.usextr=false <span class="er">(</span><span class="ex">useful</span> for dyldcache<span class="kw">)</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a> <span class="ex">-z,</span> <span class="at">-zz</span>      do not load strings or load them even in raw</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="common-usage-patterns" class="level3" data-number="7.0.1">
+<h3 data-number="7.0.1" class="anchored" data-anchor-id="common-usage-patterns"><span class="header-section-number">7.0.1</span> Common usage patterns</h3>
+<ul>
+<li>To open a file in write mode without parsing the file format headers, use the following command:</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin <span class="at">-nw</span> file</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>To quickly enter an Rizin shell without opening any file, you can use the following command:</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>To quickly enter an Rizin shell and allocate 512 bytes of writable buffer (equivalent of <code>malloc://512</code>), you can use the following command:</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin = </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>To specify which architecture and bits you want to open the file with, you can use the following command:</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin <span class="at">-a</span> ppc <span class="at">-b</span> 32 ls.fat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>To run a script <strong>before</strong> before the file is opened, you can use the <code>-i</code> option followed by the path to your script. Here’s an example:</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin <span class="at">-i</span> /path/to/patch.rz target.bin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>To execute a command and quit without entering the interactive mode in Rizin, you can use the <code>-qc</code> option followed by the command you want to execute. Here’s an example:</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin <span class="at">-qc</span> <span class="st">'iij'</span> hi.bin <span class="op">&gt;</span> imports.json</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>To set a environment variable in Rizin, you can use the <code>-e</code> option followed by the environment variable assignment. Here’s an example:</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin <span class="at">-e</span> <span class="st">"pdb.server=https://msdl.microsoft.com/download/symbols"</span> blah.bin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>To debug a program using Rizin, you can use the following option:</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin <span class="at">-d</span> /bin/ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>To use an existing project file in Rizin, you can specify the project file when opening Rizin. Here’s an example:</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin <span class="at">-p</span> test.rzdb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-[0x004048c5]&gt; R
-0 - rap://&lt;host1&gt;:1234//bin/ls</code></pre>
-<p>You can open remote files in debug mode (or using any IO plugin) specifying URI when adding hosts:</p>
-<pre><code>[0x004048c5]&gt; R+ R+ rap://&lt;host2&gt;:1234/dbg:///bin/ls
-Connected to: &lt;host2&gt; at port 1234
-waiting... ok
-0 - rap://&lt;host1&gt;:1234//bin/ls
-1 - rap://&lt;host2&gt;:1234/dbg:///bin/ls</code></pre>
-<p>To execute commands on host1:</p>
-<pre><code>[0x004048c5]&gt; R 0 px
-[0x004048c5]&gt; R s 0x666</code></pre>
-<p>To open a session with host2:</p>
-<pre><code>[0x004048c5]&gt; R= 1
-fd:6&gt; pi 1
-...
-fd:6&gt; q</code></pre>
-<p>To remove hosts (and close connections):</p>
-<pre><code>[0x004048c5]&gt; R-</code></pre>
-<p>You can also redirect rizin output to a TCP or UDP server (such as <code>nc -l</code>). First, Add the server with ‘R+ tcp://’ or ‘R+ udp://’, then you can redirect the output of a command to be sent to the server:</p>
-<pre><code>[0x004048c5]&gt; R+ tcp://&lt;host&gt;:&lt;port&gt;/
-Connected to: &lt;host&gt; at port &lt;port&gt;
-5 - tcp://&lt;host&gt;:&lt;port&gt;/
-[0x004048c5]&gt; R&lt;5 cmd...</code></pre>
-<p>The <code>R&lt;</code> command will send the output from the execution of <code>cmd</code> to the remote connection number N (or the last one used if no id specified).</p>
 
-
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1440,13 +1512,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../src/debugger/apple.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">70</span>&nbsp; <span class="chapter-title">macOS/iOS</span></span>
+      <a href="../../src/first_steps/intro.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Basic Rizin Usage</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../src/debugger/remote_gdb.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">Debugging with gdbserver</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../src/first_steps/commandline_rizin.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Rizin Command-line</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1454,4 +1526,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rizinorg/book/edit/master/src/debugger/remoting_capabilities.md" class="toc-action">Edit this page</a></p></div></div></div></div></footer></body></html>
+</body></html>

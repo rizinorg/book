@@ -8,7 +8,7 @@
 
 <meta name="description" content="This book focuses on the Rizin reverse engineering framework">
 
-<title>The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework - 71&nbsp; Remote Access Capabilities</title>
+<title>The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework - 8&nbsp; Rizin Command-line</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -31,8 +65,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../src/debugger/remote_gdb.html" rel="next">
-<link href="../../src/debugger/apple.html" rel="prev">
+<link href="../../src/first_steps/expressions.html" rel="next">
+<link href="../../src/first_steps/commandline_options.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -76,7 +110,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/debugger/remoting_capabilities.html">Remote Access</a></li><li class="breadcrumb-item"><a href="../../src/debugger/remoting_capabilities.html"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/first_steps/intro.html">First Steps</a></li><li class="breadcrumb-item"><a href="../../src/first_steps/commandline_rizin.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Rizin Command-line</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -202,7 +236,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/commandline_rizin.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/first_steps/commandline_rizin.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Rizin Command-line</span></span></a>
   </div>
 </li>
@@ -679,7 +713,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/remoting_capabilities.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../src/debugger/remoting_capabilities.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></span></a>
   </div>
 </li>
@@ -1124,14 +1158,28 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#help-commands" id="toc-help-commands" class="nav-link active" data-scroll-target="#help-commands"><span class="header-section-number">8.0.1</span> Help commands</a></li>
+  <li><a href="#shell-command-within-rizin-command-line" id="toc-shell-command-within-rizin-command-line" class="nav-link" data-scroll-target="#shell-command-within-rizin-command-line"><span class="header-section-number">8.0.2</span> Shell command within rizin command line</a></li>
+  <li><a href="#temporary-modifiers" id="toc-temporary-modifiers" class="nav-link" data-scroll-target="#temporary-modifiers"><span class="header-section-number">8.0.3</span> Temporary modifiers</a></li>
+  <li><a href="#pipe-output-to-file" id="toc-pipe-output-to-file" class="nav-link" data-scroll-target="#pipe-output-to-file"><span class="header-section-number">8.0.4</span> Pipe output to file</a></li>
+  <li><a href="#executing-multiple-commands-on-a-single-line" id="toc-executing-multiple-commands-on-a-single-line" class="nav-link" data-scroll-target="#executing-multiple-commands-on-a-single-line"><span class="header-section-number">8.0.5</span> Executing multiple commands on a single line</a></li>
+  <li><a href="#repeat-a-command-n-times" id="toc-repeat-a-command-n-times" class="nav-link" data-scroll-target="#repeat-a-command-n-times"><span class="header-section-number">8.0.6</span> Repeat a command n-times</a></li>
+  <li><a href="#filtering-grep-output-lines" id="toc-filtering-grep-output-lines" class="nav-link" data-scroll-target="#filtering-grep-output-lines"><span class="header-section-number">8.0.7</span> Filtering (grep) output lines</a></li>
+  <li><a href="#iterators-and-loops" id="toc-iterators-and-loops" class="nav-link" data-scroll-target="#iterators-and-loops"><span class="header-section-number">8.0.8</span> Iterators and loops</a></li>
+  <li><a href="#examples-of-shell-usage." id="toc-examples-of-shell-usage." class="nav-link" data-scroll-target="#examples-of-shell-usage."><span class="header-section-number">8.0.9</span> Examples of shell usage.</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rizinorg/book/edit/master/src/first_steps/commandline_rizin.md" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Rizin Command-line</span></h1>
 </div>
 
 
@@ -1146,63 +1194,208 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Rizin can be run locally, or it can be started as a server process which is controlled by a local rizin process. This is possible because everything uses rizin’s IO subsystem which abstracts access to system(), cmd() and all basic IO operations so to work over a network.</p>
-<p>Help for commands useful for remote access to rizin:</p>
-<pre><code>[0x00000000]&gt; R?
-Usage: R[?]   # Connect with other instances of rizin
-| R [[&lt;fd&gt;] &lt;cmd&gt;]        # List all open connections / Exec &lt;cmd&gt; at remote &lt;fd&gt;
-| R&lt; [&lt;fd&gt; &lt;cmd&gt;]         # Send output of local &lt;cmd&gt; to remote &lt;fd&gt;
-| R![&lt;cmd&gt;]               # Run &lt;cmd&gt; via rz_io_system
-| R+ &lt;[proto://]host:port&gt; # Connect to remote host:port
-| R- [&lt;fd&gt;]               # remove all hosts or host 'fd'
-| R= &lt;fd&gt;                 # Open remote session with host 'fd', 'q' to quit
-| R!= &lt;fd&gt;=0              # Enable remote cmd mode, sending commands to remote &lt;fd&gt; server
-| R=!                     # Disable remote cmd mode
-| Rr &lt;[host:]port&gt; [&lt;cmd&gt;] # Start the rap server (o rap://9999) / Execute &lt;cmd&gt; on rap server
-| Rg[?]                   # Start the gdbserver
-| Rh[?]                   # Start the http webserver
-| RH[?]                   # Start the http webserver (and launch the web browser)
-| Rt &lt;[host:]port&gt; [&lt;cmd&gt;] # Start the tcp server
-| R&amp;r &lt;port&gt;              # Start rap server in background (same as '&amp;_=h')</code></pre>
-<p>You can learn rizin remote capabilities by displaying the list of supported IO plugins: <code>rizin -L</code>.</p>
-<p>A little example should make this clearer. A typical remote session might look like this:</p>
-<p>At the remote host1:</p>
-<pre><code>$ rizin rap://:1234</code></pre>
-<p>At the remote host2:</p>
-<pre><code>$ rizin rap://:1234</code></pre>
-<p>At localhost:</p>
-<pre><code>$ rizin =</code></pre>
-<p>Add hosts</p>
-<pre><code>[0x004048c5]&gt; R+ rap://&lt;host1&gt;:1234//bin/ls
-Connected to: &lt;host1&gt; at port 1234
-waiting... ok
+<p>The Rizin command line initially displays the current address enclosed by brackets (e.g., <code>[0x00000000]&gt;</code>).</p>
+<p>Following these brackets, users can input commands. Typically, commands are represented by a single case-sensitive character.</p>
+<p>Rizin includes special commands that enable the execution of shell-like commands. These can be accessed through the help command <code>shell?</code>.</p>
+<p>The standard format for Rizin commands is as follows:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># executes a rizin command at at the current address (0x00000000)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> command <span class="op">&lt;</span>params<span class="op">&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># executes a rizin command with a special temporary modifier</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> command <span class="op">&lt;</span>params<span class="op">&gt;</span> @<span class="op">&lt;</span>temporay modifier<span class="op">&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># executes a shell command</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> !<span class="op">&lt;</span>shell command<span class="op">&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># executes a rizin command and pipes its contents to a shell command</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> command <span class="op">&lt;</span>params<span class="op">&gt;</span> <span class="kw">|</span> <span class="op">&lt;</span>shell <span class="bu">command</span><span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This format will be consistently used throughout the book.</p>
+<section id="help-commands" class="level3" data-number="8.0.1">
+<h3 data-number="8.0.1" class="anchored" data-anchor-id="help-commands"><span class="header-section-number">8.0.1</span> Help commands</h3>
+<p>Every shell command is accompanied by a description that can be accessed by adding <code>?</code>. This displays the help descriptions for the individual command and all its subcommands.</p>
+<p>Appending <code>??</code> instead provides the help message for the single command (excluding subcommands) along with an extended description, which may include possible examples.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> e<span class="pp">?</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> e<span class="pp">[</span><span class="ss">?</span><span class="pp">]</span>   <span class="co"># List/get/set config evaluable vars</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">e</span> <span class="op">&lt;</span>key<span class="op">&gt;</span>[=<span class="op">&lt;</span>val<span class="kw">|</span><span class="ex">?</span><span class="op">&gt;</span>] [<span class="op">&lt;</span>key<span class="op">&gt;</span>[=<span class="op">&lt;</span>val<span class="kw">|</span><span class="ex">?</span><span class="op">&gt;</span>] ...]] <span class="co"># Get/Set value of config variable &lt;key&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="va">el</span><span class="op">[</span>j<span class="pp">*</span>qlJ<span class="op">]</span> <span class="ex">[</span><span class="op">&lt;</span>key<span class="op">&gt;</span>]  <span class="co"># List config variables with their descriptions</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">e-</span>                 <span class="co"># Reset config variables</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">e!</span> <span class="op">&lt;</span>key<span class="op">&gt;</span>           # Invert the boolean value of config variable <span class="op">&lt;</span>key<span class="op">&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="va">ec</span><span class="op">[</span><span class="pp">?</span><span class="op">]</span>              <span class="co"># Set color for given key (prompt, offset, ...) (see ec?? for more details)</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">ee</span> <span class="op">&lt;</span>key<span class="op">&gt;</span>           # Open editor to change the value of config variable <span class="op">&lt;</span>key<span class="op">&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">er</span> <span class="op">&lt;</span>key<span class="op">&gt;</span>           # Set config variable <span class="op">&lt;</span>key<span class="op">&gt;</span> as read-only</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">es</span> [<span class="op">&lt;</span>key<span class="op">&gt;</span>]         <span class="co"># List all config variable spaces or sub-keys/sub-spaces if a &lt;key&gt; is provided</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">et</span> <span class="op">&lt;</span>key<span class="op">&gt;</span>           # Show type of given config variable <span class="op">&lt;</span>key<span class="op">&gt;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> e<span class="pp">??</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> e <span class="op">&lt;</span>key<span class="op">&gt;</span>[=<span class="op">&lt;</span>val<span class="kw">|</span><span class="ex">?</span><span class="op">&gt;</span>] [<span class="op">&lt;</span>key<span class="op">&gt;</span>[=<span class="op">&lt;</span>val<span class="kw">|</span><span class="ex">?</span><span class="op">&gt;</span>] ...]]   <span class="co"># Get/Set value of config variable &lt;key&gt;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Examples:</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">e</span> asm.bytes          <span class="co"># Show current value of config variable `asm.bytes`</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">e</span> asm.bytes=true     <span class="co"># Set config variable `asm.bytes` to `true`</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">e</span> search.in=<span class="pp">?</span>        <span class="co"># Show all possible values for config variable `search.in`</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">e</span> search.in=<span class="pp">??</span>       <span class="co"># Show all possible values for config variable `search.in` together with description</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">e</span> asm.bytes=true asm.offset=false <span class="co"># Set asm.bytes to true and asm.offset to false</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="shell-command-within-rizin-command-line" class="level3" data-number="8.0.2">
+<h3 data-number="8.0.2" class="anchored" data-anchor-id="shell-command-within-rizin-command-line"><span class="header-section-number">8.0.2</span> Shell command within rizin command line</h3>
+<p>Executing shell commands within the Rizin command line is achievable through various methods, each with distinct behaviors.</p>
+<p>The initial method involves using the <code>!</code> command. The syntax for this approach is as follows: <code>!&lt;shell command&gt;</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> !<span class="pp">?</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> !<span class="pp">[</span><span class="ss">!</span><span class="pp">]</span>   <span class="co"># Run given commands as in system(3) or shows command history</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">!</span><span class="op">&lt;</span>command<span class="op">&gt;</span> [<span class="op">&lt;</span>args1<span class="op">&gt;</span> <span class="op">&lt;</span>args2<span class="op">&gt;</span> ...]  <span class="co"># Runs given commands in system(3)</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">!!</span><span class="op">&lt;</span>command<span class="op">&gt;</span> [<span class="op">&lt;</span>args1<span class="op">&gt;</span> <span class="op">&lt;</span>args2<span class="op">&gt;</span> ...] <span class="co"># Runs a given commands in system(3) and pipes stdout to rizin</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># executes `ls /path/to/dir` within the shell of the operating system</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> !ls /path/to/dir</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">somefile</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The second method involves using the pipe command <code>|</code>, enabling the redirection of a command’s output (<code>stdout</code>) to an external shell command.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> <span class="kw">|</span><span class="ex">?</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> <span class="kw">|</span><span class="ex">[</span><span class="op">&lt;</span>program<span class="op">&gt;|</span>H<span class="kw">|</span><span class="ex">T</span><span class="kw">|</span><span class="bu">.</span><span class="kw">|</span><span class="ex">]</span>   <span class="co"># Pipe help ('|')</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> <span class="kw">|</span>           <span class="co"># Disable scr.html and scr.color</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> <span class="kw">|</span><span class="ex">H</span>          <span class="co"># Enable scr.html, respect scr.color</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> <span class="kw">|</span> <span class="op">&lt;</span>program<span class="op">&gt;</span> # <span class="ex">Pipe</span> output of command to program</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> <span class="kw">|</span><span class="bu">.</span>          <span class="co"># Alias for .&lt;cmd&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># executes the `iz` rizin command and redirects the output to the external command `grep "hello"`</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> iz <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"hello"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="temporary-modifiers" class="level3" data-number="8.0.3">
+<h3 data-number="8.0.3" class="anchored" data-anchor-id="temporary-modifiers"><span class="header-section-number">8.0.3</span> Temporary modifiers</h3>
+<p>When utilizing the Rizin command-line, users may encounter situations where they need to temporarily modify specific values or configurations before executing a command. This can be accomplished using the <code>@</code> commands.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> @<span class="pp">?</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> <span class="op">&lt;</span>@<span class="op">&gt;</span> <span class="op">&lt;</span>args<span class="op">&gt;</span>   # <span class="st">'@'</span> help, temporary modifiers</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> @ <span class="op">&lt;</span>addr<span class="op">&gt;</span>             # <span class="ex">Temporary</span> seek to <span class="op">&lt;</span>addr<span class="op">&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> @ <span class="ex">..</span><span class="op">&lt;</span>addr<span class="op">&gt;</span>           # Temporary partial address seek <span class="er">(</span><span class="ex">see</span> s..<span class="kw">)</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> @!<span class="op">&lt;</span>blocksize<span class="op">&gt;</span>        # <span class="ex">Temporary</span> change the block size</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> <span class="ex">@</span><span class="er">(</span><span class="op">&lt;</span>from<span class="op">&gt;</span> <span class="op">&lt;</span>to<span class="op">&gt;</span><span class="kw">)</span>       <span class="co"># Temporary set from and to for commands supporting ranges</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> @a:<span class="op">&lt;</span>arch<span class="op">&gt;</span><span class="ex">[:</span><span class="op">&lt;</span>bits<span class="op">&gt;</span>]   <span class="co"># Temporary set arch and bits, if specified</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> @b:<span class="op">&lt;</span>bits<span class="op">&gt;</span>            # <span class="ex">Temporary</span> set asm.bits</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> @B:<span class="op">&lt;</span>nth<span class="op">&gt;</span>             # <span class="ex">Temporary</span> seek to nth instruction in current basic block <span class="er">(</span><span class="ex">negative</span> numbers too<span class="kw">)</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> @e:<span class="op">&lt;</span>k<span class="op">&gt;</span>=<span class="op">&lt;</span>v<span class="op">&gt;</span><span class="ex">[,</span><span class="op">&lt;</span>k<span class="op">&gt;</span>=<span class="op">&lt;</span>v<span class="op">&gt;</span>] <span class="co"># Temporary change eval vars (multiple vars separated by comma)</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> @f:<span class="op">&lt;</span>file<span class="op">&gt;</span>            # <span class="ex">Temporary</span> replace block with file contents</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> @F:<span class="op">&lt;</span>flagspace<span class="op">&gt;</span>       # <span class="ex">Temporary</span> change flag space</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> @i:<span class="op">&lt;</span>nth.op<span class="op">&gt;</span>          # <span class="ex">Temporary</span> seek to the Nth relative instruction</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> @k:<span class="op">&lt;</span>key<span class="op">&gt;</span>             # <span class="ex">Temporary</span> seek at value of sdb key <span class="kw">`</span><span class="ex">key</span><span class="kw">`</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> @o:<span class="op">&lt;</span>fd<span class="op">&gt;</span>              # <span class="ex">Temporary</span> switch to another fd</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> @r:<span class="op">&lt;</span>reg<span class="op">&gt;</span>             # <span class="ex">Temporary</span> seek to register value</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> @s:<span class="op">&lt;</span>string<span class="op">&gt;</span>          # <span class="ex">Temporary</span> replace block with string</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> @v:<span class="op">&lt;</span>value<span class="op">&gt;</span>           # <span class="ex">Temporary</span> replace block with value, written according to asm.bits and cfg.bigendian</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> @x:<span class="op">&lt;</span>hexstring<span class="op">&gt;</span>       # <span class="ex">Temporary</span> replace block with hexstring</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co"># execute `px 16` (print hexadecimal) at address 0x100</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> px 16 @ 0x100</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> offset <span class="at">-</span>   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="ex">0x00000100</span>  ffff ffff ffff ffff ffff ffff ffff ffff  ................</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co"># execute `px` (print hexadecimal) with a block size of `10 bytes` </span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co"># and replace the block with 00112233445566778822 hex bytes.</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> px @!10 @x:00112233445566778822</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> offset <span class="at">-</span>   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="ex">0x00000000</span>  0011 2233 4455 6677 8822                 ..<span class="st">"3DUfw."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Multiple temporary commands can be used simultaneously, requiring them to be space-separated. For instance: <code>@!10 @x:0011223344 @e:cfg.bigendian=true @ 0x12345</code>.</p>
+</section>
+<section id="pipe-output-to-file" class="level3" data-number="8.0.4">
+<h3 data-number="8.0.4" class="anchored" data-anchor-id="pipe-output-to-file"><span class="header-section-number">8.0.4</span> Pipe output to file</h3>
+<p>In certain situations, users may need to save output to a file. This can be achieved by using <code>&gt;</code>, similar to how it’s done in the UNIX shell.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> <span class="op">&gt;</span><span class="pp">?</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> <span class="op">&gt;</span> <span class="op">&lt;</span>arg<span class="op">&gt;</span>   # Redirection help <span class="er">(</span><span class="st">'&gt;'</span><span class="kw">)</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> <span class="op">&gt;</span> <span class="op">&lt;</span>file<span class="op">&gt;|&lt;</span><span class="va">$alias</span><span class="op">&gt;</span>  # <span class="ex">Redirect</span> STDOUT of <span class="op">&lt;</span>cmd<span class="op">&gt;</span> to <span class="op">&lt;</span>file<span class="op">&gt;</span> or save it to an alias <span class="er">(</span><span class="ex">see</span> <span class="va">$?</span><span class="kw">)</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> 2<span class="op">&gt;</span> <span class="op">&lt;</span>file<span class="op">&gt;|&lt;</span><span class="va">$alias</span><span class="op">&gt;</span> # <span class="ex">Redirect</span> STDERR of <span class="op">&lt;</span>cmd<span class="op">&gt;</span> to <span class="op">&lt;</span>file<span class="op">&gt;</span> or save it to an alias <span class="er">(</span><span class="ex">see</span> <span class="va">$?</span><span class="kw">)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> H<span class="op">&gt;</span> <span class="op">&lt;</span>file<span class="op">&gt;|&lt;</span><span class="va">$alias</span><span class="op">&gt;</span> # <span class="ex">Redirect</span> HTML output of <span class="op">&lt;</span>cmd<span class="op">&gt;</span> to <span class="op">&lt;</span>file<span class="op">&gt;</span> or save it to an alias <span class="er">(</span><span class="ex">see</span> <span class="va">$?</span><span class="kw">)</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># execute `iij` (print import as JSON) and redirect the output to file</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> iij <span class="op">&gt;</span> imports.json</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># execute `pr 128` (raw print) of 128 bytes at the address 0x1234 and </span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># redirect the output to file.</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># this allows to dump n-bytes at the current address to a file</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> pr 128 @ 0x1234 <span class="op">&gt;</span> dump.bin</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> !hexdump <span class="at">-C</span> dump.bin </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="ex">00000000</span>  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  <span class="kw">|</span><span class="ex">................</span><span class="kw">|</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="ex">00000080</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="executing-multiple-commands-on-a-single-line" class="level3" data-number="8.0.5">
+<h3 data-number="8.0.5" class="anchored" data-anchor-id="executing-multiple-commands-on-a-single-line"><span class="header-section-number">8.0.5</span> Executing multiple commands on a single line</h3>
+<p>The Rizin command line employs the <code>;</code> character to separate commands, enabling the execution of multiple commands in a single line.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> px 20 <span class="kw">;</span> <span class="ex">pd</span> 3 <span class="kw">;</span> <span class="ex">px</span> 40</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="repeat-a-command-n-times" class="level3" data-number="8.0.6">
+<h3 data-number="8.0.6" class="anchored" data-anchor-id="repeat-a-command-n-times"><span class="header-section-number">8.0.6</span> Repeat a command n-times</h3>
+<p>It is possible to execute a command repeatedly, by prepending the command with a numerical value:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># executes `px`</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> px</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># executes `px` 3 times</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> 3 px</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="filtering-grep-output-lines" class="level3" data-number="8.0.7">
+<h3 data-number="8.0.7" class="anchored" data-anchor-id="filtering-grep-output-lines"><span class="header-section-number">8.0.7</span> Filtering (grep) output lines</h3>
+<p>Filtering the output of an Rizin command is possible with any shell program that reads from stdin, such as <code>grep</code>, <code>less</code>, or <code>wc</code>, by utilizing the <code>|</code> pipe command. However, if spawning external processes is not desirable, possible, or the target system lacks essential UNIX tools (as is the case for Windows or embedded systems), you can also employ the built-in grep (<code>~</code>).</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> ~<span class="pp">?</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> <span class="op">&lt;</span>command<span class="op">&gt;</span>~<span class="pp">[</span><span class="ss">modifier</span><span class="pp">][</span><span class="ss">word,word</span><span class="pp">][</span><span class="ss">endmodifier</span><span class="pp">]</span>[<span class="pp">[</span><span class="ss">column</span><span class="pp">]</span>]<span class="pp">[</span><span class="ss">:line</span><span class="pp">]</span>   <span class="co"># Internal grep help ('~')</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Modifiers:</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="kw">&amp;</span>      <span class="co"># All words must match to grep the line</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">$[n]</span>   <span class="co"># Sort numerically / alphabetically the Nth column</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="va">$!</span>     <span class="co"># Sort in inverse order</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">,</span>      <span class="co"># Token to define another keyword</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">+</span>      <span class="co"># Set the grep as the opposite of search.case_sensitive</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">^</span>      <span class="co"># Words must be placed at the beginning of line</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>      # <span class="ex">Perform</span> zoom operation on the buffer</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ot">! </span>     <span class="co"># Negate grep</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">?</span>      <span class="co"># Count number of matching lines</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">?.</span>     <span class="co"># Count number chars</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">:s..e</span>  <span class="co"># Show lines s-e</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">..</span>     <span class="co"># Internal 'less'</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">...</span>    <span class="co"># Internal 'hud' (like V_)</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">{:</span>     <span class="co"># Human friendly indentation (yes, it's a smiley)</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">{:..</span>   <span class="co"># Less the output of {:</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">{:...</span>  <span class="co"># Hud the output of {:</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">{}</span>     <span class="co"># Json indentation</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">{}..</span>   <span class="co"># Less json indentation</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">{}...</span>  <span class="co"># Hud json indentation</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">{path}</span> <span class="co"># Json path grep</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="ex">EndModifiers:</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">$</span> <span class="co"># Words must be placed at the end of line</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="ex">Columns:</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">[n]</span>     <span class="co"># Show only columns n</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">[n-m]</span>   <span class="co"># Show column n to m</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">[n-]</span>    <span class="co"># Show all columns starting from column n</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">[i,j,k]</span> <span class="co"># Show the columns i, j and k</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="ex">Examples:</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">i~:0</span>     <span class="co"># Show first line of 'i' output</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">i~:-2..</span>  <span class="co"># Show from the second-last line to the last line of 'i' output</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">i~:..3</span>   <span class="co"># Show first three lines of 'i' output</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">i~:2..5</span>  <span class="co"># Show three lines of 'i' output starting from 2nd line</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">pd~mov</span>   <span class="co"># Disasm and grep for mov</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">pi~[0]</span>   <span class="co"># Show only opcode</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">i~0x400$</span> <span class="co"># Show lines ending with 0x400</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Moreover, you can employ grep for either columns (using <code>[n]</code>) or rows (using <code>:n</code>). For instance:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get first row</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> pd 20~call:0 </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># get second row</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> pd 20~call:1 </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># get first column</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> pd 20~call<span class="pp">[</span><span class="ss">0</span><span class="pp">]</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># get second column</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> pd 20~call<span class="pp">[</span><span class="ss">1</span><span class="pp">]</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively, you can combine them.</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># This filters the first column of the first row matching 'call'.</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> pd 20~call:0<span class="pp">[</span><span class="ss">0</span><span class="pp">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The internal grep function is a crucial feature for scripting in Rizin.</p>
+</section>
+<section id="iterators-and-loops" class="level3" data-number="8.0.8">
+<h3 data-number="8.0.8" class="anchored" data-anchor-id="iterators-and-loops"><span class="header-section-number">8.0.8</span> Iterators and loops</h3>
+<p>It allows iteration over a list of offsets or data generated by the disassembler, ranges, or any other command. For more information, refer to the <a href="../../src/scripting/loops.html">loops</a> section (iterators).</p>
+</section>
+<section id="examples-of-shell-usage." class="level3" data-number="8.0.9">
+<h3 data-number="8.0.9" class="anchored" data-anchor-id="examples-of-shell-usage."><span class="header-section-number">8.0.9</span> Examples of shell usage.</h3>
+<p>Here are a few examples of shell usage:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> ds                    <span class="co"># call the debugger's 'step' command</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> px 200 @ esp          <span class="co"># show 200 hex bytes at esp</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> pc <span class="op">&gt;</span> file.c           <span class="co"># dump buffer as a C byte array to file.c</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> wx 90 @@is            <span class="co"># write a nop on every symbol</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> pd 2000 <span class="kw">|</span> <span class="fu">grep</span> eax    <span class="co"># grep opcodes that use the 'eax' register</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>@</code> character is used to specify a temporary offset at which the command to its left will be executed. The original seek position in a file is then restored.</p>
+<p>For example, <code>pd 5 @ 0x100000fce</code> to disassemble 5 instructions at address 0x100000fce.</p>
+<p>Most of the commands offer autocompletion support using <code>&lt;TAB&gt;</code> key, for example <code>s</code>eek or <code>f</code>lags commands. It offers autocompletion using all possible values, taking flag names in this case. Note that it is possible to see the history of the commands using the <code>!~...</code> command - it offers a visual mode to scroll through the rizin command history.</p>
+<p>To extend the autocompletion support to handle more commands or enable autocompletion to your own commands defined in core, I/O plugins you must use the <code>!!!</code> command.</p>
 
-[0x004048c5]&gt; R
-0 - rap://&lt;host1&gt;:1234//bin/ls</code></pre>
-<p>You can open remote files in debug mode (or using any IO plugin) specifying URI when adding hosts:</p>
-<pre><code>[0x004048c5]&gt; R+ R+ rap://&lt;host2&gt;:1234/dbg:///bin/ls
-Connected to: &lt;host2&gt; at port 1234
-waiting... ok
-0 - rap://&lt;host1&gt;:1234//bin/ls
-1 - rap://&lt;host2&gt;:1234/dbg:///bin/ls</code></pre>
-<p>To execute commands on host1:</p>
-<pre><code>[0x004048c5]&gt; R 0 px
-[0x004048c5]&gt; R s 0x666</code></pre>
-<p>To open a session with host2:</p>
-<pre><code>[0x004048c5]&gt; R= 1
-fd:6&gt; pi 1
-...
-fd:6&gt; q</code></pre>
-<p>To remove hosts (and close connections):</p>
-<pre><code>[0x004048c5]&gt; R-</code></pre>
-<p>You can also redirect rizin output to a TCP or UDP server (such as <code>nc -l</code>). First, Add the server with ‘R+ tcp://’ or ‘R+ udp://’, then you can redirect the output of a command to be sent to the server:</p>
-<pre><code>[0x004048c5]&gt; R+ tcp://&lt;host&gt;:&lt;port&gt;/
-Connected to: &lt;host&gt; at port &lt;port&gt;
-5 - tcp://&lt;host&gt;:&lt;port&gt;/
-[0x004048c5]&gt; R&lt;5 cmd...</code></pre>
-<p>The <code>R&lt;</code> command will send the output from the execution of <code>cmd</code> to the remote connection number N (or the last one used if no id specified).</p>
 
-
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1440,13 +1633,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../src/debugger/apple.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">70</span>&nbsp; <span class="chapter-title">macOS/iOS</span></span>
+      <a href="../../src/first_steps/commandline_options.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Shell Command-line Options</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../src/debugger/remote_gdb.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">Debugging with gdbserver</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../src/first_steps/expressions.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Expressions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1454,4 +1647,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rizinorg/book/edit/master/src/debugger/remoting_capabilities.md" class="toc-action">Edit this page</a></p></div></div></div></div></footer></body></html>
+</body></html>
