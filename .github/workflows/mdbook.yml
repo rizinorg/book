@@ -1,28 +1,46 @@
 name: Publish to GitHub Pages
-
 on:
   push:
     branches:
       - master
+      - dev
   pull_request:
     branches:
       - master
+      - dev
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out repository
+        uses: actions/checkout@v4
 
-      - name: Install Quarto and render
-        uses: pommevilla/quarto-render@main
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          tinytex: true
 
-      - name: Deploy
-        if: github.event_name == 'push'
+      - name: Render Book project in HTML
+        uses: quarto-dev/quarto-actions/render@v2
+        with:
+          to: html
+
+      - name: Deploy Stable
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs
           cname: book.rizin.re
+
+      - name: Deploy Dev
+        if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs
+          cname: book-dev.rizin.re
 
       - name: Render to PDF and ePub
         shell: bash

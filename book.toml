@@ -1,7 +1,7 @@
 [book]
-title = "The Official Rizin Book"
-author = "pancake <pancake@nopcode.org>"
-description = "The Official Rizin Book"
+title = "The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework"
+author = "Rizin Organization"
+description = "This book focuses on the Rizin reverse engineering framework"
 
 [build]
 create-missing = false

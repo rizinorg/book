@@ -64,7 +64,7 @@ Tip: when using json output, you can append the `~{}` to the command to get a pr
 ]
 ```
 
-For more on the magical powers of `~` see the help in `?@?`, and the [Command Format](../first_steps/command_format.md) chapter earlier in the book.
+For more on the magical powers of `~` see the help in `?@?`, and the [Rizin Command-line](../first_steps/commandline_rizin.md) chapter earlier in the book.
 
 ### Hexadecimal View
 

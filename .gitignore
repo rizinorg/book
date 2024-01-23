@@ -9,5 +9,8 @@ _book/*
 .*.swo
 *.un~
 *.snippets
-
+*.html
+index.log
+index.tex
 /.quarto/
+/site_libs/

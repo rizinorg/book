@@ -1,13 +1,13 @@
 ## Compilation and Portability
 
-Currently the core of rizin can be compiled on many systems and architectures, but the main development is done on GNU/Linux with GCC, and on MacOS X with clang. Rizin is also known to compile on many different systems and architectures (including TCC and SunStudio).
+Rizin can be compiled on various systems and architectures, with primary development conducted on UNIX like systems (GNU/Linux, macOS, etc..) using GCC and on macOS with clang. Rizin is known to compile on a wide range of systems and architectures, including compatibility with [TinyCC](https://repo.or.cz/w/tinycc.git).
 
-People often want to use rizin as a debugger for reverse engineering. Currently, the debugger layer can be used on Windows, GNU/Linux (Intel x86 and x86_64, MIPS, and ARM), OS X, FreeBSD, NetBSD, and OpenBSD (Intel x86 and x86_64)..
+For those interested in utilizing Rizin as a debugger for reverse engineering, the debugger layer is currently available on Windows, GNU/Linux (x86, x86_64, MIPS, PowerPC, RISC-V, ARM, and AArch64), macOS (x86, x86_64 and AArch64), FreeBSD, NetBSD, and OpenBSD (x86 and x86_64).
 
-Compared to core, the debugger feature is more restrictive portability-wise. If the debugger has not been ported to your favorite platform, you can disable the debugger layer with the meson option `-Ddebugger=false`. Have a look at [BUILDING.md](https://github.com/rizinorg/rizin/blob/dev/BUILDING.md) for more information.
+However, it's important to note that the debugger feature has more restrictive portability compared to the core. If the debugger hasn't been ported to your preferred platform, you have the option to disable the debugger layer using the meson option `-Ddebugger=false`. Refer to [BUILDING.md](https://github.com/rizinorg/rizin/blob/dev/BUILDING.md) for additional details.
 
-Note that there are I/O plugins that use GDB, WinDbg, or Wine as back-ends, and therefore rely on presence of corresponding third-party tools (in case of remote debugging - just on the target machine).
+Keep in mind that there are I/O plugins utilizing GDB, WinDbg, KD, or Wine as back-ends, and they depend on the presence of corresponding third-party tools, especially in the case of remote debugging (on the target machine).
 
 ### Docker
 
-Rizin repository ships a [Dockerfile](https://github.com/rizinorg/rizin/blob/master/Dockerfile) that you can use with Docker.
+The Rizin repository includes a [Dockerfile](https://github.com/rizinorg/rizin/blob/master/Dockerfile) that you can use with Docker for streamlined deployment.

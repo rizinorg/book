@@ -41,7 +41,7 @@ To perform a case-insensitive search for strings use `/i`:
     Searching 8 bytes from 0x00400238 to 0x0040488f: 53 74 61 6c 6c 6d 61 6e
     [# ]hits: 004138 < 0x0040488f  hits = 0
 
-It is possible to specify hexadecimal escape sequences in the search string by prepending them with "\x":
+It is possible to specify hexadecimal escape sequences in the search string by prepending them with `\x`:
 
     [0x00000000]> / \x7FELF
 
