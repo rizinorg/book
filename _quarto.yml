@@ -192,3 +192,9 @@ book:
       - part: "Acknowledgments"
         chapters:
           - src/credits/credits.md
+
+format:
+  html:
+    theme:
+      light: default
+      dark: darkly
