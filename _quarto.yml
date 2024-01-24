@@ -195,6 +195,17 @@ book:
 
 format:
   html:
+    highlight-style: github
     theme:
       light: default
       dark: darkly
+  epub:
+    highlight-style: github
+    cover-image: cover.jpg
+  pdf:
+    highlight-style: github
+    documentclass: book
+    geometry:
+      - top=30mm
+      - left=20mm
+      - heightrounded
