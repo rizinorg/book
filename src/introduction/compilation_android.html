@@ -8,7 +8,7 @@
 
 <meta name="description" content="This book focuses on the Rizin reverse engineering framework">
 
-<title>The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework - 2&nbsp; Getting Rizin</title>
+<title>The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework - 5&nbsp; Android</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,8 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../src/first_steps/compilation_portability.html" rel="next">
-<link href="../../src/first_steps/overview.html" rel="prev">
+<link href="../../src/first_steps/intro.html" rel="next">
+<link href="../../src/introduction/windows_compilation.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -78,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/first_steps/overview.html">Introduction</a></li><li class="breadcrumb-item"><a href="../../src/first_steps/getting_rizin.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Rizin</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/introduction/overview.html">Introduction</a></li><li class="breadcrumb-item"><a href="../../src/introduction/compilation_android.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Android</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -152,31 +152,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/overview.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Rizin Framework</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/getting_rizin.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../src/introduction/getting_rizin.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Rizin</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/compilation_portability.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/compilation_portability.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Compilation and Portability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/windows_compilation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/windows_compilation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Windows</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/compilation_android.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/compilation_android.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Android</span></span></a>
   </div>
 </li>
@@ -547,7 +547,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/signatures/signatures.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/analysis/signatures.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Signatures</span></span></a>
   </div>
 </li>
@@ -682,19 +682,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/remoting_capabilities.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/remote_access/remoting_capabilities.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/remote_gdb.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/remote_access/remote_gdb.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">Debugging with gdbserver</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/windbg.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/remote_access/windbg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title">WinDBG Kernel-mode Debugging (KD)</span></span></a>
   </div>
 </li>
@@ -1115,7 +1115,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/credits/credits.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/acknowledgments/credits.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">134</span>&nbsp; <span class="chapter-title">Authors &amp; Contributors</span></span></a>
   </div>
 </li>
@@ -1127,14 +1127,21 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites"><span class="header-section-number">5.0.1</span> Prerequisites</a></li>
+  <li><a href="#step-by-step" id="toc-step-by-step" class="nav-link" data-scroll-target="#step-by-step"><span class="header-section-number">5.0.2</span> Step-by-step</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rizinorg/book/edit/master/src/introduction/compilation_android.md" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Rizin</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Android</span></h1>
 </div>
 
 
@@ -1149,10 +1156,73 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Binary packages are available for most common platforms (e.g., Windows, MacOS, Linux). However, you can still compile Rizin yourself for many other architectures/operating systems.</p>
-<p>Please have a look at the <a href="https://github.com/rizinorg/rizin/releases">releases</a> tab of Rizin’s GitHub repository for the binary packages. See <a href="https://github.com/rizinorg/rizin/blob/dev/BUILDING.md">BUILDING.md</a> for more detailed instructions on how to build the tool.</p>
+<p>Rizin can be cross-compiled for other architectures/systems as well, like Android.</p>
+<section id="prerequisites" class="level3" data-number="5.0.1">
+<h3 data-number="5.0.1" class="anchored" data-anchor-id="prerequisites"><span class="header-section-number">5.0.1</span> Prerequisites</h3>
+<ul>
+<li>Python 3</li>
+<li>Meson</li>
+<li>Ninja</li>
+<li>Git</li>
+<li>Android NDK</li>
+</ul>
+</section>
+<section id="step-by-step" class="level3" data-number="5.0.2">
+<h3 data-number="5.0.2" class="anchored" data-anchor-id="step-by-step"><span class="header-section-number">5.0.2</span> Step-by-step</h3>
+<section id="download-and-extract-the-android-ndk" class="level4" data-number="5.0.2.1">
+<h4 data-number="5.0.2.1" class="anchored" data-anchor-id="download-and-extract-the-android-ndk"><span class="header-section-number">5.0.2.1</span> Download and extract the Android NDK</h4>
+<p>Download the Android NDK from the <a href="https://developer.android.com/ndk">official site</a> and extract it somewhere on your system (e.g.&nbsp;<code>/tmp/android-ndk</code>)</p>
+</section>
+<section id="meson" class="level4" data-number="5.0.2.2">
+<h4 data-number="5.0.2.2" class="anchored" data-anchor-id="meson"><span class="header-section-number">5.0.2.2</span> Meson</h4>
+<p>See also <a href="https://github.com/rizinorg/rizin/blob/dev/BUILDING.md#cross-compilation-for-android">BUILDING.md</a>.</p>
+<section id="create-a-cross-file-for-meson" class="level5" data-number="5.0.2.2.1">
+<h5 data-number="5.0.2.2.1" class="anchored" data-anchor-id="create-a-cross-file-for-meson"><span class="header-section-number">5.0.2.2.1</span> Create a cross-file for meson</h5>
+<p>Meson needs a configuration file that describes the cross compilation environment (e.g.&nbsp;<code>meson-android.ini</code>). You can adjust it as necessary, but something like the following should be a good starting point:</p>
+<pre><code>[binaries]
+c       = '/tmp/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android28-clang'
+cpp     = '/tmp/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android28-clang++'
+ar      = '/tmp/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android-ar'
+as      = '/tmp/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android-as'
+ranlib  = '/tmp/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android-ranlib'
+ld      = '/tmp/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android-ld'
+strip   = '/tmp/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android-strip'
+pkgconfig = 'false'
+
+[properties]
+sys_root = '/tmp/android-ndk/sysroot'
+
+[host_machine]
+system = 'android'
+cpu_family = 'arm'
+cpu = 'aarch64'
+endian = 'little'</code></pre>
+</section>
+<section id="compile-with-meson-ninja" class="level5" data-number="5.0.2.2.2">
+<h5 data-number="5.0.2.2.2" class="anchored" data-anchor-id="compile-with-meson-ninja"><span class="header-section-number">5.0.2.2.2</span> Compile with meson + ninja</h5>
+<p>Now setup the build directory with meson as usual:</p>
+<pre><code>$ meson --default-library static -Dstatic_runtime=true --prefix=/tmp/android-dir -Dblob=true build --cross-file ./meson-android.ini</code></pre>
+<p>A bit of explanation about all the options: * <code>--default-library static -Dstatic_runtime=true</code>: this ensure that libraries and binaries are statically compiled, so you do not need to properly set LD_<em> environment variables in your Android environment to make it find the right libraries. Binaries have everything they need inside. </em> <code>-Dblob=true</code>: it tells meson to compile just one binary with all the needed code for running <code>rizin</code>, <code>rz-bin</code>, <code>rz-asm</code>, etc. and creates symbolic links to those names. This avoids creating many statically compiled large binaries and just create one that provides all features. You will still have <code>rz-bin</code>, <code>rz-asm</code>, <code>rz-ax</code>, etc. but they are just symlinks to <code>rizin</code>. * <code>--cross-file ./meson-android.ini</code>: it describes how to compile rizin for Android</p>
+<p>Then compile and install the project:</p>
+<pre><code>$ ninja -C build
+$ ninja -C build install</code></pre>
+</section>
+<section id="move-files-to-your-android-device-and-enjoy" class="level5" data-number="5.0.2.2.3">
+<h5 data-number="5.0.2.2.3" class="anchored" data-anchor-id="move-files-to-your-android-device-and-enjoy"><span class="header-section-number">5.0.2.2.3</span> Move files to your android device and enjoy</h5>
+<p>At this point you can copy the generated files in /tmp/android-dir to your Android device and running rizin from it. For example:</p>
+<pre><code>$ cd /tmp &amp;&amp; tar -cvf rizin-android.tar.gz android-dir
+$ adb push rizin-android.tar.gz /data/local/tmp
+$ adb shell
+DEVICE:/ $ cd /data/local/tmp
+DEVICE:/data/local/tmp $ tar xvf rizin-android.tar.gz
+DEVICE:/data/local/tmp $ ./android-dir/bin/rizin
+Usage: rizin [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i file]
+          [-s addr] [-B baddr] [-m maddr] [-c cmd] [-e k=v] file|pid|-|--|=</code></pre>
 
 
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1505,13 +1575,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../src/first_steps/overview.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Rizin Framework</span></span>
+      <a href="../../src/introduction/windows_compilation.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Windows</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../src/first_steps/compilation_portability.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Compilation and Portability</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../src/first_steps/intro.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Basic Rizin Usage</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1519,4 +1589,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rizinorg/book/edit/master/src/first_steps/getting_rizin.md" class="toc-action">Edit this page</a></p></div></div></div></div></footer></body></html>
+</body></html>

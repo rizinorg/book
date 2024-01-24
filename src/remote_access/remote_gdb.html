@@ -8,7 +8,7 @@
 
 <meta name="description" content="This book focuses on the Rizin reverse engineering framework">
 
-<title>The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework - 134&nbsp; Authors &amp; Contributors</title>
+<title>The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework - 72&nbsp; Debugging with gdbserver</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../src/refcard/intro.html" rel="prev">
+<link href="../../src/remote_access/windbg.html" rel="next">
+<link href="../../src/remote_access/remoting_capabilities.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -77,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/credits/credits.html">Acknowledgments</a></li><li class="breadcrumb-item"><a href="../../src/credits/credits.html"><span class="chapter-number">134</span>&nbsp; <span class="chapter-title">Authors &amp; Contributors</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/remote_access/remoting_capabilities.html">Remote Access</a></li><li class="breadcrumb-item"><a href="../../src/remote_access/remote_gdb.html"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">Debugging with gdbserver</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -151,31 +152,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/overview.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Rizin Framework</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/getting_rizin.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/getting_rizin.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Rizin</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/compilation_portability.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/compilation_portability.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Compilation and Portability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/windows_compilation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/windows_compilation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Windows</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/compilation_android.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/compilation_android.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Android</span></span></a>
   </div>
 </li>
@@ -546,7 +547,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/signatures/signatures.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/analysis/signatures.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Signatures</span></span></a>
   </div>
 </li>
@@ -681,19 +682,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/remoting_capabilities.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/remote_access/remoting_capabilities.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/remote_gdb.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/remote_access/remote_gdb.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">Debugging with gdbserver</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/windbg.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/remote_access/windbg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title">WinDBG Kernel-mode Debugging (KD)</span></span></a>
   </div>
 </li>
@@ -1114,7 +1115,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/credits/credits.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../src/acknowledgments/credits.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">134</span>&nbsp; <span class="chapter-title">Authors &amp; Contributors</span></span></a>
   </div>
 </li>
@@ -1133,7 +1134,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">134</span>&nbsp; <span class="chapter-title">Authors &amp; Contributors</span></h1>
+<h1 class="title"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">Debugging with gdbserver</span></h1>
 </div>
 
 
@@ -1148,8 +1149,58 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>The creation of this book owes much to the extensive list of contributors who have played a crucial role in reviewing, writing, and reporting bugs within the Rizin project and this book. Heartfelt thanks to everyone who has been actively engaged in the development of the book:</p>
-<p>7flying 8dcc Adrian Studer aemmitt-ns Agustín Dall’Alba Ahmed Mohamed Abd El-MAwgood Akshay Krishnan R Alba Mendez Ali Raheem Andrew Hoog Anton Kochkov Antonio Sánchez aoighost Aswin C Austin Hartzheim bemojo2021 Bob131 Braiden Kindt chucklesb ckanibal condret Connor Armand Du Plooy Cyrill Leutwiler David Tomaschik Deepak Chethan Dennis Goodlett Dennis van der Schagt Dhruv Maroo Dhruva Gole dodococo dreamist DZ_ruyk Eric Fangrui Song Florian Best Francesco Tamagni FreeArtMan Gerardo García Peña Giuseppe gogo2464 GPery grepharder Grigory Rechistov GustavoLCR h0pp hdznrrd Heersin hmht Hui Peng Itay Cohen ivan tkachenko izhuer Jacob Rosenthal Jeffrey Crowell John jones martin Judge Dredd Jupiter jvoisin Kali Kaneko karliss Kevin Grandemange Kevin Laeufer Khairul Azhar Kasmiran kij krmpotic Lev Aronsky Liumeo lowsec Luca Di Bartolomeo Lukas Dresel madblobfish Maijin Martin Brunner Masterfox meowmeowxw Michael Scherer Mike mrmacete ms111ds muzlightbeer Nikita Abdullin officialcjunior pancake Paul I Paweł Łukasik Peter C polym (Tim) puddl3glum Pulak Malhotra Rafael Rivera ralexe RandomLive ratijas Razvan Ioan Alexe Ren Kimura Reto Schneider Riccardo Schirone Roman Valls Guimera Rot127 Ryan Geary Sandra Bino SchumBlubBlub seanachao sghctoma shakreiner sivaramaaa SkUaTeR Solomon Sophie Chen Srimanta Barua Surendrajat Sushant Dinesh taiyu TDKPS Thanat0s tick Tomasz Różański Tomáš Golembiovský Tristan Vanellope Vex Woo Vorlent wargio xarkes XYlearn yossizap Yuri Slobodyanyuk Zi Fan Óscar Carrasco</p>
+<p>rizin allows remote debugging over the gdb remote protocol. So you can run a gdbserver and connect to it with rizin for remote debugging. The syntax for connecting is:</p>
+<pre><code>$ rizin -d gdb://&lt;host&gt;:&lt;port&gt;</code></pre>
+<p>Note that the following command does the same, rizin will use the debug plugin specified by the uri if found.</p>
+<pre><code>$ rizin -D gdb gdb://&lt;host&gt;:&lt;port&gt;</code></pre>
+<p>The debug plugin can be changed at runtime using the dL or Ld commands.</p>
+<p>Or if the gdbserver is running in extended mode, you can attach to a process on the host with:</p>
+<pre><code>$ rizin -d gdb://&lt;host&gt;:&lt;port&gt;/&lt;pid&gt;</code></pre>
+<p>It is also possible to start debugging after analyzing a file using the <code>doof</code> command which rebases the current session’s data after opening gdb</p>
+<pre><code>[0x00404870]&gt; doof gdb://&lt;host&gt;:&lt;port&gt;/&lt;pid&gt;</code></pre>
+<p>After connecting, you can use the standard rizin debug commands as normal.</p>
+<p>rizin does not yet load symbols from gdbserver, so it needs the binary to be locally present to load symbols from it. In case symbols are not loaded even if the binary is present, you can try specifying the path with <code>e dbg.exe.path</code>:</p>
+<pre><code>$ rizin -e dbg.exe.path=&lt;path&gt; -d gdb://&lt;host&gt;:&lt;port&gt;</code></pre>
+<p>If symbols are loaded at an incorrect base address, you can try specifying the base address too with <code>e bin.baddr</code>:</p>
+<pre><code>$ rizin -e bin.baddr=&lt;baddr&gt; -e dbg.exe.path=&lt;path&gt; -d gdb://&lt;host&gt;:&lt;port&gt;</code></pre>
+<p>Usually the gdbserver reports the maximum packet size it supports. Otherwise, rizin resorts to sensible defaults. But you can specify the maximum packet size with the environment variable <code>R2_GDB_PKTSZ</code>. You can also check and set the max packet size during a session with the IO system, <code>R!</code>.</p>
+<pre><code>$ export R2_GDB_PKTSZ=512
+$ rizin -d gdb://&lt;host&gt;:&lt;port&gt;
+= attach &lt;pid&gt; &lt;tid&gt;
+Assuming filepath &lt;path/to/exe&gt;
+[0x7ff659d9fcc0]&gt; R!pktsz
+packet size: 512 bytes
+[0x7ff659d9fcc0]&gt; R!pktsz 64
+[0x7ff659d9fcc0]&gt; R!pktsz
+packet size: 64 bytes</code></pre>
+<p>The gdb IO system provides useful commands which might not fit into any standard rizin commands. You can get a list of these commands with <code>R!?</code>. (Remember, <code>R!</code> accesses the underlying IO plugin’s <code>system()</code>).</p>
+<pre><code>[0x7ff659d9fcc0]&gt; R!?
+Usage: R!cmd args
+ R!pid             - show targeted pid
+ R!pkt s           - send packet 's'
+ R!monitor cmd     - hex-encode monitor command and pass to target interpreter
+ R!rd              - show reverse debugging availability
+ R!dsb             - step backwards
+ R!dcb             - continue backwards
+ R!detach [pid]    - detach from remote/detach specific pid
+ R!inv.reg         - invalidate reg cache
+ R!pktsz           - get max packet size used
+ R!pktsz bytes     - set max. packet size as 'bytes' bytes
+ R!exec_file [pid] - get file which was executed for current/specified pid</code></pre>
+<p>Note that <code>R!dsb</code> and <code>R!dcb</code> are only available in special gdbserver implementations such as <a href="https://github.com/mozilla/rr">Mozilla’s rr</a>, the default gdbserver doesn’t include remote reverse debugging support. Use <code>R!rd</code> to print the currently available reverse debugging capabilities.</p>
+<p>If you are interested in debugging rizin’s interaction with gdbserver you can use <code>R!monitor set remote-debug 1</code> to turn on logging of gdb’s remote protocol packets in gdbserver’s console and <code>R!monitor set debug 1</code> to show general debug messages from gdbserver in it’s console.</p>
+<p>rizin also provides its own gdbserver implementation:</p>
+<pre><code>$ rizin =
+[0x00000000]&gt; Rg?
+|Usage:  =[g] [...] # gdb server
+| gdbserver:
+| Rg port file [args]   listen on 'port' debugging 'file' using gdbserver
+| Rg! port file [args]  same as above, but debug protocol messages (like gdbserver --remote-debug)</code></pre>
+<p>So you can start it as:</p>
+<pre><code>$ rizin =
+[0x00000000]&gt; Rg 8000 /bin/rizin -</code></pre>
+<p>And then connect to it like you would to any gdbserver. For example, with rizin:</p>
+<pre><code>$ rizin -d gdb://localhost:8000</code></pre>
 
 
 
@@ -1504,15 +1555,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../src/refcard/intro.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">133</span>&nbsp; <span class="chapter-title">Rizin Reference Card</span></span>
+      <a href="../../src/remote_access/remoting_capabilities.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../../src/remote_access/windbg.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title">WinDBG Kernel-mode Debugging (KD)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rizinorg/book/edit/master/src/credits/credits.md" class="toc-action">Edit this page</a></p></div></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rizinorg/book/edit/master/src/remote_access/remote_gdb.md" class="toc-action">Edit this page</a></p></div></div></div></div></footer></body></html>

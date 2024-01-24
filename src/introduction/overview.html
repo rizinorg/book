@@ -8,7 +8,7 @@
 
 <meta name="description" content="This book focuses on the Rizin reverse engineering framework">
 
-<title>The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework - 54&nbsp; Signatures</title>
+<title>The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework - 1&nbsp; The Rizin Framework</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,8 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../src/analysis/graphs.html" rel="next">
-<link href="../../src/analysis/symbols.html" rel="prev">
+<link href="../../src/introduction/getting_rizin.html" rel="next">
+<link href="../../index.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -78,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/analysis/intro.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../src/signatures/signatures.html"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Signatures</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/introduction/overview.html">Introduction</a></li><li class="breadcrumb-item"><a href="../../src/introduction/overview.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Rizin Framework</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -152,31 +152,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/overview.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/overview.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Rizin Framework</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/getting_rizin.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/getting_rizin.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Rizin</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/compilation_portability.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/compilation_portability.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Compilation and Portability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/windows_compilation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/windows_compilation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Windows</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/compilation_android.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/compilation_android.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Android</span></span></a>
   </div>
 </li>
@@ -547,7 +547,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/signatures/signatures.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../src/analysis/signatures.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Signatures</span></span></a>
   </div>
 </li>
@@ -682,19 +682,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/remoting_capabilities.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/remote_access/remoting_capabilities.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/remote_gdb.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/remote_access/remote_gdb.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">Debugging with gdbserver</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/windbg.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/remote_access/windbg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title">WinDBG Kernel-mode Debugging (KD)</span></span></a>
   </div>
 </li>
@@ -1115,7 +1115,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/credits/credits.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/acknowledgments/credits.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">134</span>&nbsp; <span class="chapter-title">Authors &amp; Contributors</span></span></a>
   </div>
 </li>
@@ -1127,14 +1127,29 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#rizin" id="toc-rizin" class="nav-link active" data-scroll-target="#rizin"><span class="header-section-number">1.0.1</span> rizin</a></li>
+  <li><a href="#rz-bin" id="toc-rz-bin" class="nav-link" data-scroll-target="#rz-bin"><span class="header-section-number">1.0.2</span> rz-bin</a></li>
+  <li><a href="#rz-asm" id="toc-rz-asm" class="nav-link" data-scroll-target="#rz-asm"><span class="header-section-number">1.0.3</span> rz-asm</a></li>
+  <li><a href="#rz-hash" id="toc-rz-hash" class="nav-link" data-scroll-target="#rz-hash"><span class="header-section-number">1.0.4</span> rz-hash</a></li>
+  <li><a href="#examples-2" id="toc-examples-2" class="nav-link" data-scroll-target="#examples-2"><span class="header-section-number">1.0.5</span> Examples</a></li>
+  <li><a href="#rz-diff" id="toc-rz-diff" class="nav-link" data-scroll-target="#rz-diff"><span class="header-section-number">1.0.6</span> rz-diff</a></li>
+  <li><a href="#rz-find" id="toc-rz-find" class="nav-link" data-scroll-target="#rz-find"><span class="header-section-number">1.0.7</span> rz-find</a></li>
+  <li><a href="#rz-gg" id="toc-rz-gg" class="nav-link" data-scroll-target="#rz-gg"><span class="header-section-number">1.0.8</span> rz-gg</a></li>
+  <li><a href="#rz-run" id="toc-rz-run" class="nav-link" data-scroll-target="#rz-run"><span class="header-section-number">1.0.9</span> rz-run</a></li>
+  <li><a href="#rz-ax" id="toc-rz-ax" class="nav-link" data-scroll-target="#rz-ax"><span class="header-section-number">1.0.10</span> rz-ax</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rizinorg/book/edit/master/src/introduction/overview.md" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Signatures</span></h1>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Rizin Framework</span></h1>
 </div>
 
 
@@ -1149,132 +1164,178 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Rizin supports the <a href="https://hex-rays.com/products/ida/tech/flirt/">HexRays FLIRT</a> signature format which allows you to create, parse or apply the signatures on the fly. Rizin is also capable of applying the signatures automatically, when the <a href="https://github.com/rizinorg/sigdb">sigdb</a> is defined by the user via the variable <code>flirt.sigdb.path</code>. All the applied signatures are stored in the <code>flirt</code> flag space.</p>
-<p>The HexRays FLIRT format is made by two formats:</p>
-<ul>
-<li><code>.pat</code> text string format</li>
-<li><code>.sig</code> compressed format which includes the architecture type used to generate the signature</li>
-</ul>
-<p>Signature commands are available under the <code>zf</code> command namespace:</p>
-<pre><code>[0x00000000]&gt; zf?
-Usage: zf&lt;cds&gt;   # Manage FLIRT signatures
-| zfc &lt;filename&gt; # Create a FLIRT file (.pac or .sig)
-| zfd &lt;filename&gt; # Open a FLIRT file (.pac or .sig) and dumps its contents
-| zfs &lt;filename&gt; # Open a FLIRT file (.pac or .sig) and tries to apply the signatures to the loaded binary</code></pre>
-<p>To apply a signature file manually or a folder of signatures, you need to call <code>zfs</code></p>
-<pre><code>$ rizin /path/to/binary/with/stripped.elf
-[0x000051c0]&gt; aaa
-[0x000051c0]&gt; zfs signature.sig # relative or absolutes paths are accepted
-Found 206 FLIRT signatures via signature.sig
-[0x000051c0]&gt;</code></pre>
-<p>To create signature you need to analyze the binary first, then you can create it by calling <code>zfc</code>. You can modify the behaviour of the signature creation via the following options:</p>
-<ul>
-<li><code>flirt.node.optimize</code> - FLIRT optimization option when creating a signature file (none: 0, normal: 1, smallest: 2), <code>default: 2</code></li>
-<li><code>flirt.sig.deflate</code> - enables/disables FLIRT zlib compression when creating a signature file (available only for .sig files), <code>default: true</code></li>
-<li><code>flirt.sig.file</code> - FLIRT file list (comma separated) for sig format (msdos, win, os2, netware, unix, other, all, none), <code>default: all</code></li>
-<li><code>flirt.sig.library</code> - FLIRT library name for sig format, <code>default: Built with rizin x.y.z</code></li>
-<li><code>flirt.sig.os</code> - FLIRT operating system list (comma separated) for sig format (aixar, aout, ar, bin, coff, dos:com, dos:com:old, dos:exe, dos:exe:old, dosdrv, elf, intelhex, le, loader, lx, moshex, ne, nlm, omf, omflib, pe, pilot, srec, w32run, zip, all, none), <code>default: all</code></li>
-<li><code>flirt.sig.version</code> - FLIRT version for sig format, <code>default: 10</code></li>
-</ul>
-<p>Example of signature creation with <code>.sig</code> format:</p>
-<pre><code>$ rizin /path/to/binary/with/symbols.elf
-[0x000051c0]&gt; aa
-[0x000051c0]&gt; # setting library name
-[0x000051c0]&gt; e flirt.sig.library="My Awesome Signature"
-[0x000051c0]&gt; # creating signature
-[0x000051c0]&gt; zfc signature.sig # relative or absolutes paths are accepted
-707 FLIRT signatures were written in 'signature.sig'
-[0x000051c0]&gt;</code></pre>
-<p>Example of signature creation with <code>.pat</code> format:</p>
-<pre><code>$ rizin /path/to/binary/with/symbols.elf
-[0x000051c0]&gt; aa
-[0x000051c0]&gt; # setting internal node optimization to none
-[0x000051c0]&gt; e flirt.node.optimize=0
-[0x000051c0]&gt; # creating signature
-[0x000051c0]&gt; zfc signature.pat # relative or absolutes paths are accepted
-707 FLIRT signatures were written in 'signature.pat'
-[0x000051c0]&gt;</code></pre>
-<p>You can print the contents of a FLIRT signature file via <code>zfd</code></p>
-<pre><code>[0x000051c0]&gt; zfd signature.sig
-SIG format
-Signature:    Built with rizin 0.4.0-git, 8 modules
-Version:      1
-Architecture: 0 (x86)
-F30F:
- 1EFA:
-  31ED4989D15E4889E24883E4F050544C............48..........:
-   0. 09 CDDC 002E 0000:entry0 (REF )
-  41574C............41564989D641554989F541544189FC5548....:
-   0. 45 7595 0065 0000:__libc_csu_init (REF )
-  4883EC0848:
-   83C408C3......................................:
-    0. 00 0000 000D 0000:_fini (REF )
-   ............4885C074..FFD04883C408C3..........:
-    0. 00 0000 001B 0000:_init (REF )
-  80............75..5548..............4889E574..48........:
-   0. 21 300E 0041 0000:__do_global_dtors_aux (REF )
-  C3......................................................:
-   0. 00 0000 0005 0000:__libc_csu_fini (REF )
-  E9......................................................:
-   0. 00 0000 0009 0000:entry.init0 (REF )
- 6F866E0100004889F84189C80F1187F8130000F30F6F8E7E0100000F118F:
-  0. A7 A662 00C8 0000:Curl_persistconninfo (REF )
-[0x000051c0]&gt;</code></pre>
-<p>It is also possible to use <code>rz-sign</code> to create (automatically) or to convert or to dump FLIRT signatures:</p>
-<pre><code>$ rz-sign -h
-Usage: rz-sign [options] [file]
- -h                          this help message
- -a [-a]                     add extra 'a' to analysis command (available only with -o option)
- -e [k=v]                    set an evaluable config variable (available only with -o option)
- -c [output.pat] [input.sig] parses a FLIRT signature and converts it to its other format
- -o [output.sig] [input.bin] performs an analysis on the binary and generates the FLIRT signature.
- -d [flirt.sig]              parses a FLIRT signature and dump its content
- -q                          quiet mode
- -v                          show version information
-Examples:
-  rz-sign -d signature.sig
-  rz-sign -c new_signature.pat old_signature.sig
-  rz-sign -o libc.sig libc.so.6
+<p>Rizin is a free and open-source reverse engineering framework that delivers a comprehensive binary analysis experience. It focuses on usability, stability, and functional features, striving to create a welcoming environment for developers and users.</p>
+<p>At its core, Rizin consists of a set of small command-line utilities. These utilities can be used in tandem with Rizin or independently, each serving specific purposes. While this chapter provides a brief introduction to these tools, dedicated sections for each tool can be found at the end of this book for more detailed information.</p>
+<section id="rizin" class="level3" data-number="1.0.1">
+<h3 data-number="1.0.1" class="anchored" data-anchor-id="rizin"><span class="header-section-number">1.0.1</span> rizin</h3>
+<p>The primary command line tool within the framework is <code>rizin</code>. It encompasses various features such as a disassembler, hexadecimal editor, and debugger. Rizin enables you to treat multiple input/output sources, such as plain text files, executables, kernel drivers, processes, etc., as if they were straightforward text files.</p>
+<p>It incorporates a sophisticated command line interface for navigating through the accessed resource, analyzing data, disassembling, patching binaries, comparing data, searching, replacing, and visualizing. Furthermore, scripting capabilities are available with a range of languages, including Python, Haskell, OCaml, JavaScript, and others.</p>
+</section>
+<section id="rz-bin" class="level3" data-number="1.0.2">
+<h3 data-number="1.0.2" class="anchored" data-anchor-id="rz-bin"><span class="header-section-number">1.0.2</span> rz-bin</h3>
+<p>The <code>rz-bin</code> utility serves the purpose of extracting information from executable binaries, encompassing formats like ELF, PE, Java CLASS, Mach-O, and any other format supported by rizin plugins. Within the core functionality, <code>rz-bin</code> plays a crucial role in obtaining data such as exported symbols, imports, file details, cross references, library dependencies, and sections.</p>
+<section id="examples" class="level4" data-number="1.0.2.1">
+<h4 data-number="1.0.2.1" class="anchored" data-anchor-id="examples"><span class="header-section-number">1.0.2.1</span> Examples</h4>
+<pre><code>$ rz-bin -I unknown.bin
+[Info]
+arch     x86
+cpu      N/A
+baddr    0x00000000
+binsz    0x000213b3
+bintype  elf
+bits     64
+class    ELF64
+compiler GCC: (GNU) 13.2.1 20230801
+dbg_file N/A
+endian   LE
+hdr.csum N/A
+guid     N/A
+intrp    /lib64/ld-linux-x86-64.so.2
+laddr    0x00000000
+lang     c
+machine  AMD x86-64 architecture
+maxopsz  16
+minopsz  1
+os       linux
+cc       N/A
+pcalign  0
+relro    full
+rpath    NONE
+subsys   linux
+stripped true
+crypto   false
+havecode true
+va       true
+sanitiz  false
+static   false
+linenum  false
+lsyms    false
+canary   true
+PIE      true
+RELROCS  false
+NX       true</code></pre>
+</section>
+</section>
+<section id="rz-asm" class="level3" data-number="1.0.3">
+<h3 data-number="1.0.3" class="anchored" data-anchor-id="rz-asm"><span class="header-section-number">1.0.3</span> rz-asm</h3>
+<p>The <code>rz-asm</code> tool operates as a command line assembler and disassembler, catering to various architectures such as Intel x86 and x86-64, MIPS, ARM, PowerPC, Java, and numerous others.</p>
+<section id="examples-1" class="level4" data-number="1.0.3.1">
+<h4 data-number="1.0.3.1" class="anchored" data-anchor-id="examples-1"><span class="header-section-number">1.0.3.1</span> Examples</h4>
+<pre><code>$ rz-asm -a java 'nop'
+00</code></pre>
+<pre><code>$ rz-asm -a x86 -d '90'
+nop</code></pre>
+<pre><code>$ rz-asm -a x86 -b 32 'mov eax, 33'
+b821000000</code></pre>
+<pre><code>$ echo 'push eax;nop;nop' | rz-asm -f -
+509090</code></pre>
+</section>
+</section>
+<section id="rz-hash" class="level3" data-number="1.0.4">
+<h3 data-number="1.0.4" class="anchored" data-anchor-id="rz-hash"><span class="header-section-number">1.0.4</span> rz-hash</h3>
+<p><code>rz-hash</code> stands as an implementation of a block-based hash tool. It offers support for a range of algorithms, including <code>MD4</code>, <code>MD5</code>, <code>CRC</code>, <code>SHA1</code>, <code>SHA256</code>, and more, accommodating both small text strings and large files. Its utility extends to checking the integrity or monitoring changes in substantial files and memory dumps.</p>
+</section>
+<section id="examples-2" class="level3" data-number="1.0.5">
+<h3 data-number="1.0.5" class="anchored" data-anchor-id="examples-2"><span class="header-section-number">1.0.5</span> Examples</h3>
+<pre><code>$ rz-hash file.bin
+file.bin: 0x00000000-0x00000007 sha256: 887cfbd0d44aaff69f7bdbedebd282ec96191cce9d7fa7336298a18efc3c7a5a</code></pre>
+<pre><code>$ rz-hash -a md5 file.bin
+file.bin: 0x00000000-0x00000007 md5: d1833805515fc34b46c2b9de553f599d</code></pre>
+</section>
+<section id="rz-diff" class="level3" data-number="1.0.6">
+<h3 data-number="1.0.6" class="anchored" data-anchor-id="rz-diff"><span class="header-section-number">1.0.6</span> rz-diff</h3>
+<p>The <code>rz-diff</code> utility serves as a binary diffing tool, implementing various algorithms. It facilitates byte-level or delta diffing for binary files and code-analysis diffing to identify alterations in fundamental code blocks derived from the rizin code analysis.</p>
+<p>This tool optimally leverages multi-threading to enhance performance, particularly on CPU-intensive and time-consuming tasks.</p>
+</section>
+<section id="rz-find" class="level3" data-number="1.0.7">
+<h3 data-number="1.0.7" class="anchored" data-anchor-id="rz-find"><span class="header-section-number">1.0.7</span> rz-find</h3>
+<p><code>rz-find</code> operates as a program designed to locate byte patterns in files. It provides the capability to search for various types of signatures, including strings in different encodings such as ASCII, UTF-8, wide, and more, across multiple encoding types.</p>
+</section>
+<section id="rz-gg" class="level3" data-number="1.0.8">
+<h3 data-number="1.0.8" class="anchored" data-anchor-id="rz-gg"><span class="header-section-number">1.0.8</span> rz-gg</h3>
+<p><code>rz-gg</code> is a tool designed to compile programs written in a simple high-level language into compact binaries suitable for x86, x86-64, and ARM architectures.</p>
+<section id="examples-3" class="level4" data-number="1.0.8.1">
+<h4 data-number="1.0.8.1" class="anchored" data-anchor-id="examples-3"><span class="header-section-number">1.0.8.1</span> Examples</h4>
+<pre><code>$ cat hi.r
+/* hello world in r_egg */
+write@syscall(4); //x64 write@syscall(1);
+exit@syscall(1); //x64 exit@syscall(60);
 
-$ rz-sign -e "flirt.sig.library=My Awesome Signature" -o signature.sig /path/to/binary/with/symbols.elf</code></pre>
-<p>If instead you want to manually select the FLIRT signature file from <code>sigdb</code> you have to use <code>aaF</code> commands:</p>
-<pre><code>[0x00409c70]&gt; pdf
-            ; CALL XREF from main @ 0x4017c1
-/ fcn.00409c70 (int64_t arg1, int64_t arg2, int64_t arg3, int64_t arg4, int64_t arg5, int64_t arg6, int64_t arg7, int64_t arg8, int64_t arg9, int64_t arg10, int64_t arg11, int64_t arg_e0h);
-|           ; var int64_t var_4h_2 @ rsp+0x4
-|           ; var int64_t var_8h_2 @ rsp+0x8
-|           ; var int64_t var_10h_2 @ rsp+0x10
-|           ; var int64_t var_18h_2 @ rsp+0x18
-|           ; var int64_t var_20h_2 @ rsp+0x20
-|           ; var int64_t var_30h_2 @ rsp+0x30
-|           ; var int64_t var_38h_2 @ rsp+0x38
-|           ; var int64_t var_40h_2 @ rsp+0x40
-[0x00409c70]&gt; e flirt.sigdb.path=/path/to/sigdb
-[0x00409c70]&gt; aaF?
-Usage: aaF  [l] # applies signatures from sigdb automatically
-| aaF &lt;filter&gt;  applies signatures from sigdb automatically
-| aaFl          lists all the signatures available in sigdb
-[0x00409c70]&gt; aaFl~gcc
-elf/x86/64/ubuntu-libgcc-10.sig
-elf/x86/64/ubuntu-libgcc-11.sig
-elf/x86/64/ubuntu-libgcc-7.sig
-elf/x86/64/ubuntu-libgcc-8.sig
-[0x00409c70]&gt; aaF ubuntu-libgcc
-Applying elf/x86/64/ubuntu-libgcc-10.sig signature file
-Applying elf/x86/64/ubuntu-libgcc-11.sig signature file
-Applying elf/x86/64/ubuntu-libgcc-7.sig signature file
-Applying elf/x86/64/ubuntu-libgcc-8.sig signature file
-[0x00409c70]&gt; pdf
-            ; CALL XREF from main @ 0x4017c1
-            ;-- fcn.00409c70:
-/ flirt.printf (int64_t arg1, int64_t arg2, int64_t arg3, int64_t arg4, int64_t arg5, int64_t arg6, int64_t arg7, int64_t arg8, int64_t arg9, int64_t arg10, int64_t arg11, int64_t arg_e0h);
-|           ; var int64_t var_4h @ rsp+0xdc
-|           ; var int64_t var_8h @ rsp+0xe0
-|           ; var int64_t var_10h @ rsp+0xe8
-|           ; var int64_t var_18h @ rsp+0xf0
-| </code></pre>
+main@global(128) {
+ .var0 = "hi!\n";
+ write(1,.var0, 4);
+ exit(0);
+}
+$ rz-gg -O -F hi.r
+$ ./hi
+hi!
+
+$ cat hi.c
+main@global(0,6) {
+ write(1, "Hello0", 6);
+ exit(0);
+}
+$ rz-gg hi.c
+$ ./hi.c.bin
+Hello</code></pre>
+</section>
+</section>
+<section id="rz-run" class="level3" data-number="1.0.9">
+<h3 data-number="1.0.9" class="anchored" data-anchor-id="rz-run"><span class="header-section-number">1.0.9</span> rz-run</h3>
+<p><code>rz-run</code> functions as a launcher for executing programs within diverse environments, allowing customization of various aspects such as arguments, permissions, directories, and overridden default file descriptors. This utility proves beneficial for activities like solving crackmes, fuzzing, and running test suites.</p>
+<p>The versatility of <code>rz-run</code> is evident in its capabilities. Here are a few examples illustrating how it can be utilized:</p>
+<section id="sample-rz-run-script" class="level4" data-number="1.0.9.1">
+<h4 data-number="1.0.9.1" class="anchored" data-anchor-id="sample-rz-run-script"><span class="header-section-number">1.0.9.1</span> Sample rz-run script</h4>
+<pre><code>$ cat foo.rrz
+#!/usr/bin/rz-run
+program=./pp400
+arg0=10
+stdin=foo.txt
+chdir=/tmp
+#chroot=.
+./foo.rrz</code></pre>
+</section>
+<section id="connecting-a-program-with-a-socket" class="level4" data-number="1.0.9.2">
+<h4 data-number="1.0.9.2" class="anchored" data-anchor-id="connecting-a-program-with-a-socket"><span class="header-section-number">1.0.9.2</span> Connecting a program with a socket</h4>
+<pre><code>$ nc -l 9999
+$ rz-run program=/bin/ls connect=localhost:9999</code></pre>
+</section>
+<section id="debugging-a-program-redirecting-stdio-into-another-terminal" class="level4" data-number="1.0.9.3">
+<h4 data-number="1.0.9.3" class="anchored" data-anchor-id="debugging-a-program-redirecting-stdio-into-another-terminal"><span class="header-section-number">1.0.9.3</span> Debugging a program redirecting STDIO into another terminal</h4>
+<p>1 - Open a new terminal and type ‘tty’ to get a terminal name:</p>
+<pre><code>$ tty ; clear ; sleep 999999
+/dev/ttyS010</code></pre>
+<p>2 - Create a new file containing the following rz-run profile named foo.rrz:</p>
+<pre><code>#!/usr/bin/rz-run
+program=/bin/ls
+stdio=/dev/ttys010</code></pre>
+<p>3 - Launch the following rizin command:</p>
+<pre><code>rizin -r foo.rrz -d /bin/ls</code></pre>
+</section>
+</section>
+<section id="rz-ax" class="level3" data-number="1.0.10">
+<h3 data-number="1.0.10" class="anchored" data-anchor-id="rz-ax"><span class="header-section-number">1.0.10</span> rz-ax</h3>
+<p><code>rz-ax</code> stands out as a minimalistic mathematical expression evaluator tailored for the shell. Its utility extends to facilitating base conversions between floating-point values, hexadecimal representations, hexpair strings to ASCII, octal to integer, and more. Notably, it supports endianness settings and can serve as an interactive shell when invoked without arguments.</p>
+<section id="examples-4" class="level4" data-number="1.0.10.1">
+<h4 data-number="1.0.10.1" class="anchored" data-anchor-id="examples-4"><span class="header-section-number">1.0.10.1</span> Examples</h4>
+<pre><code>$ rz-ax 1337
+0x539
+
+$ rz-ax 0x400000
+4194304
+
+$ rz-ax -b 01111001
+y
+
+$ rz-ax -S rizin
+72616461726532
+
+$ rz-ax -s 617765736f6d65
+awesome</code></pre>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1627,13 +1688,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../src/analysis/symbols.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">53</span>&nbsp; <span class="chapter-title">Symbols</span></span>
+      <a href="../../index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Welcome</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../src/analysis/graphs.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">55</span>&nbsp; <span class="chapter-title">Graph commands</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../src/introduction/getting_rizin.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Rizin</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1641,4 +1702,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rizinorg/book/edit/master/src/signatures/signatures.md" class="toc-action">Edit this page</a></p></div></div></div></div></footer></body></html>
+</body></html>

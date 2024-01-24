@@ -8,7 +8,7 @@
 
 <meta name="description" content="This book focuses on the Rizin reverse engineering framework">
 
-<title>The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework - 4&nbsp; Windows</title>
+<title>The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework - 73&nbsp; WinDBG Kernel-mode Debugging (KD)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,8 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../src/first_steps/compilation_android.html" rel="next">
-<link href="../../src/first_steps/compilation_portability.html" rel="prev">
+<link href="../../src/tools/intro.html" rel="next">
+<link href="../../src/remote_access/remote_gdb.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -78,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/first_steps/overview.html">Introduction</a></li><li class="breadcrumb-item"><a href="../../src/first_steps/windows_compilation.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Windows</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/remote_access/remoting_capabilities.html">Remote Access</a></li><li class="breadcrumb-item"><a href="../../src/remote_access/windbg.html"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title">WinDBG Kernel-mode Debugging (KD)</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -152,31 +152,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/overview.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Rizin Framework</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/getting_rizin.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/getting_rizin.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Rizin</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/compilation_portability.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/compilation_portability.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Compilation and Portability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/windows_compilation.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../src/introduction/windows_compilation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Windows</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/compilation_android.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/compilation_android.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Android</span></span></a>
   </div>
 </li>
@@ -547,7 +547,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/signatures/signatures.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/analysis/signatures.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Signatures</span></span></a>
   </div>
 </li>
@@ -682,19 +682,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/remoting_capabilities.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/remote_access/remoting_capabilities.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/remote_gdb.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/remote_access/remote_gdb.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">Debugging with gdbserver</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/windbg.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/remote_access/windbg.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title">WinDBG Kernel-mode Debugging (KD)</span></span></a>
   </div>
 </li>
@@ -1115,7 +1115,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/credits/credits.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/acknowledgments/credits.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">134</span>&nbsp; <span class="chapter-title">Authors &amp; Contributors</span></span></a>
   </div>
 </li>
@@ -1131,17 +1131,30 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites"><span class="header-section-number">4.0.1</span> Prerequisites</a></li>
-  <li><a href="#step-by-step" id="toc-step-by-step" class="nav-link" data-scroll-target="#step-by-step"><span class="header-section-number">4.0.2</span> Step-by-Step</a></li>
+  <li><a href="#setting-up-kd-on-windows" id="toc-setting-up-kd-on-windows" class="nav-link active" data-scroll-target="#setting-up-kd-on-windows"><span class="header-section-number">73.1</span> Setting Up KD on Windows</a>
+  <ul class="collapse">
+  <li><a href="#serial-port" id="toc-serial-port" class="nav-link" data-scroll-target="#serial-port"><span class="header-section-number">73.1.1</span> Serial Port</a></li>
+  <li><a href="#network" id="toc-network" class="nav-link" data-scroll-target="#network"><span class="header-section-number">73.1.2</span> Network</a></li>
+  </ul></li>
+  <li><a href="#connecting-to-kd-interface-on-rizin" id="toc-connecting-to-kd-interface-on-rizin" class="nav-link" data-scroll-target="#connecting-to-kd-interface-on-rizin"><span class="header-section-number">73.2</span> Connecting to KD interface on rizin</a>
+  <ul class="collapse">
+  <li><a href="#serial-port-1" id="toc-serial-port-1" class="nav-link" data-scroll-target="#serial-port-1"><span class="header-section-number">73.2.1</span> Serial Port</a></li>
+  <li><a href="#network-1" id="toc-network-1" class="nav-link" data-scroll-target="#network-1"><span class="header-section-number">73.2.2</span> Network</a></li>
+  </ul></li>
+  <li><a href="#using-kd" id="toc-using-kd" class="nav-link" data-scroll-target="#using-kd"><span class="header-section-number">73.3</span> Using KD</a></li>
+  <li><a href="#windbg-backend-for-windows-dbgeng" id="toc-windbg-backend-for-windows-dbgeng" class="nav-link" data-scroll-target="#windbg-backend-for-windows-dbgeng"><span class="header-section-number">74</span> WinDBG Backend for Windows (DbgEng)</a>
+  <ul class="collapse">
+  <li><a href="#using-the-plugin" id="toc-using-the-plugin" class="nav-link" data-scroll-target="#using-the-plugin"><span class="header-section-number">74.1</span> Using the plugin</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rizinorg/book/edit/master/src/first_steps/windows_compilation.md" class="toc-action">Edit this page</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rizinorg/book/edit/master/src/remote_access/windbg.md" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Windows</span></h1>
+<h1 class="title"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title">WinDBG Kernel-mode Debugging (KD)</span></h1>
 </div>
 
 
@@ -1156,135 +1169,118 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Rizin relies on the Meson build system generator to support compilation on all platforms, including Windows. Meson will generate a Visual Studio Solution, all the necessary project files, and wire up the Microsoft Visual C++ compiler for you.</p>
+<p>The WinDBG KD interface support for rizin allows you to attach to VM running Windows and debug its kernel over a serial port or network.</p>
+<p>It is also possible to use the remote GDB interface to connect and debug Windows kernels without depending on Windows capabilities.</p>
+<p>Bear in mind that WinDBG KD support is still work-in-progress, and this is just an initial implementation which will get better in time.</p>
+<section id="setting-up-kd-on-windows" class="level2" data-number="73.1">
+<h2 data-number="73.1" class="anchored" data-anchor-id="setting-up-kd-on-windows"><span class="header-section-number">73.1</span> Setting Up KD on Windows</h2>
 <blockquote class="blockquote">
-<p><strong>tip</strong> You can download nightly binaries from https://ci.appveyor.com/project/rizinorg/rizin/history. Be sure to download only from <code>master</code> branch!</p>
+<p>For a complete walkthrough, refer to Microsoft’s <a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/setting-up-kernel-mode-debugging-in-windbg--cdb--or-ntsd">documentation</a>.</p>
 </blockquote>
-<section id="prerequisites" class="level3" data-number="4.0.1">
-<h3 data-number="4.0.1" class="anchored" data-anchor-id="prerequisites"><span class="header-section-number">4.0.1</span> Prerequisites</h3>
-<ul>
-<li>Visual Studio 2015 (or higher)</li>
-<li>Python 3</li>
-<li>Meson</li>
-<li>Git</li>
-</ul>
+<section id="serial-port" class="level3" data-number="73.1.1">
+<h3 data-number="73.1.1" class="anchored" data-anchor-id="serial-port"><span class="header-section-number">73.1.1</span> Serial Port</h3>
+<p>Enable KD over a serial port on Windows Vista and higher like this:</p>
+<pre><code>bcdedit /debug on
+bcdedit /dbgsettings serial debugport:1 baudrate:115200</code></pre>
+<p>Or like this for Windows XP: Open boot.ini and add /debug /debugport=COM1 /baudrate=115200:</p>
+<pre><code>[boot loader]
+timeout=30
+default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS
+[operating systems]
+multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Debugging with Cable" /fastdetect /debug /debugport=COM1 /baudrate=57600</code></pre>
+<p>In case of VMWare</p>
+<pre><code>    Virtual Machine Settings -&gt; Add -&gt; Serial Port
+    Device Status:
+    [v] Connect at power on
+    Connection:
+    [v] Use socket (named pipe)
+    [_/tmp/winkd.pipe________]
+    From: Server To: Virtual Machine</code></pre>
+<p>Configure the VirtualBox Machine like this:</p>
+<pre><code>    Preferences -&gt; Serial Ports -&gt; Port 1
+
+    [v] Enable Serial Port
+    Port Number: [_COM1_______[v]]
+    Port Mode:   [_Host_Pipe__[v]]
+                 [v] Create Pipe
+    Port/File Path: [_/tmp/winkd.pipe____]</code></pre>
+<p>Or just spawn the VM with qemu like this:</p>
+<pre><code>$ qemu-system-x86_64 -chardev socket,id=serial0,\
+     path=/tmp/winkd.pipe,nowait,server \
+     -serial chardev:serial0 -hda Windows7-VM.vdi</code></pre>
 </section>
-<section id="step-by-step" class="level3" data-number="4.0.2">
-<h3 data-number="4.0.2" class="anchored" data-anchor-id="step-by-step"><span class="header-section-number">4.0.2</span> Step-by-Step</h3>
-<section id="install-visual-studio-2015-or-higher" class="level4" data-number="4.0.2.1">
-<h4 data-number="4.0.2.1" class="anchored" data-anchor-id="install-visual-studio-2015-or-higher"><span class="header-section-number">4.0.2.1</span> Install Visual Studio 2015 (or higher)</h4>
-<p>Visual Studio must be installed with a Visual C++ compiler, supporting C++ libraries, and the appropriate Windows SDK for the target platform version.</p>
-<ul>
-<li>In the Visual Studio 2015 installer, ensure <code>Programming Languages &gt; Visual C++</code> is selected</li>
-<li>In the Visual Studio 2017+ installers, ensure the <code>Desktop development with C++</code> workload is selected</li>
-</ul>
-<p>If you need a copy of Visual Studio, the Community versions are free and work great.</p>
-<ul>
-<li><a href="https://my.visualstudio.com/Downloads?q=Visual%20Studio%202015%20with%20Update%203">Download Visual Studio 2015 Community (registration required)</a></li>
-<li><a href="https://visualstudio.microsoft.com/downloads/">Download Visual Studio 2017 Community</a></li>
-<li><a href="https://visualstudio.microsoft.com/downloads/">Download Visual Studio 2019 Community</a></li>
-</ul>
-</section>
-<section id="install-python-3-and-mesonninja-via-conda" class="level4" data-number="4.0.2.2">
-<h4 data-number="4.0.2.2" class="anchored" data-anchor-id="install-python-3-and-mesonninja-via-conda"><span class="header-section-number">4.0.2.2</span> Install Python 3 and Meson/Ninja via Conda</h4>
-<p>It is strongly recommended you install Conda — a Python environment management system — when working with Python on the Windows platform. This will isolate the Rizin build environment from other installed Python versions and minimize potential conflicts.</p>
-<section id="set-up-conda" class="level5" data-number="4.0.2.2.1">
-<h5 data-number="4.0.2.2.1" class="anchored" data-anchor-id="set-up-conda"><span class="header-section-number">4.0.2.2.1</span> Set Up Conda:</h5>
-<ol type="1">
-<li>Download the appropriate Conda (Python 3.x) for your platform (https://conda.io/miniconda.html)</li>
-<li>Install Conda with the recommended defaults</li>
-</ol>
-</section>
-<section id="create-a-python-environment-for-rizin" class="level5" data-number="4.0.2.2.2">
-<h5 data-number="4.0.2.2.2" class="anchored" data-anchor-id="create-a-python-environment-for-rizin"><span class="header-section-number">4.0.2.2.2</span> Create a Python Environment for Rizin</h5>
-<p>Follow these steps to create and activate a Conda environment named <em>rizin</em>. All instructions from this point on will assume this name matches your environment, but you may change this if desired.</p>
-<ol type="1">
-<li>Start &gt; Anaconda Prompt</li>
-<li><code>conda create -n rizin python=3</code></li>
-<li><code>activate rizin</code></li>
-</ol>
-<p>Any time you wish to enter this environment, open the Anaconda Prompt and re-issue <code>activate rizin</code>. Conversely, <code>deactivate</code> will leave the environment.</p>
-</section>
-<section id="install-meson-ninja" class="level5" data-number="4.0.2.2.3">
-<h5 data-number="4.0.2.2.3" class="anchored" data-anchor-id="install-meson-ninja"><span class="header-section-number">4.0.2.2.3</span> Install Meson + Ninja</h5>
-<ol type="1">
-<li>Enter the Rizin Conda environment, if needed (<code>activate rizin</code>)</li>
-<li>Download meson + ninja</li>
-<li><code>pip install meson ninja</code></li>
-<li>Verify Meson is version 0.50 or higher (<code>meson -v</code>)</li>
-</ol>
+<section id="network" class="level3" data-number="73.1.2">
+<h3 data-number="73.1.2" class="anchored" data-anchor-id="network"><span class="header-section-number">73.1.2</span> Network</h3>
+<p>Enable KD over network (KDNet) on Windows 7 or later likes this:</p>
+<pre><code>bcdedit /debug on
+bcdedit /dbgsettings net hostip:w.x.y.z port:n</code></pre>
+<p>Starting from Windows 8 there is no way to enforce debugging for every boot, but it is possible to always show the advanced boot options, which allows to enable kernel debugging:</p>
+<pre><code>bcedit /set {globalsettings} advancedoptions true</code></pre>
 </section>
 </section>
-<section id="install-git-for-windows" class="level4" data-number="4.0.2.3">
-<h4 data-number="4.0.2.3" class="anchored" data-anchor-id="install-git-for-windows"><span class="header-section-number">4.0.2.3</span> Install Git for Windows</h4>
-<p>All Rizin code is managed via the Git version control system and <a href="https://github.com/rizin">hosted on GitHub</a>.</p>
-<p>Follow these steps to install Git for Windows.</p>
-<ol type="1">
-<li>Download <a href="https://git-scm.com/download/win">Git for Windows</a></li>
-</ol>
-<p>As you navigate the install wizard, we recommend you set these options when they appear: * Use a TrueType font in all console windows * Use Git from the Windows Command Prompt * Use the native Windows Secure Channel library (instead of OpenSSL) * Checkout Windows-style, commit Unix-style line endings (core.autocrlf=true) * Use Windows’ default console window (instead of Mintty)</p>
-<ol start="2" type="1">
-<li>Close any previously open console windows and re-open them to ensure they receive the new PATH</li>
-<li>Ensure <code>git --version</code> works</li>
-</ol>
+<section id="connecting-to-kd-interface-on-rizin" class="level2" data-number="73.2">
+<h2 data-number="73.2" class="anchored" data-anchor-id="connecting-to-kd-interface-on-rizin"><span class="header-section-number">73.2</span> Connecting to KD interface on rizin</h2>
+<section id="serial-port-1" class="level3" data-number="73.2.1">
+<h3 data-number="73.2.1" class="anchored" data-anchor-id="serial-port-1"><span class="header-section-number">73.2.1</span> Serial Port</h3>
+<p>Rizin will use the <code>winkd</code> io plugin to connect to a socket file created by virtualbox or qemu. Also, the <code>winkd</code> debugger plugin and we should specify the x86-32 too. (32 and 64 bit debugging is supported)</p>
+<pre><code>$ rizin -a x86 -b 32 -D winkd winkd:///tmp/winkd.pipe</code></pre>
+<p>On Windows you should run the following line:</p>
+<pre><code>$ rizin -D winkd winkd://\\.\pipe\com_1</code></pre>
 </section>
-<section id="get-rizin-code" class="level4" data-number="4.0.2.4">
-<h4 data-number="4.0.2.4" class="anchored" data-anchor-id="get-rizin-code"><span class="header-section-number">4.0.2.4</span> Get Rizin Code</h4>
-<p>Follow these steps to clone the Rizin git repository.</p>
-<ol type="1">
-<li>In your Rizin Conda environment, navigate to a location where the code will be saved and compiled. This location needs approximately <strong>3-4GiB</strong> of space</li>
-<li>Clone the repository with <code>git clone --recurse-submodules https://github.com/rizinorg/rizin.git</code></li>
-</ol>
+<section id="network-1" class="level3" data-number="73.2.2">
+<h3 data-number="73.2.2" class="anchored" data-anchor-id="network-1"><span class="header-section-number">73.2.2</span> Network</h3>
+<pre><code>$ rizin -a x86 -b 32 -d winkd://&lt;hostip&gt;:&lt;port&gt;:w.x.y.z</code></pre>
 </section>
-<section id="compile-rizin-code" class="level4" data-number="4.0.2.5">
-<h4 data-number="4.0.2.5" class="anchored" data-anchor-id="compile-rizin-code"><span class="header-section-number">4.0.2.5</span> Compile Rizin Code</h4>
-<p>Follow these steps to compile the Rizin Code.</p>
-<p>Compiled binaries will be installed into the <code>dest</code> folder.</p>
-<ol type="1">
-<li><p>Enter the Rizin Conda environment</p></li>
-<li><p>Navigate to the root of the Rizin sources (<code>cd rizin</code>)</p></li>
-<li><p>Initialize Visual Studio tooling by executing the command below that matches the version of Visual Studio installed on your machine and the version of Rizin you wish to install:</p>
-<ul>
-<li><p><strong>Visual Studio 2015:</strong></p>
-<p>Note: For the 64-bit version change only the <code>x86</code> at the very end of the command below to <code>x64</code>.</p>
-<p><code>"%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86</code></p></li>
-<li><p><strong>Visual Studio 2017/2019:</strong></p>
-<p>Note 1: Change <code>Community</code> to either <code>Professional</code> or <code>Enterprise</code> in the command below depending on the version installed.</p>
-<p>Note 2: Change <code>vcvars32.bat</code> to <code>vcvars64.bat</code> in the command below for the 64-bit version.</p>
-<p>Note 3: Change <code>2017</code> to <code>2019</code> if you are using Visual Studio 2019.</p>
-<p><code>"%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"</code></p></li>
-<li><p><strong>Visual Studio Preview:</strong></p>
-<p>Note 1: Change <code>Community</code> to either <code>Professional</code> or <code>Enterprise</code> in the command below depending on the version installed.</p>
-<p>Note 2: Change <code>vcvars32.bat</code> to <code>vcvars64.bat</code> in the command below for the 64-bit version.</p>
-<p><code>"%ProgramFiles(x86)%\Microsoft Visual Studio\Preview\Community\VC\Auxiliary\Build\vcvars32.bat"</code></p></li>
-</ul></li>
-<li><p>Generate the build system with Meson:</p></li>
-</ol>
-<p>Note 1: Change <code>debug</code> to <code>release</code> in the command below depending on whether the latest version or release version is desired.</p>
-<p><code>meson --buildtype debug --prefix %cd%\dest build</code></p>
-<p>Meson currently requires <code>--prefix</code> to point to an absolute path. We use the %CD% pseudo-variable to get the absolute path to the current working directory.</p>
-<ol start="5" type="1">
-<li>Start a build:</li>
-</ol>
-<p><code>ninja -C build</code></p>
-<ol start="6" type="1">
-<li>Install into your destination folder: <code>ninja -C build install</code></li>
-<li>Check your Rizin version: <code>dest\bin\rizin.exe -v</code></li>
-</ol>
 </section>
-<section id="check-that-rizin-runs-from-all-locations" class="level4" data-number="4.0.2.6">
-<h4 data-number="4.0.2.6" class="anchored" data-anchor-id="check-that-rizin-runs-from-all-locations"><span class="header-section-number">4.0.2.6</span> Check That Rizin Runs From All Locations</h4>
-<ol type="1">
-<li>In the file explorer go to the folder Rizin was just installed in.</li>
-<li>From this folder go to <code>dest</code> &gt; <code>bin</code> and keep this window open.</li>
-<li>Go to System Properties: In the Windows search bar enter <code>sysdm.cpl</code>.</li>
-<li>Go to <code>Advanced &gt; Environment Variables</code>.</li>
-<li>Click on the PATH variable and then click edit (if it exists within both the user and system variables, look at the user version).</li>
-<li>Ensure the file path displayed in the window left open is listed within the PATH variable. If it is not add it and click <code>ok</code>.</li>
-<li>Log out of your Windows session.</li>
-<li>Open up a new Windows Command Prompt: type <code>cmd</code> in the search bar. Ensure that the current path is not in the Rizin folder.</li>
-<li>Check Rizin version from Command Prompt Window: <code>rizin -v</code></li>
-</ol>
+<section id="using-kd" class="level2" data-number="73.3">
+<h2 data-number="73.3" class="anchored" data-anchor-id="using-kd"><span class="header-section-number">73.3</span> Using KD</h2>
+<p>When connecting to a KD interface, rizin will send a breakin packet to interrupt the target and we will get stuck here:</p>
+<pre><code>[0x828997b8]&gt; pd 20
+    ;-- eip:
+    0x828997b8    cc           int3
+    0x828997b9    c20400       ret 4
+    0x828997bc    cc           int3
+    0x828997bd    90           nop
+    0x828997be    c3           ret
+    0x828997bf    90           nop</code></pre>
+<p>In order to skip that trap we will need to change eip and run ‘dc’ twice:</p>
+<pre><code>dr eip=eip+1
+dc
+dr eip=eip+1
+dc</code></pre>
+<p>Now the Windows VM will be interactive again. We will need to kill rizin and attach again to get back to control the kernel.</p>
+<p>In addition, the <code>dp</code> command can be used to list all processes, and <code>dpa</code> or <code>dp=</code> to attach to the process. This will display the base address of the process in the physical memory layout.</p>
+</section>
+<section id="windbg-backend-for-windows-dbgeng" class="level1" data-number="74">
+<h1 data-number="74"><span class="header-section-number">74</span> WinDBG Backend for Windows (DbgEng)</h1>
+<p>On Windows, rizin can use <code>DbgEng.dll</code> as a debugging backend, allowing it to make use of WinDBG’s capabilities, supporting dump files, local and remote user and kernel mode debugging.</p>
+<p>You can use the debugging DLLs included on Windows or get the latest version from Microsoft’s <a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-download-tools">download page</a> (recommended).</p>
+<blockquote class="blockquote">
+<p>You cannot use DLLs from the Microsoft Store’s <code>WinDbg Preview</code> app folder directly as they are not marked as executable for normal users.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>rizin will try to load <code>dbgeng.dll</code> from the <code>_NT_DEBUGGER_EXTENSION_PATH</code> environment variable before using Windows’ default library search path.</p>
+</blockquote>
+<section id="using-the-plugin" class="level2" data-number="74.1">
+<h2 data-number="74.1" class="anchored" data-anchor-id="using-the-plugin"><span class="header-section-number">74.1</span> Using the plugin</h2>
+<p>To use the <code>windbg</code> plugin, pass the same command-line options as you would for <code>WinDBG</code> or <code>kd</code> (see Microsoft’s <a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/windbg-command-line-options">documentation</a>), quoting/escaping when necessary:</p>
+<pre><code>&gt; rizin -d "windbg://-remote tcp:server=Server,port=Socket"</code></pre>
+<pre><code>&gt; rizin -d "windbg://MyProgram.exe \"my arg\""</code></pre>
+<pre><code>&gt; rizin -d "windbg://-k net:port=&lt;n&gt;,key=&lt;MyKey&gt;"</code></pre>
+<pre><code>&gt; rizin -d "windbg://-z MyDumpFile.dmp"</code></pre>
+<p>You can then debug normally (see <code>d?</code> command) or interact with the backend shell directly with the <code>R!</code> command:</p>
+<pre><code>[0x7ffcac9fcea0]&gt; dcu 0x0007ffc98f42190
+Continue until 0x7ffc98f42190 using 1 bpsize
+ModLoad: 00007ffc`ab6b0000 00007ffc`ab6e0000   C:\WINDOWS\System32\IMM32.DLL
+Breakpoint 1 hit
+hit breakpoint at: 0x7ffc98f42190
+
+[0x7fffcf232190]&gt; R!k4
+Child-SP          RetAddr           Call Site
+00000033`73b1f618 00007ff6`c67a861d r_main!r_main_rizin
+00000033`73b1f620 00007ff6`c67d0019 rizin!main+0x8d
+00000033`73b1f720 00007ff6`c67cfebe rizin!invoke_main+0x39
+00000033`73b1f770 00007ff6`c67cfd7e rizin!__scrt_common_main_seh+0x12e</code></pre>
 
 
 </section>
@@ -1641,13 +1637,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../src/first_steps/compilation_portability.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Compilation and Portability</span></span>
+      <a href="../../src/remote_access/remote_gdb.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">Debugging with gdbserver</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../src/first_steps/compilation_android.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Android</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../src/tools/intro.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">74</span>&nbsp; <span class="chapter-title">Tools</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

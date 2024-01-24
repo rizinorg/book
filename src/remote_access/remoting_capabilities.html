@@ -8,7 +8,7 @@
 
 <meta name="description" content="This book focuses on the Rizin reverse engineering framework">
 
-<title>The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework - 73&nbsp; WinDBG Kernel-mode Debugging (KD)</title>
+<title>The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework - 71&nbsp; Remote Access Capabilities</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,8 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../src/tools/intro.html" rel="next">
-<link href="../../src/debugger/remote_gdb.html" rel="prev">
+<link href="../../src/remote_access/remote_gdb.html" rel="next">
+<link href="../../src/debugger/apple.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -78,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/debugger/remoting_capabilities.html">Remote Access</a></li><li class="breadcrumb-item"><a href="../../src/debugger/windbg.html"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title">WinDBG Kernel-mode Debugging (KD)</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/remote_access/remoting_capabilities.html">Remote Access</a></li><li class="breadcrumb-item"><a href="../../src/remote_access/remoting_capabilities.html"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -152,31 +152,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/overview.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Rizin Framework</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/getting_rizin.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/getting_rizin.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Rizin</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/compilation_portability.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/compilation_portability.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Compilation and Portability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/windows_compilation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/windows_compilation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Windows</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/compilation_android.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/compilation_android.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Android</span></span></a>
   </div>
 </li>
@@ -547,7 +547,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/signatures/signatures.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/analysis/signatures.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Signatures</span></span></a>
   </div>
 </li>
@@ -682,19 +682,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/remoting_capabilities.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/remote_access/remoting_capabilities.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/remote_gdb.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/remote_access/remote_gdb.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">Debugging with gdbserver</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/windbg.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../src/remote_access/windbg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title">WinDBG Kernel-mode Debugging (KD)</span></span></a>
   </div>
 </li>
@@ -1115,7 +1115,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/credits/credits.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/acknowledgments/credits.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">134</span>&nbsp; <span class="chapter-title">Authors &amp; Contributors</span></span></a>
   </div>
 </li>
@@ -1127,34 +1127,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#setting-up-kd-on-windows" id="toc-setting-up-kd-on-windows" class="nav-link active" data-scroll-target="#setting-up-kd-on-windows"><span class="header-section-number">73.1</span> Setting Up KD on Windows</a>
-  <ul class="collapse">
-  <li><a href="#serial-port" id="toc-serial-port" class="nav-link" data-scroll-target="#serial-port"><span class="header-section-number">73.1.1</span> Serial Port</a></li>
-  <li><a href="#network" id="toc-network" class="nav-link" data-scroll-target="#network"><span class="header-section-number">73.1.2</span> Network</a></li>
-  </ul></li>
-  <li><a href="#connecting-to-kd-interface-on-rizin" id="toc-connecting-to-kd-interface-on-rizin" class="nav-link" data-scroll-target="#connecting-to-kd-interface-on-rizin"><span class="header-section-number">73.2</span> Connecting to KD interface on rizin</a>
-  <ul class="collapse">
-  <li><a href="#serial-port-1" id="toc-serial-port-1" class="nav-link" data-scroll-target="#serial-port-1"><span class="header-section-number">73.2.1</span> Serial Port</a></li>
-  <li><a href="#network-1" id="toc-network-1" class="nav-link" data-scroll-target="#network-1"><span class="header-section-number">73.2.2</span> Network</a></li>
-  </ul></li>
-  <li><a href="#using-kd" id="toc-using-kd" class="nav-link" data-scroll-target="#using-kd"><span class="header-section-number">73.3</span> Using KD</a></li>
-  <li><a href="#windbg-backend-for-windows-dbgeng" id="toc-windbg-backend-for-windows-dbgeng" class="nav-link" data-scroll-target="#windbg-backend-for-windows-dbgeng"><span class="header-section-number">74</span> WinDBG Backend for Windows (DbgEng)</a>
-  <ul class="collapse">
-  <li><a href="#using-the-plugin" id="toc-using-the-plugin" class="nav-link" data-scroll-target="#using-the-plugin"><span class="header-section-number">74.1</span> Using the plugin</a></li>
-  </ul></li>
-  </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rizinorg/book/edit/master/src/debugger/windbg.md" class="toc-action">Edit this page</a></p></div></div></nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title">WinDBG Kernel-mode Debugging (KD)</span></h1>
+<h1 class="title"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></h1>
 </div>
 
 
@@ -1169,122 +1149,63 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>The WinDBG KD interface support for rizin allows you to attach to VM running Windows and debug its kernel over a serial port or network.</p>
-<p>It is also possible to use the remote GDB interface to connect and debug Windows kernels without depending on Windows capabilities.</p>
-<p>Bear in mind that WinDBG KD support is still work-in-progress, and this is just an initial implementation which will get better in time.</p>
-<section id="setting-up-kd-on-windows" class="level2" data-number="73.1">
-<h2 data-number="73.1" class="anchored" data-anchor-id="setting-up-kd-on-windows"><span class="header-section-number">73.1</span> Setting Up KD on Windows</h2>
-<blockquote class="blockquote">
-<p>For a complete walkthrough, refer to Microsoft’s <a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/setting-up-kernel-mode-debugging-in-windbg--cdb--or-ntsd">documentation</a>.</p>
-</blockquote>
-<section id="serial-port" class="level3" data-number="73.1.1">
-<h3 data-number="73.1.1" class="anchored" data-anchor-id="serial-port"><span class="header-section-number">73.1.1</span> Serial Port</h3>
-<p>Enable KD over a serial port on Windows Vista and higher like this:</p>
-<pre><code>bcdedit /debug on
-bcdedit /dbgsettings serial debugport:1 baudrate:115200</code></pre>
-<p>Or like this for Windows XP: Open boot.ini and add /debug /debugport=COM1 /baudrate=115200:</p>
-<pre><code>[boot loader]
-timeout=30
-default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS
-[operating systems]
-multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Debugging with Cable" /fastdetect /debug /debugport=COM1 /baudrate=57600</code></pre>
-<p>In case of VMWare</p>
-<pre><code>    Virtual Machine Settings -&gt; Add -&gt; Serial Port
-    Device Status:
-    [v] Connect at power on
-    Connection:
-    [v] Use socket (named pipe)
-    [_/tmp/winkd.pipe________]
-    From: Server To: Virtual Machine</code></pre>
-<p>Configure the VirtualBox Machine like this:</p>
-<pre><code>    Preferences -&gt; Serial Ports -&gt; Port 1
+<p>Rizin can be run locally, or it can be started as a server process which is controlled by a local rizin process. This is possible because everything uses rizin’s IO subsystem which abstracts access to system(), cmd() and all basic IO operations so to work over a network.</p>
+<p>Help for commands useful for remote access to rizin:</p>
+<pre><code>[0x00000000]&gt; R?
+Usage: R[?]   # Connect with other instances of rizin
+| R [[&lt;fd&gt;] &lt;cmd&gt;]        # List all open connections / Exec &lt;cmd&gt; at remote &lt;fd&gt;
+| R&lt; [&lt;fd&gt; &lt;cmd&gt;]         # Send output of local &lt;cmd&gt; to remote &lt;fd&gt;
+| R![&lt;cmd&gt;]               # Run &lt;cmd&gt; via rz_io_system
+| R+ &lt;[proto://]host:port&gt; # Connect to remote host:port
+| R- [&lt;fd&gt;]               # remove all hosts or host 'fd'
+| R= &lt;fd&gt;                 # Open remote session with host 'fd', 'q' to quit
+| R!= &lt;fd&gt;=0              # Enable remote cmd mode, sending commands to remote &lt;fd&gt; server
+| R=!                     # Disable remote cmd mode
+| Rr &lt;[host:]port&gt; [&lt;cmd&gt;] # Start the rap server (o rap://9999) / Execute &lt;cmd&gt; on rap server
+| Rg[?]                   # Start the gdbserver
+| Rh[?]                   # Start the http webserver
+| RH[?]                   # Start the http webserver (and launch the web browser)
+| Rt &lt;[host:]port&gt; [&lt;cmd&gt;] # Start the tcp server
+| R&amp;r &lt;port&gt;              # Start rap server in background (same as '&amp;_=h')</code></pre>
+<p>You can learn rizin remote capabilities by displaying the list of supported IO plugins: <code>rizin -L</code>.</p>
+<p>A little example should make this clearer. A typical remote session might look like this:</p>
+<p>At the remote host1:</p>
+<pre><code>$ rizin rap://:1234</code></pre>
+<p>At the remote host2:</p>
+<pre><code>$ rizin rap://:1234</code></pre>
+<p>At localhost:</p>
+<pre><code>$ rizin =</code></pre>
+<p>Add hosts</p>
+<pre><code>[0x004048c5]&gt; R+ rap://&lt;host1&gt;:1234//bin/ls
+Connected to: &lt;host1&gt; at port 1234
+waiting... ok
 
-    [v] Enable Serial Port
-    Port Number: [_COM1_______[v]]
-    Port Mode:   [_Host_Pipe__[v]]
-                 [v] Create Pipe
-    Port/File Path: [_/tmp/winkd.pipe____]</code></pre>
-<p>Or just spawn the VM with qemu like this:</p>
-<pre><code>$ qemu-system-x86_64 -chardev socket,id=serial0,\
-     path=/tmp/winkd.pipe,nowait,server \
-     -serial chardev:serial0 -hda Windows7-VM.vdi</code></pre>
-</section>
-<section id="network" class="level3" data-number="73.1.2">
-<h3 data-number="73.1.2" class="anchored" data-anchor-id="network"><span class="header-section-number">73.1.2</span> Network</h3>
-<p>Enable KD over network (KDNet) on Windows 7 or later likes this:</p>
-<pre><code>bcdedit /debug on
-bcdedit /dbgsettings net hostip:w.x.y.z port:n</code></pre>
-<p>Starting from Windows 8 there is no way to enforce debugging for every boot, but it is possible to always show the advanced boot options, which allows to enable kernel debugging:</p>
-<pre><code>bcedit /set {globalsettings} advancedoptions true</code></pre>
-</section>
-</section>
-<section id="connecting-to-kd-interface-on-rizin" class="level2" data-number="73.2">
-<h2 data-number="73.2" class="anchored" data-anchor-id="connecting-to-kd-interface-on-rizin"><span class="header-section-number">73.2</span> Connecting to KD interface on rizin</h2>
-<section id="serial-port-1" class="level3" data-number="73.2.1">
-<h3 data-number="73.2.1" class="anchored" data-anchor-id="serial-port-1"><span class="header-section-number">73.2.1</span> Serial Port</h3>
-<p>Rizin will use the <code>winkd</code> io plugin to connect to a socket file created by virtualbox or qemu. Also, the <code>winkd</code> debugger plugin and we should specify the x86-32 too. (32 and 64 bit debugging is supported)</p>
-<pre><code>$ rizin -a x86 -b 32 -D winkd winkd:///tmp/winkd.pipe</code></pre>
-<p>On Windows you should run the following line:</p>
-<pre><code>$ rizin -D winkd winkd://\\.\pipe\com_1</code></pre>
-</section>
-<section id="network-1" class="level3" data-number="73.2.2">
-<h3 data-number="73.2.2" class="anchored" data-anchor-id="network-1"><span class="header-section-number">73.2.2</span> Network</h3>
-<pre><code>$ rizin -a x86 -b 32 -d winkd://&lt;hostip&gt;:&lt;port&gt;:w.x.y.z</code></pre>
-</section>
-</section>
-<section id="using-kd" class="level2" data-number="73.3">
-<h2 data-number="73.3" class="anchored" data-anchor-id="using-kd"><span class="header-section-number">73.3</span> Using KD</h2>
-<p>When connecting to a KD interface, rizin will send a breakin packet to interrupt the target and we will get stuck here:</p>
-<pre><code>[0x828997b8]&gt; pd 20
-    ;-- eip:
-    0x828997b8    cc           int3
-    0x828997b9    c20400       ret 4
-    0x828997bc    cc           int3
-    0x828997bd    90           nop
-    0x828997be    c3           ret
-    0x828997bf    90           nop</code></pre>
-<p>In order to skip that trap we will need to change eip and run ‘dc’ twice:</p>
-<pre><code>dr eip=eip+1
-dc
-dr eip=eip+1
-dc</code></pre>
-<p>Now the Windows VM will be interactive again. We will need to kill rizin and attach again to get back to control the kernel.</p>
-<p>In addition, the <code>dp</code> command can be used to list all processes, and <code>dpa</code> or <code>dp=</code> to attach to the process. This will display the base address of the process in the physical memory layout.</p>
-</section>
-<section id="windbg-backend-for-windows-dbgeng" class="level1" data-number="74">
-<h1 data-number="74"><span class="header-section-number">74</span> WinDBG Backend for Windows (DbgEng)</h1>
-<p>On Windows, rizin can use <code>DbgEng.dll</code> as a debugging backend, allowing it to make use of WinDBG’s capabilities, supporting dump files, local and remote user and kernel mode debugging.</p>
-<p>You can use the debugging DLLs included on Windows or get the latest version from Microsoft’s <a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-download-tools">download page</a> (recommended).</p>
-<blockquote class="blockquote">
-<p>You cannot use DLLs from the Microsoft Store’s <code>WinDbg Preview</code> app folder directly as they are not marked as executable for normal users.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>rizin will try to load <code>dbgeng.dll</code> from the <code>_NT_DEBUGGER_EXTENSION_PATH</code> environment variable before using Windows’ default library search path.</p>
-</blockquote>
-<section id="using-the-plugin" class="level2" data-number="74.1">
-<h2 data-number="74.1" class="anchored" data-anchor-id="using-the-plugin"><span class="header-section-number">74.1</span> Using the plugin</h2>
-<p>To use the <code>windbg</code> plugin, pass the same command-line options as you would for <code>WinDBG</code> or <code>kd</code> (see Microsoft’s <a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/windbg-command-line-options">documentation</a>), quoting/escaping when necessary:</p>
-<pre><code>&gt; rizin -d "windbg://-remote tcp:server=Server,port=Socket"</code></pre>
-<pre><code>&gt; rizin -d "windbg://MyProgram.exe \"my arg\""</code></pre>
-<pre><code>&gt; rizin -d "windbg://-k net:port=&lt;n&gt;,key=&lt;MyKey&gt;"</code></pre>
-<pre><code>&gt; rizin -d "windbg://-z MyDumpFile.dmp"</code></pre>
-<p>You can then debug normally (see <code>d?</code> command) or interact with the backend shell directly with the <code>R!</code> command:</p>
-<pre><code>[0x7ffcac9fcea0]&gt; dcu 0x0007ffc98f42190
-Continue until 0x7ffc98f42190 using 1 bpsize
-ModLoad: 00007ffc`ab6b0000 00007ffc`ab6e0000   C:\WINDOWS\System32\IMM32.DLL
-Breakpoint 1 hit
-hit breakpoint at: 0x7ffc98f42190
-
-[0x7fffcf232190]&gt; R!k4
-Child-SP          RetAddr           Call Site
-00000033`73b1f618 00007ff6`c67a861d r_main!r_main_rizin
-00000033`73b1f620 00007ff6`c67d0019 rizin!main+0x8d
-00000033`73b1f720 00007ff6`c67cfebe rizin!invoke_main+0x39
-00000033`73b1f770 00007ff6`c67cfd7e rizin!__scrt_common_main_seh+0x12e</code></pre>
+[0x004048c5]&gt; R
+0 - rap://&lt;host1&gt;:1234//bin/ls</code></pre>
+<p>You can open remote files in debug mode (or using any IO plugin) specifying URI when adding hosts:</p>
+<pre><code>[0x004048c5]&gt; R+ R+ rap://&lt;host2&gt;:1234/dbg:///bin/ls
+Connected to: &lt;host2&gt; at port 1234
+waiting... ok
+0 - rap://&lt;host1&gt;:1234//bin/ls
+1 - rap://&lt;host2&gt;:1234/dbg:///bin/ls</code></pre>
+<p>To execute commands on host1:</p>
+<pre><code>[0x004048c5]&gt; R 0 px
+[0x004048c5]&gt; R s 0x666</code></pre>
+<p>To open a session with host2:</p>
+<pre><code>[0x004048c5]&gt; R= 1
+fd:6&gt; pi 1
+...
+fd:6&gt; q</code></pre>
+<p>To remove hosts (and close connections):</p>
+<pre><code>[0x004048c5]&gt; R-</code></pre>
+<p>You can also redirect rizin output to a TCP or UDP server (such as <code>nc -l</code>). First, Add the server with ‘R+ tcp://’ or ‘R+ udp://’, then you can redirect the output of a command to be sent to the server:</p>
+<pre><code>[0x004048c5]&gt; R+ tcp://&lt;host&gt;:&lt;port&gt;/
+Connected to: &lt;host&gt; at port &lt;port&gt;
+5 - tcp://&lt;host&gt;:&lt;port&gt;/
+[0x004048c5]&gt; R&lt;5 cmd...</code></pre>
+<p>The <code>R&lt;</code> command will send the output from the execution of <code>cmd</code> to the remote connection number N (or the last one used if no id specified).</p>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1637,13 +1558,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../src/debugger/remote_gdb.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">Debugging with gdbserver</span></span>
+      <a href="../../src/debugger/apple.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">70</span>&nbsp; <span class="chapter-title">macOS/iOS</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../src/tools/intro.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">74</span>&nbsp; <span class="chapter-title">Tools</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../src/remote_access/remote_gdb.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">Debugging with gdbserver</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1651,4 +1572,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rizinorg/book/edit/master/src/remote_access/remoting_capabilities.md" class="toc-action">Edit this page</a></p></div></div></div></div></footer></body></html>

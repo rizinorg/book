@@ -8,7 +8,7 @@
 
 <meta name="description" content="This book focuses on the Rizin reverse engineering framework">
 
-<title>The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework - 72&nbsp; Debugging with gdbserver</title>
+<title>The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework - 54&nbsp; Signatures</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,8 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../src/debugger/windbg.html" rel="next">
-<link href="../../src/debugger/remoting_capabilities.html" rel="prev">
+<link href="../../src/analysis/graphs.html" rel="next">
+<link href="../../src/analysis/symbols.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -78,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/debugger/remoting_capabilities.html">Remote Access</a></li><li class="breadcrumb-item"><a href="../../src/debugger/remote_gdb.html"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">Debugging with gdbserver</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/analysis/intro.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../src/analysis/signatures.html"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Signatures</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -152,31 +152,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/overview.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Rizin Framework</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/getting_rizin.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/getting_rizin.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Rizin</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/compilation_portability.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/compilation_portability.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Compilation and Portability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/windows_compilation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/windows_compilation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Windows</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/compilation_android.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/introduction/compilation_android.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Android</span></span></a>
   </div>
 </li>
@@ -547,7 +547,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/signatures/signatures.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/analysis/signatures.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Signatures</span></span></a>
   </div>
 </li>
@@ -682,19 +682,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/remoting_capabilities.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/remote_access/remoting_capabilities.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/remote_gdb.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../src/remote_access/remote_gdb.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">Debugging with gdbserver</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/windbg.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/remote_access/windbg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title">WinDBG Kernel-mode Debugging (KD)</span></span></a>
   </div>
 </li>
@@ -1115,7 +1115,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/credits/credits.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/acknowledgments/credits.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">134</span>&nbsp; <span class="chapter-title">Authors &amp; Contributors</span></span></a>
   </div>
 </li>
@@ -1134,7 +1134,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">Debugging with gdbserver</span></h1>
+<h1 class="title"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Signatures</span></h1>
 </div>
 
 
@@ -1149,58 +1149,130 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>rizin allows remote debugging over the gdb remote protocol. So you can run a gdbserver and connect to it with rizin for remote debugging. The syntax for connecting is:</p>
-<pre><code>$ rizin -d gdb://&lt;host&gt;:&lt;port&gt;</code></pre>
-<p>Note that the following command does the same, rizin will use the debug plugin specified by the uri if found.</p>
-<pre><code>$ rizin -D gdb gdb://&lt;host&gt;:&lt;port&gt;</code></pre>
-<p>The debug plugin can be changed at runtime using the dL or Ld commands.</p>
-<p>Or if the gdbserver is running in extended mode, you can attach to a process on the host with:</p>
-<pre><code>$ rizin -d gdb://&lt;host&gt;:&lt;port&gt;/&lt;pid&gt;</code></pre>
-<p>It is also possible to start debugging after analyzing a file using the <code>doof</code> command which rebases the current session’s data after opening gdb</p>
-<pre><code>[0x00404870]&gt; doof gdb://&lt;host&gt;:&lt;port&gt;/&lt;pid&gt;</code></pre>
-<p>After connecting, you can use the standard rizin debug commands as normal.</p>
-<p>rizin does not yet load symbols from gdbserver, so it needs the binary to be locally present to load symbols from it. In case symbols are not loaded even if the binary is present, you can try specifying the path with <code>e dbg.exe.path</code>:</p>
-<pre><code>$ rizin -e dbg.exe.path=&lt;path&gt; -d gdb://&lt;host&gt;:&lt;port&gt;</code></pre>
-<p>If symbols are loaded at an incorrect base address, you can try specifying the base address too with <code>e bin.baddr</code>:</p>
-<pre><code>$ rizin -e bin.baddr=&lt;baddr&gt; -e dbg.exe.path=&lt;path&gt; -d gdb://&lt;host&gt;:&lt;port&gt;</code></pre>
-<p>Usually the gdbserver reports the maximum packet size it supports. Otherwise, rizin resorts to sensible defaults. But you can specify the maximum packet size with the environment variable <code>R2_GDB_PKTSZ</code>. You can also check and set the max packet size during a session with the IO system, <code>R!</code>.</p>
-<pre><code>$ export R2_GDB_PKTSZ=512
-$ rizin -d gdb://&lt;host&gt;:&lt;port&gt;
-= attach &lt;pid&gt; &lt;tid&gt;
-Assuming filepath &lt;path/to/exe&gt;
-[0x7ff659d9fcc0]&gt; R!pktsz
-packet size: 512 bytes
-[0x7ff659d9fcc0]&gt; R!pktsz 64
-[0x7ff659d9fcc0]&gt; R!pktsz
-packet size: 64 bytes</code></pre>
-<p>The gdb IO system provides useful commands which might not fit into any standard rizin commands. You can get a list of these commands with <code>R!?</code>. (Remember, <code>R!</code> accesses the underlying IO plugin’s <code>system()</code>).</p>
-<pre><code>[0x7ff659d9fcc0]&gt; R!?
-Usage: R!cmd args
- R!pid             - show targeted pid
- R!pkt s           - send packet 's'
- R!monitor cmd     - hex-encode monitor command and pass to target interpreter
- R!rd              - show reverse debugging availability
- R!dsb             - step backwards
- R!dcb             - continue backwards
- R!detach [pid]    - detach from remote/detach specific pid
- R!inv.reg         - invalidate reg cache
- R!pktsz           - get max packet size used
- R!pktsz bytes     - set max. packet size as 'bytes' bytes
- R!exec_file [pid] - get file which was executed for current/specified pid</code></pre>
-<p>Note that <code>R!dsb</code> and <code>R!dcb</code> are only available in special gdbserver implementations such as <a href="https://github.com/mozilla/rr">Mozilla’s rr</a>, the default gdbserver doesn’t include remote reverse debugging support. Use <code>R!rd</code> to print the currently available reverse debugging capabilities.</p>
-<p>If you are interested in debugging rizin’s interaction with gdbserver you can use <code>R!monitor set remote-debug 1</code> to turn on logging of gdb’s remote protocol packets in gdbserver’s console and <code>R!monitor set debug 1</code> to show general debug messages from gdbserver in it’s console.</p>
-<p>rizin also provides its own gdbserver implementation:</p>
-<pre><code>$ rizin =
-[0x00000000]&gt; Rg?
-|Usage:  =[g] [...] # gdb server
-| gdbserver:
-| Rg port file [args]   listen on 'port' debugging 'file' using gdbserver
-| Rg! port file [args]  same as above, but debug protocol messages (like gdbserver --remote-debug)</code></pre>
-<p>So you can start it as:</p>
-<pre><code>$ rizin =
-[0x00000000]&gt; Rg 8000 /bin/rizin -</code></pre>
-<p>And then connect to it like you would to any gdbserver. For example, with rizin:</p>
-<pre><code>$ rizin -d gdb://localhost:8000</code></pre>
+<p>Rizin supports the <a href="https://hex-rays.com/products/ida/tech/flirt/">HexRays FLIRT</a> signature format which allows you to create, parse or apply the signatures on the fly. Rizin is also capable of applying the signatures automatically, when the <a href="https://github.com/rizinorg/sigdb">sigdb</a> is defined by the user via the variable <code>flirt.sigdb.path</code>. All the applied signatures are stored in the <code>flirt</code> flag space.</p>
+<p>The HexRays FLIRT format is made by two formats:</p>
+<ul>
+<li><code>.pat</code> text string format</li>
+<li><code>.sig</code> compressed format which includes the architecture type used to generate the signature</li>
+</ul>
+<p>Signature commands are available under the <code>zf</code> command namespace:</p>
+<pre><code>[0x00000000]&gt; zf?
+Usage: zf&lt;cds&gt;   # Manage FLIRT signatures
+| zfc &lt;filename&gt; # Create a FLIRT file (.pac or .sig)
+| zfd &lt;filename&gt; # Open a FLIRT file (.pac or .sig) and dumps its contents
+| zfs &lt;filename&gt; # Open a FLIRT file (.pac or .sig) and tries to apply the signatures to the loaded binary</code></pre>
+<p>To apply a signature file manually or a folder of signatures, you need to call <code>zfs</code></p>
+<pre><code>$ rizin /path/to/binary/with/stripped.elf
+[0x000051c0]&gt; aaa
+[0x000051c0]&gt; zfs signature.sig # relative or absolutes paths are accepted
+Found 206 FLIRT signatures via signature.sig
+[0x000051c0]&gt;</code></pre>
+<p>To create signature you need to analyze the binary first, then you can create it by calling <code>zfc</code>. You can modify the behaviour of the signature creation via the following options:</p>
+<ul>
+<li><code>flirt.node.optimize</code> - FLIRT optimization option when creating a signature file (none: 0, normal: 1, smallest: 2), <code>default: 2</code></li>
+<li><code>flirt.sig.deflate</code> - enables/disables FLIRT zlib compression when creating a signature file (available only for .sig files), <code>default: true</code></li>
+<li><code>flirt.sig.file</code> - FLIRT file list (comma separated) for sig format (msdos, win, os2, netware, unix, other, all, none), <code>default: all</code></li>
+<li><code>flirt.sig.library</code> - FLIRT library name for sig format, <code>default: Built with rizin x.y.z</code></li>
+<li><code>flirt.sig.os</code> - FLIRT operating system list (comma separated) for sig format (aixar, aout, ar, bin, coff, dos:com, dos:com:old, dos:exe, dos:exe:old, dosdrv, elf, intelhex, le, loader, lx, moshex, ne, nlm, omf, omflib, pe, pilot, srec, w32run, zip, all, none), <code>default: all</code></li>
+<li><code>flirt.sig.version</code> - FLIRT version for sig format, <code>default: 10</code></li>
+</ul>
+<p>Example of signature creation with <code>.sig</code> format:</p>
+<pre><code>$ rizin /path/to/binary/with/symbols.elf
+[0x000051c0]&gt; aa
+[0x000051c0]&gt; # setting library name
+[0x000051c0]&gt; e flirt.sig.library="My Awesome Signature"
+[0x000051c0]&gt; # creating signature
+[0x000051c0]&gt; zfc signature.sig # relative or absolutes paths are accepted
+707 FLIRT signatures were written in 'signature.sig'
+[0x000051c0]&gt;</code></pre>
+<p>Example of signature creation with <code>.pat</code> format:</p>
+<pre><code>$ rizin /path/to/binary/with/symbols.elf
+[0x000051c0]&gt; aa
+[0x000051c0]&gt; # setting internal node optimization to none
+[0x000051c0]&gt; e flirt.node.optimize=0
+[0x000051c0]&gt; # creating signature
+[0x000051c0]&gt; zfc signature.pat # relative or absolutes paths are accepted
+707 FLIRT signatures were written in 'signature.pat'
+[0x000051c0]&gt;</code></pre>
+<p>You can print the contents of a FLIRT signature file via <code>zfd</code></p>
+<pre><code>[0x000051c0]&gt; zfd signature.sig
+SIG format
+Signature:    Built with rizin 0.4.0-git, 8 modules
+Version:      1
+Architecture: 0 (x86)
+F30F:
+ 1EFA:
+  31ED4989D15E4889E24883E4F050544C............48..........:
+   0. 09 CDDC 002E 0000:entry0 (REF )
+  41574C............41564989D641554989F541544189FC5548....:
+   0. 45 7595 0065 0000:__libc_csu_init (REF )
+  4883EC0848:
+   83C408C3......................................:
+    0. 00 0000 000D 0000:_fini (REF )
+   ............4885C074..FFD04883C408C3..........:
+    0. 00 0000 001B 0000:_init (REF )
+  80............75..5548..............4889E574..48........:
+   0. 21 300E 0041 0000:__do_global_dtors_aux (REF )
+  C3......................................................:
+   0. 00 0000 0005 0000:__libc_csu_fini (REF )
+  E9......................................................:
+   0. 00 0000 0009 0000:entry.init0 (REF )
+ 6F866E0100004889F84189C80F1187F8130000F30F6F8E7E0100000F118F:
+  0. A7 A662 00C8 0000:Curl_persistconninfo (REF )
+[0x000051c0]&gt;</code></pre>
+<p>It is also possible to use <code>rz-sign</code> to create (automatically) or to convert or to dump FLIRT signatures:</p>
+<pre><code>$ rz-sign -h
+Usage: rz-sign [options] [file]
+ -h                          this help message
+ -a [-a]                     add extra 'a' to analysis command (available only with -o option)
+ -e [k=v]                    set an evaluable config variable (available only with -o option)
+ -c [output.pat] [input.sig] parses a FLIRT signature and converts it to its other format
+ -o [output.sig] [input.bin] performs an analysis on the binary and generates the FLIRT signature.
+ -d [flirt.sig]              parses a FLIRT signature and dump its content
+ -q                          quiet mode
+ -v                          show version information
+Examples:
+  rz-sign -d signature.sig
+  rz-sign -c new_signature.pat old_signature.sig
+  rz-sign -o libc.sig libc.so.6
+
+$ rz-sign -e "flirt.sig.library=My Awesome Signature" -o signature.sig /path/to/binary/with/symbols.elf</code></pre>
+<p>If instead you want to manually select the FLIRT signature file from <code>sigdb</code> you have to use <code>aaF</code> commands:</p>
+<pre><code>[0x00409c70]&gt; pdf
+            ; CALL XREF from main @ 0x4017c1
+/ fcn.00409c70 (int64_t arg1, int64_t arg2, int64_t arg3, int64_t arg4, int64_t arg5, int64_t arg6, int64_t arg7, int64_t arg8, int64_t arg9, int64_t arg10, int64_t arg11, int64_t arg_e0h);
+|           ; var int64_t var_4h_2 @ rsp+0x4
+|           ; var int64_t var_8h_2 @ rsp+0x8
+|           ; var int64_t var_10h_2 @ rsp+0x10
+|           ; var int64_t var_18h_2 @ rsp+0x18
+|           ; var int64_t var_20h_2 @ rsp+0x20
+|           ; var int64_t var_30h_2 @ rsp+0x30
+|           ; var int64_t var_38h_2 @ rsp+0x38
+|           ; var int64_t var_40h_2 @ rsp+0x40
+[0x00409c70]&gt; e flirt.sigdb.path=/path/to/sigdb
+[0x00409c70]&gt; aaF?
+Usage: aaF  [l] # applies signatures from sigdb automatically
+| aaF &lt;filter&gt;  applies signatures from sigdb automatically
+| aaFl          lists all the signatures available in sigdb
+[0x00409c70]&gt; aaFl~gcc
+elf/x86/64/ubuntu-libgcc-10.sig
+elf/x86/64/ubuntu-libgcc-11.sig
+elf/x86/64/ubuntu-libgcc-7.sig
+elf/x86/64/ubuntu-libgcc-8.sig
+[0x00409c70]&gt; aaF ubuntu-libgcc
+Applying elf/x86/64/ubuntu-libgcc-10.sig signature file
+Applying elf/x86/64/ubuntu-libgcc-11.sig signature file
+Applying elf/x86/64/ubuntu-libgcc-7.sig signature file
+Applying elf/x86/64/ubuntu-libgcc-8.sig signature file
+[0x00409c70]&gt; pdf
+            ; CALL XREF from main @ 0x4017c1
+            ;-- fcn.00409c70:
+/ flirt.printf (int64_t arg1, int64_t arg2, int64_t arg3, int64_t arg4, int64_t arg5, int64_t arg6, int64_t arg7, int64_t arg8, int64_t arg9, int64_t arg10, int64_t arg11, int64_t arg_e0h);
+|           ; var int64_t var_4h @ rsp+0xdc
+|           ; var int64_t var_8h @ rsp+0xe0
+|           ; var int64_t var_10h @ rsp+0xe8
+|           ; var int64_t var_18h @ rsp+0xf0
+| </code></pre>
 
 
 
@@ -1555,13 +1627,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../src/debugger/remoting_capabilities.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></span>
+      <a href="../../src/analysis/symbols.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">53</span>&nbsp; <span class="chapter-title">Symbols</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../src/debugger/windbg.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title">WinDBG Kernel-mode Debugging (KD)</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../src/analysis/graphs.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">55</span>&nbsp; <span class="chapter-title">Graph commands</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1569,4 +1641,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rizinorg/book/edit/master/src/debugger/remote_gdb.md" class="toc-action">Edit this page</a></p></div></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rizinorg/book/edit/master/src/analysis/signatures.md" class="toc-action">Edit this page</a></p></div></div></div></div></footer></body></html>
