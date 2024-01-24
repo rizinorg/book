@@ -17,11 +17,11 @@ book:
       - index.md
       - part: "Introduction"
         chapters:
-         - src/first_steps/overview.md
-         - src/first_steps/getting_rizin.md
-         - src/first_steps/compilation_portability.md
-         - src/first_steps/windows_compilation.md
-         - src/first_steps/compilation_android.md
+         - src/introduction/overview.md
+         - src/introduction/getting_rizin.md
+         - src/introduction/compilation_portability.md
+         - src/introduction/windows_compilation.md
+         - src/introduction/compilation_android.md
 
       - part: "First Steps"
         chapters:
@@ -73,11 +73,13 @@ book:
          - src/search_bytes/backward_search.md
          - src/search_bytes/search_in_assembly.md
          - src/search_bytes/searching_aes_keys.md
+
       - part: "Disassembling"
         chapters:
          - src/disassembling/intro.md
          - src/disassembling/adding_metadata.md
          - src/disassembling/esil.md
+
       - part: "Analysis"
         chapters:
          - src/analysis/intro.md
@@ -89,15 +91,17 @@ book:
          - src/analysis/syscalls.md
          - src/analysis/emulation.md
          - src/analysis/symbols.md
-         - src/signatures/signatures.md
+         - src/analysis/signatures.md
          - src/analysis/graphs.md
          - src/analysis/cpu_platform_profiles.md
+
       - part: "Scripting"
         chapters:
          - src/scripting/intro.md
          - src/scripting/loops.md
          - src/scripting/macros.md
          - src/scripting/rz-pipe.md
+
       - part: "Debugger"
         chapters:
          - src/debugger/intro.md
@@ -110,11 +114,20 @@ book:
          - src/debugger/revdebug.md
          - src/debugger/windows_messages.md
          - src/debugger/apple.md
+
       - part: "Remote Access"
         chapters:
-         - src/debugger/remoting_capabilities.md
-         - src/debugger/remote_gdb.md
-         - src/debugger/windbg.md
+         - src/remote_access/remoting_capabilities.md
+         - src/remote_access/remote_gdb.md
+         - src/remote_access/windbg.md
+
+      # To be reviewed, it has been added to 
+      # this yaml if we ever change this.
+      # 
+      # - part: "Architectures"
+      #   chapters:
+      #    - src/arch/intro.md
+      #    - src/arch/8051.md
 
       - part: "Command Line Tools"
         chapters:
@@ -154,6 +167,7 @@ book:
          - src/plugins/debug.md
          - src/plugins/testing.md
          - src/plugins/rz-pm.md
+
       - part: "Crackmes"
         chapters:
          - src/crackmes/intro.md
@@ -186,15 +200,30 @@ book:
          - src/crackmes/hackthebox/find-the-easy-pass/find-the-validation-routine.md
          - src/crackmes/hackthebox/find-the-easy-pass/fire-up-the-debugger.md
          - src/crackmes/hackthebox/find-the-easy-pass/bonus.md
+
       - part: "Reference Card"
         chapters:
           - src/refcard/intro.md
+
       - part: "Acknowledgments"
         chapters:
-          - src/credits/credits.md
+          - src/acknowledgments/credits.md
 
 format:
   html:
+    highlight-style: github
     theme:
       light: default
       dark: darkly
+
+  epub:
+    highlight-style: github
+    cover-image: cover.jpg
+
+  pdf:
+    highlight-style: github
+    documentclass: book
+    geometry:
+      - top=30mm
+      - left=20mm
+      - heightrounded
