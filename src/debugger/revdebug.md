@@ -102,4 +102,4 @@ And step back by `aesb`:
 In addition to the native reverse debugging capabilities in rizin, it's also possible to
 use gdb's remote protocol to reverse debug a target gdbserver that supports it.
 `R!dsb` and `R!dcb` are available as `dsb` and `dcb` replacements for this purpose,
-see [remote gdb's documentation](remote_gdb.md) for more information.
+see [remote gdb's documentation](../remote_access/remote_gdb.md) for more information.
