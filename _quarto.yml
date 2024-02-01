@@ -37,7 +37,8 @@ book:
          - src/configuration/intro.md
          - src/configuration/colors.md
          - src/configuration/evars.md
-         - src/configuration/files.md
+         - src/configuration/initial_scripts.md
+         - src/configuration/build_variables.md
 
       - part: "Basic Commands"
         chapters:

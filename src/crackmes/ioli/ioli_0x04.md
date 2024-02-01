@@ -94,7 +94,7 @@ int32_t check(char *s)
 
 In short, it calculates the Digit Sum of a number (add a number digit by digit. for example, 96 => 9 + 6 = 15) :
 
-```sh
+```bash
 ./crackme0x04
 IOLI Crackme Level 0x04
 Password: 12345

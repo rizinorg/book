@@ -3,7 +3,7 @@ IOLI 0x06
 
 nearly a routine to check this binary (not complete output in the following):
 
-```shell
+```bash
 rz-bin -z ./crackme0x06
 [Strings]
 nth paddr      vaddr      len size section type  string
@@ -65,7 +65,7 @@ int32_t main (int32_t arg_10h) {
 
 main has 3 arguments `argc, argv, envp`, and this program is compiled with GCC, so the stack should be like this :
 
-```sh
+```bash
 [esp + 0x10] - envp
 [esp + 0x0c] - argv
 [esp + 0x08] - argc
@@ -218,7 +218,7 @@ There are 3 constraints to crackme_0x06:
 * Odd Number
 * should have an environment variable whose name started with "LOL".
 
-```sh
+```bash
 $ ./crackme0x06
 IOLI Crackme Level 0x06
 Password: 12346

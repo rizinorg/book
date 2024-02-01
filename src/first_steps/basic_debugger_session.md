@@ -38,7 +38,7 @@ When Rizin is in debugger mode, it forks and loads the debuggee `ls` program int
 
 Execution pauses early in the `ld.so` dynamic linker, making the entrypoint and any shared libraries invisible at this stage.
 
-To override this behavior and set another name for an entry breakpoint, add a Rizin command `e dbg.bep=entry` or `e dbg.bep=main` to your startup script (the `rizinrc` paths can be found by executing `rizin -hh`).
+To override this behavior and set another name for an entry breakpoint, add a Rizin command `e dbg.bep=entry` or `e dbg.bep=main` to your `rizinrc` [initial script](../configuration/initial_scripts.md).
 
 An alternative method to continue until a specific address is by using the `dcu` command, meaning "debug continue until." Provide the address where you want to stop, for example:
 
