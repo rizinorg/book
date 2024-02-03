@@ -1,6 +1,6 @@
 ## Colors & Themes
 
-The console access is encapsulated in an API that enables displaying the output of any command in ANSI, W32 Console, or HTML formats. This functionality enables rizin to operate within environments with restricted display capabilities, such as kernels or embedded devices. You can still receive data from it in your preferred format.
+The console access is encapsulated in an API that enables displaying the output of any command in ANSI, Win32 Console, or HTML formats. This functionality enables rizin to operate within environments with restricted display capabilities, such as kernels or embedded devices. You can still receive data from it in your preferred format.
 
 The color option is referred to as `scr.color` and can be modified using the `e` command. The `scr.color` option offers support for four values:
 - `e scr.color=0`: no colors (black and white)

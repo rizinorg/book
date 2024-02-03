@@ -34,7 +34,7 @@ This section provides instructions on altering the behavior of the assembler and
 
 The `asm.arch` configuration variable establishes the target CPU architecture employed for disassembling (`pd`, `pD` commands) and code analysis (`a` command). The list of potential values can be retrieved by examining the output of `e asm.arch=?` or `rz-asm -L`.
 
-Adding new architectures for disassembling and analyzing code is a straightforward process with a dedicated interface. For x86, this interface facilitates the integration of various third-party disassembler engines, such as GNU binutils, Udis86, and a selection of custom ones.
+Adding new architectures for disassembling and analyzing code is a straightforward process with a dedicated interface. For x86, this interface facilitates the integration of various third-party disassembler engines, such as GNU binutils, and a selection of custom ones.
 
 ### asm.bits: `int`
 
