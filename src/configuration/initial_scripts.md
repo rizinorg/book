@@ -67,7 +67,7 @@ C:\Users\user\Desktop\rizin> rizin.exe
 [0x00000000]> q
 C:\Users\user\Desktop\rizin> type some\folder\myrizinrc
 clippy 'This is executed elsewhere'
-C:\Users\user\Desktop\rizin> set RZ_RCFILE="some\folder\\myrizinrc"
+C:\Users\user\Desktop\rizin> set RZ_RCFILE="some\folder\myrizinrc"
 C:\Users\user\Desktop\rizin> rizin.exe
  .--.     .----------------------------.
  | _|_    |                            |
