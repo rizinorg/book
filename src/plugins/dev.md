@@ -117,7 +117,7 @@ struct rz_lib_struct_t rizin_plugin = {
 
 To build and install this plugin just type this:
 
-```sh
+```bash
 meson build
 ninja -C build && ninja -C build install
 ```

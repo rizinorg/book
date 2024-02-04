@@ -55,7 +55,7 @@ int32_t main (void) {
 
 Here comes the`sym.test`, called with two parameters. One is var_4h (our input from `scanf()`). The other is var_ch. The value of var_ch (as the parameter of `test()`) can be calculated like it did in crackme_0x02. It's  0x52b24. Try it!
 
-```sh
+```bash
 ./crackme0x03
 IOLI Crackme Level 0x03
 Password: 338724
@@ -137,7 +137,7 @@ print(''.join([chr(ord(i)-0x3) for i in 'LqydolgSdvvzrug$']))
 
 the easier way is to `run` the decryption code, that means debug it or emulate it. I used rizin ESIL emulator but it got stuck when executed ` call dword imp.strlen`. And I can't find the usage of hooking function / skip instruction in rizin.  The following is an example to show u how to emulate ESIL.
 
-```sh
+```bash
 [0x08048414]> s 0x08048445		# the 'sub al, 0x03'
 [0x08048445]> aei				# init VM
 [0x08048445]> aeim				# init memory
@@ -182,7 +182,7 @@ dead at 0x00000000
 
 By the way, you can also open the file and use write data command to decrypt data.
 
-```sh
+```bash
 rizin -w ./crackme0x03
 [0x08048360]> aaa
 [0x08048360]> fs strings

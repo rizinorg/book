@@ -37,7 +37,7 @@ Usage: o[?]   # Open files and handle opened files
 
 Prepare a simple layout:
 
-```sh
+```bash
 $ rz-bin -l /bin/ls
 [Linked libraries]
 libselinux.so.1

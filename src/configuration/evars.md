@@ -1,293 +1,425 @@
-## Configuration Variables
+## Evaluable Variables
 
-Below is a list of the most frequently used configuration variables. You can get a complete list by issuing `e` command without arguments. For example, to see all variables defined in the "cfg" namespace, issue `e cfg.` (mind the ending dot). You can get help on any eval configuration variable by using `el cfg.`
+Rizin incorporates "evaluable variables", which are configuration variables that influence the behavior of analysis, visuals, assembly, and more.
 
-The `el` command to get help on all the evaluable configuration variables of rizin. As long as the output of this command is pretty large you can combine it with the internal grep `~` to filter for what you are looking for:
+Below you can find a compilation of the most frequently used configuration variables.
 
-```
-[0x00000000]> el~color
-      graph.gv.graph: Graphviz global style attributes. (bgcolor=white)
-       graph.gv.node: Graphviz node style. (color=gray, style=filled shape=box)
-          log.colors: Should the log output use colors (TODO)
+Utilize the `el` command to list all the evaluable variables in Rizin. If the output is extensive, you can narrow it down by combining it with the internal grep `~` to filter for specific information or by appending the sub-space after the command, such as `el cfg`.
+
+Example:
+
+```bash
+[0x00000000]> el scr.color
            scr.color: Enable colors (0: none, 1: ansi, 2: 256 colors, 3: truecolor)
       scr.color.args: Colorize arguments and variables of functions
      scr.color.bytes: Colorize bytes that represent the opcodes of the instruction
       scr.color.grep: Enable colors when using ~grep
        scr.color.ops: Colorize numbers and registers in opcodes
       scr.color.pipe: Enable colors when using pipes
-     scr.prompt.mode: Set prompt color based on vi mode
-         scr.rainbow: Shows rainbow colors depending of address
-         scr.randpal: Random color palette or just get the next one from 'eco'
+[0x00000000]> el* scr.color
+e scr.color=3
+e scr.color.args=true
+e scr.color.bytes=true
+e scr.color.grep=false
+e scr.color.ops=true
+e scr.color.pipe=false
+[0x00000000]> e scr.color=2
 ```
-
-The Visual mode has an eval browser that is accessible through the `Vbe` command.
 
 ## Assembly Configuration
 
+This section provides instructions on altering the behavior of the assembler and disassembler.
+
 ### asm.arch: `string`
 
-Defines the target CPU architecture used for disassembling (`pd`, `pD` commands) and code analysis (`a` command). You can find the list of possible values by looking at the result of `e asm.arch=?` or `rz-asm -L`.
-It is quite simple to add new architectures for disassembling and analyzing code. There is an interface for that. For x86, it is used to attach a number of third-party disassembler engines, including GNU binutils, Udis86 and a few handmade ones.
+The `asm.arch` configuration variable establishes the target CPU architecture employed for disassembling (`pd`, `pD` commands) and code analysis (`a` command). The list of potential values can be retrieved by examining the output of `e asm.arch=?` or `rz-asm -L`.
+
+Adding new architectures for disassembling and analyzing code is a straightforward process with a dedicated interface. For x86, this interface facilitates the integration of various third-party disassembler engines, such as GNU binutils, and a selection of custom ones.
 
 ### asm.bits: `int`
 
-Determines width in bits of registers for the current architecture.
-Supported values:
-
-* 8
-* 16
-* 32
-* 64
-
-Note that not all target architectures support all combinations for asm.bits.
+The `asm.bits` configuration variable dictates the width in bits of registers for the current architecture. The supported values vary depending on the architecture, and you can explore them by using `rz-asm -L` or `e asm.bits=?`.
 
 ### asm.bytes: `bool`
 
-Show or hide displaying of raw bytes of instructions. By default, it is turned off, resulting in a disassembly like:
+When `asm.bytes` is set to `true`, it enables the display of raw bytes of instructions. By default, it is turned off, resulting in a disassembly format like shown below. When activated, the raw bytes will be shown alongside the instructions.
 
-```
-[0x00005b20]> e asm.bytes
-false
-[0x00005b20]> pd 5
-            0x00005b20      endbr64
-            0x00005b24      xor   ebp, ebp
-            0x00005b26      mov   r9, rdx
-            0x00005b29      pop   rsi
-            0x00005b2a      mov   rdx, rsp
-```
-When turned on, the raw bytes will be displayed along with the instructions:
-```
-[0x00005b20]> e asm.bytes=true
-[0x00005b20]> pd 5
+```bash
+# you can disable this also via `e asm.bytes=false`
+[0x00005fa0]> pd 5 @e:asm.bytes=false
             ;-- entry0:
-            ;-- rip:
-            0x00005b20      f30f1efa       endbr64
-            0x00005b24      31ed           xor   ebp, ebp
-            0x00005b26      4989d1         mov   r9, rdx
-            0x00005b29      5e             pop   rsi
-            0x00005b2a      4889e2         mov   rdx, rsp
+            0x00005fa0      endbr64
+            0x00005fa4      xor   ebp, ebp
+            0x00005fa6      mov   r9, rdx
+            0x00005fa9      pop   rsi
+            0x00005faa      mov   rdx, rsp
+# you can enable this also via `e asm.bytes=true`
+[0x00005fa0]> pd 5 @e:asm.bytes=true
+            ;-- entry0:
+            0x00005fa0      f30f1efa       endbr64
+            0x00005fa4      31ed           xor   ebp, ebp
+            0x00005fa6      4989d1         mov   r9, rdx
+            0x00005fa9      5e             pop   rsi
+            0x00005faa      4889e2         mov   rdx, rsp
 ```
 
 ### asm.cpu: `string`
 
-You can use this configuration variable to define the CPU type. For example, if you had picked the architecture as AVR, you can choose your CPU type (ATmega1281, ATmega2561, etc) using `asm.cpu`.
+The `asm.cpu` configuration variable enables you to specify the CPU type. For example, if you've chosen the architecture as AVR, you can designate your CPU type (e.g., ATmega1281, ATmega2561, etc.) using `asm.cpu`. To view all available CPU types of the selected architecture, you can use the command `e asm.cpu=?`.
 
 ### asm.platform: `string`
 
-You can use this configuration variable to select the platform and it'll load up the corresponding 
-platform profile during analysis. See the section about [CPU and platform profiles](https://book.rizin.re/analysis/cpu_platform_profiles.html) for more information.
+The `asm.platform` configuration variable allows you to choose the platform, and it will load the corresponding platform profile during analysis. Refer to the section about [CPU and platform profiles](../analysis/cpu_platform_profiles.md) for more information.
 
 ### asm.flags: `bool`
 
-When set to "true", the disassembler view will have the flags column.
+When `asm.flags` is set to `true`, the disassembler view will include the flags column.
 
 ### asm.fcn.size: `bool`
 
-This variable is used to display the size of the function in the disassembly. By default, it is set to false and turning it on would result in a disassembly like the one below:
+The `asm.fcn.size` variable is employed to show the size of the function in the disassembly. By default, it is set to false, and enabling it would lead to a disassembly format similar to the one below:
+
+```bash
+# you can enable this also via `e asm.fcn.size=true`
+[0x00004050]> pd 10 @e:asm.fcn.size=true
+            ; DATA XREF from entry0 @ 0x5fb8
+/ 7992: int main(int argc, char **argv, char **envp);
+| stack: 31 (vars 31, args 0)
+| rg: 2 (vars 0, args 2)
+|           0x00004050      endbr64
+|           0x00004054      push  r15
+|           0x00004056      push  r14
+|           0x00004058      push  r13
+|           0x0000405a      push  r12
+|           0x0000405c      push  rbp
+|           0x0000405d      push  rbx
+|           0x0000405e      sub   rsp, 0xf8
+|           0x00004065      mov   rbx, qword [rsi]                     ; argv
+|           0x00004068      mov   dword [var_118h], edi                ; argc
 
 ```
-┌ 44: int main (char **argv);
-│           ; var int32_t var_4h @ ebp-0x4
-│           ; arg char **argv @ esp+0x24
-│           0x000011cd      lea   ecx, [argv]
-│           0x000011d1      and   esp, 0xfffffff0
-```
-Here, `44` is the size of the function.
+Here, `7992` is the size of the function.
 
 ### asm.lines.call: `bool`
 
-If set to "true", draw lines at the left of the disassembly output (`pd`, `pD` commands) to graphically represent control flow changes (jumps and calls) that are targeted inside the current block. Also, see `asm.lines.out`.
+When `asm.lines.call` is set to `true`, lines are drawn at the left of the disassembly output (`pd`, `pD` commands). These lines graphically represent control flow changes, such as jumps and calls, that are targeted inside the current block. Also, refer to `asm.lines.out`.
 
 ### asm.lines.out: `bool`
 
-When set to "true", the disassembly view will also draw control flow lines that go outside of the block.
+When `asm.lines.out` is set to `true`, the disassembly view will draw control flow lines that extend beyond the block.
 
 ### asm.offset: `bool`
 
-Show or hide offsets for individual disassembled instructions.
+The `asm.offset` configuration variable determines whether to show or hide offsets for individual disassembled instructions.
 
 ### asm.os: `string`
 
-Selects a target operating system for the currently loaded binary. Usually, OS is automatically detected by Rizin (`rz-bin -rI`). Yet, `asm.os` can be used to switch to a different syscall table employed by another OS.
+The `asm.os` configuration variable lets you select a target operating system for the currently loaded binary. Typically, the OS is automatically detected by Rizin (command `i` or via `rz-bin -I /path/to/bin`). However, `asm.os` can be employed to switch to a different syscall table used by another OS.
 
 ### asm.pseudo: `bool`
 
-A boolean value to set the pseudo syntax in the disassembly. "False" indicates a native one, defined by the current architecture, "true" activates a pseudocode strings format. For example, it'll transform :
+The `asm.pseudo` configuration variable is a boolean value used to set the pseudo syntax in the disassembly. When set to `false`, it indicates a native syntax defined by the current architecture. When set to `true`, it activates a pseudocode strings format; this feature can be beneficial when disassembling obscure architectures.
+
+```bash
+# you can disable this also via `e asm.pseudo=false`
+[0x00100508]> pd 10 @e:asm.pseudo=false
+            ;-- _start:
+/ entry0(int64_t arg_18h, int64_t arg_8h, int64_t arg_10h, int64_t arg1, int64_t arg2, int64_t arg4, int64_t arg5);
+|           ; arg int64_t arg1 @ r3
+|           ; arg int64_t arg2 @ r4
+|           ; arg int64_t arg4 @ r6
+|           ; arg int64_t arg5 @ r7
+|           ; var int64_t var_1h @ stack - 0x1
+|           ; arg int64_t arg_8h @ stack + 0x8
+|           ; arg int64_t arg_10h @ stack + 0x10
+|           ; arg int64_t arg_18h @ stack + 0x18
+|           0x00100508      lis   r2, 0x1e                             ; start.S:65 ; 0x1e0000
+|                                                                      ; sym..iplt
+|           0x0010050c      addi  r2, r2, 0x7c00
+|           0x00100510      mr    r9, r1                               ; start.S:67
+|           0x00100514      rldicr r1, r1, 0, 0x3b                     ; start.S:69
+|           0x00100518      li    r0, 0                                ; start.S:70
+|           0x0010051c      stdu  r1, -0x80(r1)                        ; start.S:71
+|           0x00100520      mtlr  r0                                   ; start.S:72
+|           0x00100524      std   r0, 0(r1)                            ; start.S:73
+|           0x00100528      ld    r8, -0x7ff0(r2)                      ; start.S:77 ; 0x194c40
+|                                                                      ; sym..rodata
+|       ,=< 0x0010052c      b     0x101048                             ; start.S:80
+# you can enable this also via `e asm.pseudo=true`
+[0x00100508]> pd 10 @e:asm.pseudo=true
+            ;-- _start:
+/ entry0(int64_t arg_18h, int64_t arg_8h, int64_t arg_10h, int64_t arg1, int64_t arg2, int64_t arg4, int64_t arg5);
+|           ; arg int64_t arg1 @ r3
+|           ; arg int64_t arg2 @ r4
+|           ; arg int64_t arg4 @ r6
+|           ; arg int64_t arg5 @ r7
+|           ; var int64_t var_1h @ stack - 0x1
+|           ; arg int64_t arg_8h @ stack + 0x8
+|           ; arg int64_t arg_10h @ stack + 0x10
+|           ; arg int64_t arg_18h @ stack + 0x18
+|           0x00100508      r2 = (0x1e << 16)                          ; start.S:65 ; 0x1e0000
+|                                                                      ; sym..iplt
+|           0x0010050c      r2 += 0x7c00
+|           0x00100510      r9 = r1                                    ; start.S:67
+|           0x00100514      r1 = rol64(r1, 0) & 0x1f                   ; start.S:69
+|           0x00100518      r0 = 0                                     ; start.S:70
+|           0x0010051c      [r1 - 0x80] = r1                           ; start.S:71
+|           0x00100520      lr = r0                                    ; start.S:72
+|           0x00100524      [r1 + 0] = r0                              ; start.S:73
+|           0x00100528      r8 = [r2 - 0x7ff0]                         ; start.S:77 ; 0x194c40
+|                                                                      ; sym..rodata
+|       ,=< 0x0010052c      goto 0x101048                              ; start.S:80
 
 ```
-│           0x080483ff      e832000000     call 0x8048436
-│           0x08048404      31c0           xor eax, eax
-│           0x08048406      0205849a0408   add al, byte [0x8049a84]
-│           0x0804840c      83f800         cmp eax, 0
-│           0x0804840f      7405           je 0x8048416
-```
-to
-
-```
-│           0x080483ff      e832000000     0x8048436 ()
-│           0x08048404      31c0           eax = 0
-│           0x08048406      0205849a0408   al += byte [0x8049a84]
-│           0x0804840c      83f800         var = eax - 0
-│           0x0804840f      7405           if (!var) goto 0x8048416
-```
-It can be useful while disassembling obscure architectures.
 
 ### asm.sub.jmp: `bool`
 
-Substitute jump, call and branch targets with function names in the disassembly.
-
-For example, when turned on, it'd display `jal 0x80001a40` as `jal fcn.80001a40` in the disassembly.
+The `asm.sub.jmp` configuration variable substitutes jump, call, and branch targets with function names in the disassembly. For instance, when activated, it would display `jal 0x80001a40` as `jal fcn.80001a40` in the disassembly.
 
 ### asm.sub.reg: `bool`
 
-Replace register names with arguments or their associated role alias.
+asm.sub.reg Replace register names with arguments or their associated role alias.
 
 For example, if you have something like this:
 
-```
-│           0x080483ea      83c404         add esp, 4
-│           0x080483ed      68989a0408     push 0x8049a98
-│           0x080483f7      e870060000     call sym.imp.scanf
-│           0x080483fc      83c408         add esp, 8
-│           0x08048404      31c0           xor eax, eax
-```
-This variable changes it to:
-```
-│           0x080483ea      83c404         add SP, 4
-│           0x080483ed      68989a0408     push 0x8049a98
-│           0x080483f7      e870060000     call sym.imp.scanf
-│           0x080483fc      83c408         add SP, 8
-│           0x08048404      31c0           xor A0, A0
+```bash
+[0x00004050]> pd 4 @e:asm.sub.reg=false
+            ; DATA XREF from entry0 @ 0x5fb8
+            ; DATA XREF from fcn.00015be0 @ 0x17078
+/ int main(int argc, char **argv, char **envp);
+| stack: 29 (vars 29, args 0)
+| rg: 2 (vars 0, args 2)
+|           0x0000405d      push  rbx
+|           0x0000405e      sub   rsp, 0xf8
+|           0x00004065      mov   rbx, qword [rsi]                     ; argv
+|           0x00004068      mov   dword [var_118h], edi                ; argc
+[0x00004050]> pd 4 @e:asm.sub.reg=true
+            ; DATA XREF from entry0 @ 0x5fb8
+            ; DATA XREF from fcn.00015be0 @ 0x17078
+/ int main(int argc, char **argv, char **envp);
+| stack: 29 (vars 29, args 0)
+| rg: 2 (vars 0, args 2)
+|           0x0000405d      push  rbx
+|           0x0000405e      sub   SP, 0xf8
+|           0x00004065      mov   rbx, qword [A1]                      ; argv
+|           0x00004068      mov   dword [var_118h], A0                 ; argc
+
 ```
 
 ### asm.sub.rel: `bool`
 
-A boolean value that substitutes expressions relative to the Program Counter in the disassembly. When turned on, it shows the references as string references.
+The `asm.sub.rel` configuration variable, when set to true, substitutes expressions relative to the Program Counter in the disassembly. When activated, it displays the references as string references.
 
-For example:
-
-```
-0x5563844a0181      488d3d7c0e00.  lea rdi, [rip + 0xe7c]    ; str.argv__2d_:__s
-```
-When turned on, this variable lets you display the above instruction as:
-
-```
-0x5563844a0181      488d3d7c0e00.  lea rdi, str.argv__2d_:__s    ; 0x5563844a1004 ; "argv[%2d]: %s\n"
+```bash
+[0x00004050]> pd 30 @e:asm.sub.rel=false ~lea
+|     |||   0x000040bb      lea   rsi, [rip + 0x15f51]                 ; str..libs
+[0x00004050]> pd 30 @e:asm.sub.rel=true ~lea
+|     |||   0x000040bb      lea   rsi, str..libs                       ; 0x1a013 ; "/.libs/" ; const char *s2
 ```
 
 ### asm.sub.section: `bool`
 
-Prefix offsets in the disassembly with the name of the section or map.
+The `asm.sub.section` configuration variable, when set, prefixes offsets in the disassembly with the name of the section or map.
 
-That means, from something like:
-
-```
+```bash
+[0x00004050]> pd 30 @e:asm.sub.rel=false ~lea
 0x000067ea      488d0def0c01.  lea rcx, [0x000174e0]
-```
-to the one below, when toggled on.
-```
+[0x00004050]> pd 30 @e:asm.sub.rel=true ~lea
 0x000067ea      488d0def0c01.  lea rcx, [fmap.LOAD1.0x000174e0]
 ```
 
 ### asm.sub.varonly: `bool`
 
-Substitutes the variable expression with the local variable name.
+The `asm.sub.varonly` configuration variable, when enabled, substitutes the variable expression with the local variable name. For instance, it would display `var_118h` as `rsp + var_118h` in the disassembly.
 
-For example: `var_14h` as `rbp - var_14h`, in the disassembly.
+```bash
+[0x00004050]> pd 10 @e:asm.sub.varonly=false
+            ; DATA XREF from entry0 @ 0x5fb8
+            ; DATA XREF from fcn.00015be0 @ 0x17078
+/ int main(int argc, char **argv, char **envp);
+| stack: 29 (vars 29, args 0)
+| rg: 2 (vars 0, args 2)
+|           0x00004050      endbr64
+|           0x00004054      push  r15
+|           0x00004056      push  r14
+|           0x00004058      push  r13
+|           0x0000405a      push  r12
+|           0x0000405c      push  rbp
+|           0x0000405d      push  rbx
+|           0x0000405e      sub   rsp, 0xf8
+|           0x00004065      mov   rbx, qword [rsi]                     ; argv
+|           0x00004068      mov   dword [rsp + var_118h], edi          ; argc
+[0x00004050]> pd 10 @e:asm.sub.varonly=true
+            ; DATA XREF from entry0 @ 0x5fb8
+            ; DATA XREF from fcn.00015be0 @ 0x17078
+/ int main(int argc, char **argv, char **envp);
+| stack: 29 (vars 29, args 0)
+| rg: 2 (vars 0, args 2)
+|           0x00004050      endbr64
+|           0x00004054      push  r15
+|           0x00004056      push  r14
+|           0x00004058      push  r13
+|           0x0000405a      push  r12
+|           0x0000405c      push  rbp
+|           0x0000405d      push  rbx
+|           0x0000405e      sub   rsp, 0xf8
+|           0x00004065      mov   rbx, qword [rsi]                     ; argv
+|           0x00004068      mov   dword [var_118h], edi                ; argc
+```
 
 ### asm.syntax: `string`
 
-Changes syntax flavor for disassembler between Intel and AT&T. At the moment, this setting affects Udis86 disassembler for Intel 32/Intel 64 targets only. Supported values are `intel` and `att`.
+The `asm.syntax` configuration variable enables you to change the syntax flavor for disassembler syntax. Supported values can be queried using `e asm.syntax=?`.
+
+```bash
+[0x00004050]> pd 10 @e:asm.syntax=att
+            ; DATA XREF from entry0 @ 0x5fb8
+            ; DATA XREF from fcn.00015be0 @ 0x17078
+/ int main(int argc, char **argv, char **envp);
+| stack: 29 (vars 29, args 0)
+| rg: 2 (vars 0, args 2)
+|           0x00004050      endbr64
+|           0x00004054      pushq %r15
+|           0x00004056      pushq %r14
+|           0x00004058      pushq %r13
+|           0x0000405a      pushq %r12
+|           0x0000405c      pushq %rbp
+|           0x0000405d      pushq %rbx
+|           0x0000405e      subq  $0xf8, %rsp
+|           0x00004065      movq  (%rsi), %rbx                         ; argv
+|           0x00004068      movl  %edi, var_118h                       ; argc
+[0x00004050]> pd 10 @e:asm.syntax=masm
+            ; DATA XREF from entry0 @ 0x5fb8
+            ; DATA XREF from fcn.00015be0 @ 0x17078
+/ int main(int argc, char **argv, char **envp);
+| stack: 29 (vars 29, args 0)
+| rg: 2 (vars 0, args 2)
+|           0x00004050      endbr64
+|           0x00004054      push  r15
+|           0x00004056      push  r14
+|           0x00004058      push  r13
+|           0x0000405a      push  r12
+|           0x0000405c      push  rbp
+|           0x0000405d      push  rbx
+|           0x0000405e      sub   rsp, 0f8h
+|           0x00004065      mov   rbx, qword [rsi]                     ; argv
+|           0x00004068      mov   dword [var_118h], edi                ; argc
+[0x00004050]> pd 10 @e:asm.syntax=intel
+            ; DATA XREF from entry0 @ 0x5fb8
+            ; DATA XREF from fcn.00015be0 @ 0x17078
+/ int main(int argc, char **argv, char **envp);
+| stack: 29 (vars 29, args 0)
+| rg: 2 (vars 0, args 2)
+|           0x00004050      endbr64
+|           0x00004054      push  r15
+|           0x00004056      push  r14
+|           0x00004058      push  r13
+|           0x0000405a      push  r12
+|           0x0000405c      push  rbp
+|           0x0000405d      push  rbx
+|           0x0000405e      sub   rsp, 0xf8
+|           0x00004065      mov   rbx, qword [rsi]                     ; argv
+|           0x00004068      mov   dword [var_118h], edi                ; argc
+```
 
 ### asm.tabs: `int`
 
-If your disassembly doesn't fit in your screen or aligns clumsily, `asm.tabs` might be of help. You can use this variable to control the distance between the operands, by setting the number of spaces, while displaying your disassembly.
+If the disassembly output doesn't fit on your screen or appears awkwardly aligned, `asm.tabs` can be helpful. You can adjust the spacing between operands by setting the number of spaces while displaying your disassembly using this variable.
 
-For example, this is the disassembly with the variable set to 0:
-```
-[0x000040a7]> e asm.tabs=0
-[0x000040a7]> pd 6
-│           0x000040a7      push rsp
-│           0x000040a8      mov r12d, edi                              ; argc
-│           0x000040ab      push rbp
-│           0x000040ac      mov rbp, rsi                               ; argv
-│           0x000040af      push rbx
-│           0x000040b0      sub rsp, 0x48
-```
-And here's what it would look like after setting it to 6:
-```
-[0x000040a7]> e asm.tabs=6
-[0x000040a7]> pd 6
-│           0x000040a7      push  rsp
-│           0x000040a8      mov   r12d, edi                            ; argc
-│           0x000040ab      push  rbp
-│           0x000040ac      mov   rbp,  rsi                            ; argv
-│           0x000040af      push  rbx
-│           0x000040b0      sub   rsp,  0x48
+For example:
+
+```bash
+[0x00004050]> pd 10 @e:asm.tabs=0
+/ int main(int argc, char **argv, char **envp);
+| stack: 29 (vars 29, args 0)
+| rg: 2 (vars 0, args 2)
+|           0x00004050      endbr64
+|           0x00004054      push r15
+|           0x00004056      push r14
+|           0x00004058      push r13
+|           0x0000405a      push r12
+|           0x0000405c      push rbp
+|           0x0000405d      push rbx
+|           0x0000405e      sub rsp, 0xf8
+|           0x00004065      mov rbx, qword [rsi]                       ; argv
+|           0x00004068      mov dword [var_118h], edi                  ; argc
+[0x00004050]> pd 10 @e:asm.tabs=6
+/ int main(int argc, char **argv, char **envp);
+| stack: 29 (vars 29, args 0)
+| rg: 2 (vars 0, args 2)
+|           0x00004050      endbr64
+|           0x00004054      push  r15
+|           0x00004056      push  r14
+|           0x00004058      push  r13
+|           0x0000405a      push  r12
+|           0x0000405c      push  rbp
+|           0x0000405d      push  rbx
+|           0x0000405e      sub   rsp, 0xf8
+|           0x00004065      mov   rbx, qword [rsi]                     ; argv
+|           0x00004068      mov   dword [var_118h], edi                ; argc
+
 ```
 
 ### asm.tabs.once: `bool`
 
-This is a boolean variable that can be set to true if you want to align only the opcodes, excluding the arguments. This makes sense only if you have set `asm.tabs` on.
+`asm.tabs.once` represents a boolean variable, which can be configured as true if the alignment is desired solely for opcodes, omitting the arguments. This configuration is meaningful only when `asm.tabs` has been previously enabled.
 
-```
-[0x00008290]> e asm.tabs=6
-[0x00008290]> e asm.tabs.once=false
-[0x00008290]> pd 10
-│           0x00008290      mov   ip,   sp
-│           0x00008294      push  {r4,  fp,   ip,   lr,   pc}
-│           0x00008298      sub   fp,   ip,   4
-│           0x0000829c      sub   sp,   sp,   0x24
-│           0x000082a0      str   r0,   [fp,  -0x28]
-│           0x000082a4      str   r1,   [fp,  -0x2c]
-│           0x000082a8      ldr   r3,   [fp,  -0x28]
-│           0x000082ac      cmp   r3,   1
-│       ┌─< 0x000082b0      bgt   0x82c0
-│       │   0x000082b4      mvn   r3,   0
-```
-In the above example, the opcodes and the operands are aligned. Now, turning it on would align only the opcodes.
-```
-[0x00008290]> e asm.tabs.once=true
-[0x00008290]> pd 10
-│           0x00008290      mov   ip, sp
-│           0x00008294      push  {r4, fp, ip, lr, pc}
-│           0x00008298      sub   fp, ip, 4
-│           0x0000829c      sub   sp, sp, 0x24
-│           0x000082a0      str   r0, [var_28h]
-│           0x000082a4      str   r1, [var_2ch]
-│           0x000082a8      ldr   r3, [var_28h]
-│           0x000082ac      cmp   r3, 1
-│       ┌─< 0x000082b0      bgt   0x82c0
-│       │   0x000082b4      mvn   r3, 0
+```bash
+[0x00004050]> pd 10 @e:asm.tabs=10 @e:asm.tabs.once=false
+/ int main(int argc, char **argv, char **envp);
+| stack: 29 (vars 29, args 0)
+| rg: 2 (vars 0, args 2)
+|           0x00004050      endbr64
+|           0x00004054      push      r15
+|           0x00004056      push      r14
+|           0x00004058      push      r13
+|           0x0000405a      push      r12
+|           0x0000405c      push      rbp
+|           0x0000405d      push      rbx
+|           0x0000405e      sub       rsp,      0xf8
+|           0x00004065      mov       rbx,      qword [rsi]            ; argv
+|           0x00004068      mov       dword [var_118h], edi            ; argc
+[0x00004050]> pd 10 @e:asm.tabs=10 @e:asm.tabs.once=true
+/ int main(int argc, char **argv, char **envp);
+| stack: 29 (vars 29, args 0)
+| rg: 2 (vars 0, args 2)
+|           0x00004050      endbr64
+|           0x00004054      push      r15
+|           0x00004056      push      r14
+|           0x00004058      push      r13
+|           0x0000405a      push      r12
+|           0x0000405c      push      rbp
+|           0x0000405d      push      rbx
+|           0x0000405e      sub       rsp, 0xf8
+|           0x00004065      mov       rbx, qword [rsi]                 ; argv
+|           0x00004068      mov       dword [var_118h], edi            ; argc
+
 ```
 
 ### asm.trace: `bool`
 
-A boolean value that controls displaying of tracing information (sequence number and counter) at the left of each opcode. It is used to assist with programs trace analysis.
+`asm.trace` is a boolean parameter governing the display of tracing details (sequence number and counter) adjacent to each opcode. Its purpose is to aid in the analysis of program traces.
 
 ## Debug Configuration
 
 ### dbg.follow.child: `bool`
 
-This variable lets you follow the child process, when a fork (system call) is encountered during debugging. By default, it is set to `false` and the parent process is traced.
+The variable `dbg.follow.child` allows tracking the child process when encountering a fork (system call) during debugging. Its default setting is `false`, causing the parent process to be traced.
 
 ## Screen Configuration
 
 ### scr.color: `int`
 
-This variable specifies the mode for colorized screen output.
+The variable `scr.color` designates the mode for displaying colorized output on the screen.
 
-* `0` means no colors.
-* `1` means 16-colors mode.
-* `2` means 256-colors mode.
-* `3` means 16 million-colors mode.
-
-If your favorite theme looks weird, try to bump this up.
+* `0` no colors (black and white)
+* `1` ANSI colors (16 basic ANSI colors)
+* `2` 256 colors (256 scale colors)
+* `3` truecolor (24bit true color)
 
 ### scr.visual.mode: `int`
 
-`scr.visual.mode` lets you set a default view for the visual mode. The variable
-accepts an integer as its value and it gets mapped to the following modes:
+The variable `scr.visual.mode` enables the configuration of a default view for the visual mode. This variable accepts an integer value, which corresponds to the following modes:
 
 * `0` - Hexadecimal view
 * `1` - Disassembly view
@@ -295,32 +427,31 @@ accepts an integer as its value and it gets mapped to the following modes:
 * `3` - Color blocks (entropy)
 * `4` - Print in string format
 
-So, if you want to have the disassembly view everytime you open up visual mode, you can
-have `e scr.visual.mode=1` put on your `~/.rizinrc`.
+For instance, if you prefer the disassembly view every time you initiate visual mode, you can include `e scr.visual.mode=1` in your `rizinrc` [initial script](initial_scripts.md).
 
 ### scr.seek: `string`
 
-This variable accepts a full-featured expression or a pointer/flag (eg. eip). If set, rizin will set seek position to its value on startup.
+The variable `scr.seek` can be assigned a full-featured expression or a pointer/flag (e.g., `eip`). When configured, Rizin will initialize the seek position to the specified value upon startup.
 
 ### scr.scrollbar: `bool`
 
-If you have set up any [flagzones](http://book.rada.re/basic_commands/flags.html#flag-zones) (`fz?`), this variable will let you display the scrollbar with the flagzones, in Visual mode. Set it to `1` to display the scrollbar at the right end, `2` for the top and `3` to display it at the bottom.
+When you have configured any [flagzones](http://book.rada.re/basic_commands/flags.html#flag-zones) (`fz?`), the `scr.scrollbar` variable facilitates the display of the scrollbar alongside the flagzones in Visual mode. Set it to `1` for displaying the scrollbar at the right end, `2` for the top, and `3` to position it at the bottom.
 
 ### scr.utf8: `bool`
 
-Show UTF-8 characters instead of ANSI.
+The variable `scr.utf8` toggles the display of UTF-8 characters instead of ANSI characters.
 
 ### scr.utf8.curvy: `bool`
 
-This variable lets you display curved corners in places like function graphs. This variable requires `scr.utf8` to be turned on.
+The `scr.utf8.curvy` variable enables the presentation of curved corners in locations such as function graphs. It is dependent on having the `scr.utf8` setting activated.
 
-```
+```bash
 [0x0000415c]> pd 4
 │           0x0000415c      cmp   eax, 2
 │       ┌─< 0x0000415f      je    0x5001
 │       │   0x00004165      cmp   eax, 3
 │      ┌──< 0x00004168      jne   0x4348
-[0x0000415c]> e scr.utf8.curvy=1
+[0x0000415c]> e scr.utf8.curvy=true
 [0x0000415c]> pd 4
 │           0x0000415c      cmp   eax, 2
 │       ╭─< 0x0000415f      je    0x5001
@@ -330,67 +461,63 @@ This variable lets you display curved corners in places like function graphs. Th
 
 ### scr.wheel: `bool`
 
-This variable lets you enable the mouse in Visual mode. Turning this variable on will be useful when you want to use your mouse to scroll through your disassembly or copy something in the Visual mode.
+The `scr.wheel` variable permits the activation of the mouse in Visual mode. Enabling this variable proves beneficial when you wish to utilize your mouse for scrolling through disassembly or copying content in Visual mode.
 
 ## General Configuration
 
 ### cfg.bigendian: `bool`
 
-Change endianness. "true" means big-endian, "false" is for little-endian.
-"file.id" and "file.flag" both to be true.
+The `cfg.bigendian` setting alters the endianness, where "true" indicates big-endian, and "false" corresponds to little-endian.
 
 ### cfg.fortunes: `bool`
 
-Enables or disables "fortune" messages displayed at each rizin start.
+The `cfg.fortunes` option allows you to enable or disable the display of "fortune" messages that appear at each Rizin start.
 
 ### cfg.fortunes.file: `string`
 
-Rizin has two types for fortunes: tips and fun. Fortunes of the type 'tips' are general tips to help you use Rizin better, whereas the other one prints some lighthearted jokes. You can choose which type of fortune to display, using this variable.
+Rizin offers two categories of fortunes: `tips` and `fun`. Fortunes categorized as `tips` provide general advice to enhance your usage of Rizin, while the other category offers lighthearted jokes. You can specify the type of fortune to display by utilizing the `cfg.fortunes.file` variable.
 
-```
-[0x00000000]> e cfg.fortunes.file=tips
-[0x00000000]> fo
- -- Bindiff two files with '$ rz_diff /bin/true /bin/false'
-[0x00000000]> e cfg.fortunes.file=fun
-[0x00000000]> fo
- -- Welcome to "IDA - the roguelike"
+```bash
+[0x00000000]> fortune @e:cfg.fortunes.file=tips
+ -- Interpret rizin scripts with '. <path-to-script>'. Similar to the bash source alias command.
+[0x00000000]> fortune @e:cfg.fortunes.file=fun
+ -- For a full list of commands see `strings /dev/urandom`
 [0x00000000]>
 ```
-Rizin also supports custom fortunes. You can save your fortunes in a file and provide the relative or absolute path to the same variable, to have them displayed at the startup.
 
-```
-[0x00000000]> e cfg.fortunes.file=/path/to/my/fortunes.txt
+Rizin additionally supports custom fortunes. You can store your own fortunes in a file and then specify the relative or absolute path to that file using the same variable. This allows your custom fortunes to be displayed at startup.
+
+```bash
+[0x00000000]> fortune @e:cfg.fortunes.file=/path/to/my/fortunes.txt
 ```
 
-Please make sure that you add these in your `~/.rizinrc` to preserve the changes when you reopen rizin.
+Ensure to include these configurations in your `rizinrc` file to retain the changes when reopening Rizin.
 
 ### cfg.newtab: `bool`
 
-If this variable is enabled, help messages will be displayed along with command names in tab completion for commands.
+Enabling the `cfg.newtab` variable results in the display of help messages alongside command names during tab completion for commands.
 
 ## Stack Configuration
 
 ### stack.size: `int`
 
-This variable lets you set the size of stack in bytes.
+The `stack.size` variable allows you to define the size of the stack hexdump in visual debug, specified in bytes.
 
 ## Command Configuration
 
 ## cmd.repeat: `bool`
 
-Sometimes, you may need to run the same command repeatedly and that is what `cmd.repeat` is for. When set to `true`, pressing Return key (Enter key) will run the previous command again.
+At times, you might find the need to execute a particular command repeatedly, and that's where `cmd.repeat` comes into play. When configured as `true`, pressing the Return key (Enter key) will rerun the previous command. This may alter the current offset.
 
 For example:
-```
+```bash
 [0x00005bc0]> e cmd.repeat=true
 [0x00005bc0]> pd 2
             ;-- entry.fini0:
             0x00005bc0      endbr64
             0x00005bc4      cmp   byte [0x000232c8], 0
-```
-When turned on, you'd just need to press Enter key to run `pd 2`
-```
-[0x00005bc0]>
+[0x00005bc4]>
             0x00005bce      cmp   qword [reloc.__cxa_finalize], 0
             0x00005bd6      mov   rbp, rsp
+[0x00005bd6]>
 ```

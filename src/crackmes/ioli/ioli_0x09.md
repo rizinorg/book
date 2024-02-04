@@ -3,7 +3,7 @@ IOLI 0x09
 
 Hints: crackme0x09 hides the format string (%d and %s), and nothing more than 0x08.
 
-```sh
+```bash
 $ export LOLA=help
 $ ./crackme0x09
 IOLI Crackme Level 0x09

@@ -162,7 +162,7 @@ Now there are 2 constraints:
 
 The password is at our fingertips now.
 
-```sh
+```bash
 ./crackme0x05
 IOLI Crackme Level 0x05
 Password: 88

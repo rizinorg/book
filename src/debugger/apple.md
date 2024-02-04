@@ -22,7 +22,7 @@ regular user, download the Entitlements file
 [here](https://github.com/rizinorg/rizin/blob/dev/binrz/rizin/rizin_macos.xml).
 Then execute the following command:
 
-```sh
+```bash
 $ codesign --entitlements <entitlements-file> --force -s - $(which rizin)
 ```
 
@@ -47,7 +47,7 @@ instruct taskport to not authenticate the user by executing the following
 commands. This will disable the debugging authentication prompt even after
 you reboot.
 
-```sh
+```bash
 security authorizationdb read system.privilege.taskport > taskport.plist
 /usr/libexec/PlistBuddy -c 'Set :authenticate-user false' ./taskport.plist
 sudo security authorizationdb write system.privilege.taskport < taskport.plist

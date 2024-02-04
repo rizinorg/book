@@ -3,7 +3,7 @@ IOLI 0x08
 
 we can reverse it and find it's similar to 0x07, and use the same password to solve it:
 
-```sh
+```bash
 $ export LOLAA=help
 $ ./cracke0x08
 IOLI Crackme Level 0x08
@@ -13,7 +13,7 @@ Password OK!
 
 [dustri](https://dustri.org/b/defeating-ioli-with-rizin.html) provided a better way to check crackme0x08. 0x07 is the stripped version of 0x08.
 
-```sh
+```bash
 $ rz-diff -A -C ./crackme0x07 ./crackme0x08
 ...
               fcn.08048360  23 0x8048360 |   MATCH  (1.000000) | 0x8048360   23 sym._init
