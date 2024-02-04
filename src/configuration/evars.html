@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="description" content="This book focuses on the Rizin reverse engineering framework">
 
-<title>The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework - 14&nbsp; Configuration Variables</title>
+<title>The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework - 14&nbsp; Evaluable Variables</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -31,7 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../src/configuration/files.html" rel="next">
+<link href="../../src/configuration/initial_scripts.html" rel="next">
 <link href="../../src/configuration/colors.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -50,7 +84,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -59,6 +99,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -70,17 +111,16 @@ ul.task-list li input[type="checkbox"] {
 
 <body class="nav-sidebar floating">
 
-
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/configuration/intro.html">Configuration</a></li><li class="breadcrumb-item"><a href="../../src/configuration/evars.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Configuration Variables</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/configuration/intro.html">Configuration</a></li><li class="breadcrumb-item"><a href="../../src/configuration/evars.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Evaluable Variables</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
@@ -90,12 +130,12 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/rizinorg/book" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/rizinorg/book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -241,25 +281,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/configuration/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Configuration</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/configuration/colors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Colors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Colors &amp; Themes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/configuration/evars.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Configuration Variables</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Evaluable Variables</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/configuration/files.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Files</span></span></a>
+  <a href="../../src/configuration/initial_scripts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Initial Scripts</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/configuration/build_variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Build Variables</span></span></a>
   </div>
 </li>
       </ul>
@@ -276,79 +322,79 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/basic_commands/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Basic Commands</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Basic Commands</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/basic_commands/seeking.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Seeking</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Seeking</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/basic_commands/block_size.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Block Size</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Block Size</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/basic_commands/sections.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Sections</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Sections</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/basic_commands/mapping_files.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Mapping Files</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Mapping Files</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/basic_commands/print_modes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Print Modes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Print Modes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/basic_commands/flags.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Flags</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Flags</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/basic_commands/write.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Writing Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Writing Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/basic_commands/zoom.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Zoom</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Zoom</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/basic_commands/yank_paste.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Yank/Paste</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Yank/Paste</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/basic_commands/comparing_bytes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Comparing Bytes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Comparing Bytes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/basic_commands/sdb.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">SDB</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">SDB</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/basic_commands/dietline.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Dietline</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Dietline</span></span></a>
   </div>
 </li>
       </ul>
@@ -365,31 +411,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/visual_mode/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Visual Mode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Visual Mode</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/visual_mode/visual_disassembly.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Visual Disassembly</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Visual Disassembly</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/visual_mode/visual_assembler.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Visual Assembler</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Visual Assembler</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/visual_mode/visual_configuration_editor.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Visual Configuration Editor</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Visual Configuration Editor</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/visual_mode/visual_panels.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Visual Panels</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Visual Panels</span></span></a>
   </div>
 </li>
       </ul>
@@ -406,49 +452,49 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/search_bytes/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Searching for Bytes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Searching for Bytes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/search_bytes/basic_searches.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Basic Search</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Basic Search</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/search_bytes/configurating_the_search.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Configuring Search Options</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Configuring Search Options</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/search_bytes/pattern_search.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Pattern Matching Search</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Pattern Matching Search</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/search_bytes/automation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Search Automation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Search Automation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/search_bytes/backward_search.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Searching Backwards</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Searching Backwards</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/search_bytes/search_in_assembly.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Assembler Search</span></span></a>
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Assembler Search</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/search_bytes/searching_aes_keys.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Searching for AES Keys</span></span></a>
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Searching for AES Keys</span></span></a>
   </div>
 </li>
       </ul>
@@ -465,19 +511,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/disassembling/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Disassembling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">Disassembling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/disassembling/adding_metadata.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">Adding Metadata to Disassembly</span></span></a>
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">Adding Metadata to Disassembly</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/disassembling/esil.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">ESIL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">45</span>&nbsp; <span class="chapter-title">ESIL</span></span></a>
   </div>
 </li>
       </ul>
@@ -494,73 +540,73 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/analysis/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">45</span>&nbsp; <span class="chapter-title">Data and Code Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">46</span>&nbsp; <span class="chapter-title">Data and Code Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/analysis/code_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">46</span>&nbsp; <span class="chapter-title">Code Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">47</span>&nbsp; <span class="chapter-title">Code Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/analysis/variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">47</span>&nbsp; <span class="chapter-title">Managing variables</span></span></a>
+ <span class="menu-text"><span class="chapter-number">48</span>&nbsp; <span class="chapter-title">Managing variables</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/analysis/types.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">48</span>&nbsp; <span class="chapter-title">Types</span></span></a>
+ <span class="menu-text"><span class="chapter-number">49</span>&nbsp; <span class="chapter-title">Types</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/analysis/calling_conventions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">49</span>&nbsp; <span class="chapter-title">Calling Conventions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">50</span>&nbsp; <span class="chapter-title">Calling Conventions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/analysis/vtables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">50</span>&nbsp; <span class="chapter-title">Virtual Tables</span></span></a>
+ <span class="menu-text"><span class="chapter-number">51</span>&nbsp; <span class="chapter-title">Virtual Tables</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/analysis/syscalls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">51</span>&nbsp; <span class="chapter-title">Syscalls</span></span></a>
+ <span class="menu-text"><span class="chapter-number">52</span>&nbsp; <span class="chapter-title">Syscalls</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/analysis/emulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">52</span>&nbsp; <span class="chapter-title">Emulation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">53</span>&nbsp; <span class="chapter-title">Emulation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/analysis/symbols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">53</span>&nbsp; <span class="chapter-title">Symbols</span></span></a>
+ <span class="menu-text"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Symbols</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/analysis/signatures.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Signatures</span></span></a>
+ <span class="menu-text"><span class="chapter-number">55</span>&nbsp; <span class="chapter-title">Signatures</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/analysis/graphs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">55</span>&nbsp; <span class="chapter-title">Graph commands</span></span></a>
+ <span class="menu-text"><span class="chapter-number">56</span>&nbsp; <span class="chapter-title">Graph commands</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/analysis/cpu_platform_profiles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">56</span>&nbsp; <span class="chapter-title">CPU and platform profiles</span></span></a>
+ <span class="menu-text"><span class="chapter-number">57</span>&nbsp; <span class="chapter-title">CPU and platform profiles</span></span></a>
   </div>
 </li>
       </ul>
@@ -577,25 +623,25 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/scripting/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">57</span>&nbsp; <span class="chapter-title">Scripting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">58</span>&nbsp; <span class="chapter-title">Scripting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/scripting/loops.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">58</span>&nbsp; <span class="chapter-title">Loops</span></span></a>
+ <span class="menu-text"><span class="chapter-number">59</span>&nbsp; <span class="chapter-title">Loops</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/scripting/macros.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">59</span>&nbsp; <span class="chapter-title">Macros</span></span></a>
+ <span class="menu-text"><span class="chapter-number">60</span>&nbsp; <span class="chapter-title">Macros</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/scripting/rz-pipe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">60</span>&nbsp; <span class="chapter-title">Rz-pipe</span></span></a>
+ <span class="menu-text"><span class="chapter-number">61</span>&nbsp; <span class="chapter-title">Rz-pipe</span></span></a>
   </div>
 </li>
       </ul>
@@ -612,61 +658,61 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">61</span>&nbsp; <span class="chapter-title">Debugger</span></span></a>
+ <span class="menu-text"><span class="chapter-number">62</span>&nbsp; <span class="chapter-title">Debugger</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/getting_started.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">62</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">64</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/registers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">64</span>&nbsp; <span class="chapter-title">Registers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">65</span>&nbsp; <span class="chapter-title">Registers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/memory_maps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">65</span>&nbsp; <span class="chapter-title">Memory Maps</span></span></a>
+ <span class="menu-text"><span class="chapter-number">66</span>&nbsp; <span class="chapter-title">Memory Maps</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/heap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">66</span>&nbsp; <span class="chapter-title">Heap</span></span></a>
+ <span class="menu-text"><span class="chapter-number">67</span>&nbsp; <span class="chapter-title">Heap</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/files.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">67</span>&nbsp; <span class="chapter-title">Files</span></span></a>
+ <span class="menu-text"><span class="chapter-number">68</span>&nbsp; <span class="chapter-title">Files</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/revdebug.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">68</span>&nbsp; <span class="chapter-title">Reverse Debugging</span></span></a>
+ <span class="menu-text"><span class="chapter-number">69</span>&nbsp; <span class="chapter-title">Reverse Debugging</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/windows_messages.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">69</span>&nbsp; <span class="chapter-title">Windows Messages</span></span></a>
+ <span class="menu-text"><span class="chapter-number">70</span>&nbsp; <span class="chapter-title">Windows Messages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/apple.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">70</span>&nbsp; <span class="chapter-title">macOS/iOS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">macOS/iOS</span></span></a>
   </div>
 </li>
       </ul>
@@ -683,19 +729,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/remote_access/remoting_capabilities.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></span></a>
+ <span class="menu-text"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/remote_access/remote_gdb.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">Debugging with gdbserver</span></span></a>
+ <span class="menu-text"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title">Debugging with gdbserver</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/remote_access/windbg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title">WinDBG Kernel-mode Debugging (KD)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">74</span>&nbsp; <span class="chapter-title">WinDBG Kernel-mode Debugging (KD)</span></span></a>
   </div>
 </li>
       </ul>
@@ -712,139 +758,139 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">74</span>&nbsp; <span class="chapter-title">Tools</span></span></a>
+ <span class="menu-text"><span class="chapter-number">75</span>&nbsp; <span class="chapter-title">Tools</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-ax/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">75</span>&nbsp; <span class="chapter-title">Rz-ax</span></span></a>
+ <span class="menu-text"><span class="chapter-number">76</span>&nbsp; <span class="chapter-title">Rz-ax</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-find/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">76</span>&nbsp; <span class="chapter-title">Rz-find</span></span></a>
+ <span class="menu-text"><span class="chapter-number">77</span>&nbsp; <span class="chapter-title">Rz-find</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-run/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">77</span>&nbsp; <span class="chapter-title">Rz-run</span></span></a>
+ <span class="menu-text"><span class="chapter-number">78</span>&nbsp; <span class="chapter-title">Rz-run</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-bin/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">78</span>&nbsp; <span class="chapter-title">Rz-bin — Show Properties of a Binary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">79</span>&nbsp; <span class="chapter-title">Rz-bin — Show Properties of a Binary</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-bin/file_identification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">79</span>&nbsp; <span class="chapter-title">File Properties Identification</span></span></a>
+ <span class="menu-text"><span class="chapter-number">80</span>&nbsp; <span class="chapter-title">File Properties Identification</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-bin/entrypoints.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">80</span>&nbsp; <span class="chapter-title">Code Entrypoints</span></span></a>
+ <span class="menu-text"><span class="chapter-number">81</span>&nbsp; <span class="chapter-title">Code Entrypoints</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-bin/imports.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">81</span>&nbsp; <span class="chapter-title">Imports</span></span></a>
+ <span class="menu-text"><span class="chapter-number">82</span>&nbsp; <span class="chapter-title">Imports</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-bin/exports.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">82</span>&nbsp; <span class="chapter-title">Exports</span></span></a>
+ <span class="menu-text"><span class="chapter-number">83</span>&nbsp; <span class="chapter-title">Exports</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-bin/symbols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">83</span>&nbsp; <span class="chapter-title">Symbols (Exports)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">84</span>&nbsp; <span class="chapter-title">Symbols (Exports)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-bin/libraries.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">84</span>&nbsp; <span class="chapter-title">List Libraries</span></span></a>
+ <span class="menu-text"><span class="chapter-number">85</span>&nbsp; <span class="chapter-title">List Libraries</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-bin/strings.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">85</span>&nbsp; <span class="chapter-title">Strings</span></span></a>
+ <span class="menu-text"><span class="chapter-number">86</span>&nbsp; <span class="chapter-title">Strings</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-bin/program_sections.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">86</span>&nbsp; <span class="chapter-title">Program Sections</span></span></a>
+ <span class="menu-text"><span class="chapter-number">87</span>&nbsp; <span class="chapter-title">Program Sections</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-diff/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">87</span>&nbsp; <span class="chapter-title">Rz-diff</span></span></a>
+ <span class="menu-text"><span class="chapter-number">88</span>&nbsp; <span class="chapter-title">Rz-diff</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-diff/binary_diffing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">88</span>&nbsp; <span class="chapter-title">Rz-Diff (binary and text diffing utility)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">89</span>&nbsp; <span class="chapter-title">Rz-Diff (binary and text diffing utility)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-asm/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">89</span>&nbsp; <span class="chapter-title">Rz-asm</span></span></a>
+ <span class="menu-text"><span class="chapter-number">90</span>&nbsp; <span class="chapter-title">Rz-asm</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-asm/assemble.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">90</span>&nbsp; <span class="chapter-title">Assembler</span></span></a>
+ <span class="menu-text"><span class="chapter-number">91</span>&nbsp; <span class="chapter-title">Assembler</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-asm/disassemble.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">91</span>&nbsp; <span class="chapter-title">Disassembler</span></span></a>
+ <span class="menu-text"><span class="chapter-number">92</span>&nbsp; <span class="chapter-title">Disassembler</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-asm/config.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">92</span>&nbsp; <span class="chapter-title">Disassembler Configuration</span></span></a>
+ <span class="menu-text"><span class="chapter-number">93</span>&nbsp; <span class="chapter-title">Disassembler Configuration</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-gg/rz-gg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">93</span>&nbsp; <span class="chapter-title">Rz-gg</span></span></a>
+ <span class="menu-text"><span class="chapter-number">94</span>&nbsp; <span class="chapter-title">Rz-gg</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-gg/lang.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">94</span>&nbsp; <span class="chapter-title">Syntax of the language</span></span></a>
+ <span class="menu-text"><span class="chapter-number">95</span>&nbsp; <span class="chapter-title">Syntax of the language</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-hash/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">95</span>&nbsp; <span class="chapter-title">Rz-hash</span></span></a>
+ <span class="menu-text"><span class="chapter-number">96</span>&nbsp; <span class="chapter-title">Rz-hash</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/tools/rz-hash/rz-hash_tool.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">96</span>&nbsp; <span class="chapter-title">Examples</span></span></a>
+ <span class="menu-text"><span class="chapter-number">97</span>&nbsp; <span class="chapter-title">Examples</span></span></a>
   </div>
 </li>
       </ul>
@@ -861,61 +907,61 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/plugins/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">97</span>&nbsp; <span class="chapter-title">Plugins</span></span></a>
+ <span class="menu-text"><span class="chapter-number">98</span>&nbsp; <span class="chapter-title">Plugins</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/plugins/ioplugins.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">98</span>&nbsp; <span class="chapter-title">IO plugins</span></span></a>
+ <span class="menu-text"><span class="chapter-number">99</span>&nbsp; <span class="chapter-title">IO plugins</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/plugins/dev-asm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">99</span>&nbsp; <span class="chapter-title">Implementing a new disassembly plugin</span></span></a>
+ <span class="menu-text"><span class="chapter-number">100</span>&nbsp; <span class="chapter-title">Implementing a new disassembly plugin</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/plugins/dev-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">100</span>&nbsp; <span class="chapter-title">Implementing a new analysis plugin</span></span></a>
+ <span class="menu-text"><span class="chapter-number">101</span>&nbsp; <span class="chapter-title">Implementing a new analysis plugin</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/plugins/dev-bin.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">101</span>&nbsp; <span class="chapter-title">Implementing a new format</span></span></a>
+ <span class="menu-text"><span class="chapter-number">102</span>&nbsp; <span class="chapter-title">Implementing a new format</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/plugins/dev-other.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">102</span>&nbsp; <span class="chapter-title">Write a debugger plugin</span></span></a>
+ <span class="menu-text"><span class="chapter-number">103</span>&nbsp; <span class="chapter-title">Write a debugger plugin</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/plugins/python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">103</span>&nbsp; <span class="chapter-title">Python plugins</span></span></a>
+ <span class="menu-text"><span class="chapter-number">104</span>&nbsp; <span class="chapter-title">Python plugins</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/plugins/debug.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">104</span>&nbsp; <span class="chapter-title">Debugging</span></span></a>
+ <span class="menu-text"><span class="chapter-number">105</span>&nbsp; <span class="chapter-title">Debugging</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/plugins/testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">105</span>&nbsp; <span class="chapter-title">Testing the plugin</span></span></a>
+ <span class="menu-text"><span class="chapter-number">106</span>&nbsp; <span class="chapter-title">Testing the plugin</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/plugins/rz-pm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">106</span>&nbsp; <span class="chapter-title">Creating an rz-pm package of the plugin</span></span></a>
+ <span class="menu-text"><span class="chapter-number">107</span>&nbsp; <span class="chapter-title">Creating an rz-pm package of the plugin</span></span></a>
   </div>
 </li>
       </ul>
@@ -932,157 +978,157 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">107</span>&nbsp; <span class="chapter-title">Crackmes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">108</span>&nbsp; <span class="chapter-title">Crackmes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/ioli/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">108</span>&nbsp; <span class="chapter-title">IOLI CrackMes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">109</span>&nbsp; <span class="chapter-title">IOLI CrackMes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/ioli/ioli_0x00.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">109</span>&nbsp; <span class="chapter-title">IOLI 0x00</span></span></a>
+ <span class="menu-text"><span class="chapter-number">110</span>&nbsp; <span class="chapter-title">IOLI 0x00</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/ioli/ioli_0x01.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">110</span>&nbsp; <span class="chapter-title">IOLI 0x01</span></span></a>
+ <span class="menu-text"><span class="chapter-number">111</span>&nbsp; <span class="chapter-title">IOLI 0x01</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/ioli/ioli_0x02.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">111</span>&nbsp; <span class="chapter-title">IOLI 0x02</span></span></a>
+ <span class="menu-text"><span class="chapter-number">112</span>&nbsp; <span class="chapter-title">IOLI 0x02</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/ioli/ioli_0x03.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">112</span>&nbsp; <span class="chapter-title">IOLI 0x03</span></span></a>
+ <span class="menu-text"><span class="chapter-number">113</span>&nbsp; <span class="chapter-title">IOLI 0x03</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/ioli/ioli_0x04.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">113</span>&nbsp; <span class="chapter-title">IOLI 0x04</span></span></a>
+ <span class="menu-text"><span class="chapter-number">114</span>&nbsp; <span class="chapter-title">IOLI 0x04</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/ioli/ioli_0x05.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">114</span>&nbsp; <span class="chapter-title">IOLI 0x05</span></span></a>
+ <span class="menu-text"><span class="chapter-number">115</span>&nbsp; <span class="chapter-title">IOLI 0x05</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/ioli/ioli_0x06.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">115</span>&nbsp; <span class="chapter-title">IOLI 0x06</span></span></a>
+ <span class="menu-text"><span class="chapter-number">116</span>&nbsp; <span class="chapter-title">IOLI 0x06</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/ioli/ioli_0x07.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">116</span>&nbsp; <span class="chapter-title">IOLI 0x07</span></span></a>
+ <span class="menu-text"><span class="chapter-number">117</span>&nbsp; <span class="chapter-title">IOLI 0x07</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/ioli/ioli_0x08.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">117</span>&nbsp; <span class="chapter-title">IOLI 0x08</span></span></a>
+ <span class="menu-text"><span class="chapter-number">118</span>&nbsp; <span class="chapter-title">IOLI 0x08</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/ioli/ioli_0x09.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">118</span>&nbsp; <span class="chapter-title">IOLI 0x09</span></span></a>
+ <span class="menu-text"><span class="chapter-number">119</span>&nbsp; <span class="chapter-title">IOLI 0x09</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/avatao/01-reverse4/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">119</span>&nbsp; <span class="chapter-title">Avatao R3v3rs3 4</span></span></a>
+ <span class="menu-text"><span class="chapter-number">120</span>&nbsp; <span class="chapter-title">Avatao R3v3rs3 4</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/avatao/01-reverse4/rizin.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">120</span>&nbsp; <span class="chapter-title">.rizin</span></span></a>
+ <span class="menu-text"><span class="chapter-number">121</span>&nbsp; <span class="chapter-title">.rizin</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/avatao/01-reverse4/first_steps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">121</span>&nbsp; <span class="chapter-title">.first_steps</span></span></a>
+ <span class="menu-text"><span class="chapter-number">122</span>&nbsp; <span class="chapter-title">.first_steps</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/avatao/01-reverse4/main.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">122</span>&nbsp; <span class="chapter-title">.main</span></span></a>
+ <span class="menu-text"><span class="chapter-number">123</span>&nbsp; <span class="chapter-title">.main</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/avatao/01-reverse4/vmloop.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">123</span>&nbsp; <span class="chapter-title">.vmloop</span></span></a>
+ <span class="menu-text"><span class="chapter-number">124</span>&nbsp; <span class="chapter-title">.vmloop</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/avatao/01-reverse4/instructionset.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">124</span>&nbsp; <span class="chapter-title">.instructionset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">125</span>&nbsp; <span class="chapter-title">.instructionset</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/avatao/01-reverse4/bytecode.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">125</span>&nbsp; <span class="chapter-title">.bytecode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">126</span>&nbsp; <span class="chapter-title">.bytecode</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/avatao/01-reverse4/outro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">126</span>&nbsp; <span class="chapter-title">.outro</span></span></a>
+ <span class="menu-text"><span class="chapter-number">127</span>&nbsp; <span class="chapter-title">.outro</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/hackthebox/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">127</span>&nbsp; <span class="chapter-title">hackthebox</span></span></a>
+ <span class="menu-text"><span class="chapter-number">128</span>&nbsp; <span class="chapter-title">hackthebox</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/hackthebox/find-the-easy-pass/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">128</span>&nbsp; <span class="chapter-title">Find The Easy Pass</span></span></a>
+ <span class="menu-text"><span class="chapter-number">129</span>&nbsp; <span class="chapter-title">Find The Easy Pass</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/hackthebox/find-the-easy-pass/identification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">129</span>&nbsp; <span class="chapter-title">identification</span></span></a>
+ <span class="menu-text"><span class="chapter-number">130</span>&nbsp; <span class="chapter-title">identification</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/hackthebox/find-the-easy-pass/find-the-validation-routine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">130</span>&nbsp; <span class="chapter-title">Find the validation routine</span></span></a>
+ <span class="menu-text"><span class="chapter-number">131</span>&nbsp; <span class="chapter-title">Find the validation routine</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/hackthebox/find-the-easy-pass/fire-up-the-debugger.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">131</span>&nbsp; <span class="chapter-title">Fire up the debugger</span></span></a>
+ <span class="menu-text"><span class="chapter-number">132</span>&nbsp; <span class="chapter-title">Fire up the debugger</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/crackmes/hackthebox/find-the-easy-pass/bonus.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">132</span>&nbsp; <span class="chapter-title">Bonus</span></span></a>
+ <span class="menu-text"><span class="chapter-number">133</span>&nbsp; <span class="chapter-title">Bonus</span></span></a>
   </div>
 </li>
       </ul>
@@ -1099,7 +1145,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/refcard/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">133</span>&nbsp; <span class="chapter-title">Rizin Reference Card</span></span></a>
+ <span class="menu-text"><span class="chapter-number">134</span>&nbsp; <span class="chapter-title">Rizin Reference Card</span></span></a>
   </div>
 </li>
       </ul>
@@ -1116,7 +1162,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/acknowledgments/credits.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">134</span>&nbsp; <span class="chapter-title">Authors &amp; Contributors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">135</span>&nbsp; <span class="chapter-title">Authors &amp; Contributors</span></span></a>
   </div>
 </li>
       </ul>
@@ -1124,7 +1170,7 @@ ul.task-list li input[type="checkbox"] {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -1183,14 +1229,14 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#command-configuration" id="toc-command-configuration" class="nav-link" data-scroll-target="#command-configuration"><span class="header-section-number">14.6</span> Command Configuration</a></li>
   <li><a href="#cmd.repeat-bool" id="toc-cmd.repeat-bool" class="nav-link" data-scroll-target="#cmd.repeat-bool"><span class="header-section-number">14.7</span> cmd.repeat: <code>bool</code></a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rizinorg/book/edit/master/src/configuration/evars.md" class="toc-action">Edit this page</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/rizinorg/book/edit/master/src/configuration/evars.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/configuration/intro.html">Configuration</a></li><li class="breadcrumb-item"><a href="../../src/configuration/evars.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Evaluable Variables</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Configuration Variables</span></h1>
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Evaluable Variables</span></h1>
 </div>
 
 
@@ -1203,243 +1249,387 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
 
-<p>Below is a list of the most frequently used configuration variables. You can get a complete list by issuing <code>e</code> command without arguments. For example, to see all variables defined in the “cfg” namespace, issue <code>e cfg.</code> (mind the ending dot). You can get help on any eval configuration variable by using <code>el cfg.</code></p>
-<p>The <code>el</code> command to get help on all the evaluable configuration variables of rizin. As long as the output of this command is pretty large you can combine it with the internal grep <code>~</code> to filter for what you are looking for:</p>
-<pre><code>[0x00000000]&gt; el~color
-      graph.gv.graph: Graphviz global style attributes. (bgcolor=white)
-       graph.gv.node: Graphviz node style. (color=gray, style=filled shape=box)
-          log.colors: Should the log output use colors (TODO)
-           scr.color: Enable colors (0: none, 1: ansi, 2: 256 colors, 3: truecolor)
-      scr.color.args: Colorize arguments and variables of functions
-     scr.color.bytes: Colorize bytes that represent the opcodes of the instruction
-      scr.color.grep: Enable colors when using ~grep
-       scr.color.ops: Colorize numbers and registers in opcodes
-      scr.color.pipe: Enable colors when using pipes
-     scr.prompt.mode: Set prompt color based on vi mode
-         scr.rainbow: Shows rainbow colors depending of address
-         scr.randpal: Random color palette or just get the next one from 'eco'</code></pre>
-<p>The Visual mode has an eval browser that is accessible through the <code>Vbe</code> command.</p>
+
+<p>Rizin incorporates “evaluable variables”, which are configuration variables that influence the behavior of analysis, visuals, assembly, and more.</p>
+<p>Below you can find a compilation of the most frequently used configuration variables.</p>
+<p>Utilize the <code>el</code> command to list all the evaluable variables in Rizin. If the output is extensive, you can narrow it down by combining it with the internal grep <code>~</code> to filter for specific information or by appending the sub-space after the command, such as <code>el cfg</code>.</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> el scr.color</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>           <span class="ex">scr.color:</span> Enable colors <span class="er">(</span><span class="ex">0:</span> none, 1: ansi, 2: 256 colors, 3: truecolor<span class="kw">)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>      <span class="ex">scr.color.args:</span> Colorize arguments and variables of functions</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>     <span class="ex">scr.color.bytes:</span> Colorize bytes that represent the opcodes of the instruction</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      <span class="ex">scr.color.grep:</span> Enable colors when using ~grep</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>       <span class="ex">scr.color.ops:</span> Colorize numbers and registers in opcodes</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      <span class="ex">scr.color.pipe:</span> Enable colors when using pipes</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> el<span class="pp">*</span> scr.color</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">e</span> scr.color=3</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">e</span> scr.color.args=true</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">e</span> scr.color.bytes=true</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ex">e</span> scr.color.grep=false</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ex">e</span> scr.color.ops=true</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ex">e</span> scr.color.pipe=false</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> e scr.color=2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="assembly-configuration" class="level2" data-number="14.1">
 <h2 data-number="14.1" class="anchored" data-anchor-id="assembly-configuration"><span class="header-section-number">14.1</span> Assembly Configuration</h2>
+<p>This section provides instructions on altering the behavior of the assembler and disassembler.</p>
 <section id="asm.arch-string" class="level3" data-number="14.1.1">
 <h3 data-number="14.1.1" class="anchored" data-anchor-id="asm.arch-string"><span class="header-section-number">14.1.1</span> asm.arch: <code>string</code></h3>
-<p>Defines the target CPU architecture used for disassembling (<code>pd</code>, <code>pD</code> commands) and code analysis (<code>a</code> command). You can find the list of possible values by looking at the result of <code>e asm.arch=?</code> or <code>rz-asm -L</code>. It is quite simple to add new architectures for disassembling and analyzing code. There is an interface for that. For x86, it is used to attach a number of third-party disassembler engines, including GNU binutils, Udis86 and a few handmade ones.</p>
+<p>The <code>asm.arch</code> configuration variable establishes the target CPU architecture employed for disassembling (<code>pd</code>, <code>pD</code> commands) and code analysis (<code>a</code> command). The list of potential values can be retrieved by examining the output of <code>e asm.arch=?</code> or <code>rz-asm -L</code>.</p>
+<p>Adding new architectures for disassembling and analyzing code is a straightforward process with a dedicated interface. For x86, this interface facilitates the integration of various third-party disassembler engines, such as GNU binutils, and a selection of custom ones.</p>
 </section>
 <section id="asm.bits-int" class="level3" data-number="14.1.2">
 <h3 data-number="14.1.2" class="anchored" data-anchor-id="asm.bits-int"><span class="header-section-number">14.1.2</span> asm.bits: <code>int</code></h3>
-<p>Determines width in bits of registers for the current architecture. Supported values:</p>
-<ul>
-<li>8</li>
-<li>16</li>
-<li>32</li>
-<li>64</li>
-</ul>
-<p>Note that not all target architectures support all combinations for asm.bits.</p>
+<p>The <code>asm.bits</code> configuration variable dictates the width in bits of registers for the current architecture. The supported values vary depending on the architecture, and you can explore them by using <code>rz-asm -L</code> or <code>e asm.bits=?</code>.</p>
 </section>
 <section id="asm.bytes-bool" class="level3" data-number="14.1.3">
 <h3 data-number="14.1.3" class="anchored" data-anchor-id="asm.bytes-bool"><span class="header-section-number">14.1.3</span> asm.bytes: <code>bool</code></h3>
-<p>Show or hide displaying of raw bytes of instructions. By default, it is turned off, resulting in a disassembly like:</p>
-<pre><code>[0x00005b20]&gt; e asm.bytes
-false
-[0x00005b20]&gt; pd 5
-            0x00005b20      endbr64
-            0x00005b24      xor   ebp, ebp
-            0x00005b26      mov   r9, rdx
-            0x00005b29      pop   rsi
-            0x00005b2a      mov   rdx, rsp</code></pre>
-<p>When turned on, the raw bytes will be displayed along with the instructions:</p>
-<pre><code>[0x00005b20]&gt; e asm.bytes=true
-[0x00005b20]&gt; pd 5
-            ;-- entry0:
-            ;-- rip:
-            0x00005b20      f30f1efa       endbr64
-            0x00005b24      31ed           xor   ebp, ebp
-            0x00005b26      4989d1         mov   r9, rdx
-            0x00005b29      5e             pop   rsi
-            0x00005b2a      4889e2         mov   rdx, rsp</code></pre>
+<p>When <code>asm.bytes</code> is set to <code>true</code>, it enables the display of raw bytes of instructions. By default, it is turned off, resulting in a disassembly format like shown below. When activated, the raw bytes will be shown alongside the instructions.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># you can disable this also via `e asm.bytes=false`</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00005fa0]</span><span class="op">&gt;</span> pd 5 @e:asm.bytes=false</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span><span class="ex">--</span> entry0:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005fa0</span>      endbr64</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005fa4</span>      xor   ebp, ebp</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005fa6</span>      mov   r9, rdx</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005fa9</span>      pop   rsi</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005faa</span>      mov   rdx, rsp</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># you can enable this also via `e asm.bytes=true`</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00005fa0]</span><span class="op">&gt;</span> pd 5 @e:asm.bytes=true</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span><span class="ex">--</span> entry0:</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005fa0</span>      f30f1efa       endbr64</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005fa4</span>      31ed           xor   ebp, ebp</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005fa6</span>      4989d1         mov   r9, rdx</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005fa9</span>      5e             pop   rsi</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005faa</span>      4889e2         mov   rdx, rsp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="asm.cpu-string" class="level3" data-number="14.1.4">
 <h3 data-number="14.1.4" class="anchored" data-anchor-id="asm.cpu-string"><span class="header-section-number">14.1.4</span> asm.cpu: <code>string</code></h3>
-<p>You can use this configuration variable to define the CPU type. For example, if you had picked the architecture as AVR, you can choose your CPU type (ATmega1281, ATmega2561, etc) using <code>asm.cpu</code>.</p>
+<p>The <code>asm.cpu</code> configuration variable enables you to specify the CPU type. For example, if you’ve chosen the architecture as AVR, you can designate your CPU type (e.g., ATmega1281, ATmega2561, etc.) using <code>asm.cpu</code>. To view all available CPU types of the selected architecture, you can use the command <code>e asm.cpu=?</code>.</p>
 </section>
 <section id="asm.platform-string" class="level3" data-number="14.1.5">
 <h3 data-number="14.1.5" class="anchored" data-anchor-id="asm.platform-string"><span class="header-section-number">14.1.5</span> asm.platform: <code>string</code></h3>
-<p>You can use this configuration variable to select the platform and it’ll load up the corresponding platform profile during analysis. See the section about <a href="https://book.rizin.re/analysis/cpu_platform_profiles.html">CPU and platform profiles</a> for more information.</p>
+<p>The <code>asm.platform</code> configuration variable allows you to choose the platform, and it will load the corresponding platform profile during analysis. Refer to the section about <a href="../../src/analysis/cpu_platform_profiles.html">CPU and platform profiles</a> for more information.</p>
 </section>
 <section id="asm.flags-bool" class="level3" data-number="14.1.6">
 <h3 data-number="14.1.6" class="anchored" data-anchor-id="asm.flags-bool"><span class="header-section-number">14.1.6</span> asm.flags: <code>bool</code></h3>
-<p>When set to “true”, the disassembler view will have the flags column.</p>
+<p>When <code>asm.flags</code> is set to <code>true</code>, the disassembler view will include the flags column.</p>
 </section>
 <section id="asm.fcn.size-bool" class="level3" data-number="14.1.7">
 <h3 data-number="14.1.7" class="anchored" data-anchor-id="asm.fcn.size-bool"><span class="header-section-number">14.1.7</span> asm.fcn.size: <code>bool</code></h3>
-<p>This variable is used to display the size of the function in the disassembly. By default, it is set to false and turning it on would result in a disassembly like the one below:</p>
-<pre><code>┌ 44: int main (char **argv);
-│           ; var int32_t var_4h @ ebp-0x4
-│           ; arg char **argv @ esp+0x24
-│           0x000011cd      lea   ecx, [argv]
-│           0x000011d1      and   esp, 0xfffffff0</code></pre>
-<p>Here, <code>44</code> is the size of the function.</p>
+<p>The <code>asm.fcn.size</code> variable is employed to show the size of the function in the disassembly. By default, it is set to false, and enabling it would lead to a disassembly format similar to the one below:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># you can enable this also via `e asm.fcn.size=true`</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 10 @e:asm.fcn.size=true</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from entry0 @ 0x5fb8</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> 7992: int main<span class="er">(</span><span class="ex">int</span> argc, char <span class="pp">**</span>argv, char <span class="pp">**</span>envp<span class="kw">);</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">stack:</span> 31 <span class="er">(</span><span class="ex">vars</span> 31, args 0<span class="kw">)</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">rg:</span> 2 <span class="er">(</span><span class="ex">vars</span> 0, args 2<span class="kw">)</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004050</span>      endbr64</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004054</span>      push  r15</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004056</span>      push  r14</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004058</span>      push  r13</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405a</span>      push  r12</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405c</span>      push  rbp</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405d</span>      push  rbx</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405e</span>      sub   rsp, 0xf8</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004065</span>      mov   rbx, qword <span class="pp">[</span><span class="ss">rsi</span><span class="pp">]</span>                     <span class="kw">;</span> <span class="ex">argv</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov   dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, edi                <span class="kw">;</span> <span class="ex">argc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here, <code>7992</code> is the size of the function.</p>
 </section>
 <section id="asm.lines.call-bool" class="level3" data-number="14.1.8">
 <h3 data-number="14.1.8" class="anchored" data-anchor-id="asm.lines.call-bool"><span class="header-section-number">14.1.8</span> asm.lines.call: <code>bool</code></h3>
-<p>If set to “true”, draw lines at the left of the disassembly output (<code>pd</code>, <code>pD</code> commands) to graphically represent control flow changes (jumps and calls) that are targeted inside the current block. Also, see <code>asm.lines.out</code>.</p>
+<p>When <code>asm.lines.call</code> is set to <code>true</code>, lines are drawn at the left of the disassembly output (<code>pd</code>, <code>pD</code> commands). These lines graphically represent control flow changes, such as jumps and calls, that are targeted inside the current block. Also, refer to <code>asm.lines.out</code>.</p>
 </section>
 <section id="asm.lines.out-bool" class="level3" data-number="14.1.9">
 <h3 data-number="14.1.9" class="anchored" data-anchor-id="asm.lines.out-bool"><span class="header-section-number">14.1.9</span> asm.lines.out: <code>bool</code></h3>
-<p>When set to “true”, the disassembly view will also draw control flow lines that go outside of the block.</p>
+<p>When <code>asm.lines.out</code> is set to <code>true</code>, the disassembly view will draw control flow lines that extend beyond the block.</p>
 </section>
 <section id="asm.offset-bool" class="level3" data-number="14.1.10">
 <h3 data-number="14.1.10" class="anchored" data-anchor-id="asm.offset-bool"><span class="header-section-number">14.1.10</span> asm.offset: <code>bool</code></h3>
-<p>Show or hide offsets for individual disassembled instructions.</p>
+<p>The <code>asm.offset</code> configuration variable determines whether to show or hide offsets for individual disassembled instructions.</p>
 </section>
 <section id="asm.os-string" class="level3" data-number="14.1.11">
 <h3 data-number="14.1.11" class="anchored" data-anchor-id="asm.os-string"><span class="header-section-number">14.1.11</span> asm.os: <code>string</code></h3>
-<p>Selects a target operating system for the currently loaded binary. Usually, OS is automatically detected by Rizin (<code>rz-bin -rI</code>). Yet, <code>asm.os</code> can be used to switch to a different syscall table employed by another OS.</p>
+<p>The <code>asm.os</code> configuration variable lets you select a target operating system for the currently loaded binary. Typically, the OS is automatically detected by Rizin (command <code>i</code> or via <code>rz-bin -I /path/to/bin</code>). However, <code>asm.os</code> can be employed to switch to a different syscall table used by another OS.</p>
 </section>
 <section id="asm.pseudo-bool" class="level3" data-number="14.1.12">
 <h3 data-number="14.1.12" class="anchored" data-anchor-id="asm.pseudo-bool"><span class="header-section-number">14.1.12</span> asm.pseudo: <code>bool</code></h3>
-<p>A boolean value to set the pseudo syntax in the disassembly. “False” indicates a native one, defined by the current architecture, “true” activates a pseudocode strings format. For example, it’ll transform :</p>
-<pre><code>│           0x080483ff      e832000000     call 0x8048436
-│           0x08048404      31c0           xor eax, eax
-│           0x08048406      0205849a0408   add al, byte [0x8049a84]
-│           0x0804840c      83f800         cmp eax, 0
-│           0x0804840f      7405           je 0x8048416</code></pre>
-<p>to</p>
-<pre><code>│           0x080483ff      e832000000     0x8048436 ()
-│           0x08048404      31c0           eax = 0
-│           0x08048406      0205849a0408   al += byte [0x8049a84]
-│           0x0804840c      83f800         var = eax - 0
-│           0x0804840f      7405           if (!var) goto 0x8048416</code></pre>
-<p>It can be useful while disassembling obscure architectures.</p>
+<p>The <code>asm.pseudo</code> configuration variable is a boolean value used to set the pseudo syntax in the disassembly. When set to <code>false</code>, it indicates a native syntax defined by the current architecture. When set to <code>true</code>, it activates a pseudocode strings format; this feature can be beneficial when disassembling obscure architectures.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># you can disable this also via `e asm.pseudo=false`</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00100508]</span><span class="op">&gt;</span> pd 10 @e:asm.pseudo=false</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span><span class="ex">--</span> _start:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> entry0<span class="er">(</span><span class="ex">int64_t</span> arg_18h, int64_t arg_8h, int64_t arg_10h, int64_t arg1, int64_t arg2, int64_t arg4, int64_t arg5<span class="kw">);</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">arg</span> int64_t arg1 @ r3</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">arg</span> int64_t arg2 @ r4</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">arg</span> int64_t arg4 @ r6</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">arg</span> int64_t arg5 @ r7</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">var</span> int64_t var_1h @ stack <span class="at">-</span> 0x1</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">arg</span> int64_t arg_8h @ stack + 0x8</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">arg</span> int64_t arg_10h @ stack + 0x10</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">arg</span> int64_t arg_18h @ stack + 0x18</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00100508</span>      lis   r2, 0x1e                             <span class="kw">;</span> <span class="ex">start.S:65</span> <span class="kw">;</span> <span class="ex">0x1e0000</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>                                                                      <span class="kw">;</span> <span class="ex">sym..iplt</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0010050c</span>      addi  r2, r2, 0x7c00</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00100510</span>      mr    r9, r1                               <span class="kw">;</span> <span class="ex">start.S:67</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00100514</span>      rldicr r1, r1, 0, 0x3b                     <span class="kw">;</span> <span class="ex">start.S:69</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00100518</span>      li    r0, 0                                <span class="kw">;</span> <span class="ex">start.S:70</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0010051c</span>      stdu  r1, <span class="at">-0x80</span><span class="er">(</span><span class="ex">r1</span><span class="kw">)</span>                        <span class="kw">;</span> <span class="ex">start.S:71</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00100520</span>      mtlr  r0                                   <span class="kw">;</span> <span class="ex">start.S:72</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00100524</span>      std   r0, 0<span class="er">(</span><span class="ex">r1</span><span class="kw">)</span>                            <span class="kw">;</span> <span class="ex">start.S:73</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00100528</span>      ld    r8, <span class="at">-0x7ff0</span><span class="er">(</span><span class="ex">r2</span><span class="kw">)</span>                      <span class="kw">;</span> <span class="ex">start.S:77</span> <span class="kw">;</span> <span class="ex">0x194c40</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>                                                                      <span class="kw">;</span> <span class="ex">sym..rodata</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>       <span class="ex">,=</span><span class="op">&lt;</span> 0x0010052c      b     0x101048                             <span class="kw">;</span> <span class="ex">start.S:80</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co"># you can enable this also via `e asm.pseudo=true`</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00100508]</span><span class="op">&gt;</span> pd 10 @e:asm.pseudo=true</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span><span class="ex">--</span> _start:</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> entry0<span class="er">(</span><span class="ex">int64_t</span> arg_18h, int64_t arg_8h, int64_t arg_10h, int64_t arg1, int64_t arg2, int64_t arg4, int64_t arg5<span class="kw">);</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">arg</span> int64_t arg1 @ r3</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">arg</span> int64_t arg2 @ r4</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">arg</span> int64_t arg4 @ r6</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">arg</span> int64_t arg5 @ r7</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">var</span> int64_t var_1h @ stack <span class="at">-</span> 0x1</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">arg</span> int64_t arg_8h @ stack + 0x8</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">arg</span> int64_t arg_10h @ stack + 0x10</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">arg</span> int64_t arg_18h @ stack + 0x18</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00100508</span>      r2 = <span class="er">(</span><span class="ex">0x1e</span> <span class="op">&lt;&lt; 16</span><span class="st">)                          ; start.S:65 ; 0x1e0000</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="st">|                                                                      ; sym..iplt</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="st">|           0x0010050c      r2 += 0x7c00</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="st">|           0x00100510      r9 = r1                                    ; start.S:67</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="st">|           0x00100514      r1 = rol64(r1, 0) &amp; 0x1f                   ; start.S:69</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="st">|           0x00100518      r0 = 0                                     ; start.S:70</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="st">|           0x0010051c      [r1 - 0x80] = r1                           ; start.S:71</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="st">|           0x00100520      lr = r0                                    ; start.S:72</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="st">|           0x00100524      [r1 + 0] = r0                              ; start.S:73</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="st">|           0x00100528      r8 = [r2 - 0x7ff0]                         ; start.S:77 ; 0x194c40</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="st">|                                                                      ; sym..rodata</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="st">|       ,=&lt; 0x0010052c      goto 0x101048                              ; start.S:80</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="asm.sub.jmp-bool" class="level3" data-number="14.1.13">
 <h3 data-number="14.1.13" class="anchored" data-anchor-id="asm.sub.jmp-bool"><span class="header-section-number">14.1.13</span> asm.sub.jmp: <code>bool</code></h3>
-<p>Substitute jump, call and branch targets with function names in the disassembly.</p>
-<p>For example, when turned on, it’d display <code>jal 0x80001a40</code> as <code>jal fcn.80001a40</code> in the disassembly.</p>
+<p>The <code>asm.sub.jmp</code> configuration variable substitutes jump, call, and branch targets with function names in the disassembly. For instance, when activated, it would display <code>jal 0x80001a40</code> as <code>jal fcn.80001a40</code> in the disassembly.</p>
 </section>
 <section id="asm.sub.reg-bool" class="level3" data-number="14.1.14">
 <h3 data-number="14.1.14" class="anchored" data-anchor-id="asm.sub.reg-bool"><span class="header-section-number">14.1.14</span> asm.sub.reg: <code>bool</code></h3>
-<p>Replace register names with arguments or their associated role alias.</p>
+<p>asm.sub.reg Replace register names with arguments or their associated role alias.</p>
 <p>For example, if you have something like this:</p>
-<pre><code>│           0x080483ea      83c404         add esp, 4
-│           0x080483ed      68989a0408     push 0x8049a98
-│           0x080483f7      e870060000     call sym.imp.scanf
-│           0x080483fc      83c408         add esp, 8
-│           0x08048404      31c0           xor eax, eax</code></pre>
-<p>This variable changes it to:</p>
-<pre><code>│           0x080483ea      83c404         add SP, 4
-│           0x080483ed      68989a0408     push 0x8049a98
-│           0x080483f7      e870060000     call sym.imp.scanf
-│           0x080483fc      83c408         add SP, 8
-│           0x08048404      31c0           xor A0, A0</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 4 @e:asm.sub.reg=false</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from entry0 @ 0x5fb8</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from fcn.00015be0 @ 0x17078</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> int main<span class="er">(</span><span class="ex">int</span> argc, char <span class="pp">**</span>argv, char <span class="pp">**</span>envp<span class="kw">);</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">stack:</span> 29 <span class="er">(</span><span class="ex">vars</span> 29, args 0<span class="kw">)</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">rg:</span> 2 <span class="er">(</span><span class="ex">vars</span> 0, args 2<span class="kw">)</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405d</span>      push  rbx</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405e</span>      sub   rsp, 0xf8</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004065</span>      mov   rbx, qword <span class="pp">[</span><span class="ss">rsi</span><span class="pp">]</span>                     <span class="kw">;</span> <span class="ex">argv</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov   dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, edi                <span class="kw">;</span> <span class="ex">argc</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 4 @e:asm.sub.reg=true</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from entry0 @ 0x5fb8</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from fcn.00015be0 @ 0x17078</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> int main<span class="er">(</span><span class="ex">int</span> argc, char <span class="pp">**</span>argv, char <span class="pp">**</span>envp<span class="kw">);</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">stack:</span> 29 <span class="er">(</span><span class="ex">vars</span> 29, args 0<span class="kw">)</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">rg:</span> 2 <span class="er">(</span><span class="ex">vars</span> 0, args 2<span class="kw">)</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405d</span>      push  rbx</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405e</span>      sub   SP, 0xf8</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004065</span>      mov   rbx, qword <span class="pp">[</span><span class="ss">A1</span><span class="pp">]</span>                      <span class="kw">;</span> <span class="ex">argv</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov   dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, A0                 <span class="kw">;</span> <span class="ex">argc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="asm.sub.rel-bool" class="level3" data-number="14.1.15">
 <h3 data-number="14.1.15" class="anchored" data-anchor-id="asm.sub.rel-bool"><span class="header-section-number">14.1.15</span> asm.sub.rel: <code>bool</code></h3>
-<p>A boolean value that substitutes expressions relative to the Program Counter in the disassembly. When turned on, it shows the references as string references.</p>
-<p>For example:</p>
-<pre><code>0x5563844a0181      488d3d7c0e00.  lea rdi, [rip + 0xe7c]    ; str.argv__2d_:__s</code></pre>
-<p>When turned on, this variable lets you display the above instruction as:</p>
-<pre><code>0x5563844a0181      488d3d7c0e00.  lea rdi, str.argv__2d_:__s    ; 0x5563844a1004 ; "argv[%2d]: %s\n"</code></pre>
+<p>The <code>asm.sub.rel</code> configuration variable, when set to true, substitutes expressions relative to the Program Counter in the disassembly. When activated, it displays the references as string references.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 30 @e:asm.sub.rel=false ~lea</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>     <span class="kw">|||</span>   <span class="ex">0x000040bb</span>      lea   rsi, [rip + 0x15f51]                 <span class="kw">;</span> <span class="ex">str..libs</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 30 @e:asm.sub.rel=true ~lea</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>     <span class="kw">|||</span>   <span class="ex">0x000040bb</span>      lea   rsi, str..libs                       <span class="kw">;</span> <span class="ex">0x1a013</span> <span class="kw">;</span> <span class="st">"/.libs/"</span> <span class="kw">;</span> <span class="ex">const</span> char <span class="pp">*</span>s2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="asm.sub.section-bool" class="level3" data-number="14.1.16">
 <h3 data-number="14.1.16" class="anchored" data-anchor-id="asm.sub.section-bool"><span class="header-section-number">14.1.16</span> asm.sub.section: <code>bool</code></h3>
-<p>Prefix offsets in the disassembly with the name of the section or map.</p>
-<p>That means, from something like:</p>
-<pre><code>0x000067ea      488d0def0c01.  lea rcx, [0x000174e0]</code></pre>
-<p>to the one below, when toggled on.</p>
-<pre><code>0x000067ea      488d0def0c01.  lea rcx, [fmap.LOAD1.0x000174e0]</code></pre>
+<p>The <code>asm.sub.section</code> configuration variable, when set, prefixes offsets in the disassembly with the name of the section or map.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 30 @e:asm.sub.rel=false ~lea</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">0x000067ea</span>      488d0def0c01.  lea rcx, <span class="pp">[</span><span class="ss">0x000174e0</span><span class="pp">]</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 30 @e:asm.sub.rel=true ~lea</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">0x000067ea</span>      488d0def0c01.  lea rcx, <span class="pp">[</span><span class="ss">fmap.LOAD1.0x000174e0</span><span class="pp">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="asm.sub.varonly-bool" class="level3" data-number="14.1.17">
 <h3 data-number="14.1.17" class="anchored" data-anchor-id="asm.sub.varonly-bool"><span class="header-section-number">14.1.17</span> asm.sub.varonly: <code>bool</code></h3>
-<p>Substitutes the variable expression with the local variable name.</p>
-<p>For example: <code>var_14h</code> as <code>rbp - var_14h</code>, in the disassembly.</p>
+<p>The <code>asm.sub.varonly</code> configuration variable, when enabled, substitutes the variable expression with the local variable name. For instance, it would display <code>var_118h</code> as <code>rsp + var_118h</code> in the disassembly.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 10 @e:asm.sub.varonly=false</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from entry0 @ 0x5fb8</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from fcn.00015be0 @ 0x17078</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> int main<span class="er">(</span><span class="ex">int</span> argc, char <span class="pp">**</span>argv, char <span class="pp">**</span>envp<span class="kw">);</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">stack:</span> 29 <span class="er">(</span><span class="ex">vars</span> 29, args 0<span class="kw">)</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">rg:</span> 2 <span class="er">(</span><span class="ex">vars</span> 0, args 2<span class="kw">)</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004050</span>      endbr64</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004054</span>      push  r15</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004056</span>      push  r14</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004058</span>      push  r13</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405a</span>      push  r12</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405c</span>      push  rbp</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405d</span>      push  rbx</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405e</span>      sub   rsp, 0xf8</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004065</span>      mov   rbx, qword <span class="pp">[</span><span class="ss">rsi</span><span class="pp">]</span>                     <span class="kw">;</span> <span class="ex">argv</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov   dword [rsp + var_118h], edi          <span class="kw">;</span> <span class="ex">argc</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 10 @e:asm.sub.varonly=true</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from entry0 @ 0x5fb8</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from fcn.00015be0 @ 0x17078</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> int main<span class="er">(</span><span class="ex">int</span> argc, char <span class="pp">**</span>argv, char <span class="pp">**</span>envp<span class="kw">);</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">stack:</span> 29 <span class="er">(</span><span class="ex">vars</span> 29, args 0<span class="kw">)</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">rg:</span> 2 <span class="er">(</span><span class="ex">vars</span> 0, args 2<span class="kw">)</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004050</span>      endbr64</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004054</span>      push  r15</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004056</span>      push  r14</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004058</span>      push  r13</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405a</span>      push  r12</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405c</span>      push  rbp</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405d</span>      push  rbx</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405e</span>      sub   rsp, 0xf8</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004065</span>      mov   rbx, qword <span class="pp">[</span><span class="ss">rsi</span><span class="pp">]</span>                     <span class="kw">;</span> <span class="ex">argv</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov   dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, edi                <span class="kw">;</span> <span class="ex">argc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="asm.syntax-string" class="level3" data-number="14.1.18">
 <h3 data-number="14.1.18" class="anchored" data-anchor-id="asm.syntax-string"><span class="header-section-number">14.1.18</span> asm.syntax: <code>string</code></h3>
-<p>Changes syntax flavor for disassembler between Intel and AT&amp;T. At the moment, this setting affects Udis86 disassembler for Intel 32/Intel 64 targets only. Supported values are <code>intel</code> and <code>att</code>.</p>
+<p>The <code>asm.syntax</code> configuration variable enables you to change the syntax flavor for disassembler syntax. Supported values can be queried using <code>e asm.syntax=?</code>.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 10 @e:asm.syntax=att</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from entry0 @ 0x5fb8</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from fcn.00015be0 @ 0x17078</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> int main<span class="er">(</span><span class="ex">int</span> argc, char <span class="pp">**</span>argv, char <span class="pp">**</span>envp<span class="kw">);</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">stack:</span> 29 <span class="er">(</span><span class="ex">vars</span> 29, args 0<span class="kw">)</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">rg:</span> 2 <span class="er">(</span><span class="ex">vars</span> 0, args 2<span class="kw">)</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004050</span>      endbr64</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004054</span>      pushq %r15</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004056</span>      pushq %r14</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004058</span>      pushq %r13</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405a</span>      pushq %r12</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405c</span>      pushq %rbp</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405d</span>      pushq %rbx</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405e</span>      subq  <span class="va">$0</span>xf8, %rsp</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004065</span>      movq  <span class="er">(</span><span class="ex">%rsi</span><span class="kw">)</span><span class="ex">,</span> %rbx                         <span class="kw">;</span> <span class="ex">argv</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      movl  %edi, var_118h                       <span class="kw">;</span> <span class="ex">argc</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 10 @e:asm.syntax=masm</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from entry0 @ 0x5fb8</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from fcn.00015be0 @ 0x17078</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> int main<span class="er">(</span><span class="ex">int</span> argc, char <span class="pp">**</span>argv, char <span class="pp">**</span>envp<span class="kw">);</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">stack:</span> 29 <span class="er">(</span><span class="ex">vars</span> 29, args 0<span class="kw">)</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">rg:</span> 2 <span class="er">(</span><span class="ex">vars</span> 0, args 2<span class="kw">)</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004050</span>      endbr64</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004054</span>      push  r15</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004056</span>      push  r14</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004058</span>      push  r13</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405a</span>      push  r12</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405c</span>      push  rbp</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405d</span>      push  rbx</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405e</span>      sub   rsp, 0f8h</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004065</span>      mov   rbx, qword <span class="pp">[</span><span class="ss">rsi</span><span class="pp">]</span>                     <span class="kw">;</span> <span class="ex">argv</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov   dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, edi                <span class="kw">;</span> <span class="ex">argc</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 10 @e:asm.syntax=intel</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from entry0 @ 0x5fb8</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from fcn.00015be0 @ 0x17078</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> int main<span class="er">(</span><span class="ex">int</span> argc, char <span class="pp">**</span>argv, char <span class="pp">**</span>envp<span class="kw">);</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">stack:</span> 29 <span class="er">(</span><span class="ex">vars</span> 29, args 0<span class="kw">)</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">rg:</span> 2 <span class="er">(</span><span class="ex">vars</span> 0, args 2<span class="kw">)</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004050</span>      endbr64</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004054</span>      push  r15</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004056</span>      push  r14</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004058</span>      push  r13</span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405a</span>      push  r12</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405c</span>      push  rbp</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405d</span>      push  rbx</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405e</span>      sub   rsp, 0xf8</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004065</span>      mov   rbx, qword <span class="pp">[</span><span class="ss">rsi</span><span class="pp">]</span>                     <span class="kw">;</span> <span class="ex">argv</span></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov   dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, edi                <span class="kw">;</span> <span class="ex">argc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="asm.tabs-int" class="level3" data-number="14.1.19">
 <h3 data-number="14.1.19" class="anchored" data-anchor-id="asm.tabs-int"><span class="header-section-number">14.1.19</span> asm.tabs: <code>int</code></h3>
-<p>If your disassembly doesn’t fit in your screen or aligns clumsily, <code>asm.tabs</code> might be of help. You can use this variable to control the distance between the operands, by setting the number of spaces, while displaying your disassembly.</p>
-<p>For example, this is the disassembly with the variable set to 0:</p>
-<pre><code>[0x000040a7]&gt; e asm.tabs=0
-[0x000040a7]&gt; pd 6
-│           0x000040a7      push rsp
-│           0x000040a8      mov r12d, edi                              ; argc
-│           0x000040ab      push rbp
-│           0x000040ac      mov rbp, rsi                               ; argv
-│           0x000040af      push rbx
-│           0x000040b0      sub rsp, 0x48</code></pre>
-<p>And here’s what it would look like after setting it to 6:</p>
-<pre><code>[0x000040a7]&gt; e asm.tabs=6
-[0x000040a7]&gt; pd 6
-│           0x000040a7      push  rsp
-│           0x000040a8      mov   r12d, edi                            ; argc
-│           0x000040ab      push  rbp
-│           0x000040ac      mov   rbp,  rsi                            ; argv
-│           0x000040af      push  rbx
-│           0x000040b0      sub   rsp,  0x48</code></pre>
+<p>If the disassembly output doesn’t fit on your screen or appears awkwardly aligned, <code>asm.tabs</code> can be helpful. You can adjust the spacing between operands by setting the number of spaces while displaying your disassembly using this variable.</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 10 @e:asm.tabs=0</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> int main<span class="er">(</span><span class="ex">int</span> argc, char <span class="pp">**</span>argv, char <span class="pp">**</span>envp<span class="kw">);</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">stack:</span> 29 <span class="er">(</span><span class="ex">vars</span> 29, args 0<span class="kw">)</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">rg:</span> 2 <span class="er">(</span><span class="ex">vars</span> 0, args 2<span class="kw">)</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004050</span>      endbr64</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004054</span>      push r15</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004056</span>      push r14</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004058</span>      push r13</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405a</span>      push r12</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405c</span>      push rbp</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405d</span>      push rbx</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405e</span>      sub rsp, 0xf8</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004065</span>      mov rbx, qword <span class="pp">[</span><span class="ss">rsi</span><span class="pp">]</span>                       <span class="kw">;</span> <span class="ex">argv</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, edi                  <span class="kw">;</span> <span class="ex">argc</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 10 @e:asm.tabs=6</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> int main<span class="er">(</span><span class="ex">int</span> argc, char <span class="pp">**</span>argv, char <span class="pp">**</span>envp<span class="kw">);</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">stack:</span> 29 <span class="er">(</span><span class="ex">vars</span> 29, args 0<span class="kw">)</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">rg:</span> 2 <span class="er">(</span><span class="ex">vars</span> 0, args 2<span class="kw">)</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004050</span>      endbr64</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004054</span>      push  r15</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004056</span>      push  r14</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004058</span>      push  r13</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405a</span>      push  r12</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405c</span>      push  rbp</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405d</span>      push  rbx</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405e</span>      sub   rsp, 0xf8</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004065</span>      mov   rbx, qword <span class="pp">[</span><span class="ss">rsi</span><span class="pp">]</span>                     <span class="kw">;</span> <span class="ex">argv</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov   dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, edi                <span class="kw">;</span> <span class="ex">argc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="asm.tabs.once-bool" class="level3" data-number="14.1.20">
 <h3 data-number="14.1.20" class="anchored" data-anchor-id="asm.tabs.once-bool"><span class="header-section-number">14.1.20</span> asm.tabs.once: <code>bool</code></h3>
-<p>This is a boolean variable that can be set to true if you want to align only the opcodes, excluding the arguments. This makes sense only if you have set <code>asm.tabs</code> on.</p>
-<pre><code>[0x00008290]&gt; e asm.tabs=6
-[0x00008290]&gt; e asm.tabs.once=false
-[0x00008290]&gt; pd 10
-│           0x00008290      mov   ip,   sp
-│           0x00008294      push  {r4,  fp,   ip,   lr,   pc}
-│           0x00008298      sub   fp,   ip,   4
-│           0x0000829c      sub   sp,   sp,   0x24
-│           0x000082a0      str   r0,   [fp,  -0x28]
-│           0x000082a4      str   r1,   [fp,  -0x2c]
-│           0x000082a8      ldr   r3,   [fp,  -0x28]
-│           0x000082ac      cmp   r3,   1
-│       ┌─&lt; 0x000082b0      bgt   0x82c0
-│       │   0x000082b4      mvn   r3,   0</code></pre>
-<p>In the above example, the opcodes and the operands are aligned. Now, turning it on would align only the opcodes.</p>
-<pre><code>[0x00008290]&gt; e asm.tabs.once=true
-[0x00008290]&gt; pd 10
-│           0x00008290      mov   ip, sp
-│           0x00008294      push  {r4, fp, ip, lr, pc}
-│           0x00008298      sub   fp, ip, 4
-│           0x0000829c      sub   sp, sp, 0x24
-│           0x000082a0      str   r0, [var_28h]
-│           0x000082a4      str   r1, [var_2ch]
-│           0x000082a8      ldr   r3, [var_28h]
-│           0x000082ac      cmp   r3, 1
-│       ┌─&lt; 0x000082b0      bgt   0x82c0
-│       │   0x000082b4      mvn   r3, 0</code></pre>
+<p><code>asm.tabs.once</code> represents a boolean variable, which can be configured as true if the alignment is desired solely for opcodes, omitting the arguments. This configuration is meaningful only when <code>asm.tabs</code> has been previously enabled.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 10 @e:asm.tabs=10 @e:asm.tabs.once=false</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> int main<span class="er">(</span><span class="ex">int</span> argc, char <span class="pp">**</span>argv, char <span class="pp">**</span>envp<span class="kw">);</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">stack:</span> 29 <span class="er">(</span><span class="ex">vars</span> 29, args 0<span class="kw">)</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">rg:</span> 2 <span class="er">(</span><span class="ex">vars</span> 0, args 2<span class="kw">)</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004050</span>      endbr64</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004054</span>      push      r15</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004056</span>      push      r14</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004058</span>      push      r13</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405a</span>      push      r12</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405c</span>      push      rbp</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405d</span>      push      rbx</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405e</span>      sub       rsp,      0xf8</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004065</span>      mov       rbx,      qword <span class="pp">[</span><span class="ss">rsi</span><span class="pp">]</span>            <span class="kw">;</span> <span class="ex">argv</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov       dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, edi            <span class="kw">;</span> <span class="ex">argc</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 10 @e:asm.tabs=10 @e:asm.tabs.once=true</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> int main<span class="er">(</span><span class="ex">int</span> argc, char <span class="pp">**</span>argv, char <span class="pp">**</span>envp<span class="kw">);</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">stack:</span> 29 <span class="er">(</span><span class="ex">vars</span> 29, args 0<span class="kw">)</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">rg:</span> 2 <span class="er">(</span><span class="ex">vars</span> 0, args 2<span class="kw">)</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004050</span>      endbr64</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004054</span>      push      r15</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004056</span>      push      r14</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004058</span>      push      r13</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405a</span>      push      r12</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405c</span>      push      rbp</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405d</span>      push      rbx</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405e</span>      sub       rsp, 0xf8</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004065</span>      mov       rbx, qword <span class="pp">[</span><span class="ss">rsi</span><span class="pp">]</span>                 <span class="kw">;</span> <span class="ex">argv</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov       dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, edi            <span class="kw">;</span> <span class="ex">argc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="asm.trace-bool" class="level3" data-number="14.1.21">
 <h3 data-number="14.1.21" class="anchored" data-anchor-id="asm.trace-bool"><span class="header-section-number">14.1.21</span> asm.trace: <code>bool</code></h3>
-<p>A boolean value that controls displaying of tracing information (sequence number and counter) at the left of each opcode. It is used to assist with programs trace analysis.</p>
+<p><code>asm.trace</code> is a boolean parameter governing the display of tracing details (sequence number and counter) adjacent to each opcode. Its purpose is to aid in the analysis of program traces.</p>
 </section>
 </section>
 <section id="debug-configuration" class="level2" data-number="14.2">
 <h2 data-number="14.2" class="anchored" data-anchor-id="debug-configuration"><span class="header-section-number">14.2</span> Debug Configuration</h2>
 <section id="dbg.follow.child-bool" class="level3" data-number="14.2.1">
 <h3 data-number="14.2.1" class="anchored" data-anchor-id="dbg.follow.child-bool"><span class="header-section-number">14.2.1</span> dbg.follow.child: <code>bool</code></h3>
-<p>This variable lets you follow the child process, when a fork (system call) is encountered during debugging. By default, it is set to <code>false</code> and the parent process is traced.</p>
+<p>The variable <code>dbg.follow.child</code> allows tracking the child process when encountering a fork (system call) during debugging. Its default setting is <code>false</code>, causing the parent process to be traced.</p>
 </section>
 </section>
 <section id="screen-configuration" class="level2" data-number="14.3">
 <h2 data-number="14.3" class="anchored" data-anchor-id="screen-configuration"><span class="header-section-number">14.3</span> Screen Configuration</h2>
 <section id="scr.color-int" class="level3" data-number="14.3.1">
 <h3 data-number="14.3.1" class="anchored" data-anchor-id="scr.color-int"><span class="header-section-number">14.3.1</span> scr.color: <code>int</code></h3>
-<p>This variable specifies the mode for colorized screen output.</p>
+<p>The variable <code>scr.color</code> designates the mode for displaying colorized output on the screen.</p>
 <ul>
-<li><code>0</code> means no colors.</li>
-<li><code>1</code> means 16-colors mode.</li>
-<li><code>2</code> means 256-colors mode.</li>
-<li><code>3</code> means 16 million-colors mode.</li>
+<li><code>0</code> no colors (black and white)</li>
+<li><code>1</code> ANSI colors (16 basic ANSI colors)</li>
+<li><code>2</code> 256 colors (256 scale colors)</li>
+<li><code>3</code> truecolor (24bit true color)</li>
 </ul>
-<p>If your favorite theme looks weird, try to bump this up.</p>
 </section>
 <section id="scr.visual.mode-int" class="level3" data-number="14.3.2">
 <h3 data-number="14.3.2" class="anchored" data-anchor-id="scr.visual.mode-int"><span class="header-section-number">14.3.2</span> scr.visual.mode: <code>int</code></h3>
-<p><code>scr.visual.mode</code> lets you set a default view for the visual mode. The variable accepts an integer as its value and it gets mapped to the following modes:</p>
+<p>The variable <code>scr.visual.mode</code> enables the configuration of a default view for the visual mode. This variable accepts an integer value, which corresponds to the following modes:</p>
 <ul>
 <li><code>0</code> - Hexadecimal view</li>
 <li><code>1</code> - Disassembly view</li>
@@ -1447,74 +1637,72 @@ false
 <li><code>3</code> - Color blocks (entropy)</li>
 <li><code>4</code> - Print in string format</li>
 </ul>
-<p>So, if you want to have the disassembly view everytime you open up visual mode, you can have <code>e scr.visual.mode=1</code> put on your <code>~/.rizinrc</code>.</p>
+<p>For instance, if you prefer the disassembly view every time you initiate visual mode, you can include <code>e scr.visual.mode=1</code> in your <code>rizinrc</code> <a href="../../src/configuration/initial_scripts.html">initial script</a>.</p>
 </section>
 <section id="scr.seek-string" class="level3" data-number="14.3.3">
 <h3 data-number="14.3.3" class="anchored" data-anchor-id="scr.seek-string"><span class="header-section-number">14.3.3</span> scr.seek: <code>string</code></h3>
-<p>This variable accepts a full-featured expression or a pointer/flag (eg. eip). If set, rizin will set seek position to its value on startup.</p>
+<p>The variable <code>scr.seek</code> can be assigned a full-featured expression or a pointer/flag (e.g., <code>eip</code>). When configured, Rizin will initialize the seek position to the specified value upon startup.</p>
 </section>
 <section id="scr.scrollbar-bool" class="level3" data-number="14.3.4">
 <h3 data-number="14.3.4" class="anchored" data-anchor-id="scr.scrollbar-bool"><span class="header-section-number">14.3.4</span> scr.scrollbar: <code>bool</code></h3>
-<p>If you have set up any <a href="http://book.rada.re/basic_commands/flags.html#flag-zones">flagzones</a> (<code>fz?</code>), this variable will let you display the scrollbar with the flagzones, in Visual mode. Set it to <code>1</code> to display the scrollbar at the right end, <code>2</code> for the top and <code>3</code> to display it at the bottom.</p>
+<p>When you have configured any <a href="http://book.rada.re/basic_commands/flags.html#flag-zones">flagzones</a> (<code>fz?</code>), the <code>scr.scrollbar</code> variable facilitates the display of the scrollbar alongside the flagzones in Visual mode. Set it to <code>1</code> for displaying the scrollbar at the right end, <code>2</code> for the top, and <code>3</code> to position it at the bottom.</p>
 </section>
 <section id="scr.utf8-bool" class="level3" data-number="14.3.5">
 <h3 data-number="14.3.5" class="anchored" data-anchor-id="scr.utf8-bool"><span class="header-section-number">14.3.5</span> scr.utf8: <code>bool</code></h3>
-<p>Show UTF-8 characters instead of ANSI.</p>
+<p>The variable <code>scr.utf8</code> toggles the display of UTF-8 characters instead of ANSI characters.</p>
 </section>
 <section id="scr.utf8.curvy-bool" class="level3" data-number="14.3.6">
 <h3 data-number="14.3.6" class="anchored" data-anchor-id="scr.utf8.curvy-bool"><span class="header-section-number">14.3.6</span> scr.utf8.curvy: <code>bool</code></h3>
-<p>This variable lets you display curved corners in places like function graphs. This variable requires <code>scr.utf8</code> to be turned on.</p>
-<pre><code>[0x0000415c]&gt; pd 4
-│           0x0000415c      cmp   eax, 2
-│       ┌─&lt; 0x0000415f      je    0x5001
-│       │   0x00004165      cmp   eax, 3
-│      ┌──&lt; 0x00004168      jne   0x4348
-[0x0000415c]&gt; e scr.utf8.curvy=1
-[0x0000415c]&gt; pd 4
-│           0x0000415c      cmp   eax, 2
-│       ╭─&lt; 0x0000415f      je    0x5001
-│       │   0x00004165      cmp   eax, 3
-│      ╭──&lt; 0x00004168      jne   0x4348</code></pre>
+<p>The <code>scr.utf8.curvy</code> variable enables the presentation of curved corners in locations such as function graphs. It is dependent on having the <code>scr.utf8</code> setting activated.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x0000415c]</span><span class="op">&gt;</span> pd 4</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>           0x0000415c      cmp   eax, 2</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>       ┌─<span class="op">&lt;</span> 0x0000415f      je    0x5001</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>       │   0x00004165      cmp   eax, 3</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>      ┌──<span class="op">&lt;</span> 0x00004168      jne   0x4348</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x0000415c]</span><span class="op">&gt;</span> e scr.utf8.curvy=true</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x0000415c]</span><span class="op">&gt;</span> pd 4</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>           0x0000415c      cmp   eax, 2</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>       ╭─<span class="op">&lt;</span> 0x0000415f      je    0x5001</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>       │   0x00004165      cmp   eax, 3</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>      ╭──<span class="op">&lt;</span> 0x00004168      jne   0x4348</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="scr.wheel-bool" class="level3" data-number="14.3.7">
 <h3 data-number="14.3.7" class="anchored" data-anchor-id="scr.wheel-bool"><span class="header-section-number">14.3.7</span> scr.wheel: <code>bool</code></h3>
-<p>This variable lets you enable the mouse in Visual mode. Turning this variable on will be useful when you want to use your mouse to scroll through your disassembly or copy something in the Visual mode.</p>
+<p>The <code>scr.wheel</code> variable permits the activation of the mouse in Visual mode. Enabling this variable proves beneficial when you wish to utilize your mouse for scrolling through disassembly or copying content in Visual mode.</p>
 </section>
 </section>
 <section id="general-configuration" class="level2" data-number="14.4">
 <h2 data-number="14.4" class="anchored" data-anchor-id="general-configuration"><span class="header-section-number">14.4</span> General Configuration</h2>
 <section id="cfg.bigendian-bool" class="level3" data-number="14.4.1">
 <h3 data-number="14.4.1" class="anchored" data-anchor-id="cfg.bigendian-bool"><span class="header-section-number">14.4.1</span> cfg.bigendian: <code>bool</code></h3>
-<p>Change endianness. “true” means big-endian, “false” is for little-endian. “file.id” and “file.flag” both to be true.</p>
+<p>The <code>cfg.bigendian</code> setting alters the endianness, where “true” indicates big-endian, and “false” corresponds to little-endian.</p>
 </section>
 <section id="cfg.fortunes-bool" class="level3" data-number="14.4.2">
 <h3 data-number="14.4.2" class="anchored" data-anchor-id="cfg.fortunes-bool"><span class="header-section-number">14.4.2</span> cfg.fortunes: <code>bool</code></h3>
-<p>Enables or disables “fortune” messages displayed at each rizin start.</p>
+<p>The <code>cfg.fortunes</code> option allows you to enable or disable the display of “fortune” messages that appear at each Rizin start.</p>
 </section>
 <section id="cfg.fortunes.file-string" class="level3" data-number="14.4.3">
 <h3 data-number="14.4.3" class="anchored" data-anchor-id="cfg.fortunes.file-string"><span class="header-section-number">14.4.3</span> cfg.fortunes.file: <code>string</code></h3>
-<p>Rizin has two types for fortunes: tips and fun. Fortunes of the type ‘tips’ are general tips to help you use Rizin better, whereas the other one prints some lighthearted jokes. You can choose which type of fortune to display, using this variable.</p>
-<pre><code>[0x00000000]&gt; e cfg.fortunes.file=tips
-[0x00000000]&gt; fo
- -- Bindiff two files with '$ rz_diff /bin/true /bin/false'
-[0x00000000]&gt; e cfg.fortunes.file=fun
-[0x00000000]&gt; fo
- -- Welcome to "IDA - the roguelike"
-[0x00000000]&gt;</code></pre>
-<p>Rizin also supports custom fortunes. You can save your fortunes in a file and provide the relative or absolute path to the same variable, to have them displayed at the startup.</p>
-<pre><code>[0x00000000]&gt; e cfg.fortunes.file=/path/to/my/fortunes.txt</code></pre>
-<p>Please make sure that you add these in your <code>~/.rizinrc</code> to preserve the changes when you reopen rizin.</p>
+<p>Rizin offers two categories of fortunes: <code>tips</code> and <code>fun</code>. Fortunes categorized as <code>tips</code> provide general advice to enhance your usage of Rizin, while the other category offers lighthearted jokes. You can specify the type of fortune to display by utilizing the <code>cfg.fortunes.file</code> variable.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> fortune @e:cfg.fortunes.file=tips</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">--</span> Interpret rizin scripts with <span class="st">'. &lt;path-to-script&gt;'</span>. Similar to the bash source alias command.</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> fortune @e:cfg.fortunes.file=fun</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">--</span> For a full list of commands see <span class="kw">`</span><span class="fu">strings</span> /dev/urandom<span class="kw">`</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Rizin additionally supports custom fortunes. You can store your own fortunes in a file and then specify the relative or absolute path to that file using the same variable. This allows your custom fortunes to be displayed at startup.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> fortune @e:cfg.fortunes.file=/path/to/my/fortunes.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Ensure to include these configurations in your <code>rizinrc</code> file to retain the changes when reopening Rizin.</p>
 </section>
 <section id="cfg.newtab-bool" class="level3" data-number="14.4.4">
 <h3 data-number="14.4.4" class="anchored" data-anchor-id="cfg.newtab-bool"><span class="header-section-number">14.4.4</span> cfg.newtab: <code>bool</code></h3>
-<p>If this variable is enabled, help messages will be displayed along with command names in tab completion for commands.</p>
+<p>Enabling the <code>cfg.newtab</code> variable results in the display of help messages alongside command names during tab completion for commands.</p>
 </section>
 </section>
 <section id="stack-configuration" class="level2" data-number="14.5">
 <h2 data-number="14.5" class="anchored" data-anchor-id="stack-configuration"><span class="header-section-number">14.5</span> Stack Configuration</h2>
 <section id="stack.size-int" class="level3" data-number="14.5.1">
 <h3 data-number="14.5.1" class="anchored" data-anchor-id="stack.size-int"><span class="header-section-number">14.5.1</span> stack.size: <code>int</code></h3>
-<p>This variable lets you set the size of stack in bytes.</p>
+<p>The <code>stack.size</code> variable allows you to define the size of the stack hexdump in visual debug, specified in bytes.</p>
 </section>
 </section>
 <section id="command-configuration" class="level2" data-number="14.6">
@@ -1522,17 +1710,17 @@ false
 </section>
 <section id="cmd.repeat-bool" class="level2" data-number="14.7">
 <h2 data-number="14.7" class="anchored" data-anchor-id="cmd.repeat-bool"><span class="header-section-number">14.7</span> cmd.repeat: <code>bool</code></h2>
-<p>Sometimes, you may need to run the same command repeatedly and that is what <code>cmd.repeat</code> is for. When set to <code>true</code>, pressing Return key (Enter key) will run the previous command again.</p>
+<p>At times, you might find the need to execute a particular command repeatedly, and that’s where <code>cmd.repeat</code> comes into play. When configured as <code>true</code>, pressing the Return key (Enter key) will rerun the previous command. This may alter the current offset.</p>
 <p>For example:</p>
-<pre><code>[0x00005bc0]&gt; e cmd.repeat=true
-[0x00005bc0]&gt; pd 2
-            ;-- entry.fini0:
-            0x00005bc0      endbr64
-            0x00005bc4      cmp   byte [0x000232c8], 0</code></pre>
-<p>When turned on, you’d just need to press Enter key to run <code>pd 2</code></p>
-<pre><code>[0x00005bc0]&gt;
-            0x00005bce      cmp   qword [reloc.__cxa_finalize], 0
-            0x00005bd6      mov   rbp, rsp</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00005bc0]</span><span class="op">&gt;</span> e cmd.repeat=true</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00005bc0]</span><span class="op">&gt;</span> pd 2</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span><span class="ex">--</span> entry.fini0:</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005bc0</span>      endbr64</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005bc4</span>      cmp   byte <span class="pp">[</span><span class="ss">0x000232c8</span><span class="pp">]</span>, 0</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00005bc4]</span><span class="op">&gt;</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005bce</span>      cmp   qword <span class="pp">[</span><span class="ss">reloc.__cxa_finalize</span><span class="pp">]</span>, 0</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005bd6</span>      mov   rbp, rsp</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00005bd6]</span><span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
@@ -1579,6 +1767,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -1647,13 +1862,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1732,10 +1949,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1745,8 +1961,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1759,6 +1984,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1802,6 +2146,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1827,6 +2172,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1888,13 +2259,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../src/configuration/colors.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Colors</span></span>
+      <a href="../../src/configuration/colors.html" class="pagination-link  aria-label=" &lt;span="" &amp;="" themes&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Colors &amp; Themes</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../src/configuration/files.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Files</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../src/configuration/initial_scripts.html" class="pagination-link" aria-label="<span class='chapter-number'>15</span>&nbsp; <span class='chapter-title'>Initial Scripts</span>">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Initial Scripts</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1902,4 +2273,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/rizinorg/book/edit/master/src/configuration/evars.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>

@@ -2,542 +2,546 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://book.rizin.re/index.html</loc>
-    <lastmod>2024-01-24T10:34:58.518Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.137Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/introduction/overview.html</loc>
-    <lastmod>2024-01-24T10:34:58.538Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/introduction/getting_rizin.html</loc>
-    <lastmod>2024-01-24T10:34:58.554Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/introduction/compilation_portability.html</loc>
-    <lastmod>2024-01-24T10:34:58.578Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/introduction/windows_compilation.html</loc>
-    <lastmod>2024-01-24T10:34:58.602Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/introduction/compilation_android.html</loc>
-    <lastmod>2024-01-24T10:34:58.618Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/first_steps/intro.html</loc>
-    <lastmod>2024-01-24T10:34:58.646Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/first_steps/commandline_options.html</loc>
-    <lastmod>2024-01-24T10:34:58.690Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/first_steps/commandline_rizin.html</loc>
-    <lastmod>2024-01-24T10:34:58.734Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/first_steps/expressions.html</loc>
-    <lastmod>2024-01-24T10:34:58.762Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/first_steps/basic_debugger_session.html</loc>
-    <lastmod>2024-01-24T10:34:58.790Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/first_steps/contributing.html</loc>
-    <lastmod>2024-01-24T10:34:58.814Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/configuration/intro.html</loc>
-    <lastmod>2024-01-24T10:34:58.830Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.149Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/configuration/colors.html</loc>
-    <lastmod>2024-01-24T10:34:58.850Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.149Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/configuration/evars.html</loc>
-    <lastmod>2024-01-24T10:34:58.878Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.149Z</lastmod>
   </url>
   <url>
-    <loc>https://book.rizin.re/src/configuration/files.html</loc>
-    <lastmod>2024-01-24T10:34:58.898Z</lastmod>
+    <loc>https://book.rizin.re/src/configuration/initial_scripts.html</loc>
+    <lastmod>2024-02-04T08:08:11.149Z</lastmod>
+  </url>
+  <url>
+    <loc>https://book.rizin.re/src/configuration/build_variables.html</loc>
+    <lastmod>2024-02-04T08:08:11.149Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/basic_commands/intro.html</loc>
-    <lastmod>2024-01-24T10:34:58.918Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.145Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/basic_commands/seeking.html</loc>
-    <lastmod>2024-01-24T10:34:58.942Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.145Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/basic_commands/block_size.html</loc>
-    <lastmod>2024-01-24T10:34:58.958Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.145Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/basic_commands/sections.html</loc>
-    <lastmod>2024-01-24T10:34:58.982Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.145Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/basic_commands/mapping_files.html</loc>
-    <lastmod>2024-01-24T10:34:58.998Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.145Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/basic_commands/print_modes.html</loc>
-    <lastmod>2024-01-24T10:34:59.022Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.145Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/basic_commands/flags.html</loc>
-    <lastmod>2024-01-24T10:34:59.050Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.145Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/basic_commands/write.html</loc>
-    <lastmod>2024-01-24T10:34:59.066Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.149Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/basic_commands/zoom.html</loc>
-    <lastmod>2024-01-24T10:34:59.086Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.149Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/basic_commands/yank_paste.html</loc>
-    <lastmod>2024-01-24T10:34:59.110Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.149Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/basic_commands/comparing_bytes.html</loc>
-    <lastmod>2024-01-24T10:34:59.126Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.145Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/basic_commands/sdb.html</loc>
-    <lastmod>2024-01-24T10:34:59.154Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.145Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/basic_commands/dietline.html</loc>
-    <lastmod>2024-01-24T10:34:59.174Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.145Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/visual_mode/intro.html</loc>
-    <lastmod>2024-01-24T10:34:59.198Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.189Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/visual_mode/visual_disassembly.html</loc>
-    <lastmod>2024-01-24T10:34:59.222Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.189Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/visual_mode/visual_assembler.html</loc>
-    <lastmod>2024-01-24T10:34:59.238Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.189Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/visual_mode/visual_configuration_editor.html</loc>
-    <lastmod>2024-01-24T10:34:59.262Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.189Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/visual_mode/visual_panels.html</loc>
-    <lastmod>2024-01-24T10:34:59.286Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.189Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/search_bytes/intro.html</loc>
-    <lastmod>2024-01-24T10:34:59.302Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/search_bytes/basic_searches.html</loc>
-    <lastmod>2024-01-24T10:34:59.326Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/search_bytes/configurating_the_search.html</loc>
-    <lastmod>2024-01-24T10:34:59.342Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/search_bytes/pattern_search.html</loc>
-    <lastmod>2024-01-24T10:34:59.362Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/search_bytes/automation.html</loc>
-    <lastmod>2024-01-24T10:34:59.386Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/search_bytes/backward_search.html</loc>
-    <lastmod>2024-01-24T10:34:59.402Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/search_bytes/search_in_assembly.html</loc>
-    <lastmod>2024-01-24T10:34:59.434Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/search_bytes/searching_aes_keys.html</loc>
-    <lastmod>2024-01-24T10:34:59.494Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/disassembling/intro.html</loc>
-    <lastmod>2024-01-24T10:34:59.542Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/disassembling/adding_metadata.html</loc>
-    <lastmod>2024-01-24T10:34:59.558Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/disassembling/esil.html</loc>
-    <lastmod>2024-01-24T10:34:59.594Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/analysis/intro.html</loc>
-    <lastmod>2024-01-24T10:34:59.618Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.141Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/analysis/code_analysis.html</loc>
-    <lastmod>2024-01-24T10:34:59.642Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.137Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/analysis/variables.html</loc>
-    <lastmod>2024-01-24T10:34:59.662Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.145Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/analysis/types.html</loc>
-    <lastmod>2024-01-24T10:34:59.686Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.145Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/analysis/calling_conventions.html</loc>
-    <lastmod>2024-01-24T10:34:59.710Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.137Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/analysis/vtables.html</loc>
-    <lastmod>2024-01-24T10:34:59.726Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.145Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/analysis/syscalls.html</loc>
-    <lastmod>2024-01-24T10:34:59.750Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.141Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/analysis/emulation.html</loc>
-    <lastmod>2024-01-24T10:34:59.770Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.141Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/analysis/symbols.html</loc>
-    <lastmod>2024-01-24T10:34:59.790Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.141Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/analysis/signatures.html</loc>
-    <lastmod>2024-01-24T10:34:59.814Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.141Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/analysis/graphs.html</loc>
-    <lastmod>2024-01-24T10:34:59.830Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.141Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/analysis/cpu_platform_profiles.html</loc>
-    <lastmod>2024-01-24T10:34:59.854Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.141Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/scripting/intro.html</loc>
-    <lastmod>2024-01-24T10:34:59.878Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/scripting/loops.html</loc>
-    <lastmod>2024-01-24T10:34:59.894Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/scripting/macros.html</loc>
-    <lastmod>2024-01-24T10:34:59.918Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/scripting/rz-pipe.html</loc>
-    <lastmod>2024-01-24T10:34:59.938Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/debugger/intro.html</loc>
-    <lastmod>2024-01-24T10:34:59.962Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/debugger/getting_started.html</loc>
-    <lastmod>2024-01-24T10:34:59.982Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/debugger/migration.html</loc>
-    <lastmod>2024-01-24T10:35:00.014Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/debugger/registers.html</loc>
-    <lastmod>2024-01-24T10:35:00.034Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/debugger/memory_maps.html</loc>
-    <lastmod>2024-01-24T10:35:00.054Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/debugger/heap.html</loc>
-    <lastmod>2024-01-24T10:35:00.074Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/debugger/files.html</loc>
-    <lastmod>2024-01-24T10:35:00.094Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/debugger/revdebug.html</loc>
-    <lastmod>2024-01-24T10:35:00.118Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/debugger/windows_messages.html</loc>
-    <lastmod>2024-01-24T10:35:00.134Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/debugger/apple.html</loc>
-    <lastmod>2024-01-24T10:35:00.158Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/remote_access/remoting_capabilities.html</loc>
-    <lastmod>2024-01-24T10:35:00.178Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/remote_access/remote_gdb.html</loc>
-    <lastmod>2024-01-24T10:35:00.202Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/remote_access/windbg.html</loc>
-    <lastmod>2024-01-24T10:35:00.226Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/intro.html</loc>
-    <lastmod>2024-01-24T10:35:00.242Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-ax/intro.html</loc>
-    <lastmod>2024-01-24T10:35:00.266Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-find/intro.html</loc>
-    <lastmod>2024-01-24T10:35:00.286Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.185Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-run/intro.html</loc>
-    <lastmod>2024-01-24T10:35:00.306Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.185Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-bin/intro.html</loc>
-    <lastmod>2024-01-24T10:35:00.326Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-bin/file_identification.html</loc>
-    <lastmod>2024-01-24T10:35:00.346Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-bin/entrypoints.html</loc>
-    <lastmod>2024-01-24T10:35:00.366Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-bin/imports.html</loc>
-    <lastmod>2024-01-24T10:35:00.390Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-bin/exports.html</loc>
-    <lastmod>2024-01-24T10:35:00.406Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-bin/symbols.html</loc>
-    <lastmod>2024-01-24T10:35:00.430Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-bin/libraries.html</loc>
-    <lastmod>2024-01-24T10:35:00.446Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-bin/strings.html</loc>
-    <lastmod>2024-01-24T10:35:00.470Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-bin/program_sections.html</loc>
-    <lastmod>2024-01-24T10:35:00.486Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-diff/intro.html</loc>
-    <lastmod>2024-01-24T10:35:00.510Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.185Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-diff/binary_diffing.html</loc>
-    <lastmod>2024-01-24T10:35:00.534Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-asm/intro.html</loc>
-    <lastmod>2024-01-24T10:35:00.550Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-asm/assemble.html</loc>
-    <lastmod>2024-01-24T10:35:00.574Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-asm/disassemble.html</loc>
-    <lastmod>2024-01-24T10:35:00.598Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-asm/config.html</loc>
-    <lastmod>2024-01-24T10:35:00.614Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-gg/rz-gg.html</loc>
-    <lastmod>2024-01-24T10:35:00.638Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.185Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-gg/lang.html</loc>
-    <lastmod>2024-01-24T10:35:00.666Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.185Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-hash/intro.html</loc>
-    <lastmod>2024-01-24T10:35:00.682Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.185Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/tools/rz-hash/rz-hash_tool.html</loc>
-    <lastmod>2024-01-24T10:35:00.706Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.185Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/plugins/intro.html</loc>
-    <lastmod>2024-01-24T10:35:00.722Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/plugins/ioplugins.html</loc>
-    <lastmod>2024-01-24T10:35:00.746Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/plugins/dev-asm.html</loc>
-    <lastmod>2024-01-24T10:35:00.774Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/plugins/dev-analysis.html</loc>
-    <lastmod>2024-01-24T10:35:00.810Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/plugins/dev-bin.html</loc>
-    <lastmod>2024-01-24T10:35:00.898Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/plugins/dev-other.html</loc>
-    <lastmod>2024-01-24T10:35:00.970Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/plugins/python.html</loc>
-    <lastmod>2024-01-24T10:35:01.038Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/plugins/debug.html</loc>
-    <lastmod>2024-01-24T10:35:01.070Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/plugins/testing.html</loc>
-    <lastmod>2024-01-24T10:35:01.094Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/plugins/rz-pm.html</loc>
-    <lastmod>2024-01-24T10:35:01.118Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/intro.html</loc>
-    <lastmod>2024-01-24T10:35:01.134Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/ioli/intro.html</loc>
-    <lastmod>2024-01-24T10:35:01.158Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/ioli/ioli_0x00.html</loc>
-    <lastmod>2024-01-24T10:35:01.174Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/ioli/ioli_0x01.html</loc>
-    <lastmod>2024-01-24T10:35:01.198Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/ioli/ioli_0x02.html</loc>
-    <lastmod>2024-01-24T10:35:01.222Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/ioli/ioli_0x03.html</loc>
-    <lastmod>2024-01-24T10:35:01.254Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/ioli/ioli_0x04.html</loc>
-    <lastmod>2024-01-24T10:35:01.278Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/ioli/ioli_0x05.html</loc>
-    <lastmod>2024-01-24T10:35:01.310Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/ioli/ioli_0x06.html</loc>
-    <lastmod>2024-01-24T10:35:01.346Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/ioli/ioli_0x07.html</loc>
-    <lastmod>2024-01-24T10:35:01.378Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/ioli/ioli_0x08.html</loc>
-    <lastmod>2024-01-24T10:35:01.402Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/ioli/ioli_0x09.html</loc>
-    <lastmod>2024-01-24T10:35:01.426Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/avatao/01-reverse4/intro.html</loc>
-    <lastmod>2024-01-24T10:35:01.442Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.165Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/avatao/01-reverse4/rizin.html</loc>
-    <lastmod>2024-01-24T10:35:01.466Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.165Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/avatao/01-reverse4/first_steps.html</loc>
-    <lastmod>2024-01-24T10:35:01.482Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.149Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/avatao/01-reverse4/main.html</loc>
-    <lastmod>2024-01-24T10:35:01.506Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.165Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/avatao/01-reverse4/vmloop.html</loc>
-    <lastmod>2024-01-24T10:35:01.534Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.165Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/avatao/01-reverse4/instructionset.html</loc>
-    <lastmod>2024-01-24T10:35:01.558Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.165Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/avatao/01-reverse4/bytecode.html</loc>
-    <lastmod>2024-01-24T10:35:01.574Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.149Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/avatao/01-reverse4/outro.html</loc>
-    <lastmod>2024-01-24T10:35:01.594Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.165Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/hackthebox/intro.html</loc>
-    <lastmod>2024-01-24T10:35:01.610Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/hackthebox/find-the-easy-pass/intro.html</loc>
-    <lastmod>2024-01-24T10:35:01.634Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.173Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/hackthebox/find-the-easy-pass/identification.html</loc>
-    <lastmod>2024-01-24T10:35:01.658Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.165Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/hackthebox/find-the-easy-pass/find-the-validation-routine.html</loc>
-    <lastmod>2024-01-24T10:35:01.678Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.165Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/hackthebox/find-the-easy-pass/fire-up-the-debugger.html</loc>
-    <lastmod>2024-01-24T10:35:01.702Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.165Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/crackmes/hackthebox/find-the-easy-pass/bonus.html</loc>
-    <lastmod>2024-01-24T10:35:01.726Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.165Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/refcard/intro.html</loc>
-    <lastmod>2024-01-24T10:35:01.750Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.177Z</lastmod>
   </url>
   <url>
     <loc>https://book.rizin.re/src/acknowledgments/credits.html</loc>
-    <lastmod>2024-01-24T10:35:01.770Z</lastmod>
+    <lastmod>2024-02-04T08:08:11.137Z</lastmod>
   </url>
 </urlset>
