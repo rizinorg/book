@@ -29,7 +29,7 @@ This isn't going to be as easy as 0x00. Let's try disassembly with rizin.
 $ rizin ./crackme0x01
 -- Use `zoom.byte=printable` in zoom mode ('z' in Visual mode) to find strings
 [0x08048330]> aa
-[0x08048330]> pdf@main
+[0x08048330]> pdf @ main
             ; DATA XREF from entry0 @ 0x8048347
 / 113: int main (int argc, char **argv, char **envp);
 |           ; var int32_t var_4h @ ebp-0x4
