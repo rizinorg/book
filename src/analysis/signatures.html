@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -1139,7 +1173,15 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#signature-matching" id="toc-signature-matching" class="nav-link active" data-scroll-target="#signature-matching"><span class="header-section-number">55.1</span> Signature matching</a></li>
+  <li><a href="#signature-creation" id="toc-signature-creation" class="nav-link" data-scroll-target="#signature-creation"><span class="header-section-number">55.2</span> Signature creation</a></li>
+  <li><a href="#signature-database-creation" id="toc-signature-database-creation" class="nav-link" data-scroll-target="#signature-database-creation"><span class="header-section-number">55.3</span> Signature database creation</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/rizinorg/book/edit/master/src/analysis/signatures.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -1163,132 +1205,252 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Rizin supports the <a href="https://hex-rays.com/products/ida/tech/flirt/">HexRays FLIRT</a> signature format which allows you to create, parse or apply the signatures on the fly. Rizin is also capable of applying the signatures automatically, when the <a href="https://github.com/rizinorg/sigdb">sigdb</a> is defined by the user via the variable <code>flirt.sigdb.path</code>. All the applied signatures are stored in the <code>flirt</code> flag space.</p>
-<p>The HexRays FLIRT format is made by two formats:</p>
+<p>Rizin supports the <a href="https://hex-rays.com/products/ida/tech/flirt/">HexRays FLIRT</a> signature format, enabling users to effortlessly create, parse, or apply signatures on the go. Additionally, Rizin can automatically apply these signatures when the user defines the <a href="https://github.com/rizinorg/sigdb">sigdb</a> via the <code>flirt.sigdb.path</code> variable. All applied signatures are then stored within the <code>flirt</code> flag space.</p>
+<p>The HexRays FLIRT format has two formats:</p>
 <ul>
-<li><code>.pat</code> text string format</li>
-<li><code>.sig</code> compressed format which includes the architecture type used to generate the signature</li>
+<li><code>.pat</code> A human-readable text string format</li>
+<li><code>.sig</code> A compressed format, which includes a name, version and the architecture type utilized for generating the signature.</li>
 </ul>
-<p>Signature commands are available under the <code>zf</code> command namespace:</p>
-<pre><code>[0x00000000]&gt; zf?
-Usage: zf&lt;cds&gt;   # Manage FLIRT signatures
-| zfc &lt;filename&gt; # Create a FLIRT file (.pac or .sig)
-| zfd &lt;filename&gt; # Open a FLIRT file (.pac or .sig) and dumps its contents
-| zfs &lt;filename&gt; # Open a FLIRT file (.pac or .sig) and tries to apply the signatures to the loaded binary</code></pre>
-<p>To apply a signature file manually or a folder of signatures, you need to call <code>zfs</code></p>
-<pre><code>$ rizin /path/to/binary/with/stripped.elf
-[0x000051c0]&gt; aaa
-[0x000051c0]&gt; zfs signature.sig # relative or absolutes paths are accepted
-Found 206 FLIRT signatures via signature.sig
-[0x000051c0]&gt;</code></pre>
-<p>To create signature you need to analyze the binary first, then you can create it by calling <code>zfc</code>. You can modify the behaviour of the signature creation via the following options:</p>
+<p>Signature commands are available under the <code>F</code> command namespace:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> F<span class="pp">?</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> F<span class="op">&lt;</span>cdsfal<span class="op">&gt;</span>   <span class="co"># FLIRT signature management</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">Fc</span> <span class="op">&lt;</span>filename<span class="op">&gt;</span> <span class="co"># Create a FLIRT file (.pat or .sig)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">Fd</span> <span class="op">&lt;</span>filename<span class="op">&gt;</span> <span class="co"># Open a FLIRT file (.pat or .sig) and dumps its contents</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">Fs</span> <span class="op">&lt;</span>filename<span class="op">&gt;</span> <span class="co"># Open a FLIRT file (.pat or .sig) and tries to apply the signatures to the loaded binary</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">Ff</span>            <span class="co"># Outputs the flirt function signature info</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">Fa</span> [<span class="op">&lt;</span>filter<span class="op">&gt;</span>] <span class="co"># Apply signatures from sigdb</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="va">Fl</span><span class="op">[</span>t<span class="op">]</span>         <span class="co"># Lists all available signatures in sigdb</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="signature-matching" class="level2" data-number="55.1">
+<h2 data-number="55.1" class="anchored" data-anchor-id="signature-matching"><span class="header-section-number">55.1</span> Signature matching</h2>
+<p>Before applying a signature, <strong>you must first analyze the binary</strong> (see <a href="../../src/analysis/code_analysis.html">code analysis</a> chapter).</p>
+<p>In Rizin, there are two methods to apply signatures to a file: using sigdb or manually specifying the signature file.</p>
+<p>If <code>e flirt.sigdb.path</code> is configured before executing the analysis (<code>aaa</code> command), then <code>sigdb</code> files are automatically applied to the binary. However, if a manual approach is preferred, it is possible to select the FLIRT signature file from <code>sigdb</code> using the <code>Fa</code> command. To list all available signature files in sigdb, use the <code>Fl</code> command.</p>
+<p>An example of selecting sigdb signatures via <code>Fa</code> could be:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00409c70]</span><span class="op">&gt;</span> pdf</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">CALL</span> XREF from main @ 0x4017c1</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> fcn.00409c70 <span class="er">(</span><span class="ex">int64_t</span> arg1, int64_t arg2, int64_t arg3, int64_t arg4, int64_t arg5, int64_t arg6, int64_t arg7, int64_t arg8, int64_t arg9, int64_t arg10, int64_t arg11, int64_t arg_e0h<span class="kw">);</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">var</span> int64_t var_4h_2 @ rsp+0x4</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">var</span> int64_t var_8h_2 @ rsp+0x8</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">var</span> int64_t var_10h_2 @ rsp+0x10</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">var</span> int64_t var_18h_2 @ rsp+0x18</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">var</span> int64_t var_20h_2 @ rsp+0x20</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">var</span> int64_t var_30h_2 @ rsp+0x30</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">var</span> int64_t var_38h_2 @ rsp+0x38</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">var</span> int64_t var_40h_2 @ rsp+0x40</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00409c70]</span><span class="op">&gt;</span> e flirt.sigdb.path=/path/to/sigdb</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00409c70]</span><span class="op">&gt;</span> Fa<span class="pp">?</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> Fa [<span class="op">&lt;</span>filter<span class="op">&gt;</span>]   <span class="co"># Apply signatures from sigdb</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00409c70]</span><span class="op">&gt;</span> Fl<span class="pp">?</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> Fl<span class="pp">[</span><span class="ss">t</span><span class="pp">]</span>   <span class="co"># Lists all available signatures in sigdb (table mode)</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">Flt</span>    <span class="co"># Lists all available signatures in sigdb (table mode)</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00409c70]</span><span class="op">&gt;</span> Flt:name/str/gcc</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="ex">bin</span> arch bits name                 modules details                                          </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="ex">--------------------------------------------------------------------------------------------</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="ex">elf</span> x86  64   ubuntu-libgcc-10.sig 487     Ubuntu GCC support library Version 10 <span class="er">(</span><span class="ex">rizin.re</span><span class="kw">)</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="ex">elf</span> x86  64   ubuntu-libgcc-11.sig 298     Ubuntu GCC support library Version 11 <span class="er">(</span><span class="ex">rizin.re</span><span class="kw">)</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="ex">elf</span> x86  64   ubuntu-libgcc-12.sig 307     Ubuntu GCC support library Version 12 <span class="er">(</span><span class="ex">rizin.re</span><span class="kw">)</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="ex">elf</span> x86  64   ubuntu-libgcc-7.sig  247     Ubuntu GCC support library Version 7 <span class="er">(</span><span class="ex">rizin.re</span><span class="kw">)</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="ex">elf</span> x86  64   ubuntu-libgcc-8.sig  520     Ubuntu GCC support library Version 8 <span class="er">(</span><span class="ex">rizin.re</span><span class="kw">)</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="ex">elf</span> x86  64   ubuntu-libgcc-9.sig  535     Ubuntu GCC support library Version 9 <span class="er">(</span><span class="ex">rizin.re</span><span class="kw">)</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00409c70]</span><span class="op">&gt;</span> Fa gcc</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="ex">Applying</span> elf/x86/64/ubuntu-libgcc-10.sig signature file</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="ex">Applying</span> elf/x86/64/ubuntu-libgcc-11.sig signature file</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="ex">Applying</span> elf/x86/64/ubuntu-libgcc-12.sig signature file</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="ex">Applying</span> elf/x86/64/ubuntu-libgcc-7.sig signature file</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="ex">Applying</span> elf/x86/64/ubuntu-libgcc-8.sig signature file</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="ex">Applying</span> elf/x86/64/ubuntu-libgcc-9.sig signature file</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00409c70]</span><span class="op">&gt;</span> pdf</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">CALL</span> XREF from main @ 0x4017c1</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span><span class="ex">--</span> fcn.00409c70:</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> flirt.printf <span class="er">(</span><span class="ex">int64_t</span> arg1, int64_t arg2, int64_t arg3, int64_t arg4, int64_t arg5, int64_t arg6, int64_t arg7, int64_t arg8, int64_t arg9, int64_t arg10, int64_t arg11, int64_t arg_e0h<span class="kw">);</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">var</span> int64_t var_4h @ rsp+0xdc</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">var</span> int64_t var_8h @ rsp+0xe0</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">var</span> int64_t var_10h @ rsp+0xe8</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">var</span> int64_t var_18h @ rsp+0xf0</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To manually apply a signature file, you need to use the <code>Fs</code> command.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin /path/to/binary/with/stripped.elf</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00009690]</span><span class="op">&gt;</span> aaa</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00009690]</span><span class="op">&gt;</span> Fs signature.sig <span class="co"># relative or absolutes paths are accepted</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Found</span> 536 FLIRT signatures via signature.sig</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00009690]</span><span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="signature-creation" class="level2" data-number="55.2">
+<h2 data-number="55.2" class="anchored" data-anchor-id="signature-creation"><span class="header-section-number">55.2</span> Signature creation</h2>
+<p>Before creating a signature, <strong>you must first analyze the binary</strong> (see <a href="../../src/analysis/code_analysis.html">code analysis</a> chapter).</p>
+<p>You can generate the signature by invoking the <code>Fc &lt;filename&gt;</code> command. You can customize the behavior of signature creation using the following options:</p>
 <ul>
-<li><code>flirt.node.optimize</code> - FLIRT optimization option when creating a signature file (none: 0, normal: 1, smallest: 2), <code>default: 2</code></li>
-<li><code>flirt.sig.deflate</code> - enables/disables FLIRT zlib compression when creating a signature file (available only for .sig files), <code>default: true</code></li>
-<li><code>flirt.sig.file</code> - FLIRT file list (comma separated) for sig format (msdos, win, os2, netware, unix, other, all, none), <code>default: all</code></li>
-<li><code>flirt.sig.library</code> - FLIRT library name for sig format, <code>default: Built with rizin x.y.z</code></li>
-<li><code>flirt.sig.os</code> - FLIRT operating system list (comma separated) for sig format (aixar, aout, ar, bin, coff, dos:com, dos:com:old, dos:exe, dos:exe:old, dosdrv, elf, intelhex, le, loader, lx, moshex, ne, nlm, omf, omflib, pe, pilot, srec, w32run, zip, all, none), <code>default: all</code></li>
-<li><code>flirt.sig.version</code> - FLIRT version for sig format, <code>default: 10</code></li>
+<li>Signature creation options:
+<ul>
+<li><code>flirt.ignore.unknown</code>: When enabled, during FLIRT creation, it will disregard any function starting with <code>fcn.</code>, <code>default: true</code>.</li>
+<li><code>flirt.node.optimize</code>: FLIRT optimization option when creating a signature file (none: 0, normal: 1, smallest: 2), <code>default: 2</code>.</li>
+</ul></li>
+<li><code>.sig</code> (compressed format) specific options:
+<ul>
+<li><code>flirt.sig.deflate</code>: Enables or disables the FLIRT zlib compression when creating a signature file (available only for .sig files), <code>default: true</code>.</li>
+<li><code>flirt.sig.file</code>: FLIRT file list (comma separated) for <code>.sig</code> format (msdos, win, os2, netware, unix, other, all, none), <code>default: all</code>.</li>
+<li><code>flirt.sig.library</code>: FLIRT library name for <code>.sig</code> format, <code>default: Built with rizin x.y.z</code>.</li>
+<li><code>flirt.sig.os</code>: FLIRT operating system list (comma separated) for <code>.sig</code> format (aixar, aout, ar, bin, coff, dos:com, dos:com:old, dos:exe, dos:exe:old, dosdrv, elf, intelhex, le, loader, lx, moshex, ne, nlm, omf, omflib, pe, pilot, srec, w32run, zip, all, none), <code>default: all</code>.</li>
+<li><code>flirt.sig.version</code>: FLIRT version for <code>.sig</code> format <code>default: 10</code>.</li>
+</ul></li>
+<li><a href="https://github.com/rizinorg/sigdb">sigdb</a> specific options:
+<ul>
+<li><code>analysis.apply.signature</code>: Enables or disables the automatic application of signatures to the loaded binary, <code>default: true</code>.</li>
+<li><code>flirt.sigdb.load.extra</code>: Load signatures from the extra path, <code>default: true</code> and its path can be found via <code>rizin -H RZ_EXTRA_SIGDB</code>.</li>
+<li><code>flirt.sigdb.load.home</code>: Load signatures from the home path, <code>default: true</code>.</li>
+<li><code>flirt.sigdb.load.system</code>: Load signatures from the system path, <code>default: true</code> and its path can be found via <code>rizin -H RZ_SIGDB</code>.</li>
+<li><code>flirt.sigdb.path</code>: Additional user defined rizin sigdb location to load on the filesystem <code>default: (empty)</code>.</li>
+</ul></li>
 </ul>
-<p>Example of signature creation with <code>.sig</code> format:</p>
-<pre><code>$ rizin /path/to/binary/with/symbols.elf
-[0x000051c0]&gt; aa
-[0x000051c0]&gt; # setting library name
-[0x000051c0]&gt; e flirt.sig.library="My Awesome Signature"
-[0x000051c0]&gt; # creating signature
-[0x000051c0]&gt; zfc signature.sig # relative or absolutes paths are accepted
-707 FLIRT signatures were written in 'signature.sig'
-[0x000051c0]&gt;</code></pre>
-<p>Example of signature creation with <code>.pat</code> format:</p>
-<pre><code>$ rizin /path/to/binary/with/symbols.elf
-[0x000051c0]&gt; aa
-[0x000051c0]&gt; # setting internal node optimization to none
-[0x000051c0]&gt; e flirt.node.optimize=0
-[0x000051c0]&gt; # creating signature
-[0x000051c0]&gt; zfc signature.pat # relative or absolutes paths are accepted
-707 FLIRT signatures were written in 'signature.pat'
-[0x000051c0]&gt;</code></pre>
-<p>You can print the contents of a FLIRT signature file via <code>zfd</code></p>
-<pre><code>[0x000051c0]&gt; zfd signature.sig
-SIG format
-Signature:    Built with rizin 0.4.0-git, 8 modules
-Version:      1
-Architecture: 0 (x86)
-F30F:
- 1EFA:
-  31ED4989D15E4889E24883E4F050544C............48..........:
-   0. 09 CDDC 002E 0000:entry0 (REF )
-  41574C............41564989D641554989F541544189FC5548....:
-   0. 45 7595 0065 0000:__libc_csu_init (REF )
-  4883EC0848:
-   83C408C3......................................:
-    0. 00 0000 000D 0000:_fini (REF )
-   ............4885C074..FFD04883C408C3..........:
-    0. 00 0000 001B 0000:_init (REF )
-  80............75..5548..............4889E574..48........:
-   0. 21 300E 0041 0000:__do_global_dtors_aux (REF )
-  C3......................................................:
-   0. 00 0000 0005 0000:__libc_csu_fini (REF )
-  E9......................................................:
-   0. 00 0000 0009 0000:entry.init0 (REF )
- 6F866E0100004889F84189C80F1187F8130000F30F6F8E7E0100000F118F:
-  0. A7 A662 00C8 0000:Curl_persistconninfo (REF )
-[0x000051c0]&gt;</code></pre>
-<p>It is also possible to use <code>rz-sign</code> to create (automatically) or to convert or to dump FLIRT signatures:</p>
-<pre><code>$ rz-sign -h
-Usage: rz-sign [options] [file]
- -h                          this help message
- -a [-a]                     add extra 'a' to analysis command (available only with -o option)
- -e [k=v]                    set an evaluable config variable (available only with -o option)
- -c [output.pat] [input.sig] parses a FLIRT signature and converts it to its other format
- -o [output.sig] [input.bin] performs an analysis on the binary and generates the FLIRT signature.
- -d [flirt.sig]              parses a FLIRT signature and dump its content
- -q                          quiet mode
- -v                          show version information
-Examples:
-  rz-sign -d signature.sig
-  rz-sign -c new_signature.pat old_signature.sig
-  rz-sign -o libc.sig libc.so.6
+<p>Example of signature creation in <code>.sig</code> (compressed) format:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin /path/to/binary/with/symbols.elf</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00009690]</span><span class="op">&gt;</span> aa</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00009690]</span><span class="op">&gt;</span> <span class="co"># setting library name</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00009690]</span><span class="op">&gt;</span> e flirt.sig.library=<span class="st">"My Awesome Library Name"</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00009690]</span><span class="op">&gt;</span> <span class="co"># creating signature</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00009690]</span><span class="op">&gt;</span> Fc signature.sig <span class="co"># relative or absolutes paths are accepted</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ex">704</span> FLIRT signatures were written in <span class="st">'signature.sig'</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00009690]</span><span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Example of signature creation in <code>.pat</code> (human readable) format:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin /path/to/binary/with/symbols.elf</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00009690]</span><span class="op">&gt;</span> aa</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00009690]</span><span class="op">&gt;</span> <span class="co"># disable internal node optimization</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00009690]</span><span class="op">&gt;</span> e flirt.node.optimize=0</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00009690]</span><span class="op">&gt;</span> <span class="co"># creating signature</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00009690]</span><span class="op">&gt;</span> Fc signature.pat <span class="co"># relative or absolutes paths are accepted</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ex">704</span> FLIRT signatures were written in <span class="st">'signature.pat'</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00009690]</span><span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can view the contents of a FLIRT signature file via <code>Fd &lt;filename&gt;</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00009690]</span><span class="op">&gt;</span> Fd signature.sig</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">SIG</span> format</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Signature:</span>    Built with rizin x.y.z, 704 modules</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Version:</span>      10</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Architecture:</span> 0 <span class="er">(</span><span class="ex">x86</span><span class="kw">)</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">09CA74..C30F1F00E9:</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">0.</span> 00 0000 000D 0000:sock_state_cb</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="ex">0F:</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a> <span class="ex">B6:</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="ex">07:</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>   <span class="ex">3C..74..84C074..4C8D86FF000000EB..0F1F40003C..74..4939F074:</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">0.</span> 00 0000 0103 0000:Curl_auth_digest_get_pair</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>   <span class="ex">84C0:</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="ex">0F84........0FB60E84C90F84........4885D20F84........53:</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>     <span class="ex">0.</span> 01 A5A9 0105 0000:Curl_strncasecompare</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="ex">75..E9........0F1F400041......448D50E0448D429F4189C345:</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>     <span class="ex">0.</span> 07 6545 009B 0000:Curl_strcasecompare</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="ex">4F080FB7570883....66C1C20880....74..83....41B8010000006681..:</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>   <span class="ex">0.</span> 00 0000 008A 0000:Curl_ipv6_scope.part.0</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="ex">87910B00008B9748010000F7D0C0E80781..........0F9EC108C874..31:</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>   <span class="ex">0.</span> 11 F2A8 00AF 0000:http_should_fail</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a> <span class="ex">B707:</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="ex">66C1C008C3:</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>   <span class="ex">0.</span> 00 0000 0008 0000:Curl_read16_be</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="ex">C3:</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>   <span class="ex">0.</span> 00 0000 0004 0000:Curl_read16_le</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can also utilize <code>rz-sign</code> to automatically create, convert, or dump FLIRT signatures:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-sign <span class="at">-h</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> rz-sign <span class="pp">[</span><span class="ss">options</span><span class="pp">]</span> <span class="pp">[</span><span class="ss">file</span><span class="pp">]</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">-h</span>                          Show this help</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">-a</span> <span class="pp">[-</span><span class="ss">a</span><span class="pp">]</span>                     Add extra <span class="st">'a'</span> to analysis command <span class="er">(</span><span class="ex">available</span> only with <span class="at">-o</span> option<span class="kw">)</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">-e</span> <span class="pp">[</span><span class="ss">k=v</span><span class="pp">]</span>                    Set an evaluable config variable <span class="er">(</span><span class="ex">available</span> only with <span class="at">-o</span> option<span class="kw">)</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a> <span class="ex">-c</span> <span class="pp">[</span><span class="ss">output.pat</span><span class="pp">]</span> <span class="pp">[</span><span class="ss">input.sig</span><span class="pp">]</span> Parse a FLIRT signature and convert it to its other format</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">-o</span> <span class="pp">[</span><span class="ss">output.sig</span><span class="pp">]</span> <span class="pp">[</span><span class="ss">input.bin</span><span class="pp">]</span> Perform an analysis on the binary and generate the FLIRT signature</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">-d</span> <span class="pp">[</span><span class="ss">flirt.sig</span><span class="pp">]</span>              Parse a FLIRT signature and dump its content</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a> <span class="ex">-q</span>                          Quiet mode</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a> <span class="ex">-v</span>                          Show version information</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Examples:</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="ex">rz-sign</span> <span class="at">-d</span> signature.sig</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="ex">rz-sign</span> <span class="at">-c</span> new_signature.pat old_signature.sig</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="ex">rz-sign</span> <span class="at">-o</span> libc.sig libc.so.6</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-sign <span class="at">-e</span> <span class="st">"flirt.sig.library=My Awesome Library Name"</span> <span class="at">-o</span> signature.sig /path/to/binary/with/symbols.elf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For library files that use the <code>.a</code> or <code>.la</code> formats, it is highly recommended to unpack them using <code>ar</code> and utilize the <code>.o</code> files as sources for the signature files.</p>
+</section>
+<section id="signature-database-creation" class="level2" data-number="55.3">
+<h2 data-number="55.3" class="anchored" data-anchor-id="signature-database-creation"><span class="header-section-number">55.3</span> Signature database creation</h2>
+<p>It is possible to create personal <code>sigdb</code> using the <a href="https://github.com/rizinorg/sigdb-tools">sigdb tools</a> and the scripts in <a href="https://github.com/rizinorg/sigdb-source/tree/main/.scripts">sigdb source</a> available in the RizinOrg repository.</p>
+<ul>
+<li><a href="https://github.com/rizinorg/sigdb-tools">sigdb tools</a>
+<ul>
+<li><code>generate-pat-from-obj.py</code> Generates unoptimized <code>.pat</code> signatures from <code>.o</code>, <code>.lo</code>, or <code>.obj</code> object files. The tool creates a new file with the same name as the original object file but with the extension <code>.pat</code>.</li>
+<li><code>generate-obj-from-lib.py</code> Unpacks Windows <code>.lib</code> files into <code>.o</code> (object files). This tool accepts a folder containing all the <code>.lib</code> files to unpack as input and generates multiple directories (named after the respective libraries) along with their contents (beware that this tool requires linux utilities).</li>
+<li><code>launchpad-deb-scraper.py</code> This script downloads <code>deb</code> packages from launchpad leveraging high-performance asynchronous i/o. It is possible to filter the <code>deb</code> packages by architecture.</li>
+</ul></li>
+<li><a href="https://github.com/rizinorg/sigdb-source/tree/main/.scripts">sigdb source</a>
+<ul>
+<li><code>generate-pat.py</code> is a tool that generates a <code>.pat</code> file from one or multiple <code>.pat</code> files. It offers various options to automatically resolve conflicts. Additionally, it is possible to run it in <strong>test mode</strong> (also known as a dry run) to preview its actions without making any actual changes.</li>
+<li><code>generate-sig.py</code> is a tool that is only used to generate <code>.sig</code> files for the release version of a signature database. this compress and automatically names the libraries following the <a href="https://github.com/rizinorg/sigdb-source/blob/main/README.md#mandatory-folder-structure">sigdb source format</a>.</li>
+</ul></li>
+</ul>
+<p>Example of sigdb generation using the tools mentioned above:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create output folders</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mkdir mysigdb mysigdb-extract mysigdb-source</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># check if there are lib files</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> find libs/ <span class="at">-type</span> f <span class="at">-name</span> <span class="st">'*.lib'</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="ex">libs/libcrypto.lib</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">libs/libssl.lib</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># unpack all lib files</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> python ~/sigdb-tools/generate-obj-from-lib.py <span class="at">-v</span> <span class="at">--input</span> libs/</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ex">input</span> dir: libs/</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="ex">found</span> 2 file to ingest</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="ex">[1</span><span class="kw">|</span><span class="ex">2]</span> parsing libssl.lib</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="ex">[2</span><span class="kw">|</span><span class="ex">2]</span> parsing libcrypto.lib</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="ex">done.</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co"># create a sigdb source folder from the extracted files.</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> python ~/sigdb-tools/generate-pat-from-obj.py <span class="at">-i</span> libs/ <span class="at">--output</span> mysigdb-extract</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="ex">input</span> dir: libs/</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="ex">found</span> 580 file to ingest</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="ex">done.</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> find mysigdb-extract/ <span class="at">-type</span> f <span class="at">-name</span> <span class="st">'*.pat'</span> <span class="kw">|</span> <span class="fu">head</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="ex">mysigdb-extract/coff/x86/64/libcrypto.lib.ext/bf_ofb64.c.obj.pat</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="ex">mysigdb-extract/coff/x86/64/libcrypto.lib.ext/aes_cfb.c.obj.pat</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="ex">mysigdb-extract/coff/x86/64/libcrypto.lib.ext/t_req.c.obj.pat</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="ex">mysigdb-extract/coff/x86/64/libcrypto.lib.ext/md5-mingw64-x86_64.S.obj.pat</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="ex">mysigdb-extract/coff/x86/64/libcrypto.lib.ext/tasn_utl.c.obj.pat</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="ex">mysigdb-extract/coff/x86/64/libcrypto.lib.ext/asn1_par.c.obj.pat</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="co"># create sigdb source folder structure.</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mkdir <span class="at">-p</span> <span class="st">"mysigdb-source/coff/x86/64/openssl_3_0_0"</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="co"># create sigdb library description files.</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="co"># see https://github.com/rizinorg/sigdb-source/blob/main/README.md#mandatory-folder-structure</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> echo <span class="st">"OpenSSL 3.0.0 for Windows"</span> <span class="op">&gt;</span> <span class="st">"mysigdb-source/coff/x86/64/openssl_3_0_0/openssl_3_0_0.description"</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> sha1sum openssl.3.0.0.zip <span class="op">&gt;</span> <span class="st">"mysigdb-source/coff/x86/64/openssl_3_0_0/openssl_3_0_0.src.sha1"</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="co"># create sigdb source .pat from extracted files in mysigdb-extract</span></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> python ~/sigdb-source/.scripts/generate-pat.py <span class="at">--auto</span> <span class="at">--recursive</span> <span class="at">-d</span> <span class="st">"mysigdb-extract/"</span> <span class="at">-o</span> <span class="st">"mysigdb-source/coff/x86/64/openssl_3_0_0/openssl_3_0_0.pat"</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="ex">output:</span> mysigdb-source/coff/x86/64/openssl_3_0_0/openssl_3_0_0.pat</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="ex">input:</span>  577 pat files</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="ex">parsed</span> a total of 6163 signatures and dropped 2082 <span class="er">(</span><span class="ex">~34%</span><span class="kw">)</span> <span class="ex">signatures.</span>                   </span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="ex">There</span> were 452 duplicates out of 4081 signatures <span class="er">(</span><span class="ex">~11%</span><span class="kw">)</span><span class="bu">.</span></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a><span class="ex">mysigdb-source/coff/x86/64/openssl_3_0_0/openssl_3_0_0.pat</span> has been created</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="co"># sigdb source directory is now complete.</span></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> find mysigdb-source/ <span class="at">-type</span> f</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="ex">mysigdb-source/coff/x86/64/openssl_3_0_0/openssl_3_0_0.description</span></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="ex">mysigdb-source/coff/x86/64/openssl_3_0_0/openssl_3_0_0.pat</span></span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="ex">mysigdb-source/coff/x86/64/openssl_3_0_0/openssl_3_0_0.src.sha1</span></span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a><span class="co"># create release compressed files in mysigdb/ using mysigdb-source/.</span></span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> python generate-sig.py <span class="at">-s</span> mysigdb-source/ <span class="at">-o</span> mysigdb <span class="at">--test</span></span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a><span class="ex">source:</span> mysigdb-source</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a><span class="ex">output:</span> mysigdb</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a><span class="ex">Generating</span> OpenSSL 3.0.0 for Windows signature <span class="er">(</span><span class="fu">as</span> openssl_3_0_0.sig<span class="kw">)</span> <span class="ex">from</span> openssl_3_0_0.pat</span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the generated sigdb with rizin.</span></span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin <span class="at">-e</span> <span class="st">"flirt.sigdb.path=mysigdb/"</span> <span class="at">-qc</span> <span class="st">'Fl'</span></span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a><span class="ex">bin</span>  arch bits name              modules details                              </span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a><span class="ex">------------------------------------------------------------------------------</span></span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a><span class="ex">coff</span> x86  64   openssl_3_0_0.sig 3357    OpenSSL 3.0.0 for Windows <span class="er">(</span><span class="ex">rizin.re</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-$ rz-sign -e "flirt.sig.library=My Awesome Signature" -o signature.sig /path/to/binary/with/symbols.elf</code></pre>
-<p>If instead you want to manually select the FLIRT signature file from <code>sigdb</code> you have to use <code>aaF</code> commands:</p>
-<pre><code>[0x00409c70]&gt; pdf
-            ; CALL XREF from main @ 0x4017c1
-/ fcn.00409c70 (int64_t arg1, int64_t arg2, int64_t arg3, int64_t arg4, int64_t arg5, int64_t arg6, int64_t arg7, int64_t arg8, int64_t arg9, int64_t arg10, int64_t arg11, int64_t arg_e0h);
-|           ; var int64_t var_4h_2 @ rsp+0x4
-|           ; var int64_t var_8h_2 @ rsp+0x8
-|           ; var int64_t var_10h_2 @ rsp+0x10
-|           ; var int64_t var_18h_2 @ rsp+0x18
-|           ; var int64_t var_20h_2 @ rsp+0x20
-|           ; var int64_t var_30h_2 @ rsp+0x30
-|           ; var int64_t var_38h_2 @ rsp+0x38
-|           ; var int64_t var_40h_2 @ rsp+0x40
-[0x00409c70]&gt; e flirt.sigdb.path=/path/to/sigdb
-[0x00409c70]&gt; aaF?
-Usage: aaF  [l] # applies signatures from sigdb automatically
-| aaF &lt;filter&gt;  applies signatures from sigdb automatically
-| aaFl          lists all the signatures available in sigdb
-[0x00409c70]&gt; aaFl~gcc
-elf/x86/64/ubuntu-libgcc-10.sig
-elf/x86/64/ubuntu-libgcc-11.sig
-elf/x86/64/ubuntu-libgcc-7.sig
-elf/x86/64/ubuntu-libgcc-8.sig
-[0x00409c70]&gt; aaF ubuntu-libgcc
-Applying elf/x86/64/ubuntu-libgcc-10.sig signature file
-Applying elf/x86/64/ubuntu-libgcc-11.sig signature file
-Applying elf/x86/64/ubuntu-libgcc-7.sig signature file
-Applying elf/x86/64/ubuntu-libgcc-8.sig signature file
-[0x00409c70]&gt; pdf
-            ; CALL XREF from main @ 0x4017c1
-            ;-- fcn.00409c70:
-/ flirt.printf (int64_t arg1, int64_t arg2, int64_t arg3, int64_t arg4, int64_t arg5, int64_t arg6, int64_t arg7, int64_t arg8, int64_t arg9, int64_t arg10, int64_t arg11, int64_t arg_e0h);
-|           ; var int64_t var_4h @ rsp+0xdc
-|           ; var int64_t var_8h @ rsp+0xe0
-|           ; var int64_t var_10h @ rsp+0xe8
-|           ; var int64_t var_18h @ rsp+0xf0
-| </code></pre>
 
-
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1514,6 +1676,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/book\.rizin\.re\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -1548,7 +1728,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -1824,12 +2008,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../src/analysis/symbols.html" class="pagination-link  aria-label=" &lt;span="">
+      <a href="../../src/analysis/symbols.html" class="pagination-link" aria-label="Symbols">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Symbols</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../src/analysis/graphs.html" class="pagination-link" aria-label="<span class='chapter-number'>56</span>&nbsp; <span class='chapter-title'>Graph commands</span>">
+      <a href="../../src/analysis/graphs.html" class="pagination-link" aria-label="Graph commands">
         <span class="nav-page-text"><span class="chapter-number">56</span>&nbsp; <span class="chapter-title">Graph commands</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -1839,4 +2023,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/rizinorg/book/edit/master/src/analysis/signatures.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/rizinorg/book/edit/master/src/analysis/signatures.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
