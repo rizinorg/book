@@ -4,7 +4,7 @@ Rizin supports the [HexRays FLIRT](https://hex-rays.com/products/ida/tech/flirt/
 
 The HexRays FLIRT format has two formats:
 
-- `.pat` A human readable text string format
+- `.pat` A human-readable text string format
 - `.sig` A compressed format, which includes a name, version and the architecture type utilized for generating the signature.
 
 Signature commands are available under the `F` command namespace:
@@ -20,6 +20,8 @@ Usage: F<cdsfal>   # FLIRT signature management
 ```
 
 ## Signature matching
+
+Before applying a signature, **you must first analyze the binary** (see [code analysis](code_analysis.md) chapter).
 
 In Rizin, there are two methods to apply signatures to a file: using sigdb or manually specifying the signature file.
 
@@ -83,7 +85,9 @@ Found 536 FLIRT signatures via signature.sig
 
 ## Signature creation
 
-Before creating a signature, **you must first analyze the binary**. Then, you can generate the signature by invoking `Fc`. You can customize the behavior of signature creation using the following options:
+Before creating a signature, **you must first analyze the binary** (see [code analysis](code_analysis.md) chapter).
+
+You can generate the signature by invoking the `Fc <filename>` command. You can customize the behavior of signature creation using the following options:
 
 - Signature creation options:
     - `flirt.ignore.unknown`: When enabled, during FLIRT creation, it will disregard any function starting with `fcn.`, `default: true`.
