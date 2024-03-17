@@ -11,48 +11,45 @@ To create a flag:
 You can remove a flag by appending the `-` character to command. Most commands accept `-` as argument-prefix as an indication to delete something.
 
 ```
-[0x4A13B8C0]> f-flag_name
+[0x4A13B8C0]> f- flag_name
 ```
 
 To switch between or create new flagspaces use the `fs` command:
 
 ```
-[0x00005310]> fs?
-|Usage: fs [*] [+-][flagspace|addr] # Manage flagspaces
-| fs            display flagspaces
-| fs*           display flagspaces as rizin commands
-| fsj           display flagspaces in JSON
-| fs *          select all flagspaces
-| fs flagspace  select flagspace or create if it doesn't exist
-| fs-flagspace  remove flagspace
-| fs-*          remove all flagspaces
-| fs+foo        push previous flagspace and set
-| fs-           pop to the previous flagspace
-| fs-.          remove the current flagspace
-| fsq           list flagspaces in quiet mode
-| fsm [addr]    move flags at given address to the current flagspace
-| fss           display flagspaces stack
-| fss*          display flagspaces stack in rizin commands
-| fssj          display flagspaces stack in JSON
-| fsr newname   rename selected flagspace
-[0x00005310]> fs
-0  439 * strings
-1   17 * symbols
-2   54 * sections
-3   20 * segments
-4  115 * relocs
-5  109 * imports
-[0x00005310]>
+[0x00000000]> fs?
+Usage: fs[l-mrs?]   # Manage flagspaces
+| fs <name>     # Add the flagspace
+| fsl[jq]       # Display flagspaces
+| fs- <name>    # Remove the flagspace
+| fs-*          # Remove all flagspaces
+| fsm           # Move the flags at the current address to the current flagspace
+| fsr <newname> # Rename the flag space
+| fss<+-l>      # Manage the flagspace stack
+[0x00000000]> fsl
+    0 . classes
+    2 . functions
+    1 . imports
+    0 . platform.ports
+    0 . registers
+    0 . registers.extended
+    0 . registers.mmio
+   12 . relocs
+    1 * search
+   25 . sections
+   14 . segments
+    1 . strings
+   19 . symbols
 ```
 
 Here there are some command examples:
 
 ```
-[0x4A13B8C0]> fs symbols ; select only flags in symbols flagspace
-[0x4A13B8C0]> f          ; list only flags in symbols flagspace
-[0x4A13B8C0]> fs *       ; select all flagspaces
-[0x4A13B8C0]> f myflag   ; create a new flag called 'myflag'
-[0x4A13B8C0]> f-myflag  ; delete the flag called 'myflag'
+[0x4A13B8C0]> fs symbols  # select only flags in symbols flagspace
+[0x4A13B8C0]> f           # list only flags in symbols flagspace
+[0x4A13B8C0]> fs *        # select all flagspaces
+[0x4A13B8C0]> f myflag    # create a new flag called 'myflag'
+[0x4A13B8C0]> f- myflag   # delete the flag called 'myflag'
 ```
 
 You can rename flags with `fr`.
