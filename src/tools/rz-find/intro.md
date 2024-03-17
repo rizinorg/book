@@ -8,6 +8,7 @@ Usage: rz-find [-mXnzZhqv] [-a align] [-b sz] [-f/t from/to] [-[e|s|S] str] [-x 
  -a [align] only accept aligned hits
  -b [size]  set block size
  -e [regex] search for regex matches (can be used multiple times)
+ -E [cmd]   execute command on each match
  -f [from]  start searching from address 'from'
  -h         show this help
  -i         identify filetype (rizin -nqcpm file)
