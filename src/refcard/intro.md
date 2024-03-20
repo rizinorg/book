@@ -14,69 +14,85 @@ around a binary and getting information about it.
 
 | Command                 | Description                             |
 |:------------------------|:----------------------------------------|
+| help                    | First introduction                      |
 | s (tab)                 | Seek to a different place               |
+| aa[a]                   | Auto analyze (three `a` for more)       |
+| afl                     | List functions                          |
+| afvl                    | List function local vars and args       |
+| avg                     | List globals                            |
+| t                       | List types                              |
+| iz[z]                   | List strings (two `z` for more)         |
+| pdf @ [funcname](Tab)   | Disassemble function (main, fcn, etc)   |
 | x [nbytes]              | Hexdump of nbytes, $b by default        |
-| aa                      | Auto analyze                            |
-| pdf@ [funcname](Tab)    | Disassemble function (main, fcn, etc.)  |
-| f fcn(Tab)              | List functions                          |
-| f str(Tab)              | List strings                            |
-| fr [flagname] [newname] | Rename flag                             |
-| psz [offset]~grep       | Print strings and grep for one          |
-| axF [flag]              | Find cross reference for a flag         |
+| wx [nbytes]             | Write hexadecimal string                |
+| axt @ [flag/address]    | Find cross reference to a flag/address  |
 
 ## Flags
 
-Flags are like bookmarks, but they carry some extra information like size, tags or associated flagspace. Use the `f` command to list, set, get them.
+Flags are like bookmarks, but they carry some extra information like size, tags or associated flagspace. Use `f` commands to list, set, get them.
 
 | Command             | Description           |
 |:--------------------|:----------------------|
-| f                   | List flags            |
+| f name              | Add flag "name"       |
+| f- name             | Remove flag "name"    |
+| fl                  | List flags            |
 | fd $$               | Describe an offset    |
-| fj                  | Display flags in JSON |
-| fl                  | Show flag length      |
+| fN [name]           | Show the real name    |
 | fx [flagname]       | Show hexdump of flag  |
 | fC [name] [comment] | Set flag comment      |
 
-## Flagspaces
+## Functions and variables
 
-Flags are created into a flagspace, by default none is selected,
-and listing flags will list them all. To display a subset of flags
-you can use the `fs` command to restrict it.
+Functions appear after auto-analysis or after adding them manually with the `af` command.
 
-| Command       | Description           |
-|:--------------|:----------------------|
-| fs            | Display flagspaces    |
-| fs *          | Select all flagspaces |
-| fs [space]    | Select one flagspace  |
+| Command             | Description               |
+|:--------------------|:--------------------------|
+| af                  | Analyze function          |
+| af- name            | Remove function "name"    |
+| afb                 | List basic blocks         |
+| afi                 | Show function information |
+| afs                 | Show function signature   |
+| afvl                | Show function variables   |
+| agf                 | Show function graph       |
+
+## Global variables
+
+Global variables appear after auto-analysis or after adding them manually.
+
+| Command             | Description               |
+|:--------------------|:--------------------------|
+| avg                 | Show all globals          |
+| avg name            | Show global "name"        |
+| avga name type      | Add global variable       |
+| avgp name           | Print global variable     |
+| avgx name           | Show xrefs to the global  |
 
 ## Information
 
-Binary files have information stored inside the headers. The `i`
-command uses the RzBin api and allows us to the same things rz-bin
-do. Those are the most common ones.
+Binary files have information stored inside the headers. The `i` command uses the RzBin API and allows us to the same things rz-bin does. Those are the most common ones.
 
-| Command | Description              |
-|:--------|:-------------------------|
-| ii      | Information on imports   |
-| iI      | Info on binary           |
-| ie      | Display entrypoint       |
-| iS      | Display sections         |
-| ir      | Display relocations      |
-| iz      | List strings (izz, izzz) |
+| Command | Description                 |
+|:--------|:----------------------------|
+| ii      | Information on imports      |
+| iI      | Info on binary              |
+| ie      | Display entrypoint          |
+| iS      | Display sections            |
+| ir      | Display relocations         |
 
 ## Print string
 
 There are different ways to represent a string in memory. The `ps` command
-allows us to print it in utf-16, pascal, zero terminated, .. formats.
+allows us to print it in UTF8, UTF-16, Pascal, zero-terminated, .. formats.
 
-| Command      | Description                    |
-|:-------------|:-------------------------------|
-| psz [offset] | Print zero terminated string   |
-| psb [offset] | Print strings in current block |
-| psx [offset] | Show string with scaped chars  |
-| psp [offset] | Print pascal string            |
-| psw [offset] | Print wide string              |
-
+| Command        | Description                            |
+|:---------------|:---------------------------------------|
+| ps @ [offset]  | Print auto-detected string             |
+| psb @ [offset] | Print all strings in the current block |
+| psp @ [offset] | Print Pascal string                    |
+| psw @ [offset] | Print UTF-16 LE string                 |
+| psm @ [offset] | Print UTF-16 BE string                 |
+| psW @ [offset] | Print UTF-32 LE string                 |
+| psM @ [offset] | Print UTF-32 BE string                 |
 
 ## Visual mode
 
@@ -90,14 +106,14 @@ have to press keys to get the actions happen instead of commands.
 | V              | Enter visual mode                                 |
 | p/P            | Rotate modes (hex, disasm, debug, words, buf)     |
 | c              | Toggle (c)ursor                                   |
-| q              | Back to rizin shell                              |
+| q              | Back to rizin shell                               |
 | hjkl           | Move around (or HJKL) (left-down-up-right)        |
 | Enter          | Follow address of jump/call                       |
 | sS             | Step/step over                                    |
 | o              | Toggle asm.pseudo and asm.esil                    |
 | .              | Seek to program counter                           |
 | /              | In cursor mode, search in current block           |
-| :cmd           | Run rizin command                                |
+| :cmd           | Run rizin command                                 |
 | ;[-]cmt        | Add/remove comment                                |
 | /*+-[]         | Change block size, [] = resize hex.cols           |
 | <,>            | Seek aligned to block size                        |
@@ -120,8 +136,7 @@ have to press keys to get the actions happen instead of commands.
 | uU             | Undo/redo seek                                    |
 | x              | Show xrefs of current func from/to data/code      |
 | yY             | Copy and paste selection                          |
-| z              | fold/unfold comments in disassembly                |
-
+| z              | fold/unfold comments in disassembly               |
 
 ## Searching
 
@@ -166,52 +181,20 @@ All commands in rizin that accept a number supports the use of those variables.
 | Command       | Description                                                 |
 |:--------------|:------------------------------------------------------------|
 | $$            | here (current virtual seek)                                 |
-| $$$           | current non-temporary virtual seek                          |
 | $?            | last comparison value                                       |
 | $B            | base address (aligned lowest map address)                   |
 | $b            | block size                                                  |
-| $c            | get terminal width in character columns                     |
-| $Cn           | get nth call of function                                    |
 | $D            | current debug map base address ?v $D @ rsp                  |
 | $DB           | same as dbg.baddr, progam base address                      |
-| $DD           | current debug map size                                      |
-| $Dn           | get nth data reference in function                          |
-| $e            | 1 if end of block, else 0                                   |
-| $f            | jump fail address (e.g. jz 0x10 => next instruction)        |
-| $F            | Same as $FB                                                 |
 | $Fb           | begin of basic block                                        |
 | $FB           | begin of function                                           |
 | $Fe           | end of basic block                                          |
 | $FE           | end of function                                             |
-| $Ff           | function false destination                                  |
-| $Fi           | basic block instructions                                    |
-| $FI           | function instructions                                       |
-| $Fj           | function jump destination                                   |
-| $fl           | flag length (size) at current address (fla; pD $l @ entry0) |
 | $FS           | function size (linear length)                               |
 | $Fs           | size of the current basic block                             |
 | $FSS          | function size (sum bb sizes)                                |
-| $j            | jump address (e.g. jmp 0x10, jz 0x10 => 0x10)               |
-| $Ja           | get nth jump of function                                    |
-| $l            | opcode length                                               |
-| $M            | map address (lowest map address)                            |
-| $m            | opcode memory reference (e.g. mov eax,[0x10] => 0x10)       |
-| $MM           | map size (lowest map address)                               |
-| $O            | cursor here (current offset pointed by the cursor)          |
-| $o            | here (current disk io offset)                               |
-| $p            | getpid()                                                    |
-| $P            | pid of children (only in debug)                             |
-| $r            | get console height (in rows, see $c for columns)            |
 | $s            | file size                                                   |
 | $S            | section offset                                              |
 | $SS           | section size                                                |
-| $v            | opcode immediate value (e.g. lui a0,0x8010 => 0x8010)       |
-| $w            | get word size, 4 if asm.bits=32, 8 if 64, ...               |
-| $Xn           | get nth xref of function                                    |
-| flag          | offset of flag                                              |
 | ${ev}         | get value of eval <config variable <ev>                     |
-| $alias        | alias commands (simple macros)                              |
-| $e{flag}      | end of <flag> (flag->offset + flag->size)                   |
-| $k{kv}        | get value of an sdb query value                             |
 | $r{reg}       | get value of named register <reg>                           |
-| $s{flag}      | get size of <flag>                                          |
