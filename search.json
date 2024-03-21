@@ -2509,7 +2509,7 @@
     "href": "src/refcard/intro.html#survival-guide",
     "title": "134  Rizin Reference Card",
     "section": "",
-    "text": "Command\nDescription\n\n\n\n\ns (tab)\nSeek to a different place\n\n\nx [nbytes]\nHexdump of nbytes, $b by default\n\n\naa\nAuto analyze\n\n\npdf@ funcname\nDisassemble function (main, fcn, etc.)\n\n\nf fcn(Tab)\nList functions\n\n\nf str(Tab)\nList strings\n\n\nfr [flagname] [newname]\nRename flag\n\n\npsz [offset]~grep\nPrint strings and grep for one\n\n\naxF [flag]\nFind cross reference for a flag",
+    "text": "Command\nDescription\n\n\n\n\nhelp\nFirst introduction\n\n\ns (tab)\nSeek to a different place\n\n\naa[a]\nAuto analyze (three a for more)\n\n\nafl\nList functions\n\n\nafvl\nList function local vars and args\n\n\navg\nList globals\n\n\nt\nList types\n\n\niz[z]\nList strings (two z for more)\n\n\npdf @ funcname\nDisassemble function (main, fcn, etc)\n\n\nx [nbytes]\nHexdump of nbytes, $b by default\n\n\nwx [nbytes]\nWrite hexadecimal string\n\n\naxt @ [flag/address]\nFind cross reference to a flag/address",
     "crumbs": [
       "Reference Card",
       "<span class='chapter-number'>134</span>  <span class='chapter-title'>Rizin Reference Card</span>"
@@ -2520,18 +2520,29 @@
     "href": "src/refcard/intro.html#flags",
     "title": "134  Rizin Reference Card",
     "section": "134.2 Flags",
-    "text": "134.2 Flags\nFlags are like bookmarks, but they carry some extra information like size, tags or associated flagspace. Use the f command to list, set, get them.\n\n\n\nCommand\nDescription\n\n\n\n\nf\nList flags\n\n\nfd $$\nDescribe an offset\n\n\nfj\nDisplay flags in JSON\n\n\nfl\nShow flag length\n\n\nfx [flagname]\nShow hexdump of flag\n\n\nfC [name] [comment]\nSet flag comment",
+    "text": "134.2 Flags\nFlags are like bookmarks, but they carry some extra information like size, tags or associated flagspace. Use f commands to list, set, get them.\n\n\n\nCommand\nDescription\n\n\n\n\nf name\nAdd flag “name”\n\n\nf- name\nRemove flag “name”\n\n\nfl\nList flags\n\n\nfd $$\nDescribe an offset\n\n\nfN [name]\nShow the real name\n\n\nfx [flagname]\nShow hexdump of flag\n\n\nfC [name] [comment]\nSet flag comment",
     "crumbs": [
       "Reference Card",
       "<span class='chapter-number'>134</span>  <span class='chapter-title'>Rizin Reference Card</span>"
     ]
   },
   {
-    "objectID": "src/refcard/intro.html#flagspaces",
-    "href": "src/refcard/intro.html#flagspaces",
+    "objectID": "src/refcard/intro.html#functions-and-variables",
+    "href": "src/refcard/intro.html#functions-and-variables",
     "title": "134  Rizin Reference Card",
-    "section": "134.3 Flagspaces",
-    "text": "134.3 Flagspaces\nFlags are created into a flagspace, by default none is selected, and listing flags will list them all. To display a subset of flags you can use the fs command to restrict it.\n\n\n\nCommand\nDescription\n\n\n\n\nfs\nDisplay flagspaces\n\n\nfs *\nSelect all flagspaces\n\n\nfs [space]\nSelect one flagspace",
+    "section": "134.3 Functions and variables",
+    "text": "134.3 Functions and variables\nFunctions appear after auto-analysis or after adding them manually with the af command.\n\n\n\nCommand\nDescription\n\n\n\n\naf\nAnalyze function\n\n\naf- name\nRemove function “name”\n\n\nafb\nList basic blocks\n\n\nafi\nShow function information\n\n\nafs\nShow function signature\n\n\nafvl\nShow function variables\n\n\nagf\nShow function graph",
+    "crumbs": [
+      "Reference Card",
+      "<span class='chapter-number'>134</span>  <span class='chapter-title'>Rizin Reference Card</span>"
+    ]
+  },
+  {
+    "objectID": "src/refcard/intro.html#global-variables",
+    "href": "src/refcard/intro.html#global-variables",
+    "title": "134  Rizin Reference Card",
+    "section": "134.4 Global variables",
+    "text": "134.4 Global variables\nGlobal variables appear after auto-analysis or after adding them manually.\n\n\n\nCommand\nDescription\n\n\n\n\navg\nShow all globals\n\n\navg name\nShow global “name”\n\n\navga name type\nAdd global variable\n\n\navgp name\nPrint global variable\n\n\navgx name\nShow xrefs to the global",
     "crumbs": [
       "Reference Card",
       "<span class='chapter-number'>134</span>  <span class='chapter-title'>Rizin Reference Card</span>"
@@ -2541,8 +2552,8 @@
     "objectID": "src/refcard/intro.html#information",
     "href": "src/refcard/intro.html#information",
     "title": "134  Rizin Reference Card",
-    "section": "134.4 Information",
-    "text": "134.4 Information\nBinary files have information stored inside the headers. The i command uses the RzBin api and allows us to the same things rz-bin do. Those are the most common ones.\n\n\n\nCommand\nDescription\n\n\n\n\nii\nInformation on imports\n\n\niI\nInfo on binary\n\n\nie\nDisplay entrypoint\n\n\niS\nDisplay sections\n\n\nir\nDisplay relocations\n\n\niz\nList strings (izz, izzz)",
+    "section": "134.5 Information",
+    "text": "134.5 Information\nBinary files have information stored inside the headers. The i command uses the RzBin API and allows us to the same things rz-bin does. Those are the most common ones.\n\n\n\nCommand\nDescription\n\n\n\n\nii\nInformation on imports\n\n\niI\nInfo on binary\n\n\nie\nDisplay entrypoint\n\n\niS\nDisplay sections\n\n\nir\nDisplay relocations",
     "crumbs": [
       "Reference Card",
       "<span class='chapter-number'>134</span>  <span class='chapter-title'>Rizin Reference Card</span>"
@@ -2552,8 +2563,8 @@
     "objectID": "src/refcard/intro.html#print-string",
     "href": "src/refcard/intro.html#print-string",
     "title": "134  Rizin Reference Card",
-    "section": "134.5 Print string",
-    "text": "134.5 Print string\nThere are different ways to represent a string in memory. The ps command allows us to print it in utf-16, pascal, zero terminated, .. formats.\n\n\n\nCommand\nDescription\n\n\n\n\npsz [offset]\nPrint zero terminated string\n\n\npsb [offset]\nPrint strings in current block\n\n\npsx [offset]\nShow string with scaped chars\n\n\npsp [offset]\nPrint pascal string\n\n\npsw [offset]\nPrint wide string",
+    "section": "134.6 Print string",
+    "text": "134.6 Print string\nThere are different ways to represent a string in memory. The ps command allows us to print it in UTF8, UTF-16, Pascal, zero-terminated, .. formats.\n\n\n\nCommand\nDescription\n\n\n\n\nps @ [offset]\nPrint auto-detected string\n\n\npsb @ [offset]\nPrint all strings in the current block\n\n\npsp @ [offset]\nPrint Pascal string\n\n\npsw @ [offset]\nPrint UTF-16 LE string\n\n\npsm @ [offset]\nPrint UTF-16 BE string\n\n\npsW @ [offset]\nPrint UTF-32 LE string\n\n\npsM @ [offset]\nPrint UTF-32 BE string",
     "crumbs": [
       "Reference Card",
       "<span class='chapter-number'>134</span>  <span class='chapter-title'>Rizin Reference Card</span>"
@@ -2563,8 +2574,8 @@
     "objectID": "src/refcard/intro.html#visual-mode",
     "href": "src/refcard/intro.html#visual-mode",
     "title": "134  Rizin Reference Card",
-    "section": "134.6 Visual mode",
-    "text": "134.6 Visual mode\nThe visual mode is the standard interactive interface of rizin.\nTo enter in visual mode use the v or V command, and then you’ll only have to press keys to get the actions happen instead of commands.\n\n\n\nCommand\nDescription\n\n\n\n\nV\nEnter visual mode\n\n\np/P\nRotate modes (hex, disasm, debug, words, buf)\n\n\nc\nToggle (c)ursor\n\n\nq\nBack to rizin shell\n\n\nhjkl\nMove around (or HJKL) (left-down-up-right)\n\n\nEnter\nFollow address of jump/call\n\n\nsS\nStep/step over\n\n\no\nToggle asm.pseudo and asm.esil\n\n\n.\nSeek to program counter\n\n\n/\nIn cursor mode, search in current block\n\n\n:cmd\nRun rizin command\n\n\n;[-]cmt\nAdd/remove comment\n\n\n/*+-[]\nChange block size, [] = resize hex.cols\n\n\n&lt;,&gt;\nSeek aligned to block size\n\n\ni/a/A\n(i)nsert hex, (a)ssemble code, visual (A)ssembler\n\n\nb\nToggle breakpoint\n\n\nB\nBrowse evals, symbols, flags, classes, …\n\n\nd[f?]\nDefine function, data, code, ..\n\n\nD\nEnter visual diff mode (set diff.from/to)\n\n\ne\nEdit eval configuration variables\n\n\nf/F\nSet/unset flag\n\n\ngG\nGo seek to begin and end of file (0-$s)\n\n\nmK/’K\nMark/go to Key (any key)\n\n\nn/N\nSeek next/prev function/flag/hit (scr.nkey)\n\n\nC\nToggle (C)olors\n\n\nR\nRandomize color palette (ecr)\n\n\ntT\nTab related. see also tab\n\n\nv\nVisual code analysis menu\n\n\nV\n(V)iew graph (agv?)\n\n\nwW\nSeek cursor to next/prev word\n\n\nuU\nUndo/redo seek\n\n\nx\nShow xrefs of current func from/to data/code\n\n\nyY\nCopy and paste selection\n\n\nz\nfold/unfold comments in disassembly",
+    "section": "134.7 Visual mode",
+    "text": "134.7 Visual mode\nThe visual mode is the standard interactive interface of rizin.\nTo enter in visual mode use the v or V command, and then you’ll only have to press keys to get the actions happen instead of commands.\n\n\n\nCommand\nDescription\n\n\n\n\nV\nEnter visual mode\n\n\np/P\nRotate modes (hex, disasm, debug, words, buf)\n\n\nc\nToggle (c)ursor\n\n\nq\nBack to rizin shell\n\n\nhjkl\nMove around (or HJKL) (left-down-up-right)\n\n\nEnter\nFollow address of jump/call\n\n\nsS\nStep/step over\n\n\no\nToggle asm.pseudo and asm.esil\n\n\n.\nSeek to program counter\n\n\n/\nIn cursor mode, search in current block\n\n\n:cmd\nRun rizin command\n\n\n;[-]cmt\nAdd/remove comment\n\n\n/*+-[]\nChange block size, [] = resize hex.cols\n\n\n&lt;,&gt;\nSeek aligned to block size\n\n\ni/a/A\n(i)nsert hex, (a)ssemble code, visual (A)ssembler\n\n\nb\nToggle breakpoint\n\n\nB\nBrowse evals, symbols, flags, classes, …\n\n\nd[f?]\nDefine function, data, code, ..\n\n\nD\nEnter visual diff mode (set diff.from/to)\n\n\ne\nEdit eval configuration variables\n\n\nf/F\nSet/unset flag\n\n\ngG\nGo seek to begin and end of file (0-$s)\n\n\nmK/’K\nMark/go to Key (any key)\n\n\nn/N\nSeek next/prev function/flag/hit (scr.nkey)\n\n\nC\nToggle (C)olors\n\n\nR\nRandomize color palette (ecr)\n\n\ntT\nTab related. see also tab\n\n\nv\nVisual code analysis menu\n\n\nV\n(V)iew graph (agv?)\n\n\nwW\nSeek cursor to next/prev word\n\n\nuU\nUndo/redo seek\n\n\nx\nShow xrefs of current func from/to data/code\n\n\nyY\nCopy and paste selection\n\n\nz\nfold/unfold comments in disassembly",
     "crumbs": [
       "Reference Card",
       "<span class='chapter-number'>134</span>  <span class='chapter-title'>Rizin Reference Card</span>"
@@ -2574,8 +2585,8 @@
     "objectID": "src/refcard/intro.html#searching",
     "href": "src/refcard/intro.html#searching",
     "title": "134  Rizin Reference Card",
-    "section": "134.7 Searching",
-    "text": "134.7 Searching\nThere are many situations where we need to find a value inside a binary or in some specific regions. Use the e search.in=? command to choose where the / command may search for the given value.\n\n\n\n\n\n\n\nCommand\nDescription\n\n\n\n\n/ foo\\00\nSearch for string ’foo\\0’\n\n\n/b\nSearch backwards\n\n\n//\nRepeat last search\n\n\n/w foo\nSearch for wide string ’f\\0o\\0o\\0’\n\n\n/wi foo\nSearch for wide string ignoring case\n\n\n/! ff\nSearch for first occurrence not matching\n\n\n/i foo\nSearch for string ’foo’ ignoring case\n\n\n/e /E.F/i\nMatch regular expression\n\n\n/x a1b2c3\nSearch for bytes; spaces and uppercase nibbles are allowed, same as /x A1 B2 C3\n\n\n/x a1..c3\nSearch for bytes ignoring some nibbles (auto-generates mask, in this example: ff00ff)\n\n\n/x a1b2:fff3\nSearch for bytes with mask (specify individual bits)\n\n\n/d 101112\nSearch for a deltified sequence of bytes\n\n\n/!x 00\nInverse hexa search (find first byte != 0x00)\n\n\n/c jmp [esp]\nSearch for asm code (see search.asmstr)\n\n\n/a jmp eax\nAssemble opcode and search its bytes\n\n\n/A\nSearch for AES expanded keys\n\n\n/r sym.printf\nAnalyze opcode reference an offset\n\n\n/R\nSearch for ROP gadgets\n\n\n/P\nShow offset of previous instruction\n\n\n/m magicfile\nSearch for matching magic file\n\n\n/p patternsize\nSearch for pattern of given size\n\n\n/z min max\nSearch for strings of given size\n\n\n/v[?248] num\nLook for a asm.bigendian 32bit value",
+    "section": "134.8 Searching",
+    "text": "134.8 Searching\nThere are many situations where we need to find a value inside a binary or in some specific regions. Use the e search.in=? command to choose where the / command may search for the given value.\n\n\n\n\n\n\n\nCommand\nDescription\n\n\n\n\n/ foo\\00\nSearch for string ’foo\\0’\n\n\n/b\nSearch backwards\n\n\n//\nRepeat last search\n\n\n/w foo\nSearch for wide string ’f\\0o\\0o\\0’\n\n\n/wi foo\nSearch for wide string ignoring case\n\n\n/! ff\nSearch for first occurrence not matching\n\n\n/i foo\nSearch for string ’foo’ ignoring case\n\n\n/e /E.F/i\nMatch regular expression\n\n\n/x a1b2c3\nSearch for bytes; spaces and uppercase nibbles are allowed, same as /x A1 B2 C3\n\n\n/x a1..c3\nSearch for bytes ignoring some nibbles (auto-generates mask, in this example: ff00ff)\n\n\n/x a1b2:fff3\nSearch for bytes with mask (specify individual bits)\n\n\n/d 101112\nSearch for a deltified sequence of bytes\n\n\n/!x 00\nInverse hexa search (find first byte != 0x00)\n\n\n/c jmp [esp]\nSearch for asm code (see search.asmstr)\n\n\n/a jmp eax\nAssemble opcode and search its bytes\n\n\n/A\nSearch for AES expanded keys\n\n\n/r sym.printf\nAnalyze opcode reference an offset\n\n\n/R\nSearch for ROP gadgets\n\n\n/P\nShow offset of previous instruction\n\n\n/m magicfile\nSearch for matching magic file\n\n\n/p patternsize\nSearch for pattern of given size\n\n\n/z min max\nSearch for strings of given size\n\n\n/v[?248] num\nLook for a asm.bigendian 32bit value",
     "crumbs": [
       "Reference Card",
       "<span class='chapter-number'>134</span>  <span class='chapter-title'>Rizin Reference Card</span>"
@@ -2585,8 +2596,8 @@
     "objectID": "src/refcard/intro.html#usable-variables-in-expression",
     "href": "src/refcard/intro.html#usable-variables-in-expression",
     "title": "134  Rizin Reference Card",
-    "section": "134.8 Usable variables in expression",
-    "text": "134.8 Usable variables in expression\nThe %$? command will display the variables that can be used in any math operation inside the rizin shell. For example, using the % $$ command to evaluate a number or %v to just the value in one format.\nAll commands in rizin that accept a number supports the use of those variables.\n\n\n\n\n\n\n\nCommand\nDescription\n\n\n\n\n\\[            | here (current virtual seek)                                 |\n| \\]$\ncurrent non-temporary virtual seek\n\n\n$?\nlast comparison value\n\n\n$B\nbase address (aligned lowest map address)\n\n\n$b\nblock size\n\n\n$c\nget terminal width in character columns\n\n\n$Cn\nget nth call of function\n\n\n$D\ncurrent debug map base address ?v $D @ rsp\n\n\n$DB\nsame as dbg.baddr, progam base address\n\n\n$DD\ncurrent debug map size\n\n\n$Dn\nget nth data reference in function\n\n\n$e\n1 if end of block, else 0\n\n\n$f\njump fail address (e.g. jz 0x10 =&gt; next instruction)\n\n\n$F\nSame as $FB\n\n\n$Fb\nbegin of basic block\n\n\n$FB\nbegin of function\n\n\n$Fe\nend of basic block\n\n\n$FE\nend of function\n\n\n$Ff\nfunction false destination\n\n\n$Fi\nbasic block instructions\n\n\n$FI\nfunction instructions\n\n\n$Fj\nfunction jump destination\n\n\n$fl\nflag length (size) at current address (fla; pD $l @ entry0)\n\n\n$FS\nfunction size (linear length)\n\n\n$Fs\nsize of the current basic block\n\n\n$FSS\nfunction size (sum bb sizes)\n\n\n$j\njump address (e.g. jmp 0x10, jz 0x10 =&gt; 0x10)\n\n\n$Ja\nget nth jump of function\n\n\n$l\nopcode length\n\n\n$M\nmap address (lowest map address)\n\n\n$m\nopcode memory reference (e.g. mov eax,[0x10] =&gt; 0x10)\n\n\n$MM\nmap size (lowest map address)\n\n\n$O\ncursor here (current offset pointed by the cursor)\n\n\n$o\nhere (current disk io offset)\n\n\n$p\ngetpid()\n\n\n$P\npid of children (only in debug)\n\n\n$r\nget console height (in rows, see $c for columns)\n\n\n$s\nfile size\n\n\n$S\nsection offset\n\n\n$SS\nsection size\n\n\n$v\nopcode immediate value (e.g. lui a0,0x8010 =&gt; 0x8010)\n\n\n$w\nget word size, 4 if asm.bits=32, 8 if 64, …\n\n\n$Xn\nget nth xref of function\n\n\nflag\noffset of flag\n\n\n${ev}\nget value of eval &lt;config variable \n\n\n$alias\nalias commands (simple macros)\n\n\n$e{flag}\nend of  (flag-&gt;offset + flag-&gt;size)\n\n\n$k{kv}\nget value of an sdb query value\n\n\n$r{reg}\nget value of named register \n\n\n$s{flag}\nget size of",
+    "section": "134.9 Usable variables in expression",
+    "text": "134.9 Usable variables in expression\nThe %$? command will display the variables that can be used in any math operation inside the rizin shell. For example, using the % $$ command to evaluate a number or %v to just the value in one format.\nAll commands in rizin that accept a number supports the use of those variables.\n\n\n\n\n\n\n\nCommand\nDescription\n\n\n\n\n$$\nhere (current virtual seek)\n\n\n$?\nlast comparison value\n\n\n$B\nbase address (aligned lowest map address)\n\n\n$b\nblock size\n\n\n$D\ncurrent debug map base address ?v $D @ rsp\n\n\n$DB\nsame as dbg.baddr, progam base address\n\n\n$Fb\nbegin of basic block\n\n\n$FB\nbegin of function\n\n\n$Fe\nend of basic block\n\n\n$FE\nend of function\n\n\n$FS\nfunction size (linear length)\n\n\n$Fs\nsize of the current basic block\n\n\n$FSS\nfunction size (sum bb sizes)\n\n\n$s\nfile size\n\n\n$S\nsection offset\n\n\n$SS\nsection size\n\n\n${ev}\nget value of eval &lt;config variable \n\n\n$r{reg}\nget value of named register",
     "crumbs": [
       "Reference Card",
       "<span class='chapter-number'>134</span>  <span class='chapter-title'>Rizin Reference Card</span>"

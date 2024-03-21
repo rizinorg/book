@@ -72,35 +72,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -1174,12 +1145,13 @@ window.Quarto = {
   <ul>
   <li><a href="#survival-guide" id="toc-survival-guide" class="nav-link active" data-scroll-target="#survival-guide"><span class="header-section-number">134.1</span> Survival Guide</a></li>
   <li><a href="#flags" id="toc-flags" class="nav-link" data-scroll-target="#flags"><span class="header-section-number">134.2</span> Flags</a></li>
-  <li><a href="#flagspaces" id="toc-flagspaces" class="nav-link" data-scroll-target="#flagspaces"><span class="header-section-number">134.3</span> Flagspaces</a></li>
-  <li><a href="#information" id="toc-information" class="nav-link" data-scroll-target="#information"><span class="header-section-number">134.4</span> Information</a></li>
-  <li><a href="#print-string" id="toc-print-string" class="nav-link" data-scroll-target="#print-string"><span class="header-section-number">134.5</span> Print string</a></li>
-  <li><a href="#visual-mode" id="toc-visual-mode" class="nav-link" data-scroll-target="#visual-mode"><span class="header-section-number">134.6</span> Visual mode</a></li>
-  <li><a href="#searching" id="toc-searching" class="nav-link" data-scroll-target="#searching"><span class="header-section-number">134.7</span> Searching</a></li>
-  <li><a href="#usable-variables-in-expression" id="toc-usable-variables-in-expression" class="nav-link" data-scroll-target="#usable-variables-in-expression"><span class="header-section-number">134.8</span> Usable variables in expression</a></li>
+  <li><a href="#functions-and-variables" id="toc-functions-and-variables" class="nav-link" data-scroll-target="#functions-and-variables"><span class="header-section-number">134.3</span> Functions and variables</a></li>
+  <li><a href="#global-variables" id="toc-global-variables" class="nav-link" data-scroll-target="#global-variables"><span class="header-section-number">134.4</span> Global variables</a></li>
+  <li><a href="#information" id="toc-information" class="nav-link" data-scroll-target="#information"><span class="header-section-number">134.5</span> Information</a></li>
+  <li><a href="#print-string" id="toc-print-string" class="nav-link" data-scroll-target="#print-string"><span class="header-section-number">134.6</span> Print string</a></li>
+  <li><a href="#visual-mode" id="toc-visual-mode" class="nav-link" data-scroll-target="#visual-mode"><span class="header-section-number">134.7</span> Visual mode</a></li>
+  <li><a href="#searching" id="toc-searching" class="nav-link" data-scroll-target="#searching"><span class="header-section-number">134.8</span> Searching</a></li>
+  <li><a href="#usable-variables-in-expression" id="toc-usable-variables-in-expression" class="nav-link" data-scroll-target="#usable-variables-in-expression"><span class="header-section-number">134.9</span> Usable variables in expression</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/rizinorg/book/edit/master/src/refcard/intro.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -1220,47 +1192,59 @@ general public licence — Copyright by Thanat0s - v0.1 -</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
+<td style="text-align: left;">help</td>
+<td style="text-align: left;">First introduction</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">s (tab)</td>
 <td style="text-align: left;">Seek to a different place</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">aa[a]</td>
+<td style="text-align: left;">Auto analyze (three <code>a</code> for more)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">afl</td>
+<td style="text-align: left;">List functions</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">afvl</td>
+<td style="text-align: left;">List function local vars and args</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">avg</td>
+<td style="text-align: left;">List globals</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">t</td>
+<td style="text-align: left;">List types</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">iz[z]</td>
+<td style="text-align: left;">List strings (two <code>z</code> for more)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">pdf @ <a href="Tab">funcname</a></td>
+<td style="text-align: left;">Disassemble function (main, fcn, etc)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">x [nbytes]</td>
 <td style="text-align: left;">Hexdump of nbytes, $b by default</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">aa</td>
-<td style="text-align: left;">Auto analyze</td>
+<td style="text-align: left;">wx [nbytes]</td>
+<td style="text-align: left;">Write hexadecimal string</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">pdf@ <a href="Tab">funcname</a></td>
-<td style="text-align: left;">Disassemble function (main, fcn, etc.)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">f fcn(Tab)</td>
-<td style="text-align: left;">List functions</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">f str(Tab)</td>
-<td style="text-align: left;">List strings</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">fr [flagname] [newname]</td>
-<td style="text-align: left;">Rename flag</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">psz [offset]~grep</td>
-<td style="text-align: left;">Print strings and grep for one</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">axF [flag]</td>
-<td style="text-align: left;">Find cross reference for a flag</td>
+<td style="text-align: left;">axt @ [flag/address]</td>
+<td style="text-align: left;">Find cross reference to a flag/address</td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="flags" class="level2" data-number="134.2">
 <h2 data-number="134.2" class="anchored" data-anchor-id="flags"><span class="header-section-number">134.2</span> Flags</h2>
-<p>Flags are like bookmarks, but they carry some extra information like size, tags or associated flagspace. Use the <code>f</code> command to list, set, get them.</p>
+<p>Flags are like bookmarks, but they carry some extra information like size, tags or associated flagspace. Use <code>f</code> commands to list, set, get them.</p>
 <table class="table">
 <thead>
 <tr class="header">
@@ -1270,7 +1254,15 @@ general public licence — Copyright by Thanat0s - v0.1 -</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">f</td>
+<td style="text-align: left;">f name</td>
+<td style="text-align: left;">Add flag “name”</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">f- name</td>
+<td style="text-align: left;">Remove flag “name”</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fl</td>
 <td style="text-align: left;">List flags</td>
 </tr>
 <tr class="even">
@@ -1278,27 +1270,23 @@ general public licence — Copyright by Thanat0s - v0.1 -</code></pre>
 <td style="text-align: left;">Describe an offset</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">fj</td>
-<td style="text-align: left;">Display flags in JSON</td>
+<td style="text-align: left;">fN [name]</td>
+<td style="text-align: left;">Show the real name</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">fl</td>
-<td style="text-align: left;">Show flag length</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">fx [flagname]</td>
 <td style="text-align: left;">Show hexdump of flag</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">fC [name] [comment]</td>
 <td style="text-align: left;">Set flag comment</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="flagspaces" class="level2" data-number="134.3">
-<h2 data-number="134.3" class="anchored" data-anchor-id="flagspaces"><span class="header-section-number">134.3</span> Flagspaces</h2>
-<p>Flags are created into a flagspace, by default none is selected, and listing flags will list them all. To display a subset of flags you can use the <code>fs</code> command to restrict it.</p>
+<section id="functions-and-variables" class="level2" data-number="134.3">
+<h2 data-number="134.3" class="anchored" data-anchor-id="functions-and-variables"><span class="header-section-number">134.3</span> Functions and variables</h2>
+<p>Functions appear after auto-analysis or after adding them manually with the <code>af</code> command.</p>
 <table class="table">
 <thead>
 <tr class="header">
@@ -1308,23 +1296,73 @@ general public licence — Copyright by Thanat0s - v0.1 -</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">fs</td>
-<td style="text-align: left;">Display flagspaces</td>
+<td style="text-align: left;">af</td>
+<td style="text-align: left;">Analyze function</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">fs *</td>
-<td style="text-align: left;">Select all flagspaces</td>
+<td style="text-align: left;">af- name</td>
+<td style="text-align: left;">Remove function “name”</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">fs [space]</td>
-<td style="text-align: left;">Select one flagspace</td>
+<td style="text-align: left;">afb</td>
+<td style="text-align: left;">List basic blocks</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">afi</td>
+<td style="text-align: left;">Show function information</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">afs</td>
+<td style="text-align: left;">Show function signature</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">afvl</td>
+<td style="text-align: left;">Show function variables</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">agf</td>
+<td style="text-align: left;">Show function graph</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="information" class="level2" data-number="134.4">
-<h2 data-number="134.4" class="anchored" data-anchor-id="information"><span class="header-section-number">134.4</span> Information</h2>
-<p>Binary files have information stored inside the headers. The <code>i</code> command uses the RzBin api and allows us to the same things rz-bin do. Those are the most common ones.</p>
+<section id="global-variables" class="level2" data-number="134.4">
+<h2 data-number="134.4" class="anchored" data-anchor-id="global-variables"><span class="header-section-number">134.4</span> Global variables</h2>
+<p>Global variables appear after auto-analysis or after adding them manually.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Command</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">avg</td>
+<td style="text-align: left;">Show all globals</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">avg name</td>
+<td style="text-align: left;">Show global “name”</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">avga name type</td>
+<td style="text-align: left;">Add global variable</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">avgp name</td>
+<td style="text-align: left;">Print global variable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">avgx name</td>
+<td style="text-align: left;">Show xrefs to the global</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="information" class="level2" data-number="134.5">
+<h2 data-number="134.5" class="anchored" data-anchor-id="information"><span class="header-section-number">134.5</span> Information</h2>
+<p>Binary files have information stored inside the headers. The <code>i</code> command uses the RzBin API and allows us to the same things rz-bin does. Those are the most common ones.</p>
 <table class="table">
 <thead>
 <tr class="header">
@@ -1353,16 +1391,12 @@ general public licence — Copyright by Thanat0s - v0.1 -</code></pre>
 <td style="text-align: left;">ir</td>
 <td style="text-align: left;">Display relocations</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">iz</td>
-<td style="text-align: left;">List strings (izz, izzz)</td>
-</tr>
 </tbody>
 </table>
 </section>
-<section id="print-string" class="level2" data-number="134.5">
-<h2 data-number="134.5" class="anchored" data-anchor-id="print-string"><span class="header-section-number">134.5</span> Print string</h2>
-<p>There are different ways to represent a string in memory. The <code>ps</code> command allows us to print it in utf-16, pascal, zero terminated, .. formats.</p>
+<section id="print-string" class="level2" data-number="134.6">
+<h2 data-number="134.6" class="anchored" data-anchor-id="print-string"><span class="header-section-number">134.6</span> Print string</h2>
+<p>There are different ways to represent a string in memory. The <code>ps</code> command allows us to print it in UTF8, UTF-16, Pascal, zero-terminated, .. formats.</p>
 <table class="table">
 <thead>
 <tr class="header">
@@ -1372,30 +1406,38 @@ general public licence — Copyright by Thanat0s - v0.1 -</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">psz [offset]</td>
-<td style="text-align: left;">Print zero terminated string</td>
+<td style="text-align: left;">ps @ [offset]</td>
+<td style="text-align: left;">Print auto-detected string</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">psb [offset]</td>
-<td style="text-align: left;">Print strings in current block</td>
+<td style="text-align: left;">psb @ [offset]</td>
+<td style="text-align: left;">Print all strings in the current block</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">psx [offset]</td>
-<td style="text-align: left;">Show string with scaped chars</td>
+<td style="text-align: left;">psp @ [offset]</td>
+<td style="text-align: left;">Print Pascal string</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">psp [offset]</td>
-<td style="text-align: left;">Print pascal string</td>
+<td style="text-align: left;">psw @ [offset]</td>
+<td style="text-align: left;">Print UTF-16 LE string</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">psw [offset]</td>
-<td style="text-align: left;">Print wide string</td>
+<td style="text-align: left;">psm @ [offset]</td>
+<td style="text-align: left;">Print UTF-16 BE string</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">psW @ [offset]</td>
+<td style="text-align: left;">Print UTF-32 LE string</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">psM @ [offset]</td>
+<td style="text-align: left;">Print UTF-32 BE string</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="visual-mode" class="level2" data-number="134.6">
-<h2 data-number="134.6" class="anchored" data-anchor-id="visual-mode"><span class="header-section-number">134.6</span> Visual mode</h2>
+<section id="visual-mode" class="level2" data-number="134.7">
+<h2 data-number="134.7" class="anchored" data-anchor-id="visual-mode"><span class="header-section-number">134.7</span> Visual mode</h2>
 <p>The visual mode is the standard interactive interface of rizin.</p>
 <p>To enter in visual mode use the <code>v</code> or <code>V</code> command, and then you’ll only have to press keys to get the actions happen instead of commands.</p>
 <table class="table">
@@ -1545,8 +1587,8 @@ general public licence — Copyright by Thanat0s - v0.1 -</code></pre>
 </tbody>
 </table>
 </section>
-<section id="searching" class="level2" data-number="134.7">
-<h2 data-number="134.7" class="anchored" data-anchor-id="searching"><span class="header-section-number">134.7</span> Searching</h2>
+<section id="searching" class="level2" data-number="134.8">
+<h2 data-number="134.8" class="anchored" data-anchor-id="searching"><span class="header-section-number">134.8</span> Searching</h2>
 <p>There are many situations where we need to find a value inside a binary or in some specific regions. Use the <code>e search.in=?</code> command to choose where the <code>/</code> command may search for the given value.</p>
 <table class="table">
 <colgroup>
@@ -1655,8 +1697,8 @@ general public licence — Copyright by Thanat0s - v0.1 -</code></pre>
 </tbody>
 </table>
 </section>
-<section id="usable-variables-in-expression" class="level2" data-number="134.8">
-<h2 data-number="134.8" class="anchored" data-anchor-id="usable-variables-in-expression"><span class="header-section-number">134.8</span> Usable variables in expression</h2>
+<section id="usable-variables-in-expression" class="level2" data-number="134.9">
+<h2 data-number="134.9" class="anchored" data-anchor-id="usable-variables-in-expression"><span class="header-section-number">134.9</span> Usable variables in expression</h2>
 <p>The <code>%$?</code> command will display the variables that can be used in any math operation inside the rizin shell. For example, using the <code>% $$</code> command to evaluate a number or <code>%v</code> to just the value in one format.</p>
 <p>All commands in rizin that accept a number supports the use of those variables.</p>
 <table class="table">
@@ -1672,9 +1714,8 @@ general public licence — Copyright by Thanat0s - v0.1 -</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><span class="math display">\[            | here (current virtual seek)                                 |
-| \]</span>$</td>
-<td style="text-align: left;">current non-temporary virtual seek</td>
+<td style="text-align: left;">$$</td>
+<td style="text-align: left;">here (current virtual seek)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">$?</td>
@@ -1689,14 +1730,6 @@ general public licence — Copyright by Thanat0s - v0.1 -</code></pre>
 <td style="text-align: left;">block size</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">$c</td>
-<td style="text-align: left;">get terminal width in character columns</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">$Cn</td>
-<td style="text-align: left;">get nth call of function</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">$D</td>
 <td style="text-align: left;">current debug map base address ?v $D @ rsp</td>
 </tr>
@@ -1705,60 +1738,20 @@ general public licence — Copyright by Thanat0s - v0.1 -</code></pre>
 <td style="text-align: left;">same as dbg.baddr, progam base address</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">$DD</td>
-<td style="text-align: left;">current debug map size</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">$Dn</td>
-<td style="text-align: left;">get nth data reference in function</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">$e</td>
-<td style="text-align: left;">1 if end of block, else 0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">$f</td>
-<td style="text-align: left;">jump fail address (e.g.&nbsp;jz 0x10 =&gt; next instruction)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">$F</td>
-<td style="text-align: left;">Same as $FB</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">$Fb</td>
 <td style="text-align: left;">begin of basic block</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">$FB</td>
 <td style="text-align: left;">begin of function</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">$Fe</td>
 <td style="text-align: left;">end of basic block</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">$FE</td>
 <td style="text-align: left;">end of function</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">$Ff</td>
-<td style="text-align: left;">function false destination</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">$Fi</td>
-<td style="text-align: left;">basic block instructions</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">$FI</td>
-<td style="text-align: left;">function instructions</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">$Fj</td>
-<td style="text-align: left;">function jump destination</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">$fl</td>
-<td style="text-align: left;">flag length (size) at current address (fla; pD $l @ entry0)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">$FS</td>
@@ -1773,100 +1766,24 @@ general public licence — Copyright by Thanat0s - v0.1 -</code></pre>
 <td style="text-align: left;">function size (sum bb sizes)</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">$j</td>
-<td style="text-align: left;">jump address (e.g.&nbsp;jmp 0x10, jz 0x10 =&gt; 0x10)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">$Ja</td>
-<td style="text-align: left;">get nth jump of function</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">$l</td>
-<td style="text-align: left;">opcode length</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">$M</td>
-<td style="text-align: left;">map address (lowest map address)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">$m</td>
-<td style="text-align: left;">opcode memory reference (e.g.&nbsp;mov eax,[0x10] =&gt; 0x10)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">$MM</td>
-<td style="text-align: left;">map size (lowest map address)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">$O</td>
-<td style="text-align: left;">cursor here (current offset pointed by the cursor)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">$o</td>
-<td style="text-align: left;">here (current disk io offset)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">$p</td>
-<td style="text-align: left;">getpid()</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">$P</td>
-<td style="text-align: left;">pid of children (only in debug)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">$r</td>
-<td style="text-align: left;">get console height (in rows, see $c for columns)</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">$s</td>
 <td style="text-align: left;">file size</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">$S</td>
 <td style="text-align: left;">section offset</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">$SS</td>
 <td style="text-align: left;">section size</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">$v</td>
-<td style="text-align: left;">opcode immediate value (e.g.&nbsp;lui a0,0x8010 =&gt; 0x8010)</td>
-</tr>
 <tr class="odd">
-<td style="text-align: left;">$w</td>
-<td style="text-align: left;">get word size, 4 if asm.bits=32, 8 if 64, …</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">$Xn</td>
-<td style="text-align: left;">get nth xref of function</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">flag</td>
-<td style="text-align: left;">offset of flag</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">${ev}</td>
 <td style="text-align: left;">get value of eval &lt;config variable <ev></ev></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">$alias</td>
-<td style="text-align: left;">alias commands (simple macros)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">$e{flag}</td>
-<td style="text-align: left;">end of <flag> (flag-&gt;offset + flag-&gt;size)</flag></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">$k{kv}</td>
-<td style="text-align: left;">get value of an sdb query value</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">$r{reg}</td>
 <td style="text-align: left;">get value of named register <reg></reg></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">$s{flag}</td>
-<td style="text-align: left;">get size of <flag></flag></td>
 </tr>
 </tbody>
 </table>
