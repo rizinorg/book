@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.4.553">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -1172,11 +1172,11 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Disassembling is the inverse action of assembling. Rasm2 takes hexpair as an input (but can also take a file in binary form) and show the human readable form.</p>
+<p>Disassembling is the inverse action of assembling. Rz-asm takes hexpair as an input (but can also take a file in binary form) and show the human readable form.</p>
 <p>To do this we can use the <code>-d</code> option of rz-asm like this:</p>
 <pre><code>$ rz-asm -a x86 -b 32 -d '90'
 nop</code></pre>
-<p>Rasm2 also have the <code>-D</code> flag to show the disassembly like <code>-d</code> does, but includes offset and bytes.</p>
+<p>Rz-asm also has the <code>-D</code> flag to show the disassembly like <code>-d</code> does, but includes offset and bytes.</p>
 <p>In rizin there are many commands to perform a disassembly from a specific place in memory.</p>
 <p>You might be interested in trying if you want different outputs for later parsing with your scripts, or just grep to find what you are looking for:</p>
 <section id="pd-n" class="level3" data-number="92.0.1">
