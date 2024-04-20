@@ -24,7 +24,7 @@ nth paddr      vaddr      len size section type  string
 4   0x000005a9 0x080485a9 15  16   .rodata ascii Password OK :)\n
 ```
 
-So we know what the following section is, this section is the header shown when the application is run.
+So we know what the following section is: this section is the header shown when the application is run.
 
 ```
 nth paddr      vaddr      len size section type  string
