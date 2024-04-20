@@ -1,149 +1,194 @@
 IOLI 0x03
 =========
 
-crackme 0x03, let's skip the string check part and analyze it directly.
+This is the fourth crackme.
+
+```
+$ ./crackme0x03
+IOLI Crackme Level 0x03
+Password: letmein
+Invalid Password!
+```
+
+Checking for strings with `rz-bin -z ./crackme0x03` gives us the following result:
+
+```
+$ rz-bin -z ./crackme0x03
+[Strings]
+nth paddr      vaddr      len size section type  string                    
+---------------------------------------------------------------------------
+0   0x000005ec 0x080485ec 17  18   .rodata ascii Lqydolg#Sdvvzrug$
+1   0x000005fe 0x080485fe 17  18   .rodata ascii Sdvvzrug#RN$$$#=,
+2   0x00000610 0x08048610 24  25   .rodata ascii IOLI Crackme Level 0x03\n
+3   0x00000629 0x08048629 10  11   .rodata ascii Password: 
+
+```
+
+Note that the 'Invalid Password!' and the 'Password OK :)' strings have been seemingly replaced by random
+gibberish.
+
+Let's analyze.
 
 ```C
 [0x08048360]> aaa
-[0x08048360]> pdd@sym.main
-/* jsdec pseudo code output */
-/* ./crackme0x03 @ 0x8048498 */
-#include <stdint.h>
+[0x08048360]> pdg @ main
 
-int32_t main (void) {
+undefined4 main(void)
+{
+    int32_t var_18h;
+    int32_t var_10h;
     int32_t var_ch;
     int32_t var_8h;
-    int32_t var_4h;
-    int32_t var_sp_4h;
-    eax = 0;
-    eax += 0xf;
-    eax += 0xf;
-    eax >>= 4;
-    eax <<= 4;
-    printf ("IOLI Crackme Level 0x03\n");
-    printf ("Password: ");
-    eax = &var_4h;
-    scanf (0x8048634, eax);
-    var_8h = 0x5a;
-    var_ch = 0x1ec;
-    edx = 0x1ec;
-    eax = &var_8h;
-    *(eax) += edx;
-    eax = var_8h;
-    eax *= var_8h;
-    var_ch = eax;
-    eax = var_4h;
-    test (eax, eax);
-    eax = 0;
-    return eax;
+    
+    sym.imp.printf("IOLI Crackme Level 0x03\n");
+    sym.imp.printf("Password: ");
+    sym.imp.scanf(data.08048634, &var_8h);
+    sym.test(var_8h, 0x52b24);
+    return 0;
 }
 ```
 
- It looks straightforward except the function `test(eax, eax)`. This is unusual to call a function with same two parameters , so I speculate that the decompiler has gone wrong. we can check it in disassembly.
+This looks quite straightforward, `var_8h` is the result of `scanf` which the function `sym.test(var_8h, 0x52b24)` apparently
+compares to the value `0x52b24`.
 
-```asm
-[0x08048360]> pdf@sym.main
-...
-           0x080484fc      8945f4         mov dword [var_ch], eax
-           0x080484ff      8b45f4         mov eax, dword [var_ch]
-           0x08048502      89442404       mov dword [var_sp_4h], eax   ; uint32_t arg_ch
-           0x08048506      8b45fc         mov eax, dword [var_4h]
-           0x08048509      890424         mov dword [esp], eax         ; int32_t arg_8h
-           0x0804850c      e85dffffff     call sym.test
-...
+And indeed entering the decimal value of `0x52b24` (338724) gives us a pass.
+
 ```
-
-Here comes the`sym.test`, called with two parameters. One is var_4h (our input from `scanf()`). The other is var_ch. The value of var_ch (as the parameter of `test()`) can be calculated like it did in crackme_0x02. It's  0x52b24. Try it!
-
-```bash
-./crackme0x03
+$ ./crackme0x03
 IOLI Crackme Level 0x03
 Password: 338724
 Password OK!!! :)
 ```
 
-Take a look at `sym.test`. It's a two path conditional jump which compares two parameters and then do shift. We can guess that shift is most likely the decryption part (shift cipher, e.g. Caesar cipher).
+But let's dive a bit deeper to see what `sym.test()` is actually doing!
 
 ```C
-/* jsdec pseudo code output */
-/* ./crackme0x03 @ 0x804846e */
-#include <stdint.h>
+[0x08048360]> pdg @ sym.test
 
-int32_t test (int32_t arg_8h, uint32_t arg_ch) {
-    eax = arg_8h;
-    if (eax != arg_ch) {
-        shift ("Lqydolg#Sdvvzrug$");
+void sym.test(int32_t arg_4h, unsigned long arg_8h)
+{
+    if (arg_4h == arg_8h) {
+        sym.shift("Sdvvzrug#RN$$$#=,");
     } else {
-        shift ("Sdvvzrug#RN$$$#=,");
+        sym.shift("Lqydolg#Sdvvzrug$");
     }
-    return eax;
+    return;
+}
+```
+It's a two path conditional jump which compares two parameters and then does a shift. We can guess that `shift()` is most likely
+some sort of decoding step of the seemingly random strings (shift cipher, e.g. Caesar cipher).
+
+To confirm our suspicions let's analyze `sym.shift()`.
+
+```C
+[0x08048360]> pdg @ sym.shift
+
+// WARNING: Variable defined which should be unmapped: var_98h
+
+void sym.shift(char *s)
+{
+    uint32_t uVar1;
+    int32_t var_98h;
+    unsigned long var_80h;
+    int32_t var_7ch;
+    
+    var_80h = 0;
+    while( true ) {
+        uVar1 = sym.imp.strlen(s);
+        if (uVar1 <= var_80h) break;
+        *(char *)((int32_t)&var_7ch + var_80h) = s[var_80h] + -3;
+        var_80h = var_80h + 1;
+    }
+    *(undefined *)((int32_t)&var_7ch + var_80h) = 0;
+    sym.imp.printf(data.080485e8, &var_7ch);
+    return;
 }
 ```
 
-can also reverse `shift()` to satisfy curiosity.
+If we clean this up a bit it becomes more evident what is going on.
 
-```asm
-[0x08048360]> pdf@sym.shift
-        ; CODE (CALL) XREF 0x08048491 (sym.test)
-        ; CODE (CALL) XREF 0x08048483 (sym.test)
-/ function: sym.shift (90)
-|       0x08048414  sym.shift:
-|       0x08048414     55               push ebp
-|       0x08048415     89e5             mov ebp, esp
-|       0x08048417     81ec98000000     sub esp, 0x98
-|       0x0804841d     c7458400000000   mov dword [ebp-0x7c], 0x0  ; this seems to be a counter
-|  .    ; CODE (JMP) XREF 0x0804844e (sym.shift)
-/ loc: loc.08048424 (74)
-|  .    0x08048424  loc.08048424:
-|  .--> 0x08048424     8b4508           mov eax, [ebp+0x8] ; ebp+0x8 = strlen(chain)
-|  |    0x08048427     890424           mov [esp], eax
-|  |    0x0804842a     e811ffffff       call dword imp.strlen
-|  |       ; imp.strlen()
-|  |    0x0804842f     394584           cmp [ebp-0x7c], eax
-|  |,=< 0x08048432     731c             jae loc.08048450
-|  ||   0x08048434     8d4588           lea eax, [ebp-0x78]
-|  ||   0x08048437     89c2             mov edx, eax
-|  ||   0x08048439     035584           add edx, [ebp-0x7c]
-|  ||   0x0804843c     8b4584           mov eax, [ebp-0x7c]
-|  ||   0x0804843f     034508           add eax, [ebp+0x8]
-|  ||   0x08048442     0fb600           movzx eax, byte [eax]
-|  ||   0x08048445     2c03             sub al, 0x3
-|  ||   0x08048447     8802             mov [edx], al
-|  ||   0x08048449     8d4584           lea eax, [ebp-0x7c]
-|  ||   0x0804844c     ff00             inc dword [eax]
-|  `==< 0x0804844e     ebd4             jmp loc.08048424
-|   |   ; CODE (JMP) XREF 0x08048432 (sym.shift)
-/ loc: loc.08048450 (30)
-|   |   0x08048450  loc.08048450:
-|   `-> 0x08048450     8d4588           lea eax, [ebp-0x78]
-|       0x08048453     034584           add eax, [ebp-0x7c]
-|       0x08048456     c60000           mov byte [eax], 0x0
-|       0x08048459     8d4588           lea eax, [ebp-0x78]
-|       0x0804845c     89442404         mov [esp+0x4], eax
-|       0x08048460     c70424e8850408   mov dword [esp], 0x80485e8
-|       0x08048467     e8e4feffff       call dword imp.printf
-|          ; imp.printf()
-|       0x0804846c     c9               leave
-\       0x0804846d     c3               ret
-        ; ------------
+```C
+void shift(char *str)
+{
+    uint32_t len = strlen(str);
+    char res[len + 1];
+    
+    int32_t idx = 0;
+    while( idx < len ) {
+        res[idx] = str[idx] - 3; // Subtract character code by 3
+        idx++;
+    }
+    res[idx] = 0; // Add null terminator
+    printf("%s\n", res);
+    return;
+}
 ```
 
-you can read the assembly code and find the decryption is actually a "sub al, 0x3". we can write a python script for it:
+We can see that each character in `str` is subtracted by 3 to produce the final result.
 
-```python
-print(''.join([chr(ord(i)-0x3) for i in 'SdvvzrugRN$$$']))
-print(''.join([chr(ord(i)-0x3) for i in 'LqydolgSdvvzrug$']))
+With this knowledge we can take a shot at decoding the strings. We can use the `pos` command to apply
+the subtraction needed for decoding and printing the result.
+
+```bash
+$ rizin ./crackme0x03
+[0x08048360]> aaa
+[0x08048360]> fs strings
+[0x08048360]> fl
+0x080485ec 18 str.Lqydolg_Sdvvzrug
+0x080485fe 18 str.Sdvvzrug_RN
+0x08048610 25 str.IOLI_Crackme_Level_0x03
+0x08048629 11 str.Password:
+[0x08048360]> pos 0x03 @ str.Lqydolg_Sdvvzrug @! 18
+- offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
+0x080485ec  496e 7661 6c69 6420 5061 7373 776f 7264  Invalid Password
+0x080485fc  21fd                                     !.
+[0x08048360]> pos 0x03 @ str.Sdvvzrug_RN @! 18
+- offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
+0x080485fe  5061 7373 776f 7264 204f 4b21 2121 203a  Password OK!!! :
+0x0804860e  29fd                                     ).
 ```
 
-the easier way is to `run` the decryption code, that means debug it or emulate it. I used rizin ESIL emulator but it got stuck when executed ` call dword imp.strlen`. And I can't find the usage of hooking function / skip instruction in rizin.  The following is an example to show u how to emulate ESIL.
+However, some functions may not be as easy to understand as this one, in which case it may be useful to be able to run the code.
+Rizin provides us two ways of doing this: by using the debugger, or by emulation (using ESIL). 
+
+Let's first see how we can achieve this using the debugger. We will be wanting to pass the encoded strings to `shift()`. We know
+`shift` takes one parameter `s`, which is an address to a (null terminated) string. We can see where on the stack local variables and
+arguments are using the `afvl` command.
+
+```bash
+$ rizin -d ./crackme0x03
+[0xec0ff970]> aa
+[0xec0ff970]> afvl @ sym.shift
+var int32_t var_98h @ stack - 0x98
+var unsigned long var_80h @ stack - 0x80
+var int32_t var_7ch @ stack - 0x7c
+arg const char *s @ stack + 0x4
+```
+
+We can see that `s` starts at a 4 byte offset from the stack pointer.
+
+```bash
+[0xec0ff970]> dcu main                      # run until program start
+[0x08048498]> *esp+4=str.Lqydolg_Sdvvzrug   # 'push' address onto the stack (note the 4 byte offset)
+[0x08048498]> dr eip=sym.shift              # set instruction pointer to start of shift()
+[0x08048498]> dcr                           # run shift() until it returns
+Invalid Password!
+[0x0804846d]> *esp+4=str.Sdvvzrug_RN        # and now for the other string
+[0x08048498]> dr eip=sym.shift
+[0x08048498]> dcr
+Password OK!!! :)
+```
+
+Emulation is a bit more tricky because we can't make external calls to functions like `strlen()` and `printf()`. So we have to manually
+skip over them and set the registers accordingly. Below is an example.
 
 ```bash
 [0x08048414]> s 0x08048445		# the 'sub al, 0x03'
 [0x08048445]> aei				# init VM
 [0x08048445]> aeim				# init memory
 [0x08048445]> aeip				# init ip
-[0x08048445]> aer eax=0x41		# set eax=0x41 -- 'A'
-[0x08048445]> aer				# show current value of regs
+[0x08048445]> ar eax=0x41		# set eax=0x41 -- 'A'
+[0x08048445]> ar				# show current value of regs
 oeax = 0x00000000
 eax = 0x00000041
 ebx = 0x00000000
@@ -178,35 +223,4 @@ dead at 0x00000000
        :=< 0x0804844e      ebd4           jmp 0x8048424
            ; CODE XREF from sym.shift @ 0x8048432
            0x08048450      8d4588         lea eax, [var_78h]
-```
-
-By the way, you can also open the file and use write data command to decrypt data.
-
-```bash
-rizin -w ./crackme0x03
-[0x08048360]> aaa
-[0x08048360]> fs strings
-[0x08048360]> f
-0x080485ec 18 str.Lqydolg_Sdvvzrug
-0x080485fe 18 str.Sdvvzrug_RN
-0x08048610 25 str.IOLI_Crackme_Level_0x03
-0x08048629 11 str.Password:
-[0x08048360]> s str.Lqydolg_Sdvvzrug
-[0x080485ec]> wos 0x03 @ str.Lqydolg_Sdvvzrug!0x11
-[0x080485ec]> px
-- offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
-0x080485ec  496e 7661 6c69 6420 5061 7373 776f 7264  Invalid Password
-0x080485fc  2100 5364 7676 7a72 7567 2352 4e24 2424  !.Sdvvzrug#RN$$$
-0x0804860c  233d 2c00 494f 4c49 2043 7261 636b 6d65  #=,.IOLI Crackme
-0x0804861c  204c 6576 656c 2030 7830 330a 0050 6173   Level 0x03..Pas
-0x0804862c  7377 6f72 643a 2000 2564 0000 0000 0000  sword: .%d......
-[0x080485ec]> wos 0x03 @ str.Sdvvzrug_RN!17
-[0x080485ec]> px
-- offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
-0x080485ec  496e 7661 6c69 6420 5061 7373 776f 7264  Invalid Password
-0x080485fc  2100 5061 7373 776f 7264 204f 4b21 2121  !.Password OK!!!
-0x0804860c  203a 2900 494f 4c49 2043 7261 636b 6d65   :).IOLI Crackme
-0x0804861c  204c 6576 656c 2030 7830 330a 0050 6173   Level 0x03..Pas
-0x0804862c  7377 6f72 643a 2000 2564 0000 0000 0000  sword: .%d......
-[0x080485ec]>
 ```
