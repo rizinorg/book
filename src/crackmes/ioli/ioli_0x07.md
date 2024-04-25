@@ -1,7 +1,7 @@
 IOLI 0x07
 =========
 
-a weird "wtf?" string.
+Already onto the eighth crackme!
 
 ```bash
 $ rz-bin -z ./crackme0x07
@@ -16,164 +16,454 @@ nth paddr      vaddr      len size section type  string
 5   0x000007f2 0x080487f2 10  11   .rodata ascii Password:
 ```
 
-again, no password string or compare in `main()`. I put the simplified pseudo code here. var_78h is likely to a char *pointer (string) .
+Doing our routine strings check we see another new contender, wtf? Literally.
 
-```asm
-#include <stdint.h>
-int32_t main (int32_t arg_10h) {
-    printf ("IOLI Crackme Level 0x07\n");
-    printf ("Password: ");
-    scanf (%s, &var_78h);
-    return fcn_080485b9 (&var_78h, arg_10h);
-}
-```
+```c
+$ rizin ./crackme0x07
+[0x08048400]> aa
+[0x08048400]> pdg @ main
 
-due to the symbol info lost, neither `aa` nor `aaa` show the name of functions. we can double check this in "flagspace". Rizin use fcn_080485b9 as the function name. It's a common case in reverse engineering that we don't have any symbol info of the binary.
+// WARNING: [rz-ghidra] Detected overlap for variable var_11h
 
-```bash
-[0x080487fd]> fs symbols
-[0x080487fd]> f
-0x08048400 33 entry0
-0x0804867d 92 main
-0x080487a4 4 obj._IO_stdin_used
-```
-
-decompile the `fcn_080485b9()`:
-
-```C
-[0x080485b9]> pdfc
-            ; CALL XREF from main @ 0x80486d4
-/ 118: fcn.080485b9 (char *s, int32_t arg_ch);
-|           ; var char *var_dh @ ebp-0xd
-|           ; var signed int var_ch  { >= 0xffffffffffffffff} @ ebp-0xc
-|           ; var uint32_t var_8h @ ebp-0x8
-|           ; var int32_t var_bp_4h @ ebp-0x4
-|           ; arg char *s @ ebp+0x8
-|           ; arg int32_t arg_ch @ ebp+0xc
-|           ; var char *format @ esp+0x4
-|           ; var int32_t var_sp_8h @ esp+0x8
-|           0x080485b9      55             push ebp
-|           0x080485ba      89e5           mov ebp, esp
-|           0x080485bc      83ec28         sub esp, 0x28
-|           0x080485bf      c745f8000000.  mov dword [var_8h], 0
-|           0x080485c6      c745f4000000.  mov dword [var_ch], 0
-|           ; CODE XREF from fcn.080485b9 @ 0x8048628
-|       .-> 0x080485cd      8b4508         mov eax, dword [s]
-|       :   0x080485d0      890424         mov dword [esp], eax        ; const char *s
-|       :   0x080485d3      e8d0fdffff     call sym.imp.strlen         ; size_t strlen(const char *s)
-|       :   0x080485d8      3945f4         cmp dword [var_ch], eax
-|      ,==< 0x080485db      734d           jae 0x804862a
-|      |:   0x080485dd      8b45f4         mov eax, dword [var_ch]
-|      |:   0x080485e0      034508         add eax, dword [s]
-|      |:   0x080485e3      0fb600         movzx eax, byte [eax]
-|      |:   0x080485e6      8845f3         mov byte [var_dh], al
-|      |:   0x080485e9      8d45fc         lea eax, [var_bp_4h]
-|      |:   0x080485ec      89442408       mov dword [var_sp_8h], eax  ;   ...
-|      |:   0x080485f0      c7442404c287.  mov dword [format], 0x80487c2 ; [0x80487c2:4]=0x50006425 ; const char *format
-|      |:   ;-- eip:
-|      |:   0x080485f8      8d45f3         lea eax, [var_dh]
-|      |:   0x080485fb      890424         mov dword [esp], eax        ; const char *s
-|      |:   0x080485fe      e8c5fdffff     call sym.imp.sscanf         ; int sscanf(const char *s, const char *format,   ...)
-|      |:   0x08048603      8b55fc         mov edx, dword [var_bp_4h]
-|      |:   0x08048606      8d45f8         lea eax, [var_8h]
-|      |:   0x08048609      0110           add dword [eax], edx
-|      |:   0x0804860b      837df810       cmp dword [var_8h], 0x10
-|     ,===< 0x0804860f      7512           jne 0x8048623
-|     ||:   0x08048611      8b450c         mov eax, dword [arg_ch]
-|     ||:   0x08048614      89442404       mov dword [format], eax     ; char *arg_ch
-|     ||:   0x08048618      8b4508         mov eax, dword [s]
-|     ||:   0x0804861b      890424         mov dword [esp], eax        ; char *s
-|     ||:   0x0804861e      e81fffffff     call fcn.08048542
-|     ||:   ; CODE XREF from fcn.080485b9 @ 0x804860f
-|     `---> 0x08048623      8d45f4         lea eax, [var_ch]
-|      |:   0x08048626      ff00           inc dword [eax]
-|      |`=< 0x08048628      eba3           jmp 0x80485cd
-|      |    ; CODE XREF from fcn.080485b9 @ 0x80485db
-\      `--> 0x0804862a      e8f5feffff     call fcn.08048524
-```
-
-we got familiar with this code structure in the previous challenges (the check function). It's not difficult for us even we don't have the symbol info. you can also use `afn` command to rename the function name if you like.
-
-```C
-int32_t fcn_080485b9 (char * s, void* envp)
+undefined4 main(undefined4 placeholder_0, undefined4 placeholder_1, char **envp)
 {
-    var_ch = 0;
-    var_8h = 0;
-    for (var_ch = 0; var_ch < strlen(s); ++var_ch)
-    {
-        var_dh = s[var_ch];
-        sscanf(&var_dh, %d, &var_4h);			// read from string[var_ch], store to var_4h
-        var_8h += var_4h;
-        if(var_8h == 0x10)
-            fcn_08048542(s, envp);
-    }
-    return fcn_08048524();
+    int32_t var_88h;
+    int32_t var_7ch;
+    
+    sym.imp.printf("IOLI Crackme Level 0x07\n");
+    sym.imp.printf("Password: ");
+    sym.imp.scanf(0x80487fd, &var_7ch);
+    fcn.080485b9((int32_t)&var_7ch, (int32_t)envp);
+    return 0;
 }
 ```
 
-most part of crackme 0x07 is the same with 0x06. and it can be solved by the same password & environment:
+Upping the difficulty, `check` is no longer exported so it's now listed as `fcn.080485b9`.
+To make our lives a bit easier, let's set the name manually.
+
+```c
+[0x08048400]> afn check @ fcn.080485b9
+[0x08048400]> pdg @ check
+
+// WARNING: Variable defined which should be unmapped: var_28h
+// WARNING: Variable defined which should be unmapped: var_24h
+// WARNING: [rz-ghidra] Detected overlap for variable var_11h
+
+void check(int32_t arg_4h, int32_t arg_8h)
+{
+    uint32_t uVar1;
+    int32_t iVar2;
+    int32_t var_28h;
+    int32_t var_24h;
+    undefined var_11h;
+    int32_t var_10h;
+    int32_t var_ch;
+    int32_t var_8h;
+    
+    var_ch = 0;
+    var_10h = 0;
+    while( true ) {
+        uVar1 = sym.imp.strlen(arg_4h);
+        if (uVar1 <= (uint32_t)var_10h) break;
+        var_11h = *(undefined *)(var_10h + arg_4h);
+        sym.imp.sscanf(&var_11h, 0x80487c2, &var_8h);
+        var_ch = var_ch + var_8h;
+        if (var_ch == 0x10) {
+            func_0x08048542(arg_4h, arg_8h);
+        }
+        var_10h = var_10h + 1;
+    }
+    func_0x08048524();
+    iVar2 = func_0x080484b4(var_8h, arg_8h);
+    if (iVar2 != 0) {
+        for (var_10h = 0; var_10h < 10; var_10h = var_10h + 1) {
+            if ((var_8h & 1U) == 0) {
+                sym.imp.printf("wtf?\n");
+    // WARNING: Subroutine does not return
+                sym.imp.exit(0);
+            }
+        }
+    }
+    return;
+}
+```
+
+This looks like the `check` we've seen in previous version except there is now a parity check slapped on the end of it where
+the string "wtf?" is printed.
+
+Before we can continue to the other functions, they have to be analyzed first. We can analyze all functions recursively
+using `afr`. 
+```c
+[0x08048400]> afr @ check
+[0x08048400]> pdg @ check
+
+// WARNING: Variable defined which should be unmapped: var_28h
+// WARNING: Variable defined which should be unmapped: var_24h
+// WARNING: [rz-ghidra] Detected overlap for variable var_11h
+
+void check(int32_t arg_4h, int32_t arg_8h)
+{
+    uint32_t uVar1;
+    int32_t iVar2;
+    int32_t var_28h;
+    int32_t var_24h;
+    undefined var_11h;
+    int32_t var_10h;
+    int32_t var_ch;
+    int32_t var_8h;
+    
+    var_ch = 0;
+    var_10h = 0;
+    while( true ) {
+        uVar1 = sym.imp.strlen(arg_4h);
+        if (uVar1 <= (uint32_t)var_10h) break;
+        var_11h = *(undefined *)(var_10h + arg_4h);
+        sym.imp.sscanf(&var_11h, 0x80487c2, &var_8h);
+        var_ch = var_ch + var_8h;
+        if (var_ch == 0x10) {
+            fcn.08048542(arg_4h, arg_8h);
+        }
+        var_10h = var_10h + 1;
+    }
+    fcn.08048524();
+    iVar2 = fcn.080484b4(var_8h, arg_8h);
+    if (iVar2 != 0) {
+        for (var_10h = 0; var_10h < 10; var_10h = var_10h + 1) {
+            if ((var_8h & 1U) == 0) {
+                sym.imp.printf("wtf?\n");
+    // WARNING: Subroutine does not return
+                sym.imp.exit(0);
+            }
+        }
+    }
+    return;
+}
+```
+The reason we're doing it this way in this case, is because `aaa` will cause some critical information to
+be omitted: namely the code that prints `"wtf?"`, more on that later. 
+
+For now though let's first check out `fcn.08048542`. We can probably already guess its identity as the code structure remains largely unchanged
+from the previous versions. But it can't hurt to do our due diligence.
+
+```c
+[0x08048400]> pdg @ fcn.08048542
+
+// WARNING: Variable defined which should be unmapped: var_18h
+// WARNING: Variable defined which should be unmapped: var_14h
+
+void fcn.08048542(int32_t arg_4h, int32_t arg_8h)
+{
+    int32_t iVar1;
+    int32_t var_18h;
+    int32_t var_14h;
+    int32_t var_ch;
+    int32_t var_8h;
+    
+    sym.imp.sscanf(arg_4h, 0x80487c2, &var_8h);
+    iVar1 = fcn.080484b4(var_8h, arg_8h);
+    if (iVar1 != 0) {
+        for (var_ch = 0; var_ch < 10; var_ch = var_ch + 1) {
+            if ((var_8h & 1U) == 0) {
+                if (*(int32_t *)0x804a02c == 1) {
+                    sym.imp.printf("Password OK!\n");
+                }
+    // WARNING: Subroutine does not return
+                sym.imp.exit(0);
+            }
+        }
+    }
+    return;
+}
+```
+
+That does indeed look like `parell` from the previous versions. And that must make `fcn.080484b4` `dummy`. But look, there's an extra `if` inside
+the parity check! Apparently some global variable has to be set to `1` in order for the password to be valid. 
+
+```c
+[0x08048400]> pdg @ fcn.080484b4
+
+// WARNING: Variable defined which should be unmapped: var_18h
+// WARNING: Variable defined which should be unmapped: var_14h
+
+undefined4 fcn.080484b4(undefined4 placeholder_0, int32_t arg_8h)
+{
+    int32_t iVar1;
+    int32_t var_18h;
+    int32_t var_14h;
+    int32_t var_ch;
+    int32_t var_8h;
+    
+    var_8h = 0;
+    do {
+        if (*(int32_t *)(var_8h * 4 + arg_8h) == 0) {
+            return 0;
+        }
+        iVar1 = var_8h * 4;
+        var_8h = var_8h + 1;
+        iVar1 = sym.imp.strncmp(*(undefined4 *)(iVar1 + arg_8h), "LOLO", 3);
+    } while (iVar1 != 0);
+    *(undefined4 *)0x804a02c = 1;
+    return 1;
+}
+
+[0x08048400]> afn dummy @ fcn.080484b4
+[0x08048400]> afn parell @ fcn.08048542
+```
+
+And this must be `dummy`... With an addition. Can you spot it? This is where that global variable that we saw earlier gets set!
+On the line containing `*(undefined4 *)0x804a02c = 1;`, more specifically.
+
+But before we continue let's see if there are any other references to or from this global variable.
+
+```c
+[0x08048400]> axf @ 0x804a02c
+[0x08048400]> axt @ 0x804a02c
+dummy 0x8048505 [DATA] mov dword [0x804a02c], 1
+parell 0x804858f [DATA] cmp dword [0x804a02c], 1
+```
+
+It doesn't appear to be the case, so let's go back to `check`.
+
+```c
+[0x08048400]> pdg @ check
+
+// WARNING: Variable defined which should be unmapped: var_28h
+// WARNING: Variable defined which should be unmapped: var_24h
+// WARNING: [rz-ghidra] Detected overlap for variable var_11h
+
+void check(int32_t arg_4h, int32_t arg_8h)
+{
+    uint32_t uVar1;
+    int32_t iVar2;
+    int32_t var_28h;
+    int32_t var_24h;
+    undefined var_11h;
+    int32_t var_10h;
+    int32_t var_ch;
+    int32_t var_8h;
+    
+    var_ch = 0;
+    var_10h = 0;
+    while( true ) {
+        uVar1 = sym.imp.strlen(arg_4h);
+        if (uVar1 <= (uint32_t)var_10h) break;
+        var_11h = *(undefined *)(var_10h + arg_4h);
+        sym.imp.sscanf(&var_11h, 0x80487c2, &var_8h);
+        var_ch = var_ch + var_8h;
+        if (var_ch == 0x10) {
+            parell(arg_4h, arg_8h);
+        }
+        var_10h = var_10h + 1;
+    }
+    fcn.08048524();
+    iVar2 = dummy(var_8h, arg_8h);
+    if (iVar2 != 0) {
+        for (var_10h = 0; var_10h < 10; var_10h = var_10h + 1) {
+            if ((var_8h & 1U) == 0) {
+                sym.imp.printf("wtf?\n");
+    // WARNING: Subroutine does not return
+                sym.imp.exit(0);
+            }
+        }
+    }
+    return;
+}
+```
+
+We still have one unidentified function left: `fcn.08048524`.
+
+
+```c
+[0x08048400]> pdg @ fcn.08048524
+
+void fcn.08048524 noreturn (void)
+{
+    sym.imp.printf("Password Incorrect!\n");
+    // WARNING: Subroutine does not return
+    sym.imp.exit(0);
+}
+```
+
+This doesn't seem to do much, other than to print that the password is incorrect and exit. So let's call it `print_and_exit`.
+
+```c
+[0x08048400]> afn print_and_exit @ fcn.08048524
+[0x08048400]> pdg @ check
+
+// WARNING: Variable defined which should be unmapped: var_28h
+// WARNING: Variable defined which should be unmapped: var_24h
+// WARNING: [rz-ghidra] Detected overlap for variable var_11h
+
+void check(int32_t arg_4h, int32_t arg_8h)
+{
+    uint32_t uVar1;
+    int32_t iVar2;
+    int32_t var_28h;
+    int32_t var_24h;
+    undefined var_11h;
+    int32_t var_10h;
+    int32_t var_ch;
+    int32_t var_8h;
+    
+    var_ch = 0;
+    var_10h = 0;
+    while( true ) {
+        uVar1 = sym.imp.strlen(arg_4h);
+        if (uVar1 <= (uint32_t)var_10h) break;
+        var_11h = *(undefined *)(var_10h + arg_4h);
+        sym.imp.sscanf(&var_11h, 0x80487c2, &var_8h);
+        var_ch = var_ch + var_8h;
+        if (var_ch == 0x10) {
+            parell(arg_4h, arg_8h);
+        }
+        var_10h = var_10h + 1;
+    }
+    print_and_exit();
+    iVar2 = dummy(var_8h, arg_8h);
+    if (iVar2 != 0) {
+        for (var_10h = 0; var_10h < 10; var_10h = var_10h + 1) {
+            if ((var_8h & 1U) == 0) {
+                sym.imp.printf("wtf?\n");
+    // WARNING: Subroutine does not return
+                sym.imp.exit(0);
+            }
+        }
+    }
+    return;
+}
+```
+
+Interestingly, `print_and_exit` is called unconditionally before the second parity check, meaning it is never executed under normal
+circumstances. If we had used `aaa` to analyze this binary, Rizin would have noticed this and it would have simply omitted it from
+the disassembly and decompilation outputs.
+
+If you happen to accidentally (or intentionally) run `aaa`, you can remove all function
+analysis using `af-*`, after which you can run `aa`, followed by `afr` where needed. 
+
+With that being said, it doesn't seem like the password constraints have changed at all from the previous versions:
+
+- Digit sum reaches 16 at some point
+- The number is even
+- An environment variable starting with "LOL" is set
+
+Before we close Rizin however let's save this as a project first, so we don't lose all our hard work naming the functions.
+
+```c
+[0x08048400]> Ps crackme0x07.rzdb
+```
+
+And as we concluded, the passwords from the previous version still work.
 
 ```bash
-$ export LOLAA=help
-$ ./cracke0x07
+$ LOL= ./crackme0x07
+IOLI Crackme Level 0x07
+Password: 88
+Password OK!
+
+$ LOL= ./crackme0x07
 IOLI Crackme Level 0x07
 Password: 12346
 Password OK!
 ```
 
-wait ... where is the 'wtf?'. Often, we would like to find the cross reference (xref) to strings (or data, functions, etc.) in reverse engineering. The related commands in Rizin are under "ax" namespace:
+## Wtf?
+
+We could go to the next one. Technically we've solved this crackme. But we have some unfinished business: the `wtf?` string. Let's see if we can
+find a way to reach the code that's supposed to write it to the console!
+
+It's easy enough using the debugger: we can simply set the instruction pointer to some location after the `print_and_exit` function (remember
+`dr eip=<address>`).  
+
+We can reopen the current file in debug mode using the `ood` command. We do need an environment variable set that starts with `LOL`, we
+can achieve this using the `dor` command. And let's also set a breakpoint at the location `print_and_exit` is called so we can jump
+over it manually.
 
 ```bash
-[0x08048400]> f
-0x080487a8 5 str.LOLO
-0x080487ad 21 str.Password_Incorrect
-0x080487c5 14 str.Password_OK
-0x080487d3 6 str.wtf
-0x080487d9 25 str.IOLI_Crackme_Level_0x07
-0x080487f2 11 str.Password:
-[0x08048400]> axt 0x80487d3
-(nofunc) 0x804865c [DATA] mov dword [esp], str.wtf
-[0x08048400]> axF str.wtf
-Finding references of flags matching 'str.wtf'...
-[0x001eff28-0x001f0000] (nofunc) 0x804865c [DATA] mov dword [esp], str.wtf
-Macro 'findstref' removed.
+[0x08048400]> ood
+Process with PID 191704 started...
+[0xf173fcd0]> dor setenv=LOL=O
+[0xf173fcd0]> pdf @ check
+# find 'call print_and_exit'
+[0xf173fcd0]> db @ 0x0804862a
+[0xf173fcd0]> dc # run the program
+IOLI Crackme Level 0x07
+Password: 2
+hit breakpoint at: 0x804862a
 ```
 
-the `[DATA] mov dword [esp], str.wtf` at `0x804865c` is an instruction of fcn.080485b9. But the analysis in my PC ignores the remained instructions and only display the incomplete assembly. the range of fcn.080485b9 should be `0x080485b9 ~ 0x0804867c` . we can reset block size and print opcodes.
+Now we should be at the instruction that reads `call print_and_exit` (confirm with `pd 1 @ eip`). Now we need to find the address of the
+instruction that comes after this one and set the instruction pointer to equal this value.
 
+```bash
+[0x0804862a]> pd 2 @ eip
 ```
-[0x08040000]> s 0x080485b9
-[0x080485b9]> b 230
-[0x08048400]> pd
-...
-            0x0804862f      8b450c         mov eax, dword [ebp + 0xc]
-            0x08048632      89442404       mov dword [esp + 4], eax
-            0x08048636      8b45fc         mov eax, dword [ebp - 4]
-            0x08048639      890424         mov dword [esp], eax        ; char **s1
-            0x0804863c      e873feffff     call fcn.080484b4
-            0x08048641      85c0           test eax, eax
-        ,=< 0x08048643      7436           je 0x804867b
-        |   0x08048645      c745f4000000.  mov dword [ebp - 0xc], 0
-        |   ; CODE XREF from fcn.080485b9 @ +0xc0
-       .--> 0x0804864c      837df409       cmp dword [ebp - 0xc], 9
-      ,===< 0x08048650      7f29           jg 0x804867b
-      |:|   0x08048652      8b45fc         mov eax, dword [ebp - 4]
-      |:|   0x08048655      83e001         and eax, 1
-      |:|   0x08048658      85c0           test eax, eax
-     ,====< 0x0804865a      7518           jne 0x8048674
-     ||:|   0x0804865c      c70424d38704.  mov dword [esp], str.wtf    ; [0x80487d3:4]=0x3f667477 ; "wtf?\n" ; const char *format
-     ||:|   0x08048663      e850fdffff     call sym.imp.printf         ; int printf(const char *format)
-     ||:|   0x08048668      c70424000000.  mov dword [esp], 0          ; int status
-     ||:|   0x0804866f      e874fdffff     call sym.imp.exit           ; void exit(int status)
-     ||:|   ; CODE XREF from fcn.080485b9 @ +0xa1
-     `----> 0x08048674      8d45f4         lea eax, [ebp - 0xc]
-      |:|   0x08048677      ff00           inc dword [eax]
-      |`==< 0x08048679      ebd1           jmp 0x804864c
-      | |   ; CODE XREFS from fcn.080485b9 @ +0x8a, +0x97
-      `-`-> 0x0804867b      c9             leave
-            0x0804867c      c3             ret
-
+```asm
+│           ;-- eip:
+│           0x0804862a b    call  print_and_exit                       ; print_and_exit
+│           0x0804862f      mov   eax, dword [arg_8h]
+```
+```bash
+[0x0804862a]> dr eip=0x0804862f
+[0x0804862a]> pd 1 @ eip
+```
+```asm
+│           ;-- eip:
+│           0x0804862f      mov   eax, dword [arg_8h]
 ```
 
-`test eax, ea;je 0x804867b` will jump to `leave; ret`, which forever skips the str.wtf part. only use `aa` to analyze this binary can display the whole function.
+With the `print_and_exit` function skipped we can continue execution.
 
+```bash
+[0x0804862a]> dc
+wtf?
+(191704) Process exited with status=0x0
+[0xf3608579]> doc # close the debugging session
+```
+
+We've successfully triggered the `wtf?` code using the debugger. But that's no fun! Let's see if there is a way we can reach that
+code (semi-)naturally.
+
+In order for the `print_and_exit` function to be called we have to fail `parell` or the digit sum `check`. Failing `parell` is tricky
+because the same version has to succeed after `print_and_exit` in order for our desired string to be printed. So we'll have
+to fail the digit sum check, which means making sure that our digit sum will not land on 16 during the computation.
+
+Easy enough! The only problem we have is that `exit` stops the process...  But what if we were to make our own version of `exit`?
+
+```c 
+void exit(int status) {
+	void *ret = __builtin_return_address(2);
+
+	__asm__ __volatile__ (
+		"leave\n\t"
+		"jmp *%0\n\t"
+		: "+rm" (ret)
+	);
+}
+```
+
+This turns `exit` into something that, well, *doesn't* exit. `__builtin_return_address` is used to look two
+call frames up for a return address (the return address of `print_and_exit`) and jumps to it. Let's save it to a file called `exit.c`.
+Compile it to a shared library using `gcc -m32 -shared -o libexit.so exit.c` and then we can preload it using `LD_PRELOAD`.
+
+```bash
+$ LD_PRELOAD=./libexit.so LOL= ./crackme0x07
+IOLI Crackme Level 0x07
+Password: 2
+Password Incorrect!
+wtf?
+```
+
+There it is!
+
+Now that `exit` is a simple trampoline, something interesting happens when we enter a valid password.
+
+```bash
+$ LD_PRELOAD=./libexit.so LOL= ./crackme0x07
+IOLI Crackme Level 0x07
+Password: 888
+Password OK!
+Password Incorrect!
+wtf?
+```
+
+"Password OK!" No. "Password Incorrect!" `wtf?` indeed.
