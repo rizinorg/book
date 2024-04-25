@@ -1,177 +1,133 @@
 IOLI 0x05
 =========
 
-check again, it uses `scanf()` to get our input and pass it to `check()` as parameter.
+This is the sixth crackme.
 
-```C
-[0x080483d0]> pdd@main
-/* jsdec pseudo code output */
-/* ./crackme0x05 @ 0x8048540 */
-#include <stdint.h>
-
-int32_t main (void) {
-    int32_t var_78h;
-    int32_t var_4h;
-    eax = 0;
-    eax += 0xf;
-    eax += 0xf;
-    eax >>= 4;
-    eax <<= 4;
-    printf ("IOLI Crackme Level 0x05\n");
-    printf ("Password: ");
-    eax = &var_78h;
-    scanf (0x80486b2, eax);			// 0x80486b2 is %s
-    eax = &var_78h;
-    check (eax);
-    eax = 0;
-    return eax;
-}
+```
+$ rz-bin -z ./crackme0x05
+[Strings]
+nth paddr      vaddr      len size section type  string                    
+---------------------------------------------------------------------------
+0   0x0000066b 0x0804866b 13  14   .rodata ascii Password OK!\n
+1   0x00000679 0x08048679 20  21   .rodata ascii Password Incorrect!\n
+2   0x0000068e 0x0804868e 24  25   .rodata ascii IOLI Crackme Level 0x05\n
+3   0x000006a7 0x080486a7 10  11   .rodata ascii Password: 
 ```
 
-the check() function:
+No interesting strings, so let's analyze.
 
-```C
-/* jsdec pseudo code output */
-/* ./crackme0x05 @ 0x80484c8 */
-#include <stdint.h>
+```c
+[0x080483d0]> aa
+[0x080483d0]> pdg @ main
 
-int32_t check (char * s) {
-    char * var_dh;
-    uint32_t var_ch;
-    uint32_t var_8h;
-    int32_t var_4h;
-    char * format;
-    int32_t var_sp_8h;
-    var_8h = 0;
-    var_ch = 0;
-    do {
-        eax = s;
-        eax = strlen (eax);
-        if (var_ch >= eax) {
-            goto label_0;
-        }
-        eax = var_ch;
-        eax += s;
-        eax = *(eax);
-        var_dh = al;
-        eax = &var_4h;
-        eax = &var_dh;
-        sscanf (eax, eax, 0x8048668);			// 0x8048668 is %d
-        edx = var_4h;
-        eax = &var_8h;
-        *(eax) += edx;
-        if (var_8h == 0x10) {
-            eax = s;
-            parell (eax);
-        }
-        eax = &var_ch;
-        *(eax)++;
-    } while (1);
-label_0:
-    printf ("Password Incorrect!\n");
-    return eax;
-}
-```
+// WARNING: [rz-ghidra] Detected overlap for variable var_11h
 
-The same, we can write our own C-like pseudo code.
-
-```C
-#include <stdint.h>
-int32_t check(char *s)
+undefined4 main(void)
 {
-    var_ch = 0;
-    var_8h = 0;
-    for (var_ch = 0; var_ch < strlen(s); ++var_ch)
-    {
-        var_dh = s[var_ch];
-        sscanf(&var_dh, %d, &var_4h);			// read from string[var_ch], store to var_4h
-        var_8h += var_4h;
-        if(var_8h == 0x10)
-            parell(s);
-    }
-    printf("Password Incorrect!\n");
+    int32_t var_88h;
+    int32_t var_7ch;
+    
+    sym.imp.printf("IOLI Crackme Level 0x05\n");
+    sym.imp.printf("Password: ");
+    sym.imp.scanf(0x80486b2, &var_7ch);
+    sym.check((int32_t)&var_7ch);
     return 0;
 }
+[0x080483d0]> ps @ 0x80486b2
+%s
 ```
 
-The if condition becomes `var_8h == 0x10`. In addition, a new function call - `parell(s)` replace the `printf("password OK")`now. The next step is to reverse sym.parell.
+We can see the same structure is used again: a string is read by `scanf` and is passed to `check`.
 
-```C
-[0x08048484]> s sym.parell
-[0x08048484]> pdd@sym.parell
-/* jsdec pseudo code output */
-/* ./crackme0x05 @ 0x8048484 */
-#include <stdint.h>
+```c
+[0x080483d0]> pdg @ sym.check
 
-uint32_t parell (char * s) {
-    int32_t var_4h;
-    char * format;
+// WARNING: Variable defined which should be unmapped: var_28h
+// WARNING: Variable defined which should be unmapped: var_24h
+// WARNING: [rz-ghidra] Detected overlap for variable var_11h
+
+void sym.check(int32_t arg_4h)
+{
+    uint32_t uVar1;
+    int32_t var_28h;
+    int32_t var_24h;
+    undefined var_11h;
+    int32_t var_10h;
+    int32_t var_ch;
     int32_t var_8h;
-    eax = &var_4h;
-    eax = s;
-    sscanf (eax, eax, 0x8048668);
-    eax = var_4h;
-    eax &= 1;
-    if (eax == 0) {
-        printf ("Password OK!\n");
-        exit (0);
+    
+    var_ch = 0;
+    var_10h = 0;
+    while( true ) {
+        uVar1 = sym.imp.strlen(arg_4h);
+        if (uVar1 <= (uint32_t)var_10h) break;
+        var_11h = *(undefined *)(var_10h + arg_4h);
+        sym.imp.sscanf(&var_11h, 0x8048668, &var_8h);
+        var_ch = var_ch + var_8h;
+        if (var_ch == 0x10) {
+            sym.parell(arg_4h);
+        }
+        var_10h = var_10h + 1;
     }
-    return eax;
+    sym.imp.printf("Password Incorrect!\n");
+    return;
 }
+[0x080483d0]> ps @ 0x8048668 @! 2
+%d
 ```
 
-the decompiled code looks well except the `sscanf()` function. It can be easily corrected by checking the assembly code.
+We can see that `check` is mostly the same, except that this time the digit sum has to equal 16 (0x10), after
+which a function named `parell` is called.
 
-```asm
-/ 68: sym.parell (int32_t arg_8h);
-|           ; var int32_t var_4h @ ebp-0x4
-|           ; arg int32_t arg_8h @ ebp+0x8
-|           ; var int32_t var_sp_4h @ esp+0x4
-|           ; var int32_t var_8h @ esp+0x8
-|           0x08048484      55             push ebp
-|           0x08048485      89e5           mov ebp, esp
-|           0x08048487      83ec18         sub esp, 0x18
-|           0x0804848a      8d45fc         lea eax, [var_4h]
-|           0x0804848d      89442408       mov dword [var_8h], eax
-|           0x08048491      c74424046886.  mov dword [var_sp_4h], 0x8048668 ; [0x8048668:4]=0x50006425 %d
-|           0x08048499      8b4508         mov eax, dword [arg_8h]
-|           0x0804849c      890424         mov dword [esp], eax
-|           0x0804849f      e800ffffff     call sym.imp.sscanf         ; int sscanf(const char *s, const char *format,   ...)
-....
-```
+```c
+[0x080483d0]> pdg @ sym.parell
 
-The `mov dword [esp], eax` is the nearest instruction to sscanf (and it's equivalent to a push instruction). It stores the string 's' to the stack top (arg1).  `mov dword [var_sp_4h], 0x8048668` push '%d' as arg2 into stack. var_8h (esp + 0x8) which keeps the address of var_4h is the arg3.
+// WARNING: Variable defined which should be unmapped: var_18h
+// WARNING: Variable defined which should be unmapped: var_14h
 
-Finally we have the corrected pseudo code:
-
-```C
-uint32_t parell (char * s) {
-    sscanf (s, %d, &var_4h);
-    if ((var_4h & 1) == 0) {
-        printf ("Password OK!\n");
-        exit(0);
+void sym.parell(int32_t arg_4h)
+{
+    int32_t var_18h;
+    int32_t var_14h;
+    int32_t var_8h;
+    
+    sym.imp.sscanf(arg_4h, 0x8048668, &var_8h);
+    if ((var_8h & 1U) == 0) {
+        sym.imp.printf("Password OK!\n");
+        sym.imp.exit(0);
     }
-    return 0;
+    return;
 }
+[0x080483d0]> ps @ 0x8048668 @! 2
+%d
 ```
 
-Now there are 2 constraints:
-
-* Digit Sum is 16 (0x10)
-* Must be an odd number (1 & number == 0)
-
-The password is at our fingertips now.
+We can see here that the function `parell` takes a string, converts it to an integer and performs a parity
+check on it `(var_8h & 1U) == 0`. In this case the least significant bit has to be 0, which means the number
+has to be even.
 
 ```bash
-./crackme0x05
+$ ./crackme0x05
 IOLI Crackme Level 0x05
 Password: 88
 Password OK!
 
-./crackme0x05
+$ ./crackme0x05
 IOLI Crackme Level 0x05
 Password: 12346
 Password OK!
 ```
 
-we can also use angr to solve it since we have two constraints to the password.
+And our trick from the previous crackme works as well.
+
+```bash
+$ ./crackme0x05
+IOLI Crackme Level 0x05
+Password: 4asdf
+Password OK!
+
+$ ./crackme0x05
+IOLI Crackme Level 0x05
+Password: 0this-doesnt-count4this-does
+Password OK!
+```
