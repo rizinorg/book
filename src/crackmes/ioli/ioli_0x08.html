@@ -1197,38 +1197,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>we can reverse it and find it’s similar to 0x07, and use the same password to solve it:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> export LOLAA=help</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./cracke0x08</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">IOLI</span> Crackme Level 0x08</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Password:</span> 12346</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Password</span> OK!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a href="https://dustri.org/b/defeating-ioli-with-rizin.html">dustri</a> provided a better way to check crackme0x08. 0x07 is the stripped version of 0x08.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-diff <span class="at">-A</span> <span class="at">-C</span> ./crackme0x07 ./crackme0x08</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>              <span class="ex">fcn.08048360</span>  23 0x8048360 <span class="kw">|</span>   <span class="ex">MATCH</span>  <span class="er">(</span><span class="ex">1.000000</span><span class="kw">)</span> <span class="kw">|</span> <span class="ex">0x8048360</span>   23 sym._init</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">sym.imp.__libc_start_main</span>   6 0x8048388 <span class="kw">|</span>   <span class="ex">MATCH</span>  <span class="er">(</span><span class="ex">1.000000</span><span class="kw">)</span> <span class="kw">|</span> <span class="ex">0x8048388</span>    6 sym.imp.__libc_start_main</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>             <span class="ex">sym.imp.scanf</span>   6 0x8048398 <span class="kw">|</span>   <span class="ex">MATCH</span>  <span class="er">(</span><span class="ex">1.000000</span><span class="kw">)</span> <span class="kw">|</span> <span class="ex">0x8048398</span>    6 sym.imp.scanf</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            <span class="ex">sym.imp.strlen</span>   6 0x80483a8 <span class="kw">|</span>   <span class="ex">MATCH</span>  <span class="er">(</span><span class="ex">1.000000</span><span class="kw">)</span> <span class="kw">|</span> <span class="ex">0x80483a8</span>    6 sym.imp.strlen</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            <span class="ex">sym.imp.printf</span>   6 0x80483b8 <span class="kw">|</span>   <span class="ex">MATCH</span>  <span class="er">(</span><span class="ex">1.000000</span><span class="kw">)</span> <span class="kw">|</span> <span class="ex">0x80483b8</span>    6 sym.imp.printf</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            <span class="ex">sym.imp.sscanf</span>   6 0x80483c8 <span class="kw">|</span>   <span class="ex">MATCH</span>  <span class="er">(</span><span class="ex">1.000000</span><span class="kw">)</span> <span class="kw">|</span> <span class="ex">0x80483c8</span>    6 sym.imp.sscanf</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>           <span class="ex">sym.imp.strncmp</span>   6 0x80483d8 <span class="kw">|</span>   <span class="ex">MATCH</span>  <span class="er">(</span><span class="ex">1.000000</span><span class="kw">)</span> <span class="kw">|</span> <span class="ex">0x80483d8</span>    6 sym.imp.strncmp</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>              <span class="ex">sym.imp.exit</span>   6 0x80483e8 <span class="kw">|</span>   <span class="ex">MATCH</span>  <span class="er">(</span><span class="ex">1.000000</span><span class="kw">)</span> <span class="kw">|</span> <span class="ex">0x80483e8</span>    6 sym.imp.exit</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">entry0</span>  33 0x8048400 <span class="kw">|</span>   <span class="ex">MATCH</span>  <span class="er">(</span><span class="ex">1.000000</span><span class="kw">)</span> <span class="kw">|</span> <span class="ex">0x8048400</span>   33 entry0</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>              <span class="ex">fcn.08048424</span>  33 0x8048424 <span class="kw">|</span>   <span class="ex">MATCH</span>  <span class="er">(</span><span class="ex">1.000000</span><span class="kw">)</span> <span class="kw">|</span> <span class="ex">0x8048424</span>   33 fcn.08048424</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>              <span class="ex">fcn.08048450</span>  47 0x8048450 <span class="kw">|</span>   <span class="ex">MATCH</span>  <span class="er">(</span><span class="ex">1.000000</span><span class="kw">)</span> <span class="kw">|</span> <span class="ex">0x8048450</span>   47 sym.__do_global_dtors_aux</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>              <span class="ex">fcn.08048480</span>  50 0x8048480 <span class="kw">|</span>   <span class="ex">MATCH</span>  <span class="er">(</span><span class="ex">1.000000</span><span class="kw">)</span> <span class="kw">|</span> <span class="ex">0x8048480</span>   50 sym.frame_dummy</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>              <span class="ex">fcn.080484b4</span> 112 0x80484b4 <span class="kw">|</span>   <span class="ex">MATCH</span>  <span class="er">(</span><span class="ex">1.000000</span><span class="kw">)</span> <span class="kw">|</span> <span class="ex">0x80484b4</span>  112 sym.dummy</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>              <span class="ex">fcn.08048524</span>  30 0x8048524 <span class="kw">|</span>   <span class="ex">MATCH</span>  <span class="er">(</span><span class="ex">1.000000</span><span class="kw">)</span> <span class="kw">|</span> <span class="ex">0x8048524</span>   30 sym.che</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>              <span class="ex">fcn.08048542</span> 119 0x8048542 <span class="kw">|</span>   <span class="ex">MATCH</span>  <span class="er">(</span><span class="ex">1.000000</span><span class="kw">)</span> <span class="kw">|</span> <span class="ex">0x8048542</span>  119 sym.parell</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>              <span class="ex">fcn.080485b9</span> 118 0x80485b9 <span class="kw">|</span>   <span class="ex">MATCH</span>  <span class="er">(</span><span class="ex">1.000000</span><span class="kw">)</span> <span class="kw">|</span> <span class="ex">0x80485b9</span>  118 sym.check</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>                      <span class="ex">main</span>  92 0x804867d <span class="kw">|</span>   <span class="ex">MATCH</span>  <span class="er">(</span><span class="ex">1.000000</span><span class="kw">)</span> <span class="kw">|</span> <span class="ex">0x804867d</span>   92 main</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>              <span class="ex">fcn.08048755</span>   4 0x8048755 <span class="kw">|</span>   <span class="ex">MATCH</span>  <span class="er">(</span><span class="ex">1.000000</span><span class="kw">)</span> <span class="kw">|</span> <span class="ex">0x8048755</span>    4 sym.__i686.get_pc_thunk.bx</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>              <span class="ex">fcn.08048760</span>  35 0x8048760 <span class="kw">|</span>   <span class="ex">MATCH</span>  <span class="er">(</span><span class="ex">1.000000</span><span class="kw">)</span> <span class="kw">|</span> <span class="ex">0x8048760</span>   35 sym.__do_global_ctors_aux</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>              <span class="ex">fcn.0804878d</span>  17 0x804878d <span class="kw">|</span>     <span class="ex">NEW</span>  <span class="er">(</span><span class="ex">0.000000</span><span class="kw">)</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>       <span class="ex">sym.__libc_csu_init</span>  99 0x80486e0 <span class="kw">|</span>     <span class="ex">NEW</span>  <span class="er">(</span><span class="ex">0.000000</span><span class="kw">)</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>       <span class="ex">sym.__libc_csu_fini</span>   5 0x8048750 <span class="kw">|</span>     <span class="ex">NEW</span>  <span class="er">(</span><span class="ex">0.000000</span><span class="kw">)</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>                 <span class="ex">sym._fini</span>  26 0x8048784 <span class="kw">|</span>     <span class="ex">NEW</span>  <span class="er">(</span><span class="ex">0.000000</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Time for the ninth crackme.</p>
+<pre><code>$ rz-bin -z ./crackme0x08
+[Strings]
+nth paddr      vaddr      len size section type  string                    
+---------------------------------------------------------------------------
+0   0x000007a8 0x080487a8 4   5    .rodata ascii LOLO
+1   0x000007ad 0x080487ad 20  21   .rodata ascii Password Incorrect!\n
+2   0x000007c5 0x080487c5 13  14   .rodata ascii Password OK!\n
+3   0x000007d3 0x080487d3 5   6    .rodata ascii wtf?\n
+4   0x000007d9 0x080487d9 24  25   .rodata ascii IOLI Crackme Level 0x08\n
+5   0x000007f2 0x080487f2 10  11   .rodata ascii Password:</code></pre>
+<p>It looks like no new strings have been added. Before we jump into analyzing however, let’s first see which functions have changed from the previous version. We can get a nice overview using <code>rz-diff</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>$ rz-diff -t functions crackme0x07 crackme0x08</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>.--------------------------------------------------------------------------------------------------------------------------.</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>| name0                     | size0 | addr0      | type     | similarity | addr1      | size1 | name1                      |</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)--------------------------------------------------------------------------------------------------------------------------(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>| fcn.08048360              | 23    | 0x08048360 | COMPLETE | 1.000000   | 0x08048360 | 23    | sym._init                  |</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>| sym.imp.__libc_start_main | 6     | 0x08048388 | COMPLETE | 1.000000   | 0x08048388 | 6     | sym.imp.__libc_start_main  |</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>| sym.imp.scanf             | 6     | 0x08048398 | COMPLETE | 1.000000   | 0x08048398 | 6     | sym.imp.scanf              |</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>| sym.imp.strlen            | 6     | 0x080483a8 | COMPLETE | 1.000000   | 0x080483a8 | 6     | sym.imp.strlen             |</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>| sym.imp.printf            | 6     | 0x080483b8 | COMPLETE | 1.000000   | 0x080483b8 | 6     | sym.imp.printf             |</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>| sym.imp.sscanf            | 6     | 0x080483c8 | COMPLETE | 1.000000   | 0x080483c8 | 6     | sym.imp.sscanf             |</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>| sym.imp.strncmp           | 6     | 0x080483d8 | COMPLETE | 1.000000   | 0x080483d8 | 6     | sym.imp.strncmp            |</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>| sym.imp.exit              | 6     | 0x080483e8 | COMPLETE | 1.000000   | 0x080483e8 | 6     | sym.imp.exit               |</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>| fcn.08048424              | 33    | 0x08048424 | COMPLETE | 1.000000   | 0x08048424 | 33    | fcn.08048424               |</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>| fcn.08048450              | 47    | 0x08048450 | COMPLETE | 1.000000   | 0x08048450 | 47    | sym.__do_global_dtors_aux  |</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>| fcn.08048480              | 50    | 0x08048480 | COMPLETE | 1.000000   | 0x08048480 | 50    | sym.frame_dummy            |</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>| fcn.080484b4              | 112   | 0x080484b4 | COMPLETE | 1.000000   | 0x080484b4 | 112   | sym.dummy                  |</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>| fcn.08048524              | 30    | 0x08048524 | COMPLETE | 1.000000   | 0x08048524 | 30    | sym.che                    |</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>| fcn.08048542              | 119   | 0x08048542 | COMPLETE | 1.000000   | 0x08048542 | 119   | sym.parell                 |</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>| fcn.080485b9              | 118   | 0x080485b9 | COMPLETE | 1.000000   | 0x080485b9 | 118   | sym.check                  |</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>| fcn.08048755              | 4     | 0x08048755 | COMPLETE | 1.000000   | 0x08048755 | 4     | sym.__i686.get_pc_thunk.bx |</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>| fcn.08048760              | 35    | 0x08048760 | COMPLETE | 1.000000   | 0x08048760 | 35    | sym.__do_global_ctors_aux  |</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>| fcn.0804878d              | 17    | 0x0804878d | COMPLETE | 1.000000   | 0x0804878d | 17    | fcn.0804878d               |</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>`--------------------------------------------------------------------------------------------------------------------------'</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Look at that! crackme0x08 is completely identical to crackme0x07! With one exception however, crackme0x08 <em>adds</em> the symbol names back. Or looking at it another way: crackme0x07 is the stripped version of crackme0x08.</p>
+<p>That means we can solve it the exact same way we solved crackme0x07.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> LOL= ./crackme0x08</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">IOLI</span> Crackme Level 0x08</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Password:</span> 12346</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Password</span> OK!</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> LOL= ./crackme0x08</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">IOLI</span> Crackme Level 0x08</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Password:</span> 88</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Password</span> OK!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And our <code>exit</code> trampoline from the previous version still works as well.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> LD_PRELOAD=./libexit.so LOL= ./crackme0x08</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">IOLI</span> Crackme Level 0x08</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Password:</span> 2</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Password</span> Incorrect!</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">wtf?</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> LD_PRELOAD=./libexit.so LOL= ./crackme0x08</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ex">IOLI</span> Crackme Level 0x08</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Password:</span> 88</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Password</span> OK!</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Password</span> Incorrect!</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="ex">wtf?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Analyzing the binary, there is not much to discover that we didn’t already know. With the exception that <code>print_and_exit</code> is actually called <code>che</code>. And the mysterious global variable referenced in <code>dummy</code> is called <code>LOL</code>.</p>
 
 
 

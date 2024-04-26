@@ -1197,12 +1197,127 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Hints: crackme0x09 hides the format string (%d and %s), and nothing more than 0x08.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> export LOLA=help</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./crackme0x09</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">IOLI</span> Crackme Level 0x09</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Password:</span> 12346</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Password</span> OK!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And that brings us onto the last crackme.</p>
+<p>We can also use <code>rz-diff</code> to check for string differences.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>$ rz-diff -t strings crackme0x08 crackme0x09</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">--- crackme0x08</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ ./crackme0x09</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dt">@@ -1,4 +1,4 @@</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">-IOLI Crackme Level 0x08</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="va">+IOLI Crackme Level 0x09</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a> Password Incorrect!</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a> Password OK!</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a> Password: </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The only change is the version info (from 0x08 to 0x09). So let’s check for functions.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>$ rz-diff -t functions crackme0x08 ./crackme0x09</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>.--------------------------------------------------------------------------------------------------------------------------.</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>| name0                      | size0 | addr0      | type     | similarity | addr1      | size1 | name1                     |</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)--------------------------------------------------------------------------------------------------------------------------(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>| sym._init                  | 23    | 0x08048360 | PARTIAL  | 0.826087   | 0x08048388 | 23    | fcn.08048388              |</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>| sym.imp.__libc_start_main  | 6     | 0x08048388 | COMPLETE | 1.000000   | 0x080483b0 | 6     | sym.imp.__libc_start_main |</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>| sym.imp.scanf              | 6     | 0x08048398 | COMPLETE | 1.000000   | 0x080483c0 | 6     | sym.imp.scanf             |</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>| sym.imp.strlen             | 6     | 0x080483a8 | COMPLETE | 1.000000   | 0x080483d0 | 6     | sym.imp.strlen            |</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>| sym.imp.printf             | 6     | 0x080483b8 | COMPLETE | 1.000000   | 0x080483e0 | 6     | sym.imp.printf            |</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>| sym.imp.sscanf             | 6     | 0x080483c8 | COMPLETE | 1.000000   | 0x080483f0 | 6     | sym.imp.sscanf            |</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>| sym.imp.strncmp            | 6     | 0x080483d8 | COMPLETE | 1.000000   | 0x08048400 | 6     | sym.imp.strncmp           |</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>| sym.imp.exit               | 6     | 0x080483e8 | COMPLETE | 1.000000   | 0x08048410 | 6     | sym.imp.exit              |</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>| fcn.08048424               | 33    | 0x08048424 | PARTIAL  | 0.939394   | 0x08048444 | 33    | fcn.08048444              |</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>| sym.__do_global_dtors_aux  | 47    | 0x08048450 | COMPLETE | 1.000000   | 0x08048470 | 47    | fcn.08048470              |</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>| sym.frame_dummy            | 50    | 0x08048480 | PARTIAL  | 0.940000   | 0x080484a0 | 50    | fcn.080484a0              |</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>| sym.dummy                  | 112   | 0x080484b4 | PARTIAL  | 0.554745   | 0x080484d4 | 137   | fcn.080484d4              |</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>| sym.che                    | 30    | 0x08048524 | UNLIKE   | 0.4773     | 0x0804855d | 44    | fcn.0804855d              |</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>| sym.parell                 | 119   | 0x08048542 | PARTIAL  | 0.581560   | 0x08048589 | 141   | fcn.08048589              |</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>| sym.check                  | 118   | 0x080485b9 | PARTIAL  | 0.689394   | 0x08048616 | 132   | fcn.08048616              |</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>| sym.__i686.get_pc_thunk.bx | 4     | 0x08048755 | COMPLETE | 1.000000   | 0x08048766 | 4     | fcn.08048766              |</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>| sym.__do_global_ctors_aux  | 35    | 0x08048760 | PARTIAL  | 0.942857   | 0x080487f0 | 35    | fcn.080487f0              |</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>| fcn.0804878d               | 17    | 0x0804878d | PARTIAL  | 0.823529   | 0x0804881d | 17    | fcn.0804881d              |</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>`--------------------------------------------------------------------------------------------------------------------------'</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can see that a few functions have been changed. So let’s check it out! We can also see that this version strips the symbol names again, but that should be no problem. We can easily identify them using the functions diff.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin ./crackme0x09</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048420]</span><span class="op">&gt;</span> aa</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048420]</span><span class="op">&gt;</span> afr @ main <span class="co"># recursively analyze functions, starting from main</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048420]</span><span class="op">&gt;</span> afn check @ fcn.08048616</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048420]</span><span class="op">&gt;</span> afn parell @ fcn.08048589</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048420]</span><span class="op">&gt;</span> afn che @ fcn.0804855d</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048420]</span><span class="op">&gt;</span> afn dummy @ fcn.080484d4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span><span class="bn">0x08048420</span><span class="op">]&gt;</span> pdg @ main</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">// </span><span class="al">WARNING</span><span class="co">: Variable defined which should be unmapped: var_8h</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">// </span><span class="al">WARNING</span><span class="co">: [rz-ghidra] Detected overlap for variable var_15h</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>undefined4 main<span class="op">(</span>undefined4 placeholder_0<span class="op">,</span> undefined4 placeholder_1<span class="op">,</span> <span class="dt">char</span> <span class="op">**</span>envp<span class="op">)</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> unaff_EBX<span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_88h<span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_7ch<span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_8h<span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    fcn<span class="fl">.08048766</span><span class="op">();</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    sym<span class="op">.</span>imp<span class="op">.</span>printf<span class="op">(</span>unaff_EBX <span class="op">+</span> <span class="bn">0x16c</span><span class="op">);</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    sym<span class="op">.</span>imp<span class="op">.</span>printf<span class="op">(</span>unaff_EBX <span class="op">+</span> <span class="bn">0x185</span><span class="op">);</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    sym<span class="op">.</span>imp<span class="op">.</span>scanf<span class="op">(</span>unaff_EBX <span class="op">+</span> <span class="dv">400</span><span class="op">,</span> <span class="op">&amp;</span>var_7ch<span class="op">);</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    check<span class="op">((</span><span class="dt">int32_t</span><span class="op">)&amp;</span>var_7ch<span class="op">,</span> <span class="op">(</span><span class="dt">int32_t</span><span class="op">)</span>envp<span class="op">);</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Looking at <code>main</code> we can see some changes: a new function <code>fcn.08048766</code> is introduced, and all string addresses have been replaced by offsets to some base address <code>unaff_EBX</code>.</p>
+<p>Looking at the functions diff we can see that <code>fcn.08048766</code> is named <code>__i686.get_pc_thunk.bx</code>. This function is used in position-independent code to get the addresses of global constants (like string constants). Let’s see if we can find out to which strings these offsets resolve to, but let’s first give this new function a name.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048420]</span><span class="op">&gt;</span> afn sym.__i686.get_pc_thunk.bx @ fcn.08048766</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To compute the addresses we can use ESIL. But we need to initialize it first.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048420]</span><span class="op">&gt;</span> s main</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x080486ee]</span><span class="op">&gt;</span> aei</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x080486ee]</span><span class="op">&gt;</span> aeip</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x080486ee]</span><span class="op">&gt;</span> aeim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now we can step through the function, and all pointer arithmetic will be simulated! Open the interactive view with <code>v</code>, and then we can step through using the <code>s</code> key to step in and <code>S</code> to step over (this also works when using the debugger).</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x080486ee]</span><span class="op">&gt;</span> v</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># opens visual mode</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># step through by pressing Shift+S until we hit the instruction</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># call instruction to printf()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Having landed at the call to <code>printf</code> we can now look at what the address in <code>eax</code> points to. Exit visual mode by pressing <code>q</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x080486ee]</span><span class="op">&gt;</span> ar eax</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">eax</span> = 0x08048869</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x080486ee]</span><span class="op">&gt;</span> ps @ 0x08048869</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">IOLI</span> Crackme Level 0x09</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can add this as a comment if we want. This way we don’t have to keep doing this ESIL simulation if we forget what particular string was printed here.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x080486ef]</span><span class="op">&gt;</span> CC <span class="st">"IOLI Crackme Level 0x09"</span> @ eip</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x080486ef]</span><span class="op">&gt;</span> pd 1 @ eip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode asm code-with-copy"><code class="sourceCode fasm"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>│           <span class="co">;-- eip:</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>│           0x08048722      <span class="cf">call</span>  sym<span class="op">.</span>imp<span class="op">.</span>printf                       <span class="co">; sym.imp.printf ; IOLI Crackme Level 0x09 ; int printf(const char *format)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Perfect! Onto the next string. We can skip the call to <code>printf</code> with the <code>aess</code> command, and then perform two steps using <code>aes 2</code>.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x080486ee]</span><span class="op">&gt;</span> aess</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x080486ee]</span><span class="op">&gt;</span> aes 2</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x080486ee]</span><span class="op">&gt;</span> ar eax</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">eax</span> = 0x08048882</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x080486ee]</span><span class="op">&gt;</span> ps @ 0x08048882</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Password:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can continue this until we have identified all strings. Or until our curiosity is sated.</p>
+<p>Either way, nothing of note has been added or changed in this version, which means that the password constraints are still the same.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> LOL= ./crackme0x09</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">IOLI</span> Crackme Level 0x09</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Password:</span> 12346</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Password</span> OK!</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> LOL= ./crackme0x09</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="ex">IOLI</span> Crackme Level 0x09</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Password:</span> 888</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Password</span> OK!</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> LD_PRELOAD=./libexit.so LOL= ./crackme0x09</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="ex">IOLI</span> Crackme Level 0x09</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Password:</span> 2</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Password</span> Incorrect!</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="ex">wtf?</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> LD_PRELOAD=./libexit.so LOL= ./crackme0x09</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="ex">IOLI</span> Crackme Level 0x09</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="ex">Password:</span> 888</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="ex">Password</span> OK!</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="ex">Password</span> Incorrect!</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="ex">wtf?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And that concludes the IOLI crackmes!</p>
 
 
 

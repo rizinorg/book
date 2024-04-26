@@ -1197,184 +1197,174 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>crackme 0x03, let’s skip the string check part and analyze it directly.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span><span class="bn">0x08048360</span><span class="op">]&gt;</span> aaa</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">[</span><span class="bn">0x08048360</span><span class="op">]&gt;</span> pdd@sym<span class="op">.</span>main</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">/* jsdec pseudo code output */</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">/* ./crackme0x03 @ 0x8048498 */</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdint.h&gt;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int32_t</span> main <span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_ch<span class="op">;</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_8h<span class="op">;</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_4h<span class="op">;</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_sp_4h<span class="op">;</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    eax <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    eax <span class="op">+=</span> <span class="bn">0xf</span><span class="op">;</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    eax <span class="op">+=</span> <span class="bn">0xf</span><span class="op">;</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    eax <span class="op">&gt;&gt;=</span> <span class="dv">4</span><span class="op">;</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    eax <span class="op">&lt;&lt;=</span> <span class="dv">4</span><span class="op">;</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    printf <span class="op">(</span><span class="st">"IOLI Crackme Level 0x03</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    printf <span class="op">(</span><span class="st">"Password: "</span><span class="op">);</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    eax <span class="op">=</span> <span class="op">&amp;</span>var_4h<span class="op">;</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    scanf <span class="op">(</span><span class="bn">0x8048634</span><span class="op">,</span> eax<span class="op">);</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    var_8h <span class="op">=</span> <span class="bn">0x5a</span><span class="op">;</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    var_ch <span class="op">=</span> <span class="bn">0x1ec</span><span class="op">;</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    edx <span class="op">=</span> <span class="bn">0x1ec</span><span class="op">;</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    eax <span class="op">=</span> <span class="op">&amp;</span>var_8h<span class="op">;</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">*(</span>eax<span class="op">)</span> <span class="op">+=</span> edx<span class="op">;</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    eax <span class="op">=</span> var_8h<span class="op">;</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    eax <span class="op">*=</span> var_8h<span class="op">;</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    var_ch <span class="op">=</span> eax<span class="op">;</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    eax <span class="op">=</span> var_4h<span class="op">;</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    test <span class="op">(</span>eax<span class="op">,</span> eax<span class="op">);</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    eax <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> eax<span class="op">;</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>It looks straightforward except the function <code>test(eax, eax)</code>. This is unusual to call a function with same two parameters , so I speculate that the decompiler has gone wrong. we can check it in disassembly.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode asm code-with-copy"><code class="sourceCode fasm"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>[0x08048360]&gt; pdf<span class="fu">@</span><span class="er">s</span>ym<span class="op">.</span>main</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>...</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>           0x080484fc      8945f4         <span class="bu">mov</span> <span class="dt">dword</span> <span class="op">[</span>var_ch<span class="op">],</span> <span class="kw">eax</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>           0x080484ff      8b45f4         <span class="bu">mov</span> <span class="kw">eax</span><span class="op">,</span> <span class="dt">dword</span> <span class="op">[</span>var_ch<span class="op">]</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>           0x08048502      89442404       <span class="bu">mov</span> <span class="dt">dword</span> <span class="op">[</span>var_sp_4h<span class="op">],</span> <span class="kw">eax</span>   <span class="co">; uint32_t arg_ch</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>           0x08048506      8b45fc         <span class="bu">mov</span> <span class="kw">eax</span><span class="op">,</span> <span class="dt">dword</span> <span class="op">[</span>var_4h<span class="op">]</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>           0x08048509      890424         <span class="bu">mov</span> <span class="dt">dword</span> <span class="op">[</span><span class="kw">esp</span><span class="op">],</span> <span class="kw">eax</span>         <span class="co">; int32_t arg_8h</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>           0x0804850c      e85dffffff     call sym<span class="op">.</span>test</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Here comes the<code>sym.test</code>, called with two parameters. One is var_4h (our input from <code>scanf()</code>). The other is var_ch.&nbsp;The value of var_ch (as the parameter of <code>test()</code>) can be calculated like it did in crackme_0x02. It’s 0x52b24. Try it!</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./crackme0x03</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">IOLI</span> Crackme Level 0x03</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Password:</span> 338724</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Password</span> OK!!! :<span class="er">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Take a look at <code>sym.test</code>. It’s a two path conditional jump which compares two parameters and then do shift. We can guess that shift is most likely the decryption part (shift cipher, e.g.&nbsp;Caesar cipher).</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* jsdec pseudo code output */</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">/* ./crackme0x03 @ 0x804846e */</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdint.h&gt;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int32_t</span> test <span class="op">(</span><span class="dt">int32_t</span> arg_8h<span class="op">,</span> <span class="dt">uint32_t</span> arg_ch<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    eax <span class="op">=</span> arg_8h<span class="op">;</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>eax <span class="op">!=</span> arg_ch<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        shift <span class="op">(</span><span class="st">"Lqydolg#Sdvvzrug$"</span><span class="op">);</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        shift <span class="op">(</span><span class="st">"Sdvvzrug#RN$$$#=,"</span><span class="op">);</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> eax<span class="op">;</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>can also reverse <code>shift()</code> to satisfy curiosity.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode asm code-with-copy"><code class="sourceCode fasm"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>[0x08048360]&gt; pdf<span class="fu">@</span><span class="er">s</span>ym<span class="op">.</span>shift</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>        <span class="co">; CODE (CALL) XREF 0x08048491 (sym.test)</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">; CODE (CALL) XREF 0x08048483 (sym.test)</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>/ function<span class="op">:</span> sym<span class="op">.</span>shift <span class="op">(</span><span class="dv">90</span><span class="op">)</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>|       0x08048414  sym<span class="op">.</span>shift<span class="op">:</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>|       0x08048414     55               <span class="bu">push</span> <span class="kw">ebp</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>|       0x08048415     89e5             <span class="bu">mov</span> <span class="kw">ebp</span><span class="op">,</span> <span class="kw">esp</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>|       0x08048417     81ec98000000     <span class="bu">sub</span> <span class="kw">esp</span><span class="op">,</span> <span class="bn">0x98</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>|       0x0804841d     c7458400000000   mov <span class="dt">dword</span> <span class="op">[</span><span class="kw">ebp</span><span class="op">-</span><span class="bn">0x7c</span><span class="op">],</span> <span class="bn">0x0</span>  <span class="co">; this seems to be a counter</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>|  .    <span class="co">; CODE (JMP) XREF 0x0804844e (sym.shift)</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>/ loc<span class="op">:</span> loc<span class="op">.</span><span class="dv">08048424</span> <span class="op">(</span><span class="dv">74</span><span class="op">)</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>|  .    0x08048424  loc<span class="op">.</span><span class="dv">08048424</span><span class="op">:</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>|  .--&gt; 0x08048424     8b4508           <span class="bu">mov</span> <span class="kw">eax</span><span class="op">,</span> <span class="op">[</span><span class="kw">ebp</span><span class="op">+</span><span class="bn">0x8</span><span class="op">]</span> <span class="co">; ebp+0x8 = strlen(chain)</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>|  |    0x08048427     890424           <span class="bu">mov</span> <span class="op">[</span><span class="kw">esp</span><span class="op">],</span> <span class="kw">eax</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>|  |    0x0804842a     e811ffffff       call <span class="dt">dword</span> imp<span class="op">.</span>strlen</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>|  |       <span class="co">; imp.strlen()</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>|  |    0x0804842f     394584           <span class="bu">cmp</span> <span class="op">[</span><span class="kw">ebp</span><span class="op">-</span><span class="bn">0x7c</span><span class="op">],</span> <span class="kw">eax</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>|  |,=&lt; 0x08048432     731c             <span class="cf">jae</span> loc<span class="op">.</span><span class="dv">08048450</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>|  ||   0x08048434     8d4588           <span class="bu">lea</span> <span class="kw">eax</span><span class="op">,</span> <span class="op">[</span><span class="kw">ebp</span><span class="op">-</span><span class="bn">0x78</span><span class="op">]</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>|  ||   0x08048437     89c2             <span class="bu">mov</span> <span class="kw">edx</span><span class="op">,</span> <span class="kw">eax</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>|  ||   0x08048439     035584           <span class="bu">add</span> <span class="kw">edx</span><span class="op">,</span> <span class="op">[</span><span class="kw">ebp</span><span class="op">-</span><span class="bn">0x7c</span><span class="op">]</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>|  ||   0x0804843c     8b4584           <span class="bu">mov</span> <span class="kw">eax</span><span class="op">,</span> <span class="op">[</span><span class="kw">ebp</span><span class="op">-</span><span class="bn">0x7c</span><span class="op">]</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>|  ||   0x0804843f     034508           <span class="bu">add</span> <span class="kw">eax</span><span class="op">,</span> <span class="op">[</span><span class="kw">ebp</span><span class="op">+</span><span class="bn">0x8</span><span class="op">]</span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>|  ||   0x08048442     0fb600           <span class="bu">movzx</span> <span class="kw">eax</span><span class="op">,</span> <span class="dt">byte</span> <span class="op">[</span><span class="kw">eax</span><span class="op">]</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>|  ||   0x08048445     2c03             <span class="bu">sub</span> <span class="kw">al</span><span class="op">,</span> <span class="bn">0x3</span></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>|  ||   0x08048447     8802             <span class="bu">mov</span> <span class="op">[</span><span class="kw">edx</span><span class="op">],</span> <span class="kw">al</span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>|  ||   0x08048449     8d4584           <span class="bu">lea</span> <span class="kw">eax</span><span class="op">,</span> <span class="op">[</span><span class="kw">ebp</span><span class="op">-</span><span class="bn">0x7c</span><span class="op">]</span></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>|  ||   0x0804844c     ff00             inc <span class="dt">dword</span> <span class="op">[</span><span class="kw">eax</span><span class="op">]</span></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>|  `==&lt; 0x0804844e     ebd4             jmp loc<span class="op">.</span><span class="dv">08048424</span></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>|   |   <span class="co">; CODE (JMP) XREF 0x08048432 (sym.shift)</span></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>/ loc<span class="op">:</span> loc<span class="op">.</span><span class="dv">08048450</span> <span class="op">(</span><span class="dv">30</span><span class="op">)</span></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>|   |   0x08048450  loc<span class="op">.</span><span class="dv">08048450</span><span class="op">:</span></span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>|   `-&gt; 0x08048450     8d4588           <span class="bu">lea</span> <span class="kw">eax</span><span class="op">,</span> <span class="op">[</span><span class="kw">ebp</span><span class="op">-</span><span class="bn">0x78</span><span class="op">]</span></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>|       0x08048453     034584           <span class="bu">add</span> <span class="kw">eax</span><span class="op">,</span> <span class="op">[</span><span class="kw">ebp</span><span class="op">-</span><span class="bn">0x7c</span><span class="op">]</span></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>|       0x08048456     c60000           mov <span class="dt">byte</span> <span class="op">[</span><span class="kw">eax</span><span class="op">],</span> <span class="bn">0x0</span></span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>|       0x08048459     8d4588           <span class="bu">lea</span> <span class="kw">eax</span><span class="op">,</span> <span class="op">[</span><span class="kw">ebp</span><span class="op">-</span><span class="bn">0x78</span><span class="op">]</span></span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>|       0x0804845c     89442404         <span class="bu">mov</span> <span class="op">[</span><span class="kw">esp</span><span class="op">+</span><span class="bn">0x4</span><span class="op">],</span> <span class="kw">eax</span></span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>|       0x08048460     c70424e8850408   mov <span class="dt">dword</span> <span class="op">[</span><span class="kw">esp</span><span class="op">],</span> <span class="bn">0x80485e8</span></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>|       0x08048467     e8e4feffff       call <span class="dt">dword</span> imp<span class="op">.</span>printf</span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>|          <span class="co">; imp.printf()</span></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>|       0x0804846c     c9               leave</span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>\       0x0804846d     c3               ret</span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>        <span class="co">; ------------</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>you can read the assembly code and find the decryption is actually a “sub al, 0x3”. we can write a python script for it:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">''</span>.join([<span class="bu">chr</span>(<span class="bu">ord</span>(i)<span class="op">-</span><span class="bn">0x3</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="st">'SdvvzrugRN$$$'</span>]))</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">''</span>.join([<span class="bu">chr</span>(<span class="bu">ord</span>(i)<span class="op">-</span><span class="bn">0x3</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="st">'LqydolgSdvvzrug$'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>the easier way is to <code>run</code> the decryption code, that means debug it or emulate it. I used rizin ESIL emulator but it got stuck when executed <code>call dword imp.strlen</code>. And I can’t find the usage of hooking function / skip instruction in rizin. The following is an example to show u how to emulate ESIL.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048414]</span><span class="op">&gt;</span> s 0x08048445      <span class="co"># the 'sub al, 0x03'</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048445]</span><span class="op">&gt;</span> aei               <span class="co"># init VM</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048445]</span><span class="op">&gt;</span> aeim              <span class="co"># init memory</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048445]</span><span class="op">&gt;</span> aeip              <span class="co"># init ip</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048445]</span><span class="op">&gt;</span> aer eax=0x41      <span class="co"># set eax=0x41 -- 'A'</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048445]</span><span class="op">&gt;</span> aer               <span class="co"># show current value of regs</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ex">oeax</span> = 0x00000000</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ex">eax</span> = 0x00000041</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="ex">ebx</span> = 0x00000000</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="ex">ecx</span> = 0x00000000</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="ex">edx</span> = 0x00000000</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="ex">esi</span> = 0x00000000</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="ex">edi</span> = 0x00000000</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="ex">esp</span> = 0x00178000</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="ex">ebp</span> = 0x00178000</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="ex">eip</span> = 0x08048445</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="ex">eflags</span> = 0x00000000</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048445]</span><span class="op">&gt;</span> V                 <span class="co"># enter Visual mode</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 'p' or 'P' to change visual mode</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co"># I prefer the [xaDvc] mode</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co"># use 's' to step in and 'S' to step over</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048442</span> <span class="pp">[</span><span class="ss">xaDvc</span><span class="pp">]</span>0 0% 265 ./crackme0x03]<span class="op">&gt;</span> diq<span class="kw">;</span><span class="ex">?0</span><span class="kw">;</span><span class="ex">f</span> t.. @ sym.shift+46 <span class="co"># 0x8048442</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="ex">dead</span> at 0x00000000</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> offset <span class="at">-</span>   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="ex">0x00178000</span>  0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="ex">0x00178010</span>  0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="ex">0x00178020</span>  0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="ex">0x00178030</span>  0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>   <span class="ex">oeax</span> 0x00000000      eax 0x00000041      ebx 0x00000000      ecx 0x00000000</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    <span class="ex">edx</span> 0x00000000      esi 0x00000000      edi 0x00000000      esp 0x00178000</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ebp</span> 0x00178000      eip 0x08048445   eflags 0x00000000</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>       <span class="bu">:</span>   0x08048442      0fb600         movzx eax, byte <span class="pp">[</span><span class="ss">eax</span><span class="pp">]</span></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>       <span class="bu">:</span>   <span class="kw">;</span><span class="ex">--</span> eip:</span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>       <span class="bu">:</span>   0x08048445      2c03           sub al, 3</span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>       <span class="bu">:</span>   0x08048447      8802           mov byte <span class="pp">[</span><span class="ss">edx</span><span class="pp">]</span>, al</span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>       <span class="bu">:</span>   0x08048449      8d4584         lea eax, <span class="pp">[</span><span class="ss">var_7ch</span><span class="pp">]</span></span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>       <span class="bu">:</span>   0x0804844c      ff00           inc dword <span class="pp">[</span><span class="ss">eax</span><span class="pp">]</span></span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>       <span class="bu">:</span>=<span class="op">&lt;</span> 0x0804844e      ebd4           jmp 0x8048424</span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>           <span class="kw">;</span> <span class="ex">CODE</span> XREF from sym.shift @ 0x8048432</span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>           <span class="ex">0x08048450</span>      8d4588         lea eax, <span class="pp">[</span><span class="ss">var_78h</span><span class="pp">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>By the way, you can also open the file and use write data command to decrypt data.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rizin</span> <span class="at">-w</span> ./crackme0x03</span>
+<p>This is the fourth crackme.</p>
+<pre><code>$ ./crackme0x03
+IOLI Crackme Level 0x03
+Password: letmein
+Invalid Password!</code></pre>
+<p>Checking for strings with <code>rz-bin -z ./crackme0x03</code> gives us the following result:</p>
+<pre><code>$ rz-bin -z ./crackme0x03
+[Strings]
+nth paddr      vaddr      len size section type  string                    
+---------------------------------------------------------------------------
+0   0x000005ec 0x080485ec 17  18   .rodata ascii Lqydolg#Sdvvzrug$
+1   0x000005fe 0x080485fe 17  18   .rodata ascii Sdvvzrug#RN$$$#=,
+2   0x00000610 0x08048610 24  25   .rodata ascii IOLI Crackme Level 0x03\n
+3   0x00000629 0x08048629 10  11   .rodata ascii Password: 
+</code></pre>
+<p>Note that the ‘Invalid Password!’ and the ‘Password OK :)’ strings have been seemingly replaced by random gibberish.</p>
+<p>Let’s analyze.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span><span class="bn">0x08048360</span><span class="op">]&gt;</span> aaa</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">[</span><span class="bn">0x08048360</span><span class="op">]&gt;</span> pdg @ main</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>undefined4 main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_18h<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_10h<span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_ch<span class="op">;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_8h<span class="op">;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    sym<span class="op">.</span>imp<span class="op">.</span>printf<span class="op">(</span><span class="st">"IOLI Crackme Level 0x03</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    sym<span class="op">.</span>imp<span class="op">.</span>printf<span class="op">(</span><span class="st">"Password: "</span><span class="op">);</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    sym<span class="op">.</span>imp<span class="op">.</span>scanf<span class="op">(</span>data<span class="fl">.08048634</span><span class="op">,</span> <span class="op">&amp;</span>var_8h<span class="op">);</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    sym<span class="op">.</span>test<span class="op">(</span>var_8h<span class="op">,</span> <span class="bn">0x52b24</span><span class="op">);</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This looks quite straightforward, <code>var_8h</code> is the result of <code>scanf</code> which the function <code>sym.test(var_8h, 0x52b24)</code> apparently compares to the value <code>0x52b24</code>.</p>
+<p>And indeed entering the decimal value of <code>0x52b24</code> (338724) gives us a pass.</p>
+<pre><code>$ ./crackme0x03
+IOLI Crackme Level 0x03
+Password: 338724
+Password OK!!! :)</code></pre>
+<p>But let’s dive a bit deeper to see what <code>sym.test()</code> is actually doing!</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span><span class="bn">0x08048360</span><span class="op">]&gt;</span> pdg @ sym<span class="op">.</span>test</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> sym<span class="op">.</span>test<span class="op">(</span><span class="dt">int32_t</span> arg_4h<span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">long</span> arg_8h<span class="op">)</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>arg_4h <span class="op">==</span> arg_8h<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        sym<span class="op">.</span>shift<span class="op">(</span><span class="st">"Sdvvzrug#RN$$$#=,"</span><span class="op">);</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        sym<span class="op">.</span>shift<span class="op">(</span><span class="st">"Lqydolg#Sdvvzrug$"</span><span class="op">);</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It’s a two path conditional jump which compares two parameters and then does a shift. We can guess that <code>shift()</code> is most likely some sort of decoding step of the seemingly random strings (shift cipher, e.g.&nbsp;Caesar cipher).</p>
+<p>To confirm our suspicions let’s analyze <code>sym.shift()</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span><span class="bn">0x08048360</span><span class="op">]&gt;</span> pdg @ sym<span class="op">.</span>shift</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">// </span><span class="al">WARNING</span><span class="co">: Variable defined which should be unmapped: var_98h</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> sym<span class="op">.</span>shift<span class="op">(</span><span class="dt">char</span> <span class="op">*</span>s<span class="op">)</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">uint32_t</span> uVar1<span class="op">;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_98h<span class="op">;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">unsigned</span> <span class="dt">long</span> var_80h<span class="op">;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_7ch<span class="op">;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    var_80h <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span> <span class="kw">true</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        uVar1 <span class="op">=</span> sym<span class="op">.</span>imp<span class="op">.</span>strlen<span class="op">(</span>s<span class="op">);</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>uVar1 <span class="op">&lt;=</span> var_80h<span class="op">)</span> <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">*(</span><span class="dt">char</span> <span class="op">*)((</span><span class="dt">int32_t</span><span class="op">)&amp;</span>var_7ch <span class="op">+</span> var_80h<span class="op">)</span> <span class="op">=</span> s<span class="op">[</span>var_80h<span class="op">]</span> <span class="op">+</span> <span class="op">-</span><span class="dv">3</span><span class="op">;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        var_80h <span class="op">=</span> var_80h <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">*(</span>undefined <span class="op">*)((</span><span class="dt">int32_t</span><span class="op">)&amp;</span>var_7ch <span class="op">+</span> var_80h<span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    sym<span class="op">.</span>imp<span class="op">.</span>printf<span class="op">(</span>data<span class="fl">.080485e8</span><span class="op">,</span> <span class="op">&amp;</span>var_7ch<span class="op">);</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If we clean this up a bit it becomes more evident what is going on.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> shift<span class="op">(</span><span class="dt">char</span> <span class="op">*</span>str<span class="op">)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">uint32_t</span> len <span class="op">=</span> strlen<span class="op">(</span>str<span class="op">);</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> res<span class="op">[</span>len <span class="op">+</span> <span class="dv">1</span><span class="op">];</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> idx <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span> idx <span class="op">&lt;</span> len <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        res<span class="op">[</span>idx<span class="op">]</span> <span class="op">=</span> str<span class="op">[</span>idx<span class="op">]</span> <span class="op">-</span> <span class="dv">3</span><span class="op">;</span> <span class="co">// Subtract character code by 3</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        idx<span class="op">++;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    res<span class="op">[</span>idx<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> <span class="co">// Add null terminator</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">%s\n</span><span class="st">"</span><span class="op">,</span> res<span class="op">);</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can see that each character in <code>str</code> is subtracted by 3 to produce the final result.</p>
+<p>With this knowledge we can take a shot at decoding the strings. We can use the <code>pos</code> command to apply the subtraction needed for decoding and printing the result.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin ./crackme0x03</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048360]</span><span class="op">&gt;</span> aaa</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048360]</span><span class="op">&gt;</span> fs strings</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048360]</span><span class="op">&gt;</span> f</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048360]</span><span class="op">&gt;</span> fl</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">0x080485ec</span> 18 str.Lqydolg_Sdvvzrug</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="ex">0x080485fe</span> 18 str.Sdvvzrug_RN</span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">0x08048610</span> 25 str.IOLI_Crackme_Level_0x03</span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">0x08048629</span> 11 str.Password:</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048360]</span><span class="op">&gt;</span> s str.Lqydolg_Sdvvzrug</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x080485ec]</span><span class="op">&gt;</span> wos 0x03 @ str.Lqydolg_Sdvvzrug!0x11</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x080485ec]</span><span class="op">&gt;</span> px</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> offset <span class="at">-</span>   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="ex">0x080485ec</span>  496e 7661 6c69 6420 5061 7373 776f 7264  Invalid Password</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="ex">0x080485fc</span>  2100 5364 7676 7a72 7567 2352 4e24 2424  !.Sdvvzrug#RN<span class="va">$$</span>$</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="ex">0x0804860c</span>  233d 2c00 494f 4c49 2043 7261 636b 6d65  <span class="co">#=,.IOLI Crackme</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="ex">0x0804861c</span>  204c 6576 656c 2030 7830 330a 0050 6173   Level 0x03..Pas</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="ex">0x0804862c</span>  7377 6f72 643a 2000 2564 0000 0000 0000  sword: .%d......</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x080485ec]</span><span class="op">&gt;</span> wos 0x03 @ str.Sdvvzrug_RN!17</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x080485ec]</span><span class="op">&gt;</span> px</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> offset <span class="at">-</span>   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="ex">0x080485ec</span>  496e 7661 6c69 6420 5061 7373 776f 7264  Invalid Password</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="ex">0x080485fc</span>  2100 5061 7373 776f 7264 204f 4b21 2121  !.Password OK!!!</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="ex">0x0804860c</span>  203a 2900 494f 4c49 2043 7261 636b 6d65   :<span class="er">)</span><span class="ex">.IOLI</span> Crackme</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="ex">0x0804861c</span>  204c 6576 656c 2030 7830 330a 0050 6173   Level 0x03..Pas</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="ex">0x0804862c</span>  7377 6f72 643a 2000 2564 0000 0000 0000  sword: .%d......</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x080485ec]</span><span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048360]</span><span class="op">&gt;</span> pos 0x03 @ str.Lqydolg_Sdvvzrug @! 18</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> offset <span class="at">-</span>   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="ex">0x080485ec</span>  496e 7661 6c69 6420 5061 7373 776f 7264  Invalid Password</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="ex">0x080485fc</span>  21fd                                     !.</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048360]</span><span class="op">&gt;</span> pos 0x03 @ str.Sdvvzrug_RN @! 18</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> offset <span class="at">-</span>   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="ex">0x080485fe</span>  5061 7373 776f 7264 204f 4b21 2121 203a  Password OK!!! :</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="ex">0x0804860e</span>  29fd                                     <span class="er">)</span><span class="bu">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>However, some functions may not be as easy to understand as this one, in which case it may be useful to be able to run the code. Rizin provides us two ways of doing this: by using the debugger, or by emulation (using ESIL).</p>
+<p>Let’s first see how we can achieve this using the debugger. We will be wanting to pass the encoded strings to <code>shift()</code>. We know <code>shift</code> takes one parameter <code>s</code>, which is an address to a (null terminated) string. We can see where on the stack local variables and arguments are using the <code>afvl</code> command.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin <span class="at">-d</span> ./crackme0x03</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0xec0ff970]</span><span class="op">&gt;</span> aa</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0xec0ff970]</span><span class="op">&gt;</span> afvl @ sym.shift</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">var</span> int32_t var_98h @ stack <span class="at">-</span> 0x98</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">var</span> unsigned long var_80h @ stack <span class="at">-</span> 0x80</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="ex">var</span> int32_t var_7ch @ stack <span class="at">-</span> 0x7c</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="ex">arg</span> const char <span class="pp">*</span>s @ stack + 0x4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can see that <code>s</code> starts at a 4 byte offset from the stack pointer.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0xec0ff970]</span><span class="op">&gt;</span> dcu main                      <span class="co"># run until program start</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048498]</span><span class="op">&gt;</span> <span class="pp">*</span>esp+4=str.Lqydolg_Sdvvzrug   <span class="co"># 'push' address onto the stack (note the 4 byte offset)</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048498]</span><span class="op">&gt;</span> dr eip=sym.shift              <span class="co"># set instruction pointer to start of shift()</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048498]</span><span class="op">&gt;</span> dcr                           <span class="co"># run shift() until it returns</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Invalid</span> Password!</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x0804846d]</span><span class="op">&gt;</span> <span class="pp">*</span>esp+4=str.Sdvvzrug_RN        <span class="co"># and now for the other string</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048498]</span><span class="op">&gt;</span> dr eip=sym.shift</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048498]</span><span class="op">&gt;</span> dcr</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Password</span> OK!!! :<span class="er">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Emulation is a bit more tricky because we can’t make external calls to functions like <code>strlen()</code> and <code>printf()</code>. So we have to manually skip over them and set the registers accordingly. Below is an example.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048414]</span><span class="op">&gt;</span> s 0x08048445      <span class="co"># the 'sub al, 0x03'</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048445]</span><span class="op">&gt;</span> aei               <span class="co"># init VM</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048445]</span><span class="op">&gt;</span> aeim              <span class="co"># init memory</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048445]</span><span class="op">&gt;</span> aeip              <span class="co"># init ip</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048445]</span><span class="op">&gt;</span> ar eax=0x41       <span class="co"># set eax=0x41 -- 'A'</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048445]</span><span class="op">&gt;</span> ar                <span class="co"># show current value of regs</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="ex">oeax</span> = 0x00000000</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="ex">eax</span> = 0x00000041</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="ex">ebx</span> = 0x00000000</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="ex">ecx</span> = 0x00000000</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="ex">edx</span> = 0x00000000</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="ex">esi</span> = 0x00000000</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="ex">edi</span> = 0x00000000</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="ex">esp</span> = 0x00178000</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="ex">ebp</span> = 0x00178000</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="ex">eip</span> = 0x08048445</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="ex">eflags</span> = 0x00000000</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048445]</span><span class="op">&gt;</span> V                 <span class="co"># enter Visual mode</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 'p' or 'P' to change visual mode</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co"># I prefer the [xaDvc] mode</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co"># use 's' to step in and 'S' to step over</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048442</span> <span class="pp">[</span><span class="ss">xaDvc</span><span class="pp">]</span>0 0% 265 ./crackme0x03]<span class="op">&gt;</span> diq<span class="kw">;</span><span class="ex">?0</span><span class="kw">;</span><span class="ex">f</span> t.. @ sym.shift+46 <span class="co"># 0x8048442</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="ex">dead</span> at 0x00000000</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> offset <span class="at">-</span>   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="ex">0x00178000</span>  0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="ex">0x00178010</span>  0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="ex">0x00178020</span>  0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="ex">0x00178030</span>  0000 0000 0000 0000 0000 0000 0000 0000  ................</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>   <span class="ex">oeax</span> 0x00000000      eax 0x00000041      ebx 0x00000000      ecx 0x00000000</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    <span class="ex">edx</span> 0x00000000      esi 0x00000000      edi 0x00000000      esp 0x00178000</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ebp</span> 0x00178000      eip 0x08048445   eflags 0x00000000</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>       <span class="bu">:</span>   0x08048442      0fb600         movzx eax, byte <span class="pp">[</span><span class="ss">eax</span><span class="pp">]</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>       <span class="bu">:</span>   <span class="kw">;</span><span class="ex">--</span> eip:</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>       <span class="bu">:</span>   0x08048445      2c03           sub al, 3</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>       <span class="bu">:</span>   0x08048447      8802           mov byte <span class="pp">[</span><span class="ss">edx</span><span class="pp">]</span>, al</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>       <span class="bu">:</span>   0x08048449      8d4584         lea eax, <span class="pp">[</span><span class="ss">var_7ch</span><span class="pp">]</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>       <span class="bu">:</span>   0x0804844c      ff00           inc dword <span class="pp">[</span><span class="ss">eax</span><span class="pp">]</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>       <span class="bu">:</span>=<span class="op">&lt;</span> 0x0804844e      ebd4           jmp 0x8048424</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>           <span class="kw">;</span> <span class="ex">CODE</span> XREF from sym.shift @ 0x8048432</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>           <span class="ex">0x08048450</span>      8d4588         lea eax, <span class="pp">[</span><span class="ss">var_78h</span><span class="pp">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 
