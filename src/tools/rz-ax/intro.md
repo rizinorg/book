@@ -73,7 +73,6 @@ Usage: rz-ax [options] [expr ...]
   -w      signed word          ;  rz-ax -w 16 0xffff
   -v      version              ;  rz-ax -v
   -p      position of set bits ;  rz-ax -p 0xb3
-
 ```
 
 Some examples:
