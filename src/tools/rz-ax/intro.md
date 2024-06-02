@@ -54,21 +54,25 @@ Usage: rz-ax [options] [expr ...]
   -E      base64 encode        ;
   -f      floating point       ;  rz-ax -f 6.3+2.1
   -F      stdin slurp code hex ;  rz-ax -F < shellcode.[c/py/js]
-  -h      help                 ;  rz-ax -h
+  -h      show this help       ;  rz-ax -h
   -i      dump as C byte array ;  rz-ax -i < bytes
+  -I      IP address <-> LONG  ;  rz-ax -I 3530468537
   -k      keep base            ;  rz-ax -k 33+3 -> 36
-  -K      randomart            ;  rz-ax -K 0x34 1020304050
   -L      bin -> hex(bignum)   ;  rz-ax -L 111111111 # 0x1ff
-  -n      binary number        ;  rz-ax -n 0x1234 # 34120000
+  -n      int value -> hexpairs;  rz-ax -n 0x1234 # 34120000
+  -o      octalstr -> raw      ;  rz-ax -o \162 \172 # rz
   -N      binary number        ;  rz-ax -N 0x1234 # \x34\x12\x00\x00
-  -r      rizin style output      ;  rz-ax -r 0x1234
+  -r      rz style output      ;  rz-ax -r 0x1234
   -s      hexstr -> raw        ;  rz-ax -s 43 4a 50
   -S      raw -> hexstr        ;  rz-ax -S < /bin/ls > ls.hex
-  -t      tstamp -> str        ;  rz-ax -t 1234567890
+  -t      Unix tstamp -> str   ;  rz-ax -t 1234567890
+  -m      MS-DOS tstamp -> str ;  rz-ax -m 1234567890
+  -W      Win32 tstamp -> str  ;  rz-ax -W 1234567890
   -x      hash string          ;  rz-ax -x linux osx
   -u      units                ;  rz-ax -u 389289238 # 317.0M
   -w      signed word          ;  rz-ax -w 16 0xffff
   -v      version              ;  rz-ax -v
+  -p      position of set bits ;  rz-ax -p 0xb3
 ```
 
 Some examples:
