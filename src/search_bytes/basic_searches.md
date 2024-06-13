@@ -3,17 +3,23 @@
 A basic search for a plain text string in a file would be something like:
 
     $ rizin -q -c "/ lib" /bin/ls
-    Searching 3 bytes from 0x00400000 to 0x0041ae08: 6c 69 62 
-    hits: 9
-    0x00400239 hit0_0 "lib64/ld-linux-x86-64.so.2"
-    0x00400f19 hit0_1 "libselinux.so.1"
-    0x00400fae hit0_2 "librt.so.1"
-    0x00400fc7 hit0_3 "libacl.so.1"
-    0x00401004 hit0_4 "libc.so.6"
-    0x004013ce hit0_5 "libc_start_main"
-    0x00416542 hit0_6 "libs/"
-    0x00417160 hit0_7 "lib/xstrtol.c"
-    0x00417578 hit0_8 "lib"
+    Searching 3 bytes in [0x23520-0x23f58]
+    hits: 0
+    Searching 3 bytes in [0x0-0x3638]
+    hits: 4
+    Searching 3 bytes in [0x4000-0x17401]
+    hits: 0
+    Searching 3 bytes in [0x18000-0x1f8b0]
+    hits: 1
+    Searching 3 bytes in [0x22278-0x23518]
+    hits: 0
+    Searching 3 bytes in [0x20f70-0x22278]
+    hits: 0
+    0x00000319 hit0_0 ./lib64/ld-linux-x86-.
+    0x0000103f hit0_1 ._cxa_finalize__libc_start_main__c.
+    0x0000152b hit0_2 .txattrgetxattrlibcap.so.2libc.so.
+    0x00001537 hit0_3 .ttrlibcap.so.2libc.so.6GLIBC_2.2.
+    0x0001a015 hit0_4 .-full-isolc/.libs/lt-/usr/shar.
 
 As can be seen from the output above, rizin generates a "hit" flag for every entry found. You can then use the `ps` command to see the strings stored at the offsets marked by the flags in this group, and they will have names of the form `hit0_<index>`:
 
@@ -37,9 +43,20 @@ Using Rizin, you can also automatically search for magic signatures in the file.
 
 To perform a case-insensitive search for strings use `/i`:
 
-    [0x0040488f]> /i Stallman
-    Searching 8 bytes from 0x00400238 to 0x0040488f: 53 74 61 6c 6c 6d 61 6e
-    [# ]hits: 004138 < 0x0040488f  hits = 0
+    [0x00000000]> /i hello
+    Searching 5 bytes in [0x4028-0x4070]
+    hits: 0
+    Searching 5 bytes in [0x0-0x630]
+    hits: 0
+    Searching 5 bytes in [0x1000-0x1161]
+    hits: 0
+    Searching 5 bytes in [0x2000-0x20b4]
+    hits: 1
+    Searching 5 bytes in [0x4018-0x4020]
+    hits: 0
+    Searching 5 bytes in [0x3dd0-0x4018]
+    hits: 0
+    0x00002004 hit0_0 .Hello, World!; .
 
 It is possible to specify hexadecimal escape sequences in the search string by prepending them with `\x`:
 
@@ -49,23 +66,31 @@ if, instead, you are searching for a string of hexadecimal values, you're probab
 
     [0x00000000]> /x 7F454C46
 
-Once the search is done, the results are stored in the `searches` flag space.
+Once the search is done, the results are stored in the `search` flag space.
 
-    [0x00000000]> fs
-    0    0 . strings
-    1    0 . symbols
-    2    6 . searches
+    [0x00000000]> fsl
+        0 * classes
+        2 * functions
+        1 * imports
+        0 * platform.ports
+        0 * registers
+        0 * registers.extended
+        0 * registers.mmio
+       12 * relocs
+        1 * search
+       25 * sections
+       14 * segments
+        1 * strings
+       19 * symbols
 
-    [0x00000000]> f
-    0x00000135 512 hit0_0
-    0x00000b71 512 hit0_1
-    0x00000bad 512 hit0_2
-    0x00000bdd 512 hit0_3
-    0x00000bfb 512 hit0_4
-    0x00000f2a 512 hit0_5
+You can list the flags in the `search` flag space by selecting it with `fs` and listing the flags with `fl`:
+
+    [0x00000000]> fs search
+    [0x00000000]> fl
+    0x00002004 5 hit0_0
 
 To remove "hit" flags after you do not need them anymore, use the `f- hit*` command.
 
 Often, during long search sessions, you will need to launch the latest search more than once. You can use the `//` command to repeat the last search.
 
-    [0x00000f2a]> //     ; repeat last search
+    [0x00000f2a]> //     # Repeat last search
