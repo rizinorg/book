@@ -252,7 +252,7 @@ mysigdb-source/coff/x86/64/openssl_3_0_0/openssl_3_0_0.pat
 mysigdb-source/coff/x86/64/openssl_3_0_0/openssl_3_0_0.src.sha1
 
 # create release compressed files in mysigdb/ using mysigdb-source/.
-$ python generate-sig.py -s mysigdb-source/ -o mysigdb --test
+$ python generate-sig.py -s mysigdb-source/ -o mysigdb
 source: mysigdb-source
 output: mysigdb
 Generating OpenSSL 3.0.0 for Windows signature (as openssl_3_0_0.sig) from openssl_3_0_0.pat
