@@ -3,41 +3,44 @@
 `rz-asm` is an inline assembler/disassembler. Its main function is to get bytes corresponding to given machine instruction opcode.
 
 ```
-$ rz-asm -h
 Usage: rz-asm [-ACdDehLBvw] [-a arch] [-b bits] [-o addr] [-s syntax]
              [-f file] [-F fil:ter] [-i skip] [-l len] 'code'|hex|-
- -a [arch]    Set architecture to assemble/disassemble (see -L)
- -A           Show Analysis information from given hexpairs
- -b [bits]    Set cpu register size (8, 16, 32, 64) (RASM2_BITS)
- -B           Binary input/output (-l is mandatory for binary input)
- -c [cpu]     Select specific CPU (depends on arch)
- -C           Output in C format
- -d, -D       Disassemble from hexpair bytes (-D show hexpairs)
- -e           Use big endian instead of little endian
- -E           Display ESIL expression (same input as in -d)
- -f [file]    Read data from file
- -F [in:out]  Specify input and/or output filters (att2intel, x86.pseudo, ...)
- -h, -hh      Show this help, -hh for long
- -i [len]     ignore/skip N bytes of the input buffer
- -j           output in json format
- -k [kernel]  Select operating system (linux, windows, darwin, ..)
- -l [len]     Input/Output length
- -L           List Asm plugins: (a=asm, d=disasm, A=analyze, e=ESIL)
- -o [offset]  Set start address for code (default 0)
- -O [file]    Output file name (rz-asm -Bf a.asm -O a)
- -p           Run SPP over input for assembly
- -q           quiet mode
- -r           output in rizin commands
- -s [syntax]  Select syntax (intel, att)
- -v           Show version information
- -w           What's this instruction for? describe opcode
+ -a [arch]     Set architecture to assemble/disassemble (see -L)
+ -A            Show Analysis information from given hexpairs
+ -b [bits]     Set cpu register size (8, 16, 32, 64) (RZ_ASM_BITS)
+ -B            Binary input/output (-l is mandatory for binary input)
+ -c [cpu]      Select specific CPU (depends on arch)
+ -C            Output in C format
+ -d, -D        Disassemble from hexpair bytes (-D show hexpairs)
+ -e            Use big endian instead of little endian
+ -I            Display lifted RzIL code (same input as in -d, IL is also validated)
+ -E            Display ESIL expression (same input as in -d)
+ -f [file]     Read data from file
+ -F [in:out]   Specify input and/or output filters (att2intel, x86.pseudo, ...)
+ -h, -hh       Show this help, -hh for long
+ -i [len]      Ignore N bytes of the input buffer
+ -j            Output in JSON format
+ -k [kernel]   Select operating system (linux, windows, darwin, ..)
+ -l [len]      Input/Output length
+ -L            List Asm plugins: (a=asm, d=disasm, A=analyze, e=ESIL)
+ -o, -@ [addr] Set start address for code (default 0)
+ -O [file]     Output file name (rz-asm -Bf a.asm -O a)
+ -p            Run SPP over input for assembly
+ -q            Quiet mode
+ -r            Output in rizin commands
+ -s [syntax]   Select syntax (intel, att)
+ -v            Show version information
+ -x            Use hex dwords instead of hex pairs when assembling.
+ -w            Describe opcode
  If '-l' value is greater than output length, output is padded with nops
  If the last argument is '-' reads from stdin
 Environment:
- RASM2_NOPLUGINS  do not load shared plugins (speedup loading)
- RASM2_ARCH       same as rz-asm -a
- RASM2_BITS       same as rz-asm -b
- R_DEBUG          if defined, show error messages and crash signal
+ RZ_ARCH      e asm.arch # architecture to assemble/disassemble (same as rz-asm -a)
+ RZ_ASM_ARCH             # architecture to assemble/disassemble (same as rz-asm -a)
+ RZ_ASM_BITS             # cpu register size (8, 16, 32, 64) (same as rz-asm -b)
+ RZ_BITS      e asm.bits # cpu register size (8, 16, 32, 64) (same as rz-asm -b)
+ RZ_DEBUG                # if defined, show error messages and crash signal
+ RZ_NOPLUGINS            # do not load shared plugins (speedup loading)
 
 ```
 
