@@ -38,7 +38,8 @@ book:
          - src/configuration/colors.md
          - src/configuration/evars.md
          - src/configuration/initial_scripts.md
-         - src/configuration/build_variables.md
+         - src/configuration/compile-time_variables.md
+         - src/configuration/run-time_variables.md
 
       - part: "Basic Commands"
         chapters:
