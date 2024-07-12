@@ -1,12 +1,17 @@
 ## Run-Time Variables
 
-After successful compilation, run-time variables will be exposed to change the default behavior of rizin.
+Run-time variables (also known as environment variables) can be used to change the default behavior when running rizin or tools.
 
-Description of these run-time variables can be accessed by executing the command `rizin -hh` on a terminal.
+The description of these run-time variables can be accessed by executing the command `rizin -hh` on a terminal.
 
 ```bash
 $ rizin -hh
 ...
+Plugins:
+ binrc            /home/username/.local/share/rizin/rc.d/bin-<format> (elf, elf64, mach0, ..)
+ RZ_USER_PLUGINS  /home/username/.local/lib/rizin/plugins
+ RZ_LIB_PLUGINS   /home/username/.local/lib/rizin/plugins
+ RZ_EXTRA_PLUGINS
 Environment:
  ANSICON             ansicon's W & H of the buffer and w & h of the window in the form of: "WxH (wxh)"
  DEBUGINFOD_URLS     e bin.dbginfo.debuginfod_urls - use alternative debuginfod server
@@ -24,11 +29,18 @@ Environment:
  RZ_LOGSHOWSOURCES   should the log output contain src info (filename:lineno)
  RZ_PIPE_IN          rzpipe cmd input (file descriptor)
  RZ_PIPE_OUT         rzpipe cmd output (file descriptor)
- RZ_MAGICPATH        /home/adam/.local/share/rizin/magic
+ RZ_MAGICPATH        /home/username/.local/share/rizin/magic
  RZ_NOPLUGINS        do not load rizin shared plugins
- RZ_RCFILE           /home/adam/.rizinrc (user preferences, batch script)
- RZ_DATAHOME         /home/adam/.local/share/rizin
+ RZ_RCFILE           /home/username/.rizinrc (user preferences, batch script)
+ RZ_DATAHOME         /home/username/.local/share/rizin
  RZ_VERSION          contains the current version of rizin
  SFLIBPATH           SFLib syscall library path
-...
+Paths:
+ RZ_PREFIX       /home/username/.local
+ RZ_EXTRA_PREFIX
+ RZ_INCDIR       /home/username/.local/include/librz
+ RZ_LIBDIR       /home/username/.local/lib
+ RZ_SIGDB        /home/username/.local/share/rizin/sigdb
+ RZ_EXTRA_SIGDB
+ RZ_LIBEXT       so
 ```
