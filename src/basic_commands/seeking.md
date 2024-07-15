@@ -57,7 +57,6 @@ Usage: s[?]   # Seek commands
 | sp [<type>]         # Seek to prev location
 | so [<n>]            # Seek to <n> next opcodes
 | sr <reg>            # Seek to register
-| sleep <seconds>     # Sleep for the specified amount of seconds
 
 
 > 3s++        ; 3 times block-seeking
@@ -67,11 +66,11 @@ Usage: s[?]   # Seek commands
 If you want to inspect the result of a math expression, you can evaluate it using the `?` command. Simply pass the expression as an argument. The result can be displayed in hexadecimal, decimal, octal or binary formats.
 
 ```
-> ? 0x100+200
+> % 0x100+200
 0x1C8 ; 456d ; 710o ; 1100 1000
 ```
 
-There are also subcommands of `?` that display the output in one specific format (base 10, base 16 ,...). See `?v` and `?vi`.
+There are also subcommands of `%` that display the output in one specific format (base 10, base 16 ,...). See `%v` for instance.
 
 In the visual mode, you can press `u` (undo) or `U` (redo) inside the seek history to return back to previous or forward to the next location.
 
@@ -111,7 +110,7 @@ Print current address:
 [0x00000000]>
 ```
 
-There is an alternate way to print current position: `?v $$`.
+There is an alternate way to print current position: `%v $$`.
 
 Seek N positions forward, space is optional:
 
@@ -148,4 +147,3 @@ f undo_0 @ 0x400411
 # Current seek @ 0x400410
 f redo_0 @ 0x4005b4
 ```
-

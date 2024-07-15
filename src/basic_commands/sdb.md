@@ -81,7 +81,7 @@ $ gcc test.c -o test
 
 ```
 $ rizin -A ./test
-[0x08048320]> k **
+[0x08048320]> k ** # list namespaces under analysis
 bin
 analysis
 syscall
