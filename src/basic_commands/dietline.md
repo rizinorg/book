@@ -48,7 +48,7 @@ By default dietline mode is compatible with readline Emacs-like mode key binding
 
 # Vi mode
 
-Rizin also comes with in vi mode that can be enabled by toggling `scr.prompt.vi` (`e scr.prompt.vi=true`). The various keybindings available in this mode are:
+Rizin also comes with in vi mode that can be enabled by toggling `e scr.prompt.vi=true`). The various keybindings available in this mode are:
 
 ## Entering command modes
 - `ESC` - enter into the control mode

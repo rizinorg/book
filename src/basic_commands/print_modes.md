@@ -41,7 +41,6 @@ Below is a list of available print modes listed by `p?`:
 | pv[?][jh] [mode]        show variable/pointer/value in memory
 | pwd                     display current working directory
 | px[?][owq] [len]        hexdump of N bytes (o=octal, w=32bit, q=64bit)
-| pz[?] [len]             print zoom view (see pz? for help)
 [0x00005310]>
 ```
 

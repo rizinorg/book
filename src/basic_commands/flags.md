@@ -42,7 +42,7 @@ Usage: fs[l-mrs?]   # Manage flagspaces
 |  55 * symbols
 ```
 
-Here are some command examples:
+Here you can find some command examples using flagspaces:
 
 ```
 [0x100003ba0]> fs symbols     ; select only flags in symbols flagspace
