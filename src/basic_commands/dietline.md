@@ -16,7 +16,7 @@ autocompletion options.
 In the every shell and rizin command autocompletion is supported. There are multiple modes of it -
 files, flags, and SDB keys/namespaces. To provide the easy way to select possible completion options
 the scrollable popup widget is available. It can be enabled with `scr.prompt.popup`, just set it to
-the `true`.
+the `true` (as such: `e scr.prompt.popup=true`).
 
 # Emacs (default) mode
 
@@ -48,7 +48,7 @@ By default dietline mode is compatible with readline Emacs-like mode key binding
 
 # Vi mode
 
-Rizin also comes with in vi mode that can be enabled by toggling `scr.prompt.vi`. The various keybindings available in this mode are:
+Rizin also comes with in vi mode that can be enabled by toggling `e scr.prompt.vi=true`). The various keybindings available in this mode are:
 
 ## Entering command modes
 - `ESC` - enter into the control mode
@@ -80,4 +80,4 @@ Rizin also comes with in vi mode that can be enabled by toggling `scr.prompt.vi`
 - `p` - yank the top of the kill ring into the buffer at point.
 - `c` - acts similar to d based commands, but goes into insert mode in the end by prefixing the commands with numbers, the command is performed multiple times.
 
-If you are finding it hard to keep track of which mode you are in, just set `scr.prompt.mode=true` to update the color of the prompt based on the vi-mode.
+If you are finding it hard to keep track of which mode you are in, just enter `e scr.prompt.mode=true` to update the color of the prompt based on the vi-mode.

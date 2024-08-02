@@ -1,7 +1,5 @@
 # Python plugins
 
-At first, to be able to write a plugins in Python for rizin you need to install
-rz-lang plugin: `rz-pm -i lang-python`.
 Note - in the following examples there are missing functions of the actual decoding
 for the sake of readability!
 
