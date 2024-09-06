@@ -54,7 +54,7 @@ $ meson --default-library static -Dstatic_runtime=true --prefix=/tmp/android-dir
 
 A bit of explanation about all the options:
 * `--default-library static -Dstatic_runtime=true`: this ensure that libraries
-  and binaries are statically compiled, so you do not need to properly set LD_*
+  and binaries are statically compiled, so you do not need to properly set LD_\*
   environment variables in your Android environment to make it find the right
   libraries. Binaries have everything they need inside.
 * `-Dblob=true`: it tells meson to compile just one binary with all the needed
