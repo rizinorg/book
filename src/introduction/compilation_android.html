@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -1210,7 +1210,7 @@ endian = 'little'</code></pre>
 <h5 data-number="5.0.2.2.2" class="anchored" data-anchor-id="compile-with-meson-ninja"><span class="header-section-number">5.0.2.2.2</span> Compile with meson + ninja</h5>
 <p>Now setup the build directory with meson as usual:</p>
 <pre><code>$ meson --default-library static -Dstatic_runtime=true --prefix=/tmp/android-dir -Dblob=true build --cross-file ./meson-android.ini</code></pre>
-<p>A bit of explanation about all the options: * <code>--default-library static -Dstatic_runtime=true</code>: this ensure that libraries and binaries are statically compiled, so you do not need to properly set LD_<em> environment variables in your Android environment to make it find the right libraries. Binaries have everything they need inside. </em> <code>-Dblob=true</code>: it tells meson to compile just one binary with all the needed code for running <code>rizin</code>, <code>rz-bin</code>, <code>rz-asm</code>, etc. and creates symbolic links to those names. This avoids creating many statically compiled large binaries and just create one that provides all features. You will still have <code>rz-bin</code>, <code>rz-asm</code>, <code>rz-ax</code>, etc. but they are just symlinks to <code>rizin</code>. * <code>--cross-file ./meson-android.ini</code>: it describes how to compile rizin for Android</p>
+<p>A bit of explanation about all the options: * <code>--default-library static -Dstatic_runtime=true</code>: this ensure that libraries and binaries are statically compiled, so you do not need to properly set LD_* environment variables in your Android environment to make it find the right libraries. Binaries have everything they need inside. * <code>-Dblob=true</code>: it tells meson to compile just one binary with all the needed code for running <code>rizin</code>, <code>rz-bin</code>, <code>rz-asm</code>, etc. and creates symbolic links to those names. This avoids creating many statically compiled large binaries and just create one that provides all features. You will still have <code>rz-bin</code>, <code>rz-asm</code>, <code>rz-ax</code>, etc. but they are just symlinks to <code>rizin</code>. * <code>--cross-file ./meson-android.ini</code>: it describes how to compile rizin for Android</p>
 <p>Then compile and install the project:</p>
 <pre><code>$ ninja -C build
 $ ninja -C build install</code></pre>
