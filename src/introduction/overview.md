@@ -83,7 +83,7 @@ $ echo 'push eax;nop;nop' | rz-asm -f -
 
 `rz-hash` stands as an implementation of a block-based hash tool. It offers support for a range of algorithms, including `MD4`, `MD5`, `CRC`, `SHA1`, `SHA256`, and more, accommodating both small text strings and large files. Its utility extends to checking the integrity or monitoring changes in substantial files and memory dumps.
 
-### Examples
+#### Examples
 ```
 $ rz-hash file.bin
 file.bin: 0x00000000-0x00000007 sha256: 887cfbd0d44aaff69f7bdbedebd282ec96191cce9d7fa7336298a18efc3c7a5a
