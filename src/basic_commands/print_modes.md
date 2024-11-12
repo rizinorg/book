@@ -1,55 +1,55 @@
 ## Print Modes
 
-One of the key features of rizin is displaying information in many formats. The goal is to offer a selection of display choices to interpret binary data in the best possible way.
+One of the key features of Rizin is displaying information in many formats. The goal is to offer a selection of display
+choices to interpret binary data in the best possible way.
 
-Binary data can be represented as integers, shorts, longs, floats, timestamps, hexpair strings, or more complex formats like C structures, disassembly listings, decompilation listing, be a result of an external processing...
+Binary data can be represented as integers, shorts, longs, floats, timestamps, hexpair strings, or more complex formats
+like C structures, disassembly listings, decompilation listing, be a result of an external processing...
 
 Below is a list of available print modes listed by `p?`:
 
 ```
-[0x00005310]> p?
-|Usage: p[=68abcdDfiImrstuxz] [arg|len] [@addr]
+[0x00001100]> p?
+Usage: p[=68abcdDfiImrstuxz] [arg|len] [@addr]  
 | p[b|B|xb] [len] ([S])   bindump N bits skipping S bytes
-| p[iI][df] [len]         print N ops/bytes (f=func) (see pi? and pdi)
+| p[iI][df] [len]         print N ops/bytes (f=func) (see pi? and pdq)
 | p[kK] [len]             print key in randomart (K is for mosaic)
-| p-[?][jh] [mode]        bar|json|histogram blocks (mode: el search.in)
+| p-[?][jh] [mode]        bar|json|histogram blocks (mode: e?search.in)
 | p2 [len]                8x8 2bpp-tiles
-| p3 [file]               print stereogram (3D)
 | p6[de] [len]            base64 decode/encode
 | p8[?][j] [len]          8bit hexpair list of bytes
 | p=[?][bep] [N] [L] [b]  show entropy/printable chars/chars bars
 | pa[edD] [arg]           pa:assemble  pa[dD]:disasm or pae: esil from hex
-| pA[n_ops]               show n_ops address and type
 | pb[?] [n]               bitstream of N bits
 | pB[?] [n]               bitstream of N bytes
 | pc[?][p] [len]          output C (or python) format
-| pC[aAcdDxw] [rows]      print disassembly in columns (see hex.cols and pdi)
+| pC[aAcdDxw] [rows]      print disassembly in columns (see hex.cols and pdq)
 | pd[?] [sz] [a] [b]      disassemble N opcodes (pd) or N bytes (pD)
 | pf[?][.nam] [fmt]       print formatted data (pf.name, pf.name $<expr>)
 | pF[?][apx]              print asn1, pkcs7 or x509
 | pg[?][x y w h] [cmd]    create new visual gadget or print it (see pg? for details)
 | ph[?][=|hash] ([len])   calculate hash for a block
+| pi[?][bdefrj] [num]     print instructions
+| pI[?][iI][df] [len]     print N instructions/bytes (f=func)
 | pj[?] [len]             print as indented JSON
 | pm[?] [magic]           print libmagic data (see pm? and /m?)
 | po[?] hex               print operation applied to block (see po?)
 | pp[?][sz] [len]         print patterns, see pp? for more help
-| pq[?][is] [len]         print QR code with the first Nbytes
 | pr[?][glx] [len]        print N raw bytes (in lines or hexblocks, 'g'unzip)
 | ps[?][pwz] [len]        print pascal/wide/zero-terminated strings
 | pt[?][dn] [len]         print different timestamps
 | pu[?][w] [len]          print N url encoded bytes (w=wide)
 | pv[?][jh] [mode]        show variable/pointer/value in memory
-| pwd                     display current working directory
 | px[?][owq] [len]        hexdump of N bytes (o=octal, w=32bit, q=64bit)
-[0x00005310]>
+| plf                     print the RzIL output of the function
 ```
 
 Tip: when using json output, you can append the `~{}` to the command to get a pretty-printed version of the output:
 
 ```
-[0x00000000]> oj
+[0x00000000]> olj
 [{"raised":false,"fd":563280,"uri":"malloc://512","from":0,"writable":true,"size":512,"overlaps":false}]
-[0x00000000]> oj~{}
+[0x00000000]> olj~{}
 [
 	{
 		"raised": false,
@@ -63,28 +63,58 @@ Tip: when using json output, you can append the `~{}` to the command to get a pr
 ]
 ```
 
-For more on the magical powers of `~` see the help in `?@?`, and the [Rizin Command-line](../first_steps/commandline_rizin.md) chapter earlier in the book.
+For more on the magical powers of `~` see the help in `?@?`, and the [Rizin Command-line](../first_steps/commandline_rizin.md)
+chapter earlier in the book.
 
 ### Hexadecimal View
 
 `px` gives a user-friendly output showing 16 pairs of numbers per row with offsets and raw representations:
 
-![hexprint](print_modes_px.png)
+```
+[0x00001100]> px
+- offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
+0x00001100  f30f 1efa 31ed 4989 d15e 4889 e248 83e4  ....1.I..^H..H..
+0x00001110  f050 5445 31c0 31c9 488d 3dca 0000 00ff  .PTE1.1.H.=.....
+0x00001120  15b3 2e00 00f4 662e 0f1f 8400 0000 0000  ......f.........
+```
 
 #### Show Hexadecimal Words Dump (32 bits)
 
-![wordprint](print_modes_pxw.png)
+```
+[0x00001100]> pxw
+0x00001100  0xfa1e0ff3 0x8949ed31 0x89485ed1 0xe48348e2  ....1.I..^H..H..
+0x00001110  0x455450f0 0xc931c031 0xca3d8d48 0xff000000  .PTE1.1.H.=.....
+0x00001120  0x002eb315 0x2e66f400 0x00841f0f 0x00000000  ......f.........
+
+[0x00001100]> e cfg.bigendian
+false
+
+[0x00001100]> e cfg.bigendian=true
+
+[0x00001100]> pxw
+0x00001100  0xf30f1efa 0x31ed4989 0xd15e4889 0xe24883e4  ....1.I..^H..H..
+0x00001110  0xf0505445 0x31c031c9 0x488d3dca 0x000000ff  .PTE1.1.H.=.....
+0x00001120  0x15b32e00 0x00f4662e 0x0f1f8400 0x00000000  ......f.........
+
+[0x00001100]> e cfg.bigendian=false
+```
 
 #### 8 bits Hexpair List of Bytes
 
 ```
-[0x00404888]> p8 16
-31ed4989d15e4889e24883e4f0505449
+[0x00001100]> p8 16
+f30f1efa31ed4989d15e4889e24883e4
 ```
 
 #### Show Hexadecimal Quad-words Dump (64 bits)
 
-![pxq](print_modes_pxq.png)
+```
+[0x00001100]> pxq
+0x00001100  0x8949ed31fa1e0ff3  0xe48348e289485ed1   ....1.I..^H..H..
+0x00001110  0xc931c031455450f0  0xff000000ca3d8d48   .PTE1.1.H.=.....
+0x00001120  0x2e66f400002eb315  0x0000000000841f0f   ......f.........
+0x00001130  0x4800002ed93d8d48  0x394800002ed2058d   H.=....H......H9
+```
 
 ### Date/Time Formats
 
@@ -92,12 +122,12 @@ Currently supported timestamp output modes are:
 
 ```
 [0x00404888]> pt?
-|Usage: pt [dn]  print timestamps
-| pt.  print current time
-| pt   print UNIX time (32 bit `cfg.bigendian`) Since January 1, 1970
-| ptd  print DOS time (32 bit `cfg.bigendian`) Since January 1, 1980
-| pth  print HFS time (32 bit `cfg.bigendian`) Since January 1, 1904
-| ptn  print NTFS time (64 bit `cfg.bigendian`) Since January 1, 1601
+Usage: pt[.dhn]   # Print timestamps
+| pt  # Print UNIX epoch time (32 bit `cfg.bigendian`, since January 1, 1970)
+| pt. # Print the current time
+| ptd # Print MS-DOS time (32 bit `cfg.bigendian`, since January 1, 1980)
+| pth # Print Mac HFS time (32 bit `cfg.bigendian`, since January 1, 1904)
+| ptn # Print NTFS time (64 bit `cfg.bigendian`, since January 1, 1601)
 ```
 
 For example, you can 'view' the current buffer as timestamps in the ntfs time:
@@ -111,7 +141,8 @@ For example, you can 'view' the current buffer as timestamps in the ntfs time:
 20:05:13001 09:29:21 +0000
 ```
 
-As you can see, the endianness affects the result. Once you have printed a timestamp, you can grep the output, for example, by year:
+As you can see, the endianness affects the result. Once you have printed a timestamp, you can grep the output, for
+example, by year:
 
 ```
 [0x08048000]> pt ~1974 | wc -l
@@ -120,7 +151,8 @@ As you can see, the endianness affects the result. Once you have printed a times
 27:04:2022 16:15:43 +0000
 ```
 
-The default date format can be configured using the `cfg.datefmt` variable. Formatting rules for it follow the well known strftime(3) format. Check the manpage for more details, but these are the most important:
+The default date format can be configured using the `cfg.datefmt` variable. Formatting rules for it follow the well
+known strftime(3) format. Check the manpage for more details, but these are the most important:
 
 ```
 %a  The abbreviated name of the day of the week according to the current locale.
@@ -143,154 +175,171 @@ The default date format can be configured using the `cfg.datefmt` variable. Form
 
 ### Basic Types
 
-There are print modes available for all basic types. If you are interested in a more complex structure, type `pf??` for format characters and `pf???` for examples:
+There are print modes available for all basic types. If you are interested in a more complex structure, type `pf??`
+for format characters and `pf???` for examples:
 
 ```
 [0x00499999]> pf??
-|pf: pf[.k[.f[=v]]|[v]]|[n]|[0|cnt][fmt] [a0 a1 ...]
-| Format:
-|  b       byte (unsigned)
-|  B       resolve enum bitfield (see t?)
-|  c       char (signed byte)
-|  C       byte in decimal
-|  d       0xHEX value (4 bytes) (see 'i' and 'x')
-|  D       disassemble one opcode
-|  e       temporally swap endian
-|  E       resolve enum name (see t?)
-|  f       float value (4 bytes)
-|  F       double value (8 bytes)
-|  i       signed integer value (4 bytes) (see 'd' and 'x')
-|  n       next char specifies size of signed value (1, 2, 4 or 8 byte(s))
-|  N       next char specifies size of unsigned value (1, 2, 4 or 8 byte(s))
-|  o       octal value (4 byte)
-|  p       pointer reference (2, 4 or 8 bytes)
-|  q       quadword (8 bytes)
-|  r       CPU register `pf r (eax)plop`
-|  s       32bit pointer to string (4 bytes)
-|  S       64bit pointer to string (8 bytes)
-|  t       UNIX timestamp (4 bytes)
-|  T       show Ten first bytes of buffer
-|  u       uleb128 (variable length)
-|  w       word (2 bytes unsigned short in hex)
-|  x       0xHEX value and flag (fd @ addr) (see 'd' and 'i')
-|  X       show formatted hexpairs
-|  z       null terminated string
-|  Z       null terminated wide string
-|  ?       data structure `pf ? (struct_name)example_name`
-|  *       next char is pointer (honors asm.bits)
-|  +       toggle show flags for each offset
-|  :       skip 4 bytes
-|  .       skip 1 byte
-|  ;       rewind 4 bytes
-|  ,       rewind 1 byte
+Usage: pf[j*q] <format>   # Show data using given format string
+| pf <format>       # Show data using given format string
+| pfj <format>      # Show data using given format string (JSON mode)
+| pf* <format>      # Show data using given format string (rizin mode)
+| pfq <format>      # Show data using given format string (quiet mode)
+
+Formats:
+| b # byte (unsigned)
+| B # resolve enum bitfield (see t?)
+| c # char (signed byte)
+| C # byte in decimal
+| d # 0xHEX value (4 bytes) (see 'i' and 'x' formats)
+| D # disassemble one opcode
+| e # temporarily swap endian
+| E # resolve enum name (see t?)
+| f # float value (4 bytes)
+| F # double float value (8 bytes)
+| i # signed integer value (4 bytes) (see 'd' and 'x' formats)
+| n # next char specifies size of signed value (1, 2, 4, or 8 byte(s))
+| N # next char specifies size of unsigned value (1, 2, 4, or 8 byte(s))
+| o # octal value (4 bytes)
+| p # pointer reference (2, 4, or 8 bytes)
+| q # quadword (8 bytes)
+| Q # octoword (uint128_t) (16 bytes)
+| r # CPU register (`pf r (eax)plop`)
+| s # 32 bit pointer to string (4 bytes)
+| s # 32 bit pointer to string (4 bytes)
+| t # 32 bit UNIX timestamp (4 bytes)
+| T # show ten first bytes of buffer
+| u # uleb128 (variable length)
+| w # word (2 bytes unsigned short in hex)
+| x # 0xHEX value and flag (fd @ addr) (see 'd' and 'i' formats)
+| X # show formatted hexpairs
+| z # null terminated string
+| Z # null terminated wide string
+| ? # data structure `pf ? (struct_name)example_name`
+| * # next char is pointer (honors 'asm.bits')
+| + # toggle show flags for each offset
+| : # skip 4 bytes
+| . # skip 1 byte
+| ; # rewind 4 bytes
+| , # rewind 1 byte
 ```
 
 Use triple-question-mark `pf???` to get some examples using print format strings.
 
 ```
-[0x00499999]> pf???
-|pf: pf[.k[.f[=v]]|[v]]|[n]|[0|cnt][fmt] [a0 a1 ...]
-| Examples:
-| pf 3xi foo bar                               3-array of struct, each with named fields: 'foo' as hex, and 'bar' as int
-| pf B (BitFldType)arg_name`                   bitfield type
-| pf E (EnumType)arg_name`                     enum type
-| pf.obj xxdz prev next size name              Define the obj format as xxdz
-| pf obj=xxdz prev next size name              Same as above
-| pf *z*i*w nb name blob                       Print the pointers with given labels
-| pf iwq foo bar troll                         Print the iwq format with foo, bar, troll as the respective names for the fields
-| pf 0iwq foo bar troll                        Same as above, but considered as a union (all fields at offset 0)
-| pf.plop ? (troll)mystruct                    Use structure troll previously defined
-| pfj.plop @ 0x14                              Apply format object at the given offset
-| pf 10xiz pointer length string               Print a size 10 array of the xiz struct with its field names
-| pf 5sqw string quad word                     Print an array with sqw struct along with its field names
-| pf {integer}? (bifc)                         Print integer times the following format (bifc)
-| pf [4]w[7]i                                  Print an array of 4 words and then an array of 7 integers
-| pf ic...?i foo bar "(pf xw yo foo)troll" yo  Print nested anonymous structures
-| pf ;..x                                      Print value located 6 bytes from current offset
-| pf [10]z[3]i[10]Zb                           Print an fixed size str, widechar, and var
-| pfj +F @ 0x14                                Print the content at given offset with flag
-| pf n2                                        print signed short (2 bytes) value. Use N instead of n for printing unsigned values
-| pf [2]? (plop)structname @ 0                 Prints an array of structs
-| pf eqew bigWord beef                         Swap endianness and print with given labels
-| pf.foo rr (eax)reg1 (eip)reg2                Create object referencing to register values
-| pf tt troll plop                             print time stamps with labels troll and plop
+[0x00001100]> pf???
+Usage: p[=68abcdDfiImrstuxz] [arg|len] [@addr]  
+| p[b|B|xb] [len] ([S])   bindump N bits skipping S bytes
+| p[iI][df] [len]         print N ops/bytes (f=func) (see pi? and pdq)
+| p[kK] [len]             print key in randomart (K is for mosaic)
+| p-[?][jh] [mode]        bar|json|histogram blocks (mode: e?search.in)
+| p2 [len]                8x8 2bpp-tiles
+| p6[de] [len]            base64 decode/encode
+| p8[?][j] [len]          8bit hexpair list of bytes
+| p=[?][bep] [N] [L] [b]  show entropy/printable chars/chars bars
+| pa[edD] [arg]           pa:assemble  pa[dD]:disasm or pae: esil from hex
+| pb[?] [n]               bitstream of N bits
+| pB[?] [n]               bitstream of N bytes
+| pc[?][p] [len]          output C (or python) format
+| pC[aAcdDxw] [rows]      print disassembly in columns (see hex.cols and pdq)
+| pd[?] [sz] [a] [b]      disassemble N opcodes (pd) or N bytes (pD)
+| pf[?][.nam] [fmt]       print formatted data (pf.name, pf.name $<expr>)
+| pF[?][apx]              print asn1, pkcs7 or x509
+| pg[?][x y w h] [cmd]    create new visual gadget or print it (see pg? for details)
+| ph[?][=|hash] ([len])   calculate hash for a block
+| pi[?][bdefrj] [num]     print instructions
+| pI[?][iI][df] [len]     print N instructions/bytes (f=func)
+| pj[?] [len]             print as indented JSON
+| pm[?] [magic]           print libmagic data (see pm? and /m?)
+| po[?] hex               print operation applied to block (see po?)
+| pp[?][sz] [len]         print patterns, see pp? for more help
+| pr[?][glx] [len]        print N raw bytes (in lines or hexblocks, 'g'unzip)
+| ps[?][pwz] [len]        print pascal/wide/zero-terminated strings
+| pt[?][dn] [len]         print different timestamps
+| pu[?][w] [len]          print N url encoded bytes (w=wide)
+| pv[?][jh] [mode]        show variable/pointer/value in memory
+| px[?][owq] [len]        hexdump of N bytes (o=octal, w=32bit, q=64bit)
+| plf                     print the RzIL output of the function
 ```
+
 Some examples are below:
 ```
-[0x4A13B8C0]> pf i
-0x00404888 = 837634441
-```
-```
-[0x4A13B8C0]> pf
-0x00404888 = 837634432.000000
+[0x00001100]> pf i
+0x00001100 = -98693133
+
+[0x00001100]> pf f
+0x00001100 = -2.05176598e+35
+
 ```
 
 ### High-level Languages Views
 
 Valid print code formats for human-readable languages are:
 
-* `pc`     C
-* `pc*`    print 'wx' rizin commands
-* `pch`    C half-words (2 byte)
-* `pcw`    C words (4 byte)
-* `pcd`    C dwords (8 byte)
-* `pci`    C array of bytes with instructions
-* `pca`    GAS .byte blob
-* `pcA`    .bytes with instructions in comments
-* `pcs`    string
-* `pcS`    shellscript that reconstructs the bin
-* `pcj`    json
-* `pcJ`    javascript
-* `pco`    Objective-C
-* `pcp`    python
-* `pck`    kotlin
-* `pcr`    rust
-* `pcv`    JaVa
-* `pcV`    V (vlang.io)
-* `pcy`    yara
-* `pcz`    Swift
+```
+0x00001100]> pc?
+Usage: pc[?]   # Print bytes as code byte arrays.
+| pc [<len>]  # Generate a C/C++ byte array.
+| pch         # Generate a C/C++ 16 bits array.
+| pcw         # Generate a C/C++ 32 bits array.
+| pcd         # Generate a C/C++ 64 bits array.
+| pca [<len>] # Generate a byte array in GAS assembly.
+| pcA [<len>] # Generate a byte array in GAS assembly with instructions in comments.
+| pcb [<len>] # Generate a bash script with the byte array.
+| pcg [<len>] # Generate a Golang byte array.
+| pcJ [<len>] # Generate a Java byte array.
+| pcj [<len>] # Generate a JSON byte array.
+| pck [<len>] # Generate a Kotlin byte array.
+| pcn [<len>] # Generate a NodeJS buffer.
+| pco [<len>] # Generate a Objective-C/C++ byte array.
+| pcp [<len>] # Generate a Python byte array.
+| pcr [<len>] # Generate a Rust byte array.
+| pcs [<len>] # Generate a Swift byte array.
+| pcy [<len>] # Generate a Yara match pattern.
+| pc* [<len>] # Generate a rizin commands for writing the byte array.
+```
 
-If we need to create a .c file containing a binary blob, use the `pc` command, that creates this output. The default size is like in many other commands: the block size, which can be changed with the `b` command.
+If we need to create a .c file containing a binary blob, use the `pc` command, that creates this output. The default
+size is like in many other commands: the block size, which can be changed with the `b` command.
 
 We can also just temporarily override this block size by expressing it as an argument.
 
 ```
-[0xB7F8E810]> pc 32
-#define _BUFFER_SIZE 32
-unsigned char buffer[_BUFFER_SIZE] = {
-0x89, 0xe0, 0xe8, 0x49, 0x02, 0x00, 0x00, 0x89, 0xc7, 0xe8, 0xe2, 0xff, 0xff, 0xff, 0x81, 0xc3, 0xd6, 0xa7, 0x01, 0x00, 0x8b, 0x83, 0x00, 0xff, 0xff, 0xff, 0x5a, 0x8d, 0x24, 0x84, 0x29, 0xc2 };
-```
-
-That cstring can be used in many programming languages, not just C.
-
-```
-[0x7fcd6a891630]> pcs
-"\x48\x89\xe7\xe8\x68\x39\x00\x00\x49\x89\xc4\x8b\x05\xef\x16\x22\x00\x5a\x48\x8d\x24\xc4\x29\xc2\x52\x48\x89\xd6\x49\x89\xe5\x48\x83\xe4\xf0\x48\x8b\x3d\x06\x1a
+[0x00001100]> pc 32
+#define ARRAY_SIZE 32
+const uint8_t array[ARRAY_SIZE] = {
+  0xf3, 0x0f, 0x1e, 0xfa, 0x31, 0xed, 0x49, 0x89, 0xd1, 0x5e, 0x48, 0x89, 0xe2, 0x48, 0x83, 0xe4,
+  0xf0, 0x50, 0x54, 0x45, 0x31, 0xc0, 0x31, 0xc9, 0x48, 0x8d, 0x3d, 0xca, 0x00, 0x00, 0x00, 0xff
+};
 ```
 
 ### Strings
 
-Strings are probably one of the most important entry points when starting to reverse engineer a program because they usually reference information about functions' actions (asserts, debug or info messages...). Therefore, rizin supports various string formats:
+Strings are probably one of the most important entry points when starting to reverse engineer a program because they
+usually reference information about functions' actions (asserts, debug or info messages...). Therefore, Rizin supports
+various string formats:
 
 ```
-[0x00000000]> ps?
-|Usage: ps[bijqpsuwWxz+] [N]  Print String
-| ps       print string
-| ps+[j]   print libc++ std::string (same-endian, ascii, zero-terminated)
-| psb      print strings in current block
-| psi      print string inside curseek
-| psj      print string in JSON format
-| psp[j]   print pascal string
-| psq      alias for pqs
-| pss      print string in screen (wrap width)
-| psu[zj]  print utf16 unicode (json)
-| psw[j]   print 16bit wide string
-| psW[j]   print 32bit wide string
-| psx      show string with escaped chars
-| psz[j]   print zero-terminated string
+[0x00001100]> ps?
+Usage: ps[?]   # Print string at the current offset
+| ps[j] <delimiter>=null # Print the autodetected string at the current offset (null->zero-terminated, block->block-terminated)
+| ps+[j]                 # Print libc++ std::string (same-endian, ascii, zero-terminated)
+| psb[q]                 # Print all the strings in current block
+| psc[?]                 # Generate a C/C++ string
+| psi[?]                 # Print the first string in the current block
+| psp[j] <bits>=8        # Print the pascal string at the current offset
+| pss[?]                 # Print string at the current offset in screen (wrap width)
+| psm[j]                 # Print buffer as a utf16be string
+| psM[j]                 # Print buffer as a utf32be string
+| psn[j]                 # Print string with escaped new lines
+| psw[j]                 # Print buffer as a utf16le string
+| psW[j]                 # Print buffer as a utf32le string
 ```
 
-Most strings are zero-terminated. Below there is an example using the debugger to continue the execution of a program until it executes the 'open' syscall. When we recover the control over the process, we get the arguments passed to the syscall, pointed by %ebx. In the case of the 'open' call, it is a zero terminated string which we can inspect using `psz`.
+Most strings are zero-terminated. Below there is an example using the debugger to continue the execution of a program
+until it executes the 'open' syscall. When we recover the control over the process, we get the arguments passed to the
+syscall, pointed by %ebx. In the case of the 'open' call, it is a zero terminated string which we can inspect using
+`psz`.
 
 ```
 [0x4A13B8C0]> dcs open
@@ -316,7 +365,10 @@ It is also possible to print various packed data types using the `pf` command:
 0x7fff0d29da38 = 0x7fff0d29da38 -> 0x0d29f7ee /bin/ls
 ```
 
-This can be used to look at the arguments passed to a function. To achieve this, simply pass a 'format memory string' as an argument to `pf`, and temporally change the current seek position/offset using `@`. It is also possible to define arrays of structures with `pf`. To do this, prefix the format string with a numeric value. You can also define a name for each field of the structure by appending them as a space-separated arguments list.
+This can be used to look at the arguments passed to a function. To achieve this, simply pass a 'format memory string'
+as an argument to `pf`, and temporally change the current seek position/offset using `@`. It is also possible to define
+arrays of structures with `pf`. To do this, prefix the format string with a numeric value. You can also define a name
+for each field of the structure by appending them as a space-separated arguments list.
 
 ```
 [0x4A13B8C0]> pf 2*xw pointer type @ esp
@@ -361,15 +413,19 @@ $ rizin /usr/lib/gstreamer-1.0/libgsttcp.so
 
 ### Disassembly
 
-The `pd` command is used to disassemble code. It accepts a numeric value to specify how many instructions should be disassembled. The `pD` command is similar but instead of a number of instructions, it decompiles a given number of bytes.
+The `pd` command is used to disassemble code. It accepts a numeric value to specify how many instructions should be
+disassembled. The `pD` command is similar but instead of a number of instructions, it decompiles a given number of
+bytes.
 
-* `d` : disassembly N opcodes   count of opcodes
-* `D` : asm.arch disassembler   bsize bytes
+* `pd` : Disassemble N instructions (can be negative)
+* `pD` : Disassemble N bytes (can be negative)
 
 ```
-[0x00404888]> pd 1
-			;-- entry0:
-			0x00404888    31ed         xor ebp, ebp
+[0x00001100]> pd 1
+            ;-- entry0:
+            ;-- section..text:
+            ;-- _start:
+            0x00001100      endbr64                                    ; [14] -r-x section size 409 named .text
 ```
 
 ### Selecting Target Architecture
@@ -377,59 +433,63 @@ The `pd` command is used to disassemble code. It accepts a numeric value to spec
 The architecture flavor for the disassembler is defined by the `asm.arch` eval variable. You can use `e asm.arch=??` to list all available architectures.
 
 ```
-[0x00005310]> e asm.arch=??
-_dAe  _8_16      6502        LGPL3   6502/NES/C64/Tamagotchi/T-1000 CPU
-_dAe  _8         8051        PD      8051 Intel CPU
-_dA_  _16_32     arc         GPL3    Argonaut RISC Core
-a___  _16_32_64  arm.as      LGPL3   as ARM Assembler (use ARM_AS environment)
-adAe  _16_32_64  arm         BSD     Capstone ARM disassembler
-_dA_  _16_32_64  arm.gnu     GPL3    Acorn RISC Machine CPU
-_d__  _16_32     arm.winedbg LGPL2   WineDBG's ARM disassembler
-adAe  _8_16      avr         GPL     AVR Atmel
-adAe  _16_32_64  bf          LGPL3   Brainfuck
-_dA_  _32        chip8       LGPL3   Chip8 disassembler
-_dA_  _16        cr16        LGPL3   cr16 disassembly plugin
-_dA_  _32        cris        GPL3    Axis Communications 32-bit embedded processor
-adA_  _32_64     dalvik      LGPL3   AndroidVM Dalvik
-ad__  _16        dcpu16      PD      Mojang's DCPU-16
-_dA_  _32_64     ebc         LGPL3   EFI Bytecode
-adAe  _16        gb          LGPL3   GameBoy(TM) (z80-like)
-_dAe  _16        h8300       LGPL3   H8/300 disassembly plugin
-_dAe  _32        hexagon     LGPL3   Qualcomm Hexagon (QDSP6) V6
-_d__  _32        hppa        GPL3    HP PA-RISC
-_dAe  _0         i4004       LGPL3   Intel 4004 microprocessor
-_dA_  _8         i8080       BSD     Intel 8080 CPU
-adA_  _32        java        Apache  Java bytecode
-_d__  _32        lanai       GPL3    LANAI
+[0x00001100]> e asm.arch=??
+_dAeI 8 16       6502        LGPL3   6502/NES/C64/Tamagotchi/T-1000 CPU
+adAeI 8          8051        PD      8051 Intel CPU
+_dA__ 32         amd29k      LGPL3   AMD 29k RISC CPU (by deroad)
+_dA__ 16 32      arc         GPL3    Argonaut RISC Core
+adAeI 16 32 64   arm         BSD     Capstone ARM disassembler
+a____ 16 32 64   arm.as      LGPL3   as ARM Assembler (use RZ_ARM32_AS and RZ_ARM64_AS environment) (by pancake)
+adAeI 8 16       avr         LGPL3   AVR Atmel
+adA_I 16 32 64   bf          LGPL3   Brainfuck (by pancake, nibble) v4.0.0
+_dA__ 32         chip8       LGPL3   Chip8 disassembler
+_dA__ 16 32 64   cil         LGPL3   .NET Common Intermediate Language
+_dA__ 16         cr16        LGPL3   cr16 disassembly plugin
+_dA__ 32         cris        GPL3    Axis Communications 32-bit embedded processor (by pancake)
+adA__ 32 64      dalvik      LGPL3   AndroidVM Dalvik
+ad___ 16         dcpu16      PD      Mojang's DCPU-16
+_dA__ 32 64      ebc         LGPL3   EFI Bytecode (by Fedor Sakharov)
+adAeI 16         gb          LGPL3   GameBoy(TM) (z80-like) (by condret)
+_dAe_ 16         h8300       LGPL3   H8/300 disassembly plugin
+_dA_I 32         hexagon     LGPL3   Qualcomm Hexagon (QDSP6) V6 (by Rot127)
+_d___ 32         hppa        GPL3    HP PA-RISC
+_dA__ 4          i4004       LGPL3   Intel 4004 microprocessor
+_dA__ 8          i8080       BSD     Intel 8080 CPU
+adA__ 32         java        LGPL-3  Java bytecode disassembler (by deroad)
+_d___ 32         lanai       GPL3    LANAI
 ...
 ```
 
 ### Configuring the Disassembler
 
-There are multiple options which can be used to configure the output of the disassembler. All these options are described in `el asm.`
+There are multiple options which can be used to configure the output of the disassembler. All these options are
+described in `el asm.`
 
 ```
-[0x00005310]> el asm.
-asm.analysis: Analyze code and refs while disassembling (see analysis.strings)
-asm.arch: Set the arch to be used by asm
-asm.assembler: Set the plugin name to use when assembling
-asm.bbline: Show empty line after every basic block
-asm.bits: Word size in bits at assembler
-asm.bytes: Display the bytes of each instruction
-asm.bytespace: Separate hexadecimal bytes with a whitespace
-asm.calls: Show callee function related info as comments in disasm
-asm.capitalize: Use camelcase at disassembly
-asm.cmt.col: Column to align comments
-asm.cmt.flgrefs: Show comment flags associated to branch reference
-asm.cmt.fold: Fold comments, toggle with Vz
+[0x00001100]> el asm.
+        asm.analysis: Analyze code and refs while disassembling (see analysis.strings)
+            asm.arch: Set the arch to be used by asm
+       asm.assembler: Set the plugin name to use when assembling
+         asm.bb.line: Show empty line after every basic block
+       asm.bb.middle: Realign disassembly if a basic block starts in the middle of an instruction
+            asm.bits: Word size in bits at assembler
+           asm.bytes: Display the bytes of each instruction
+     asm.bytes.right: Display the bytes at the right of the disassembly
+     asm.bytes.space: Separate hexadecimal bytes with a whitespace
+           asm.calls: Show callee function related info as comments in disasm
+      asm.capitalize: Use camelcase at disassembly
+         asm.cmt.col: Column to align comments
+        asm.cmt.esil: Show ESIL expressions as comments
+     asm.cmt.flgrefs: Show comment flags associated to branch reference
 ...
 ```
 
-Currently there are 136 `asm.` configuration variables so we do not list them all.
+Currently, there are 130 `asm.` configuration variables so we do not list them all.
 
 ### Disassembly Syntax
 
-The `asm.syntax` variable is used to change the flavor of the assembly syntax used by a disassembler engine. To switch between Intel and AT&T representations:
+The `asm.syntax` variable is used to change the flavor of the assembly syntax used by a disassembler engine. To switch
+between Intel and AT&T representations:
 
 ```
 e asm.syntax=intel
@@ -437,18 +497,24 @@ e asm.syntax=att
 ```
 
 You can also check `asm.pseudo`, which is an experimental pseudocode view,
-and `asm.esil` which outputs [ESIL](../disassembling/esil.md) ('Evaluable Strings Intermediate Language'). ESIL's goal is to have a human-readable representation of every opcode semantics. Such representations can be evaluated (interpreted) to emulate effects of individual instructions.
+and `asm.esil` which outputs [ESIL](../disassembling/esil.md) ('Evaluable Strings Intermediate Language').
+ESIL's goal is to have a human-readable representation of every opcode semantics. Such representations can be evaluated
+(interpreted) to emulate effects of individual instructions.
 
 ### Print gadgets
 
-In Rizin, visual gadgets allows the users to cast or display the output of a particular Rizin command anywhere on the screen while in Visual mode.
-This command is unrelated with displaying [ROP Gadgets](https://book.rizin.re/refcard/intro.html#searching).
+In Rizin, visual gadgets allows the users to cast or display the output of a particular Rizin command anywhere on the
+screen while in Visual mode. This command is unrelated with displaying [ROP Gadgets](https://book.rizin.re/refcard/intro.html#searching).
 
-Using the commands under `pg` (print gadgets), we can add, remove and change the location of these visual gadgets. You can add a gadget using `pg`:
+Using the commands under `pg` (print gadgets), we can add, remove and change the location of these visual gadgets.
+You can add a gadget using `pg`:
+
 ```
 pg 10 10 10 10 ddr
 ```
-This will add the output of the Rizin command `ddr` be printed on the screen. The four arguments to be passed are the position (like coordinates) and
-the height and width of the gadget you would like to see. This command requires the configuration variable `scr.gadgets` to be turned on.
+
+This will add the output of the Rizin command `ddr` be printed on the screen. The four arguments to be passed are
+the position (like coordinates) and the height and width of the gadget you would like to see. This command requires
+the configuration variable `scr.gadgets` to be turned on.
 
 See `pg?` for more information.
