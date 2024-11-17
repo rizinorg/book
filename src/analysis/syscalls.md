@@ -11,6 +11,7 @@ on the others, these can be different instructions, e.g. `syscall` on x86 PC.
 0x00018a0e   # 2: svc 0x82
 ...
 ```
+
 Syscalls detection is driven by `asm.os`, `asm.bits`, and `asm.arch`. Be sure
 to set those configuration options accordingly. You can use `asl` command
 to check if syscalls' support is set up properly and as you expect.
@@ -34,11 +35,10 @@ the addresses where particular syscalls were found and list them.
 0x00018a0e sd_ble_gap_sec_info_reply
 ...
 ```
-To reduce searching time it is possible to [restrict the
-searching](../search_bytes/configurating_the_search.md) range for
-only executable segments or sections with `/as @e:search.in=io.maps.x`
+To reduce searching time it is possible to [restrict the searching](../search_bytes/configurating_the_search.md)
+range for only executable segments or sections with `/as @e:search.in=io.maps.x`
 
-Using the [ESIL emulation](emulation.md) rizin can print syscall arguments
+Using the [ESIL emulation](emulation.md) Rizin can print syscall arguments
 in the disassembly output. To enable the linear (but very rough) emulation use
 `asm.emu` configuration variable:
 ```
@@ -50,8 +50,9 @@ in the disassembly output. To enable the linear (but very rough) emulation use
 ```
 
 In case of executing `aae` (or `aaaa` which calls `aae`) command
-rizin will push found syscalls to a special `syscall.` flagspace,
+Rizin will push found syscalls to a special `syscall.` flagspace,
 which can be useful for automation purpose:
+
 ```
 [0x000187c2]> fs
 0    0 * imports
@@ -77,7 +78,9 @@ It also can be interactively navigated through within HUD mode (`V_`)
    0x0002ac36  syscall.sd_ble_gap_disconnect.3
 ```
 
-When debugging in rizin, you can use `dcs` to continue execution until the next syscall. You can also run `dcs*` to trace all syscalls.
+When debugging in Rizin, you can use `dcs` to continue execution until the next syscall. You can also run `dcs*` to
+trace all syscalls.
+
 ```
 [0xf7fb9120]> dcs*
 Running child until syscalls:-1 
@@ -90,7 +93,8 @@ child stopped with signal 133
 child stopped with signal 133
 ```
 
-rizin also has a syscall name to syscall number utility. You can return the syscall name of a given syscall number or vice versa, without leaving the shell.
+rizin also has a syscall name to syscall number utility. You can return the syscall name of a given syscall number
+or vice versa, without leaving the shell.
 
 ```
 [0x08048436]> asr 1

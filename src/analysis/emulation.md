@@ -5,14 +5,14 @@ the core difference between static analysis and dynamic analysis. As many alread
 know, static analysis suffers from the path explosion problem, which is impossible
 to solve even in the most basic way without at least a partial emulation.
 
-Thus many professional reverse engineering tools use code emulation while
-performing an analysis of binary code, and rizin is no different here.
+Thus, many professional reverse engineering tools use code emulation while
+performing an analysis of binary code, and Rizin is no different here.
 
-For partial emulation (or imprecise full emulation) rizin uses its own
-[ESIL](../disassembling/esil.md) intermediate language and virtual machine.
+For partial emulation (or imprecise full emulation) Rizin uses its own RzIL intermediate language, designed
+to replace current [ESIL](../disassembling/esil.md).
 
 Rizin supports this kind of partial emulation for all platforms that
-implement ESIL uplifting (x86/x86_64, ARM, arm64, MIPS, PowerPC, SPARC, AVR, 8051, Gameboy, ...).
+implement ESIL uplifting (x86/x86_64, ARM, arm64, MIPS, PowerPC, SPARC, AVR, 8051, Game Boy, ...).
 
 One of the most common usages of such emulation is to calculate
 indirect jumps and conditional jumps.
@@ -66,7 +66,7 @@ To manually setup the ESIL imprecise emulation you need to run this command sequ
 - a sequence of `aer` commands to set the initial register values.
 
 While performing emulation, please remember, that ESIL VM cannot emulate external calls
-or system calls, along with SIMD instructions. Thus the most common scenario is to
+or system calls, along with SIMD instructions. Thus, the most common scenario is to
 emulate only a small chunk of the code, like encryption/decryption, unpacking or
 calculating something.
 
@@ -79,7 +79,7 @@ The commands interface for ESIL VM is almost identical to the debugging one:
 - `aesue <ESIL expression>` to step until some specified ESIL expression met
 - `aec` to continue until break (Ctrl-C), this one is rarely used though, due to the omnipresence of external calls
 
-In visual mode, all of the debugging hotkeys will work also in ESIL emulation mode.
+In visual mode, all the debugging hotkeys will work also in ESIL emulation mode.
 
 Along with usual emulation, there is a possibility to record and replay mode:
 

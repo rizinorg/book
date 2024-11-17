@@ -3,27 +3,27 @@
 Rizin supports C-syntax data type definitions. Most of the related commands are located in `t` namespace:
 
 ```
-[0x000051c0]> t?
+[0x00001100]> t?
 Usage: t[?]   # Types, noreturn, signatures, C parser and more
-| t[j*] [<type>] # List all types / Show type information
-| t- <type>      # Remove the type
-| t-*            # Remove all types
-| tc[dc]         # List loaded types in C format
-| td <type>      # Define type from C definition
-| te[jbcdf]      # List loaded enums
-| tf[j-c?]       # List loaded functions definitions
-| tn[j-?]        # Manage noreturn function attributes and marks
-| to[es]         # Open C header file and load types from it
-| tp[vx]         # Print formatted type casted to the address
-| ts[jlcd]       # List loaded structures
-| tt[jc]         # List loaded typedefs
-| tu[jlcd]       # List loaded unions
-| tx[fgl]        # Type xrefs
+| t[j*l] [<type>] # List all types / Show type information
+| t- <type>       # Remove the type
+| t-*             # Remove all types
+| tc[dc]          # List loaded types in C format
+| td <type>       # Define type from C definition
+| te[jbcdf]       # List loaded enums
+| tf[j-c?]        # List loaded functions definitions
+| tn[j-?]         # Manage noreturn function attributes and marks
+| to[es]          # Open C header file and load types from it
+| tp[vx]          # Print formatted type casted to the address
+| ts[jlcd]        # List loaded structures
+| tt[jc]          # List loaded typedefs
+| tu[jlcd]        # List loaded unions
+| tx[fgl]         # Type xrefs
 ```
 
 Note that the basic (atomic) types are not those from the C standard -
 not `char`, `_Bool`, or `short`. Because those types can be different
-from one platform to another, rizin uses `definite` types like as
+from one platform to another, Rizin uses `definite` types like as
 `int8_t` or `uint64_t` and will convert `int` to `int32_t` or `int64_t`
 depending on the binary or debuggee platform/compiler.
 
@@ -49,7 +49,7 @@ long long
 There are three easy ways to define a new type:
 * Passing a string to the `td` command
 * Passing a file with the `to <filename>` command
-* Using your defined `cfg.editor` by calling the the `to -` command
+* Using your defined `cfg.editor` by calling the `to -` command
 
 ```
 [0x000051c0]> td "struct foo {char* a; int b;}"
@@ -135,16 +135,16 @@ Moreover, the link will be shown in the disassembly output or visual mode:
  0x00005202      mov rbp, rsp
 ```
 
-Once the struct is linked, rizin tries to propagate structure offset in the function at the current 
+Once the struct is linked, Rizin tries to propagate structure offset in the function at the current 
 offset, to run this analysis on the whole program or at any targeted functions after all structs are 
 linked you have `aat` command:
 
 ```
-[0x00000000]> aa?
-| aat [<func_name>] # Analyze all/given function to convert immediate to linked structure offsets
+[0x00000000]> aat?
+Usage: aat [<func_name>]   # Analyze all/given function to convert immediate to linked structure offsets
 ```
 
-Note sometimes the emulation may not be accurate, for example as below :
+Note sometimes the emulation may not be accurate, for example as below:
 
 ````
 |0x000006da  push rbp
@@ -161,8 +161,8 @@ The return value of `malloc` may differ between two emulations, so you have to s
 value manually using `ahr` command, so run `tl` or `aat` command after setting up the return value hint.
 
 ```
-[0x000006da]> ah?
-| ahr <return>         # Set function return value hint
+[0x000006da]> ahr?
+Usage: ahr <return>   # Set function return value hint
 ```
 
 ### Structure Immediates
