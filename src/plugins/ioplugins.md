@@ -1,21 +1,27 @@
 # IO plugins
 
-All access to files, network, debugger and all input/output in general is wrapped by an IO abstraction layer that allows rizin to treat all data as if it were just a file.
+All access to files, network, debugger and all input/output in general is wrapped by an IO abstraction layer that
+allows Rizin to treat all data as if it were just a file.
 
-IO plugins are the ones used to wrap the open, read, write and 'system' on virtual file systems. You can make rizin understand anything as a plain file. E.g. a socket connection, a remote rizin session, a file, a process, a device, a gdb session.
+IO plugins are the ones used to wrap the open, read, write and 'system' on virtual file systems. You can make Rizin
+understand anything as a plain file. E.g. a socket connection, a remote rizin session, a file, a process, a device,
+a gdb session.
 
-So, when rizin reads a block of bytes, it is the task of an IO plugin to get these bytes from any place and put them into internal buffer. An IO plugin is chosen by a file's URI to be opened. Some examples:
+So, when rizin reads a block of bytes, it is the task of an IO plugin to get these bytes from any place and put them
+into internal buffer. An IO plugin is chosen by a file's URI to be opened. Some examples:
 
 * Debugging URIs
 ```
 $ rizin dbg:///bin/ls<br />
 $ rizin pid://1927
 ```
+
 * Remote sessions
 ```
 $ rizin rap://:1234<br />
 $ rizin rap://<host>:1234//bin/ls
 ```
+
 * Virtual buffers
 ```
 $ rizin malloc://512<br />
