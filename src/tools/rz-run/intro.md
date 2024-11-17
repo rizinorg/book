@@ -6,12 +6,18 @@ a binary for debugging.
 
 ```
 $ rz-run -h
-Usage: rz-run -v|-t|script.rrz [directive ..]
+Usage: [directives] [script.rz] [--] [program] [args]
+ -h                  Show this help
+ -l                  Show profile options
+ -t                  Output template profile
+ -v                  Show version information
+ -w                  Wait for incoming terminal process
+ -- [program] [args] Run commands
 ```
 
 It takes the text file in key=value format to specify the execution environment.
 Rz-run can be used as both separate tool or as a part of rizin.
-To load the rz-run profile in rizin you need to use either `-r` to load
+To load the rz-run profile in Rizin you need to use either `-r` to load
 the profile from file or `-R` to specify the directive from string.
 
 The format of the profile is very simple. Note the most important keys - `program` and `arg*`

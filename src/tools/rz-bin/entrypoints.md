@@ -1,16 +1,11 @@
 ## Code Entrypoints
 
-The `-e` option passed to rz-bin will show entrypoints for given binary. Two examples:
+The `-e` option passed to rz-bin will show entrypoints for given binary.
+
 ```
-$ rz-bin -e /bin/ls
-[Entrypoints]
-vaddr=0x00005310 paddr=0x00005310 baddr=0x00000000 laddr=0x00000000 haddr=0x00000018 type=program
-
-1 entrypoints
-
-$ rz-bin -er /bin/ls
-fs symbols
-f entry0 1 @ 0x00005310
-f entry0_haddr 1 @ 0x00000018
-s entry0
+$ rz-bin -e /usr/bin/ls
+[Entries]
+vaddr      paddr      hvaddr     haddr      type    
+----------------------------------------------------
+0x00005880 0x00005880 0x00000018 0x00000018 program
 ```
