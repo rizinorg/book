@@ -6,13 +6,12 @@ basic blocks, opcode data, jump targets, cross-references, and much more.
 These operations are handled by the `a` (analyze) command family:
 
 ```
-|Usage: a[abdefFghoprxstc] [...]
+[0x00001100]> a?
+Usage: a  [abdefFghoprxstc] [...]
+| a*                 same as afl*;ah*;ax*
 | aa[?]              analyze all (fcns + bbs) (aa0 to avoid sub renaming)
 | a8 [hexpairs]      analyze bytes
-| ab[b] [addr]       analyze block at given address
-| abb [len]          analyze N basic blocks in [len] (section.size by default)
-| abt [addr]         find paths in the bb function graph from current offset to given address
-| ac [cycles]        analyze which op could be executed in [cycles]
+| ab[?] [addr]       analyze block
 | ad[?]              analyze data trampoline (wip)
 | ad [from] [to]     analyze data pointers to (from-to)
 | ae[?] [expr]       analyze opcode eval expression (see ao)
@@ -21,6 +20,8 @@ These operations are handled by the `a` (analyze) command family:
 | ag[?] [options]    draw graphs in various formats
 | ah[?]              analysis hints (force opcode size, ...)
 | ai [addr]          address information (show perms, stack, heap, ...)
+| aj                 same as a* but in json (aflj)
+| aL                 list all asm/analysis plugins (e asm.arch=?)
 | an [name] [@addr]  show/rename/create whatever flag/function is used at addr
 | ao[?] [len]        analyze Opcodes (or emulate it)
 | aO[?] [len]        Analyze N instructions in M bytes
@@ -43,4 +44,3 @@ very different parts of the analysis:
  - Emulation using ESIL VM
  - Opcode introspection
  - Objects information, like virtual tables
-
