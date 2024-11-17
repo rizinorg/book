@@ -1,24 +1,23 @@
-IOLI 0x07
-=========
+# IOLI 0x07
 
 Already onto the eighth crackme!
 
-```bash
+```shell
 $ rz-bin -z ./crackme0x07
 [Strings]
-nth paddr      vaddr      len size section type  string
-―――――――――――――――――――――――――――――――――――――――――――――――――――――――
+nth paddr      vaddr      len size section type  string                    
+---------------------------------------------------------------------------
 0   0x000007a8 0x080487a8 4   5    .rodata ascii LOLO
 1   0x000007ad 0x080487ad 20  21   .rodata ascii Password Incorrect!\n
 2   0x000007c5 0x080487c5 13  14   .rodata ascii Password OK!\n
 3   0x000007d3 0x080487d3 5   6    .rodata ascii wtf?\n
 4   0x000007d9 0x080487d9 24  25   .rodata ascii IOLI Crackme Level 0x07\n
-5   0x000007f2 0x080487f2 10  11   .rodata ascii Password:
+5   0x000007f2 0x080487f2 10  11   .rodata ascii Password: 
 ```
 
 Doing our routine strings check we see another new contender, wtf? Literally.
 
-```c
+```
 $ rizin ./crackme0x07
 [0x08048400]> aa
 [0x08048400]> pdg @ main
@@ -41,7 +40,7 @@ undefined4 main(undefined4 placeholder_0, undefined4 placeholder_1, char **envp)
 Upping the difficulty, `check` is no longer exported so it's now listed as `fcn.080485b9`.
 To make our lives a bit easier, let's set the name manually.
 
-```c
+```
 [0x08048400]> afn check @ fcn.080485b9
 [0x08048400]> pdg @ check
 
@@ -88,12 +87,13 @@ void check(int32_t arg_4h, int32_t arg_8h)
 }
 ```
 
-This looks like the `check` we've seen in previous version except there is now a parity check slapped on the end of it where
-the string "wtf?" is printed.
+This looks like the `check` we've seen in previous version except there is now a parity check slapped on the end of it
+where the string "wtf?" is printed.
 
 Before we can continue to the other functions, they have to be analyzed first. We can analyze all functions recursively
-using `afr`. 
-```c
+using `afr`.
+
+```
 [0x08048400]> afr @ check
 [0x08048400]> pdg @ check
 
@@ -139,13 +139,14 @@ void check(int32_t arg_4h, int32_t arg_8h)
     return;
 }
 ```
+
 The reason we're doing it this way in this case, is because `aaa` will cause some critical information to
 be omitted: namely the code that prints `"wtf?"`, more on that later. 
 
-For now though let's first check out `fcn.08048542`. We can probably already guess its identity as the code structure remains largely unchanged
-from the previous versions. But it can't hurt to do our due diligence.
+For now though let's first check out `fcn.08048542`. We can probably already guess its identity as the code structure
+remains largely unchanged from the previous versions. But it can't hurt to do our due diligence.
 
-```c
+```
 [0x08048400]> pdg @ fcn.08048542
 
 // WARNING: Variable defined which should be unmapped: var_18h
@@ -176,10 +177,11 @@ void fcn.08048542(int32_t arg_4h, int32_t arg_8h)
 }
 ```
 
-That does indeed look like `parell` from the previous versions. And that must make `fcn.080484b4` `dummy`. But look, there's an extra `if` inside
-the parity check! Apparently some global variable has to be set to `1` in order for the password to be valid. 
+That does indeed look like `parell` from the previous versions. And that must make `fcn.080484b4` `dummy`. But look,
+there's an extra `if` inside the parity check! Apparently some global variable has to be set to `1` in order for
+the password to be valid. 
 
-```c
+```
 [0x08048400]> pdg @ fcn.080484b4
 
 // WARNING: Variable defined which should be unmapped: var_18h
@@ -210,12 +212,12 @@ undefined4 fcn.080484b4(undefined4 placeholder_0, int32_t arg_8h)
 [0x08048400]> afn parell @ fcn.08048542
 ```
 
-And this must be `dummy`... With an addition. Can you spot it? This is where that global variable that we saw earlier gets set!
-On the line containing `*(undefined4 *)0x804a02c = 1;`, more specifically.
+And this must be `dummy`... With an addition. Can you spot it? This is where that global variable that we saw earlier
+gets set! On the line containing `*(undefined4 *)0x804a02c = 1;`, more specifically.
 
 But before we continue let's see if there are any other references to or from this global variable.
 
-```c
+```
 [0x08048400]> axf @ 0x804a02c
 [0x08048400]> axt @ 0x804a02c
 dummy 0x8048505 [DATA] mov dword [0x804a02c], 1
@@ -224,7 +226,7 @@ parell 0x804858f [DATA] cmp dword [0x804a02c], 1
 
 It doesn't appear to be the case, so let's go back to `check`.
 
-```c
+```
 [0x08048400]> pdg @ check
 
 // WARNING: Variable defined which should be unmapped: var_28h
@@ -272,11 +274,10 @@ void check(int32_t arg_4h, int32_t arg_8h)
 
 We still have one unidentified function left: `fcn.08048524`.
 
-
-```c
+```
 [0x08048400]> pdg @ fcn.08048524
 
-void fcn.08048524 noreturn (void)
+void fcn.08048524(void)
 {
     sym.imp.printf("Password Incorrect!\n");
     // WARNING: Subroutine does not return
@@ -284,9 +285,10 @@ void fcn.08048524 noreturn (void)
 }
 ```
 
-This doesn't seem to do much, other than to print that the password is incorrect and exit. So let's call it `print_and_exit`.
+This doesn't seem to do much, other than to print that the password is incorrect and exit. So let's call it
+`print_and_exit`.
 
-```c
+```
 [0x08048400]> afn print_and_exit @ fcn.08048524
 [0x08048400]> pdg @ check
 
@@ -333,9 +335,9 @@ void check(int32_t arg_4h, int32_t arg_8h)
 }
 ```
 
-Interestingly, `print_and_exit` is called unconditionally before the second parity check, meaning it is never executed under normal
-circumstances. If we had used `aaa` to analyze this binary, Rizin would have noticed this and it would have simply omitted it from
-the disassembly and decompilation outputs.
+Interestingly, `print_and_exit` is called unconditionally before the second parity check, meaning it is never executed
+under normal circumstances. If we had used `aaa` to analyze this binary, Rizin would have noticed this, and it would
+have simply omitted it from the disassembly and decompilation outputs.
 
 If you happen to accidentally (or intentionally) run `aaa`, you can remove all function
 analysis using `af-*`, after which you can run `aa`, followed by `afr` where needed. 
@@ -348,13 +350,13 @@ With that being said, it doesn't seem like the password constraints have changed
 
 Before we close Rizin however let's save this as a project first, so we don't lose all our hard work naming the functions.
 
-```c
+```
 [0x08048400]> Ps crackme0x07.rzdb
 ```
 
 And as we concluded, the passwords from the previous version still work.
 
-```bash
+```shell
 $ LOL= ./crackme0x07
 IOLI Crackme Level 0x07
 Password: 88
@@ -366,19 +368,19 @@ Password: 12346
 Password OK!
 ```
 
-## Wtf?
+## WTF?
 
-We could go to the next one. Technically we've solved this crackme. But we have some unfinished business: the `wtf?` string. Let's see if we can
-find a way to reach the code that's supposed to write it to the console!
+We could go to the next one. Technically we've solved this crackme. But we have some unfinished business: the `wtf?`
+string. Let's see if we can find a way to reach the code that's supposed to write it to the console!
 
-It's easy enough using the debugger: we can simply set the instruction pointer to some location after the `print_and_exit` function (remember
-`dr eip=<address>`).  
+It's easy enough using the debugger: we can simply set the instruction pointer to some location after
+the `print_and_exit` function (remember `dr eip=<address>`).  
 
-We can reopen the current file in debug mode using the `ood` command. We do need an environment variable set that starts with `LOL`, we
-can achieve this using the `dor` command. And let's also set a breakpoint at the location `print_and_exit` is called so we can jump
-over it manually.
+We can reopen the current file in debug mode using the `ood` command. We do need an environment variable set that
+starts with `LOL`, we can achieve this using the `dor` command. And let's also set a breakpoint at the location
+`print_and_exit` is called so we can jump over it manually.
 
-```bash
+```
 [0x08048400]> ood
 Process with PID 191704 started...
 [0xf173fcd0]> dor setenv=LOL=O
@@ -391,43 +393,39 @@ Password: 2
 hit breakpoint at: 0x804862a
 ```
 
-Now we should be at the instruction that reads `call print_and_exit` (confirm with `pd 1 @ eip`). Now we need to find the address of the
-instruction that comes after this one and set the instruction pointer to equal this value.
+Now we should be at the instruction that reads `call print_and_exit` (confirm with `pd 1 @ eip`). Now we need to find
+the address of the instruction that comes after this one and set the instruction pointer to equal this value.
 
-```bash
-[0x0804862a]> pd 2 @ eip
 ```
-```asm
+[0x0804862a]> pd 2 @ eip
 │           ;-- eip:
 │           0x0804862a b    call  print_and_exit                       ; print_and_exit
 │           0x0804862f      mov   eax, dword [arg_8h]
-```
-```bash
 [0x0804862a]> dr eip=0x0804862f
 [0x0804862a]> pd 1 @ eip
-```
-```asm
 │           ;-- eip:
 │           0x0804862f      mov   eax, dword [arg_8h]
 ```
 
 With the `print_and_exit` function skipped we can continue execution.
 
-```bash
+```
 [0x0804862a]> dc
 wtf?
 (191704) Process exited with status=0x0
 [0xf3608579]> doc # close the debugging session
 ```
 
-We've successfully triggered the `wtf?` code using the debugger. But that's no fun! Let's see if there is a way we can reach that
-code (semi-)naturally.
+We've successfully triggered the `wtf?` code using the debugger. But that's no fun! Let's see if there is a way we can
+reach that code (semi-)naturally.
 
-In order for the `print_and_exit` function to be called we have to fail `parell` or the digit sum `check`. Failing `parell` is tricky
-because the same version has to succeed after `print_and_exit` in order for our desired string to be printed. So we'll have
-to fail the digit sum check, which means making sure that our digit sum will not land on 16 during the computation.
+In order for the `print_and_exit` function to be called we have to fail `parell` or the digit sum `check`.
+Failing `parell` is tricky because the same version has to succeed after `print_and_exit` in order for our desired
+string to be printed. So we'll have to fail the digit sum check, which means making sure that our digit sum will
+not land on 16 during the computation.
 
-Easy enough! The only problem we have is that `exit` stops the process...  But what if we were to make our own version of `exit`?
+Easy enough! The only problem we have is that `exit` stops the process...  But what if we were to make our own version
+of `exit`?
 
 ```c 
 void exit(int status) {
@@ -442,8 +440,9 @@ void exit(int status) {
 ```
 
 This turns `exit` into something that, well, *doesn't* exit. `__builtin_return_address` is used to look two
-call frames up for a return address (the return address of `print_and_exit`) and jumps to it. Let's save it to a file called `exit.c`.
-Compile it to a shared library using `gcc -m32 -shared -o libexit.so exit.c` and then we can preload it using `LD_PRELOAD`.
+call frames up for a return address (the return address of `print_and_exit`) and jumps to it. Let's save it to a file
+called `exit.c`. Compile it to a shared library using `gcc -m32 -shared -o libexit.so exit.c` and then we can preload
+it using `LD_PRELOAD`.
 
 ```bash
 $ LD_PRELOAD=./libexit.so LOL= ./crackme0x07

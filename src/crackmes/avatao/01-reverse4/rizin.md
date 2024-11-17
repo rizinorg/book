@@ -1,8 +1,7 @@
-.rizin
---------
+## .rizin
 
 I've decided to solve the reversing challenges using
-[rizin](http://www.rizin.org/r/), a free and open source reverse engineering
+[rizin](http://rizin.re), a free and open source reverse engineering
 framework. I have first learned about rizin back in 2011. during a huge project,
 where I had to reverse a massive, 11MB statically linked ELF. I simply needed
 something that I could easily patch Linux ELFs with. Granted, back then I've
