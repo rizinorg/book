@@ -13,6 +13,7 @@ For example, to encode a string into base64 use the following line:
 
 ```
 $ rz-hash -E base64 -s hello
+0x00000000-0x00000005 base64: aGVsbG8=
 ```
 
 You can decode it by using the -D flag instead of -E.
@@ -23,7 +24,7 @@ For encrypting data check the crypto hash plugins:
 
 ```
 $ rz-hash -L | grep "^E\|^_D"
-ED____ aes-ecb        MS-PL      Karl Malbrain
+ED____ aes-ecb        LGPL3      Nettle project (algorithm implementation), pancake (plugin)
 ED____ aes-cbc        LGPL-3     rakholiyajenish.07
 ED____ blowfish       LGPL3      kishorbhat
 ED____ cps2           LGPL-3     pancake,esanfelix,pof
@@ -36,6 +37,7 @@ _D____ ror            LGPL-3     pancake
 ED____ rot            LGPL-3     pancake
 ED____ serpent-ecb    LGPL-3     NicsTr
 ED____ xor            LGPL-3     pancake
+ED____ sm4-ecb        LGPL-3     0xSh4dy
 ```
 
 Here's an example usage to encrypt a string using rz-hash:

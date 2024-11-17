@@ -1,16 +1,20 @@
 # Rz-ax
 
-The `rz-ax` utility comes with the rizin framework and aims to be a minimalistic expression evaluator for the shell. It is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ascii, octal to integer. It supports endianness and can be used as a shell if no arguments are given.
+The `rz-ax` utility comes with the Rizin framework and aims to be a minimalistic expression evaluator for the shell.
+It is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings
+to ascii, octal to integer. It supports endianness and can be used as a shell if no arguments are given.
 
-This is the help message of rz-ax, this tool can be used in the command-line or interactively (reading the values from stdin), so it can be used as a multi-base calculator.
+This is the help message of rz-ax, this tool can be used in the command-line or interactively
+(reading the values from stdin), so it can be used as a multi-base calculator.
 
-Inside rizin, the functionality of rz-ax is available under the `%` command. For example:
+Inside Rizin, the functionality of rz-ax is available under the `%` command. For example:
 
 ```
 [0x00000000]> % 3+4
 ```
 
-As you can see, the numeric expressions can contain mathematical expressions like addition, subtraction, as well as group operations with parenthesis.
+As you can see, the numeric expressions can contain mathematical expressions like addition, subtraction,
+as well as group operations with parenthesis.
 
 The syntax in which the numbers are represented define the base, for example:
 
@@ -65,9 +69,7 @@ Usage: rz-ax [options] [expr ...]
   -r      rz style output      ;  rz-ax -r 0x1234
   -s      hexstr -> raw        ;  rz-ax -s 43 4a 50
   -S      raw -> hexstr        ;  rz-ax -S < /bin/ls > ls.hex
-  -t      Unix tstamp -> str   ;  rz-ax -t 1234567890
-  -m      MS-DOS tstamp -> str ;  rz-ax -m 1234567890
-  -W      Win32 tstamp -> str  ;  rz-ax -W 1234567890
+  -t      tstamp -> str        ;  rz-ax -t 1234567890
   -x      hash string          ;  rz-ax -x linux osx
   -u      units                ;  rz-ax -u 389289238 # 317.0M
   -w      signed word          ;  rz-ax -w 16 0xffff
@@ -76,39 +78,32 @@ Usage: rz-ax [options] [expr ...]
 ```
 
 Some examples:
+
 ```
 $ rz-ax 3+0x80
 0x83
-```
-```
+
 $ rz-ax 0x80+3
 131
-```
-```
+
 $ echo 0x80+3 | rz-ax
 131
-```
-```
+
 $ rz-ax -s 4142
 AB
-```
-```
+
 $ rz-ax -S AB
 4142
-```
-```
+
 $ rz-ax -S < bin.foo
 ...
-```
-```
+
 $ rz-ax -e 33
 0x21000000
-```
-```
+
 $ rz-ax -e 0x21000000
 33
-```
-```
+
 $ rz-ax -K 90203010
 +--[0x10302090]---+
 |Eo. .            |
