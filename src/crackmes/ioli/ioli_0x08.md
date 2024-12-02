@@ -1,5 +1,4 @@
-IOLI 0x08
-=========
+# IOLI 0x08
 
 Time for the ninth crackme.
 
@@ -13,13 +12,13 @@ nth paddr      vaddr      len size section type  string
 2   0x000007c5 0x080487c5 13  14   .rodata ascii Password OK!\n
 3   0x000007d3 0x080487d3 5   6    .rodata ascii wtf?\n
 4   0x000007d9 0x080487d9 24  25   .rodata ascii IOLI Crackme Level 0x08\n
-5   0x000007f2 0x080487f2 10  11   .rodata ascii Password:
+5   0x000007f2 0x080487f2 10  11   .rodata ascii Password: 
 ```
 
-It looks like no new strings have been added. Before we jump into analyzing however, let's first see which functions have changed from the
-previous version. We can get a nice overview using `rz-diff`.
+It looks like no new strings have been added. Before we jump into analyzing however, let's first see which functions
+have changed from the previous version. We can get a nice overview using `rz-diff`.
 
-```diff
+```
 $ rz-diff -t functions crackme0x07 crackme0x08
 .--------------------------------------------------------------------------------------------------------------------------.
 | name0                     | size0 | addr0      | type     | similarity | addr1      | size1 | name1                      |

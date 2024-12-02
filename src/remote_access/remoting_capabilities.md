@@ -1,7 +1,8 @@
 # Remote Access Capabilities
 
-Rizin can be run locally, or it can be started as a server process which is controlled by a local
-rizin process. This is possible because everything uses rizin's IO subsystem which abstracts access to system(), cmd() and all basic IO operations so to work over a network.
+Rizin can be run locally, or it can be started as a server process which is controlled by a local rizin process.
+This is possible because everything uses Rizin's IO subsystem which abstracts access to system(), cmd() and all
+basic IO operations so to work over a network.
 
 Help for commands useful for remote access to rizin:
 
@@ -21,7 +22,7 @@ Usage: R[?]   # Connect with other instances of rizin
 | Rh[?]                   # Start the http webserver
 | RH[?]                   # Start the http webserver (and launch the web browser)
 | Rt <[host:]port> [<cmd>] # Start the tcp server
-| R&r <port>              # Start rap server in background (same as '&_=h')
+| R&r <port>              # Start rap server in background (same as '& Rr')
 ```
 
 You can learn rizin remote capabilities by displaying the list of supported IO plugins: `rizin -L`.
@@ -89,7 +90,8 @@ To remove hosts (and close connections):
 [0x004048c5]> R-
 ```
 
-You can also redirect rizin output to a TCP or UDP server (such as `nc -l`). First, Add the server with 'R+ tcp://' or 'R+ udp://', then you can redirect the output of a command to be sent to the server:
+You can also redirect rizin output to a TCP or UDP server (such as `nc -l`). First, Add the server with `R+ tcp://` or
+`R+ udp://`, then you can redirect the output of a command to be sent to the server:
 
 ```
 [0x004048c5]> R+ tcp://<host>:<port>/
@@ -98,5 +100,5 @@ Connected to: <host> at port <port>
 [0x004048c5]> R<5 cmd...
 ```
 
-The `R<` command will send the output from the execution of `cmd` to the remote connection number N (or the last one used if no id specified).
-
+The `R<` command will send the output from the execution of `cmd` to the remote connection number N
+(or the last one used if no id specified).

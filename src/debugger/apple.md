@@ -1,8 +1,10 @@
 # macOS/iOS
 
 ## Sign rizin binary
+
 If you install the Rizin pkg file and try to use it to debug a binary, you
 will very likely get an error message such as:
+
 ```
 Child killed
 ptrace: Cannot attach: Invalid argument
@@ -28,17 +30,17 @@ $ codesign --entitlements <entitlements-file> --force -s - $(which rizin)
 
 However, be aware that even with a signed rizin binary you cannot debug
 binaries signed by Apple. To bypass the problem you have a few options:
+
 - Remove the certificate of the debuggee, by using
   `codesign --remove-signature <binary>` or other alternatives like
   [unsign](https://github.com/steakknife/unsign). WARNING: this cannot be
   undone, so we suggest to make a copy of the original binary.
 - Disable SIP with `csrutil enable --without debug` in Recovery Mode.
 
-
-## Debugging on MacOS over SSH
+## Debugging on macOS over SSH
 
 If you are trying to debug a program over SSH, you may experience failures
-like rizin getting stuck while opening the file. This is because the OS is
+like Rizin getting stuck while opening the file. This is because the OS is
 waiting for user authentication to allow debugging. However, since
 you are over SSH, the OS has no way of showing the permission window.
 

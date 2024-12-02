@@ -1,6 +1,7 @@
 # Testing the plugin
 
 This plugin is used by rz-asm and rizin. You can verify that the plugin is properly loaded with this command:
+
 ```
 $ rz-asm -L | grep mycpu
 _d  mycpu        My CPU disassembler  (LGPL3)
@@ -25,9 +26,8 @@ $ rizin =
            0x00000010    1382         add r8, r2
            0x00000012    7f15         ret
 ```
-Yay! it works.. and the mandatory oneliner too!
+Yay! It works... and the mandatory oneliner too!
 
 ```
 rizin -nqamycpu -cwoR -cpd' 10' =
 ```
-

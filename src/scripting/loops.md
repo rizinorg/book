@@ -5,11 +5,13 @@ there are multiple ways to do this in rizin. You can find all these loops
 under `@@?`.
 
 We can loop over flags:
+
 ```
 @@f:flagname-regex
 ```
 
 For example, we want to see function information with `afi` command:
+
 ```
 [0x004047d6]> afi
 #
@@ -34,19 +36,25 @@ args: 0
 diff: type: new
 [0x004047d6]>
 ```
-Now let's say, for example, that we'd like see a particular field from this output for all functions found by analysis. We can do that with a loop over all function flags (whose names begin with `fcn.`):
+Now let's say, for example, that we'd like see a particular field from this output for all functions found by analysis.
+We can do that with a loop over all function flags (whose names begin with `fcn.`):
+
 ```
 [0x004047d6]> fs functions
 [0x004047d6]> afi @@f:fcn.* ~name
 ```
+
 This command will extract the `name` field from the `afi` output of every flag with a name
 matching the regexp `fcn.*`.
-There are also other loops, for example one called `@@F` runs your command on every functions found by rizin:
+
+There are other loops, for example one called `@@F` runs your command on every function found by rizin:
+
 ```
 [0x004047d6]> afi @@F ~name
 ```  
 
 We can also loop over a list of offsets, using the following syntax:
+
 ```
 @@=1 2 3 ... N
 ```
@@ -77,13 +85,14 @@ fail: 0x004047da
 stack: null
 cond: al
 family: cpu
-[0x004047d6]>
 ```
+
 Note we're using the `$$` variable which evaluates to the current offset. Also note
 that `$$+2` is evaluated before looping, so we can use the simple arithmetic expressions.
 
 A third way to loop is by having the offsets be loaded from a file. This file should contain
 one offset per line.
+
 ```
 [0x004047d0]> ?v $$ > offsets.txt
 [0x004047d0]> ?v $$+2 >> offsets.txt
@@ -96,6 +105,7 @@ mov r9, rdx
 ```
 
 If you want to iterate over all instructions of a basic block, you can do:
+
 ```
 [0x004047d0]> pi 1 @@i
 endbr64
@@ -103,6 +113,7 @@ push rbx
 test rdi, rdi
 je 0x14635
 ```
+
 In this example the command `pi 1` runs over all the instructions in the current basic block.
 
 If you want to iterate over all instructions of all basic blocks of the current function, you can do:
@@ -127,6 +138,7 @@ call sym.imp.abort
 ```
 
 Or if you want to make the split between basic blocks clearer:
+
 ```
 [0x004047d0]> (_;pi 1 @@i; ?e)() @@b
 endbr64     
@@ -147,5 +159,4 @@ lea rdi, str.A_NULL_argv_0__was_passed_through_an_exec_system_call.
 mov rcx, qword [rax]
 call sym.imp.fwrite
 call sym.imp.abort
-
 ```

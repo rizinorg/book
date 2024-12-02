@@ -1,5 +1,4 @@
-IOLI 0x05
-=========
+# IOLI 0x05
 
 This is the sixth crackme.
 
@@ -16,7 +15,8 @@ nth paddr      vaddr      len size section type  string
 
 No interesting strings, so let's analyze.
 
-```c
+```
+$ rizin ./crackme0x05
 [0x080483d0]> aa
 [0x080483d0]> pdg @ main
 
@@ -33,6 +33,7 @@ undefined4 main(void)
     sym.check((int32_t)&var_7ch);
     return 0;
 }
+
 [0x080483d0]> ps @ 0x80486b2
 %s
 ```
@@ -72,6 +73,7 @@ void sym.check(int32_t arg_4h)
     sym.imp.printf("Password Incorrect!\n");
     return;
 }
+
 [0x080483d0]> ps @ 0x8048668 @! 2
 %d
 ```
@@ -79,7 +81,7 @@ void sym.check(int32_t arg_4h)
 We can see that `check` is mostly the same, except that this time the digit sum has to equal 16 (0x10), after
 which a function named `parell` is called.
 
-```c
+```
 [0x080483d0]> pdg @ sym.parell
 
 // WARNING: Variable defined which should be unmapped: var_18h
@@ -98,6 +100,7 @@ void sym.parell(int32_t arg_4h)
     }
     return;
 }
+
 [0x080483d0]> ps @ 0x8048668 @! 2
 %d
 ```

@@ -1,5 +1,4 @@
-.vmloop
--------
+## .vmloop
 
 ```
 [offset]> fcn.vmloop
@@ -24,7 +23,7 @@ First, lets analyze what we already have! First, *rdi* is put into local_3.
 Since the application is a 64bit Linux executable, we know that *rdi* is the
 first function argument (as you may have recognized, the automatic analysis of
 arguments and local variables was not entirely correct), and we also know that
-*vmloop*'s first argument is the bytecode. So lets rename local_3:
+*vmloop*'s first argument is the bytecode. So let's rename local_3:
 
 ```
 :> afvn local_3 bytecode
@@ -102,7 +101,7 @@ This is how the disassembly looks like after we add this metadata:
 ```
 
 As we can see, the address 0x400c04 is used a lot, and besides that there are 9
-different addresses. Lets see that 0x400c04 first!
+different addresses. Let's see that 0x400c04 first!
 
 ![vmloop bb-0c04](img/vmloop/bb-0c04.png)
 
@@ -161,7 +160,7 @@ how we can create the missing basic blocks for the instructions:
 ```
 
 It is also apparent from the disassembly that besides the instructions there
-are three more basic blocks. Lets create them too!
+are three more basic blocks. Let's create them too!
 
 ```
 [0x00400ec0]> afb+ 0x00400a45 0x00400c15 0x00400c2d-0x00400c15 0x400c3c 0x00400c2d
@@ -187,7 +186,7 @@ By the way, here is how IDA's graph of this same function looks like for compari
 ![IDA graph](img/vmloop_ida.png)
 
 As we browse through the disassembly of the *instr_LETTER* basic blocks, we
-should realize a few things. The first: all of the instructions starts with a
+should realize a few things. The first: all the instructions starts with a
 sequence like these:
 
 ![vmloop bb-0a80](img/vmloop/bb-0a80.png)
@@ -196,9 +195,9 @@ sequence like these:
 
 It became clear now that the 9 dwords at *sym.instr_dirty* are not simply
 indicators that an instruction got executed, but they are used to count how many
-times an instruction got called. Also I should have realized earlier that
+times an instruction got called. Also, I should have realized earlier that
 *sym.good_if_le_9* (0x6020f0) is part of this 9 dword array, but yeah, well, I
-didn't, I have to live with it... Anyways, what the condition
+didn't, I have to live with it... Anyway, what the condition
 "*sym.good_if_le_9* have to be lesser or equal 9" really means is that *instr_P*
 can not be executed more than 9 times:
 
@@ -249,7 +248,7 @@ that address!
 ```
 
 Oh, and by the way, I do have a hunch that *instr_C* also had a function call in
-the original code, but it got inlined by the compiler. Anyways, so far we have
+the original code, but it got inlined by the compiler. Anyway, so far we have
 these two instructions:
 
 - *instr_R(a1):* returns with *a1*
@@ -396,9 +395,9 @@ not the case here - e.g. the larger grey boxes are clearly not identical. This
 is something I'm definitely going to take a deeper look at after I've finished
 this writeup.
 
-Anyways, after we get over the shock of being lied to, we can easily recognize
+Anyway, after we get over the shock of being lied to, we can easily recognize
 that *instr_S* is basically a reverse-*instr_A*: where the latter does addition,
-the former does subtraction. To summarize this:
+the former does' subtraction. To summarize this:
 
 - *arg1* == "M": subtracts *arg2* from the byte at *sym.current_memory_ptr*.
 - *arg1* == "P": steps *sym.current_memory_ptr* backwards by *arg2* bytes.
@@ -433,8 +432,8 @@ It's local var rename time again!
 
 This function is pretty straightforward also, but there is one oddity: const_M
 is never used. I don't know why it is there - maybe it is supposed to be some
-kind of distraction? Anyways, this function simply writes *arg1* to
-*sym.current_memory_ptr*, and than calls *instr_I("P")*. This basically means
+kind of distraction? Anyway, this function simply writes *arg1* to
+*sym.current_memory_ptr*, and then calls *instr_I("P")*. This basically means
 that *instr_P* is used to write one byte, and put the pointer to the next byte.
 So far this would seem the ideal instruction to construct most of the "Such VM!
 MuCH reV3rse!" string, but remember, this is also the one that can be used only
@@ -442,7 +441,7 @@ MuCH reV3rse!" string, but remember, this is also the one that can be used only
 
 ###instr_X
 
-Another simple one, rename local vars anyways!
+Another simple one, rename local vars anyway!
 
 ```
 :> afvn local_1 arg1

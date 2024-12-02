@@ -1,8 +1,9 @@
 # Getting Started
 
-## Small session in rizin debugger
+## Small session in Rizin debugger
 
-* `rizin -d /bin/ls`: Opens rizin with file `/bin/ls` in debugger mode using the rizin native debugger, but does not run the program. You’ll see a prompt (rizin) - all examples are from this prompt.
+* `rizin -d /bin/ls`: Opens rizin with file `/bin/ls` in debugger mode using the rizin native debugger,
+  but does not run the program. You’ll see a prompt (rizin) - all examples are from this prompt.
 
 * `db @ flag`: place a breakpoint at flag, where flag can be either an address or a function name
 

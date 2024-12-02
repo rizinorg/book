@@ -1,6 +1,7 @@
 ## Searching Backwards
 
-Sometimes you want to find a keyword backwards. This is, before the current offset, to do this you can seek back and search forward by adding some search.from/to restrictions, or use the `/b` command.
+Sometimes you want to find a keyword backwards. This is, before the current offset, to do this you can seek back
+and search forward by adding some search.from/to restrictions, or use the `/b` command.
 
 ```
 [0x100001200]> / nop
@@ -13,7 +14,8 @@ Sometimes you want to find a keyword backwards. This is, before the current offs
 [0x100004f50]>
 ```
 
-Note that `/b` is doing the same as `/`, but backward, so what if we want to use `/x` backward? We can use `/bx`, and the same goes for other search subcommands:
+Note that `/b` is doing the same as `/`, but backward, so what if we want to use `/x` backward? We can use `/bx`,
+and the same goes for other search subcommands:
 
 ```
 [0x100001200]> /x 90

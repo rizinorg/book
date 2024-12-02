@@ -1,7 +1,10 @@
 ## Rizin package manager
 
 Rizin has its own package manager for managing external plugins (mainly from
-[rizin-extras](https://github.com/rizinorg/rizin-extras)). As most of the package managers it allows you to install, remove or update packages (plugins). There is one restriction though - currently it supports only the compilation from sources, so providing the toolchan, necessary build tools and dependencies for each plugin is the user responsibility. It might change in the future.
+[rizin-extras](https://github.com/rizinorg/rizin-extras)). As most of the package managers it allows you to install,
+remove or update packages (plugins). There is one restriction though - currently it supports only the compilation
+from sources, so providing the toolchan, necessary build tools and dependencies for each plugin is the user
+responsibility. It might change in the future.
 
 ```
 $ rz-pm -h
@@ -35,6 +38,7 @@ Already up to date.
 ```
 
 There are many commands available now:
+
 ```
 rz-pm -h
 Usage: rz-pm [init|update|cmd] [...]

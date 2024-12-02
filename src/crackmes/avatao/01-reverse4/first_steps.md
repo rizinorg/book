@@ -1,5 +1,4 @@
-.first_steps
-------------
+## .first_steps
 
 OK, enough of praising rizin, lets start reversing this stuff. First, you have to
 know your enemy:
@@ -34,7 +33,7 @@ binsz    8620
 > be used to extract information (imports, symbols, libraries, etc.) about
 > binary executables. As always, check the help (rz-bin -h)!
 
-So, its a dynamically linked, stripped, 64bit Linux executable - nothing fancy
+So, it's a dynamically linked, stripped, 64bit Linux executable - nothing fancy
 here. Let's try to run it:
 
 ```
@@ -92,7 +91,7 @@ We can list all the strings rizin found:
 [0x00400720]>
 ```
 
-> ***rizin tip***: rizin puts so called flags on important/interesting offsets, and
+> ***rizin tip***: rizin puts so-called flags on important/interesting offsets, and
 > organizes these flags into flagspaces (strings, functions, symbols, etc.) You
 > can list all flagspaces using *fs*, and switch the current one using
 > *fs [flagspace]* (the default is \*, which means all the flagspaces). The

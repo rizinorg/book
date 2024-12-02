@@ -1,28 +1,27 @@
 ## Strings
 
-The `-z` option is used to list readable strings found in the .rodata section of ELF binaries, or the .text section of PE files. Example:
+The `-z` option is used to list readable strings found in the .rodata section of ELF binaries, or the .text section
+of PE files. Example:
 
 ```
-$ rz-bin -z /bin/ls | head
+$ rz-bin -z /usr/bin/ls | head
 [Strings]
-nth paddr      vaddr      len size section type  string
-―――――――――――――――――――――――――――――――――――――――――――――――――――――――
-000 0x000160f8 0x000160f8  11  12 (.rodata) ascii dev_ino_pop
-001 0x00016188 0x00016188  10  11 (.rodata) ascii sort_files
-002 0x00016193 0x00016193   6   7 (.rodata) ascii posix-
-003 0x0001619a 0x0001619a   4   5 (.rodata) ascii main
-004 0x00016250 0x00016250  10  11 (.rodata) ascii ?pcdb-lswd
-005 0x00016260 0x00016260  65  66 (.rodata) ascii # Configuration file for dircolors, a utility to help you set the
-006 0x000162a2 0x000162a2  72  73 (.rodata) ascii # LS_COLORS environment variable used by GNU ls with the --color option.
-007 0x000162eb 0x000162eb  56  57 (.rodata) ascii # Copyright (C) 1996-2018 Free Software Foundation, Inc.
-008 0x00016324 0x00016324  70  71 (.rodata) ascii # Copying and distribution of this file, with or without modification,
-009 0x0001636b 0x0001636b  76  77 (.rodata) ascii # are permitted provided the copyright notice and this notice are preserved.
+nth paddr      vaddr      len size section type  string                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+-------------------------------------------------------
+0   0x00019007 0x00019007 5   6    .rodata ascii =fff?
+1   0x00019630 0x00019630 11  12   .rodata ascii dev_ino_pop
+2   0x000196a8 0x000196a8 10  11   .rodata ascii sort_files
+3   0x000196b3 0x000196b3 6   7    .rodata ascii posix-
+4   0x000196ba 0x000196ba 4   5    .rodata ascii main
+5   0x00019790 0x00019790 10  11   .rodata ascii ?pcdb-lswd
+6   0x000197a0 0x000197a0 65  66   .rodata ascii # Configuration file for dircolors, a utility to help you set the
 ```
 
 With the `-zr` option, this information is represented as a rizin commands list. It can be used in a rizin session to automatically create a flag space called "strings" pre-populated with flags for all strings found by rz-bin.
 Furthermore, this script will mark corresponding byte ranges as strings instead of code.
 ```
-$ rz-bin -zr /bin/ls | head
+
+$ rz-bin -zr /usr/bin/ls | head
 fs stringsf str.dev_ino_pop 12 @ 0x000160f8
 Cs 12 @ 0x000160f8
 f str.sort_files 11 @ 0x00016188

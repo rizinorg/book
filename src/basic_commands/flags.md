@@ -1,6 +1,8 @@
 ## Flags
 
-Flags are conceptually similar to bookmarks. They associate a name with a given offset in a file. Flags can be grouped into 'flagspaces'. A flagspace is a namespace for flags, grouping together flags of similar characteristics or type. Examples for flagspaces: sections, registers or symbols.
+Flags are conceptually similar to bookmarks. They associate a name with a given offset in a file. Flags can be grouped
+into 'flagspaces'. A flagspace is a namespace for flags, grouping together flags of similar characteristics or type.
+Examples for flagspaces: sections, registers or symbols.
 
 To create a flag:
 
@@ -8,7 +10,8 @@ To create a flag:
 [0x100003ba0]> f flag_name @ offset
 ```
 
-You can remove a flag by appending the `-` character to command. Most commands accept `-` as argument-prefix as an indication to delete something.
+You can remove a flag by appending the `-` character to command. Most commands accept `-` as argument-prefix as
+an indication to delete something.
 
 ```
 [0x100003ba0]> f-flag_name
@@ -70,8 +73,9 @@ You can rename flags with `fr`.
 
 ### Local flags
 
-Every flag name should be unique for addressing reasons. But it is quite a common need
-to have the flags, for example inside the functions, with simple and ubiquitous names like `loop` or `return`. For this purpose you can use so called "local" flags, which are tied to the function where they reside. It is possible to add them using `f.` command:
+Every flag name should be unique for addressing reasons. But it is quite a common need to have the flags, for example
+inside the functions, with simple and ubiquitous names like `loop` or `return`. For this purpose you can use so-called
+"local" flags, which are tied to the function where they reside. It is possible to add them using `f.` command:
 
 ```
 [0x00003a04]> pd 10
@@ -110,12 +114,14 @@ to have the flags, for example inside the functions, with simple and ubiquitous 
 
 ### Flag Zones
 
-Rizin offers flag zones, which lets you label different offsets on the scrollbar, for making it easier to navigate through large binaries. You can set a flag zone on the current seek using:
+Rizin offers flag zones, which lets you label different offsets on the scrollbar, for making it easier to navigate
+through large binaries. You can set a flag zone on the current seek using:
 
 ```
 [0x00003a04]> fz flag-zone-name
 ```
 
-Set `e scr.scrollbar=1` and go to the Visual mode, to see your flag zone appear on the scrollbar on the right end of the window.
+Set `e scr.scrollbar=1` and go to the Visual mode, to see your flag zone appear on the scrollbar on the right end of
+the window.
 
 See `fz?` for more information.

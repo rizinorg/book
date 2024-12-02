@@ -2,15 +2,20 @@
 
 To be able to use Rizin in write mode, you need to load your binary as such: `rizin -w bin`.
 
-Rizin can manipulate a loaded binary file in many ways. You can resize the file, move and copy/paste bytes, insert new bytes (shifting data to the end of the block or file), or simply overwrite bytes. New data may be given as a wide-string, assembler instructions, or the data may be read in from another file.
+Rizin can manipulate a loaded binary file in many ways. You can resize the file, move and copy/paste bytes, insert
+new bytes (shifting data to the end of the block or file), or simply overwrite bytes. New data may be given as
+a wide-string, assembler instructions, or the data may be read in from another file.
 
-Resize the file using the `r` command. It accepts a numeric argument. A positive value sets a new size for the file. A negative one will truncate the file to the current seek position minus N bytes.
+Resize the file using the `r` command. It accepts a numeric argument. A positive value sets a new size for the file.
+A negative one will truncate the file to the current seek position minus N bytes.
 
 ```
 r 1024      ; resize the file to 1024 bytes
 r -10 @ 33  ; strip 10 bytes at offset 33
 ```
-Write bytes using the `w` command. It accepts multiple input formats like inline assembly, endian-friendly dwords, files, hexpair files, wide strings:
+
+Write bytes using the `w` command. It accepts multiple input formats like inline assembly, endian-friendly dwords,
+files, hexpair files, wide strings:
 
 ```
 [0x00404888]> w?
@@ -78,7 +83,8 @@ Examples:
 | wo4      # Content before: 1122334455667788; Content after: 4433221188776655
 ```
 
-It is possible to implement cipher-algorithms using rizin core primitives and `wo`. A sample session performing xor(90) + add(01, 02):
+It is possible to implement cipher-algorithms using rizin core primitives and `wo`. A sample session performing
+xor(90) + add(01, 02):
 
 ```
 [0x7fcd6a891630]> px

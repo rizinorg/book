@@ -1,6 +1,6 @@
 # Debugging with gdbserver
 
-rizin allows remote debugging over the gdb remote protocol. So you can run a
+Rizin allows remote debugging over the gdb remote protocol. So you can run a
 gdbserver and connect to it with rizin for remote debugging. The syntax for
 connecting is:
 
@@ -8,7 +8,7 @@ connecting is:
 $ rizin -d gdb://<host>:<port>
 ```
 
-Note that the following command does the same, rizin will use the debug plugin specified by the uri if found.
+Note that the following command does the same, Rizin will use the debug plugin specified by the uri if found.
 
 ```
 $ rizin -D gdb gdb://<host>:<port>
@@ -30,9 +30,9 @@ which rebases the current session's data after opening gdb
 [0x00404870]> doof gdb://<host>:<port>/<pid>
 ```
 
-After connecting, you can use the standard rizin debug commands as normal.
+After connecting, you can use the standard Rizin debug commands as normal.
 
-rizin does not yet load symbols from gdbserver, so it needs the binary to
+Rizin does not yet load symbols from gdbserver, so it needs the binary to
 be locally present to load symbols from it. In case symbols are not loaded even
 if the binary is present, you can try specifying the path with `e dbg.exe.path`:
 
@@ -92,15 +92,15 @@ Use `R!rd` to print the currently available reverse debugging capabilities.
 If you are interested in debugging rizin's interaction with gdbserver you can use
 `R!monitor set remote-debug 1` to turn on logging of gdb's remote protocol packets in
 gdbserver's console and `R!monitor set debug 1` to show general debug messages from
-gdbserver in it's console.
+gdbserver in its console.
 
 rizin also provides its own gdbserver implementation:
 
 ```
 $ rizin =
 [0x00000000]> Rg?
-|Usage:  =[g] [...] # gdb server
-| gdbserver:
+Usage:  R[g] [...]   # gdb server
+gdbserver:
 | Rg port file [args]   listen on 'port' debugging 'file' using gdbserver
 | Rg! port file [args]  same as above, but debug protocol messages (like gdbserver --remote-debug)
 ```
@@ -117,4 +117,3 @@ And then connect to it like you would to any gdbserver. For example, with rizin:
 ```
 $ rizin -d gdb://localhost:8000
 ```
-

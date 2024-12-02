@@ -1,5 +1,4 @@
-IOLI 0x03
-=========
+# IOLI 0x03
 
 This is the fourth crackme.
 
@@ -21,7 +20,6 @@ nth paddr      vaddr      len size section type  string
 1   0x000005fe 0x080485fe 17  18   .rodata ascii Sdvvzrug#RN$$$#=,
 2   0x00000610 0x08048610 24  25   .rodata ascii IOLI Crackme Level 0x03\n
 3   0x00000629 0x08048629 10  11   .rodata ascii Password: 
-
 ```
 
 Note that the 'Invalid Password!' and the 'Password OK :)' strings have been seemingly replaced by random
@@ -29,7 +27,8 @@ gibberish.
 
 Let's analyze.
 
-```C
+```
+$ rizin ./crackme0x03
 [0x08048360]> aaa
 [0x08048360]> pdg @ main
 
@@ -48,8 +47,8 @@ undefined4 main(void)
 }
 ```
 
-This looks quite straightforward, `var_8h` is the result of `scanf` which the function `sym.test(var_8h, 0x52b24)` apparently
-compares to the value `0x52b24`.
+This looks quite straightforward, `var_8h` is the result of `scanf` which the function `sym.test(var_8h, 0x52b24)`
+apparently compares to the value `0x52b24`.
 
 And indeed entering the decimal value of `0x52b24` (338724) gives us a pass.
 
@@ -75,12 +74,13 @@ void sym.test(int32_t arg_4h, unsigned long arg_8h)
     return;
 }
 ```
-It's a two path conditional jump which compares two parameters and then does a shift. We can guess that `shift()` is most likely
-some sort of decoding step of the seemingly random strings (shift cipher, e.g. Caesar cipher).
+
+It's a two path conditional jump which compares two parameters and then does a shift. We can guess that `shift()`
+is most likely some sort of decoding step of the seemingly random strings (shift cipher, e.g. Caesar cipher).
 
 To confirm our suspicions let's analyze `sym.shift()`.
 
-```C
+```
 [0x08048360]> pdg @ sym.shift
 
 // WARNING: Variable defined which should be unmapped: var_98h
@@ -129,7 +129,7 @@ We can see that each character in `str` is subtracted by 3 to produce the final 
 With this knowledge we can take a shot at decoding the strings. We can use the `pos` command to apply
 the subtraction needed for decoding and printing the result.
 
-```bash
+```shell
 $ rizin ./crackme0x03
 [0x08048360]> aaa
 [0x08048360]> fs strings
@@ -148,27 +148,29 @@ $ rizin ./crackme0x03
 0x0804860e  29fd                                     ).
 ```
 
-However, some functions may not be as easy to understand as this one, in which case it may be useful to be able to run the code.
-Rizin provides us two ways of doing this: by using the debugger, or by emulation (using ESIL). 
+However, some functions may not be as easy to understand as this one, in which case it may be useful to be able to run
+the code. Rizin provides us two ways of doing this: by using the debugger, or by emulation (using ESIL). 
 
-Let's first see how we can achieve this using the debugger. We will be wanting to pass the encoded strings to `shift()`. We know
-`shift` takes one parameter `s`, which is an address to a (null terminated) string. We can see where on the stack local variables and
-arguments are using the `afvl` command.
+Let's first see how we can achieve this using the debugger. We will be wanting to pass the encoded strings
+to `shift()`. We know `shift` takes one parameter `s`, which is an address to a (null terminated) string.
+We can see where on the stack local variables and arguments are using the `afvl` command.
 
-```bash
+```shell
 $ rizin -d ./crackme0x03
-[0xec0ff970]> aa
-[0xec0ff970]> afvl @ sym.shift
+[0xf7f04630]> aa
+[0xf7f04630]> afvl @ sym.shift
 var int32_t var_98h @ stack - 0x98
-var unsigned long var_80h @ stack - 0x80
+var int32_t var_80h @ stack - 0x80
 var int32_t var_7ch @ stack - 0x7c
-arg const char *s @ stack + 0x4
+arg int32_t arg_4h @ stack + 0x4
 ```
 
 We can see that `s` starts at a 4 byte offset from the stack pointer.
 
-```bash
-[0xec0ff970]> dcu main                      # run until program start
+```shell
+[0xf7f04630]> dcu main                      # run until program start
+Continue until 0x08048498
+hit breakpoint at: 0x8048498
 [0x08048498]> *esp+4=str.Lqydolg_Sdvvzrug   # 'push' address onto the stack (note the 4 byte offset)
 [0x08048498]> dr eip=sym.shift              # set instruction pointer to start of shift()
 [0x08048498]> dcr                           # run shift() until it returns
@@ -179,8 +181,8 @@ Invalid Password!
 Password OK!!! :)
 ```
 
-Emulation is a bit more tricky because we can't make external calls to functions like `strlen()` and `printf()`. So we have to manually
-skip over them and set the registers accordingly. Below is an example.
+Emulation is a bit more tricky because we can't make external calls to functions like `strlen()` and `printf()`.
+So we have to manually skip over them and set the registers accordingly. Below is an example.
 
 ```bash
 [0x08048414]> s 0x08048445		# the 'sub al, 0x03'

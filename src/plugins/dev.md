@@ -1,6 +1,7 @@
 ## Implementing a new architecture
 
-rizin splits the logic of a CPU into several modules. You should write more than one plugin to get full support for a specific arch. Let's see which are those:
+Rizin splits the logic of a CPU into several modules. You should write more than one plugin to get full support
+for a specific arch. Let's see which are those:
 
 * rz_asm : assembler and disassembler
 * rz_analysis : code analysis (opcode,type,esil,..)
@@ -8,17 +9,21 @@ rizin splits the logic of a CPU into several modules. You should write more than
 * rz_syscall : system calls
 * rz_debug : debugger
 
-The most basic feature you usually want to support from a specific architecture is the disassembler. You first need to read into a human readable form the bytes in there.
+The most basic feature you usually want to support from a specific architecture is the disassembler. You first need to
+read into a human-readable form the bytes in there.
 
-Bear in mind that plugins can be compiled static or dynamically, this means that the arch will be embedded inside the core libraries or it will distributed as a separated shared library.
+Bear in mind that plugins can be compiled static or dynamically, this means that the arch will be embedded inside
+the core libraries, or it will distribute as a separated shared library.
 
 You may find some examples of external plugins in [rizin-extras](https://github.com/rizinorg/rizin-extras) repository.
 
 ## Writing the rz_asm plugin
 
-The official way to make third-party plugins is to distribute them into a separate repository. This is a sample disasm plugin:
+The official way to make third-party plugins is to distribute them into a separate repository. This is a sample
+disasm plugin:
 
 `meson.build` file:
+
 ```meson
 project('rizin-mycpu', 'c')
 
@@ -35,6 +40,7 @@ library('asm_mycpu', ['mycpu.c'],
 ```
 
 `mycpu.c` file:
+
 ```c
 /* example rz_asm plugin by pancake at 2014 */
 

@@ -1,6 +1,6 @@
 # Plugins
 
-rizin is implemented on top of a bunch of libraries, almost every of those
+Rizin is implemented on top of a bunch of libraries, almost every of those
 libraries support plugins to extend the capabilities of the library or add
 support for different targets.
 
@@ -25,18 +25,21 @@ reg       # arch register logic
 
 ## Listing plugins
 
-Some rizin tools have the `-L` flag to list all the plugins associated to the
+Some Rizin tools have the `-L` flag to list all the plugins associated to the
 functionality.
+
 ```
 rz-asm -L   # list asm plugins
 rizin -L    # list io plugins
 rz-bin -L   # list bin plugins
 rz-hash -L  # list hash/crypto/encoding plugins
 ```
-There are more plugins in rizin ecosystem, we can list them from inside rizin, and this is
+
+There are more plugins in Rizin ecosystem, we can list them from inside Rizin, and this is
 done by using the `L` suffix.
 
 Those are some of the commands:
+
 ```
 L          # list core plugins
 iL         # list bin plugins
@@ -51,7 +54,8 @@ You can use the `?` as value to get the possible values in the associated eval v
 e asm.arch=?   # list assembler/disassembler plugins
 e analysis.arch=?  # list analysis plugins
 ```
+
 ## Notes
 
-Note there are some inconsistencies that most likely will be fixed in the future rizin versions.
+Note there are some inconsistencies that most likely will be fixed in the future Rizin versions.
 

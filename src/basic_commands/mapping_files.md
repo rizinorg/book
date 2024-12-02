@@ -1,14 +1,20 @@
 ## Mapping Files
 
-Rizin's I/O subsystem allows you to map the contents of files into the same I/O space used to contain a loaded binary. New contents can be placed at random offsets.
+Rizin's I/O subsystem allows you to map the contents of files into the same I/O space used to contain a loaded binary.
+New contents can be placed at random offsets.
 
-The `o` command permits the user to open a file, this is mapped at offset 0 unless it has a known binary header and then the maps are created in virtual addresses.
+The `o` command permits the user to open a file, this is mapped at offset 0 unless it has a known binary header and
+then the maps are created in virtual addresses.
 
 Sometimes, we want to rebase a binary, or maybe we want to load or map the file in a different address.
 
-When launching rizin, the base address can be changed with the `-B` flag. But you must notice the difference when opening files with unknown headers, like bootloaders, so we need to map them using the `-m` flag (or specifying it as argument to the `o` command).
+When launching rizin, the base address can be changed with the `-B` flag. But you must notice the difference when
+opening files with unknown headers, like bootloaders, so we need to map them using the `-m` flag (or specifying it as
+argument to the `o` command).
 
-rizin is able to open files and map portions of them at random places in memory specifying attributes like permissions and name. It is the perfect basic tooling to reproduce an environment like a core file, a debug session, by also loading and mapping all the libraries the binary depends on.
+Rizin is able to open files and map portions of them at random places in memory specifying attributes like permissions
+and name. It is the perfect basic tooling to reproduce an environment like a core file, a debug session, by also
+loading and mapping all the libraries the binary depends on.
 
 Opening files (and mapping them) is done using the `o` (open) command. Let's read the help:
 
@@ -38,32 +44,37 @@ Usage: o[?]   # Open files and handle opened files
 Prepare a simple layout:
 
 ```bash
-$ rz-bin -l /bin/ls
-[Linked libraries]
-libselinux.so.1
-librt.so.1
-libacl.so.1
+$ rz-bin -l hello_world
+[Libs]
+library   
+----------
 libc.so.6
-
-4 libraries
 ```
 
 Map a file:
 
 ```
-[0x00001190]> o /bin/zsh 0x499999
+[0x00001100]> o /bin/sh 0x499999
 ```
 
 List mapped files:
 
 ```
 [0x00000000]> ol
-- 6 /bin/ls @ 0x0 ; r
-- 10 /lib/ld-linux.so.2 @ 0x100000000 ; r
-- 14 /bin/zsh @ 0x499999 ; r
+ 3 - r-x 0x00003d48 /home/user/playground/book/examples/hello_world/hello_world
+ 4 - r-x 0x00000070 vfile://0/reloc-targets
+ 5 - rw- 0x00000008 null://8
+ 6 - r-x 0x00003d48 vfile://0/patched
+ 7 * r-x 0x000d5b68 /bin/sh
+ 8 - r-- 0x00000bf0 vfile://1/reloc-targets
+ 9 - rw- 0x0000ed7c null://60796
+10 - r-- 0x000d5b68 vfile://1/patched
 ```
 
-Print hexadecimal values from /bin/zsh:
+_Note: `vfile` is a virtual file, that is often automatically created to patch relocations and could also be
+created manually, if needed. It was created to avoid modifying the original file/IO ranges._
+
+Print hexadecimal values from /bin/sh:
 
 ```
 [0x00000000]> px @ 0x499999
@@ -72,7 +83,7 @@ Print hexadecimal values from /bin/zsh:
 Unmap files using the `o-` command. Pass the required file descriptor to it as an argument:
 
 ```
-[0x00000000]> o- 14
+[0x00000000]> o- 7
 ```
 
 You can also view the ascii table showing the list of the opened files:

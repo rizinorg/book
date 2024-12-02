@@ -1,6 +1,7 @@
 ## Rasign2
 
-The `rz-sign` tool allows you to quickly create signature files. To create a SDB signature file named `libc_sigs2.sdb` for the `libc.so.6` binary, simply run:
+The `rz-sign` tool allows you to quickly create signature files. To create a SDB signature file named
+`libc_sigs2.sdb` for the `libc.so.6` binary, simply run:
 
 ```
 $ rz-sign -o libc_sigs2.sdb libc.so.6
@@ -19,7 +20,8 @@ generated zignatures: 2870
 [0x00024330]> zos libc_sigs.sdb  # write zignatures to a file
 ```
 
-The '-a' flag can be added to increase the amount of analysis performed. This will result in more functions discovered and more zignatures created.
+The '-a' flag can be added to increase the amount of analysis performed. This will result in more functions discovered
+and more zignatures created.
 
 ```
 $ rz-sign -a -o /tmp/libc_sigs2.sdb libc.so.6
@@ -36,7 +38,8 @@ generated zignatures: 2955
 
 ### Output types
 
-There are 3 different output methods. Using `-o` to create an SDB is shown above. The `-r` flag will print the discovered signatures to stdout as rizin commands.
+There are 3 different output methods. Using `-o` to create an SDB is shown above. The `-r` flag will print
+the discovered signatures to stdout as rizin commands.
 
 ```
 $ rz-sign -r hello_world  |grep main

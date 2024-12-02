@@ -1,8 +1,12 @@
 # Basic Commands
 
-Most command names in rizin are derived from action names. They should be easy to remember, as they are short. Actually, all commands are single letters. Subcommands or related commands are specified using the second character of the command name. For example, `/ foo` is a command to search plain string, while `/x 90 90` is used to look for hexadecimal pairs.
+Most command names in rizin are derived from action names. They should be easy to remember, as they are short.
+Actually, all commands are single letters. Subcommands or related commands are specified using the second character
+of the command name. For example, `/ foo` is a command to search plain string, while `/x 90 90` is used to look for
+hexadecimal pairs.
 
-The general format for a valid command (as explained in the [Rizin Command-line](../first_steps/commandline_rizin.md) chapter) looks like this:
+The general format for a valid command (as explained in the [Rizin Command-line](../first_steps/commandline_rizin.md)
+chapter) looks like this:
 
 ```
 [.][times][cmd][~grep][@[@iter]addr!size][|>pipe] ; ...
@@ -14,20 +18,24 @@ For example,
 > 3s +1024    ; seeks three times 1024 from the current seek
 ```
 
-If a command starts with `R!`, the rest of the string is passed to the currently loaded IO plugin (a debugger, for example). Most plugins provide help messages with `R!?` or `R!help`.
+If a command starts with `R!`, the rest of the string is passed to the currently loaded IO plugin (a debugger,
+for example). Most plugins provide help messages with `R!?` or `R!help`.
 
 ```
 $ rizin -d /bin/ls
 > R!help      ; handled by the IO plugin
 ```
 
-If a command starts with `!`, posix_system() is called to pass the command to your shell. Check `!?` for more options and usage examples.
+If a command starts with `!`, posix_system() is called to pass the command to your shell. Check `!?` for more options
+and usage examples.
 
 ```
 > !ls         ; run `ls` in the shell
 ```
 
-The meaning of the arguments (iter, addr, size) depends on the specific command. As a rule of thumb, most commands take a number as an argument to specify the number of bytes to work with, instead of the currently defined block size. Some commands accept math expressions or strings.
+The meaning of the arguments (iter, addr, size) depends on the specific command. As a rule of thumb, most commands take
+a number as an argument to specify the number of bytes to work with, instead of the currently defined block size.
+Some commands accept math expressions or strings.
 
 ```
 > px 0x17     ; show 0x17 bytes in hexs at current seek
@@ -35,14 +43,16 @@ The meaning of the arguments (iter, addr, size) depends on the specific command.
 > / lib       ; search for 'lib' string.
 ```
 
-The `@` sign is used to specify a temporary offset location or a seek position at which the command is executed, instead of current seek position. This is quite useful as you don't have to seek around all the time.
+The `@` sign is used to specify a temporary offset location or a seek position at which the command is executed,
+instead of current seek position. This is quite useful as you don't have to seek around all the time.
 
 ```
 > p8 10 @ 0x4010  ; show 10 bytes at offset 0x4010
 > f patata @ 0x10 ; set 'patata' flag at offset 0x10
 ```
 
-Using `@@` sub-commands you can execute a single command on a list of flags, functions, symbols, etc.. You can think of these as foreach operations:
+Using `@@` sub-commands you can execute a single command on a list of flags, functions, symbols, etc. You can think
+of these as foreach operations:
 
 ```
 > s 0
@@ -57,7 +67,8 @@ The `>` operation is used to redirect the output of a command into a file (overw
 > f  > flags.txt  ; dump flag list to 'flags.txt'
 ```
 
-The `|` operation (pipe) is similar to what you are used to expect from it in a *NIX shell: an output of one command as input to another.
+The `|` operation (pipe) is similar to what you are used to expect from it in a *NIX shell: an output of one command
+as input to another.
 
 ```
 [0x4A13B8C0]> f | grep section | grep text

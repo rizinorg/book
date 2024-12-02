@@ -3,7 +3,7 @@
 After un-compressing  the challenge file `Find The Easy Pass.zip`, we can find
 a file named `EasyPass.exe` inside it.
 
-We using `rz-bin` to identify the executable file.
+We're using `rz-bin` to identify the executable file.
 
 ```bash
 C:\Users\User\Desktop\htb>rz-bin -I EasyPass.exe

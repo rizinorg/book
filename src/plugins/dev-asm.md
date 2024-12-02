@@ -5,6 +5,7 @@ are fluent in C. For various reasons it might be easier to implement it out of t
 will need to create single C file, called `asm_mycpu.c` and a meson file for it.
 
 The key thing of RzAsm plugin is a structure
+
 ```c
 RzAsmPlugin rz_asm_plugin_mycpu = {
 	.name = "mycpu",
@@ -86,6 +87,7 @@ RZ_API RzLibStruct rizin_plugin = {
 ```
 
 After compiling rizin will list this plugin in the rz-asm output:
+
 ```
 $ rz-asm -L |grep myc
 _d__  _8_32      mycpu        LGPL3   MYCPU disassembly plugin
@@ -93,12 +95,14 @@ _d__  _8_32      mycpu        LGPL3   MYCPU disassembly plugin
 
 ### Moving plugin into the tree
 
-Pushing a new architecture into the main branch of rizin requires to modify several files in order to make it fit into the way the rest of plugins are built.
+Pushing a new architecture into the main branch of rizin requires to modify several files in order to make it fit
+into the way the rest of plugins are built.
 
 __List of affected files:__
 
 * `librz/asm/p/asm_mycpu.c`
-That's where most of our code will be, the key part is to declare a `RzAsmPlugin` containing a valid `disassemble` field, a function pointer to the actual disassembler function.
+That's where most of our code will be, the key part is to declare a `RzAsmPlugin` containing a valid `disassemble`
+field, a function pointer to the actual disassembler function.
 
 * `librz/asm/meson.build`
 The build is handled by meson, we have to add our plugin to the list of things to be compiled :
@@ -127,7 +131,7 @@ The build is handled by meson, we have to add our plugin to the list of things t
 ```
 
 * `librz/include/rz_asm.h`
-Make Rizin aware of our plugin by defining our struct :
+Make Rizin aware of our plugin by defining our struct:
 ```diff
 @@ -265,6 +265,7 @@ extern RzAsmPlugin rz_asm_plugin_xcore_cs;
  extern RzAsmPlugin rz_asm_plugin_xtensa;

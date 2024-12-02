@@ -1,6 +1,7 @@
 # Visual Mode
 
-The visual mode is a more user-friendly interface alternative to rizin's command-line prompt. It allows easy navigation, has a cursor mode for selecting bytes, and offers numerous key bindings to simplify debugger use.
+The visual mode is a more user-friendly interface alternative to Rizin's command-line prompt. It allows easy navigation,
+has a cursor mode for selecting bytes, and offers numerous key bindings to simplify debugger use.
 To enter visual mode, use `V` command. To exit from it back to command line, press `q`.
 
 ## Navigation
@@ -11,11 +12,12 @@ example `5j` will move down for 5 lines, or `2l` will move 2 characters right.
 
 ![Visual Mode](visualmode.png)
 
-## print modes aka panels
+## Print modes aka panels
 
-The Visual mode uses "print modes" which are basically different panel that you can rotate. By default those are:
+The Visual mode uses "print modes" which are basically different panel that you can rotate. By default, those are:
 
-↻ **Hexdump panel** -> **Disassembly panel** → **Debugger panel** → **Hexadecimal words dump panel** → **Hex-less hexdump panel** → **Op analysis color map panel** → **Annotated hexdump panel** ↺.
+↻ **Hexdump panel** -> **Disassembly panel** → **Debugger panel** → **Hexadecimal words dump panel** →
+**Hex-less hexdump panel** → **Op analysis color map panel** → **Annotated hexdump panel** ↺.
 
 Notice that the top of the panel contains the command which is used, for example for the disassembly panel:
 

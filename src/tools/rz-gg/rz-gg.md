@@ -9,15 +9,17 @@ for x86, x86-64, and ARM.
 You can also access all the rz-gg commands from the rizin shell. They are present
 under `g`. See `g?` for more information about how to use them.
 
-By default it will compile it's own `rz-gg` language, but you can also compile C
-code using GCC or Clang shellcodes depending on the file extension. Lets create
+By default, it will compile its own `rz-gg` language, but you can also compile C
+code using GCC or Clang shellcodes depending on the file extension. Let's create
 C file called `helloworld.c`:
+
 ```c
 int main() {
 	write(1, "Hello World\n", 13);
 	return 0;
 }
 ```
+
 ```
 $ rz-gg -a x86 -b32 helloworld.c
 e900000000488d3516000000bf01000000b80400000248c7c20d0000000f0531c0c348656c6c6f20576f726c640a00

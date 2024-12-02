@@ -3,26 +3,24 @@
 With rz-bin, the generated symbols list format is similar to the imports list. Use the `-s` option to get it:
 
 ```
-rz-bin -s /bin/ls | head
+$ rz-bin -s /usr/bin/ls | head
 [Symbols]
-
-nth paddr       vaddr      bind   type   size lib name
-――――――――――――――――――――――――――――――――――――――――――――――――――――――
-110 0x000150a0 0x000150a0 GLOBAL FUNC 56 _obstack_allocated_p
-111 0x0001f600 0x0021f600 GLOBAL  OBJ  8 program_name
-112 0x0001f620 0x0021f620 GLOBAL  OBJ  8 stderr
-113 0x00014f90 0x00014f90 GLOBAL FUNC 21 _obstack_begin_1
-114 0x0001f600 0x0021f600   WEAK  OBJ  8 program_invocation_name
-115 0x0001f5c0 0x0021f5c0 GLOBAL  OBJ  8 alloc_failed_handler
-116 0x0001f5f8 0x0021f5f8 GLOBAL  OBJ  8 optarg
-117 0x0001f5e8 0x0021f5e8 GLOBAL  OBJ  8 stdout
-118 0x0001f5e0 0x0021f5e0 GLOBAL  OBJ  8 program_short_name
+nth paddr      vaddr      bind   type   size lib name                            
+---------------------------------------------------------------------------------
+104 ---------- 0x00025280 GLOBAL OBJ    8        __progname
+105 ---------- 0x00025290 GLOBAL OBJ    4        optind
+107 ---------- 0x000252a8 WEAK   OBJ    8        program_invocation_name
+108 ---------- 0x000252a8 GLOBAL OBJ    8        __progname_full
+109 0x00024200 0x00025200 GLOBAL OBJ    8        obstack_alloc_failed_handler
+110 ---------- 0x000252c0 GLOBAL OBJ    8        stderr
+111 ---------- 0x00025280 WEAK   OBJ    8        program_invocation_short_name
 ```
 
-With the `-sr` option rz-bin produces a rizin script instead. It can later be passed to the core to automatically flag all symbols and to define corresponding byte ranges as functions and data blocks.
+With the `-sr` option rz-bin produces a rizin script instead. It can later be passed to the core to automatically
+flag all symbols and to define corresponding byte ranges as functions and data blocks.
 
 ```
-$ rz-bin -sr /bin/ls | head
+$ rz-bin -sr /usr/bin/ls | head
 fs symbols
 f sym.obstack_allocated_p 56 0x000150a0
 f sym.program_invocation_name 8 0x0021f600

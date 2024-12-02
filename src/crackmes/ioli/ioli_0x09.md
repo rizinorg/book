@@ -1,11 +1,10 @@
-IOLI 0x09
-=========
+# IOLI 0x09
 
 And that brings us onto the last crackme.
 
 We can also use `rz-diff` to check for string differences.
 
-```diff
+```
 $ rz-diff -t strings crackme0x08 crackme0x09
 --- crackme0x08
 +++ ./crackme0x09
@@ -23,7 +22,7 @@ $ rz-diff -t strings crackme0x08 crackme0x09
 
 The only change is the version info (from 0x08 to 0x09). So let's check for functions.
 
-```diff
+```
 $ rz-diff -t functions crackme0x08 ./crackme0x09
 .--------------------------------------------------------------------------------------------------------------------------.
 | name0                      | size0 | addr0      | type     | similarity | addr1      | size1 | name1                     |
@@ -52,7 +51,7 @@ $ rz-diff -t functions crackme0x08 ./crackme0x09
 We can see that a few functions have been changed. So let's check it out! We can also see that this
 version strips the symbol names again, but that should be no problem. We can easily identify them using the functions diff.
 
-```bash
+```shell
 $ rizin ./crackme0x09
 [0x08048420]> aa
 [0x08048420]> afr @ main # recursively analyze functions, starting from main
@@ -60,8 +59,6 @@ $ rizin ./crackme0x09
 [0x08048420]> afn parell @ fcn.08048589
 [0x08048420]> afn che @ fcn.0804855d
 [0x08048420]> afn dummy @ fcn.080484d4
-```
-```c
 [0x08048420]> pdg @ main
 
 // WARNING: Variable defined which should be unmapped: var_8h
@@ -90,14 +87,13 @@ Looking at the functions diff we can see that `fcn.08048766` is named `__i686.ge
 in position-independent code to get the addresses of global constants (like string constants). Let's see if we can find
 out to which strings these offsets resolve to, but let's first give this new function a name.
 
-
-```bash
+```
 [0x08048420]> afn sym.__i686.get_pc_thunk.bx @ fcn.08048766
 ```
 
 To compute the addresses we can use ESIL. But we need to initialize it first.
 
-```bash
+```
 [0x08048420]> s main
 [0x080486ee]> aei
 [0x080486ee]> aeip
@@ -132,8 +128,6 @@ what particular string was printed here.
 ```bash
 [0x080486ef]> CC "IOLI Crackme Level 0x09" @ eip
 [0x080486ef]> pd 1 @ eip
-```
-```asm
 │           ;-- eip:
 │           0x08048722      call  sym.imp.printf                       ; sym.imp.printf ; IOLI Crackme Level 0x09 ; int printf(const char *format)
 ```
