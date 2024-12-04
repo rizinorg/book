@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1159,8 +1159,14 @@ ul.task-list li input[type="checkbox"] {
 
 <p>rz-run is a tool allowing to setup a specified execution environment - redefine stdin/stdout, pipes, change the environment variables and other settings useful to craft the boundary conditions you need to run a binary for debugging.</p>
 <pre><code>$ rz-run -h
-Usage: rz-run -v|-t|script.rrz [directive ..]</code></pre>
-<p>It takes the text file in key=value format to specify the execution environment. Rz-run can be used as both separate tool or as a part of rizin. To load the rz-run profile in rizin you need to use either <code>-r</code> to load the profile from file or <code>-R</code> to specify the directive from string.</p>
+Usage: [directives] [script.rz] [--] [program] [args]
+ -h                  Show this help
+ -l                  Show profile options
+ -t                  Output template profile
+ -v                  Show version information
+ -w                  Wait for incoming terminal process
+ -- [program] [args] Run commands</code></pre>
+<p>It takes the text file in key=value format to specify the execution environment. Rz-run can be used as both separate tool or as a part of rizin. To load the rz-run profile in Rizin you need to use either <code>-r</code> to load the profile from file or <code>-R</code> to specify the directive from string.</p>
 <p>The format of the profile is very simple. Note the most important keys - <code>program</code> and <code>arg*</code></p>
 <p>One of the most common usage cases - redirect the output of debugged program in rizin. For this you need to use <code>stdio</code>, <code>stdout</code>, <code>stdin</code>, <code>input</code>, and a couple similar keys.</p>
 <p>Here is the basic profile example:</p>

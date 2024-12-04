@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1213,36 +1213,22 @@ a=3
 -a
 3</code></pre>
 <p>Remove the database</p>
-<pre><code>$ rm -f d
-</code></pre>
+<pre><code>$ rm -f d</code></pre>
 </section>
 <section id="so-what" class="level2" data-number="27.2">
 <h2 data-number="27.2" class="anchored" data-anchor-id="so-what"><span class="header-section-number">27.2</span> So what ?</h2>
 <p>So, you can now do this inside your rizin sessions!</p>
-<p>Let’s take a simple binary, and check what is already <em>sdbized</em>.</p>
-<pre><code>$ cat test.c
-int main(){
-    puts("Hello world\n");
-}
-$ gcc test.c -o test</code></pre>
-<pre><code>$ rizin -A ./test
-[0x08048320]&gt; # list namespaces under analysis
-[0x08048320]&gt; k **
-bin
+<p>Let’s take a simple binary <a href="https://github.com/rizinorg/book/tree/master/examples/hello_world">hello_world</a>, and check what is already <em>sdbized</em>.</p>
+<pre><code>$ rizin -A hello_world
+[0x00001100]&gt; k ** # list namespaces under analysis
 analysis
+bin
+debug
 syscall
-debug</code></pre>
-<pre><code>[0x08048320]&gt; k bin/**
-fd.6
-[0x08048320]&gt; k bin/fd.6/*
-archs=0:0:x86:32</code></pre>
-<p>The file corresponding to the sixth file descriptor is a x86_32 binary.</p>
-<pre><code>[0x08048320]&gt; k analysis/meta/*
-meta.s.0x80484d0=12,SGVsbG8gd29ybGQ=
-[...]
-[0x08048320]&gt; %b64- SGVsbG8gd29ybGQ=
-Hello world</code></pre>
-<p>Strings are stored encoded in base64.</p>
+
+[0x00001100]&gt; k bin/**
+cur
+fd.3</code></pre>
 <hr>
 </section>
 <section id="more-examples" class="level2" data-number="27.3">

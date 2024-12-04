@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1158,7 +1158,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>A basic search for a plain text string in a file would be something like:</p>
-<pre><code>$ rizin -q -c "/ lib" /bin/ls
+<pre class="shell"><code>$ rizin -q -c "/ lib" /bin/ls
 Searching 3 bytes from 0x00400000 to 0x0041ae08: 6c 69 62 
 hits: 9
 0x00400239 hit0_0 "lib64/ld-linux-x86-64.so.2"
@@ -1170,12 +1170,12 @@ hits: 9
 0x00416542 hit0_6 "libs/"
 0x00417160 hit0_7 "lib/xstrtol.c"
 0x00417578 hit0_8 "lib"</code></pre>
-<p>As can be seen from the output above, rizin generates a “hit” flag for every entry found. You can then use the <code>ps</code> command to see the strings stored at the offsets marked by the flags in this group, and they will have names of the form <code>hit0_&lt;index&gt;</code>:</p>
+<p>As can be seen from the output above, Rizin generates a “hit” flag for every entry found. You can then use the <code>ps</code> command to see the strings stored at the offsets marked by the flags in this group, and they will have names of the form <code>hit0_&lt;index&gt;</code>:</p>
 <pre><code>[0x00404888]&gt; / ls
 ...
 [0x00404888]&gt; ps @ hit0_0
 lseek</code></pre>
-<p>You can search for wide-char strings (e.g., unicode letters) using the <code>/w</code> command:</p>
+<p>You can search for wide-char strings (e.g., Unicode letters) using the <code>/w</code> command:</p>
 <pre><code>[0x00000000]&gt; /w Hello
 0 results found.</code></pre>
 <p>Using Rizin, you can also automatically search for magic signatures in the file. This can be done using <code>/m</code>. The offset and the file format will be displayed after the search.</p>
@@ -1190,7 +1190,7 @@ Searching 8 bytes from 0x00400238 to 0x0040488f: 53 74 61 6c 6c 6d 61 6e
 [# ]hits: 004138 &lt; 0x0040488f  hits = 0</code></pre>
 <p>It is possible to specify hexadecimal escape sequences in the search string by prepending them with <code>\x</code>:</p>
 <pre><code>[0x00000000]&gt; / \x7FELF</code></pre>
-<p>if, instead, you are searching for a string of hexadecimal values, you’re probably better of using the <code>/x</code> command:</p>
+<p>If, instead, you are searching for a string of hexadecimal values, you’re probably better off using the <code>/x</code> command:</p>
 <pre><code>[0x00000000]&gt; /x 7F454C46</code></pre>
 <p>Once the search is done, the results are stored in the <code>searches</code> flag space.</p>
 <pre><code>[0x00000000]&gt; fs

@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1184,7 +1184,7 @@ binsz    8620</code></pre>
 <blockquote class="blockquote">
 <p><strong><em>rizin tip:</em></strong> rz-bin is one of the handy tools that comes with rizin. It can be used to extract information (imports, symbols, libraries, etc.) about binary executables. As always, check the help (rz-bin -h)!</p>
 </blockquote>
-<p>So, its a dynamically linked, stripped, 64bit Linux executable - nothing fancy here. Let’s try to run it:</p>
+<p>So, it’s a dynamically linked, stripped, 64bit Linux executable - nothing fancy here. Let’s try to run it:</p>
 <pre><code>[0x00 avatao]$ ./reverse4
 ?
 Size of data: 2623
@@ -1220,7 +1220,7 @@ avatao_reverse4
 0x00400fe1 21 str.Your_getting_closer_
 [0x00400720]&gt;</code></pre>
 <blockquote class="blockquote">
-<p><strong><em>rizin tip</em></strong>: rizin puts so called flags on important/interesting offsets, and organizes these flags into flagspaces (strings, functions, symbols, etc.) You can list all flagspaces using <em>fs</em>, and switch the current one using <em>fs [flagspace]</em> (the default is *, which means all the flagspaces). The command <em>f</em> prints all flags from the currently selected flagspace(s).</p>
+<p><strong><em>rizin tip</em></strong>: rizin puts so-called flags on important/interesting offsets, and organizes these flags into flagspaces (strings, functions, symbols, etc.) You can list all flagspaces using <em>fs</em>, and switch the current one using <em>fs [flagspace]</em> (the default is *, which means all the flagspaces). The command <em>f</em> prints all flags from the currently selected flagspace(s).</p>
 </blockquote>
 <p>OK, the strings looks interesting, especially the one at 0x00400f92. It seems to hint that this crackme is based on a virtual machine. Keep that in mind!</p>
 <p>These strings could be a good starting point if we were talking about a real-life application with many-many features. But we are talking about a crackme, and they tend to be small and simple, and focused around the problem to be solved. So I usually just take a look at the entry point(s) and see if I can figure out something from there. Nevertheless, I’ll show you how to find where these strings are used:</p>

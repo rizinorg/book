@@ -664,7 +664,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1198,7 +1198,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Note - in the following examples there are missing functions of the actual decoding for the sake of readability!</p>
-<p>For this you need to do this: 1. <code>import rzlang</code> and <code>from rzlang import RZ</code> (for constants) 2. Make a function with 2 subfunctions - <code>assemble</code> and <code>disassemble</code> and returning plugin structure - for RzAsm plugin</p>
+<p>For this you need to do this:</p>
+<ol type="1">
+<li><p><code>import rzlang</code> and <code>from rzlang import RZ</code> (for constants)</p></li>
+<li><p>Make a function with 2 subfunctions - <code>assemble</code> and <code>disassemble</code> and returning plugin structure - for RzAsm plugin</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mycpu(a):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> assemble(s):</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
@@ -1209,10 +1212,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            opstr <span class="op">=</span> optbl[opcode][<span class="dv">1</span>]</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> [<span class="dv">4</span>, opstr]</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span>:</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> [<span class="dv">4</span>, <span class="st">"unknown"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="3" type="1">
-<li>This structure should contain a pointers to these 2 functions - <code>assemble</code> and <code>disassemble</code></li>
-</ol>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> [<span class="dv">4</span>, <span class="st">"unknown"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>This structure should contain a pointers to these 2 functions - <code>assemble</code> and <code>disassemble</code></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>            <span class="st">"name"</span> : <span class="st">"mycpu"</span>,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">"arch"</span> : <span class="st">"mycpu"</span>,</span>
@@ -1222,22 +1223,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"desc"</span> : <span class="st">"MYCPU disasm"</span>,</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"assemble"</span> : assemble,</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"disassemble"</span> : disassemble,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="4" type="1">
-<li>Make a function with 2 subfunctions - <code>set_reg_profile</code> and <code>op</code> and returning plugin structure - for RzAnalysis plugin</li>
-</ol>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Make a function with 2 subfunctions - <code>set_reg_profile</code> and <code>op</code> and returning plugin structure - for RzAnalysis plugin</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mycpu_analysis(a):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>       <span class="kw">def</span> set_reg_profile():</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        profile <span class="op">=</span> <span class="st">"=PC  pc</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"=SP    sp</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gpr    r0  .32 0   0</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gpr    r1  .32 4   0</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gpr    r2  .32 8   0</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gpr    r3  .32 12  0</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gpr    r4  .32 16  0</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gpr    r5  .32 20  0</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gpr    sp  .32 24  0</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gpr    pc  .32 28  0</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        profile <span class="op">=</span> <span class="st">"=PC   pc</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"=SP sp</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gpr r0  .32 0   0</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gpr r1  .32 4   0</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gpr r2  .32 8   0</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gpr r3  .32 12  0</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gpr r4  .32 16  0</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gpr r5  .32 20  0</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gpr sp  .32 24  0</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gpr pc  .32 28  0</span><span class="ch">\n</span><span class="st">"</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> profile</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> op(memview, pc):</span>
@@ -1263,10 +1262,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span>:</span>
 <span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>            result <span class="op">=</span> analysisop</span>
 <span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Don't forget to return proper instruction size!</span></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="dv">4</span>, result]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="5" type="1">
-<li>This structure should contain a pointers to these 2 functions - <code>set_reg_profile</code> and <code>op</code></li>
-</ol>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="dv">4</span>, result]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>This structure should contain a pointers to these 2 functions - <code>set_reg_profile</code> and <code>op</code></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>            <span class="st">"name"</span> : <span class="st">"mycpu"</span>,</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">"arch"</span> : <span class="st">"mycpu"</span>,</span>
@@ -1276,21 +1273,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"esil"</span> : <span class="dv">1</span>,</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"set_reg_profile"</span> : set_reg_profile,</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"op"</span> : op,</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="6" type="1">
-<li>Then register those using <code>rzlang.plugin("asm")</code> and <code>rzlang.plugin("analysis")</code> respectively</li>
-</ol>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Then register those using <code>rzlang.plugin("asm")</code> and <code>rzlang.plugin("analysis")</code> respectively</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Registering MYCPU disasm plugin..."</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rzlang.plugin(<span class="st">"asm"</span>, mycpu))</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Registering MYCPU analysis plugin..."</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rzlang.plugin(<span class="st">"analysis"</span>, mycpu_analysis))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rzlang.plugin(<span class="st">"analysis"</span>, mycpu_analysis))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ol>
 <p>You can combine everything in one file and load it using <code>-i</code> option:</p>
 <pre><code>rizin -I mycpu.py some_file.bin</code></pre>
 <p>Or you can load it from the rizin shell: <code>#!python mycpu.py</code></p>
 <section id="implementing-new-format-plugin-in-python" class="level3" data-number="103.0.1">
 <h3 data-number="103.0.1" class="anchored" data-anchor-id="implementing-new-format-plugin-in-python"><span class="header-section-number">103.0.1</span> Implementing new format plugin in Python</h3>
 <p>Note - in the following examples there are missing functions of the actual decoding for the sake of readability!</p>
-<p>For this you need to do this: 1. <code>import rzlang</code> 2. Make a function with subfunctions: - <code>load</code> - <code>load_bytes</code> - <code>destroy</code> - <code>check_bytes</code> - <code>baddr</code> - <code>entries</code> - <code>sections</code> - <code>imports</code> - <code>relocs</code> - <code>binsym</code> - <code>info</code></p>
+<p>For this you need to do this: 1. <code>import rzlang</code></p>
+<ol start="2" type="1">
+<li><p>Make a function with subfunctions:</p>
+<ul>
+<li><code>load</code></li>
+<li><code>load_bytes</code></li>
+<li><code>destroy</code></li>
+<li><code>check_bytes</code></li>
+<li><code>baddr</code></li>
+<li><code>entries</code></li>
+<li><code>sections</code></li>
+<li><code>imports</code></li>
+<li><code>relocs</code></li>
+<li><code>binsym</code></li>
+<li><code>info</code></li>
+</ul>
 <p>and returning plugin structure - for RzAsm plugin</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> le_format(a):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> load(binf):</span>
@@ -1319,10 +1330,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>                <span class="st">"bits"</span> : <span class="dv">32</span>,</span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                <span class="st">"big_endian"</span> : <span class="dv">0</span>,</span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                <span class="st">"dbg_info"</span> : <span class="dv">0</span>,</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                }]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="3" type="1">
-<li>This structure should contain a pointers to the most important functions like <code>check_bytes</code>, <code>load</code> and <code>load_bytes</code>, <code>entries</code>, <code>relocs</code>, <code>imports</code>.</li>
-</ol>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                }]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>This structure should contain a pointers to the most important functions like <code>check_bytes</code>, <code>load</code> and <code>load_bytes</code>, <code>entries</code>, <code>relocs</code>, <code>imports</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>            <span class="st">"name"</span> : <span class="st">"le"</span>,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">"desc"</span> : <span class="st">"OS/2 LE/LX format"</span>,</span>
@@ -1339,12 +1348,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">"relocs"</span> : relocs,</span>
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>            <span class="st">"binsym"</span> : binsym,</span>
 <span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>            <span class="st">"info"</span> : info,</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="4" type="1">
-<li>Then you need to register it as a file format plugin:</li>
-</ol>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Then you need to register it as a file format plugin:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Registering OS/2 LE/LX plugin..."</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rzlang.plugin(<span class="st">"bin"</span>, le_format))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rzlang.plugin(<span class="st">"bin"</span>, le_format))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ol>
 
 
 </section>

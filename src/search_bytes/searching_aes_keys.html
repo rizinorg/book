@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1157,7 +1157,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Thanks to Victor Muñoz, rizin now has support of the algorithm he developed, capable of finding <strong>expanded AES</strong> keys with <code>/Ca</code> command. It searches from current seek position up to the <code>search.distance</code> limit, or until end of file is reached. You can interrupt current search by pressing <code>Ctrl-C</code>. For example, to look for AES keys in physical memory of your system:</p>
+<p>Thanks to Victor Muñoz, Rizin now has support of the algorithm he developed, capable of finding <strong>expanded AES</strong> keys with <code>/Ca</code> command. It searches from current seek position up to the <code>search.distance</code> limit, or until end of file is reached. You can interrupt current search by pressing <code>Ctrl-C</code>. For example, to look for AES keys in physical memory of your system:</p>
 <pre><code>$ sudo rizin /dev/mem
 [0x00000000]&gt; /ca
 0 AES keys found</code></pre>
@@ -1195,7 +1195,7 @@ f entropy_section_4 0x00001000 0x0144c374
 f entropy_section_5 0x00002000 0x0144d374
 f entropy_section_6 0x00002000 0x0144f374</code></pre>
 <p>The blocksize is increased to 4096 bytes from the default 100 bytes so that the entropy search <code>/s</code> can work on reasonably sized chunks for entropy analysis. The sections flags can be applied with the dot operator, <code>./s*</code> and then looped through <code>px 32 @@f:entropy*</code>.</p>
-<p>Moreover AES keys might be referenced from strings or pointed from the imports, for instance, so the <code>/</code> and other search-related commands can come in handy in this regard.</p>
+<p>Moreover, AES keys might be referenced from strings or pointed from the imports, for instance, so the <code>/</code> and other search-related commands can come in handy in this regard.</p>
 
 
 

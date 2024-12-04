@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1138,7 +1138,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#navigation" id="toc-navigation" class="nav-link active" data-scroll-target="#navigation"><span class="header-section-number">29.1</span> Navigation</a></li>
-  <li><a href="#print-modes-aka-panels" id="toc-print-modes-aka-panels" class="nav-link" data-scroll-target="#print-modes-aka-panels"><span class="header-section-number">29.2</span> print modes aka panels</a></li>
+  <li><a href="#print-modes-aka-panels" id="toc-print-modes-aka-panels" class="nav-link" data-scroll-target="#print-modes-aka-panels"><span class="header-section-number">29.2</span> Print modes aka panels</a></li>
   <li><a href="#getting-help" id="toc-getting-help" class="nav-link" data-scroll-target="#getting-help"><span class="header-section-number">29.3</span> Getting Help</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/rizinorg/book/edit/master/src/visual_mode/intro.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
@@ -1165,7 +1165,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>The visual mode is a more user-friendly interface alternative to rizin’s command-line prompt. It allows easy navigation, has a cursor mode for selecting bytes, and offers numerous key bindings to simplify debugger use. To enter visual mode, use <code>V</code> command. To exit from it back to command line, press <code>q</code>.</p>
+<p>The visual mode is a more user-friendly interface alternative to Rizin’s command-line prompt. It allows easy navigation, has a cursor mode for selecting bytes, and offers numerous key bindings to simplify debugger use. To enter visual mode, use <code>V</code> command. To exit from it back to command line, press <code>q</code>.</p>
 <section id="navigation" class="level2" data-number="29.1">
 <h2 data-number="29.1" class="anchored" data-anchor-id="navigation"><span class="header-section-number">29.1</span> Navigation</h2>
 <p>Navigation can be done using HJKL or arrow keys and PgUp/PgDown keys. It also understands usual Home/End keys. Like in Vim the movements can be repeated by preceding the navigation key with the number, for example <code>5j</code> will move down for 5 lines, or <code>2l</code> will move 2 characters right.</p>
@@ -1177,8 +1177,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </section>
 <section id="print-modes-aka-panels" class="level2" data-number="29.2">
-<h2 data-number="29.2" class="anchored" data-anchor-id="print-modes-aka-panels"><span class="header-section-number">29.2</span> print modes aka panels</h2>
-<p>The Visual mode uses “print modes” which are basically different panel that you can rotate. By default those are:</p>
+<h2 data-number="29.2" class="anchored" data-anchor-id="print-modes-aka-panels"><span class="header-section-number">29.2</span> Print modes aka panels</h2>
+<p>The Visual mode uses “print modes” which are basically different panel that you can rotate. By default, those are:</p>
 <p>↻ <strong>Hexdump panel</strong> -&gt; <strong>Disassembly panel</strong> → <strong>Debugger panel</strong> → <strong>Hexadecimal words dump panel</strong> → <strong>Hex-less hexdump panel</strong> → <strong>Op analysis color map panel</strong> → <strong>Annotated hexdump panel</strong> ↺.</p>
 <p>Notice that the top of the panel contains the command which is used, for example for the disassembly panel:</p>
 <pre><code>[0x00404890 16% 120 /bin/ls]&gt; pd $r @ entry0</code></pre>

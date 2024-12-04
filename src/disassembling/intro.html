@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1157,16 +1157,13 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Disassembling in rizin is just a way to represent an array of bytes. It is handled as a special print mode within <code>p</code> command.</p>
-<p>In the old times, when the rizin core was smaller, the disassembler was handled by an external rsc file. That is, rizin first dumped current block into a file, and then simply called <code>objdump</code> configured to disassemble for Intel, ARM or other supported architectures.</p>
-<p>It was a working and unix friendly solution, but it was inefficient as it repeated the same expensive actions over and over, because there were no caches. As a result, scrolling was terribly slow.</p>
-<p>So there was a need to create a generic disassembler library to support multiple plugins for different architectures. We can list the current loaded plugins with</p>
+<p>Disassembling in Rizin is just a way to represent an array of bytes. It is handled as a special print mode within <code>p</code> command.</p>
 <pre><code>$ rz-asm -L</code></pre>
-<p>Or from inside rizin:</p>
+<p>Or from inside Rizin:</p>
 <pre><code>&gt; e asm.arch=??</code></pre>
-<p>This was many years before capstone appeared. So rizin was using udis86 and olly disassemblers, many gnu (from binutils).</p>
-<p>Nowadays, the disassembler support is one of the basic features of rizin. It now has many options, endianness, including target architecture flavor and disassembler variants, among other things.</p>
-<p>To see the disassembly, use the <code>pd</code> command. It accepts a numeric argument to specify how many opcodes of current block you want to see. Most of the commands in rizin consider the current block size as the default limit for data input. If you want to disassemble more bytes, set a new block size using the <code>b</code> command.</p>
+<p>This was many years before capstone appeared. So Rizin was using udis86 and olly disassemblers, many gnu (from binutils).</p>
+<p>Nowadays, the disassembler support is one of the basic features of Rizin. It now has many options, endianness, including target architecture flavor and disassembler variants, among other things.</p>
+<p>To see the disassembly, use the <code>pd</code> command. It accepts a numeric argument to specify how many opcodes of current block you want to see. Most of the commands in Rizin consider the current block size as the default limit for data input. If you want to disassemble more bytes, set a new block size using the <code>b</code> command.</p>
 <pre><code>[0x00000000]&gt; b 100    ; set block size to 100
 [0x00000000]&gt; pd       ; disassemble 100 bytes
 [0x00000000]&gt; pd 3     ; disassemble 3 opcodes
@@ -1202,7 +1199,23 @@ ul.task-list li input[type="checkbox"] {
           0x00405e1c    488b9424a80. mov 0x2a8(%rsp), %rdx
           0x00405e24    64483314252. xor %fs:0x28, %rdx
           0x00405e2d    4889d8       mov %rbx, %rax</code></pre>
-<p>And as always, you can print the disassembly in JSON using <code>pdj</code> and get more information about the other associated commands by running <code>pd?</code>.</p>
+<p>And as always, you can print the disassembly in JSON using <code>pdj</code> and get more information about the other associated commands by running <code>pd?</code>:</p>
+<pre><code>[0x00000000]&gt; pd?
+Usage: pd[?]   # Print Disassembly
+| pd[jqt] [&lt;n_instrs&gt;]  # Disassemble N instructions (can be negative)
+| pda[jq=]              # Disassemble all possible opcodes (byte per byte)
+| pdb[jJ]               # Disassemble basic block
+| pdC [&lt;n_instrs&gt;]      # Prints the comments found in N instructions
+| pde[jqQ] [&lt;n_instrs&gt;] # Disassemble N instructions following execution flow from current PC
+| pdf[js]               # Disassemble a function
+| pdJ[?] [&lt;n_instrs&gt;]   # Disassemble N instructions as json containing the printed text
+| pdk                   # Disassemble all methods of a class
+| pdl[j] [&lt;n_instrs&gt;]   # Disassemble N instructions and prints its sizes
+| pdp[jq] [&lt;limit&gt;]     # Disassemble instructions and follows pointers to read ropchains
+| pdr[j.]               # Disassemble recursively across the function graph
+| pdR[jq]               # Disassemble recursively the block size bytes without analyzing functions
+| pds[fb]               # Summarize N bytes or current block or a function (strings, calls, jumps, refs)
+| pdg[?]                # Native Ghidra decompiler and Sleigh Disassembler plugin</code></pre>
 
 
 

@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1159,13 +1159,14 @@ ul.task-list li input[type="checkbox"] {
 
 <p>There is basic support of virtual tables parsing (RTTI and others). The most important thing before you start to perform such kind of analysis is to check if the <code>analysis.cpp.abi</code> option is set correctly and change it if needed.</p>
 <p>All commands to work with virtual tables are located in the <code>av</code> namespace. Currently, the support is very basic, allowing you only to inspect parsed tables.</p>
-<pre><code>|Usage: av[?jr*] C++ vtables and RTTI
-| av           search for vtables in data sections and show results
-| avj          like av, but as json
-| av*          like av, but as rizin commands
-| avr[j@addr]  try to parse RTTI at vtable addr (see analysis.cpp.abi)
-| avra[j]      search for vtables and try to parse RTTI at each of them</code></pre>
-<p>The main commands here are <code>av</code> and <code>avr</code>. <code>av</code> lists all virtual tables found when rizin opened the file. If you are not happy with the result you may want to try to parse a virtual table at a particular address with <code>avr</code> command. <code>avra</code> performs the search and parsing of all virtual tables in the binary, like rizin does during the file opening.</p>
+<pre><code>Usage: av[j*gr?]   # C++ vtables and RTTI
+| av[j*]           # search for vtables in data sections and show results
+| avg[?]           # Global variables
+| avr[j]           # try to parse RTTI at vtable addr (see analysis.cpp.abi)
+| avra[j]          # search for vtables and try to parse RTTI at each of them
+| avrr             # recover class info from all findable RTTI (see ac)
+| avrD &lt;classname&gt; # demangle a class name from RTTI</code></pre>
+<p>The main commands here are <code>av</code> and <code>avr</code>. <code>av</code> lists all virtual tables found when Rizin opened the file. If you are not happy with the result you may want to try to parse a virtual table at a particular address with <code>avr</code> command. <code>avra</code> performs the search and parsing of all virtual tables in the binary, like Rizin does during the file opening.</p>
 
 
 

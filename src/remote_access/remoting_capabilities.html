@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1157,7 +1157,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Rizin can be run locally, or it can be started as a server process which is controlled by a local rizin process. This is possible because everything uses rizin’s IO subsystem which abstracts access to system(), cmd() and all basic IO operations so to work over a network.</p>
+<p>Rizin can be run locally, or it can be started as a server process which is controlled by a local rizin process. This is possible because everything uses Rizin’s IO subsystem which abstracts access to system(), cmd() and all basic IO operations so to work over a network.</p>
 <p>Help for commands useful for remote access to rizin:</p>
 <pre><code>[0x00000000]&gt; R?
 Usage: R[?]   # Connect with other instances of rizin
@@ -1174,7 +1174,7 @@ Usage: R[?]   # Connect with other instances of rizin
 | Rh[?]                   # Start the http webserver
 | RH[?]                   # Start the http webserver (and launch the web browser)
 | Rt &lt;[host:]port&gt; [&lt;cmd&gt;] # Start the tcp server
-| R&amp;r &lt;port&gt;              # Start rap server in background (same as '&amp;_=h')</code></pre>
+| R&amp;r &lt;port&gt;              # Start rap server in background (same as '&amp; Rr')</code></pre>
 <p>You can learn rizin remote capabilities by displaying the list of supported IO plugins: <code>rizin -L</code>.</p>
 <p>A little example should make this clearer. A typical remote session might look like this:</p>
 <p>At the remote host1:</p>
@@ -1206,7 +1206,7 @@ fd:6&gt; pi 1
 fd:6&gt; q</code></pre>
 <p>To remove hosts (and close connections):</p>
 <pre><code>[0x004048c5]&gt; R-</code></pre>
-<p>You can also redirect rizin output to a TCP or UDP server (such as <code>nc -l</code>). First, Add the server with ‘R+ tcp://’ or ‘R+ udp://’, then you can redirect the output of a command to be sent to the server:</p>
+<p>You can also redirect rizin output to a TCP or UDP server (such as <code>nc -l</code>). First, Add the server with <code>R+ tcp://</code> or <code>R+ udp://</code>, then you can redirect the output of a command to be sent to the server:</p>
 <pre><code>[0x004048c5]&gt; R+ tcp://&lt;host&gt;:&lt;port&gt;/
 Connected to: &lt;host&gt; at port &lt;port&gt;
 5 - tcp://&lt;host&gt;:&lt;port&gt;/

@@ -664,7 +664,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1213,96 +1213,104 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Code analysis is a common technique used to extract information from assembly code.</p>
 <p>Rizin has different code analysis techniques implemented in the core and available in different commands.</p>
-<p>As long as the whole functionalities of rizin are available with the API as well as using commands. This gives you the ability to implement your own analysis loops using any programming language, even with rizin one-liners, shellscripts, or analysis or core native plugins.</p>
+<p>All features of Rizin are available from the library APIs as well as from commands. This gives you the ability to implement your own analysis loops using any programming language, even with Rizin one-liners, shell scripts, or analysis/core native plugins.</p>
 <p>The analysis will show up the internal data structures to identify basic blocks, function trees and to extract opcode-level information.</p>
-<p>The most common rizin analysis command sequence is <code>aa</code>, which stands for “analyze all”. That all is referring to all symbols and entry-points. If your binary is stripped you will need to use other commands like <code>aaa</code>, <code>aab</code>, <code>aar</code>, <code>aac</code> or so.</p>
-<p>Take some time to understand what each command does and the results after running them to find the best one for your needs.</p>
-<pre><code>[0x08048440]&gt; aa
-[0x08048440]&gt; pdf @ main
-           ; DATA XREF from 0x08048457 (entry0)
-/ (fcn) fcn.08048648 141
-|     ;-- main:
-|     0x08048648    8d4c2404     lea ecx, [esp+0x4]
-|     0x0804864c    83e4f0       and esp, 0xfffffff0
-|     0x0804864f    ff71fc       push dword [ecx-0x4]
-|     0x08048652    55           push ebp
-|     ; CODE (CALL) XREF from 0x08048734 (fcn.080486e5)
-|     0x08048653    89e5         mov ebp, esp
-|     0x08048655    83ec28       sub esp, 0x28
-|     0x08048658    894df4       mov [ebp-0xc], ecx
-|     0x0804865b    895df8       mov [ebp-0x8], ebx
-|     0x0804865e    8975fc       mov [ebp-0x4], esi
-|     0x08048661    8b19         mov ebx, [ecx]
-|     0x08048663    8b7104       mov esi, [ecx+0x4]
-|     0x08048666    c744240c000. mov dword [esp+0xc], 0x0
-|     0x0804866e    c7442408010. mov dword [esp+0x8], 0x1 ;  0x00000001
-|     0x08048676    c7442404000. mov dword [esp+0x4], 0x0
-|     0x0804867e    c7042400000. mov dword [esp], 0x0
-|     0x08048685    e852fdffff   call sym..imp.ptrace
-|        sym..imp.ptrace(unk, unk)
-|     0x0804868a    85c0         test eax, eax
-| ,=&lt; 0x0804868c    7911         jns 0x804869f
-| |   0x0804868e    c70424cf870. mov dword [esp], str.Don_tuseadebuguer_ ;  0x080487cf
-| |   0x08048695    e882fdffff   call sym..imp.puts
-| |      sym..imp.puts()
-| |   0x0804869a    e80dfdffff   call sym..imp.abort
-| |      sym..imp.abort()
-| `-&gt; 0x0804869f    83fb02       cmp ebx, 0x2
-|,==&lt; 0x080486a2    7411         je 0x80486b5
-||    0x080486a4    c704240c880. mov dword [esp], str.Youmustgiveapasswordforusethisprogram_ ;  0x0804880c
-||    0x080486ab    e86cfdffff   call sym..imp.puts
-||       sym..imp.puts()
-||    0x080486b0    e8f7fcffff   call sym..imp.abort
-||       sym..imp.abort()
-|`--&gt; 0x080486b5    8b4604       mov eax, [esi+0x4]
-|     0x080486b8    890424       mov [esp], eax
-|     0x080486bb    e8e5feffff   call fcn.080485a5
-|        fcn.080485a5() ; fcn.080484c6+223
-|     0x080486c0    b800000000   mov eax, 0x0
-|     0x080486c5    8b4df4       mov ecx, [ebp-0xc]
-|     0x080486c8    8b5df8       mov ebx, [ebp-0x8]
-|     0x080486cb    8b75fc       mov esi, [ebp-0x4]
-|     0x080486ce    89ec         mov esp, ebp
-|     0x080486d0    5d           pop ebp
-|     0x080486d1    8d61fc       lea esp, [ecx-0x4]
-\     0x080486d4    c3           ret</code></pre>
-<p>In this example, we analyze the whole file (<code>aa</code>) and then print disassembly of the <code>main()</code> function (<code>pdf</code>). The <code>aa</code> command belongs to the family of auto analysis commands and performs only the most basic auto analysis steps. In rizin there are many different types of auto analysis commands with a different analysis depth, including partial emulation: <code>aa</code>, <code>aaa</code>, <code>aab</code>, <code>aaaa</code>, … There is also a mapping of those commands to the rizin CLI options: <code>rizin -A</code>, <code>rizin -AA</code>, and so on.</p>
-<p>It is common sense that completely automated analysis can produce non sequitur results, thus rizin provides separate commands for the particular stages of the analysis allowing fine-grained control of the analysis process. Moreover, there is a treasure trove of configuration variables for controlling the analysis outcomes. You can find them in <code>analysis.*</code> and <code>emu.*</code> cfg variables’ namespaces.</p>
+<p>The most common rizin analysis sequence utilizes is <strong>analyze all</strong> command (<code>aa</code>), which examines all symbols and entry-points. If the binary is stripped, using advance automated analysis <code>aaa</code> will be necessary; advanced analysis steps can be invoked manually with commands like <code>aab</code>, <code>aar</code>, or <code>aac</code>.</p>
+<p>Let’s analyse simple <a href="https://github.com/rizinorg/book/tree/master/examples/hello_world">hello_world</a> program:</p>
+<pre><code>[0x00001100]&gt; aa
+[x] Analyze all flags starting with sym. and entry0 (aa)
+
+[0x00001100]&gt; pdf @ main
+            ; DATA XREF from entry0 @ 0x1118
+/ int main(int argc, char **argv, char **envp);
+|           ; arg int argc @ rdi
+|           ; arg char **argv @ rsi
+|           ; var int64_t var_48h @ stack - 0x48
+|           ; var int64_t var_3ch @ stack - 0x3c
+|           ; var int64_t var_30h @ stack - 0x30
+|           ; var int64_t var_28h @ stack - 0x28
+|           ; var int64_t var_20h @ stack - 0x20
+|           ; var int64_t var_18h @ stack - 0x18
+|           ; var int64_t var_10h @ stack - 0x10
+|           0x000011e9      endbr64
+|           0x000011ed      push  rbp
+|           0x000011ee      mov   rbp, rsp
+|           0x000011f1      sub   rsp, 0x40
+|           0x000011f5      mov   dword [var_3ch], edi                 ; argc
+|           0x000011f8      mov   qword [var_48h], rsi                 ; argv
+|           0x000011fc      lea   rax, [str.Hello]                     ; 0x2004 ; "Hello "
+|           0x00001203      mov   qword [var_30h], rax
+|           0x00001207      lea   rax, [str.world]                     ; 0x200b ; "world!"
+|           0x0000120e      mov   qword [var_28h], rax
+|           0x00001212      mov   rax, qword [var_30h]
+|           0x00001216      mov   rdi, rax
+|           0x00001219      call  sym.imp.strlen                       ; sym.imp.strlen ; size_t strlen(const char *s)
+|           0x0000121e      mov   qword [var_20h], rax
+|           0x00001222      mov   rax, qword [var_28h]
+|           0x00001226      mov   rdi, rax
+|           0x00001229      call  sym.imp.strlen                       ; sym.imp.strlen ; size_t strlen(const char *s)
+|           0x0000122e      mov   qword [var_18h], rax
+|           0x00001232      mov   rdx, qword [var_20h]
+|           0x00001236      mov   rax, qword [var_18h]
+|           0x0000123a      add   rax, rdx
+|           0x0000123d      add   rax, 1
+|           0x00001241      mov   rdi, rax
+|           0x00001244      call  sym.imp.malloc                       ; sym.imp.malloc ; void *malloc(size_t size)
+|           0x00001249      mov   qword [var_10h], rax
+|           0x0000124d      cmp   qword [var_10h], 0
+|       ,=&lt; 0x00001252      je    0x1292
+|       |   0x00001254      mov   rdx, qword [var_30h]
+|       |   0x00001258      mov   rax, qword [var_10h]
+|       |   0x0000125c      mov   rsi, rdx
+|       |   0x0000125f      mov   rdi, rax
+|       |   0x00001262      call  sym.imp.strcpy                       ; sym.imp.strcpy ; char *strcpy(char *dest, const char *src)
+|       |   0x00001267      mov   rdx, qword [var_28h]
+|       |   0x0000126b      mov   rax, qword [var_10h]
+|       |   0x0000126f      mov   rsi, rdx
+|       |   0x00001272      mov   rdi, rax
+|       |   0x00001275      call  sym.imp.strcat                       ; sym.imp.strcat ; char *strcat(char *s1, const char *s2)
+|       |   0x0000127a      mov   rax, qword [var_10h]
+|       |   0x0000127e      mov   rdi, rax
+|       |   0x00001281      call  sym.imp.puts                         ; sym.imp.puts ; int puts(const char *s)
+|       |   0x00001286      mov   rax, qword [var_10h]
+|       |   0x0000128a      mov   rdi, rax
+|       |   0x0000128d      call  sym.imp.free                         ; sym.imp.free ; void free(void *ptr)
+|       `-&gt; 0x00001292      mov   eax, 0
+|           0x00001297      leave
+\           0x00001298      ret</code></pre>
+<p>In this example, we analyze the whole file (via <code>aa</code>) and then print disassembly of the <code>main()</code> function (via <code>pdf</code>). The <code>aa</code> command belongs to the family of auto analysis commands and performs only the most basic auto analysis steps. In Rizin there are many different types of auto analysis commands with a different analysis depth, including partial emulation: <code>aa</code>, <code>aaa</code>, <code>aab</code>, <code>aaaa</code>, … There is also a mapping of those commands to the rizin CLI options: <code>rizin -A</code>, <code>rizin -AA</code>, and so on.</p>
+<p>It is common sense that completely automated analysis can produce non sequitur results, thus Rizin provides separate commands for the particular stages of the analysis allowing fine-grained control of the analysis process. Moreover, there is a treasure trove of configuration variables for controlling the analysis outcomes. You can find them via command <code>el</code> under <code>analysis.*</code> and <code>emu.*</code> variables namespaces.</p>
 <section id="analyze-functions" class="level2" data-number="46.1">
 <h2 data-number="46.1" class="anchored" data-anchor-id="analyze-functions"><span class="header-section-number">46.1</span> Analyze functions</h2>
 <p>One of the most important “basic” analysis commands is the set of <code>af</code> subcommands. <code>af</code> means “analyze function”. Using this command you can either allow automatic analysis of the particular function or perform a completely manual one.</p>
-<pre><code>[0x00000000]&gt; af?
-Usage: af
-| af ([name]) ([addr])                  analyze functions (start at addr or $$)
-| afr ([name]) ([addr])                 analyze functions recursively
-| af+ addr name [type] [diff]           hand craft a function (requires afb+)
-| af- [addr]                            clean all function analysis data (or function at addr)
-| afa                                   analyze function arguments in a call (afal honors dbg.funcarg)
-| afb+ fcnA bbA sz [j] [f] ([t]( [d]))  add bb to function @ fcnaddr
-| afb[?] [addr]                         List basic blocks of given function
-| afbF([0|1])                           Toggle the basic-block 'folded' attribute
-| afB 16                                set current function as thumb (change asm.bits)
-| afC[lc] ([addr])@[addr]               calculate the Cycles (afC) or Cyclomatic Complexity (afCc)
-| afc[?] type @[addr]                   set calling convention for function
-| afd[addr]                             show function + delta for given offset
-| afF[1|0|]                             fold/unfold/toggle
-| afi [addr|fcn.name]                   show function(s) information (verbose afl)
-| afj [tableaddr] [count]               analyze function jumptable
-| afl[?] [ls*] [fcn name]               list functions (addr, size, bbs, name) (see afll)
-| afm name                              merge two functions
-| afM name                              print functions map
-| afn[?] name [addr]                    rename name for function at address (change flag too)
-| afna                                  suggest automatic name for current offset
-| afo[?j] [fcn.name]                    show address for the function name or current offset
-| afs[!] ([fcnsign])                    get/set function signature at current address (afs! uses cfg.editor)
-| afS[stack_size]                       set stack frame size for function at current address
-| afsr [function_name] [new_type]       change type for given function
-| aft[?]                                type matching, type propagation
-| afu addr                              resize and analyze function from current address until addr
-| afv[absrx]?                           manipulate args, registers and variables in function
-| afx                                   list function references</code></pre>
+<pre><code>[0x00001100]&gt; af?
+Usage: af[?]   # Analyze Functions commands
+| af [&lt;name&gt;]             # Analyze functions recursively (honors `analysis.calls`)
+| afr [&lt;name&gt;]            # Analyze functions recursively
+| af+ &lt;name&gt; [&lt;type&gt;]     # Hand craft a function (requires `afb+`)
+| af-                     # Delete function
+| af-*                    # Delete all function analysis data
+| afj &lt;tbl_addr&gt; &lt;elements&gt; # Analyze function jumptable
+| afa                     # Analyze function arguments in a call
+| afal                    # Analyze function arguments in a call (honors `dbg.funcarg`)
+| afb[?]                  # Basic blocks commands
+| afB &lt;bits&gt;              # Set asm.bits for the current function
+| afs[jb!r]               # Function signatures commands
+| afo[j]                  # Show address of current function
+| afu &lt;addr&gt;              # Resize and analyze function from current address until addr
+| afx[j]                  # List function references
+| afS &lt;size&gt;              # Set stack frame size for function at current address
+| afv&lt;?&gt;                  # Manipulate arguments/variables in a function
+| afl[?]                  # List functions
+| afi[j*is]               # Show/edit function information
+| afn[as]                 # Analyze function names
+| aft                     # Type matching analysis for the function in current seek
+| afM                     # Print functions map
+| afm &lt;addr&gt;              # Merge two functions
+| afc[lor]                # Calling convention
+| afd                     # Show function + delta for given offset</code></pre>
 <p>You can use <code>afl</code> to list the functions found by the analysis.</p>
-<p>There are a lot of useful commands under <code>afl</code> such as <code>aflj</code>, which lists the function in JSON format and <code>aflm</code>, which lists the functions in the syntax found in makefiles.</p>
+<p>There are a lot of useful commands under <code>afl</code> such as <code>aflj</code> (lists the function in JSON format; <code>j</code> is a common command suffix to provide JSON output), <code>aflm</code> (lists the functions in the syntax found in makefiles), or <code>afll</code> (lists all functions in verbose mode).</p>
 <p>There’s also <code>afl=</code>, which displays ASCII-art bars with function ranges.</p>
 <p>You can find the rest of them under <code>afl?</code>.</p>
 <p>Some of the most challenging tasks while performing a function analysis are merge, crop, and resize. As with other analysis commands, you have two modes: semi-automatic and manual. For the semi-automatic, you can use <code>afm &lt;function name&gt;</code> to merge the current function with the one specified by name as an argument, <code>aff</code> to readjust the function after analysis changes or function edits, <code>afu &lt;address&gt;</code> to do the resize and analysis of the current function until the specified address.</p>
@@ -1316,7 +1324,7 @@ Usage: af
 0x00003ba8 0x00003bf9 00:0000 81</code></pre>
 <section id="handcraft-function" class="level3" data-number="46.1.1">
 <h3 data-number="46.1.1" class="anchored" data-anchor-id="handcraft-function"><span class="header-section-number">46.1.1</span> Handcraft function</h3>
-<p>before starting, let’s prepare a binary file first, for example:</p>
+<p>Before starting, let’s prepare a binary file first, for example:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> code_block<span class="op">()</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> result <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
@@ -1326,8 +1334,8 @@ Usage: af
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> result<span class="op">;</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>then compile it with <code>gcc -c example.c -m32 -O0 -fno-pie</code>, we will get the object file <code>example.o</code>. open it with rizin.</p>
-<p>since we haven’t analyzed it yet, the <code>pdf</code> command will not print out the disassembly here:</p>
+<p>Then compile it with <code>gcc -c example.c -m32 -O0 -fno-pie</code>, we will get the object file <code>example.o</code>. Open it with rizin.</p>
+<p>Since we haven’t analyzed it yet, the <code>pdf</code> command will not print out the disassembly here:</p>
 <pre><code>$ rizin example.o
 [0x08000034]&gt; pdf
 p: Cannot find function at 0x08000034
@@ -1350,24 +1358,24 @@ p: Cannot find function at 0x08000034
             0x0800005b      c9             leave
             0x0800005c      c3             ret
 </code></pre>
-<p>our goal is to handcraft a function with the following structure</p>
+<p>Our goal is to handcraft a function with the following structure</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="analyze_one.png" class="img-fluid figure-img"></p>
 <figcaption>analyze_one</figcaption>
 </figure>
 </div>
-<p>create a function at 0x8000034 named code_block:</p>
+<p>Create a function at 0x8000034 named code_block:</p>
 <pre><code>[0x8000034]&gt; af+ 0x8000034 code_block</code></pre>
-<p>In most cases, we use jump or call instructions as code block boundaries. so the range of first block is from <code>0x08000034 push ebp</code> to <code>0x08000048 jmp 0x8000052</code>. use <code>afb+</code> command to add it.</p>
+<p>In most cases, we use jump or call instructions as code block boundaries. So the range of first block is from <code>0x08000034 push ebp</code> to <code>0x08000048 jmp 0x8000052</code>. Use <code>afb+</code> command to add it.</p>
 <pre><code>[0x08000034]&gt; afb+ code_block 0x8000034 0x800004a-0x8000034 0x8000052</code></pre>
-<p>note that the basic syntax of <code>afb+</code> is <code>afb+ function_address block_address block_size [jump] [fail]</code>. the final instruction of this block points to a new address(jmp 0x8000052), thus we add the address of jump target (0x8000052) to reflect the jump info.</p>
-<p>the next block (0x08000052 ~ 0x08000056) is more likely an if conditional statement which has two branches. It will jump to 0x800004a if <code>jle-less or equal</code>, otherwise (the fail condition) jump to next instruction – 0x08000058.:</p>
+<p>Note that the basic syntax of <code>afb+</code> is <code>afb+ function_address block_address block_size [jump] [fail]</code>. The final instruction of this block points to a new address (jmp 0x8000052), thus we add the address of jump target (0x8000052) to reflect the jump info.</p>
+<p>The next block (0x08000052 ~ 0x08000056) is more likely an if conditional statement which has two branches. It will jump to 0x800004a if <code>less or equal</code>, otherwise (the fail condition) jump to next instruction - 0x08000058:</p>
 <pre><code>[0x08000034]&gt; afb+ code_block 0x8000052 0x8000058-0x8000052 0x800004a 0x8000058</code></pre>
-<p>follow the control flow and create the remaining two blocks (two branches) :</p>
+<p>Follow the control flow and create the remaining two blocks (two branches):</p>
 <pre><code>[0x08000034]&gt; afb+ code_block 0x800004a 0x8000052-0x800004a 0x8000052
 [0x08000034]&gt; afb+ code_block 0x8000058 0x800005d-0x8000058</code></pre>
-<p>check our work:</p>
+<p>Check our work:</p>
 <pre><code>[0x08000034]&gt; afb
 0x08000034 0x0800004a 00:0000 22 j 0x08000052
 0x0800004a 0x08000052 00:0000 8 j 0x08000052
@@ -1395,28 +1403,22 @@ p: Cannot find function at 0x08000034
 <li><code>aad</code> - analyze pointers to pointers references</li>
 </ul>
 <p>Those are only generic semi-automated reference searching algorithms. Rizin provides a wide choice of manual references’ creation of any kind. For this fine-grained control, you can use <code>ax</code> commands.</p>
-<pre><code>Usage: ax[?d-l*]   # see also 'afx?'
-| ax              list refs
-| ax*             output rizin commands
-| ax addr [at]    add code ref pointing to addr (from curseek)
-| ax- [at]        clean all refs/refs from addr
-| ax-*            clean all refs/refs
-| axc addr [at]   add generic code ref
-| axC addr [at]   add code call ref
-| axg [addr]      show xrefs graph to reach current function
-| axg* [addr]     show xrefs graph to given address, use .axg*;aggv
-| axgj [addr]     show xrefs graph to reach current function in json format
-| axd addr [at]   add data ref
-| axq             list refs in quiet/human-readable format
-| axj             list refs in json format
-| axF [flg-glob]  find data/code references of flags
-| axm addr [at]   copy data/code references pointing to addr to also point to curseek (or at)
-| axt [addr]      find data/code references to this address
-| axf [addr]      find data/code references from this address
-| axv [addr]      list local variables read-write-exec references
-| ax. [addr]      find data/code references from and to this address
-| axff[j] [addr]  find data/code references from this function
-| axs addr [at]   add string ref</code></pre>
+<pre><code>[0x00001100]&gt; ax?
+Usage: ax[?]   # Cross references (xrefs)
+| ax &lt;addr&gt;           # Add custom xref to addr from current seek
+| axc &lt;addr&gt;          # Add generic code xref to addr from current seek
+| axC &lt;addr&gt;          # Add call code xref to addr from current seek
+| axd &lt;addr&gt;          # Add data xref to addr from current seek
+| axs &lt;addr&gt;          # Add string xref to addr from current seek
+| axl[j*q]            # List all xrefs
+| axt[j*q]            # List xrefs to current seek
+| axf[j*q]            # List xrefs from current seek
+| axtg                # Display commands to generate graphs according to xrefs
+| ax- &lt;addr&gt; [&lt;from&gt;] # Delete xrefs to addr
+| ax-*                # Delete all xrefs
+| axm &lt;addr&gt;          # Copy xrefs pointing to addr to also point to curseek
+| axg[j*]             # Show xrefs graph to reach function at current seek
+</code></pre>
 <p>The most commonly used <code>ax</code> commands are <code>axt</code> and <code>axf</code>, especially as a part of various rz-pipe scripts. Let’s say we see the string in the data or a code section and want to find all places it was referenced from, we should use <code>axt</code>:</p>
 <pre><code>[0x0001783a]&gt; pd 2
 ;-- str.02x:
@@ -1434,19 +1436,16 @@ p: Cannot find function at 0x08000034
 sub.strlen_d50 0x5de0 [STRING] lea rcx, str.02x
 (nofunc) 0x17838 [CODE] jae str.02x</code></pre>
 <p>There are also some useful commands under <code>axt</code>. Use <code>axtg</code> to generate rizin commands which will help you to create graphs according to the XREFs.</p>
-<pre><code>[0x08048320]&gt; s main
-[0x080483e0]&gt; axtg
-agn 0x8048337 "entry0 + 23"
-agn 0x80483e0 "main"
-age 0x8048337 0x80483e0</code></pre>
+<pre><code>[0x00001100]&gt; s main
+[0x000011e9]&gt; axtg
+agn 0x1118 "entry0 + 24"
+agn 0x11e9 "main"
+age 0x1118 0x11e9</code></pre>
 <p>Use <code>axt*</code> to split the rizin commands and set flags on those corresponding XREFs.</p>
 <p>Also under <code>ax</code> is <code>axg</code>, which finds the path between two points in the file by showing an XREFs graph to reach the location or function. For example:</p>
-<pre><code>:&gt; axg sym.imp.printf
-- 0x08048a5c fcn 0x08048a5c sym.imp.printf
-  - 0x080483e5 fcn 0x080483e0 main
-  - 0x080483e0 fcn 0x080483e0 main
-    - 0x08048337 fcn 0x08048320 entry0
-  - 0x08048425 fcn 0x080483e0 main</code></pre>
+<pre><code>[0x000011e9]&gt; axg
+- 0x000011e9 fcn 0x000011e9 main
+  - 0x00001118 fcn 0x00001100 entry0</code></pre>
 <p>Use <code>axg*</code> to generate rizin commands which will help you to create graphs using <code>agn</code> and <code>age</code> commands, according to the XREFs.</p>
 <p>Apart from predefined algorithms to identify functions there is a way to specify a function prelude with a configuration option <code>analysis.prelude</code>. For example, like <code>e analysis.prelude=0x554889e5</code> which means</p>
 <pre><code>push rbp
@@ -1466,9 +1465,9 @@ mov rbp, rsp</code></pre>
 </ul>
 <section id="control-flow-configuration" class="level3" data-number="46.3.1">
 <h3 data-number="46.3.1" class="anchored" data-anchor-id="control-flow-configuration"><span class="header-section-number">46.3.1</span> Control flow configuration</h3>
-<p>The two most commonly used options for changing the behavior of control flow analysis in rizin are <code>analysis.hasnext</code> and <code>analysis.jmp.after</code>. The first one allows forcing rizin to continue the analysis after the end of the function, even if the next chunk of the code wasn’t called anywhere, thus analyzing all of the available functions. The latter one allows forcing rizin to continue the analysis even after unconditional jumps.</p>
+<p>The two most commonly used options for changing the behavior of control flow analysis in rizin are <code>analysis.hasnext</code> and <code>analysis.jmp.after</code>. The first one allows forcing rizin to continue the analysis after the end of the function, even if the next chunk of the code wasn’t called anywhere, thus analyzing all the available functions. The latter one allows forcing rizin to continue the analysis even after unconditional jumps.</p>
 <p>In addition to those we can also set <code>analysis.jmp.indir</code> to follow the indirect jumps, continuing analysis; <code>analysis.pushret</code> to analyze <code>push ...; ret</code> sequence as a jump; <code>analysis.nopskip</code> to skip the NOP sequences at a function beginning.</p>
-<p>For now, rizin also allows you to change the maximum basic block size with <code>analysis.bb.maxsize</code> option . The default value just works in most use cases, but it’s useful to increase that for example when dealing with obfuscated code. Beware that some of the basic block control options may disappear in the future in favor of more automated ways to set those.</p>
+<p>For now, rizin also allows you to change the maximum basic block size with <code>analysis.bb.maxsize</code> option. The default value just works in most use cases, but it’s useful to increase that for example when dealing with obfuscated code. Beware that some of the basic block control options may disappear in the future in favor of more automated ways to set those.</p>
 <p>For some unusual binaries or targets, there is an option <code>analysis.noncode</code>. Rizin doesn’t try to analyze data sections as a code by default. But in some cases - malware, packed binaries, binaries for embedded systems, it is often a case. Thus - this option.</p>
 </section>
 <section id="reference-control" class="level3" data-number="46.3.2">
@@ -1490,9 +1489,9 @@ mov rbp, rsp</code></pre>
 <li><code>analysis.limits</code> - enables the range limits for analysis operations</li>
 <li><code>analysis.from</code> - starting address of the limit range</li>
 <li><code>analysis.to</code> - the corresponding end of the limit range</li>
-<li><code>analysis.in</code> - specify search boundaries for analysis. You can set it to <code>io.maps</code>, <code>io.sections.exec</code>, <code>dbg.maps</code> and many more. For example:
+<li><code>analysis.in</code> - specify search boundaries for analysis. You can set it to <code>io.maps</code>, <code>bin.sections</code>, <code>dbg.maps</code> and many more. For example:
 <ul>
-<li>To analyze a specific memory map with <code>analysis.from</code> and <code>analysis.to</code>, set <code>analysis.in = dbg.maps</code>.</li>
+<li>To analyze a specific memory map with <code>analysis.from</code> and <code>analysis.to</code>, set <code>analysis.in=dbg.maps</code>.</li>
 <li>To analyze in the boundaries set by <code>analysis.from</code> and <code>analysis.to</code>, set <code>analysis.in=range</code>.</li>
 <li>To analyze in the current mapped segment or section, you can put <code>analysis.in=bin.segment</code> or <code>analysis.in=bin.section</code>, respectively.</li>
 <li>To analyze in the current memory map, specify <code>analysis.in=dbg.map</code>.</li>
@@ -1504,7 +1503,7 @@ mov rbp, rsp</code></pre>
 </section>
 <section id="jump-tables" class="level3" data-number="46.3.4">
 <h3 data-number="46.3.4" class="anchored" data-anchor-id="jump-tables"><span class="header-section-number">46.3.4</span> Jump tables</h3>
-<p>Jump tables are one of the trickiest targets in binary reverse engineering. There are hundreds of different types, the end result depending on the compiler/linker and LTO stages of optimization. Thus rizin allows enabling some experimental jump tables detection algorithms using <code>analysis.jmp.tbl</code> option. Eventually, algorithms moved into the default analysis loops once they start to work on every supported platform/target/test-case. Two more options can affect the jump tables analysis results too:</p>
+<p>Jump tables are one of the trickiest targets in binary reverse engineering. There are hundreds of different types, the end result depending on the compiler/linker and LTO stages of optimization. Thus, Rizin allows enabling some experimental jump tables detection algorithms using <code>analysis.jmp.tbl</code> option. Eventually, algorithms moved into the default analysis loops once they start to work on every supported platform/target/test-case. Two more options can affect the jump tables analysis results too:</p>
 <ul>
 <li><code>analysis.jmp.indir</code> - follow the indirect jumps, some jump tables rely on them</li>
 <li><code>analysis.datarefs</code> - follow the data references, some jump tables use those</li>
@@ -1512,13 +1511,13 @@ mov rbp, rsp</code></pre>
 </section>
 <section id="platform-specific-controls" class="level3" data-number="46.3.5">
 <h3 data-number="46.3.5" class="anchored" data-anchor-id="platform-specific-controls"><span class="header-section-number">46.3.5</span> Platform specific controls</h3>
-<p>There are two common problems when analyzing embedded targets: ARM/Thumb detection and MIPS GP value. In the case of ARM binaries rizin supports some auto-detection of ARM/Thumb mode switches, but beware that it uses partial ESIL emulation, thus slowing the analysis process. If you will not like the results, particular functions’ mode can be overridden with <code>afB</code> command.</p>
+<p>There are two common problems when analyzing embedded targets: ARM/Thumb detection and MIPS GP value. In the case of ARM binaries rizin supports some auto-detection of ARM/Thumb mode switches, but beware that it uses partial ESIL emulation, thus slowing the analysis process. If you do not like the results, particular functions’ mode can be overridden with <code>afB</code> command.</p>
 <p>The MIPS GP problem is even trickier. It is basic knowledge that GP value can be different not only for the whole program but also for some functions. To partially solve that there are options <code>analysis.gp</code> and <code>analysis.gpfixed</code>. The first one sets the GP value for the whole program or particular function. The latter allows to “constantify” the GP value if some code is willing to change its value, always resetting it if the case. Those are heavily experimental and might be changed in the future in favor of more automated analysis.</p>
 </section>
 </section>
 <section id="visuals" class="level2" data-number="46.4">
 <h2 data-number="46.4" class="anchored" data-anchor-id="visuals"><span class="header-section-number">46.4</span> Visuals</h2>
-<p>One of the easiest way to see and check the changes of the analysis commands and variables is to perform scrolling in a <code>Vv</code> special visual mode, allowing functions preview:</p>
+<p>One of the easiest ways to see and check the changes of the analysis commands and variables is to perform scrolling in a <code>Vv</code> special visual mode, allowing functions preview:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="code_analysis_vv.png" class="img-fluid figure-img"></p>
@@ -1537,46 +1536,61 @@ mov rbp, rsp</code></pre>
 <section id="analysis-hints" class="level2" data-number="46.5">
 <h2 data-number="46.5" class="anchored" data-anchor-id="analysis-hints"><span class="header-section-number">46.5</span> Analysis hints</h2>
 <p>It is not an uncommon case that analysis results are not perfect even after you tried every single configuration option. This is where the “analysis hints” rizin mechanism comes in. It allows to override some basic opcode or meta-information properties, or even to rewrite the whole opcode string. These commands are located under <code>ah</code> namespace:</p>
-<pre><code>Usage: ah[lba-]  Analysis Hints
-| ah?                show this help
-| ah? offset         show hint of given offset
-| ah                 list hints in a human-readable format
-| ah.                list hints in human-readable format from current offset
-| ah-                remove all hints
-| ah- offset [size]  remove hints at the given offset
-| ah* offset         list hints in rizin commands format
-| aha ppc @ 0x42     force arch ppc for all address &gt;= 0x42 or until the next hint
-| aha 0 @ 0x84       disable the effect of arch hints for all address &gt;= 0x84 or until the next hint
-| ahb 16 @ 0x42      force 16bit for all address &gt;= 0x42 or until the next hint
-| ahb 0 @ 0x84       disable the effect of bits hints for all address &gt;= 0x84 or until the next hint
-| ahc 0x804804       override call/jump address
-| ahd foo a0,33      replace opcode string
-| ahe 3,eax,+=       set vm analysis string
-| ahf 0x804840       override fallback address for call
-| ahF 0x10           set stackframe size at the current offset
-| ahh 0x804840       highlight this address offset in disasm
-| ahi[?] 10          define numeric base for immediates (2, 8, 10, 10u, 16, i, p, S, s)
-| ahj                list hints in JSON
-| aho call           change opcode type (see aho?) (deprecated, moved to "ahd")
-| ahp addr           set pointer hint
-| ahr val            set hint for the return value of a function
-| ahs 4              set opcode size=4
-| ahS jz             set asm.syntax=jz for this opcode
-| aht [?] &lt;type&gt;     Mark immediate as a type offset (deprecated, moved to "aho")
-| ahv val            change opcode's val field (useful to set jmptbl sizes in jmp rax)</code></pre>
-<p>One of the most common cases is to set a particular numeric base for immediates:</p>
+<pre><code>[0x00001100]&gt; ah?
+Usage: ah&lt;?&gt;   # Analysis hints
+| ahl[j*]              # List all analysis hints
+| ahl.[j*]             # List analysis hints at current seek
+| ah- [&lt;size&gt;]         # Delete analysis hints in region starting from current seek
+| ah-*                 # Delete all analysis hints
+| aha &lt;arch&gt;           # Set arch hint
+| aha-                 # Delete arch hint
+| ahb &lt;bits&gt;           # Set bits hint
+| ahb-                 # Delete bits hint
+| ahh                  # Set highlight hint
+| ahh-                 # Delete highlight hint
+| ahc &lt;addr&gt;           # Set jump/call address hint
+| ahc-                 # Delete jump/call address hint
+| ahe &lt;string&gt;         # Set ESIL string hint
+| ahe-                 # Delete ESIL string hint
+| ahd &lt;opcode&gt;         # Set opcode hint
+| ahd-                 # Delete opcode hint
+| ahs &lt;size&gt;           # Set opcode size hint
+| ahs-                 # Delete opcode size hint
+| ahf &lt;addr&gt;           # Set fallback address hint
+| ahf-                 # Delete fallback address hint
+| ahF &lt;size&gt;           # Set stackframe size hint
+| ahF-                 # Delete stackframe size hint
+| ahS &lt;string&gt;         # Set asm syntax hint
+| ahS-                 # Delete asm syntax hint
+| ahp &lt;pointer&gt;        # Set pointer hint
+| ahp-                 # Delete pointer hint
+| ahr &lt;return&gt;         # Set function return value hint
+| ahr-                 # Delete function return value hint
+| ahv &lt;value&gt;          # Set opcode value hint
+| ahv-                 # Delete opcode value hint
+| aho &lt;string&gt;         # Set opcode type hint
+| aho-                 # Delete opcode type hint
+| ahi &lt;type&gt; [&lt;nword&gt;] # Set immediate base hint
+| ahi-                 # Delete immediate base hint
+| aht &lt;struct.member&gt;  # Set structure offset hint
+| aht-                 # Delete structure offset hint
+| ahts &lt;offset&gt;        # List all matching structure offsets</code></pre>
+<p>One of the most common cases is to set a particular numeric base for immediate:</p>
 <pre><code>[0x00003d54]&gt; ahi?
-Usage: ahi [2|8|10|10u|16|bodhipSs] [@ offset]   Define numeric base
-| ahi &lt;base&gt;  set numeric base (2, 8, 10, 16)
-| ahi 10|d    set base to signed decimal (10), sign bit should depend on receiver size
-| ahi 10u|du  set base to unsigned decimal (11)
-| ahi b       set base to binary (2)
-| ahi o       set base to octal (8)
-| ahi h       set base to hexadecimal (16)
-| ahi i       set base to IP address (32)
-| ahi p       set base to htons(port) (3)
-| ahi S       set base to syscall (80)
-| ahi s       set base to string (1)
+Usage: ahi &lt;type&gt; [&lt;nword&gt;]   # Set immediate base hint
+| ahi &lt;base&gt; # Set numeric &lt;base&gt; (2, 8, 10, 16)
+| ahi 10|d   # Set base to signed decimal (10), sign bit should depend on receiver size
+| ahi 10u|du # Set base to unsigned decimal (11)
+| ahi b      # Set base to binary (2)
+| ahi o      # Set base to octal (8)
+| ahi h      # Set base to hexadecimal (16)
+| ahi i      # Set base to IP address (32)
+| ahi p      # Set base to htons(port) (3)
+| ahi S      # Set base to syscall (80)
+| ahi s      # Set base to string (1)
+
+Set base of the N-th immediate (indexing starts from 0):
+| ahi 16 1 # Set base of the 1-st immediate to hexadecimal
 
 [0x00003d54]&gt; pd 2
 0x00003d54      0583000000     add eax, 0x83
@@ -1594,7 +1608,7 @@ Usage: ahi [2|8|10|10u|16|bodhipSs] [@ offset]   Define numeric base
  0x00003d54 - 0x00003d54 =&gt; immbase=2
 [0x00003d54]&gt; ah*
  ahi 2 @ 0x3d54</code></pre>
-<p>Sometimes we need to override jump or call address, for example in case of tricky relocation, which is unknown for rizin, thus we can change the value manually. The current analysis information about a particular opcode can be checked with <code>ao</code> command. We can use <code>ahc</code> command for performing such a change:</p>
+<p>Sometimes we need to override jump or call address, for example in case of tricky relocation, which is unknown for Rizin, thus we can change the value manually. The current analysis information about a particular opcode can be checked with <code>ao</code> command. We can use <code>ahc</code> command for performing such a change:</p>
 <pre><code>[0x00003cee]&gt; pd 2
 0x00003cee      e83d080100     call sub.__errno_location_530
 0x00003cf3      85c0           test eax, eax

@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -630,7 +664,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1165,7 +1199,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>To move around the file we are inspecting we will need to change the offset at which we are using the <code>s</code> command.</p>
-<p>The argument is a math expression that can contain flag names, parenthesis, addition, subtraction, multiplication of immediates of contents of memory using brackets.</p>
+<p>The argument is a math expression that can contain flag names, parenthesis, addition, subtraction, multiplication of immediate of contents of memory using brackets.</p>
 <p>Some example commands:</p>
 <pre><code>[0x00000000]&gt; s 0x10
 [0x00000010]&gt; sd +4
@@ -1212,17 +1246,50 @@ Usage: s[?]   # Seek commands
 <p>In the visual mode, you can press <code>u</code> (undo) or <code>U</code> (redo) inside the seek history to return back to previous or forward to the next location.</p>
 <section id="open-file" class="level2" data-number="18.1">
 <h2 data-number="18.1" class="anchored" data-anchor-id="open-file"><span class="header-section-number">18.1</span> Open file</h2>
-<p>As a test file, let’s use a simple <code>hello_world.c</code> compiled in Linux ELF format. After we compile it let’s open it with rizin:</p>
+<p>As a test file, let’s use a simple <a href="https://github.com/rizinorg/book/tree/master/examples/hello_world">hello_world</a> compiled in Linux ELF 64-bit format:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">/*</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"> * This is simple hello_world program made for education purposes.</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"> * Licensed under CC-BY-SA 4.0 license.</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"> * In order to compile executable run:</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"> * gcc -o hello_world hello_world.c</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"> */</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span><span class="op">*</span> argv<span class="op">[])</span> <span class="op">{</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span>str1 <span class="op">=</span> <span class="st">"Hello "</span><span class="op">;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span>str2 <span class="op">=</span> <span class="st">"world!"</span><span class="op">;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> str1_size <span class="op">=</span> strlen<span class="op">(</span>str1<span class="op">);</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> str2_size <span class="op">=</span> strlen<span class="op">(</span>str2<span class="op">);</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> <span class="op">*</span>output <span class="op">=</span> malloc<span class="op">(</span>str1_size <span class="op">+</span> str2_size <span class="op">+</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>output<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        strcpy<span class="op">(</span>output<span class="op">,</span> str1<span class="op">);</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        strcat<span class="op">(</span>output<span class="op">,</span> str2<span class="op">);</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        puts<span class="op">(</span>output<span class="op">);</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>        free<span class="op">(</span>output<span class="op">);</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>After we compile it with <code>gcc -o hello_world hello_world.c</code> let’s open it with rizin:</p>
 <pre><code>$ rizin hello_world</code></pre>
 <p>Now we have the command prompt:</p>
-<pre><code>[0x00400410]&gt;</code></pre>
+<pre><code>[0x00001100]&gt;</code></pre>
 <p>And it is time to go deeper.</p>
 </section>
 <section id="seeking-at-any-position" class="level2" data-number="18.2">
 <h2 data-number="18.2" class="anchored" data-anchor-id="seeking-at-any-position"><span class="header-section-number">18.2</span> Seeking at any position</h2>
 <p>All seeking commands that take an address as a command parameter can use any numeral base such as hex, octal, binary or decimal.</p>
 <p>Seek to an address 0x0. An alternative command is simply <code>0x0</code></p>
-<pre><code>[0x00400410]&gt; s 0x0
+<pre><code>[0x00001100]&gt; s 0x0
 [0x00000000]&gt;</code></pre>
 <p>Print current address:</p>
 <pre><code>[0x00000000]&gt; s
@@ -1235,23 +1302,17 @@ Usage: s[?]   # Seek commands
 <p>Undo last two seeks to return to the initial address:</p>
 <pre><code>[0x00000080]&gt; shu
 [0x00000000]&gt; shu
-[0x00400410]&gt;</code></pre>
-<p>We are back at <em>0x00400410</em>.</p>
+[0x00001100]&gt;</code></pre>
+<p>We are back at <code>0x00001100</code>.</p>
 <p>There’s also a command to show the seek history:</p>
-<pre><code>[0x00400410]&gt; sh
-0x400410 
-0x40041a 
-0x400410 
-0x400411 
-0x400410  # current seek
-0x4005b4  # redo
+<pre><code>[0x00001100]&gt; sh
+0x1100 entry0 # current seek
+0x0 segment.LOAD0 # redo
+0x80 segment.PHDR+64 # redo
 [0x00400410]&gt; sh*
-f undo_3 @ 0x400410
-f undo_2 @ 0x40041a
-f undo_1 @ 0x400410
-f undo_0 @ 0x400411
-# Current seek @ 0x400410
-f redo_0 @ 0x4005b4</code></pre>
+# Current seek @ 0x1100
+f redo_0 @ 0x0
+f redo_1 @ 0x80</code></pre>
 
 
 </section>

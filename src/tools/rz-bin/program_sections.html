@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1158,40 +1158,41 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>rz-bin called with the <code>-S</code> option gives complete information about the sections of an executable. For each section the index, offset, size, alignment, type and permissions, are shown. The next example demonstrates this:</p>
-<pre><code>$ rz-bin -S /bin/ls
+<pre><code>$ rz-bin -S /usr/bin/ls
 [Sections]
-
-nth paddr          size vaddr         vsize perm name
-―――――――――――――――――――――――――――――――――――――――――――――――――――――
-00 0x00000000     0 0x00000000     0 ----
-01 0x00000238    28 0x00000238    28 -r-- .interp
-02 0x00000254    32 0x00000254    32 -r-- .note.ABI_tag
-03 0x00000278   176 0x00000278   176 -r-- .gnu.hash
-04 0x00000328  3000 0x00000328  3000 -r-- .dynsym
-05 0x00000ee0  1412 0x00000ee0  1412 -r-- .dynstr
-06 0x00001464   250 0x00001464   250 -r-- .gnu.version
-07 0x00001560   112 0x00001560   112 -r-- .gnu.version_r
-08 0x000015d0  4944 0x000015d0  4944 -r-- .rela.dyn
-09 0x00002920  2448 0x00002920  2448 -r-- .rela.plt
-10 0x000032b0    23 0x000032b0    23 -r-x .init
-11 0x000032d0  1648 0x000032d0  1648 -r-x .plt
-12 0x00003940    24 0x00003940    24 -r-x .plt.got
-13 0x00003960 73931 0x00003960 73931 -r-x .text
-14 0x00015a2c     9 0x00015a2c     9 -r-x .fini
-15 0x00015a40 20201 0x00015a40 20201 -r-- .rodata
-16 0x0001a92c  2164 0x0001a92c  2164 -r-- .eh_frame_hdr
-17 0x0001b1a0 11384 0x0001b1a0 11384 -r-- .eh_frame
-18 0x0001e390     8 0x0021e390     8 -rw- .init_array
-19 0x0001e398     8 0x0021e398     8 -rw- .fini_array
-20 0x0001e3a0  2616 0x0021e3a0  2616 -rw- .data.rel.ro
-21 0x0001edd8   480 0x0021edd8   480 -rw- .dynamic
-22 0x0001efb8    56 0x0021efb8    56 -rw- .got
-23 0x0001f000   840 0x0021f000   840 -rw- .got.plt
-24 0x0001f360   616 0x0021f360   616 -rw- .data
-25 0x0001f5c8     0 0x0021f5e0  4824 -rw- .bss
-26 0x0001f5c8   232 0x00000000   232 ---- .shstrtab</code></pre>
+paddr      size    vaddr      vsize   align perm name               type       flags         
+---------------------------------------------------------------------------------------------
+0x00000000 0x0     ---------- 0x0     0x0   ----                    NULL       
+0x00000318 0x1c    0x00000318 0x1c    0x0   -r-- .interp            PROGBITS   alloc
+0x00000338 0x50    0x00000338 0x50    0x0   -r-- .note.gnu.property NOTE       alloc
+0x00000388 0x20    0x00000388 0x20    0x0   -r-- .note.ABI-tag      NOTE       alloc
+0x000003a8 0x98    0x000003a8 0x98    0x0   -r-- .gnu.hash          GNU_HASH   alloc
+0x00000440 0xaf8   0x00000440 0xaf8   0x0   -r-- .dynsym            DYNSYM     alloc
+0x00000f38 0x564   0x00000f38 0x564   0x0   -r-- .dynstr            STRTAB     alloc
+0x0000149c 0xea    0x0000149c 0xea    0x0   -r-- .gnu.version       VERSYM     alloc
+0x00001588 0xe0    0x00001588 0xe0    0x0   -r-- .gnu.version_r     VERNEED    alloc
+0x00001668 0x150   0x00001668 0x150   0x0   -r-- .rela.dyn          RELA       alloc
+0x000017b8 0x948   0x000017b8 0x948   0x0   -r-- .rela.plt          RELA       alloc,info
+0x00002100 0x50    0x00002100 0x50    0x0   -r-- .relr.dyn          NUM        alloc
+0x00003000 0x1b    0x00003000 0x1b    0x0   -r-x .init              PROGBITS   alloc,execute
+0x00003020 0x640   0x00003020 0x640   0x0   -r-x .plt               PROGBITS   alloc,execute
+0x00003660 0x40    0x00003660 0x40    0x0   -r-x .plt.got           PROGBITS   alloc,execute
+0x000036a0 0x630   0x000036a0 0x630   0x0   -r-x .plt.sec           PROGBITS   alloc,execute
+0x00003cd0 0x14972 0x00003cd0 0x14972 0x0   -r-x .text              PROGBITS   alloc,execute
+0x00018644 0xd     0x00018644 0xd     0x0   -r-x .fini              PROGBITS   alloc,execute
+0x00019000 0x5453  0x00019000 0x5453  0x0   -r-- .rodata            PROGBITS   alloc
+0x0001e454 0x9b4   0x0001e454 0x9b4   0x0   -r-- .eh_frame_hdr      PROGBITS   alloc
+0x0001ee08 0x3348  0x0001ee08 0x3348  0x0   -r-- .eh_frame          PROGBITS   alloc
+0x00022f50 0x8     0x00023f50 0x8     0x0   -rw- .init_array        INIT_ARRAY write,alloc
+0x00022f58 0x8     0x00023f58 0x8     0x0   -rw- .fini_array        FINI_ARRAY write,alloc
+0x00022f60 0xaf8   0x00023f60 0xaf8   0x0   -rw- .data.rel.ro       PROGBITS   write,alloc
+0x00023a58 0x220   0x00024a58 0x220   0x0   -rw- .dynamic           DYNAMIC    write,alloc
+0x00023c78 0x370   0x00024c78 0x370   0x0   -rw- .got               PROGBITS   write,alloc
+0x00024000 0x280   0x00025000 0x280   0x0   -rw- .data              PROGBITS   write,alloc
+0x00024280 0x0     0x00025280 0x12d8  0x0   -rw- .bss               NOBITS     write,alloc
+0x00024280 0x105   ---------- 0x105   0x0   ---- .shstrtab          STRTAB     </code></pre>
 <p>With the <code>-Sr</code> option, rz-bin will flag the start/end of every section, and will pass the rest of information as a comment.</p>
-<pre><code>$ rz-bin -Sr /bin/ls | head
+<pre><code>$ rz-bin -Sr /usr/bin/ls | head
 fs sections
 "f section. 1 0x00000000"
 "f section..interp 1 0x000002a8"

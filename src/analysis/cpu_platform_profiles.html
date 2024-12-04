@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1170,13 +1170,13 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="the-motivation" class="level2" data-number="56.1">
 <h2 data-number="56.1" class="anchored" data-anchor-id="the-motivation"><span class="header-section-number">56.1</span> The motivation</h2>
-<p>The computer ecosystem, especially in embedded systems is vast and growing and is thus diverse and is full of trivial differences. CPUs and development boards differ by minor and sometimes large differences in their design, ports, MMIO registers and other peripherals. Rizin handles these differences by storing the data regarding each CPUs and platforms in <a href="https://book.rizin.re/basic_commands/sdb.html?highlight=SDB#sdb">SDB</a> files in a standard format, instead of hardcoding them with each of the disassembler plugins. This information will be parsed and added as flags and comments during the analysis loop and will show up in the disassembly and other places, making reverse engineering on those particular chips ets is much easier. This also helps in easy addition of a new port, in maintenance and in user-friendliness.</p>
+<p>The computer ecosystem, especially in embedded systems is vast and growing and is thus diverse and is full of trivial differences. CPUs and development boards differ by minor and sometimes large differences in their design, ports, MMIO registers and other peripherals. Rizin handles these differences by storing the data regarding each CPUs and platforms in <a href="../../src/basic_commands/sdb.html">SDB</a> files in a standard format, instead of hardcoding them with each of the disassembler plugins. This information will be parsed and added as flags and comments during the analysis loop and will show up in the disassembly and other places, making reverse engineering on those particular chips ets is much easier. This also helps in easy addition of a new port, in maintenance and in user-friendliness.</p>
 </section>
 <section id="how-it-works" class="level2" data-number="56.2">
 <h2 data-number="56.2" class="anchored" data-anchor-id="how-it-works"><span class="header-section-number">56.2</span> How it works</h2>
 <section id="cpu-profiles" class="level3" data-number="56.2.1">
 <h3 data-number="56.2.1" class="anchored" data-anchor-id="cpu-profiles"><span class="header-section-number">56.2.1</span> CPU profiles</h3>
-<p>All the specifics pertaining to a CPU is written down in a CPU profile. It is designed in a way that allows you to enter CPU specefic values like: size of the RAM (<code>RAM_SIZE</code>), size of the ROM (<code>ROM_SIZE</code>) and many more. CPU profiles can be selected using the configuration variable <code>asm.cpu</code>. Firstly, Rizin checks whether the a CPU profile exists for the selected CPU and architecture. If it exists, Rizin generates the filepath of the profile and gets to a stage where it’s ready to be loaded up. During analysis (<code>aa</code>), it’s loaded up and the values are parsed and handled. CPU profiles also allow you to add information regarding the IO and extended IO registers of a CPU. The information pertaining to the IO and extended IO registers are added as flags at their corresponding offsets.</p>
+<p>All the specifics pertaining to a CPU is written down in a CPU profile. It is designed in a way that allows you to enter CPU specific values like: size of the RAM (<code>RAM_SIZE</code>), size of the ROM (<code>ROM_SIZE</code>) and many more. CPU profiles can be selected using the configuration variable <code>asm.cpu</code>. Firstly, Rizin checks whether the CPU profile exists for the selected CPU and architecture. If it exists, Rizin generates the filepath of the profile and gets to a stage where it’s ready to be loaded up. During analysis (<code>aa</code>), it’s loaded up and the values are parsed and handled. CPU profiles also allow you to add information regarding the IO and extended IO registers of a CPU. The information pertaining to the IO and extended IO registers are added as flags at their corresponding offsets.</p>
 <p>The CPU profile of AVR’s ATTiny88 CPU looks like this:</p>
 <pre class="config"><code>RAM_SIZE=512
 ROM_SIZE=8192
@@ -1187,8 +1187,8 @@ PINB.address=0x03
 DDRB=io
 DDRB.address=0x04
 PORTB=io</code></pre>
-<p>Here, <code>PINB</code> is the name and <code>io</code> is the type of the port and this will be added as a flag at the offset <code>0x03</code>. The type can be <code>ext_io</code> if it’s an extended IO register, as well. Both will be added as <a href="https://book.rizin.re/basic_commands/flags.html?highlight=flags#flags">flags</a> and the only difference between them is that they will be added in different <a href="https://book.rizin.re/refcard/intro.html?highlight=flagspa#flagspaces">flagspaces</a>.</p>
-<p>CPU profiles also support mapping the ROM. According the <code>ROM_ADDRESS</code> and <code>ROM_SIZE</code>, a <a href="https://book.rizin.re/basic_commands/sections.html?highlight=section#sections">section</a> named <code>.rom</code> will be added during analysis.</p>
+<p>Here, <code>PINB</code> is the name and <code>io</code> is the type of the port and this will be added as a flag at the offset <code>0x03</code>. The type can be <code>ext_io</code> if it’s an extended IO register, as well. Both will be added as <a href="../../src/basic_commands/flags.html">flags</a> and the only difference between them is that they will be added in different <a href="../../src/refcard/intro.html">flagspaces</a>.</p>
+<p>CPU profiles also support mapping the ROM. According to the <code>ROM_ADDRESS</code> and <code>ROM_SIZE</code>, a <a href="../../src/basic_commands/sections.html">section</a> named <code>.rom</code> will be added during analysis.</p>
 <section id="adding-cpu-profiles" class="level4" data-number="56.2.1.1">
 <h4 data-number="56.2.1.1" class="anchored" data-anchor-id="adding-cpu-profiles"><span class="header-section-number">56.2.1.1</span> Adding CPU profiles</h4>
 <p>CPU profiles are stored in SDB files under the directory <code>lirbz/asm/cpus</code> and that’s where you will have to put your new profile. The files follow a naming convention like <code>arch-cpu</code>. You can see the complete list of things that are parsed at <code>librz/analysis/arch_profile.c</code> and if necessary, a new key can be easily added.</p>
@@ -1198,7 +1198,7 @@ PORTB=io</code></pre>
 </section>
 <section id="platform-profiles" class="level3" data-number="56.2.2">
 <h3 data-number="56.2.2" class="anchored" data-anchor-id="platform-profiles"><span class="header-section-number">56.2.2</span> Platform profiles</h3>
-<p>Platform profiles are designed with an idea to support adding information that is pertaining to a specific board or a micro controller. For example, most of the Raspberry Pi-s use a specific Broadcom chip and its peripherals like registers and interrupts will be the same for all Raspberry Pi-s. These profiles can be selected using the configuration variable <code>asm.platforms</code> and is loaded during analysis (<code>aa</code>). If you run <code>e asm.platform=?</code>, you can see the supported platforms by the selected architecture and CPU.</p>
+<p>Platform profiles are designed with an idea to support adding information that is pertaining to a specific board or a microcontroller. For example, most of the Raspberry Pi-s use a specific Broadcom chip and its peripherals like registers and interrupts will be the same for all Raspberry Pi-s. These profiles can be selected using the configuration variable <code>asm.platforms</code> and is loaded during analysis (<code>aa</code>). If you run <code>e asm.platform=?</code>, you can see the supported platforms by the selected architecture and CPU.</p>
 <p>Let’s have a look at Broadcom 2835’s platform profile:</p>
 <pre class="config"><code>AUX_IRQ=name
 AUX_IRQ.address=0x7e215000
@@ -1207,7 +1207,7 @@ AUX_IRQ.comment=Auxiliary Interrupt status
 AUX_MU_IO_REG=name
 AUX_MU_IO_REG.address=0x7e215040
 AUX_MU_IO_REG.comment=Mini UART I/O Data</code></pre>
-<p>Just like in CPU profiles, the <code>name</code> will be added as a flag and the <code>comment</code> as a <a href="https://book.rizin.re/disassembling/adding_metadata.html?highlight=Comment#adding-metadata-to-disassembly">comment</a> (<code>CCu</code>).</p>
+<p>Just like in CPU profiles, the <code>name</code> will be added as a flag and the <code>comment</code> as a <a href="../../src/disassembling/adding_metadata.html">comment</a> (<code>CCu</code>).</p>
 <section id="adding-platform-profiles" class="level4" data-number="56.2.2.1">
 <h4 data-number="56.2.2.1" class="anchored" data-anchor-id="adding-platform-profiles"><span class="header-section-number">56.2.2.1</span> Adding platform profiles</h4>
 <p>Platform profiles are stored in <code>librz/asm/platforms/</code> and that’s where you will have to put your profile. They follow a naming convention like <code>arch-cpu-platform</code>.</p>

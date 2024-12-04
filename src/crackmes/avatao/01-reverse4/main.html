@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1179,14 +1179,14 @@ ul.task-list li input[type="checkbox"] {
 <p>Hitting <em>p</em> in graph view will bring up the minimap. It displays the basic blocks and the connections between them in the current function, and it also shows the disassembly of the currently selected block (marked with @@@@@ on the minimap). You can select the next or the previous block using the *&lt;TAB&gt;* and the *&lt;SHIFT&gt;&lt;TAB&gt;* keys respectively. You can also select the true or the false branches using the <em>t</em> and the <em>f</em> keys.</p>
 <p>It is possible to bring up the prompt in visual mode using the <em>:</em> key, and you can use <em>o</em> to seek.</p>
 </blockquote>
-<p>Lets read main node-by-node! The first block looks like this:</p>
+<p>Let’s read main node-by-node! The first block looks like this:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img/main/bb-0c63.png" class="img-fluid figure-img"></p>
 <figcaption>main bb-0c63</figcaption>
 </figure>
 </div>
-<p>We can see that the program reads a word (2 bytes) into the local variable named <em>local_10_6</em>, and than compares it to 0xbb8. That’s 3000 in decimal:</p>
+<p>We can see that the program reads a word (2 bytes) into the local variable named <em>local_10_6</em>, and then compares it to 0xbb8. That’s 3000 in decimal:</p>
 <pre><code>[0x00400c63]&gt; % 0xbb8
 int32   3000
 uint32  3000
@@ -1269,7 +1269,7 @@ d 0x400a51 mov qword [rbp - 8], 0x602120</code></pre>
 <figcaption>main bb-0dde</figcaption>
 </figure>
 </div>
-<p>OK, so now we know that we have to supply a bytecode that will generate that string when executed. As we can see on the minimap, there are still a few more branches ahead, which probably means more conditions to meet. Lets investigate them before we delve into <em>vmloop</em>!</p>
+<p>OK, so now we know that we have to supply a bytecode that will generate that string when executed. As we can see on the minimap, there are still a few more branches ahead, which probably means more conditions to meet. Let’s investigate them before we delve into <em>vmloop</em>!</p>
 <p>If you take a look at the minimap of the whole function, you can probably recognize that there is some kind of loop starting at block <em>[<em>0d34</em>]</em>, and it involves the following nodes:</p>
 <ul>
 <li>[<em>0d34</em>]</li>
@@ -1323,7 +1323,7 @@ d 0x400a51 mov qword [rbp - 8], 0x602120</code></pre>
 <figcaption>main bb-0d6b</figcaption>
 </figure>
 </div>
-<p>This piece of code may look a bit strange if you are not familiar with x86_64 specific stuff. In particular, we are talking about RIP-relative addressing, where offsets are described as displacements from the current instruction pointer, which makes implementing PIE easier. Anyways, rizin is nice enough to display the actual address (0x602104). Got the address, flag it!</p>
+<p>This piece of code may look a bit strange if you are not familiar with x86_64 specific stuff. In particular, we are talking about RIP-relative addressing, where offsets are described as displacements from the current instruction pointer, which makes implementing PIE easier. Anyway, rizin is nice enough to display the actual address (0x602104). Got the address, flag it!</p>
 <pre><code>:&gt; f sym.good_if_ne_zero 4 0x602104</code></pre>
 <p>Keep in mind though, that if RIP-relative addressing is used, flags won’t appear directly in the disassembly, but rizin displays them as comments:</p>
 <div class="quarto-figure quarto-figure-center">

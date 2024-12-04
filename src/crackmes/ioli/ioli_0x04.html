@@ -664,7 +664,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1201,66 +1201,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span>   0x0000065e 0x0804865e 24  25   .rodata ascii IOLI Crackme Level 0x04<span class="dt">\n</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">3</span>   0x00000677 0x08048677 10  11   .rodata ascii Password: </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Checking for strings we see that our old friends “Password OK!” and “Password Incorrect!” are back in their unobfuscated forms.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>$ rizin <span class="op">./</span>crackme0x04</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">[</span><span class="bn">0x080483d0</span><span class="op">]&gt;</span> aaa</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span><span class="bn">0x080483d0</span><span class="op">]&gt;</span> pdg @ main</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>undefined4 main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_88h<span class="op">;</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_7ch<span class="op">;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    sym<span class="op">.</span>imp<span class="op">.</span>printf<span class="op">(</span><span class="st">"IOLI Crackme Level 0x04</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    sym<span class="op">.</span>imp<span class="op">.</span>printf<span class="op">(</span><span class="st">"Password: "</span><span class="op">);</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    sym<span class="op">.</span>imp<span class="op">.</span>scanf<span class="op">(</span>data<span class="fl">.08048682</span><span class="op">,</span> <span class="op">&amp;</span>var_7ch<span class="op">);</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    sym<span class="op">.</span>check<span class="op">((</span><span class="dt">char</span> <span class="op">*)&amp;</span>var_7ch<span class="op">);</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="op">[</span><span class="bn">0x080483d0</span><span class="op">]&gt;</span> ps @ data<span class="fl">.08048682</span> </span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>$ rizin ./crackme0x04
+[0x080483d0]&gt; aaa
+[0x080483d0]&gt; pdg @ main
+
+undefined4 main(void)
+{
+    int32_t var_88h;
+    int32_t var_7ch;
+    
+    sym.imp.printf("IOLI Crackme Level 0x04\n");
+    sym.imp.printf("Password: ");
+    sym.imp.scanf(data.08048682, &amp;var_7ch);
+    sym.check((char *)&amp;var_7ch);
+    return 0;
+}
+[0x080483d0]&gt; ps @ data.08048682 
+%s</code></pre>
 <p>This time though, <code>scanf</code> takes a <em>string</em> and passes it to a function called <code>check</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span><span class="bn">0x080483d0</span><span class="op">]&gt;</span> pdg @ sym<span class="op">.</span>check</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">// </span><span class="al">WARNING</span><span class="co">: Variable defined which should be unmapped: var_28h</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">// </span><span class="al">WARNING</span><span class="co">: Variable defined which should be unmapped: var_24h</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">// </span><span class="al">WARNING</span><span class="co">: [rz-ghidra] Detected overlap for variable var_11h</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> sym<span class="op">.</span>check<span class="op">(</span><span class="dt">int32_t</span> arg_4h<span class="op">)</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">uint32_t</span> uVar1<span class="op">;</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_28h<span class="op">;</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_24h<span class="op">;</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    undefined var_11h<span class="op">;</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_10h<span class="op">;</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_ch<span class="op">;</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_8h<span class="op">;</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    var_ch <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    var_10h <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span> <span class="kw">true</span> <span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        uVar1 <span class="op">=</span> sym<span class="op">.</span>imp<span class="op">.</span>strlen<span class="op">(</span>arg_4h<span class="op">);</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>uVar1 <span class="op">&lt;=</span> <span class="op">(</span><span class="dt">uint32_t</span><span class="op">)</span>var_10h<span class="op">)</span> <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        var_11h <span class="op">=</span> <span class="op">*(</span>undefined <span class="op">*)(</span>var_10h <span class="op">+</span> arg_4h<span class="op">);</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        sym<span class="op">.</span>imp<span class="op">.</span>sscanf<span class="op">(&amp;</span>var_11h<span class="op">,</span> <span class="bn">0x8048638</span><span class="op">,</span> <span class="op">&amp;</span>var_8h<span class="op">);</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        var_ch <span class="op">=</span> var_ch <span class="op">+</span> var_8h<span class="op">;</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>var_ch <span class="op">==</span> <span class="bn">0xf</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>            sym<span class="op">.</span>imp<span class="op">.</span>printf<span class="op">(</span><span class="st">"Password OK!</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>            sym<span class="op">.</span>imp<span class="op">.</span>exit<span class="op">(</span><span class="dv">0</span><span class="op">);</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>        var_10h <span class="op">=</span> var_10h <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    sym<span class="op">.</span>imp<span class="op">.</span>printf<span class="op">(</span><span class="st">"Password Incorrect!</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="op">[</span><span class="bn">0x080483d0</span><span class="op">]&gt;</span> afvl @ sym<span class="op">.</span>check</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>var <span class="dt">int32_t</span> var_28h @ stack <span class="op">-</span> <span class="bn">0x28</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>var <span class="dt">int32_t</span> var_24h @ stack <span class="op">-</span> <span class="bn">0x24</span></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>var <span class="dt">int32_t</span> var_11h @ stack <span class="op">-</span> <span class="bn">0x11</span></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>var <span class="dt">int32_t</span> var_10h @ stack <span class="op">-</span> <span class="bn">0x10</span></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>var <span class="dt">int32_t</span> var_ch @ stack <span class="op">-</span> <span class="bn">0xc</span></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>var <span class="dt">int32_t</span> var_8h @ stack <span class="op">-</span> <span class="bn">0x8</span></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>arg <span class="dt">int32_t</span> arg_4h @ stack <span class="op">+</span> <span class="bn">0x4</span></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="op">[</span><span class="bn">0x080483d0</span><span class="op">]&gt;</span> ps @ <span class="bn">0x8048638</span> @<span class="op">!</span><span class="dv">2</span></span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>[0x080483d0]&gt; pdg @ sym.check
+
+// WARNING: Variable defined which should be unmapped: format
+// WARNING: Variable defined which should be unmapped: args
+
+void sym.check(char *s)
+{
+    uint32_t uVar1;
+    char *format;
+    va_list args;
+    char *var_11h;
+    unsigned long var_ch;
+    int32_t var_8h;
+    
+    var_ch = 0;
+    stack0xfffffff0 = 0;
+    while( true ) {
+        uVar1 = sym.imp.strlen(s);
+        if (uVar1 &lt;= stack0xfffffff0) break;
+        var_11h._0_1_ = s[stack0xfffffff0];
+        sym.imp.sscanf(&amp;var_11h, data.08048638, &amp;var_8h);
+        var_ch = var_ch + var_8h;
+        if (var_ch == 0xf) {
+            sym.imp.printf("Password OK!\n");
+            sym.imp.exit(0);
+        }
+        unique0x00003f80 = stack0xfffffff0 + 1;
+    }
+    sym.imp.printf("Password Incorrect!\n");
+    return;
+}
+
+[0x080483d0]&gt; afvl @ sym.check
+var const char *format @ stack - 0x28
+var va_list args @ stack - 0x24
+var const char *var_11h @ stack - 0x11
+var unsigned long var_ch @ stack - 0xc
+var int32_t var_8h @ stack - 0x8
+arg const char *s @ stack + 0x4
+[0x080483d0]&gt; ps @ 0x8048638 @!2
+%d</code></pre>
 <p>A few things to note: <code>sscanf</code> in the <code>while</code> loop takes an integer (“%d”), and the result is placed in <code>var_8h</code>, which is subsequently used to increment <code>var_ch</code>. As soon as <code>var_ch</code> equals 15 (0xf) we gain entry.</p>
 <p>Other than that however it may not be very obvious at first glance what exactly is going on here. So let’s start a debugging session to execute the function.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin <span class="at">-d</span> ./crackme0x04</span>
@@ -1269,33 +1268,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048509]</span><span class="op">&gt;</span> dr eip=sym.check  <span class="co"># instruction pointer to start of `check`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We will want to pass our own strings to <code>check</code>, so let’s allocate some memory and write a string to it.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048509]</span><span class="op">&gt;</span> dm+ 512 @ <span class="at">-1</span>              <span class="co"># Allocate 512 bytes at anywhere (-1)</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="va">ra0</span><span class="op">=</span>0xf3643000</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048509]</span><span class="op">&gt;</span> wz <span class="st">"letmein"</span> @ 0xf3643000 <span class="co"># Write null-terminated string to our allocated memory</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048509]</span><span class="op">&gt;</span> <span class="pp">*</span>esp+4=0xf3643000         <span class="co"># store the address under `arg_4h` (stack + 0x04)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="va">ra0</span><span class="op">=</span>0xf7fbb000</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048509]</span><span class="op">&gt;</span> wz <span class="st">"letmein"</span> @ 0xf7fbb000 <span class="co"># Write null-terminated string to our allocated memory</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048509]</span><span class="op">&gt;</span> <span class="pp">*</span>esp+4=0xf7fbb000         <span class="co"># store the address under `arg_4h` (stack + 0x04)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The password check completes if <code>var_ch</code> equals 15 (0xf) so let’s add a breakpoint that prints the value of <code>var_ch</code>. We are going to be putting the breakpoint at the comparison of <code>var_ch</code> and <code>0xf</code>, try to find it using <code>pdf @ sym.check</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048508]</span><span class="op">&gt;</span> pdf @ sym.check <span class="co"># find `cmp dword [var_ch], 0xf` </span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048508]</span><span class="op">&gt;</span> db @ 0x080484d6                       <span class="co"># set breakpoint</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048508]</span><span class="op">&gt;</span> dbc <span class="st">'pxw 1 @ esp-0xc'</span> @ 0x080484d6    <span class="co"># execute command on break</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048508]</span><span class="op">&gt;</span> dcr                                   <span class="co"># execute until return</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffa833f0</span>  0x00000004                                   . <span class="co"># l</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffa833f0</span>  0x00000008                                   . <span class="co"># e</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffa833f0</span>  0x0000000c                                   . <span class="co"># t</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffa833f0</span>  0x00000010                                   . <span class="co"># m</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffa833f0</span>  0x00000014                                   . <span class="co"># e</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffa833f0</span>  0x00000018                                   . <span class="co"># i</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffa833f0</span>  0x0000001c                                   . <span class="co"># n</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffeefb00</span>  0x000000ff                                   . <span class="co"># l</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffeefb00</span>  0x000000fe                                   . <span class="co"># e</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffeefb00</span>  0x000000fd                                   . <span class="co"># t</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffeefb00</span>  0x000000fc                                   . <span class="co"># m</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffeefb00</span>  0x000000fb                                   . <span class="co"># e</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffeefb00</span>  0x000000fa                                   . <span class="co"># i</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffeefb00</span>  0x000000f9                                   . <span class="co"># n</span></span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Password</span> Incorrect!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We can see that each letter increments <code>var_ch</code> by 4. Remember that <code>sscanf</code> in <code>check</code> takes a number (%d) as input. And because we didn’t provide any numbers, odds are that ‘4’ was probably some leftover data that happend to sit at the location of <code>var_ch</code>. This was never overwritten because <code>sscanf</code> didn’t encounter any numbers.</p>
 <p>So let’s try giving it a number as input.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048508]</span><span class="op">&gt;</span> wz <span class="st">"1234"</span> @ 0xf3643010</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048508]</span><span class="op">&gt;</span> <span class="pp">*</span>esp+4=0xf3643010</span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048508]</span><span class="op">&gt;</span> wz <span class="st">"1234"</span> @ 0xf7fbb010</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048508]</span><span class="op">&gt;</span> <span class="pp">*</span>esp+4=0xf7fbb010</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048508]</span><span class="op">&gt;</span> dr eip=sym.check</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048508]</span><span class="op">&gt;</span> dcr</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffa833f0</span>  0x00000001                                   . <span class="co"># 1</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffa833f0</span>  0x00000003                                   . <span class="co"># 2</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffa833f0</span>  0x00000006                                   . <span class="co"># 3</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffa833f0</span>  0x0000000a                                   . <span class="co"># 4</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffeefb00</span>  0x00000001                                   . <span class="co"># 1</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffeefb00</span>  0x00000003                                   . <span class="co"># 2</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffeefb00</span>  0x00000006                                   . <span class="co"># 3</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ex">0xffeefb00</span>  0x0000000a                                   . <span class="co"># 4</span></span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Password</span> Incorrect!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now we see what the function <code>check</code> is actually supposed to do: it increments the counter by each digit encountered. Or in other words it computes the digit sum, which has to land on 15 at some point during the computation.</p>
 <p>And indeed, cleaning up the decompiled <code>check</code> makes this more obvious.</p>

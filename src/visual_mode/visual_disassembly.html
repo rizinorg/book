@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1199,7 +1199,7 @@ d → d
 0x004048f7 hex length=165 delta=0
 0x004048f7  48c1 e83f 4801 c648 d1fe 7415 b800 0000
 ...</code></pre>
-<p>To improve code readability you can change how rizin presents numerical values in disassembly, by default most of disassembly display numerical value as hexadecimal. Sometimes you would like to view it as a decimal, binary or even custom defined constant. To change value format you can use <code>d</code> following by <code>i</code> then choose what base to work in, this is the equivalent to <code>ahi</code>:</p>
+<p>To improve code readability you can change how Rizin presents numerical values in disassembly, by default most disassembly display numerical value as hexadecimal. Sometimes you would like to view it as a decimal, binary or even custom defined constant. To change value format you can use <code>d</code> following by <code>i</code> then choose what base to work in, this is the equivalent to <code>ahi</code>:</p>
 <pre><code>d → i → ...
 0x004048f7      48c1e83f       shr rax, 0x3f
 d → i →  10
@@ -1208,7 +1208,7 @@ d → i →  2
 0x004048f7      48c1e83f       shr rax, '?'</code></pre>
 <section id="usage-of-the-cursor-for-insertingpatching" class="level3" data-number="30.2.1">
 <h3 data-number="30.2.1" class="anchored" data-anchor-id="usage-of-the-cursor-for-insertingpatching"><span class="header-section-number">30.2.1</span> Usage of the Cursor for Inserting/Patching…</h3>
-<p>Remember that, to be able to actually edit files loaded in rizin, you have to start it with the <code>-w</code> option. Otherwise a file is opened in read-only mode.</p>
+<p>Remember that, to be able to actually edit files loaded in rizin, you have to start it with the <code>-w</code> option. Otherwise, a file is opened in read-only mode.</p>
 <p>Pressing lowercase <code>c</code> toggles the cursor mode. When this mode is active, the currently selected byte (or byte range) is highlighted.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1257,7 +1257,7 @@ str.David_MacKenzie:</code></pre>
 <h2 data-number="30.8" class="anchored" data-anchor-id="the-huds"><span class="header-section-number">30.8</span> The HUDS</h2>
 <section id="the-userfriendly-hud" class="level3" data-number="30.8.1">
 <h3 data-number="30.8.1" class="anchored" data-anchor-id="the-userfriendly-hud"><span class="header-section-number">30.8.1</span> The “UserFriendly HUD”</h3>
-<p>The “UserFriendly HUD” can be accessed using the <code>??</code> key-combination. This HUD acts as an interactive Cheat Sheet that one can use to more easily find and execute commands. This HUD is particularly useful for new-comers. For experienced users, the other HUDS which are more activity-specific may be more useful.</p>
+<p>The “UserFriendly HUD” can be accessed using the <code>??</code> key-combination. This HUD acts as an interactive Cheat Sheet that one can use to more easily find and execute commands. This HUD is particularly useful for newcomers. For experienced users, the other HUDS which are more activity-specific may be more useful.</p>
 </section>
 <section id="the-flagcommentfunctions..-hud" class="level3" data-number="30.8.2">
 <h3 data-number="30.8.2" class="anchored" data-anchor-id="the-flagcommentfunctions..-hud"><span class="header-section-number">30.8.2</span> The “flag/comment/functions/.. HUD”</h3>
@@ -1271,7 +1271,7 @@ str.David_MacKenzie:</code></pre>
 </section>
 <section id="visual-configuration-editor" class="level2" data-number="30.10">
 <h2 data-number="30.10" class="anchored" data-anchor-id="visual-configuration-editor"><span class="header-section-number">30.10</span> Visual Configuration Editor</h2>
-<p>This HUD can be accessed using the <code>e</code> key in visual mode. The editor allows you to easily examine and change rizin’s configuration. For example, if you want to change something about the disassembly display, select <code>asm</code> from the list, navigate to the item you wish to modify it, then select it by hitting <code>Enter</code>. If the item is a boolean variable, it will toggle, otherwise you will be prompted to provide a new value.</p>
+<p>This HUD can be accessed using the <code>e</code> key in visual mode. The editor allows you to easily examine and change Rizin’s configuration. For example, if you want to change something about the disassembly display, select <code>asm</code> from the list, navigate to the item you wish to modify it, then select it by hitting <code>Enter</code>. If the item is a boolean variable, it will toggle, otherwise you will be prompted to provide a new value.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="select_asm.png" class="img-fluid figure-img"></p>

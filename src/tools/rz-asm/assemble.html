@@ -664,7 +664,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1197,8 +1197,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Assembling is the action to take a computer instruction in human readable form (using mnemonics) and convert that into a bunch of bytes that can be executed by a machine.</p>
-<p>In rizin, the assembler and disassembler logic is implemented in the rz_asm_* API, and can be used with the pa and pad commands from the commandline as well as using <code>rz-asm</code>.</p>
+<p>Assembling is the action to take a computer instruction in human-readable form (using mnemonics) and convert that into a bunch of bytes that can be executed by a machine.</p>
+<p>In Rizin, the assembler and disassembler logic is implemented in the rz_asm_* API, and can be used with the pa and pad commands from the commandline as well as using <code>rz-asm</code>.</p>
 <p>Rz-asm can be used to quickly copy-paste hexpairs that represent a given machine instruction. The following line is assembling this mov instruction for x86/32.</p>
 <pre><code>$ rz-asm -a x86 -b 32 'mov eax, 33'
 b821000000</code></pre>
@@ -1209,7 +1209,7 @@ b821000000</code></pre>
 <p>The <code>pa</code> and <code>pad</code> are a subcommands of print, what means they will only print assembly or disassembly. In case you want to actually write the instruction it is required to use <code>wa</code> or <code>wx</code> commands with the assembly string or bytes appended.</p>
 <p>The assembler understands the following input languages and their flavors: <code>x86</code> (Intel and AT&amp;T variants), <code>olly</code> (OllyDBG syntax), <code>powerpc</code> (PowerPC), <code>arm</code> and <code>java</code>. For Intel syntax, rz-asm tries to mimic NASM or GAS.</p>
 <p>There are several examples in the rz-asm source code directory. Consult them to understand how you can assemble a raw binary file from a rz-asm description.</p>
-<p>Lets create an assembly file called <code>selfstop.rzasm</code>:</p>
+<p>Let’s create an assembly file called <code>selfstop.rzasm</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode asm code-with-copy"><code class="sourceCode fasm"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">; Self-Stop shellcode written in rz-asm for x86</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">;</span></span>
@@ -1256,7 +1256,7 @@ b821000000</code></pre>
        0x0000001d    c3           ret</code></pre>
 <section id="visual-mode" class="level3" data-number="90.0.1">
 <h3 data-number="90.0.1" class="anchored" data-anchor-id="visual-mode"><span class="header-section-number">90.0.1</span> Visual mode</h3>
-<p>Assembling also is accessible in rizin visual mode through pressing <code>A</code> key to insert the assembly in the current offset.</p>
+<p>Assembling also is accessible in Rizin visual mode through pressing <code>A</code> key to insert the assembly in the current offset.</p>
 <p>The cool thing of writing assembly using the visual assembler interface that the changes are done in memory until you press enter.</p>
 <p>So you can check the size of the code and which instructions is overlapping before committing the changes.</p>
 

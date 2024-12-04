@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1168,23 +1168,23 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>Rizin supports C-syntax data type definitions. Most of the related commands are located in <code>t</code> namespace:</p>
-<pre><code>[0x000051c0]&gt; t?
+<pre><code>[0x00001100]&gt; t?
 Usage: t[?]   # Types, noreturn, signatures, C parser and more
-| t[j*] [&lt;type&gt;] # List all types / Show type information
-| t- &lt;type&gt;      # Remove the type
-| t-*            # Remove all types
-| tc[dc]         # List loaded types in C format
-| td &lt;type&gt;      # Define type from C definition
-| te[jbcdf]      # List loaded enums
-| tf[j-c?]       # List loaded functions definitions
-| tn[j-?]        # Manage noreturn function attributes and marks
-| to[es]         # Open C header file and load types from it
-| tp[vx]         # Print formatted type casted to the address
-| ts[jlcd]       # List loaded structures
-| tt[jc]         # List loaded typedefs
-| tu[jlcd]       # List loaded unions
-| tx[fgl]        # Type xrefs</code></pre>
-<p>Note that the basic (atomic) types are not those from the C standard - not <code>char</code>, <code>_Bool</code>, or <code>short</code>. Because those types can be different from one platform to another, rizin uses <code>definite</code> types like as <code>int8_t</code> or <code>uint64_t</code> and will convert <code>int</code> to <code>int32_t</code> or <code>int64_t</code> depending on the binary or debuggee platform/compiler.</p>
+| t[j*l] [&lt;type&gt;] # List all types / Show type information
+| t- &lt;type&gt;       # Remove the type
+| t-*             # Remove all types
+| tc[dc]          # List loaded types in C format
+| td &lt;type&gt;       # Define type from C definition
+| te[jbcdf]       # List loaded enums
+| tf[j-c?]        # List loaded functions definitions
+| tn[j-?]         # Manage noreturn function attributes and marks
+| to[es]          # Open C header file and load types from it
+| tp[vx]          # Print formatted type casted to the address
+| ts[jlcd]        # List loaded structures
+| tt[jc]          # List loaded typedefs
+| tu[jlcd]        # List loaded unions
+| tx[fgl]         # Type xrefs</code></pre>
+<p>Note that the basic (atomic) types are not those from the C standard - not <code>char</code>, <code>_Bool</code>, or <code>short</code>. Because those types can be different from one platform to another, Rizin uses <code>definite</code> types like as <code>int8_t</code> or <code>uint64_t</code> and will convert <code>int</code> to <code>int32_t</code> or <code>int64_t</code> depending on the binary or debuggee platform/compiler.</p>
 <p>Basic types can be listed using the <code>t</code> command. For structured types, you can use <code>ts</code>, <code>tu</code>, or <code>te</code> for structs, unions, and enums, respectively:</p>
 <pre><code>[0x000051c0]&gt; t
 char
@@ -1199,7 +1199,7 @@ long long
 ...</code></pre>
 <section id="loading-types" class="level3" data-number="48.0.1">
 <h3 data-number="48.0.1" class="anchored" data-anchor-id="loading-types"><span class="header-section-number">48.0.1</span> Loading types</h3>
-<p>There are three easy ways to define a new type: * Passing a string to the <code>td</code> command * Passing a file with the <code>to &lt;filename&gt;</code> command * Using your defined <code>cfg.editor</code> by calling the the <code>to -</code> command</p>
+<p>There are three easy ways to define a new type: * Passing a string to the <code>td</code> command * Passing a file with the <code>to &lt;filename&gt;</code> command * Using your defined <code>cfg.editor</code> by calling the <code>to -</code> command</p>
 <pre><code>[0x000051c0]&gt; td "struct foo {char* a; int b;}"
 [0x000051c0]&gt; cat ~/rizin-regressions/bins/headers/s3.h
 struct S1 {
@@ -1259,10 +1259,10 @@ global struct S1 struct_1 @ 0x000051cf</code></pre>
  0x000051f8      lea rax, loc._edata         ; 0x21f248
  0x000051ff      cmp rax, rdi
  0x00005202      mov rbp, rsp</code></pre>
-<p>Once the struct is linked, rizin tries to propagate structure offset in the function at the current offset, to run this analysis on the whole program or at any targeted functions after all structs are linked you have <code>aat</code> command:</p>
-<pre><code>[0x00000000]&gt; aa?
-| aat [&lt;func_name&gt;] # Analyze all/given function to convert immediate to linked structure offsets</code></pre>
-<p>Note sometimes the emulation may not be accurate, for example as below :</p>
+<p>Once the struct is linked, Rizin tries to propagate structure offset in the function at the current offset, to run this analysis on the whole program or at any targeted functions after all structs are linked you have <code>aat</code> command:</p>
+<pre><code>[0x00000000]&gt; aat?
+Usage: aat [&lt;func_name&gt;]   # Analyze all/given function to convert immediate to linked structure offsets</code></pre>
+<p>Note sometimes the emulation may not be accurate, for example as below:</p>
 <pre><code>|0x000006da  push rbp
 |0x000006db  mov rbp, rsp
 |0x000006de  sub rsp, 0x10
@@ -1272,8 +1272,8 @@ global struct S1 struct_1 @ 0x000051cf</code></pre>
 |0x000006f0  mov rax, qword [local_8h]
 </code></pre>
 <p>The return value of <code>malloc</code> may differ between two emulations, so you have to set the hint for return value manually using <code>ahr</code> command, so run <code>tl</code> or <code>aat</code> command after setting up the return value hint.</p>
-<pre><code>[0x000006da]&gt; ah?
-| ahr &lt;return&gt;         # Set function return value hint</code></pre>
+<pre><code>[0x000006da]&gt; ahr?
+Usage: ahr &lt;return&gt;   # Set function return value hint</code></pre>
 </section>
 <section id="structure-immediates" class="level3" data-number="48.0.4">
 <h3 data-number="48.0.4" class="anchored" data-anchor-id="structure-immediates"><span class="header-section-number">48.0.4</span> Structure Immediates</h3>

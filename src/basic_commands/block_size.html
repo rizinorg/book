@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1159,16 +1159,12 @@ ul.task-list li input[type="checkbox"] {
 
 <p>The block size determines how many bytes rizin commands will process when not given an explicit size argument. You can temporarily change the block size by specifying a numeric argument to the print commands. For example <code>px 20</code>.</p>
 <pre><code>[0x00000000]&gt; b?
-Usage: b[f] [arg]  # Get/Set block size
-| b 33     set block size to 33
-| b eip+4  numeric argument can be an expression
-| b        display current block size
-| b+3      increase blocksize by 3
-| b-16     decrease blocksize by 16
-| b*       display current block size in rizin command
-| bf foo   set block size to flag size
-| bj       display block size information in JSON
-| bm 1M    set max block size</code></pre>
+Usage: b[j*-+fm]   # Display or change the block size
+| b[j*] [&lt;num&gt;] # Set/Get current block size
+| b- &lt;num&gt;      # Decrease current block size
+| b+ &lt;num&gt;      # Increase current block size
+| bf &lt;flag&gt;     # Set block size to flag size
+| bm [&lt;num&gt;]    # Set/Get max block size</code></pre>
 <p>The <code>b</code> command is used to change the block size:</p>
 <pre><code>[0x00000000]&gt; b 0x100   # block size = 0x100
 [0x00000000]&gt; b+16      #  ... = 0x110

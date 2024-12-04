@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1159,62 +1159,46 @@ ul.task-list li input[type="checkbox"] {
 
 <p>For most generic reverse engineering tasks like finding the differences between two binary files, which bytes has changed, find differences in the graphs of the code analysis results, and other diffing operations you can just use rz-diff:</p>
 <pre><code>$ rz-diff -h</code></pre>
-<p>Inside rizin, the functionalities exposed by rz-diff are available with the <code>c</code> command.</p>
+<p>Inside Rizin, the functionalities exposed by rz-diff are available with the <code>c</code> command.</p>
 <p><code>c</code> (short for “compare”) allows you to compare arrays of bytes from different sources. The command accepts input in a number of formats and then compares it against values found at current seek position.</p>
-<pre><code>[0x00404888]&gt; c?
-Usage: c[?dfx] [argument]   # Compare
-| c [string]               Compare a plain with escaped chars string
-| c* [string]              Same as above, but printing rizin commands instead
-| c1 [addr]                Compare 8 bits from current offset
-| c2 [value]               Compare a word from a math expression
-| c4 [value]               Compare a doubleword from a math expression
-| c8 [value]               Compare a quadword from a math expression
-| cat [file]               Show contents of file (see pwd, ls)
-| cc [at]                  Compares in two hexdump columns of block size
-| ccc [at]                 Same as above, but only showing different lines
-| ccd [at]                 Compares in two disasm columns of block size
-| cd [dir]                 chdir
-| cf [file]                Compare contents of file at current seek
-| cg[?] [o] [file]         Graphdiff current file and [file]
-| cl|cls|clear             Clear screen, (clear0 to goto 0, 0 only)
-| cu[?] [addr] @at         Compare memory hexdumps of $$ and dst in unified diff
-| cud [addr] @at           Unified diff disasm from $$ and given address
-| cv[1248] [hexpairs] @at  Compare 1,2,4,8-byte (silent return in $?)
-| cV[1248] [addr] @at      Compare 1,2,4,8-byte address contents (silent, return in $?)
-| cw[?] [us?] [...]        Compare memory watchers
-| cx [hexpair]             Compare hexpair string (use '.' as nibble wildcard)
-| cx* [hexpair]            Compare hexpair string (output rizin commands)
-| cX [addr]                Like 'cc' but using hexdiff output</code></pre>
+<pre><code>[0x00001100]&gt; c?
+Usage: c[?]   # Compare block with given data
+| c[j] &lt;string&gt;    # Compare an escaped &lt;string&gt; with data at current offset
+| c1 &lt;addr&gt;        # Compare 8-bit data at current offset with the data at &lt;addr&gt;
+| ca[j] &lt;addr&gt; &lt;n&gt; # Compare &lt;n&gt; bytes of data at &lt;addr&gt; with the data at current offset
+| cb[j] &lt;num&gt; &lt;n&gt;  # Compare &lt;n&gt; (up to 8) bytes at current offset with a number &lt;num&gt;
+| cc &lt;addr&gt;        # Compare hexdump of data of block size at &lt;addr&gt; with the data at current offset
+| ccc &lt;addr&gt;       # Show different lines between hexdump of a block of data at &lt;addr&gt; wth the data at current offset
+| ccd [&lt;addr&gt;]     # Compare disassembly of block size at &lt;addr&gt; and at the current offset
+| cf[j] &lt;file&gt;     # Compare the contents of &lt;file&gt; with the data at current offset
+| cu[1248d]        # Unified diff commands
+| cw[lrux]         # Compare watcher commands
+| cx[j] &lt;hexpair&gt;  # Compare data at current offset with a hexpair string &lt;hexpair&gt; (also return in $?)
+| cX[j] &lt;addr&gt;     # Compare hexdump of data of block size at &lt;addr&gt; with the data at current offset using hexdiff output</code></pre>
 <p>To compare memory contents at current seek position against a given string of values, use <code>cx</code>:</p>
-<pre><code>[0x08048000]&gt; p8 4
-7f 45 4c 46
+<pre><code>[0x00001100]&gt; p8 4
+7f454c46
 
-[0x08048000]&gt; cx 7f 45 90 46
+[0x00001100]&gt; cx 7f 45 90 46
 Compare 3/4 equal bytes
-0x00000002 (byte=03)   90 ' '  -&gt;  4c 'L'
-[0x08048000]&gt;</code></pre>
+0x00001102 (byte=03)   90 ' '  -&gt;  4c 'L'
+Compare 3/4 equal bytes (75%)
+[0x00001100]&gt;</code></pre>
 <p>Another subcommand of the <code>c</code> command is <code>cc</code> which stands for “compare code”. To compare a byte sequence with a sequence in memory:</p>
 <pre><code>[0x4A13B8C0]&gt; cc 0x39e8e089 @ 0x4A13B8C0</code></pre>
 <p>To compare contents of two functions specified by their names:</p>
 <pre><code>[0x08049A80]&gt; cc sym.main2 @ sym.main</code></pre>
-<p><code>c8</code> compares a quadword from the current seek (in the example below, 0x00000000) against a math expression:</p>
-<pre><code>[0x00000000]&gt; c8 4
-
-Compare 1/8 equal bytes (0%)
-0x00000000 (byte=01)   7f ' '  -&gt;  04 ' '
-0x00000001 (byte=02)   45 'E'  -&gt;  00 ' '
-0x00000002 (byte=03)   4c 'L'  -&gt;  00 ' '</code></pre>
-<p>The number parameter can, of course, be math expressions which use flag names and anything allowed in an expression:</p>
+<p>The number parameter can be math expressions which use flag names and anything allowed in an expression:</p>
 <pre><code>[0x00000000]&gt; cx 7f469046
 
 Compare 2/4 equal bytes
 0x00000001 (byte=02)   45 'E'  -&gt;  46 'F'
 0x00000002 (byte=03)   4c 'L'  -&gt;  90 ' '</code></pre>
 <p>You can use the compare command to find differences between a current block and a file previously dumped to a disk:</p>
-<pre><code>rizin /bin/true
-[0x08049A80]&gt; s 0
-[0x08048000]&gt; cf /bin/true
-Compare 512/512 equal bytes</code></pre>
+<pre><code>rizin /usr/bin/true
+[0x00002680]&gt; s 0
+[0x00000000]&gt; cf /usr/bin/true
+Compare 256/256 equal bytes (100%)</code></pre>
 
 
 

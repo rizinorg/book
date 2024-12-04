@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1177,7 +1177,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>The WinDBG KD interface support for rizin allows you to attach to VM running Windows and debug its kernel over a serial port or network.</p>
+<p>The WinDBG KD interface support for Rizin allows you to attach to VM running Windows and debug its kernel over a serial port or network.</p>
 <p>It is also possible to use the remote GDB interface to connect and debug Windows kernels without depending on Windows capabilities.</p>
 <p>Bear in mind that WinDBG KD support is still work-in-progress, and this is just an initial implementation which will get better in time.</p>
 <section id="setting-up-kd-on-windows" class="level2" data-number="73.1">
@@ -1190,28 +1190,29 @@ ul.task-list li input[type="checkbox"] {
 <p>Enable KD over a serial port on Windows Vista and higher like this:</p>
 <pre><code>bcdedit /debug on
 bcdedit /dbgsettings serial debugport:1 baudrate:115200</code></pre>
-<p>Or like this for Windows XP: Open boot.ini and add /debug /debugport=COM1 /baudrate=115200:</p>
+<p>Or like this for Windows XP:</p>
+<p>Open boot.ini and add /debug /debugport=COM1 /baudrate=115200:</p>
 <pre><code>[boot loader]
 timeout=30
 default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS
 [operating systems]
 multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Debugging with Cable" /fastdetect /debug /debugport=COM1 /baudrate=57600</code></pre>
 <p>In case of VMWare</p>
-<pre><code>    Virtual Machine Settings -&gt; Add -&gt; Serial Port
-    Device Status:
-    [v] Connect at power on
-    Connection:
-    [v] Use socket (named pipe)
-    [_/tmp/winkd.pipe________]
-    From: Server To: Virtual Machine</code></pre>
+<pre><code>Virtual Machine Settings -&gt; Add -&gt; Serial Port
+Device Status:
+[v] Connect at power on
+Connection:
+[v] Use socket (named pipe)
+[_/tmp/winkd.pipe________]
+From: Server To: Virtual Machine</code></pre>
 <p>Configure the VirtualBox Machine like this:</p>
-<pre><code>    Preferences -&gt; Serial Ports -&gt; Port 1
+<pre><code>Preferences -&gt; Serial Ports -&gt; Port 1
 
-    [v] Enable Serial Port
-    Port Number: [_COM1_______[v]]
-    Port Mode:   [_Host_Pipe__[v]]
-                 [v] Create Pipe
-    Port/File Path: [_/tmp/winkd.pipe____]</code></pre>
+[v] Enable Serial Port
+Port Number: [_COM1_______[v]]
+Port Mode:   [_Host_Pipe__[v]]
+             [v] Create Pipe
+Port/File Path: [_/tmp/winkd.pipe____]</code></pre>
 <p>Or just spawn the VM with qemu like this:</p>
 <pre><code>$ qemu-system-x86_64 -chardev socket,id=serial0,\
      path=/tmp/winkd.pipe,nowait,server \
@@ -1242,7 +1243,7 @@ bcdedit /dbgsettings net hostip:w.x.y.z port:n</code></pre>
 </section>
 <section id="using-kd" class="level2" data-number="73.3">
 <h2 data-number="73.3" class="anchored" data-anchor-id="using-kd"><span class="header-section-number">73.3</span> Using KD</h2>
-<p>When connecting to a KD interface, rizin will send a breakin packet to interrupt the target and we will get stuck here:</p>
+<p>When connecting to a KD interface, Rizin will send a breakin packet to interrupt the target, and we will get stuck here:</p>
 <pre><code>[0x828997b8]&gt; pd 20
     ;-- eip:
     0x828997b8    cc           int3
@@ -1261,21 +1262,21 @@ dc</code></pre>
 </section>
 <section id="windbg-backend-for-windows-dbgeng" class="level1" data-number="74">
 <h1 data-number="74"><span class="header-section-number">74</span> WinDBG Backend for Windows (DbgEng)</h1>
-<p>On Windows, rizin can use <code>DbgEng.dll</code> as a debugging backend, allowing it to make use of WinDBG’s capabilities, supporting dump files, local and remote user and kernel mode debugging.</p>
+<p>On Windows, Rizin can use <code>DbgEng.dll</code> as a debugging backend, allowing it to make use of WinDBG’s capabilities, supporting dump files, local and remote user and kernel mode debugging.</p>
 <p>You can use the debugging DLLs included on Windows or get the latest version from Microsoft’s <a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-download-tools">download page</a> (recommended).</p>
 <blockquote class="blockquote">
-<p>You cannot use DLLs from the Microsoft Store’s <code>WinDbg Preview</code> app folder directly as they are not marked as executable for normal users.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>rizin will try to load <code>dbgeng.dll</code> from the <code>_NT_DEBUGGER_EXTENSION_PATH</code> environment variable before using Windows’ default library search path.</p>
+<p>You cannot use DLLs from the Microsoft Store’s <code>WinDbg Preview</code> app folder directly as they are not marked as executable for normal users. rizin will try to load <code>dbgeng.dll</code> from the <code>_NT_DEBUGGER_EXTENSION_PATH</code> environment variable before using Windows’ default library search path.</p>
 </blockquote>
 <section id="using-the-plugin" class="level2" data-number="74.1">
 <h2 data-number="74.1" class="anchored" data-anchor-id="using-the-plugin"><span class="header-section-number">74.1</span> Using the plugin</h2>
 <p>To use the <code>windbg</code> plugin, pass the same command-line options as you would for <code>WinDBG</code> or <code>kd</code> (see Microsoft’s <a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/windbg-command-line-options">documentation</a>), quoting/escaping when necessary:</p>
-<pre><code>&gt; rizin -d "windbg://-remote tcp:server=Server,port=Socket"</code></pre>
-<pre><code>&gt; rizin -d "windbg://MyProgram.exe \"my arg\""</code></pre>
-<pre><code>&gt; rizin -d "windbg://-k net:port=&lt;n&gt;,key=&lt;MyKey&gt;"</code></pre>
-<pre><code>&gt; rizin -d "windbg://-z MyDumpFile.dmp"</code></pre>
+<pre><code>&gt; rizin -d "windbg://-remote tcp:server=Server,port=Socket"
+
+&gt; rizin -d "windbg://MyProgram.exe \"my arg\""
+
+&gt; rizin -d "windbg://-k net:port=&lt;n&gt;,key=&lt;MyKey&gt;"
+
+&gt; rizin -d "windbg://-z MyDumpFile.dmp"</code></pre>
 <p>You can then debug normally (see <code>d?</code> command) or interact with the backend shell directly with the <code>R!</code> command:</p>
 <pre><code>[0x7ffcac9fcea0]&gt; dcu 0x0007ffc98f42190
 Continue until 0x7ffc98f42190 using 1 bpsize

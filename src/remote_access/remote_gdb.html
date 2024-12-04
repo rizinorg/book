@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1157,17 +1157,17 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>rizin allows remote debugging over the gdb remote protocol. So you can run a gdbserver and connect to it with rizin for remote debugging. The syntax for connecting is:</p>
+<p>Rizin allows remote debugging over the gdb remote protocol. So you can run a gdbserver and connect to it with rizin for remote debugging. The syntax for connecting is:</p>
 <pre><code>$ rizin -d gdb://&lt;host&gt;:&lt;port&gt;</code></pre>
-<p>Note that the following command does the same, rizin will use the debug plugin specified by the uri if found.</p>
+<p>Note that the following command does the same, Rizin will use the debug plugin specified by the uri if found.</p>
 <pre><code>$ rizin -D gdb gdb://&lt;host&gt;:&lt;port&gt;</code></pre>
 <p>The debug plugin can be changed at runtime using the dL or Ld commands.</p>
 <p>Or if the gdbserver is running in extended mode, you can attach to a process on the host with:</p>
 <pre><code>$ rizin -d gdb://&lt;host&gt;:&lt;port&gt;/&lt;pid&gt;</code></pre>
 <p>It is also possible to start debugging after analyzing a file using the <code>doof</code> command which rebases the current session’s data after opening gdb</p>
 <pre><code>[0x00404870]&gt; doof gdb://&lt;host&gt;:&lt;port&gt;/&lt;pid&gt;</code></pre>
-<p>After connecting, you can use the standard rizin debug commands as normal.</p>
-<p>rizin does not yet load symbols from gdbserver, so it needs the binary to be locally present to load symbols from it. In case symbols are not loaded even if the binary is present, you can try specifying the path with <code>e dbg.exe.path</code>:</p>
+<p>After connecting, you can use the standard Rizin debug commands as normal.</p>
+<p>Rizin does not yet load symbols from gdbserver, so it needs the binary to be locally present to load symbols from it. In case symbols are not loaded even if the binary is present, you can try specifying the path with <code>e dbg.exe.path</code>:</p>
 <pre><code>$ rizin -e dbg.exe.path=&lt;path&gt; -d gdb://&lt;host&gt;:&lt;port&gt;</code></pre>
 <p>If symbols are loaded at an incorrect base address, you can try specifying the base address too with <code>e bin.baddr</code>:</p>
 <pre><code>$ rizin -e bin.baddr=&lt;baddr&gt; -e dbg.exe.path=&lt;path&gt; -d gdb://&lt;host&gt;:&lt;port&gt;</code></pre>
@@ -1196,12 +1196,12 @@ Usage: R!cmd args
  R!pktsz bytes     - set max. packet size as 'bytes' bytes
  R!exec_file [pid] - get file which was executed for current/specified pid</code></pre>
 <p>Note that <code>R!dsb</code> and <code>R!dcb</code> are only available in special gdbserver implementations such as <a href="https://github.com/mozilla/rr">Mozilla’s rr</a>, the default gdbserver doesn’t include remote reverse debugging support. Use <code>R!rd</code> to print the currently available reverse debugging capabilities.</p>
-<p>If you are interested in debugging rizin’s interaction with gdbserver you can use <code>R!monitor set remote-debug 1</code> to turn on logging of gdb’s remote protocol packets in gdbserver’s console and <code>R!monitor set debug 1</code> to show general debug messages from gdbserver in it’s console.</p>
+<p>If you are interested in debugging rizin’s interaction with gdbserver you can use <code>R!monitor set remote-debug 1</code> to turn on logging of gdb’s remote protocol packets in gdbserver’s console and <code>R!monitor set debug 1</code> to show general debug messages from gdbserver in its console.</p>
 <p>rizin also provides its own gdbserver implementation:</p>
 <pre><code>$ rizin =
 [0x00000000]&gt; Rg?
-|Usage:  =[g] [...] # gdb server
-| gdbserver:
+Usage:  R[g] [...]   # gdb server
+gdbserver:
 | Rg port file [args]   listen on 'port' debugging 'file' using gdbserver
 | Rg! port file [args]  same as above, but debug protocol messages (like gdbserver --remote-debug)</code></pre>
 <p>So you can start it as:</p>

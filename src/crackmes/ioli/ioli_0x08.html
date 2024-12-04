@@ -664,7 +664,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1201,31 +1201,31 @@ nth paddr      vaddr      len size section type  string
 2   0x000007c5 0x080487c5 13  14   .rodata ascii Password OK!\n
 3   0x000007d3 0x080487d3 5   6    .rodata ascii wtf?\n
 4   0x000007d9 0x080487d9 24  25   .rodata ascii IOLI Crackme Level 0x08\n
-5   0x000007f2 0x080487f2 10  11   .rodata ascii Password:</code></pre>
+5   0x000007f2 0x080487f2 10  11   .rodata ascii Password: </code></pre>
 <p>It looks like no new strings have been added. Before we jump into analyzing however, let’s first see which functions have changed from the previous version. We can get a nice overview using <code>rz-diff</code>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>$ rz-diff -t functions crackme0x07 crackme0x08</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>.--------------------------------------------------------------------------------------------------------------------------.</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>| name0                     | size0 | addr0      | type     | similarity | addr1      | size1 | name1                      |</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)--------------------------------------------------------------------------------------------------------------------------(</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>| fcn.08048360              | 23    | 0x08048360 | COMPLETE | 1.000000   | 0x08048360 | 23    | sym._init                  |</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>| sym.imp.__libc_start_main | 6     | 0x08048388 | COMPLETE | 1.000000   | 0x08048388 | 6     | sym.imp.__libc_start_main  |</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>| sym.imp.scanf             | 6     | 0x08048398 | COMPLETE | 1.000000   | 0x08048398 | 6     | sym.imp.scanf              |</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>| sym.imp.strlen            | 6     | 0x080483a8 | COMPLETE | 1.000000   | 0x080483a8 | 6     | sym.imp.strlen             |</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>| sym.imp.printf            | 6     | 0x080483b8 | COMPLETE | 1.000000   | 0x080483b8 | 6     | sym.imp.printf             |</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>| sym.imp.sscanf            | 6     | 0x080483c8 | COMPLETE | 1.000000   | 0x080483c8 | 6     | sym.imp.sscanf             |</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>| sym.imp.strncmp           | 6     | 0x080483d8 | COMPLETE | 1.000000   | 0x080483d8 | 6     | sym.imp.strncmp            |</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>| sym.imp.exit              | 6     | 0x080483e8 | COMPLETE | 1.000000   | 0x080483e8 | 6     | sym.imp.exit               |</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>| fcn.08048424              | 33    | 0x08048424 | COMPLETE | 1.000000   | 0x08048424 | 33    | fcn.08048424               |</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>| fcn.08048450              | 47    | 0x08048450 | COMPLETE | 1.000000   | 0x08048450 | 47    | sym.__do_global_dtors_aux  |</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>| fcn.08048480              | 50    | 0x08048480 | COMPLETE | 1.000000   | 0x08048480 | 50    | sym.frame_dummy            |</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>| fcn.080484b4              | 112   | 0x080484b4 | COMPLETE | 1.000000   | 0x080484b4 | 112   | sym.dummy                  |</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>| fcn.08048524              | 30    | 0x08048524 | COMPLETE | 1.000000   | 0x08048524 | 30    | sym.che                    |</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>| fcn.08048542              | 119   | 0x08048542 | COMPLETE | 1.000000   | 0x08048542 | 119   | sym.parell                 |</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>| fcn.080485b9              | 118   | 0x080485b9 | COMPLETE | 1.000000   | 0x080485b9 | 118   | sym.check                  |</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>| fcn.08048755              | 4     | 0x08048755 | COMPLETE | 1.000000   | 0x08048755 | 4     | sym.__i686.get_pc_thunk.bx |</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>| fcn.08048760              | 35    | 0x08048760 | COMPLETE | 1.000000   | 0x08048760 | 35    | sym.__do_global_ctors_aux  |</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>| fcn.0804878d              | 17    | 0x0804878d | COMPLETE | 1.000000   | 0x0804878d | 17    | fcn.0804878d               |</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>`--------------------------------------------------------------------------------------------------------------------------'</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>$ rz-diff -t functions crackme0x07 crackme0x08
+.--------------------------------------------------------------------------------------------------------------------------.
+| name0                     | size0 | addr0      | type     | similarity | addr1      | size1 | name1                      |
+)--------------------------------------------------------------------------------------------------------------------------(
+| fcn.08048360              | 23    | 0x08048360 | COMPLETE | 1.000000   | 0x08048360 | 23    | sym._init                  |
+| sym.imp.__libc_start_main | 6     | 0x08048388 | COMPLETE | 1.000000   | 0x08048388 | 6     | sym.imp.__libc_start_main  |
+| sym.imp.scanf             | 6     | 0x08048398 | COMPLETE | 1.000000   | 0x08048398 | 6     | sym.imp.scanf              |
+| sym.imp.strlen            | 6     | 0x080483a8 | COMPLETE | 1.000000   | 0x080483a8 | 6     | sym.imp.strlen             |
+| sym.imp.printf            | 6     | 0x080483b8 | COMPLETE | 1.000000   | 0x080483b8 | 6     | sym.imp.printf             |
+| sym.imp.sscanf            | 6     | 0x080483c8 | COMPLETE | 1.000000   | 0x080483c8 | 6     | sym.imp.sscanf             |
+| sym.imp.strncmp           | 6     | 0x080483d8 | COMPLETE | 1.000000   | 0x080483d8 | 6     | sym.imp.strncmp            |
+| sym.imp.exit              | 6     | 0x080483e8 | COMPLETE | 1.000000   | 0x080483e8 | 6     | sym.imp.exit               |
+| fcn.08048424              | 33    | 0x08048424 | COMPLETE | 1.000000   | 0x08048424 | 33    | fcn.08048424               |
+| fcn.08048450              | 47    | 0x08048450 | COMPLETE | 1.000000   | 0x08048450 | 47    | sym.__do_global_dtors_aux  |
+| fcn.08048480              | 50    | 0x08048480 | COMPLETE | 1.000000   | 0x08048480 | 50    | sym.frame_dummy            |
+| fcn.080484b4              | 112   | 0x080484b4 | COMPLETE | 1.000000   | 0x080484b4 | 112   | sym.dummy                  |
+| fcn.08048524              | 30    | 0x08048524 | COMPLETE | 1.000000   | 0x08048524 | 30    | sym.che                    |
+| fcn.08048542              | 119   | 0x08048542 | COMPLETE | 1.000000   | 0x08048542 | 119   | sym.parell                 |
+| fcn.080485b9              | 118   | 0x080485b9 | COMPLETE | 1.000000   | 0x080485b9 | 118   | sym.check                  |
+| fcn.08048755              | 4     | 0x08048755 | COMPLETE | 1.000000   | 0x08048755 | 4     | sym.__i686.get_pc_thunk.bx |
+| fcn.08048760              | 35    | 0x08048760 | COMPLETE | 1.000000   | 0x08048760 | 35    | sym.__do_global_ctors_aux  |
+| fcn.0804878d              | 17    | 0x0804878d | COMPLETE | 1.000000   | 0x0804878d | 17    | fcn.0804878d               |
+`--------------------------------------------------------------------------------------------------------------------------'</code></pre>
 <p>Look at that! crackme0x08 is completely identical to crackme0x07! With one exception however, crackme0x08 <em>adds</em> the symbol names back. Or looking at it another way: crackme0x07 is the stripped version of crackme0x08.</p>
 <p>That means we can solve it the exact same way we solved crackme0x07.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> LOL= ./crackme0x08</span>

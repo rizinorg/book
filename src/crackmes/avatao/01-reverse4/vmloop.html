@@ -659,7 +659,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1201,7 +1201,7 @@ window.Quarto = {
 </figure>
 </div>
 <p>and rizin can’t yet recognize jump tables (<a href="https://github.com/rizinorg/rizin/issues/3201">Issue 3201</a>), so the analysis of this function is a bit incomplete. This means that we can’t really use the graph view now, so either we just use visual mode, or fix those basic blocks. The entire function is just 542 bytes long, so we certainly could reverse it without the aid of the graph mode, but since this writeup aims to include as much rizin wisdom as possible, I’m going to show you how to define basic blocks.</p>
-<p>First, lets analyze what we already have! First, <em>rdi</em> is put into local_3. Since the application is a 64bit Linux executable, we know that <em>rdi</em> is the first function argument (as you may have recognized, the automatic analysis of arguments and local variables was not entirely correct), and we also know that <em>vmloop</em>’s first argument is the bytecode. So lets rename local_3:</p>
+<p>First, lets analyze what we already have! First, <em>rdi</em> is put into local_3. Since the application is a 64bit Linux executable, we know that <em>rdi</em> is the first function argument (as you may have recognized, the automatic analysis of arguments and local variables was not entirely correct), and we also know that <em>vmloop</em>’s first argument is the bytecode. So let’s rename local_3:</p>
 <pre><code>:&gt; afvn local_3 bytecode</code></pre>
 <p>Next, <em>sym.memory</em> is put into another local variable at <em>rbp-8</em> that rizin did not recognize. So let’s define it!</p>
 <pre><code>:&gt; afv 8 memory qword</code></pre>
@@ -1255,7 +1255,7 @@ window.Quarto = {
             0x00400f68 .qword 0x0000000000400c04
             0x00400f70 .qword 0x0000000000400c04
             0x00400f78 .qword 0x0000000000400b99</code></pre>
-<p>As we can see, the address 0x400c04 is used a lot, and besides that there are 9 different addresses. Lets see that 0x400c04 first!</p>
+<p>As we can see, the address 0x400c04 is used a lot, and besides that there are 9 different addresses. Let’s see that 0x400c04 first!</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img/vmloop/bb-0c04.png" class="img-fluid figure-img"></p>
@@ -1295,7 +1295,7 @@ window.Quarto = {
 [0x00400ec0]&gt; afb+ 0x00400a45 0x00400b99 0x00400bc1-0x00400b99 0x400c15
 [0x00400ec0]&gt; afb+ 0x00400a45 0x00400bc1 0x00400be5-0x00400bc1 0x400c15
 [0x00400ec0]&gt; afb+ 0x00400a45 0x00400be5 0x00400c04-0x00400be5 0x400c15</code></pre>
-<p>It is also apparent from the disassembly that besides the instructions there are three more basic blocks. Lets create them too!</p>
+<p>It is also apparent from the disassembly that besides the instructions there are three more basic blocks. Let’s create them too!</p>
 <pre><code>[0x00400ec0]&gt; afb+ 0x00400a45 0x00400c15 0x00400c2d-0x00400c15 0x400c3c 0x00400c2d
 [0x00400ec0]&gt; afb+ 0x00400a45 0x00400c2d 0x00400c3c-0x00400c2d 0x400c4d 0x00400c3c
 [0x00400ec0]&gt; afb+ 0x00400a45 0x00400c3c 0x00400c4d-0x00400c3c 0x400c61</code></pre>
@@ -1318,7 +1318,7 @@ window.Quarto = {
 <figcaption>IDA graph</figcaption>
 </figure>
 </div>
-<p>As we browse through the disassembly of the <em>instr_LETTER</em> basic blocks, we should realize a few things. The first: all of the instructions starts with a sequence like these:</p>
+<p>As we browse through the disassembly of the <em>instr_LETTER</em> basic blocks, we should realize a few things. The first: all the instructions starts with a sequence like these:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img/vmloop/bb-0a80.png" class="img-fluid figure-img"></p>
@@ -1331,7 +1331,7 @@ window.Quarto = {
 <figcaption>vmloop bb-0ab6</figcaption>
 </figure>
 </div>
-<p>It became clear now that the 9 dwords at <em>sym.instr_dirty</em> are not simply indicators that an instruction got executed, but they are used to count how many times an instruction got called. Also I should have realized earlier that <em>sym.good_if_le_9</em> (0x6020f0) is part of this 9 dword array, but yeah, well, I didn’t, I have to live with it… Anyways, what the condition “<em>sym.good_if_le_9</em> have to be lesser or equal 9” really means is that <em>instr_P</em> can not be executed more than 9 times:</p>
+<p>It became clear now that the 9 dwords at <em>sym.instr_dirty</em> are not simply indicators that an instruction got executed, but they are used to count how many times an instruction got called. Also, I should have realized earlier that <em>sym.good_if_le_9</em> (0x6020f0) is part of this 9 dword array, but yeah, well, I didn’t, I have to live with it… Anyway, what the condition “<em>sym.good_if_le_9</em> have to be lesser or equal 9” really means is that <em>instr_P</em> can not be executed more than 9 times:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img/vmloop/bb-0b42.png" class="img-fluid figure-img"></p>
@@ -1378,7 +1378,7 @@ window.Quarto = {
 </div>
 <p>This is a one argument instruction, and it puts its argument to 0x6020c0. Flag that address!</p>
 <pre><code>:&gt; f sym.written_by_instr_C 4 @ 0x6020c0</code></pre>
-<p>Oh, and by the way, I do have a hunch that <em>instr_C</em> also had a function call in the original code, but it got inlined by the compiler. Anyways, so far we have these two instructions:</p>
+<p>Oh, and by the way, I do have a hunch that <em>instr_C</em> also had a function call in the original code, but it got inlined by the compiler. Anyway, so far we have these two instructions:</p>
 <ul>
 <li><em>instr_R(a1):</em> returns with <em>a1</em></li>
 <li><em>instr_C(a1):</em> writes <em>a1</em> to <em>sym.written_by_instr_C</em></li>
@@ -1482,7 +1482,7 @@ window.Quarto = {
 </figure>
 </div>
 <p>A sad truth reveals itself after a quick glance at these graphs: rz-diff is a liar! In theory, grey boxes should be identical, yellow ones should differ only at some offsets, and red ones should differ seriously. Well this is obviously not the case here - e.g.&nbsp;the larger grey boxes are clearly not identical. This is something I’m definitely going to take a deeper look at after I’ve finished this writeup.</p>
-<p>Anyways, after we get over the shock of being lied to, we can easily recognize that <em>instr_S</em> is basically a reverse-<em>instr_A</em>: where the latter does addition, the former does subtraction. To summarize this:</p>
+<p>Anyway, after we get over the shock of being lied to, we can easily recognize that <em>instr_S</em> is basically a reverse-<em>instr_A</em>: where the latter does addition, the former does’ subtraction. To summarize this:</p>
 <ul>
 <li><em>arg1</em> == “M”: subtracts <em>arg2</em> from the byte at <em>sym.current_memory_ptr</em>.</li>
 <li><em>arg1</em> == “P”: steps <em>sym.current_memory_ptr</em> backwards by <em>arg2</em> bytes.</li>
@@ -1515,9 +1515,9 @@ window.Quarto = {
 <figcaption>instr_P</figcaption>
 </figure>
 </div>
-<p>This function is pretty straightforward also, but there is one oddity: const_M is never used. I don’t know why it is there - maybe it is supposed to be some kind of distraction? Anyways, this function simply writes <em>arg1</em> to <em>sym.current_memory_ptr</em>, and than calls <em>instr_I(“P”)</em>. This basically means that <em>instr_P</em> is used to write one byte, and put the pointer to the next byte. So far this would seem the ideal instruction to construct most of the “Such VM! MuCH reV3rse!” string, but remember, this is also the one that can be used only 9 times!</p>
+<p>This function is pretty straightforward also, but there is one oddity: const_M is never used. I don’t know why it is there - maybe it is supposed to be some kind of distraction? Anyway, this function simply writes <em>arg1</em> to <em>sym.current_memory_ptr</em>, and then calls <em>instr_I(“P”)</em>. This basically means that <em>instr_P</em> is used to write one byte, and put the pointer to the next byte. So far this would seem the ideal instruction to construct most of the “Such VM! MuCH reV3rse!” string, but remember, this is also the one that can be used only 9 times!</p>
 <p>###instr_X</p>
-<p>Another simple one, rename local vars anyways!</p>
+<p>Another simple one, rename local vars anyway!</p>
 <pre><code>:&gt; afvn local_1 arg1</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">

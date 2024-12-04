@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1186,7 +1186,8 @@ diff: type: new
 <p>Now let’s say, for example, that we’d like see a particular field from this output for all functions found by analysis. We can do that with a loop over all function flags (whose names begin with <code>fcn.</code>):</p>
 <pre><code>[0x004047d6]&gt; fs functions
 [0x004047d6]&gt; afi @@f:fcn.* ~name</code></pre>
-<p>This command will extract the <code>name</code> field from the <code>afi</code> output of every flag with a name matching the regexp <code>fcn.*</code>. There are also other loops, for example one called <code>@@F</code> runs your command on every functions found by rizin:</p>
+<p>This command will extract the <code>name</code> field from the <code>afi</code> output of every flag with a name matching the regexp <code>fcn.*</code>.</p>
+<p>There are other loops, for example one called <code>@@F</code> runs your command on every function found by rizin:</p>
 <pre><code>[0x004047d6]&gt; afi @@F ~name</code></pre>
 <p>We can also loop over a list of offsets, using the following syntax:</p>
 <pre><code>@@=1 2 3 ... N</code></pre>
@@ -1214,8 +1215,7 @@ jump: 0x00404822
 fail: 0x004047da
 stack: null
 cond: al
-family: cpu
-[0x004047d6]&gt;</code></pre>
+family: cpu</code></pre>
 <p>Note we’re using the <code>$$</code> variable which evaluates to the current offset. Also note that <code>$$+2</code> is evaluated before looping, so we can use the simple arithmetic expressions.</p>
 <p>A third way to loop is by having the offsets be loaded from a file. This file should contain one offset per line.</p>
 <pre><code>[0x004047d0]&gt; ?v $$ &gt; offsets.txt
@@ -1270,8 +1270,7 @@ mov esi, 1
 lea rdi, str.A_NULL_argv_0__was_passed_through_an_exec_system_call.                            
 mov rcx, qword [rax]
 call sym.imp.fwrite
-call sym.imp.abort
-</code></pre>
+call sym.imp.abort</code></pre>
 
 
 

@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1157,18 +1157,12 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>The <code>-e</code> option passed to rz-bin will show entrypoints for given binary. Two examples:</p>
-<pre><code>$ rz-bin -e /bin/ls
-[Entrypoints]
-vaddr=0x00005310 paddr=0x00005310 baddr=0x00000000 laddr=0x00000000 haddr=0x00000018 type=program
-
-1 entrypoints
-
-$ rz-bin -er /bin/ls
-fs symbols
-f entry0 1 @ 0x00005310
-f entry0_haddr 1 @ 0x00000018
-s entry0</code></pre>
+<p>The <code>-e</code> option passed to rz-bin will show entrypoints for given binary.</p>
+<pre><code>$ rz-bin -e /usr/bin/ls
+[Entries]
+vaddr      paddr      hvaddr     haddr      type    
+----------------------------------------------------
+0x00005880 0x00005880 0x00000018 0x00000018 program</code></pre>
 
 
 

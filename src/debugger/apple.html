@@ -664,7 +664,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1172,7 +1172,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#sign-rizin-binary" id="toc-sign-rizin-binary" class="nav-link active" data-scroll-target="#sign-rizin-binary"><span class="header-section-number">70.1</span> Sign rizin binary</a></li>
-  <li><a href="#debugging-on-macos-over-ssh" id="toc-debugging-on-macos-over-ssh" class="nav-link" data-scroll-target="#debugging-on-macos-over-ssh"><span class="header-section-number">70.2</span> Debugging on MacOS over SSH</a></li>
+  <li><a href="#debugging-on-macos-over-ssh" id="toc-debugging-on-macos-over-ssh" class="nav-link" data-scroll-target="#debugging-on-macos-over-ssh"><span class="header-section-number">70.2</span> Debugging on macOS over SSH</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/rizinorg/book/edit/master/src/debugger/apple.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -1212,11 +1212,15 @@ For more info look at: https://book.rizin.re/debugger/apple.html#sign-rizin-bina
 <p>This is because the Darwin kernel will refuse to allow rizin to debug another process if you don’t have special rights (or if you are not root).</p>
 <p>To sign the binary and give it the special rights to allow debugging as a regular user, download the Entitlements file <a href="https://github.com/rizinorg/rizin/blob/dev/binrz/rizin/rizin_macos.xml">here</a>. Then execute the following command:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> codesign <span class="at">--entitlements</span> <span class="op">&lt;</span>entitlements-file<span class="op">&gt;</span> --force <span class="at">-s</span> <span class="at">-</span> <span class="va">$(</span><span class="fu">which</span> rizin<span class="va">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>However, be aware that even with a signed rizin binary you cannot debug binaries signed by Apple. To bypass the problem you have a few options: - Remove the certificate of the debuggee, by using <code>codesign --remove-signature &lt;binary&gt;</code> or other alternatives like <a href="https://github.com/steakknife/unsign">unsign</a>. WARNING: this cannot be undone, so we suggest to make a copy of the original binary. - Disable SIP with <code>csrutil enable --without debug</code> in Recovery Mode.</p>
+<p>However, be aware that even with a signed rizin binary you cannot debug binaries signed by Apple. To bypass the problem you have a few options:</p>
+<ul>
+<li>Remove the certificate of the debuggee, by using <code>codesign --remove-signature &lt;binary&gt;</code> or other alternatives like <a href="https://github.com/steakknife/unsign">unsign</a>. WARNING: this cannot be undone, so we suggest to make a copy of the original binary.</li>
+<li>Disable SIP with <code>csrutil enable --without debug</code> in Recovery Mode.</li>
+</ul>
 </section>
 <section id="debugging-on-macos-over-ssh" class="level2" data-number="70.2">
-<h2 data-number="70.2" class="anchored" data-anchor-id="debugging-on-macos-over-ssh"><span class="header-section-number">70.2</span> Debugging on MacOS over SSH</h2>
-<p>If you are trying to debug a program over SSH, you may experience failures like rizin getting stuck while opening the file. This is because the OS is waiting for user authentication to allow debugging. However, since you are over SSH, the OS has no way of showing the permission window.</p>
+<h2 data-number="70.2" class="anchored" data-anchor-id="debugging-on-macos-over-ssh"><span class="header-section-number">70.2</span> Debugging on macOS over SSH</h2>
+<p>If you are trying to debug a program over SSH, you may experience failures like Rizin getting stuck while opening the file. This is because the OS is waiting for user authentication to allow debugging. However, since you are over SSH, the OS has no way of showing the permission window.</p>
 <p>To avoid this problem you can either run rizin with <code>sudo</code> or you may instruct taskport to not authenticate the user by executing the following commands. This will disable the debugging authentication prompt even after you reboot.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">security</span> authorizationdb read system.privilege.taskport <span class="op">&gt;</span> taskport.plist</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/usr/libexec/PlistBuddy</span> <span class="at">-c</span> <span class="st">'Set :authenticate-user false'</span> ./taskport.plist</span>

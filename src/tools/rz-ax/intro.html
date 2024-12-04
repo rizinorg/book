@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1157,9 +1157,9 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>The <code>rz-ax</code> utility comes with the rizin framework and aims to be a minimalistic expression evaluator for the shell. It is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ascii, octal to integer. It supports endianness and can be used as a shell if no arguments are given.</p>
+<p>The <code>rz-ax</code> utility comes with the Rizin framework and aims to be a minimalistic expression evaluator for the shell. It is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ascii, octal to integer. It supports endianness and can be used as a shell if no arguments are given.</p>
 <p>This is the help message of rz-ax, this tool can be used in the command-line or interactively (reading the values from stdin), so it can be used as a multi-base calculator.</p>
-<p>Inside rizin, the functionality of rz-ax is available under the <code>%</code> command. For example:</p>
+<p>Inside Rizin, the functionality of rz-ax is available under the <code>%</code> command. For example:</p>
 <pre><code>[0x00000000]&gt; % 3+4</code></pre>
 <p>As you can see, the numeric expressions can contain mathematical expressions like addition, subtraction, as well as group operations with parenthesis.</p>
 <p>The syntax in which the numbers are represented define the base, for example:</p>
@@ -1213,9 +1213,7 @@ Usage: rz-ax [options] [expr ...]
   -r      rz style output      ;  rz-ax -r 0x1234
   -s      hexstr -&gt; raw        ;  rz-ax -s 43 4a 50
   -S      raw -&gt; hexstr        ;  rz-ax -S &lt; /bin/ls &gt; ls.hex
-  -t      Unix tstamp -&gt; str   ;  rz-ax -t 1234567890
-  -m      MS-DOS tstamp -&gt; str ;  rz-ax -m 1234567890
-  -W      Win32 tstamp -&gt; str  ;  rz-ax -W 1234567890
+  -t      tstamp -&gt; str        ;  rz-ax -t 1234567890
   -x      hash string          ;  rz-ax -x linux osx
   -u      units                ;  rz-ax -u 389289238 # 317.0M
   -w      signed word          ;  rz-ax -w 16 0xffff
@@ -1223,22 +1221,30 @@ Usage: rz-ax [options] [expr ...]
   -p      position of set bits ;  rz-ax -p 0xb3</code></pre>
 <p>Some examples:</p>
 <pre><code>$ rz-ax 3+0x80
-0x83</code></pre>
-<pre><code>$ rz-ax 0x80+3
-131</code></pre>
-<pre><code>$ echo 0x80+3 | rz-ax
-131</code></pre>
-<pre><code>$ rz-ax -s 4142
-AB</code></pre>
-<pre><code>$ rz-ax -S AB
-4142</code></pre>
-<pre><code>$ rz-ax -S &lt; bin.foo
-...</code></pre>
-<pre><code>$ rz-ax -e 33
-0x21000000</code></pre>
-<pre><code>$ rz-ax -e 0x21000000
-33</code></pre>
-<pre><code>$ rz-ax -K 90203010
+0x83
+
+$ rz-ax 0x80+3
+131
+
+$ echo 0x80+3 | rz-ax
+131
+
+$ rz-ax -s 4142
+AB
+
+$ rz-ax -S AB
+4142
+
+$ rz-ax -S &lt; bin.foo
+...
+
+$ rz-ax -e 33
+0x21000000
+
+$ rz-ax -e 0x21000000
+33
+
+$ rz-ax -K 90203010
 +--[0x10302090]---+
 |Eo. .            |
 | . . . .         |

@@ -659,7 +659,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1214,7 +1214,7 @@ window.Quarto = {
 </header>
 
 
-<p>ESIL stands for ‘Evaluable Strings Intermediate Language’. It aims to describe a <a href="https://en.wikipedia.org/wiki/Forth_%28programming_language%29">Forth</a>-like representation for every target CPU opcode semantics. ESIL representations can be evaluated (interpreted) in order to emulate individual instructions. Each command of an ESIL expression is separated by a comma. Its virtual machine can be described as this:</p>
+<p>ESIL stands for “Evaluable Strings Intermediate Language”. It aims to describe a <a href="https://en.wikipedia.org/wiki/Forth_%28programming_language%29">Forth</a>-like representation for every target CPU opcode semantics. ESIL representations can be evaluated (interpreted) in order to emulate individual instructions. Each command of an ESIL expression is separated by a comma. Its virtual machine can be described as this:</p>
 <pre><code>   while ((word=haveCommand())) {
      if (word.isOperator()) {
        esilOperators[word](esil);
@@ -1226,17 +1226,17 @@ window.Quarto = {
 <p>As we can see ESIL uses a stack-based interpreter similar to what is commonly used for calculators. You have two categories of inputs: values and operators. A value simply gets pushed on the stack, an operator then pops values (its arguments if you will) off the stack, performs its operation and pushes its results (if any) back on. We can think of ESIL as a post-fix notation of the operations we want to do.</p>
 <p>So let’s see an example:</p>
 <pre><code>4,esp,-=,ebp,esp,=[4]</code></pre>
-<p>Can you guess what this is? If we take this post-fix notation and transform it back to in-fix we get</p>
+<p>Can you guess what this is? If we take this post-fix notation and transform it back to in-fix we get:</p>
 <pre><code>esp -= 4
 4bytes(dword) [esp] = ebp</code></pre>
 <p>We can see that this corresponds to the x86 instruction <code>push ebp</code>! Isn’t that cool? The aim is to be able to express most of the common operations performed by CPUs, like binary arithmetic operations, memory loads and stores, processing syscalls. This way if we can transform the instructions to ESIL we can see what a program does while it is running even for the most cryptic architectures you definitely don’t have a device to debug on for.</p>
 <section id="using-esil" class="level2" data-number="44.1">
 <h2 data-number="44.1" class="anchored" data-anchor-id="using-esil"><span class="header-section-number">44.1</span> Using ESIL</h2>
-<p>rizin’s visual mode is great to inspect the ESIL evaluations.</p>
+<p>Rizin’s visual mode is great to inspect the ESIL evaluations.</p>
 <p>There are 3 environment variables that are important for watching what a program does:</p>
 <pre><code>[0x00000000]&gt; e emu.str=true</code></pre>
-<p><code>asm.emu</code> tells rizin if you want ESIL information to be displayed. If it is set to true, you will see comments appear to the right of your disassembly that tell you how the contents of registers and memory addresses are changed by the current instruction. For example, if you have an instruction that subtracts a value from a register it tells you what the value was before and what it becomes after. This is super useful so you don’t have to sit there yourself and track which value goes where.</p>
-<p>One problem with this is that it is a lot of information to take in at once and sometimes you simply don’t need it. rizin has a nice compromise for this. That is what the <code>emu.str</code> variable is for (<code>asm.emustr</code> on &lt;= 2.2). Instead of this super verbose output with every register value, this only adds really useful information to the output, e.g., strings that are found at addresses a program uses or whether a jump is likely to be taken or not.</p>
+<p><code>asm.emu</code> tells Rizin if you want ESIL information to be displayed. If it is set to true, you will see comments appear to the right of your disassembly that tell you how the contents of registers and memory addresses are changed by the current instruction. For example, if you have an instruction that subtracts a value from a register it tells you what the value was before and what it becomes after. This is super useful so you don’t have to sit there yourself and track which value goes where.</p>
+<p>One problem with this is that it is a lot of information to take in at once, and sometimes you simply don’t need it. Rizin has a nice compromise for this. That is what the <code>emu.str</code> variable is for (<code>asm.emustr</code> on &lt;= 2.2). Instead of this super verbose output with every register value, this only adds really useful information to the output, e.g., strings that are found at addresses a program uses or whether a jump is likely to be taken or not.</p>
 <p>The third important variable is <code>asm.esil</code>. This switches your disassembly to no longer show you the actual disassembled instructions, but instead now shows you corresponding ESIL expressions that describe what the instruction does. So if you want to take a look at how instructions are expressed in ESIL simply set “asm.esil” to true.</p>
 <pre><code>[0x00000000]&gt; e asm.esil=true</code></pre>
 <p>In visual mode you can also toggle this by simply typing <code>O</code>.</p>
@@ -1277,11 +1277,11 @@ ADDR BREAK
 <p>Here is the complete instruction set used by the ESIL VM:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 79%">
+<col style="width: 15%">
+<col style="width: 2%">
+<col style="width: 8%">
+<col style="width: 24%">
+<col style="width: 49%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1301,8 +1301,8 @@ ADDR BREAK
 <td></td>
 </tr>
 <tr class="even">
-<td><strong><span class="math inline">\(** | src | Syscall | syscall  |
-**\)</span>$</strong></td>
+<td><strong><span class="math inline">\(**                                                             | src      | Syscall                              | syscall                                                                                                    |                                                                                                                                                                                                                       |
+| **\)</span>$</strong></td>
 <td>src</td>
 <td>Instruction address</td>
 <td>Get address of current instruction<br>stack=instruction address</td>
@@ -1709,7 +1709,8 @@ a,b,/=     b /= a</code></pre>
 <p>This approach is more readable, but it is less stack-friendly.</p>
 <section id="special-instructions" class="level3" data-number="44.4.1">
 <h3 data-number="44.4.1" class="anchored" data-anchor-id="special-instructions"><span class="header-section-number">44.4.1</span> Special Instructions</h3>
-<p>NOPs are represented as empty strings. As it was said previously, syscalls are marked by ‘<span class="math inline">\(' command. For example, '0x80,\)</span>’. It delegates emulation from the ESIL machine to a callback which implements syscalls for a specific OS/kernel.</p>
+<p>NOPs are represented as empty strings. As it was said previously, syscalls are marked by ‘<span class="math inline">\(' command. For example,
+'0x80,\)</span>’. It delegates emulation from the ESIL machine to a callback which implements syscalls for a specific OS/kernel.</p>
 <p>Traps are implemented with the <code>TRAP</code> command. They are used to throw exceptions for invalid instructions, division by zero, memory read error, or any other needed by specific architectures.</p>
 </section>
 <section id="quick-analysis" class="level3" data-number="44.4.2">
@@ -1738,7 +1739,7 @@ equalsTo("")    -&gt; empty string, aka nop (wrong, if we append pc+=x)</code></
 <h3 data-number="44.4.4" class="anchored" data-anchor-id="variables"><span class="header-section-number">44.4.4</span> Variables</h3>
 <p>Properties of the VM variables:</p>
 <ol type="1">
-<li><p>They have no predefined bit width. This way it should be easy to extend them to 128, 256 and 512 bits later, e.g.&nbsp;for MMX, SSE, AVX, Neon SIMD.</p></li>
+<li><p>They have no predefined bit width. This way it should be easy to extend them to 128, 256 and 512 bits later, for MMX, SSE, AVX, Neon SIMD.</p></li>
 <li><p>There can be unbound number of variables. It is done for SSA-form compatibility.</p></li>
 <li><p>Register names have no specific syntax. They are just strings.</p></li>
 <li><p>Numbers can be specified in any base supported by RNum (dec, hex, oct, binary …).</p></li>

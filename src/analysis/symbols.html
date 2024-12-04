@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1160,31 +1160,27 @@ ul.task-list li input[type="checkbox"] {
 <p>Rizin automatically parses available imports and exports sections in the binary, moreover, it can load additional debugging information if present. Two main formats are supported: DWARF and PDB (for Windows binaries). Note that, unlike many tools rizin doesn’t rely on Windows API to parse PDB files, thus they can be loaded on any other supported platform - e.g. Linux or OS X.</p>
 <p>DWARF debug info loads automatically by default because usually it’s stored right in the executable file. PDB is a bit of a different beast - it is always stored as a separate binary, thus the different logic of handling it.</p>
 <p>At first, one of the common scenarios is to analyze the file from Windows distribution. In this case, all PDB files are available on the Microsoft server, which is by default is in options. See all pdb options in rizin:</p>
-<pre><code>pdb.autoload = 0
-pdb.extract = 1
-pdb.server = https://msdl.microsoft.com/download/symbols
-pdb.useragent = Microsoft-Symbol-Server/6.11.0001.402</code></pre>
-<p>Using the variable <code>pdb.server</code> you can change the address where rizin will try to download the PDB file by the GUID stored in the executable header. You can make use of multiple symbol servers by separating each URL with a semi-colon:</p>
-<pre><code>e pdb.server=https://msdl.microsoft.com/download/symbols;https://symbols.mozilla.org/</code></pre>
+<pre><code>[0x00000000]&gt; ell pdb
+pdb.autoload = 0 ; Automatically load the required pdb files for loaded DLLs
+pdb.extract = 1 ; Avoid extract of the pdb file, just download
+pdb.server = https://msdl.microsoft.com/download/symbols ; Semi-colon separated list of base URLs for Microsoft symbol servers
+pdb.symstore = /home/user/.local/share/rizin/pdb ; Path to downstream symbol store</code></pre>
+<p>Using the variable <code>pdb.server</code> you can change the address where Rizin will try to download the PDB file by the GUID stored in the executable header. You can make use of multiple symbol servers by separating each URL with a semicolon:</p>
+<pre><code>[0x00000000]&gt; e pdb.server=https://msdl.microsoft.com/download/symbols;https://symbols.mozilla.org/</code></pre>
 <p>On Windows, you can also use local network share paths (UNC paths) as symbol servers.</p>
-<p>Usually, there is no reason to change the default <code>pdb.useragent</code>, but who knows where could it be handy?</p>
 <p>Because those PDB files are stored as “cab” archives on the server, <code>pdb.extract=1</code> says to automatically extract them.</p>
 <p>Note that for the automatic downloading to work you need the “cabextract” tool, and wget/curl installed.</p>
-<p>Sometimes you don’t need to do that from the rizin itself, thus - two handy rz-bin options:</p>
-<pre><code> -P              show debug/pdb information
- -PP             download pdb file for binary</code></pre>
+<p>Sometimes you don’t need to do that from the Rizin itself, thus - two handy rz-bin options:</p>
+<pre><code> -P              Show debug/pdb information
+ -PP             Download pdb file for binary</code></pre>
 <p>where <code>-PP</code> automatically downloads the pdb for the selected binary, using those <code>pdb.*</code> config options. <code>-P</code> will dump the contents of the PDB file, which is useful sometimes for a quick understanding of the symbols stored in it.</p>
 <p>Apart from the basic scenario of just opening a file, PDB information can be additionally manipulated by the <code>id</code> commands:</p>
 <pre><code>[0x000051c0]&gt; id?
-|Usage: id Debug information
-| Output mode:
-| '*'              Output in rizin commands
-| id               Source lines
-| idp [file.pdb]   Load pdb file information
-| idpi [file.pdb]  Show pdb file information
-| idpd             Download pdb file on remote server</code></pre>
+Usage: id[jqp]   # Debug commands
+| id[jq]    # Show DWARF source lines information
+| idp[jidx] # PDB commands</code></pre>
 <p>Where <code>idpi</code> is basically the same as <code>rz-bin -P</code>. Note that <code>idp</code> can be also used not only in the static analysis mode but also in the debugging mode, even if connected via WinDbg.</p>
-<p>For simplifying the loading PDBs, especially for the processes with many linked DLLs, rizin can autoload all required PDBs automatically - you need just set the <code>e pdb.autoload=true</code> option. Then if you load some file in debugging mode in Windows, using <code>rizin -d file.exe</code> or <code>rizin -d 2345</code> (attach to pid 2345), all related PDB files will be loaded automatically.</p>
+<p>For simplifying the loading PDBs, especially for the processes with many linked DLLs, Rizin can autoload all required PDBs automatically - you need just set the <code>e pdb.autoload=true</code> option. Then, if you load some file in debugging mode in Windows, using <code>rizin -d file.exe</code> or <code>rizin -d 2345</code> (attach to pid 2345), all related PDB files will be loaded automatically.</p>
 <p>DWARF information loading, on the other hand, is completely automated. You don’t need to run any commands/change any options:</p>
 <pre><code>rizin `which rz-bin`
 [0x00002437 8% 300 /usr/local/bin/rz-bin]&gt; pd $r

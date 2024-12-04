@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1164,9 +1164,9 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>One of the most important things to remember in reverse engineering is the core difference between static analysis and dynamic analysis. As many already know, static analysis suffers from the path explosion problem, which is impossible to solve even in the most basic way without at least a partial emulation.</p>
-<p>Thus many professional reverse engineering tools use code emulation while performing an analysis of binary code, and rizin is no different here.</p>
-<p>For partial emulation (or imprecise full emulation) rizin uses its own <a href="../../src/disassembling/esil.html">ESIL</a> intermediate language and virtual machine.</p>
-<p>Rizin supports this kind of partial emulation for all platforms that implement ESIL uplifting (x86/x86_64, ARM, arm64, MIPS, PowerPC, SPARC, AVR, 8051, Gameboy, …).</p>
+<p>Thus, many professional reverse engineering tools use code emulation while performing an analysis of binary code, and Rizin is no different here.</p>
+<p>For partial emulation (or imprecise full emulation) Rizin uses its own RzIL intermediate language, designed to replace current <a href="../../src/disassembling/esil.html">ESIL</a>.</p>
+<p>Rizin supports this kind of partial emulation for all platforms that implement ESIL uplifting (x86/x86_64, ARM, arm64, MIPS, PowerPC, SPARC, AVR, 8051, Game Boy, …).</p>
 <p>One of the most common usages of such emulation is to calculate indirect jumps and conditional jumps.</p>
 <p>To see the ESIL representation of the program one can use the <code>ao</code> command or enable the <code>asm.esil</code> configuration variable, to check if the program uplifted correctly, and to grasp how ESIL works:</p>
 <pre><code>[0x00001660]&gt; pdf
@@ -1211,7 +1211,7 @@ ul.task-list li input[type="checkbox"] {
 <li><code>aeip</code> to set the initial ESIL VM IP (instruction pointer)</li>
 <li>a sequence of <code>aer</code> commands to set the initial register values.</li>
 </ul>
-<p>While performing emulation, please remember, that ESIL VM cannot emulate external calls or system calls, along with SIMD instructions. Thus the most common scenario is to emulate only a small chunk of the code, like encryption/decryption, unpacking or calculating something.</p>
+<p>While performing emulation, please remember, that ESIL VM cannot emulate external calls or system calls, along with SIMD instructions. Thus, the most common scenario is to emulate only a small chunk of the code, like encryption/decryption, unpacking or calculating something.</p>
 <p>After we successfully set up the ESIL VM we can interact with it like with a usual debugging mode. The commands interface for ESIL VM is almost identical to the debugging one:</p>
 <ul>
 <li><code>aes</code> to step (or <code>s</code> key in visual mode)</li>
@@ -1220,7 +1220,7 @@ ul.task-list li input[type="checkbox"] {
 <li><code>aesue &lt;ESIL expression&gt;</code> to step until some specified ESIL expression met</li>
 <li><code>aec</code> to continue until break (Ctrl-C), this one is rarely used though, due to the omnipresence of external calls</li>
 </ul>
-<p>In visual mode, all of the debugging hotkeys will work also in ESIL emulation mode.</p>
+<p>In visual mode, all the debugging hotkeys will work also in ESIL emulation mode.</p>
 <p>Along with usual emulation, there is a possibility to record and replay mode:</p>
 <ul>
 <li><code>aets</code> to list all current ESIL R&amp;R sessions</li>

@@ -664,7 +664,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1171,13 +1171,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#examples" id="toc-examples" class="nav-link active" data-scroll-target="#examples"><span class="header-section-number">61</span> Examples</a>
+  <li><a href="#examples" id="toc-examples" class="nav-link active" data-scroll-target="#examples"><span class="header-section-number">60.1</span> Examples</a>
   <ul class="collapse">
-  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python"><span class="header-section-number">61.1</span> Python</a></li>
-  <li><a href="#haskell" id="toc-haskell" class="nav-link" data-scroll-target="#haskell"><span class="header-section-number">61.2</span> Haskell</a></li>
-  <li><a href="#ocaml" id="toc-ocaml" class="nav-link" data-scroll-target="#ocaml"><span class="header-section-number">61.3</span> OCaml</a></li>
-  <li><a href="#rust" id="toc-rust" class="nav-link" data-scroll-target="#rust"><span class="header-section-number">61.4</span> Rust</a></li>
-  <li><a href="#ruby" id="toc-ruby" class="nav-link" data-scroll-target="#ruby"><span class="header-section-number">61.5</span> Ruby</a></li>
+  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python"><span class="header-section-number">60.1.1</span> Python</a></li>
+  <li><a href="#haskell" id="toc-haskell" class="nav-link" data-scroll-target="#haskell"><span class="header-section-number">60.1.2</span> Haskell</a></li>
+  <li><a href="#ocaml" id="toc-ocaml" class="nav-link" data-scroll-target="#ocaml"><span class="header-section-number">60.1.3</span> OCaml</a></li>
+  <li><a href="#rust" id="toc-rust" class="nav-link" data-scroll-target="#rust"><span class="header-section-number">60.1.4</span> Rust</a></li>
+  <li><a href="#ruby" id="toc-ruby" class="nav-link" data-scroll-target="#ruby"><span class="header-section-number">60.1.5</span> Ruby</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/rizinorg/book/edit/master/src/scripting/rz-pipe.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
@@ -1204,78 +1204,129 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>The rz-pipe module permits interacting with rizin instances in different methods:</p>
+<p>The rz-pipe module permits interacting with Rizin instances in different methods:</p>
 <ul>
 <li>spawn pipes (rizin -0)</li>
 <li>http queries (cloud friendly)</li>
 <li>tcp socket (rizin -c)</li>
 </ul>
-<pre><code>         pipe spawn async http tcp rap json
-python    x     x     -    x    x    x   x
-haskell   x     x     -    x    -    -   x
-ocaml     x     x     -    x    -    -   x
-rust      x     x     x    x    -    -   x</code></pre>
-<section id="examples" class="level1" data-number="61">
-<h1 data-number="61"><span class="header-section-number">61</span> Examples</h1>
-<section id="python" class="level2" data-number="61.1">
-<h2 data-number="61.1" class="anchored" data-anchor-id="python"><span class="header-section-number">61.1</span> Python</h2>
-<pre><code>$ pip install rzpipe</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rzpipe</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>rz <span class="op">=</span> rzpipe.<span class="bu">open</span>(<span class="st">"/bin/ls"</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>rz.cmd(<span class="st">'aa'</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rz.cmd(<span class="st">"afl"</span>))</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rz.cmdj(<span class="st">"aflj"</span>))  <span class="co"># evaluates JSONs and returns an object</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Language</th>
+<th>pipe</th>
+<th>spawn</th>
+<th>async</th>
+<th>http</th>
+<th>tcp</th>
+<th>rap</th>
+<th>json</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Python</td>
+<td>x</td>
+<td>x</td>
+<td>-</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+</tr>
+<tr class="even">
+<td>Haskell</td>
+<td>x</td>
+<td>x</td>
+<td>-</td>
+<td>x</td>
+<td>-</td>
+<td>-</td>
+<td>x</td>
+</tr>
+<tr class="odd">
+<td>OCaml</td>
+<td>x</td>
+<td>x</td>
+<td>-</td>
+<td>x</td>
+<td>-</td>
+<td>-</td>
+<td>x</td>
+</tr>
+<tr class="even">
+<td>Rust</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>-</td>
+<td>-</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<section id="examples" class="level2" data-number="60.1">
+<h2 data-number="60.1" class="anchored" data-anchor-id="examples"><span class="header-section-number">60.1</span> Examples</h2>
+<section id="python" class="level3" data-number="60.1.1">
+<h3 data-number="60.1.1" class="anchored" data-anchor-id="python"><span class="header-section-number">60.1.1</span> Python</h3>
+<pre class="shell"><code>$ pip install rzpipe</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rzpipe</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>rz <span class="op">=</span> rzpipe.<span class="bu">open</span>(<span class="st">"/bin/ls"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>rz.cmd(<span class="st">'aa'</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rz.cmd(<span class="st">"afl"</span>))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rz.cmdj(<span class="st">"aflj"</span>))  <span class="co"># evaluates JSONs and returns an object</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="haskell" class="level2" data-number="61.2">
-<h2 data-number="61.2" class="anchored" data-anchor-id="haskell"><span class="header-section-number">61.2</span> Haskell</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode haskell code-with-copy"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="dt">RzPipe</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.ByteString.Lazy</span> <span class="kw">as</span> <span class="dt">L</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>showMainFunction ctx <span class="ot">=</span> <span class="kw">do</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  cmd ctx <span class="st">"s main"</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  L.putStr <span class="op">=&lt;&lt;</span> cmd ctx <span class="st">"pD `fl $$`"</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Run rizin locally</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  open <span class="st">"/bin/ls"</span> <span class="op">&gt;&gt;=</span> showMainFunction</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Connect to rizin via HTTP (e.g. if "rizin -qc=h /bin/ls" is running)</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  open <span class="st">"http://127.0.0.1:9090"</span> <span class="op">&gt;&gt;=</span> showMainFunction</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="haskell" class="level3" data-number="60.1.2">
+<h3 data-number="60.1.2" class="anchored" data-anchor-id="haskell"><span class="header-section-number">60.1.2</span> Haskell</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell code-with-copy"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="dt">RzPipe</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.ByteString.Lazy</span> <span class="kw">as</span> <span class="dt">L</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>showMainFunction ctx <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  cmd ctx <span class="st">"s main"</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  L.putStr <span class="op">=&lt;&lt;</span> cmd ctx <span class="st">"pD `fl $$`"</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Run rizin locally</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  open <span class="st">"/bin/ls"</span> <span class="op">&gt;&gt;=</span> showMainFunction</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Connect to rizin via HTTP (e.g. if "rizin -qc=h /bin/ls" is running)</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  open <span class="st">"http://127.0.0.1:9090"</span> <span class="op">&gt;&gt;=</span> showMainFunction</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="ocaml" class="level2" data-number="61.3">
-<h2 data-number="61.3" class="anchored" data-anchor-id="ocaml"><span class="header-section-number">61.3</span> OCaml</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode ocaml code-with-copy"><code class="sourceCode ocaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="dt">result</span> = Rz.with_command ~cmd:<span class="st">"/j chown"</span> <span class="st">"/bin/ls"</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Printf</span>.printf <span class="st">"Rizin output is: %s"</span> <span class="dt">result</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="ocaml" class="level3" data-number="60.1.3">
+<h3 data-number="60.1.3" class="anchored" data-anchor-id="ocaml"><span class="header-section-number">60.1.3</span> OCaml</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode ocaml code-with-copy"><code class="sourceCode ocaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="dt">result</span> = Rz.with_command ~cmd:<span class="st">"/j chown"</span> <span class="st">"/bin/ls"</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Printf</span>.printf <span class="st">"Rizin output is: %s"</span> <span class="dt">result</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="rust" class="level2" data-number="61.4">
-<h2 data-number="61.4" class="anchored" data-anchor-id="rust"><span class="header-section-number">61.4</span> Rust</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a> <span class="at">#[</span>macro_use<span class="at">]</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a> <span class="kw">extern</span> <span class="kw">crate</span> rzpipe<span class="op">;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">extern</span> <span class="kw">crate</span> serde_json<span class="op">;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">use</span> <span class="pp">rzpipe::</span>RzPipe<span class="op">;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> path <span class="op">=</span> <span class="cn">Some</span>(<span class="st">"/bin/ls"</span><span class="op">.</span>to_owned())<span class="op">;</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> <span class="kw">mut</span> rzp <span class="op">=</span> <span class="pp">open_pipe!</span>(path)<span class="op">.</span>unwrap()<span class="op">;</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>     <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> rzp<span class="op">.</span>cmd(<span class="st">"?e Hello World"</span>)<span class="op">.</span>unwrap())<span class="op">;</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>     <span class="cf">if</span> <span class="kw">let</span> <span class="cn">Ok</span>(json) <span class="op">=</span> rzp<span class="op">.</span>cmdj(<span class="st">"ij"</span>) <span class="op">{</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>         <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> <span class="pp">serde_json::</span>to_string_pretty(<span class="op">&amp;</span>json)<span class="op">.</span>unwrap())<span class="op">;</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>         <span class="pp">println!</span>(<span class="st">"ARCH {}"</span><span class="op">,</span> json[<span class="st">"bin"</span>][<span class="st">"arch"</span>])<span class="op">;</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>     <span class="op">}</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>     rzp<span class="op">.</span>close()<span class="op">;</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a> <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="rust" class="level3" data-number="60.1.4">
+<h3 data-number="60.1.4" class="anchored" data-anchor-id="rust"><span class="header-section-number">60.1.4</span> Rust</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="at">#[</span>macro_use<span class="at">]</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">extern</span> <span class="kw">crate</span> rzpipe<span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">extern</span> <span class="kw">crate</span> serde_json<span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="pp">rzpipe::</span>RzPipe<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> path <span class="op">=</span> <span class="cn">Some</span>(<span class="st">"/bin/ls"</span><span class="op">.</span>to_owned())<span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> <span class="kw">mut</span> rzp <span class="op">=</span> <span class="pp">open_pipe!</span>(path)<span class="op">.</span>unwrap()<span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> rzp<span class="op">.</span>cmd(<span class="st">"?e Hello World"</span>)<span class="op">.</span>unwrap())<span class="op">;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="kw">let</span> <span class="cn">Ok</span>(json) <span class="op">=</span> rzp<span class="op">.</span>cmdj(<span class="st">"ij"</span>) <span class="op">{</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> <span class="pp">serde_json::</span>to_string_pretty(<span class="op">&amp;</span>json)<span class="op">.</span>unwrap())<span class="op">;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="pp">println!</span>(<span class="st">"ARCH {}"</span><span class="op">,</span> json[<span class="st">"bin"</span>][<span class="st">"arch"</span>])<span class="op">;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  rzp<span class="op">.</span>close()<span class="op">;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="ruby" class="level2" data-number="61.5">
-<h2 data-number="61.5" class="anchored" data-anchor-id="ruby"><span class="header-section-number">61.5</span> Ruby</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode ruby code-with-copy"><code class="sourceCode ruby"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span> <span class="vs">'./rzpipe'</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">begin</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  rzp <span class="kw">=</span> <span class="dt">RzPipe</span><span class="at">.new</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="cf">rescue</span> <span class="dt">Exception</span> <span class="kw">=&gt;</span> e</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  rzp <span class="kw">=</span> <span class="dt">RzPipe</span><span class="at">.new</span> <span class="vs">'/bin/ls'</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">puts</span> rzp<span class="at">.cmd</span> <span class="ch">'a'</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">puts</span> rzp<span class="at">.cmd</span> <span class="vs">'pd 10 main'</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  rzp<span class="at">.quit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="ruby" class="level3" data-number="60.1.5">
+<h3 data-number="60.1.5" class="anchored" data-anchor-id="ruby"><span class="header-section-number">60.1.5</span> Ruby</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode ruby code-with-copy"><code class="sourceCode ruby"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span> <span class="vs">'./rzpipe'</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">begin</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  rzp <span class="kw">=</span> <span class="dt">RzPipe</span><span class="at">.new</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">rescue</span> <span class="dt">Exception</span> <span class="kw">=&gt;</span> e</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  rzp <span class="kw">=</span> <span class="dt">RzPipe</span><span class="at">.new</span> <span class="vs">'/bin/ls'</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">puts</span> rzp<span class="at">.cmd</span> <span class="ch">'a'</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">puts</span> rzp<span class="at">.cmd</span> <span class="vs">'pd 10 main'</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  rzp<span class="at">.quit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>

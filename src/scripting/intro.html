@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1176,7 +1176,8 @@ family: cpu
 <p>It simply runs the second command after finishing the first one, like in a shell.</p>
 <p>The second important way to sequence the commands is with a simple pipe <code>|</code></p>
 <pre><code>ao|grep address</code></pre>
-<p>Note, the <code>|</code> pipe only can pipe output of rizin commands to external (shell) commands, like system programs or builtin shell commands. There is a similar way to sequence rizin commands, using the backtick operator <code>`command`</code>. The quoted part will undergo command substitution and the output will be used as an argument of the command line.</p>
+<p>Note, the <code>|</code> pipe only can pipe output of rizin commands to external (shell) commands, like system programs or builtin shell commands.</p>
+<p>There is a similar way to sequence rizin commands, using the backtick operator <code>`command`</code>. The quoted part will undergo command substitution and the output will be used as an argument of the command line.</p>
 <p>For example, we want to see a few bytes of the memory at the address referred to by the ‘mov eax, addr’ instruction. We can do that without jumping to it, using a sequence of commands:</p>
 <pre><code>[0x00404800]&gt; pd 1
               0x00404800      b827e66100     mov eax, 0x61e627      ; "tab"
@@ -1192,14 +1193,15 @@ type: mov
 esil: 6415911,rax,=
 stack: null
 family: cpu
+
 [0x00404800]&gt; ao~ptr[1]
 0x0061e627
 0
+
 [0x00404800]&gt; px 10 @ `ao~ptr[1]`
 - offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
-0x0061e627  7461 6200 2e69 6e74 6572                 tab..inter
-[0x00404800]&gt;</code></pre>
-<p>And of course it’s possible to redirect the output of an rizin command into a file, using the <code>&gt;</code> and <code>&gt;&gt;</code> commands</p>
+0x0061e627  7461 6200 2e69 6e74 6572                 tab..inter</code></pre>
+<p>And of course it’s possible to redirect the output of a rizin command into a file, using the <code>&gt;</code> and <code>&gt;&gt;</code> commands</p>
 <pre><code>[0x00404800]&gt; px 10 @ `ao~ptr[1]` &gt; example.txt
 [0x00404800]&gt; px 10 @ `ao~ptr[1]` &gt;&gt; example.txt</code></pre>
 <p>The <code>%$?</code> command describes several helpful variables you can use to do similar actions even more easily, like the <code>$v</code> “immediate value” variable, or the <code>$m</code> opcode memory reference variable.</p>

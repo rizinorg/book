@@ -664,7 +664,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1202,7 +1202,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>rz-gg stands for <code>rizin egg</code>, this is the basic block to construct relocatable snippets of code to be used for injection in target processes when doing exploiting.</p>
 <p>rz-gg compiles programs written in a simple high-level language into tiny binaries for x86, x86-64, and ARM.</p>
 <p>You can also access all the rz-gg commands from the rizin shell. They are present under <code>g</code>. See <code>g?</code> for more information about how to use them.</p>
-<p>By default it will compile it’s own <code>rz-gg</code> language, but you can also compile C code using GCC or Clang shellcodes depending on the file extension. Lets create C file called <code>helloworld.c</code>:</p>
+<p>By default, it will compile its own <code>rz-gg</code> language, but you can also compile C code using GCC or Clang shellcodes depending on the file extension. Let’s create C file called <code>helloworld.c</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    write<span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="st">"Hello World</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> <span class="dv">13</span><span class="op">);</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>

@@ -664,7 +664,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1195,7 +1195,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The <code>o</code> command permits the user to open a file, this is mapped at offset 0 unless it has a known binary header and then the maps are created in virtual addresses.</p>
 <p>Sometimes, we want to rebase a binary, or maybe we want to load or map the file in a different address.</p>
 <p>When launching rizin, the base address can be changed with the <code>-B</code> flag. But you must notice the difference when opening files with unknown headers, like bootloaders, so we need to map them using the <code>-m</code> flag (or specifying it as argument to the <code>o</code> command).</p>
-<p>rizin is able to open files and map portions of them at random places in memory specifying attributes like permissions and name. It is the perfect basic tooling to reproduce an environment like a core file, a debug session, by also loading and mapping all the libraries the binary depends on.</p>
+<p>Rizin is able to open files and map portions of them at random places in memory specifying attributes like permissions and name. It is the perfect basic tooling to reproduce an environment like a core file, a debug session, by also loading and mapping all the libraries the binary depends on.</p>
 <p>Opening files (and mapping them) is done using the <code>o</code> (open) command. Let’s read the help:</p>
 <pre><code>[0x00000000]&gt; o?
 Usage: o[?]   # Open files and handle opened files
@@ -1218,25 +1218,28 @@ Usage: o[?]   # Open files and handle opened files
 | om[?]                  # Handle IO maps
 | ox &lt;fd&gt; &lt;fdx&gt;          # Exchange the descs of &lt;fd&gt; and &lt;fdx&gt; and keep the mapping</code></pre>
 <p>Prepare a simple layout:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-bin <span class="at">-l</span> /bin/ls</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[Linked</span> libraries]</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">libselinux.so.1</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">librt.so.1</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">libacl.so.1</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">libc.so.6</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">4</span> libraries</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-bin <span class="at">-l</span> hello_world</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[Libs]</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">library</span>   </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">----------</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">libc.so.6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Map a file:</p>
-<pre><code>[0x00001190]&gt; o /bin/zsh 0x499999</code></pre>
+<pre><code>[0x00001100]&gt; o /bin/sh 0x499999</code></pre>
 <p>List mapped files:</p>
 <pre><code>[0x00000000]&gt; ol
-- 6 /bin/ls @ 0x0 ; r
-- 10 /lib/ld-linux.so.2 @ 0x100000000 ; r
-- 14 /bin/zsh @ 0x499999 ; r</code></pre>
-<p>Print hexadecimal values from /bin/zsh:</p>
+ 3 - r-x 0x00003d48 /home/user/playground/book/examples/hello_world/hello_world
+ 4 - r-x 0x00000070 vfile://0/reloc-targets
+ 5 - rw- 0x00000008 null://8
+ 6 - r-x 0x00003d48 vfile://0/patched
+ 7 * r-x 0x000d5b68 /bin/sh
+ 8 - r-- 0x00000bf0 vfile://1/reloc-targets
+ 9 - rw- 0x0000ed7c null://60796
+10 - r-- 0x000d5b68 vfile://1/patched</code></pre>
+<p><em>Note: <code>vfile</code> is a virtual file, that is often automatically created to patch relocations and could also be created manually, if needed. It was created to avoid modifying the original file/IO ranges.</em></p>
+<p>Print hexadecimal values from /bin/sh:</p>
 <pre><code>[0x00000000]&gt; px @ 0x499999</code></pre>
 <p>Unmap files using the <code>o-</code> command. Pass the required file descriptor to it as an argument:</p>
-<pre><code>[0x00000000]&gt; o- 14</code></pre>
+<pre><code>[0x00000000]&gt; o- 7</code></pre>
 <p>You can also view the ascii table showing the list of the opened files:</p>
 <pre><code>[0x00000000]&gt; o=</code></pre>
 

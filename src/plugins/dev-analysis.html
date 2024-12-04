@@ -664,7 +664,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1191,7 +1191,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>After implementing disassembly plugin, you might have noticed that output is far from being good - no proper highlighting, no reference lines and so on. This is because rizin requires every architecture plugin to provide also analysis information about every opcode. At the moment the implementation of disassembly and opcodes analysis is separated between two modules - RzAsm and RzAnalysis. Thus we need to write an analysis plugin too. The principle is very similar - you just need to create a C file and corresponding Makefile.</p>
+<p>After implementing disassembly plugin, you might have noticed that output is far from being good - no proper highlighting, no reference lines and so on. This is because Rizin requires every architecture plugin to provide also analysis information about every opcode. At the moment the implementation of disassembly and opcodes analysis is separated between two modules - RzAsm and RzAnalysis. Thus, we need to write an analysis plugin too. The principle is very similar - you just need to create a C file and corresponding Makefile.</p>
 <p>They structure of RzAnalysis plugin looks like</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>RzAnalysisPlugin rz_analysis_plugin_v810 <span class="op">=</span> <span class="op">{</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>name <span class="op">=</span> <span class="st">"mycpu"</span><span class="op">,</span></span>

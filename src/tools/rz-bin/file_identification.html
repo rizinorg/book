@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1158,35 +1158,45 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>File type identification is done using <code>-I</code>. With this option, rz-bin prints information on a binary type, like its encoding, endianness, class, operating system:</p>
-<pre><code>$ rz-bin -I /bin/ls
+<pre><code>$ rz-bin -I /usr/bin/ls
+[Info]
 arch     x86
-binsz    128456
+cpu      N/A
+baddr    0x00000000
+binsz    0x00024280
 bintype  elf
 bits     64
-canary   true
 class    ELF64
-crypto   false
-endian   little
-havecode true
+compiler N/A
+dbg_file N/A
+endian   LE
+hdr.csum N/A
+guid     N/A
 intrp    /lib64/ld-linux-x86-64.so.2
+laddr    0x00000000
 lang     c
-linenum  false
-lsyms    false
 machine  AMD x86-64 architecture
 maxopsz  16
 minopsz  1
-nx       true
 os       linux
+cc       N/A
 pcalign  0
-pic      true
-relocs   false
-relro    partial
+relro    full
 rpath    NONE
-static   false
-stripped true
 subsys   linux
-va       true</code></pre>
-<p>To make rz-bin output information in format that the main program, rizin, can understand, pass <code>-Ir</code> option to it:</p>
+stripped true
+crypto   false
+havecode true
+va       true
+sanitiz  false
+static   false
+linenum  false
+lsyms    false
+canary   true
+PIE      true
+RELROCS  false
+NX       true</code></pre>
+<p>To make rz-bin output information in format that the main program, Rizin, can understand, pass <code>-Ir</code> option to it:</p>
 <pre><code>$ rz-bin -Ir /bin/ls
 e cfg.bigendian=false
 e asm.bits=64

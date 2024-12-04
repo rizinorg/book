@@ -630,7 +630,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1158,13 +1158,12 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>Rizin has a very rich set of commands and configuration options to perform data and code analysis, to extract useful information from a binary, like pointers, string references, basic blocks, opcode data, jump targets, cross-references, and much more. These operations are handled by the <code>a</code> (analyze) command family:</p>
-<pre><code>|Usage: a[abdefFghoprxstc] [...]
+<pre><code>[0x00001100]&gt; a?
+Usage: a  [abdefFghoprxstc] [...]
+| a*                 same as afl*;ah*;ax*
 | aa[?]              analyze all (fcns + bbs) (aa0 to avoid sub renaming)
 | a8 [hexpairs]      analyze bytes
-| ab[b] [addr]       analyze block at given address
-| abb [len]          analyze N basic blocks in [len] (section.size by default)
-| abt [addr]         find paths in the bb function graph from current offset to given address
-| ac [cycles]        analyze which op could be executed in [cycles]
+| ab[?] [addr]       analyze block
 | ad[?]              analyze data trampoline (wip)
 | ad [from] [to]     analyze data pointers to (from-to)
 | ae[?] [expr]       analyze opcode eval expression (see ao)
@@ -1173,6 +1172,8 @@ ul.task-list li input[type="checkbox"] {
 | ag[?] [options]    draw graphs in various formats
 | ah[?]              analysis hints (force opcode size, ...)
 | ai [addr]          address information (show perms, stack, heap, ...)
+| aj                 same as a* but in json (aflj)
+| aL                 list all asm/analysis plugins (e asm.arch=?)
 | an [name] [@addr]  show/rename/create whatever flag/function is used at addr
 | ao[?] [len]        analyze Opcodes (or emulate it)
 | aO[?] [len]        Analyze N instructions in M bytes

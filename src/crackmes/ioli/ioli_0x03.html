@@ -664,7 +664,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from ida, GDB or WinDBG</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1204,26 +1204,26 @@ nth paddr      vaddr      len size section type  string
 0   0x000005ec 0x080485ec 17  18   .rodata ascii Lqydolg#Sdvvzrug$
 1   0x000005fe 0x080485fe 17  18   .rodata ascii Sdvvzrug#RN$$$#=,
 2   0x00000610 0x08048610 24  25   .rodata ascii IOLI Crackme Level 0x03\n
-3   0x00000629 0x08048629 10  11   .rodata ascii Password: 
-</code></pre>
+3   0x00000629 0x08048629 10  11   .rodata ascii Password: </code></pre>
 <p>Note that the ‘Invalid Password!’ and the ‘Password OK :)’ strings have been seemingly replaced by random gibberish.</p>
 <p>Let’s analyze.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span><span class="bn">0x08048360</span><span class="op">]&gt;</span> aaa</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">[</span><span class="bn">0x08048360</span><span class="op">]&gt;</span> pdg @ main</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>undefined4 main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_18h<span class="op">;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_10h<span class="op">;</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_ch<span class="op">;</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_8h<span class="op">;</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    sym<span class="op">.</span>imp<span class="op">.</span>printf<span class="op">(</span><span class="st">"IOLI Crackme Level 0x03</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    sym<span class="op">.</span>imp<span class="op">.</span>printf<span class="op">(</span><span class="st">"Password: "</span><span class="op">);</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    sym<span class="op">.</span>imp<span class="op">.</span>scanf<span class="op">(</span>data<span class="fl">.08048634</span><span class="op">,</span> <span class="op">&amp;</span>var_8h<span class="op">);</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    sym<span class="op">.</span>test<span class="op">(</span>var_8h<span class="op">,</span> <span class="bn">0x52b24</span><span class="op">);</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>$ rizin ./crackme0x03
+[0x08048360]&gt; aaa
+[0x08048360]&gt; pdg @ main
+
+undefined4 main(void)
+{
+    int32_t var_18h;
+    int32_t var_10h;
+    int32_t var_ch;
+    int32_t var_8h;
+    
+    sym.imp.printf("IOLI Crackme Level 0x03\n");
+    sym.imp.printf("Password: ");
+    sym.imp.scanf(data.08048634, &amp;var_8h);
+    sym.test(var_8h, 0x52b24);
+    return 0;
+}</code></pre>
 <p>This looks quite straightforward, <code>var_8h</code> is the result of <code>scanf</code> which the function <code>sym.test(var_8h, 0x52b24)</code> apparently compares to the value <code>0x52b24</code>.</p>
 <p>And indeed entering the decimal value of <code>0x52b24</code> (338724) gives us a pass.</p>
 <pre><code>$ ./crackme0x03
@@ -1244,28 +1244,28 @@ Password OK!!! :)</code></pre>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>It’s a two path conditional jump which compares two parameters and then does a shift. We can guess that <code>shift()</code> is most likely some sort of decoding step of the seemingly random strings (shift cipher, e.g.&nbsp;Caesar cipher).</p>
 <p>To confirm our suspicions let’s analyze <code>sym.shift()</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span><span class="bn">0x08048360</span><span class="op">]&gt;</span> pdg @ sym<span class="op">.</span>shift</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">// </span><span class="al">WARNING</span><span class="co">: Variable defined which should be unmapped: var_98h</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> sym<span class="op">.</span>shift<span class="op">(</span><span class="dt">char</span> <span class="op">*</span>s<span class="op">)</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">uint32_t</span> uVar1<span class="op">;</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_98h<span class="op">;</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">unsigned</span> <span class="dt">long</span> var_80h<span class="op">;</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int32_t</span> var_7ch<span class="op">;</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    var_80h <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span> <span class="kw">true</span> <span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        uVar1 <span class="op">=</span> sym<span class="op">.</span>imp<span class="op">.</span>strlen<span class="op">(</span>s<span class="op">);</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>uVar1 <span class="op">&lt;=</span> var_80h<span class="op">)</span> <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">*(</span><span class="dt">char</span> <span class="op">*)((</span><span class="dt">int32_t</span><span class="op">)&amp;</span>var_7ch <span class="op">+</span> var_80h<span class="op">)</span> <span class="op">=</span> s<span class="op">[</span>var_80h<span class="op">]</span> <span class="op">+</span> <span class="op">-</span><span class="dv">3</span><span class="op">;</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        var_80h <span class="op">=</span> var_80h <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">*(</span>undefined <span class="op">*)((</span><span class="dt">int32_t</span><span class="op">)&amp;</span>var_7ch <span class="op">+</span> var_80h<span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    sym<span class="op">.</span>imp<span class="op">.</span>printf<span class="op">(</span>data<span class="fl">.080485e8</span><span class="op">,</span> <span class="op">&amp;</span>var_7ch<span class="op">);</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>[0x08048360]&gt; pdg @ sym.shift
+
+// WARNING: Variable defined which should be unmapped: var_98h
+
+void sym.shift(char *s)
+{
+    uint32_t uVar1;
+    int32_t var_98h;
+    unsigned long var_80h;
+    int32_t var_7ch;
+    
+    var_80h = 0;
+    while( true ) {
+        uVar1 = sym.imp.strlen(s);
+        if (uVar1 &lt;= var_80h) break;
+        *(char *)((int32_t)&amp;var_7ch + var_80h) = s[var_80h] + -3;
+        var_80h = var_80h + 1;
+    }
+    *(undefined *)((int32_t)&amp;var_7ch + var_80h) = 0;
+    sym.imp.printf(data.080485e8, &amp;var_7ch);
+    return;
+}</code></pre>
 <p>If we clean this up a bit it becomes more evident what is going on.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> shift<span class="op">(</span><span class="dt">char</span> <span class="op">*</span>str<span class="op">)</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
@@ -1283,41 +1283,43 @@ Password OK!!! :)</code></pre>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We can see that each character in <code>str</code> is subtracted by 3 to produce the final result.</p>
 <p>With this knowledge we can take a shot at decoding the strings. We can use the <code>pos</code> command to apply the subtraction needed for decoding and printing the result.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin ./crackme0x03</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048360]</span><span class="op">&gt;</span> aaa</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048360]</span><span class="op">&gt;</span> fs strings</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048360]</span><span class="op">&gt;</span> fl</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">0x080485ec</span> 18 str.Lqydolg_Sdvvzrug</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="ex">0x080485fe</span> 18 str.Sdvvzrug_RN</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">0x08048610</span> 25 str.IOLI_Crackme_Level_0x03</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">0x08048629</span> 11 str.Password:</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048360]</span><span class="op">&gt;</span> pos 0x03 @ str.Lqydolg_Sdvvzrug @! 18</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> offset <span class="at">-</span>   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="ex">0x080485ec</span>  496e 7661 6c69 6420 5061 7373 776f 7264  Invalid Password</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="ex">0x080485fc</span>  21fd                                     !.</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048360]</span><span class="op">&gt;</span> pos 0x03 @ str.Sdvvzrug_RN @! 18</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> offset <span class="at">-</span>   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="ex">0x080485fe</span>  5061 7373 776f 7264 204f 4b21 2121 203a  Password OK!!! :</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="ex">0x0804860e</span>  29fd                                     <span class="er">)</span><span class="bu">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="shell"><code>$ rizin ./crackme0x03
+[0x08048360]&gt; aaa
+[0x08048360]&gt; fs strings
+[0x08048360]&gt; fl
+0x080485ec 18 str.Lqydolg_Sdvvzrug
+0x080485fe 18 str.Sdvvzrug_RN
+0x08048610 25 str.IOLI_Crackme_Level_0x03
+0x08048629 11 str.Password:
+[0x08048360]&gt; pos 0x03 @ str.Lqydolg_Sdvvzrug @! 18
+- offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
+0x080485ec  496e 7661 6c69 6420 5061 7373 776f 7264  Invalid Password
+0x080485fc  21fd                                     !.
+[0x08048360]&gt; pos 0x03 @ str.Sdvvzrug_RN @! 18
+- offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
+0x080485fe  5061 7373 776f 7264 204f 4b21 2121 203a  Password OK!!! :
+0x0804860e  29fd                                     ).</code></pre>
 <p>However, some functions may not be as easy to understand as this one, in which case it may be useful to be able to run the code. Rizin provides us two ways of doing this: by using the debugger, or by emulation (using ESIL).</p>
 <p>Let’s first see how we can achieve this using the debugger. We will be wanting to pass the encoded strings to <code>shift()</code>. We know <code>shift</code> takes one parameter <code>s</code>, which is an address to a (null terminated) string. We can see where on the stack local variables and arguments are using the <code>afvl</code> command.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin <span class="at">-d</span> ./crackme0x03</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0xec0ff970]</span><span class="op">&gt;</span> aa</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0xec0ff970]</span><span class="op">&gt;</span> afvl @ sym.shift</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">var</span> int32_t var_98h @ stack <span class="at">-</span> 0x98</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">var</span> unsigned long var_80h @ stack <span class="at">-</span> 0x80</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="ex">var</span> int32_t var_7ch @ stack <span class="at">-</span> 0x7c</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="ex">arg</span> const char <span class="pp">*</span>s @ stack + 0x4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="shell"><code>$ rizin -d ./crackme0x03
+[0xf7f04630]&gt; aa
+[0xf7f04630]&gt; afvl @ sym.shift
+var int32_t var_98h @ stack - 0x98
+var int32_t var_80h @ stack - 0x80
+var int32_t var_7ch @ stack - 0x7c
+arg int32_t arg_4h @ stack + 0x4</code></pre>
 <p>We can see that <code>s</code> starts at a 4 byte offset from the stack pointer.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0xec0ff970]</span><span class="op">&gt;</span> dcu main                      <span class="co"># run until program start</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048498]</span><span class="op">&gt;</span> <span class="pp">*</span>esp+4=str.Lqydolg_Sdvvzrug   <span class="co"># 'push' address onto the stack (note the 4 byte offset)</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048498]</span><span class="op">&gt;</span> dr eip=sym.shift              <span class="co"># set instruction pointer to start of shift()</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048498]</span><span class="op">&gt;</span> dcr                           <span class="co"># run shift() until it returns</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Invalid</span> Password!</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x0804846d]</span><span class="op">&gt;</span> <span class="pp">*</span>esp+4=str.Sdvvzrug_RN        <span class="co"># and now for the other string</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048498]</span><span class="op">&gt;</span> dr eip=sym.shift</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048498]</span><span class="op">&gt;</span> dcr</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Password</span> OK!!! :<span class="er">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="shell"><code>[0xf7f04630]&gt; dcu main                      # run until program start
+Continue until 0x08048498
+hit breakpoint at: 0x8048498
+[0x08048498]&gt; *esp+4=str.Lqydolg_Sdvvzrug   # 'push' address onto the stack (note the 4 byte offset)
+[0x08048498]&gt; dr eip=sym.shift              # set instruction pointer to start of shift()
+[0x08048498]&gt; dcr                           # run shift() until it returns
+Invalid Password!
+[0x0804846d]&gt; *esp+4=str.Sdvvzrug_RN        # and now for the other string
+[0x08048498]&gt; dr eip=sym.shift
+[0x08048498]&gt; dcr
+Password OK!!! :)</code></pre>
 <p>Emulation is a bit more tricky because we can’t make external calls to functions like <code>strlen()</code> and <code>printf()</code>. So we have to manually skip over them and set the registers accordingly. Below is an example.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048414]</span><span class="op">&gt;</span> s 0x08048445      <span class="co"># the 'sub al, 0x03'</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08048445]</span><span class="op">&gt;</span> aei               <span class="co"># init VM</span></span>
