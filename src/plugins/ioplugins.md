@@ -31,33 +31,33 @@ $ rizin =
 You can get a list of the rizin IO plugins by typing `rizin -L`:
 ```
 $ rizin -L
-rw_  ar       Open ar/lib files [ar|lib]://[file//path] (LGPL3)
-rw_  bfdbg    BrainFuck Debugger (bfdbg://path/to/file) (LGPL3)
-rwd  bochs    Attach to a BOCHS debugger (LGPL3)
-r_d  debug    Native debugger (dbg:///bin/ls dbg://1388 pidof:// waitfor://) (LGPL3) v0.2.0 pancake
-rw_  default  open local files using def_mmap:// (LGPL3)
-rwd  gdb      Attach to gdbserver, 'qemu -s', gdb://localhost:1234 (LGPL3)
-rw_  gprobe   open gprobe connection using gprobe:// (LGPL3)
-rw_  gzip     read/write gzipped files (LGPL3)
-rw_  http     http get (http://rada.re/) (LGPL3)
-rw_  ihex     Intel HEX file (ihex://eeproms.hex) (LGPL)
+rw_  ar       Open ar/lib files (LGPL3) ar://,lib:// xarkes
+rw_  bfdbg    Attach to brainfuck Debugger instance (LGPL3) bfdbg://
+rwd  bochs    Attach to a BOCHS debugger instance (LGPL3) bochs://
+r_d  debug    Attach to native debugger instance (LGPL3) dbg://,pidof://,waitfor:// v0.2.0 pancake
+rw_  default  Open local files (LGPL3) file://,nocache://
+rw_  dmp      Debug a Windows DMP file (LGPL3) dmp://
+rw_  fd       Local process filedescriptor IO (MIT) fd://
+rwd  gdb      Attach to gdbserver instance (LGPL3) gdb://
+rw_  gzip     Read/write gzipped files (LGPL3) gzip://
+rw_  http     Make http get requests (LGPL3) http://
+rw_  ihex     Open intel HEX file (LGPL) ihex://
 r__  mach     mach debug io (unsupported in this platform) (LGPL)
-rw_  malloc   memory allocation (malloc://1024 hex://cd8090) (LGPL3)
-rw_  mmap     open file using mmap:// (LGPL3)
-rw_  null     null-plugin (null://23) (LGPL3)
-rw_  procpid  /proc/pid/mem io (LGPL3)
-rwd  ptrace   ptrace and /proc/pid/mem (if available) io (LGPL3)
-rwd  qnx      Attach to QNX pdebug instance, qnx://host:1234 (LGPL3)
-rw_  rzk      kernel access API io (rzk://) (LGPL3)
-rw_  rz-pipe   rz-pipe io plugin (MIT)
-rw_  rzweb    rzweb io client (rzweb://cloud.rada.re/cmd/) (LGPL3)
-rw_  rap      rizin network protocol (rap://:port rap://host:port/file) (LGPL3)
-rw_  rbuf     RBuffer IO plugin: rbuf:// (LGPL)
-rw_  self     read memory from myself using 'self://' (LGPL3)
-rw_  shm      shared memory resources (shm://key) (LGPL3)
-rw_  sparse   sparse buffer allocation (sparse://1024 sparse://) (LGPL3)
-rw_  tcp      load files via TCP (listen or connect) (LGPL3)
-rwd  windbg   Attach to a KD debugger (windbg://socket) (LGPL3)
-rwd  winedbg  Wine-dbg io and debug.io plugin for rizin (MIT)
-rw_  zip      Open zip files [apk|ipa|zip|zipall]://[file//path] (BSD)
+rw_  malloc   Memory allocation plugin (LGPL3) malloc://,hex://
+rw_  null     Null plugin (LGPL3) null://
+rw_  procpid  Open /proc/[pid]/mem io (LGPL3) procpid://
+rwd  ptrace   Ptrace and /proc/pid/mem (if available) io plugin (LGPL3) ptrace://,attach://
+rwd  qnx      Attach to QNX pdebug instance (LGPL3) qnx://
+rw_  rap      Remote binary protocol plugin (MIT) rap://,raps://
+rw_  rzpipe   rzpipe io plugin (MIT) rzpipe://
+rw_  rzweb    rzweb io client plugin (LGPL3) rzweb://
+rw_  self     Read memory from self (LGPL3) self://
+rw_  shm      Shared memory resources plugin (MIT) shm://
+rw_  sparse   Sparse buffer allocation plugin (LGPL3) sparse://
+rw_  srec     Motorola S-record file format (LGPL-3) srec://
+rw_  tcp      Load files via TCP (listen or connect) (LGPL3) tcp://
+rw_  vfile    Virtual Files provided by RzBin Files (LGPL) vfile://
+rwd  winedbg  Wine-dbg io and debug.io plugin (MIT) winedbg://
+rwd  winkd    Attach to a KD debugger (LGPL3) winkd://
+rw_  zip      Open zip files (BSD) zip://,apk://,ipa://,jar://,zipall://,apkall://,ipaall://,jarall://
 ```
