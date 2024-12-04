@@ -2,10 +2,10 @@
 
 After implementing disassembly plugin, you might have noticed that output
 is far from being good - no proper highlighting, no reference lines
-and so on. This is because rizin requires every architecture plugin
+and so on. This is because Rizin requires every architecture plugin
 to provide also analysis information about every opcode. At the moment
 the implementation of disassembly and opcodes analysis is separated between
-two modules - RzAsm and RzAnalysis. Thus we need to write an analysis plugin too.
+two modules - RzAsm and RzAnalysis. Thus, we need to write an analysis plugin too.
 The principle is very similar - you just need to create a C file and
 corresponding Makefile.
 
@@ -57,7 +57,8 @@ uninstall:
 ```
 
 **analysis_mycpu.c:**
-This is a dummy example please go check real life examples [in the source](https://github.com/rizinorg/rizin/blob/dev/librz/analysis/p/analysis_snes.c).
+This is a dummy example please go check real life examples
+[in the source](https://github.com/rizinorg/rizin/blob/dev/librz/analysis/p/analysis_snes.c).
 
 ```c
 /* rizin - LGPL - Copyright 2022 - user */
@@ -122,10 +123,13 @@ RZ_API RzLibStruct rizin_plugin = {
 };
 #endif
 ```
+
 After compiling rizin will list this plugin in the rz-asm output:
+
 ```
 _dA_  _8_16      mycpu        LGPL3   MYCPU disassembly plugin
 ```
+
 Note the `A` just appeared on the left column (a=asm, d=disasm, A=analyze, e=ESIL).
 
 Examples:

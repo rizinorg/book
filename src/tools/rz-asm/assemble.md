@@ -1,10 +1,13 @@
 ## Assembler
 
-Assembling is the action to take a computer instruction in human readable form (using mnemonics) and convert that into a bunch of bytes that can be executed by a machine.
+Assembling is the action to take a computer instruction in human-readable form (using mnemonics) and convert that
+into a bunch of bytes that can be executed by a machine.
 
-In rizin, the assembler and disassembler logic is implemented in the rz_asm_* API, and can be used with the pa and pad commands from the commandline as well as using `rz-asm`.
+In Rizin, the assembler and disassembler logic is implemented in the rz_asm_* API, and can be used with
+the pa and pad commands from the commandline as well as using `rz-asm`.
 
-Rz-asm can be used to quickly copy-paste hexpairs that represent a given machine instruction. The following line is assembling this mov instruction for x86/32.
+Rz-asm can be used to quickly copy-paste hexpairs that represent a given machine instruction.
+The following line is assembling this mov instruction for x86/32.
 
 ```
 $ rz-asm -a x86 -b 32 'mov eax, 33'
@@ -18,15 +21,21 @@ $ echo 'push eax;nop;nop' | rz-asm -f -
 5090
 ```
 
-As you have seen, rz-asm can assemble one or many instructions. In line by separating them with a semicolon `;`, but can also read that from a file, using generic nasm/gas/.. syntax and directives. You can check the rz-asm manpage for more details on this.
+As you have seen, rz-asm can assemble one or many instructions. In line by separating them with a semicolon `;`,
+but can also read that from a file, using generic nasm/gas/.. syntax and directives. You can check the rz-asm manpage
+for more details on this.
 
-The `pa` and `pad` are a subcommands of print, what means they will only print assembly or disassembly. In case you want to actually write the instruction it is required to use `wa` or `wx` commands with the assembly string or bytes appended.
+The `pa` and `pad` are a subcommands of print, what means they will only print assembly or disassembly.
+In case you want to actually write the instruction it is required to use `wa` or `wx` commands with
+the assembly string or bytes appended.
 
-The assembler understands the following input languages and their flavors: `x86` (Intel and AT&T variants), `olly` (OllyDBG syntax), `powerpc` (PowerPC), `arm` and `java`. For Intel syntax, rz-asm tries to mimic NASM or GAS.
+The assembler understands the following input languages and their flavors: `x86` (Intel and AT&T variants),
+`olly` (OllyDBG syntax), `powerpc` (PowerPC), `arm` and `java`. For Intel syntax, rz-asm tries to mimic NASM or GAS.
 
-There are several examples in the rz-asm source code directory. Consult them to understand how you can assemble a raw binary file from a rz-asm description.
+There are several examples in the rz-asm source code directory. Consult them to understand how you can assemble
+a raw binary file from a rz-asm description.
 
-Lets create an assembly file called `selfstop.rzasm`:
+Let's create an assembly file called `selfstop.rzasm`:
 
 ```asm
 ;
@@ -81,9 +90,11 @@ Now we can assemble it in place:
 
 ### Visual mode
 
-Assembling also is accessible in rizin visual mode through pressing `A` key to insert the assembly in the current offset.
+Assembling also is accessible in Rizin visual mode through pressing `A` key to insert the assembly in
+the current offset.
 
-The cool thing of writing assembly using the visual assembler interface that the changes are done in memory until you press enter.
+The cool thing of writing assembly using the visual assembler interface that the changes are done in memory until
+you press enter.
 
 So you can check the size of the code and which instructions is overlapping before committing the changes.
 

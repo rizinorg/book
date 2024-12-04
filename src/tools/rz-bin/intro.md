@@ -1,9 +1,13 @@
 # Rz-bin — Show Properties of a Binary
 
-Rz-bin is a powerful tool to handle binaries, to get information on imports, sections, headers and other data. It can present this information in several formats accepted by other tools, including rizin itself.
-rz-bin understands many file formats: Java CLASS, ELF, PE, Mach-O or any format supported by plugins, and it is able to obtain symbol import/exports, library dependencies, strings of data sections, xrefs,  entrypoint address, sections, architecture type.
+Rz-bin is a powerful tool to handle binaries, to get information on imports, sections, headers and other data.
+It can present this information in several formats accepted by other tools, including Rizin itself.
+rz-bin understands many file formats: Java CLASS, ELF, PE, Mach-O or any format supported by plugins,
+and it is able to obtain symbol import/exports, library dependencies, strings of data sections, xrefs,
+entrypoint address, sections, architecture type.
 
 ```
+$ rz-bin -h
 Usage: rz-bin [-AcdeEghHiIjlLMqrRsSUvVxzZ] [-@ at] [-a arch] [-b bits] [-B addr]
               [-C F:C:D] [-f str] [-m addr] [-n str] [-N m:M] [-P pdb]
               [-o str] [-O str] [-k query] [-D lang symname] file
@@ -79,5 +83,4 @@ Environment:
  RZ_BIN_SYMSTORE:         e pdb.symstore                # path to downstream PDB symbol store
  RZ_CONFIG:                                             # config file
  RZ_NOPLUGINS:                                          # do not load plugins
-
 ```

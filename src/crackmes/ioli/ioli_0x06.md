@@ -1,5 +1,4 @@
-IOLI 0x06
-=========
+# IOLI 0x06
 
 Onto the seventh crackme.
 
@@ -26,7 +25,9 @@ Password Incorrect!
 
 No dice, so let's take a closer look.
 
-```c
+```
+$ rizin ./crackme0x06
+[0x08048400]> aa
 [0x08048400]> pdg @ main
 
 // WARNING: [rz-ghidra] Detected overlap for variable var_11h
@@ -42,6 +43,7 @@ undefined4 main(undefined4 placeholder_0, undefined4 placeholder_1, char **envp)
     sym.check((int32_t)&var_7ch, (int32_t)envp);
     return 0;
 }
+
 [0x08048400]> ps @ 0x8048787
 %s
 [0x08048400]> afvl @ main
@@ -52,7 +54,7 @@ arg char **envp @ stack + 0xc
 
 This looks the same as before, except the program's environment variables `envp` are passed to `check`.
 
-```c
+```
 [0x08048400]> pdg @ sym.check
 
 // WARNING: Variable defined which should be unmapped: var_28h
@@ -90,7 +92,7 @@ void sym.check(int32_t arg_4h, int32_t arg_8h)
 This looks mostly the same as well. If we follow `envp` (now named `arg_8h`) we can see it gets passed to
 `parell`.
 
-```c
+```
 [0x08048400]> pdg @ sym.parell
 
 // WARNING: Variable defined which should be unmapped: var_18h
@@ -121,7 +123,7 @@ void sym.parell(int32_t arg_4h, int32_t arg_8h)
 We can see that the parity check is still in place, except it's now in a loop that executes 10 times, but only
 if `dummy()` returns non-zero.
 
-```c
+```
 [0x08048400]> pdg @ sym.dummy
 
 // WARNING: Variable defined which should be unmapped: var_18h
@@ -149,16 +151,15 @@ undefined4 sym.dummy(undefined4 placeholder_0, int32_t arg_8h)
 ```
 
 Living up to its name, `dummy` does not use its first parameter at all, only the second one is used which is the
-`envp` parameter from `main`. Apparently some part of `envp` has to equal "LOL" (only the first 3 characters are used, note the '3'
-in `strncmp`).
+`envp` parameter from `main`. Apparently some part of `envp` has to equal "LOL" (only the first 3 characters are used
+, note the '3' in `strncmp`).
 
 It will be easier to figure out how `dummy` works if we run the code, so let's use the debugger again!
 
-
-```bash
+```shell
 $ rizin -d ./crackme0x06
-[0xe8570cd0]> aa
-[0xe8570cd0]> dcu sym.dummy
+[0xf7fb1630]> aa
+[0xf7fb1630]> dcu sym.dummy
 Continue until 0x080484b4
 IOLI Crackme Level 0x06
 Password: 88
@@ -167,52 +168,52 @@ hit breakpoint at: 0x80484b4
 
 Now we should be at the start of `dummy`, let's see where we can place a breakpoint.
 
-```asm
-[0x08048502]> pdf
+```
+[0x080484b4]> pdf
             ; CALL XREF from sym.parell @ 0x8048547
-┌ sym.dummy(int32_t arg_8h);
-│           ; var int32_t var_18h @ stack - 0x18
-│           ; var int32_t var_14h @ stack - 0x14
-│           ; var int32_t var_ch @ stack - 0xc
-│           ; var int32_t var_8h @ stack - 0x8
-│           ; arg int32_t arg_8h @ stack + 0x8
-│           0x080484b4      push  ebp
-│           0x080484b5      mov   ebp, esp
-│           0x080484b7      sub   esp, 0x18
-│           0x080484ba      mov   dword [var_8h], 0
-│       ┌─> 0x080484c1      mov   eax, dword [var_8h]
-│       ╎   0x080484c4      lea   edx, [eax*4]
-│       ╎   0x080484cb      mov   eax, dword [arg_8h]
-│       ╎   0x080484ce      cmp   dword [edx + eax], 0
-│      ┌──< 0x080484d2      je    0x804850e
-│      │╎   0x080484d4      mov   eax, dword [var_8h]
-│      │╎   0x080484d7      lea   ecx, [eax*4]
-│      │╎   0x080484de      mov   edx, dword [arg_8h]
-│      │╎   0x080484e1      lea   eax, [var_8h]
-│      │╎   0x080484e4      inc   dword [eax]
-│      │╎   0x080484e6      mov   dword [var_14h], 3
-│      │╎   0x080484ee      mov   dword [var_18h], 0x8048738           ; str.LOLO
-│      │╎                                                              ; [0x8048738:4]=0x4f4c4f4c ; "LOLO"
-│      │╎   0x080484f6      mov   eax, dword [ecx + edx]
-│      │╎   ;-- eip:
-│      │╎   0x080484f9      mov   dword [esp], eax
-│      │╎   0x080484fc      call  sym.imp.strncmp                      ; sym.imp.strncmp ; int strncmp(const char *s1, const char *s2, size_t n)
-│      │╎   0x08048501      test  eax, eax
-│      │└─< 0x08048503      jne   0x80484c1
-│      │    0x08048505      mov   dword [var_ch], 1
-│      │┌─< 0x0804850c      jmp   0x8048515
-│      └──> 0x0804850e      mov   dword [var_ch], 0
-│       │   ; CODE XREF from sym.dummy @ 0x804850c
-│       └─> 0x08048515      mov   eax, dword [var_ch]
-│           0x08048518      leave
-└           0x08048519      ret
+            ;-- eip:
+/ sym.dummy(int32_t arg_8h);
+|           ; var int32_t var_18h @ stack - 0x18
+|           ; var int32_t var_14h @ stack - 0x14
+|           ; var int32_t var_ch @ stack - 0xc
+|           ; var int32_t var_8h @ stack - 0x8
+|           ; arg int32_t arg_8h @ stack + 0x8
+|           0x080484b4      push  ebp
+|           0x080484b5      mov   ebp, esp
+|           0x080484b7      sub   esp, 0x18
+|           0x080484ba      mov   dword [var_8h], 0
+|       .-> 0x080484c1      mov   eax, dword [var_8h]
+|       :   0x080484c4      lea   edx, [eax*4]
+|       :   0x080484cb      mov   eax, dword [arg_8h]
+|       :   0x080484ce      cmp   dword [edx + eax], 0
+|      ,==< 0x080484d2      je    0x804850e
+|      |:   0x080484d4      mov   eax, dword [var_8h]
+|      |:   0x080484d7      lea   ecx, [eax*4]
+|      |:   0x080484de      mov   edx, dword [arg_8h]
+|      |:   0x080484e1      lea   eax, [var_8h]
+|      |:   0x080484e4      inc   dword [eax]
+|      |:   0x080484e6      mov   dword [var_14h], 3
+|      |:   0x080484ee      mov   dword [var_18h], 0x8048738           ; str.LOLO
+|      |:                                                              ; [0x8048738:4]=0x4f4c4f4c ; "LOLO"
+|      |:   0x080484f6      mov   eax, dword [ecx + edx]
+|      |:   0x080484f9      mov   dword [esp], eax
+|      |:   0x080484fc      call  sym.imp.strncmp                      ; sym.imp.strncmp ; int strncmp(const char *s1, const char *s2, size_t n)
+|      |:   0x08048501      test  eax, eax
+|      |`=< 0x08048503      jne   0x80484c1
+|      |    0x08048505      mov   dword [var_ch], 1
+|      |,=< 0x0804850c      jmp   0x8048515
+|      `--> 0x0804850e      mov   dword [var_ch], 0
+|       |   ; CODE XREF from sym.dummy @ 0x804850c
+|       `-> 0x08048515      mov   eax, dword [var_ch]
+|           0x08048518      leave
+\           0x08048519      ret
 ```
 
 
 The instruction at `0x080484f9` looks like a good spot. This is just before `strncmp` is called, so we can see
 what value is passed to it.
 
-```bash
+```
 [0x08048502]> db @ 0x080484f9
 [0x08048502]> dbc 'psi @r:eax' @ 0x080484f9
 [0x08048502]> dcr

@@ -2,7 +2,8 @@
 
 To move around the file we are inspecting we will need to change the offset at which we are using the `s` command.
 
-The argument is a math expression that can contain flag names, parenthesis, addition, subtraction, multiplication of immediates of contents of memory using brackets.
+The argument is a math expression that can contain flag names, parenthesis, addition, subtraction, multiplication of
+immediate of contents of memory using brackets.
 
 Some example commands:
 
@@ -20,15 +21,18 @@ The second does a relative seek 4 bytes forward.
 
 And finally, the last 2 commands are undoing, and redoing the last seek operations in the seek history.
 
-Instead of using just numbers, we can use complex expressions, or basic arithmetic operations to represent the address to seek.
+Instead of using just numbers, we can use complex expressions, or basic arithmetic operations to represent the address
+to seek.
 
-To do this, check the ?$? Help message which describes the internal variables that can be used in the expressions. For example, this is the same as doing `sd +4` .
+To do this, check the ?$? Help message which describes the internal variables that can be used in the expressions. For
+example, this is the same as doing `sd +4` .
 
 ```
 [0x00000000]> s $$+4
 ```
 
-From the debugger (or when emulating) we can also use the register names as references. They are loaded as flags with the `.dr*` command, which happens under the hood.
+From the debugger (or when emulating) we can also use the register names as references. They are loaded as flags with
+the `.dr*` command, which happens under the hood.
 
 ```
 [0x00000000]> s rsp+0x40
@@ -57,28 +61,67 @@ Usage: s[?]   # Seek commands
 | sp [<type>]         # Seek to prev location
 | so [<n>]            # Seek to <n> next opcodes
 | sr <reg>            # Seek to register
-| sleep <seconds>     # Sleep for the specified amount of seconds
 
 
 > 3s++        ; 3 times block-seeking
 > s 10+0x80   ; seek at 0x80+10
 ```
 
-If you want to inspect the result of a math expression, you can evaluate it using the `?` command. Simply pass the expression as an argument. The result can be displayed in hexadecimal, decimal, octal or binary formats.
+If you want to inspect the result of a math expression, you can evaluate it using the `?` command. Simply pass the
+expression as an argument. The result can be displayed in hexadecimal, decimal, octal or binary formats.
 
 ```
-> ? 0x100+200
+> % 0x100+200
 0x1C8 ; 456d ; 710o ; 1100 1000
 ```
 
-There are also subcommands of `?` that display the output in one specific format (base 10, base 16 ,...). See `?v` and `?vi`.
+There are also subcommands of `%` that display the output in one specific format (base 10, base 16 ,...). See `%v` for
+instance.
 
-In the visual mode, you can press `u` (undo) or `U` (redo) inside the seek history to return back to previous or forward to the next location.
+In the visual mode, you can press `u` (undo) or `U` (redo) inside the seek history to return back to previous or
+forward to the next location.
 
 ## Open file
 
-As a test file, let's use a simple `hello_world.c` compiled in Linux ELF format.
-After we compile it let's open it with rizin:
+As a test file, let's use a simple [hello_world](https://github.com/rizinorg/book/tree/master/examples/hello_world)
+compiled in Linux ELF 64-bit format:
+
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+/*
+ * This is simple hello_world program made for education purposes.
+ * Licensed under CC-BY-SA 4.0 license.
+ *
+ * In order to compile executable run:
+ *
+ * gcc -o hello_world hello_world.c
+ *
+ */
+
+int main(int argc, char* argv[]) {
+    const char *str1 = "Hello ";
+    const char *str2 = "world!";
+
+    size_t str1_size = strlen(str1);
+    size_t str2_size = strlen(str2);
+
+    char *output = malloc(str1_size + str2_size + 1);
+    if (output) {
+        strcpy(output, str1);
+        strcat(output, str2);
+
+        puts(output);
+        free(output);
+    }
+
+    return 0;
+}
+```
+
+After we compile it with `gcc -o hello_world hello_world.c` let's open it with rizin:
 
 ```
 $ rizin hello_world
@@ -87,7 +130,7 @@ $ rizin hello_world
 Now we have the command prompt:
 
 ```
-[0x00400410]>
+[0x00001100]>
 ```
 
 And it is time to go deeper.
@@ -100,7 +143,7 @@ such as hex, octal, binary or decimal.
 Seek to an address 0x0. An alternative command is simply `0x0`
 
 ```
-[0x00400410]> s 0x0
+[0x00001100]> s 0x0
 [0x00000000]>
 ```
 
@@ -111,7 +154,7 @@ Print current address:
 [0x00000000]>
 ```
 
-There is an alternate way to print current position: `?v $$`.
+There is an alternate way to print current position: `%v $$`.
 
 Seek N positions forward, space is optional:
 
@@ -125,27 +168,20 @@ Undo last two seeks to return to the initial address:
 ```
 [0x00000080]> shu
 [0x00000000]> shu
-[0x00400410]>
+[0x00001100]>
 ```
 
-We are back at _0x00400410_.
+We are back at `0x00001100`.
 
 There's also a command to show the seek history:
 
 ```
-[0x00400410]> sh
-0x400410 
-0x40041a 
-0x400410 
-0x400411 
-0x400410  # current seek
-0x4005b4  # redo
+[0x00001100]> sh
+0x1100 entry0 # current seek
+0x0 segment.LOAD0 # redo
+0x80 segment.PHDR+64 # redo
 [0x00400410]> sh*
-f undo_3 @ 0x400410
-f undo_2 @ 0x40041a
-f undo_1 @ 0x400410
-f undo_0 @ 0x400411
-# Current seek @ 0x400410
-f redo_0 @ 0x4005b4
+# Current seek @ 0x1100
+f redo_0 @ 0x0
+f redo_1 @ 0x80
 ```
-

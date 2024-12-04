@@ -1,7 +1,6 @@
 # Reverse Debugging
 
-Rizin has reverse debugger, that can seek the program counter backward.
-(e.g. reverse-next, reverse-continue in gdb)
+Rizin has reverse debugger, that can seek the program counter backward (e.g. reverse-next, reverse-continue in gdb).
 Firstly you need to save program state at the point that you want to start recording.
 The syntax for recording is:
 
@@ -27,7 +26,7 @@ hit breakpoint at: 4028a2
 When you run `dsb`, reverse debugger restore previous recorded state and execute program from it
 until desired point.
 
-Or you can also try continue back:
+Or you can also try to continue back:
 
 ```
 [0x004028a0]> db @ 0x004028a2
@@ -54,21 +53,11 @@ NOTE: Program records can be saved at any moments. These are diff style format
 that save only different memory area from previous. It saves memory space rather
 than entire dump.
 
-And also can add comment:
-
-```
-[0x004028c2]> dtsC 0 program start
-[0x004028c2]> dtsC 1 decryption start
-[0x004028c2]> dts
-session: 0   at:0x004028a0   "program start"
-session: 1   at:0x004028c2   "decryption start"
-```
-
 You can leave notes for each records to keep in your mind.
 `dsb` and `dcb` commands restore the program state from latest record if there are
 many records.
 
-Program records can exported to file and of course import it.
+Program records can be exported to file and of course imported it.
 Export/Import records to/from file:
 
 ```
@@ -99,7 +88,7 @@ And step back by `aesb`:
 0x00404879
 ```
 
-In addition to the native reverse debugging capabilities in rizin, it's also possible to
+In addition to the native reverse debugging capabilities in Rizin, it's also possible to
 use gdb's remote protocol to reverse debug a target gdbserver that supports it.
 `R!dsb` and `R!dcb` are available as `dsb` and `dcb` replacements for this purpose,
 see [remote gdb's documentation](../remote_access/remote_gdb.md) for more information.

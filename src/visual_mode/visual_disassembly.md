@@ -2,8 +2,11 @@
 
 ## Navigation
 
-Move within the Disassembly using arrow keys or `hjkl`. Use `g` to seek directly to a flag or an offset, type it when requested by the prompt: `[offset]>`.
-Follow a jump or a call using the `number` of your keyboard `[0-9]` and the number on the right in disassembly to follow a call or a jump. In this example typing `1` on the keyboard would follow the call to `sym.imp.__libc_start_main` and therefore, seek at the offset of this symbol.
+Move within the Disassembly using arrow keys or `hjkl`. Use `g` to seek directly to a flag or an offset, type it
+when requested by the prompt: `[offset]>`.
+Follow a jump or a call using the `number` of your keyboard `[0-9]` and the number on the right in disassembly
+to follow a call or a jump. In this example typing `1` on the keyboard would follow the call to
+`sym.imp.__libc_start_main` and therefore, seek at the offset of this symbol.
 
 ```
 0x00404894      e857dcffff     call sym.imp.__libc_start_main ;[1]
@@ -13,7 +16,8 @@ Seek back to the previous location using `u`, `U` will allow you to redo the see
 
 ## `d` as define
 
-`d` can be used to change the type of data of the current block, several basic types/structures are available as well as more advanced one using `pf` template:
+`d` can be used to change the type of data of the current block, several basic types/structures are available
+as well as more advanced one using `pf` template:
 
 ```
 d → ...
@@ -28,7 +32,10 @@ d → d
 ...
 ```
 
-To improve code readability you can change how rizin presents numerical values in disassembly, by default most of disassembly display numerical value as hexadecimal. Sometimes you would like to view it as a decimal, binary or even custom defined constant. To change value format you can use `d` following by `i` then choose what base to work in, this is the equivalent to `ahi`:
+To improve code readability you can change how Rizin presents numerical values in disassembly, by default most
+disassembly display numerical value as hexadecimal. Sometimes you would like to view it as a decimal, binary or even
+custom defined constant. To change value format you can use `d` following by `i` then choose what base to work in,
+this is the equivalent to `ahi`:
 
 ```
 d → i → ...
@@ -41,34 +48,44 @@ d → i →  2
 
 ### Usage of the Cursor for Inserting/Patching...
 
-Remember that, to be able to actually edit files loaded in rizin, you have to start it with the `-w` option. Otherwise a file is opened in read-only mode.
+Remember that, to be able to actually edit files loaded in rizin, you have to start it with the `-w` option.
+Otherwise, a file is opened in read-only mode.
 
-Pressing lowercase `c` toggles the cursor mode. When this mode is active, the currently selected byte (or byte range) is highlighted.
+Pressing lowercase `c` toggles the cursor mode. When this mode is active, the currently selected byte (or byte range)
+is highlighted.
 
 ![Cursor at 0x00404896](cursor.png)
 
-The cursor is used to select a range of bytes or simply to point to a byte. You can use the cursor to create a named flag at specific location. To do so, seek to the required position, then press `f` and enter a name for a flag.
-If the file was opened in write mode using the `-w` flag or the `o+` command, you can also use the cursor to overwrite a selected range with new values. To do so, select a range of bytes (with HJKL and SHIFT key pressed), then press `i` and enter the hexpair values for the new data. The data will be repeated as needed to fill the range selected. For example:
+The cursor is used to select a range of bytes or simply to point to a byte. You can use the cursor to create
+a named flag at specific location. To do so, seek to the required position, then press `f` and enter a name for a flag.
+If the file was opened in write mode using the `-w` flag or the `o+` command, you can also use the cursor to overwrite
+a selected range with new values. To do so, select a range of bytes (with HJKL and SHIFT key pressed), then press `i`
+and enter the hexpair values for the new data. The data will be repeated as needed to fill the range selected.
+For example:
+
 ```
 <select 10 bytes in visual mode using SHIFT+HJKL>
 <press 'i' and then enter '12 34'>
 ```
+
 The 10 bytes you have selected will be changed to "12 34 12 34 12 ...".
 
-
 The Visual Assembler is a feature that provides a live-preview while you type in new instructions to patch
-into the disassembly. To use it, seek or place the cursor at the wanted location and hit the 'A' key. To provide multiple instructions, separate them with semicolons, `;`.
+into the disassembly. To use it, seek or place the cursor at the wanted location and hit the 'A' key. To provide
+multiple instructions, separate them with semicolons, `;`.
 
 ## XREF
 
-When rizin has discovered a XREF during the analysis, it will show you the information in the Visual Disassembly using `XREF` tag:
+When rizin has discovered a XREF during the analysis, it will show you the information in the Visual Disassembly using
+`XREF` tag:
 
 ```
 ; DATA XREF from 0x00402e0e (unk)
 str.David_MacKenzie:
 ```
 
-To see where this string is called, press `x`, if you want to jump to the location where the data is used then press the corresponding number [0-9] on your keyboard. (This functionality is similar to `axt`)
+To see where this string is called, press `x`, if you want to jump to the location where the data is used then press
+the corresponding number [0-9] on your keyboard. (This functionality is similar to `axt`)
 
 `X` corresponds to the reverse operation aka `axf`.
 
@@ -95,11 +112,14 @@ Quickly type commands using `:`.
 
 ### The "UserFriendly HUD"
 
-The "UserFriendly HUD" can be accessed using the `??` key-combination. This HUD acts as an interactive Cheat Sheet that one can use to more easily find and execute commands. This HUD is particularly useful for new-comers. For experienced users, the other HUDS which are more activity-specific may be more useful.
+The "UserFriendly HUD" can be accessed using the `??` key-combination. This HUD acts as an interactive Cheat Sheet
+that one can use to more easily find and execute commands. This HUD is particularly useful for newcomers.
+For experienced users, the other HUDS which are more activity-specific may be more useful.
 
 ### The "flag/comment/functions/.. HUD"
 
-This HUD can be displayed using the `_` key, it shows a list of all the flags defined and lets you jump to them. Using the keyboard you can quickly filter the list down to a flag that contains a specific pattern.
+This HUD can be displayed using the `_` key, it shows a list of all the flags defined and lets you jump to them.
+Using the keyboard you can quickly filter the list down to a flag that contains a specific pattern.
 
 Hud input mode can be closed using ^C. It will also exit when backspace is pressed when the user input string is empty.
 
@@ -110,17 +130,16 @@ changed using the `e` command. All configuration keys can also be edited through
 
 ## Visual Configuration Editor
 
-This HUD can be accessed using the `e` key in visual mode. The editor allows you to easily examine and change rizin's configuration. For example, if you want to change something about the disassembly display, select `asm` from the list, navigate to the item you wish to modify it, then select it by hitting `Enter`.
+This HUD can be accessed using the `e` key in visual mode. The editor allows you to easily examine and change Rizin's
+configuration. For example, if you want to change something about the disassembly display, select `asm` from the list,
+navigate to the item you wish to modify it, then select it by hitting `Enter`.
 If the item is a boolean variable, it will toggle, otherwise you will be prompted to provide a new value.
 
-
 ![First Select asm](select_asm.png)
-
 
 Example switch to pseudo disassembly:
 
 ![Pseudo disassembly disabled](pseudo_disable.png)
-
 
 ![Pseudo disassembly enabled](pseudo_enable.png)
 
@@ -150,8 +169,8 @@ e asm.bits=16
 0000:4876      48             dec ax
 0000:4877      89e2           mov dx, sp
 ```
-This latest operation can also be done using `&` in Visual mode.
 
+This latest operation can also be done using `&` in Visual mode.
 
 #### asm.pseudo: Enable pseudo syntax
 
@@ -185,5 +204,3 @@ e asm.describe=true
 0x00404876  mov rdx, rsp   ; moves data from src to dst
 0x00404879  and rsp, -0xf  ; binary and operation between src and dst, stores result on dst
 ```
-
-

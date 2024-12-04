@@ -9,33 +9,26 @@ The two basic operations are
 * copy (yank)
 * paste
 
-The yank operation will read N bytes (specified by the argument) into the clipboard. We can later use the `yy` command to paste what we read before into a file.
+The yank operation will read N bytes (specified by the argument) into the clipboard. We can later use the `yy` command
+to paste what we read before into a file.
 
-You can yank/paste bytes in visual mode selecting them with the cursor mode (`Vc`) and then using the `y` and `Y` key bindings which are aliases for `y` and `yy` commands of the command-line interface.
+You can yank/paste bytes in visual mode selecting them with the cursor mode (`Vc`) and then using the `y` and `Y` key
+bindings which are aliases for `y` and `yy` commands of the command-line interface.
 
 ```
 [0x00000000]> y?
-Usage: y[ptxy] [len] [[@]addr]   # See wd? for memcpy, same as 'yf'.
-| y!              open cfg.editor to edit the clipboard
-| y 16 0x200      copy 16 bytes into clipboard from 0x200
-| y 16 @ 0x200    copy 16 bytes into clipboard from 0x200
-| y 16            copy 16 bytes into clipboard
-| y               show yank buffer information (srcoff len bytes)
-| y*              print in rizin commands what's been yanked
-| yf 64 0x200     copy file 64 bytes from 0x200 from file
-| yfa file copy   copy all bytes from file (opens w/ io)
-| yfx 10203040    yank from hexpairs (same as ywx)
-| yj              print in JSON commands what's been yanked
-| yp              print contents of clipboard
-| yq              print contents of clipboard in hexpairs
-| ys              print contents of clipboard as string
-| yt 64 0x200     copy 64 bytes from current seek to 0x200
-| ytf file        dump the clipboard to given file
-| yw hello world  yank from string
-| ywx 10203040    yank from hexpairs (same as yfx)
-| yx              print contents of clipboard in hexadecimal
-| yy 0x3344       paste clipboard
-| yz [len]        copy nul-terminated string (up to blocksize) into clipboard
+Usage: y[?]   # Yank/paste bytes from/to memory
+| y[j*q] [<len>]    # Yank bytes / Show yank contents
+| ye                # Open cfg.editor to edit the clipboard
+| yf <len> <file>   # Yank <len> bytes from file
+| yfa <file>        # Yank whole file into clipboard
+| yp [<len>]        # Print contents of clipboards as raw data
+| ys [<len>]        # Print contents of clipboards as string
+| yt <len> <offset> # Copy <len> bytes from current seek to <offset>
+| ywx <string>      # Yank from hexpairs string
+| yx [<len>]        # Print contents of clipboard in hexadecimal
+| yy [<len>]        # Paste <len> bytes from yank clipboard
+| yz [<len>]        # Copy NULL-terminated string into clipboard
 ```
 
 Sample session:

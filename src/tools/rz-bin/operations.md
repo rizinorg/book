@@ -3,16 +3,13 @@ and one of the predefined strings to specify the required operation. All the pos
 
 ```
 $ rz-bin -O h
-Operation string:
-  Change Entrypoint: e/0x8048000
-  Dump Symbols: d/s/1024
-  Dump Section: d/S/.text
-  Resize Section: r/.data/1024
-  Remove RPATH: R
-  Add Library: a/l/libfoo.dylib
-  Change Permissions: p/.data/rwx
-  Show LDID entitlements: C
+Usage: iO [expression]:
+ d/s/1024          dump symbols
+ d/S/.text         dump section
+ c                 show Codesign data
+ C                 show LDID entitlements
 ```
+
 Let's run some examples.
 
 Change the entry point to 0x8041111 of *somefile.bin*:

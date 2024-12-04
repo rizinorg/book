@@ -1,14 +1,21 @@
 ## Writing Data
 
-Rizin can manipulate a loaded binary file in many ways. You can resize the file, move and copy/paste bytes, insert new bytes (shifting data to the end of the block or file), or simply overwrite bytes. New data may be given as a wide-string, assembler instructions, or the data may be read in from another file.
+To be able to use Rizin in write mode, you need to load your binary as such: `rizin -w bin`.
 
-Resize the file using the `r` command. It accepts a numeric argument. A positive value sets a new size for the file. A negative one will truncate the file to the current seek position minus N bytes.
+Rizin can manipulate a loaded binary file in many ways. You can resize the file, move and copy/paste bytes, insert
+new bytes (shifting data to the end of the block or file), or simply overwrite bytes. New data may be given as
+a wide-string, assembler instructions, or the data may be read in from another file.
+
+Resize the file using the `r` command. It accepts a numeric argument. A positive value sets a new size for the file.
+A negative one will truncate the file to the current seek position minus N bytes.
 
 ```
 r 1024      ; resize the file to 1024 bytes
 r -10 @ 33  ; strip 10 bytes at offset 33
 ```
-Write bytes using the `w` command. It accepts multiple input formats like inline assembly, endian-friendly dwords, files, hexpair files, wide strings:
+
+Write bytes using the `w` command. It accepts multiple input formats like inline assembly, endian-friendly dwords,
+files, hexpair files, wide strings:
 
 ```
 [0x00404888]> w?
@@ -17,24 +24,25 @@ Usage: w[?]   # Write commands
 | wB[-]             # Set or unset bits with given value
 | wv[1248]          # Write value of given size
 | w0 <len>          # Write <len> bytes with value 0x00
-| w<1248><+-> [<n>] # increment/decrement byte, word, ..
+| w<1248><+-> [<n>] # Increment/decrement byte, word, ...
 | w6<de>            # Write base64 [d]ecoded or [e]ncoded string
-| we[?]             # Extend write operations (insert bytes instead of replacing)
-| wu[?]             # Apply unified hex patch (see output of cu)
+| we<nsx>           # Extend write operations (insert bytes instead of replacing)
+| wu <file>         # Apply unified hex patch (see output of cu)
 | wr <len>          # Write <len> random bytes
-| wA[?]             # Alter/modify opcode at current seek (see wA?)
-| wc[?]             # Write cache commands
-| wz[?]             # Write zero-terminated string
-| wt[?]             # Write to file
+| wc[j*-+ip?]       # Write cache commands
+| wz <string>       # Write zero-terminated string
 | wf[xfs]           # Write data from file, socket, offset
-| ww[?]             # Write wide string
+| ww <string>       # Write wide (16-bit) little-endian string
 | wx[f]             # Write hexadecimal data
 | wa[ifo]           # Write opcodes
-| wb[?]             # Write in current block with cyclic hexstring
-| wm[?]             # Set binary mask hexpair to be used as cyclic write mask
-| wo[?]             # Write in block with operation
-| wd[?]             # Duplicate N bytes from offset at current seek
+| wb <hex>          # Write in current block a hexstring cyclically
+| wm[-]             # Set binary mask hexpair to be used as cyclic write mask
+| wo<?>             # Write a block with a special operation
+| wD[/]             # Write de Bruijn pattern
+| wd <src> <len>    # Duplicate <len> bytes from <src> offset to current seek
 | ws <string>       # Write 1 byte for length and then the string
+
+Detailed help for w <string> is provided by w??.
 ```
 
 Some examples:
@@ -52,30 +60,31 @@ an operator. The command is applied to the current block. Supported operators in
 
 ```
 [0x4A13B8C0]> wo?
-|Usage: wo[asmdxoArl24] [hexpairs] @ addr[:bsize]
-|Example:
-|  wox 0x90   ; xor cur block with 0x90
-|  wox 90     ; xor cur block with 0x90
-|  wox 0x0203 ; xor cur block with 0203
-|  woa 02 03  ; add [0203][0203][...] to curblk
-|  woe 02 03  ; create sequence from 2 to 255 with step 3
-|Supported operations:
-|  wow  ==  write looped value (alias for 'wb')
-|  woa  +=  addition
-|  wos  -=  subtraction
-|  wom  *=  multiply
-|  wod  /=  divide
-|  wox  ^=  xor
-|  woo  |=  or
-|  woA  &=  and
-|  woR  random bytes (alias for 'wr $b'
-|  wor  >>= shift right
-|  wol  <<= shift left
-|  wo2  2=  2 byte endian swap
-|  wo4  4=  4 byte endian swap
+Usage: wo<?>   # Write a block with a special operation
+| wo2                     # Swap the endianess of 2-bytes values in the current block
+| wo4                     # Swap the endianess of 4-bytes values in the current block
+| wo8                     # Swap the endianess of 8-bytes values in the current block
+| woa <value>             # Add each existing byte in the block with the given <value>
+| woA <value>             # Bitwise-and each existing byte in the block with the given <value>
+| wod <value>             # Divide each existing byte in the block with the given <value>
+| wol <value>             # Bitwise-shift-left each existing byte in the block with the given <value>
+| wom <value>             # Multiply each existing byte in the block with the given <value>
+| woo <value>             # Bitwise-or each existing byte in the block with the given <value>
+| wor <value>             # Bitwise-shift-right each existing byte in the block with the given <value>
+| wos <value>             # Subtract each existing byte in the block with the given <value>
+| wox <value>             # Bitwise-xor each existing byte in the block with the given <value>
+| woe <from> <to> <step>=1 <value_size>=1 # Write a sequence repeatedly with values from <from> up to <to> in the block
+| woD <algo> <key> [<IV>] # Decrypt current block with given <algo>, <key> and optional <IV>
+| woE <algo> <key> [<IV>] # Encrypt current block with given <algo>, <key> and optional <IV>
+
+Examples:
+| woa 20   # Content before: 1122334455 ; Content after: 3142536475
+| wos 2021 # Content before: 1122334455 ; Content after: f101132335
+| wo4      # Content before: 1122334455667788; Content after: 4433221188776655
 ```
 
-It is possible to implement cipher-algorithms using rizin core primitives and `wo`. A sample session performing xor(90) + add(01, 02):
+It is possible to implement cipher-algorithms using rizin core primitives and `wo`. A sample session performing
+xor(90) + add(01, 02):
 
 ```
 [0x7fcd6a891630]> px

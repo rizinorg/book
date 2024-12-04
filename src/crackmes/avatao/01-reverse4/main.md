@@ -1,5 +1,4 @@
-.main
------
+## .main
 
 As I was saying, I usually take a look at the entry point, so let's just do
 that:
@@ -46,12 +45,12 @@ look at a function:
 > It is possible to bring up the prompt in visual mode using the *:* key, and
 > you can use *o* to seek.
 
-Lets read main node-by-node! The first block looks like this:
+Let's read main node-by-node! The first block looks like this:
 
 ![main bb-0c63](img/main/bb-0c63.png)
 
 We can see that the program reads a word (2 bytes) into the local variable named
-*local_10_6*, and than compares it to 0xbb8. That's 3000 in decimal:
+*local_10_6*, and then compares it to 0xbb8. That's 3000 in decimal:
 
 ```
 [0x00400c63]> % 0xbb8
@@ -179,7 +178,7 @@ the bytecode, and exits:
 
 OK, so now we know that we have to supply a bytecode that will generate that
 string when executed. As we can see on the minimap, there are still a few more
-branches ahead, which probably means more conditions to meet. Lets investigate
+branches ahead, which probably means more conditions to meet. Let's investigate
 them before we delve into *vmloop*!
 
 If you take a look at the minimap of the whole function, you can probably
@@ -239,7 +238,7 @@ more checks:
 This piece of code may look a bit strange if you are not familiar with x86_64
 specific stuff. In particular, we are talking about RIP-relative addressing,
 where offsets are described as displacements from the current instruction
-pointer, which makes implementing PIE easier. Anyways, rizin is nice enough to
+pointer, which makes implementing PIE easier. Anyway, rizin is nice enough to
 display the actual address (0x602104). Got the address, flag it!
 
 ```

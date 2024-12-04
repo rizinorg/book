@@ -50,7 +50,7 @@ Any time you wish to enter this environment, open the Anaconda Prompt and re-iss
 4. Verify Meson is version 0.50 or higher (`meson -v`)
 
 #### Install Git for Windows
-All Rizin code is managed via the Git version control system and [hosted on GitHub](https://github.com/rizin).
+All Rizin code is managed via the Git version control system and [hosted on GitHub](https://github.com/rizinorg).
 
 Follow these steps to install Git for Windows.
 

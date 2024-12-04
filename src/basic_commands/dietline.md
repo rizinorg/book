@@ -1,6 +1,7 @@
 # Dietline
 
-Rizin comes with the lean [readline](https://en.wikipedia.org/wiki/GNU_Readline)-like input capability through the lean library to handle the command edition and history navigation. It allows users to perform cursor movements, search the
+Rizin comes with the lean [readline](https://en.wikipedia.org/wiki/GNU_Readline)-like input capability through the lean
+library to handle the command edition and history navigation. It allows users to perform cursor movements, search the
 history, and implements autocompletion. Moreover, due to the rizin portability, dietline provides
 the uniform experience among all supported platforms. It is used in all rizin subshells - main
 prompt, SDB shell, visual prompt, and offsets prompt. It also implements the most common features
@@ -16,11 +17,11 @@ autocompletion options.
 In the every shell and rizin command autocompletion is supported. There are multiple modes of it -
 files, flags, and SDB keys/namespaces. To provide the easy way to select possible completion options
 the scrollable popup widget is available. It can be enabled with `scr.prompt.popup`, just set it to
-the `true`.
+the `true` (as such: `e scr.prompt.popup=true`).
 
 # Emacs (default) mode
 
-By default dietline mode is compatible with readline Emacs-like mode key bindings. Thus active are:
+By default, dietline mode is compatible with readline Emacs-like mode key bindings. Thus, active are:
 
 ## Moving 
 - `Ctrl-a` - move to the beginning of the line
@@ -38,7 +39,8 @@ By default dietline mode is compatible with readline Emacs-like mode key binding
 ## Killing and Yanking 
 - `Ctrl-k` - kill the text from point to the end of the line.
 - `Ctrl-x` - kill backward from the cursor to the beginning of the current line.
-- `Ctrl-t` - kill from point to the end of the current word, or if between words, to the end of the next word. Word boundaries are the same as forward-word.
+- `Ctrl-t` - kill from point to the end of the current word, or if between words, to the end of the next word.
+   Word boundaries are the same as forward-word.
 - `Ctrl-w` - kill the word behind point, using white space as a word boundary. The killed text is saved on the kill-ring.
 - `Ctrl-y` - yank the top of the kill ring into the buffer at point.
 - `Ctrl-]` - rotate the kill-ring, and yank the new top. You can only do this if the prior command is yank or yank-pop.
@@ -48,7 +50,8 @@ By default dietline mode is compatible with readline Emacs-like mode key binding
 
 # Vi mode
 
-Rizin also comes with in vi mode that can be enabled by toggling `scr.prompt.vi`. The various keybindings available in this mode are:
+Rizin also comes with in vi mode that can be enabled by toggling `e scr.prompt.vi=true`. The various keybindings
+available in this mode are:
 
 ## Entering command modes
 - `ESC` - enter into the control mode
@@ -76,8 +79,11 @@ Rizin also comes with in vi mode that can be enabled by toggling `scr.prompt.vi`
 - `dl` - delete a character to the right
 - `d$` - kill the text from point to the end of the line.
 - `d^` - kill backward from the cursor to the beginning of the current line.
-- `de` - kill from point to the end of the current word, or if between words, to the end of the next word. Word boundaries are the same as forward-word.
+- `de` - kill from point to the end of the current word, or if between words, to the end of the next word.
+  Word boundaries are the same as forward-word.
 - `p` - yank the top of the kill ring into the buffer at point.
-- `c` - acts similar to d based commands, but goes into insert mode in the end by prefixing the commands with numbers, the command is performed multiple times.
+- `c` - acts similar to d based commands, but goes into insert mode in the end by prefixing the commands with numbers,
+  the command is performed multiple times.
 
-If you are finding it hard to keep track of which mode you are in, just set `scr.prompt.mode=true` to update the color of the prompt based on the vi-mode.
+If you are finding it hard to keep track of which mode you are in, just enter `e scr.prompt.mode=true` to update
+the color of the prompt based on the vi-mode.

@@ -5,35 +5,35 @@ The rz-hash tool can be used to calculate checksums and has functions of byte st
 ```
 $ rz-hash -h
 Usage: rz-hash [-vhBkjLq] [-b S] [-a A] [-c H] [-E A] [-D A] [-s S] [-x S] [-f O] [-t O] [files|-] ...
- -v          Shows version
- -h          Shows this help page
- -           Input read from stdin instead from a file
- -a algo     Hash algorithm to use and you can specify multiple ones by
-             appending a comma (example: sha1,md4,md5,sha256)
- -B          Outputs the calculated value for each block
- -b size     Sets the block size
- -c value    Compare calculated value with a given one (hexadecimal)
- -e endian   Sets the endianness (default: 'big' accepted: 'big' or 'little')
- -D algo     Decrypt the given input; use -S to set key and -I to set IV (if needed)
- -E algo     Encrypt the given input; use -S to set key and -I to set IV (if needed)
- -f from     Starts the calculation at given offset
- -t to       Stops the calculation at given offset
- -I iv       Sets the initialization vector (IV)
- -i times    Repeat the calculation N times
- -j          Outputs the result as a JSON structure
- -k          Outputs the calculated value using openssh's randomkey algorithm
- -L          List all algorithms
- -q          Sets quiet mode (use -qq to get only the calculated value)
- -S seed     Sets the seed for -a, use '^' to append it before the input, use '@'
-             prefix to load it from a file and '-' from read it
- -K key      Sets the hmac key for -a and the key for -E/-D, use '@' prefix to
-             load it from a file and '-' from read it
-             from stdin (you can combine them)
- -s string   Input read from a zero-terminated string instead from a file
- -x hex      Input read from a hexadecimal value instead from a file
-
-             All the inputs (besides -s/-x/-c) can be hexadecimal or strings
-             if 's:' prefix is specified
+ -v        Show version information
+ -h        Show this help
+ -         Input read from stdin instead from a file
+ -a algo   Hash algorithm to use and you can specify multiple ones by
+           Appending a comma (example: sha1,md4,md5,sha256)
+ -B        Output the calculated value for each block
+ -b size   Set the block size
+ -c value  Compare calculated value with a given one (hexadecimal)
+ -e endian Set the endianness (default: 'big' accepted: 'big' or 'little')
+ -D algo   Decrypt the given input; use -S to set key and -I to set IV (if needed)
+ -E algo   Encrypt the given input; use -S to set key and -I to set IV (if needed)
+ -f from   Start the calculation at given offset
+ -t to     Stop the calculation at given offset
+ -I iv     Set the initialization vector (IV)
+ -i times  Repeat the calculation N times
+ -j        Output the result as a JSON structure
+ -k        Output the calculated value using openssh's randomkey algorithm
+ -L        List all algorithms
+ -q        Set quiet mode (use -qq to get only the calculated value)
+ -S seed   Set the seed for -a, use '^' to append it before the input, use '@'
+           Prefix to load it from a file and '-' from read it
+ -K key    Set the hmac key for -a and the key for -E/-D, use '@' prefix to
+           Load it from a file and '-' from read it
+           From stdin (you can combine them)
+ -s string Input read from a zero-terminated string instead from a file
+ -x hex    Input read from a hexadecimal value instead from a file
+           
+           All the input (besides -s/-x/-c) can be hexadecimal or strings
+           If 's:' prefix is specified
 ```
 
 To obtain an MD5 hash value of a text string, use the `-s` option:
@@ -43,78 +43,83 @@ $ rz-hash -q -a md5 -s 'hello world'
 string: md5: 5eb63bbbe01eeed093cb22bb8f5acdc3
 ```
 
-It is possible to calculate hash values for contents of files. But do not attempt to do it for very large files because rz-hash buffers the whole input in memory before computing the hash.
+It is possible to calculate hash values for contents of files. But do not attempt to do it for very large files
+because rz-hash buffers the whole input in memory before computing the hash.
 
 To apply all algorithms known to rz-hash, use `all` as an algorithm name:
 
 ```
-$ rz-hash -a all /bin/ls
-/bin/ls: 0x00000000-0x00022a70 md4: 4f34e90ff19613695bfe8ecbddc1ae6d
-/bin/ls: 0x00000000-0x00022a70 md5: 27ac5e2f7573020dbff16b3b9c03e678
-/bin/ls: 0x00000000-0x00022a70 sha1: 0ca5dcdf79d00cbc893a5cca29695f2afddc193d
-/bin/ls: 0x00000000-0x00022a70 sha256: f8b09fba9fda9ffebae86611261cf628bd71022fb4348d876974f7c48ddcc6d5
-/bin/ls: 0x00000000-0x00022a70 sha384: ae8404125de3ae798fe85635533dc93744136d812fe279eaa92d1f31896ba4bf9fa0e240ab1b3f234b870f243c5754da
-/bin/ls: 0x00000000-0x00022a70 sha512: 4ec188a733c402e277f60d59240aba3279b2fdc261ac479188a28aab899b81be4281283988ccbf78f7ca214eb3fbfb49811743ccdb62a459a52414075e9eae8f
-/bin/ls: 0x00000000-0x00022a70 fletcher8: 8d
-/bin/ls: 0x00000000-0x00022a70 fletcher16: 8d78
-/bin/ls: 0x00000000-0x00022a70 fletcher32: a5e716ad
-/bin/ls: 0x00000000-0x00022a70 fletcher64: ae7b1b422fd65611
-/bin/ls: 0x00000000-0x00022a70 adler32: e1028925
-/bin/ls: 0x00000000-0x00022a70 crc8smbus: 9e
-/bin/ls: 0x00000000-0x00022a70 crc8cdma2000: 73
-/bin/ls: 0x00000000-0x00022a70 crc8darc: ac
-/bin/ls: 0x00000000-0x00022a70 crc8dvbs2: f7
-/bin/ls: 0x00000000-0x00022a70 crc8ebu: 6d
-/bin/ls: 0x00000000-0x00022a70 crc8icode: 85
-/bin/ls: 0x00000000-0x00022a70 crc8itu: cb
-/bin/ls: 0x00000000-0x00022a70 crc8maxim: 38
-/bin/ls: 0x00000000-0x00022a70 crc8rohc: ef
-/bin/ls: 0x00000000-0x00022a70 crc8wcdma: 52
-/bin/ls: 0x00000000-0x00022a70 crc15can: 65ec
-/bin/ls: 0x00000000-0x00022a70 crc16: f97a
-/bin/ls: 0x00000000-0x00022a70 crc16citt: e73b
-/bin/ls: 0x00000000-0x00022a70 crc16usb: 2ed9
-/bin/ls: 0x00000000-0x00022a70 crc16hdlc: d7cd
-/bin/ls: 0x00000000-0x00022a70 crc16augccitt: 2366
-/bin/ls: 0x00000000-0x00022a70 crc16buypass: 9eac
-/bin/ls: 0x00000000-0x00022a70 crc16cdma2000: d62b
-/bin/ls: 0x00000000-0x00022a70 crc16dds110: 02d4
-/bin/ls: 0x00000000-0x00022a70 crc16dectr: 9262
-/bin/ls: 0x00000000-0x00022a70 crc16dectx: 9263
-/bin/ls: 0x00000000-0x00022a70 crc16dnp: d64b
-/bin/ls: 0x00000000-0x00022a70 crc16en13757: 9227
-/bin/ls: 0x00000000-0x00022a70 crc16genibus: 18c4
-/bin/ls: 0x00000000-0x00022a70 crc16maxim: 0685
-/bin/ls: 0x00000000-0x00022a70 crc16mcrf4xx: 2832
-/bin/ls: 0x00000000-0x00022a70 crc16riello: 0e39
-/bin/ls: 0x00000000-0x00022a70 crc16t10dif: dbb5
-/bin/ls: 0x00000000-0x00022a70 crc16teledisk: 4fee
-/bin/ls: 0x00000000-0x00022a70 crc16tms37157: ba7d
-/bin/ls: 0x00000000-0x00022a70 crca: a525
-/bin/ls: 0x00000000-0x00022a70 crc16kermit: b131
-/bin/ls: 0x00000000-0x00022a70 crc16modbus: d126
-/bin/ls: 0x00000000-0x00022a70 crc16x25: d7cd
-/bin/ls: 0x00000000-0x00022a70 crc16xmodem: 27a2
-/bin/ls: 0x00000000-0x00022a70 crc24: 007476f5
-/bin/ls: 0x00000000-0x00022a70 crc32: 09ad52f8
-/bin/ls: 0x00000000-0x00022a70 crc32ecma267: 4da033c1
-/bin/ls: 0x00000000-0x00022a70 crc32c: ad8aa54c
-/bin/ls: 0x00000000-0x00022a70 crc32bzip2: 2db14275
-/bin/ls: 0x00000000-0x00022a70 crc32d: 1a82c6fe
-/bin/ls: 0x00000000-0x00022a70 crc32mpeg2: d24ebd8a
-/bin/ls: 0x00000000-0x00022a70 crc32posix: 58bb93aa
-/bin/ls: 0x00000000-0x00022a70 crc32q: fa075365
-/bin/ls: 0x00000000-0x00022a70 crc32jamcrc: f652ad07
-/bin/ls: 0x00000000-0x00022a70 crc32xfer: bd66a285
-/bin/ls: 0x00000000-0x00022a70 crc64: 02bfeb9d3cc5ba89
-/bin/ls: 0x00000000-0x00022a70 crc64ecma182: 02bfeb9d3cc5ba89
-/bin/ls: 0x00000000-0x00022a70 crc64we: 45f4fd1aca1b6d00
-/bin/ls: 0x00000000-0x00022a70 crc64xz: 7ad92fbc2cb7bbaa
-/bin/ls: 0x00000000-0x00022a70 crc64iso: 69770b2efe4f8aae
-/bin/ls: 0x00000000-0x00022a70 xor8: 92
-/bin/ls: 0x00000000-0x00022a70 xor16: 594c
-/bin/ls: 0x00000000-0x00022a70 xxhash32: 95374b80
-/bin/ls: 0x00000000-0x00022a70 parity: 01000000
-/bin/ls: 0x00000000-0x00022a70 entropy: 5.84008688
-/bin/ls: 0x00000000-0x00022a70 entropy_fract: 0.73001086
+$ rz-hash -a all /usr/bin/ls
+/usr/bin/ls: 0x00000000-0x00024ac8 md2: 9a2a86a52e9cb44b2e06a58a00fee15e
+/usr/bin/ls: 0x00000000-0x00024ac8 md4: 725fc3498847e96d031ce4d1f4872b28
+/usr/bin/ls: 0x00000000-0x00024ac8 md5: bcf16aef7487e6ea478a168c180c07fa
+/usr/bin/ls: 0x00000000-0x00024ac8 sha1: ccb226a119fe301b2ad2dc8a7013faf6f6296ea1
+/usr/bin/ls: 0x00000000-0x00024ac8 sha256: 1ba437f3522d9e416f66425fdb816dfbaf32b4140d2092f2b8922b2825e4065a
+/usr/bin/ls: 0x00000000-0x00024ac8 sha384: fd51260b6db6940f37a3177b033e1a7e9c1cedd3ee5c9c45e3dfdac135a65edf991313da7083551f091ef553e2f4fe29
+/usr/bin/ls: 0x00000000-0x00024ac8 sha512: de26d5385088825cce3fcb87645ddf2148e4c71013ff98170ccd106795d6cf4669e1b71053593472667ff64f17a0190ab3d99430d784a0489c7bc6344d5605db
+/usr/bin/ls: 0x00000000-0x00024ac8 sm3: 9410230b34c9ab0c527c21cbdb9f953cc747479c89d019a4f6ae4c7cffd40bb0
+/usr/bin/ls: 0x00000000-0x00024ac8 blake3: 5805f287d8c0107ffdc7960b6112b586940d9767e888023048543daefa4cf6e5
+/usr/bin/ls: 0x00000000-0x00024ac8 fletcher8: dd
+/usr/bin/ls: 0x00000000-0x00024ac8 fletcher16: ddf3
+/usr/bin/ls: 0x00000000-0x00024ac8 fletcher32: dd003c1a
+/usr/bin/ls: 0x00000000-0x00024ac8 fletcher64: 5952f47d393a5468
+/usr/bin/ls: 0x00000000-0x00024ac8 adler32: 86e2c3a1
+/usr/bin/ls: 0x00000000-0x00024ac8 crc8smbus: 15
+/usr/bin/ls: 0x00000000-0x00024ac8 crc8cdma2000: d9
+/usr/bin/ls: 0x00000000-0x00024ac8 crc8darc: 3b
+/usr/bin/ls: 0x00000000-0x00024ac8 crc8dvbs2: 3d
+/usr/bin/ls: 0x00000000-0x00024ac8 crc8ebu: 67
+/usr/bin/ls: 0x00000000-0x00024ac8 crc8icode: 67
+/usr/bin/ls: 0x00000000-0x00024ac8 crc8itu: 40
+/usr/bin/ls: 0x00000000-0x00024ac8 crc8maxim: b3
+/usr/bin/ls: 0x00000000-0x00024ac8 crc8rohc: ad
+/usr/bin/ls: 0x00000000-0x00024ac8 crc8wcdma: ab
+/usr/bin/ls: 0x00000000-0x00024ac8 crc15can: 7126
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16: f310
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16citt: be97
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16usb: 9f67
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16hdlc: 282a
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16augccitt: 5c10
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16buypass: fc1c
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16cdma2000: d203
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16dds110: 98aa
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16dectr: 0485
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16dectx: 0484
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16dnp: d2fd
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16en13757: f12e
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16genibus: 4168
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16maxim: 0cef
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16mcrf4xx: d7d5
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16riello: ecaa
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16t10dif: faeb
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16teledisk: bee3
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16tms37157: 60a7
+/usr/bin/ls: 0x00000000-0x00024ac8 crca: e518
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16kermit: 0dcc
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16modbus: 6098
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16x25: 282a
+/usr/bin/ls: 0x00000000-0x00024ac8 crc16xmodem: 26cc
+/usr/bin/ls: 0x00000000-0x00024ac8 crc24: 0078edb6
+/usr/bin/ls: 0x00000000-0x00024ac8 crc32: ea7111a0
+/usr/bin/ls: 0x00000000-0x00024ac8 crc32ecma267: d7f2cb8a
+/usr/bin/ls: 0x00000000-0x00024ac8 crc32c: bb2af410
+/usr/bin/ls: 0x00000000-0x00024ac8 crc32bzip2: b307ddba
+/usr/bin/ls: 0x00000000-0x00024ac8 crc32d: 5de137a9
+/usr/bin/ls: 0x00000000-0x00024ac8 crc32mpeg2: 4cf82245
+/usr/bin/ls: 0x00000000-0x00024ac8 crc32posix: 35f6bff2
+/usr/bin/ls: 0x00000000-0x00024ac8 crc32q: 54013d42
+/usr/bin/ls: 0x00000000-0x00024ac8 crc32jamcrc: 158eee5f
+/usr/bin/ls: 0x00000000-0x00024ac8 crc32xfer: 7d03019b
+/usr/bin/ls: 0x00000000-0x00024ac8 crc64: 60f233ef3032deac
+/usr/bin/ls: 0x00000000-0x00024ac8 crc64ecma182: 60f233ef3032deac
+/usr/bin/ls: 0x00000000-0x00024ac8 crc64we: c52bf0d6179e06ef
+/usr/bin/ls: 0x00000000-0x00024ac8 crc64xz: eab2da06f0ff2682
+/usr/bin/ls: 0x00000000-0x00024ac8 crc64iso: 8734628b8dc355f3
+/usr/bin/ls: 0x00000000-0x00024ac8 xor8: fd
+/usr/bin/ls: 0x00000000-0x00024ac8 xor16: 67ec
+/usr/bin/ls: 0x00000000-0x00024ac8 xxhash32: 8a1da333
+/usr/bin/ls: 0x00000000-0x00024ac8 ssdeep: 3072:HANnWPSHOTx1XPglbUXVoaJzbuWXod7QHwOP1hKYfrMJM:HABAIi162VjJzCpJQHwWhHr0
+/usr/bin/ls: 0x00000000-0x00024ac8 parity: 01
+/usr/bin/ls: 0x00000000-0x00024ac8 entropy: 5.95354820
+/usr/bin/ls: 0x00000000-0x00024ac8 entropy_fract: 0.74419352
 ```

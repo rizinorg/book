@@ -1,6 +1,7 @@
 ## Disassembler
 
-Disassembling is the inverse action of assembling. Rz-asm takes hexpair as an input (but can also take a file in binary form) and show the human readable form.
+Disassembling is the inverse action of assembling. Rz-asm takes hexpair as an input (but can also take a file
+in binary form) and show the human-readable form.
 
 To do this we can use the `-d` option of rz-asm like this:
 
@@ -11,9 +12,10 @@ nop
 
 Rz-asm also has the `-D` flag to show the disassembly like `-d` does, but includes offset and bytes.
 
-In rizin there are many commands to perform a disassembly from a specific place in memory.
+In Rizin there are many commands to perform a disassembly from a specific place in memory.
 
-You might be interested in trying if you want different outputs for later parsing with your scripts, or just grep to find what you are looking for:
+You might be interested in trying if you want different outputs for later parsing with your scripts, or just grep
+to find what you are looking for:
 
 ### pd N
 

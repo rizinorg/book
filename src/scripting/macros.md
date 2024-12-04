@@ -1,7 +1,7 @@
 # Macros
 
-Apart from simple sequencing and looping, rizin allows to write
-simple macros, using this construction:
+Apart from simple sequencing and looping, Rizin allows to write simple macros, using this construction:
+
 ```
 [0x00404800]> (qwe; pd 4; ao)
 ```
@@ -32,12 +32,14 @@ family: cpu
 ```
 
 To list available macros simply call `(*`:
+
 ```
 [0x00404800]> (*
 (qwe ; pd 4; ao)
 ```
 
-And if want to remove some macro, just add '-' before the name:
+And if you want to remove some macro, just add '-' before the name:
+
 ```
 [0x00404800]> (-qwe)
 Macro 'qwe' removed.
@@ -59,9 +61,11 @@ simple scripting situations. To create a macro that takes arguments you simply a
 0x004047d9      and rsp, 0xfffffffffffffff0
 [0x004047d6]>
 ```
+
 As you can see, the arguments are named by index, starting from 0: $0, $1, ...
 
 To run a macro multiple times with different arguments, a convenient way is to use `..(`:
+
 ```
 [0x004047d6]> s entry0
 [0x004047d0]> ..(foo 3 5 2 4)
@@ -76,7 +80,8 @@ To run a macro multiple times with different arguments, a convenient way is to u
 
 # Aliases
 
-rizin also offers aliases which might help you save time by quickly executing your most used commands. They are under `$?`
+Rizin also offers aliases which might help you save time by quickly executing your most used commands.
+They are under `$?`.
 
 The general usage of the feature is: `$alias=cmd`
 
@@ -84,7 +89,8 @@ The general usage of the feature is: `$alias=cmd`
 [0x00404800]> $disas=pdf
 ```
 
-The above command will create an alias `disas` for `pdf`. The following command prints the disassembly of the main function.
+The above command will create an alias `disas` for `pdf`. The following command prints the disassembly
+of the main function.
 
 ```
 [0x00404800]> $disas @ main
@@ -109,12 +115,14 @@ $pmore
 ```
 
 A single `$` in the above will list all defined aliases. It's also possible check the aliased command of an alias:
+
 ```
 [0x00404800]> $pmore?
 b 200; px
 ```
 
-Can we create an alias contains alias ? The answer is yes:
+Can we create an alias contains alias? The answer is yes:
+
 ```
 [0x00404800]> $pStart='s 0x0;$pmore'
 [0x00404800]> $pStart

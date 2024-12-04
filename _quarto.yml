@@ -51,7 +51,6 @@ book:
          - src/basic_commands/print_modes.md
          - src/basic_commands/flags.md
          - src/basic_commands/write.md
-         - src/basic_commands/zoom.md
          - src/basic_commands/yank_paste.md
          - src/basic_commands/comparing_bytes.md
          - src/basic_commands/sdb.md

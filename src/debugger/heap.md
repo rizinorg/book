@@ -1,6 +1,7 @@
 # Heap
 
-rizin's `dm` subcommands can also display a map of the heap which is useful for those who are interested in inspecting the heap and its content. Simply execute `dmh` to show a map of the heap:
+rizin's `dm` subcommands can also display a map of the heap which is useful for those who are interested in inspecting
+the heap and its content. Simply execute `dmh` to show a map of the heap:
 
 ```
 [0x55c392ae1189]> dmh
@@ -35,7 +36,9 @@ Heap Layout
    │  Top chunk @ 0x55c3934c9370   │
    └───────────────────────────────┘
 ```
+
 To get information about bins of the main arena use the `dmhd` command.
+
 ```
 [0x55c392ae1189]> dmhd
 Tcache bins in Main Arena @ 0x7f10940c1b80
@@ -65,26 +68,20 @@ Other heap commands can be found under `dmh`, check `dmh?` for the full list.
 
 ```
 [0x00000000]> dmh?
-Usage:  dmh   # Memory map heap
-| dmh                                          List the chunks inside the heap segment
-| dmh @[malloc_state]                          List heap chunks of a particular arena
-| dmha                                         List all malloc_state instances in application
-| dmhb @[malloc_state]                         Display all parsed Double linked list of main_arena's or a particular arena bins instance
-| dmhb [bin_num|bin_num:malloc_state]          Display parsed double linked list of bins instance from a particular arena
-| dmhbg [bin_num]                              Display double linked list graph of main_arena's bin [Under development]
-| dmhc @[chunk_addr]                           Display malloc_chunk struct for a given malloc chunk
-| dmhd [tcache|unsorted|fast|small|large]      Display description of bins in the main_arena
-| dmhf @[malloc_state]                         Display all parsed fastbins of main_arena's or a particular arena fastbinY instance
-| dmhf [fastbin_num|fastbin_num:malloc_state]  Display parsed single linked list in fastbinY instance from a particular arena
-| dmhg                                         Display heap graph of heap segment
-| dmhg [malloc_state]                          Display heap graph of a particular arena
-| dmhi @[malloc_state]                         Display heap_info structure/structures for a given arena
-| dmhj                                         List the chunks inside the heap segment in JSON format
-| dmhm                                         List all elements of struct malloc_state of main thread (main_arena)
-| dmhm @[malloc_state]                         List all malloc_state instance of a particular arena
-| dmht                                         Display all parsed thread cache bins of all arena's tcache instance
-| dmhv @[malloc_state]                         List heap chunks of a particular arena along with hexdump of first 0x10 bytes
-| dmh?                                         Show map heap help
+Usage: dmh[?]   # Glibc heap commands
+| dmh[j*l] [<malloc_state>] # List heap chunks of an arena
+| dmha                     # List all the arenas
+| dmhb[?] [<bin_num|bin_num:malloc_state>] # Display double linked list for bins in an arena. Use dmhbg command for
+                                             graphical representation.
+| dmhc                     # Get info about heap chunk at current offset
+| dmhd[j] [<bin_type>]     # Display state of bins in an arena. <bin_type> can be tcache/fast/unsorted/small/large
+| dmhf[?] [<fastbin_num|fastbin_num:malloc_state>] # Display all parsed fastbins of main_arena's or a particular arena
+                                                     fastbinY instance
+| dmhg [<malloc_state>]    # Display heap graph of a particular arena
+| dmhi [<malloc_state>]    # Display heap_info structure/structures for a given arena
+| dmhm[*] [<malloc_state>] # List all elements of struct malloc_state
+| dmht                     # Display all parsed thread cache bins of all arena's tcache instance
 ```
+
 Rizin supports Glibc, Jemalloc < 5.0 and Windows heap.
 

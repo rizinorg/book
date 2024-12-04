@@ -1,7 +1,8 @@
 # Visual Configuration Editor
 
-`Ve` or `e` in visual mode allows you to edit rizin configuration visually.
-For example, if you want to change the assembly display just select `asm` in the list and choose your assembly display flavor.
+`Ve` or `e` in visual mode allows you to edit Rizin configuration visually.
+For example, if you want to change the assembly display just select `asm` in the list and choose your assembly
+display flavor.
 
 ![First Select asm](select_asm.png)
 
