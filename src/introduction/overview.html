@@ -1141,12 +1141,11 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#rz-bin" id="toc-rz-bin" class="nav-link" data-scroll-target="#rz-bin"><span class="header-section-number">1.0.2</span> rz-bin</a></li>
   <li><a href="#rz-asm" id="toc-rz-asm" class="nav-link" data-scroll-target="#rz-asm"><span class="header-section-number">1.0.3</span> rz-asm</a></li>
   <li><a href="#rz-hash" id="toc-rz-hash" class="nav-link" data-scroll-target="#rz-hash"><span class="header-section-number">1.0.4</span> rz-hash</a></li>
-  <li><a href="#examples-2" id="toc-examples-2" class="nav-link" data-scroll-target="#examples-2"><span class="header-section-number">1.0.5</span> Examples</a></li>
-  <li><a href="#rz-diff" id="toc-rz-diff" class="nav-link" data-scroll-target="#rz-diff"><span class="header-section-number">1.0.6</span> rz-diff</a></li>
-  <li><a href="#rz-find" id="toc-rz-find" class="nav-link" data-scroll-target="#rz-find"><span class="header-section-number">1.0.7</span> rz-find</a></li>
-  <li><a href="#rz-gg" id="toc-rz-gg" class="nav-link" data-scroll-target="#rz-gg"><span class="header-section-number">1.0.8</span> rz-gg</a></li>
-  <li><a href="#rz-run" id="toc-rz-run" class="nav-link" data-scroll-target="#rz-run"><span class="header-section-number">1.0.9</span> rz-run</a></li>
-  <li><a href="#rz-ax" id="toc-rz-ax" class="nav-link" data-scroll-target="#rz-ax"><span class="header-section-number">1.0.10</span> rz-ax</a></li>
+  <li><a href="#rz-diff" id="toc-rz-diff" class="nav-link" data-scroll-target="#rz-diff"><span class="header-section-number">1.0.5</span> rz-diff</a></li>
+  <li><a href="#rz-find" id="toc-rz-find" class="nav-link" data-scroll-target="#rz-find"><span class="header-section-number">1.0.6</span> rz-find</a></li>
+  <li><a href="#rz-gg" id="toc-rz-gg" class="nav-link" data-scroll-target="#rz-gg"><span class="header-section-number">1.0.7</span> rz-gg</a></li>
+  <li><a href="#rz-run" id="toc-rz-run" class="nav-link" data-scroll-target="#rz-run"><span class="header-section-number">1.0.8</span> rz-run</a></li>
+  <li><a href="#rz-ax" id="toc-rz-ax" class="nav-link" data-scroll-target="#rz-ax"><span class="header-section-number">1.0.9</span> rz-ax</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/rizinorg/book/edit/master/src/introduction/overview.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -1242,28 +1241,28 @@ b821000000</code></pre>
 <section id="rz-hash" class="level3" data-number="1.0.4">
 <h3 data-number="1.0.4" class="anchored" data-anchor-id="rz-hash"><span class="header-section-number">1.0.4</span> rz-hash</h3>
 <p><code>rz-hash</code> stands as an implementation of a block-based hash tool. It offers support for a range of algorithms, including <code>MD4</code>, <code>MD5</code>, <code>CRC</code>, <code>SHA1</code>, <code>SHA256</code>, and more, accommodating both small text strings and large files. Its utility extends to checking the integrity or monitoring changes in substantial files and memory dumps.</p>
-</section>
-<section id="examples-2" class="level3" data-number="1.0.5">
-<h3 data-number="1.0.5" class="anchored" data-anchor-id="examples-2"><span class="header-section-number">1.0.5</span> Examples</h3>
+<section id="examples-2" class="level4" data-number="1.0.4.1">
+<h4 data-number="1.0.4.1" class="anchored" data-anchor-id="examples-2"><span class="header-section-number">1.0.4.1</span> Examples</h4>
 <pre><code>$ rz-hash file.bin
 file.bin: 0x00000000-0x00000007 sha256: 887cfbd0d44aaff69f7bdbedebd282ec96191cce9d7fa7336298a18efc3c7a5a</code></pre>
 <pre><code>$ rz-hash -a md5 file.bin
 file.bin: 0x00000000-0x00000007 md5: d1833805515fc34b46c2b9de553f599d</code></pre>
 </section>
-<section id="rz-diff" class="level3" data-number="1.0.6">
-<h3 data-number="1.0.6" class="anchored" data-anchor-id="rz-diff"><span class="header-section-number">1.0.6</span> rz-diff</h3>
+</section>
+<section id="rz-diff" class="level3" data-number="1.0.5">
+<h3 data-number="1.0.5" class="anchored" data-anchor-id="rz-diff"><span class="header-section-number">1.0.5</span> rz-diff</h3>
 <p>The <code>rz-diff</code> utility serves as a binary diffing tool, implementing various algorithms. It facilitates byte-level or delta diffing for binary files and code-analysis diffing to identify alterations in fundamental code blocks derived from the rizin code analysis.</p>
 <p>This tool optimally leverages multi-threading to enhance performance, particularly on CPU-intensive and time-consuming tasks.</p>
 </section>
-<section id="rz-find" class="level3" data-number="1.0.7">
-<h3 data-number="1.0.7" class="anchored" data-anchor-id="rz-find"><span class="header-section-number">1.0.7</span> rz-find</h3>
+<section id="rz-find" class="level3" data-number="1.0.6">
+<h3 data-number="1.0.6" class="anchored" data-anchor-id="rz-find"><span class="header-section-number">1.0.6</span> rz-find</h3>
 <p><code>rz-find</code> operates as a program designed to locate byte patterns in files. It provides the capability to search for various types of signatures, including strings in different encodings such as ASCII, UTF-8, wide, and more, across multiple encoding types.</p>
 </section>
-<section id="rz-gg" class="level3" data-number="1.0.8">
-<h3 data-number="1.0.8" class="anchored" data-anchor-id="rz-gg"><span class="header-section-number">1.0.8</span> rz-gg</h3>
+<section id="rz-gg" class="level3" data-number="1.0.7">
+<h3 data-number="1.0.7" class="anchored" data-anchor-id="rz-gg"><span class="header-section-number">1.0.7</span> rz-gg</h3>
 <p><code>rz-gg</code> is a tool designed to compile programs written in a simple high-level language into compact binaries suitable for x86, x86-64, and ARM architectures.</p>
-<section id="examples-3" class="level4" data-number="1.0.8.1">
-<h4 data-number="1.0.8.1" class="anchored" data-anchor-id="examples-3"><span class="header-section-number">1.0.8.1</span> Examples</h4>
+<section id="examples-3" class="level4" data-number="1.0.7.1">
+<h4 data-number="1.0.7.1" class="anchored" data-anchor-id="examples-3"><span class="header-section-number">1.0.7.1</span> Examples</h4>
 <pre><code>$ cat hi.r
 /* hello world in r_egg */
 write@syscall(4); //x64 write@syscall(1);
@@ -1288,12 +1287,12 @@ $ ./hi.c.bin
 Hello</code></pre>
 </section>
 </section>
-<section id="rz-run" class="level3" data-number="1.0.9">
-<h3 data-number="1.0.9" class="anchored" data-anchor-id="rz-run"><span class="header-section-number">1.0.9</span> rz-run</h3>
+<section id="rz-run" class="level3" data-number="1.0.8">
+<h3 data-number="1.0.8" class="anchored" data-anchor-id="rz-run"><span class="header-section-number">1.0.8</span> rz-run</h3>
 <p><code>rz-run</code> functions as a launcher for executing programs within diverse environments, allowing customization of various aspects such as arguments, permissions, directories, and overridden default file descriptors. This utility proves beneficial for activities like solving crackmes, fuzzing, and running test suites.</p>
 <p>The versatility of <code>rz-run</code> is evident in its capabilities. Here are a few examples illustrating how it can be utilized:</p>
-<section id="sample-rz-run-script" class="level4" data-number="1.0.9.1">
-<h4 data-number="1.0.9.1" class="anchored" data-anchor-id="sample-rz-run-script"><span class="header-section-number">1.0.9.1</span> Sample rz-run script</h4>
+<section id="sample-rz-run-script" class="level4" data-number="1.0.8.1">
+<h4 data-number="1.0.8.1" class="anchored" data-anchor-id="sample-rz-run-script"><span class="header-section-number">1.0.8.1</span> Sample rz-run script</h4>
 <pre><code>$ cat foo.rrz
 #!/usr/bin/rz-run
 program=./pp400
@@ -1303,13 +1302,13 @@ chdir=/tmp
 #chroot=.
 ./foo.rrz</code></pre>
 </section>
-<section id="connecting-a-program-with-a-socket" class="level4" data-number="1.0.9.2">
-<h4 data-number="1.0.9.2" class="anchored" data-anchor-id="connecting-a-program-with-a-socket"><span class="header-section-number">1.0.9.2</span> Connecting a program with a socket</h4>
+<section id="connecting-a-program-with-a-socket" class="level4" data-number="1.0.8.2">
+<h4 data-number="1.0.8.2" class="anchored" data-anchor-id="connecting-a-program-with-a-socket"><span class="header-section-number">1.0.8.2</span> Connecting a program with a socket</h4>
 <pre><code>$ nc -l 9999
 $ rz-run program=/bin/ls connect=localhost:9999</code></pre>
 </section>
-<section id="debugging-a-program-redirecting-stdio-into-another-terminal" class="level4" data-number="1.0.9.3">
-<h4 data-number="1.0.9.3" class="anchored" data-anchor-id="debugging-a-program-redirecting-stdio-into-another-terminal"><span class="header-section-number">1.0.9.3</span> Debugging a program redirecting STDIO into another terminal</h4>
+<section id="debugging-a-program-redirecting-stdio-into-another-terminal" class="level4" data-number="1.0.8.3">
+<h4 data-number="1.0.8.3" class="anchored" data-anchor-id="debugging-a-program-redirecting-stdio-into-another-terminal"><span class="header-section-number">1.0.8.3</span> Debugging a program redirecting STDIO into another terminal</h4>
 <p>1 - Open a new terminal and type ‘tty’ to get a terminal name:</p>
 <pre><code>$ tty ; clear ; sleep 999999
 /dev/ttyS010</code></pre>
@@ -1321,11 +1320,11 @@ stdio=/dev/ttys010</code></pre>
 <pre><code>rizin -r foo.rrz -d /bin/ls</code></pre>
 </section>
 </section>
-<section id="rz-ax" class="level3" data-number="1.0.10">
-<h3 data-number="1.0.10" class="anchored" data-anchor-id="rz-ax"><span class="header-section-number">1.0.10</span> rz-ax</h3>
+<section id="rz-ax" class="level3" data-number="1.0.9">
+<h3 data-number="1.0.9" class="anchored" data-anchor-id="rz-ax"><span class="header-section-number">1.0.9</span> rz-ax</h3>
 <p><code>rz-ax</code> stands out as a minimalistic mathematical expression evaluator tailored for the shell. Its utility extends to facilitating base conversions between floating-point values, hexadecimal representations, hexpair strings to ASCII, octal to integer, and more. Notably, it supports endianness settings and can serve as an interactive shell when invoked without arguments.</p>
-<section id="examples-4" class="level4" data-number="1.0.10.1">
-<h4 data-number="1.0.10.1" class="anchored" data-anchor-id="examples-4"><span class="header-section-number">1.0.10.1</span> Examples</h4>
+<section id="examples-4" class="level4" data-number="1.0.9.1">
+<h4 data-number="1.0.9.1" class="anchored" data-anchor-id="examples-4"><span class="header-section-number">1.0.9.1</span> Examples</h4>
 <pre><code>$ rz-ax 1337
 0x539
 
