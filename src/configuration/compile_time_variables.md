@@ -1,8 +1,8 @@
-## Build Variables
+## Compile-Time Variables
 
-When rizin is built from sources, some build variables will be hardcoded within the rizin libraries.
+When rizin is built from sources, some compile-time variables will be hardcoded within the rizin libraries.
 
-These build variables can be accessed by executing the command `rizin -H` on a terminal.
+These compile-time variables can be accessed by executing the command `rizin -H` on a terminal.
 
 ```bash
 $ rizin -H
@@ -24,7 +24,7 @@ RZ_USER_PLUGINS=/home/username/.local/lib/rizin/plugins
 RZ_IS_PORTABLE=0
 ```
 
-You can also view a specific build variable by executing `-H variable`.
+You can also view a specific compile-time variable by executing `-H variable`.
 
 For example:
 ```bash

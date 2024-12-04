@@ -4,7 +4,6 @@
 instruction opcode.
 
 ```
-$ rz-asm -h
 Usage: rz-asm [-ACdDehLBvw] [-a arch] [-b bits] [-o addr] [-s syntax]
              [-f file] [-F fil:ter] [-i skip] [-l len] 'code'|hex|-
  -a [arch]     Set architecture to assemble/disassemble (see -L)
@@ -37,10 +36,12 @@ Usage: rz-asm [-ACdDehLBvw] [-a arch] [-b bits] [-o addr] [-s syntax]
  If '-l' value is greater than output length, output is padded with nops
  If the last argument is '-' reads from stdin
 Environment:
- RZ_NOPLUGINS      do not load shared plugins (speedup loading)
- RZ_ASM_ARCH       same as rz-asm -a
- RZ_ASM_BITS       same as rz-asm -b
- RZ_DEBUG          if defined, show error messages and crash signal
+ RZ_ARCH      e asm.arch # architecture to assemble/disassemble (same as rz-asm -a)
+ RZ_ASM_ARCH             # architecture to assemble/disassemble (same as rz-asm -a)
+ RZ_ASM_BITS             # cpu register size (8, 16, 32, 64) (same as rz-asm -b)
+ RZ_BITS      e asm.bits # cpu register size (8, 16, 32, 64) (same as rz-asm -b)
+ RZ_DEBUG                # if defined, show error messages and crash signal
+ RZ_NOPLUGINS            # do not load shared plugins (speedup loading)
 ```
 
 Plugins for supported target architectures can be listed with the `-L` option. Knowing a plugin name,

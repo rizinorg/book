@@ -70,16 +70,17 @@ Usage: rz-bin [-AcdeEghHiIjlLMqrRsSUvVxzZ] [-@ at] [-a arch] [-b bits] [-B addr]
  -zzz            Dump raw strings to stdout (for huge files)
  -Z              Guess size of binary program
 Environment:
- RZ_NOPLUGINS:                                         # do not load shared plugins (speedup loading)
- RZ_BIN_LANG:      e bin.lang                          # assume lang for demangling
- RZ_BIN_DEMANGLE=0:e bin.demangle                      # do not demangle symbols
- RZ_BIN_MAXSTRBUF: e str.search.buffer_size            # specify maximum buffer size
- RZ_BIN_STRFILTER: e bin.str.filter                    # rizin -qc 'e bin.str.filter=??' -
- RZ_BIN_STRPURGE:  e bin.str.purge                     # try to purge false positives
- RZ_BIN_DEBASE64:  e bin.debase64                      # try to debase64 all strings
- RZ_BIN_PDBSERVER: e pdb.server                        # use alternative PDB server
- RZ_BIN_SYMSTORE:  e pdb.symstore                      # path to downstream symbol store
- RZ_BIN_PREFIX:    e bin.prefix                        # prefix symbols/sections/relocs with a specific string
- RZ_BIN_DEBUGINFOD_URLS: e bin.dbginfo.debuginfod_urls # use alternative debuginfod server
- RZ_CONFIG:
+ RZ_BIN_CODESIGN_VERBOSE:                               # make code signatures verbose
+ RZ_BIN_DEBASE64:         e bin.debase64                # try to debase64 all strings
+ RZ_BIN_DEBUGINFOD_URLS:  e bin.dbginfo.debuginfod_urls # use alternative debuginfod server
+ RZ_BIN_DEMANGLE=0:       e bin.demangle                # do not demangle symbols
+ RZ_BIN_LANG:             e bin.lang                    # assume lang for demangling
+ RZ_BIN_MAXSTRBUF:        e str.search.buffer_size      # specify maximum buffer size
+ RZ_BIN_PDBSERVER:        e pdb.server                  # use alternative PDB server
+ RZ_BIN_PREFIX:           e bin.prefix                  # prefix symbols/sections/relocs with a specific string
+ RZ_BIN_STRFILTER:        e bin.str.filter              # rizin -qc 'e bin.str.filter=??' -
+ RZ_BIN_STRPURGE:         e bin.str.purge               # try to purge false positives
+ RZ_BIN_SYMSTORE:         e pdb.symstore                # path to downstream PDB symbol store
+ RZ_CONFIG:                                             # config file
+ RZ_NOPLUGINS:                                          # do not load plugins
 ```
