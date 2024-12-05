@@ -79,6 +79,7 @@ book:
         chapters:
          - src/disassembling/intro.md
          - src/disassembling/adding_metadata.md
+         - src/disassembling/rzil.md
          - src/disassembling/esil.md
 
       - part: "Analysis"

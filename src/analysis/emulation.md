@@ -8,7 +8,7 @@ to solve even in the most basic way without at least a partial emulation.
 Thus, many professional reverse engineering tools use code emulation while
 performing an analysis of binary code, and Rizin is no different here.
 
-For partial emulation (or imprecise full emulation) Rizin uses its own RzIL intermediate language, designed
+For partial emulation (or imprecise full emulation) Rizin uses its own [RzIL intermediate language](../disassembling/rzil.md), designed
 to replace current [ESIL](../disassembling/esil.md).
 
 Rizin supports this kind of partial emulation for all platforms that

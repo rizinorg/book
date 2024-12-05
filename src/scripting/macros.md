@@ -1,12 +1,26 @@
 # Macros
 
-Apart from simple sequencing and looping, Rizin allows to write simple macros, using this construction:
+Rizin allows to write simple macros via command `(`; A macro is essentially a pre-recorded set of instructions that automates tasks.
+
+```
+[0x00000000]> (?
+Usage: ([*-?]   # Manage scripting macros
+| ([*]                     # List all defined macros
+| (-<macro-name>           # Remove a defined macro named <macro-name>
+| (<macro-name> [<macro-arg0> <macro-arg1> ...][; <cmds>])[([<macro-call-arg0> <macro-call-arg1> ...])] # Add a new macro <macro-name>
+| (<macro-name> [<macro-arg0> <macro-arg1> ...][; <cmds>])[([<macro-call-arg0> <macro-call-arg1> ...])] # Define a macro <macro-name> and call it with the arguments
+                                                                                                          <macro-call-args>
+| .(<macro-name> [<macro-call-arg0> <macro-call-arg1> ...]) # Call macro <macro-name> with the arguments <macro-call-args>
+| ..(<macro-name> [<macro-call-arg0> <macro-call-arg1> ...]) # Call macro <macro-name> multiple times with the arguments <macro-call-args>
+```
+
+Example of macro usage named `qwe`:
 
 ```
 [0x00404800]> (qwe; pd 4; ao)
 ```
 
-This will define a macro called 'qwe' which runs sequentially first 'pd 4' then 'ao'.
+This will define a macro called `qwe` which runs sequentially first `pd 4` then `ao`.
 Calling the macro using syntax `.(macro)` is simple:
 
 ```
@@ -38,11 +52,10 @@ To list available macros simply call `(*`:
 (qwe ; pd 4; ao)
 ```
 
-And if you want to remove some macro, just add '-' before the name:
+And if you want to remove some macro, just add `-` before the name:
 
 ```
-[0x00404800]> (-qwe)
-Macro 'qwe' removed.
+[0x00404800]> (-qwe
 [0x00404800]>
 ```
 
@@ -80,8 +93,17 @@ To run a macro multiple times with different arguments, a convenient way is to u
 
 # Aliases
 
-Rizin also offers aliases which might help you save time by quickly executing your most used commands.
-They are under `$?`.
+Rizin also offers aliases which might help you save time by quickly executing your most used commands; they are under the command `$?`.
+
+```
+[0x00000000]> $?
+Usage: $[*?]   # Alias commands and strings
+| $[alias[=cmd] [args...]] # List all defined aliases / Define alias (see %$? for help on $variables)
+| $*                     # List all the aliases as rizin commands in base64
+| $**                    # Same as above, but using plain text
+
+Detailed help for $[alias[=cmd] [args...]] is provided by $??.
+```
 
 The general usage of the feature is: `$alias=cmd`
 

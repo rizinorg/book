@@ -435,7 +435,7 @@ The variable `scr.seek` can be assigned a full-featured expression or a pointer/
 
 ### scr.scrollbar: `bool`
 
-When you have configured any [flagzones](http://book.rada.re/basic_commands/flags.html#flag-zones) (`fz?`), the `scr.scrollbar` variable facilitates the display of the scrollbar alongside the flagzones in Visual mode. Set it to `1` for displaying the scrollbar at the right end, `2` for the top, and `3` to position it at the bottom.
+When you have configured any [flagzones](../basic_commands/flags.html#flag-zones) (`fz?`), the `scr.scrollbar` variable facilitates the display of the scrollbar alongside the flagzones in Visual mode. Set it to `1` for displaying the scrollbar at the right end, `2` for the top, and `3` to position it at the bottom.
 
 ### scr.utf8: `bool`
 
