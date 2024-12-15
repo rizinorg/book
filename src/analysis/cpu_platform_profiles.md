@@ -9,7 +9,7 @@ differences by storing the data regarding each CPUs and platforms in [SDB](../ba
 files in a standard format, instead of hardcoding them with each of the 
 disassembler plugins. This information will be parsed and added as flags and comments during the analysis
 loop and will show up in the disassembly and other places, making reverse engineering on those particular 
-chips ets is much easier. This also helps in easy addition of a new port, in maintenance and in user-friendliness. 
+chipsets much easier. This also helps in easy addition of a new port, in maintenance and in user-friendliness. 
 
 ## How it works
 
