@@ -4,7 +4,7 @@
 instruction opcode.
 
 ```
-Usage: rz-asm [-ACdDehLBvw] [-a arch] [-b bits] [-o addr] [-s syntax]
+Usage: rz-asm [-ACdDehLBvw] [-a arch] [-b bits] [-m plugin] [-o addr] [-s syntax]
              [-f file] [-F fil:ter] [-i skip] [-l len] 'code'|hex|-
  -a [arch]     Set architecture to assemble/disassemble (see -L)
  -A            Show Analysis information from given hexpairs
@@ -24,6 +24,7 @@ Usage: rz-asm [-ACdDehLBvw] [-a arch] [-b bits] [-o addr] [-s syntax]
  -k [kernel]   Select operating system (linux, windows, darwin, ..)
  -l [len]      Input/Output length
  -L            List Asm plugins: (a=asm, d=disasm, A=analyze, e=ESIL)
+ -m [plugin]   List supported CPUs for the chosen plugin       
  -o, -@ [addr] Set start address for code (default 0)
  -O [file]     Output file name (rz-asm -Bf a.asm -O a)
  -p            Run SPP over input for assembly
