@@ -1353,7 +1353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="va">$!</span>     <span class="co"># Sort in inverse order</span></span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">,</span>      <span class="co"># Token to define another keyword</span></span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">+</span>      <span class="co"># Set the grep as the opposite of search.case_sensitive</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">^</span>      <span class="co"># Words must be placed at the beginning of line</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">^</span>      <span class="co"># Words must be placed at the beginning of line, after whitespace if any</span></span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>      <span class="co"># Perform zoom operation on the buffer</span></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ot">! </span>     <span class="co"># Negate grep</span></span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">?</span>      <span class="co"># Count number of matching lines</span></span>
