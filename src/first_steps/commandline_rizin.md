@@ -172,7 +172,7 @@ Modifiers:
 | $!     # Sort in inverse order
 | ,      # Token to define another keyword
 | +      # Set the grep as the opposite of search.case_sensitive
-| ^      # Words must be placed at the beginning of line
+| ^      # Words must be placed at the beginning of line, after whitespace if any
 | <      # Perform zoom operation on the buffer
 | !      # Negate grep
 | ?      # Count number of matching lines
