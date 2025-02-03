@@ -1181,14 +1181,14 @@ search.contiguous = true ; Accept contiguous/adjacent search hits
 search.distance = 0 ; Search string distance
 search.esilcombo = 8 ; Stop search after N consecutive hits
 search.flags = true ; All search results are flagged, otherwise only printed
-search.from = 0xffffffffffffffff ; Search start address
+search.from = 0 ; Search start address (inclusive)
 search.in = io.maps ; Specify search boundaries [raw, block, bin.section, bin.sections, bin.sections.rwx, bin.sections.r, bin.sections.rw, bin.sections.rx, bin.sections.wx, bin.sections.x, io.map, io.maps, io.maps.rwx, io.maps.r, io.maps.rw, io.maps.rx, io.maps.wx, io.maps.x, dbg.stack, dbg.heap, dbg.map, dbg.maps, dbg.maps.rwx, dbg.maps.r, dbg.maps.rw, dbg.maps.rx, dbg.maps.wx, dbg.maps.x, analysis.fcn, analysis.bb]
 search.kwidx = 1 ; Store last search index count
 search.maxhits = 0 ; Maximum number of hits (0: no limit)
 search.overlap = false ; Look for overlapped search hits
 search.prefix = hit ; Prefix name in search hits label
 search.show = true ; Show search results
-search.to = 0xffffffffffffffff ; Search end address</code></pre>
+search.to = 0xffffffffffffffff ; Search end address (exclusive)</code></pre>
 <p>The <code>search.flags</code> boolean variable instructs the search engine to flag hits so that they can be referenced later. If a currently running search is interrupted with <code>Ctrl-C</code> keyboard sequence, current search position is flagged with <code>search_stop</code>.</p>
 
 
