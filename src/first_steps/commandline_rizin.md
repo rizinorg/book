@@ -12,7 +12,7 @@ The standard format for Rizin commands is as follows:
 # executes a rizin command at at the current address (0x00000000)
 [0x00000000]> command <params>
 # executes a rizin command with a special temporary modifier
-[0x00000000]> command <params> @<temporay modifier>
+[0x00000000]> command <params> @<temporary modifier>
 # executes a shell command
 [0x00000000]> !<shell command>
 # executes a rizin command and pipes its contents to a shell command
@@ -86,7 +86,7 @@ When utilizing the Rizin command-line, users may encounter situations where they
 
 ```bash
 [0x00000000]> @?
-Usage: <cmd> <@> <args>   # '@' help, temporary modifiers
+Usage: <cmd> <@> <args> [<@> <args> ...]   # '@' help, temporary modifiers, applied left-to-right
 | <cmd> @ <addr>             # Temporary seek to <addr>
 | <cmd> @ ..<addr>           # Temporary partial address seek (see s..)
 | <cmd> @!<blocksize>        # Temporary change the block size
