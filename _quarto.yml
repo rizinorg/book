@@ -66,14 +66,14 @@ book:
 
       - part: "Searching"
         chapters:
-         - src/search_bytes/intro.md
-         - src/search_bytes/basic_searches.md
-         - src/search_bytes/configurating_the_search.md
-         - src/search_bytes/pattern_search.md
-         - src/search_bytes/automation.md
-         - src/search_bytes/backward_search.md
-         - src/search_bytes/search_in_assembly.md
-         - src/search_bytes/searching_aes_keys.md
+         - src/search/intro.md
+         - src/search/basic_searches.md
+         - src/search/configurating_the_search.md
+         - src/search/pattern_search.md
+         - src/search/automation.md
+         - src/search/backward_search.md
+         - src/search/search_in_assembly.md
+         - src/search/searching_aes_keys.md
 
       - part: "Disassembling"
         chapters:
