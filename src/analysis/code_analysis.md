@@ -374,7 +374,7 @@ In addition to those we can also set `analysis.jmp.indir` to follow the indirect
 `analysis.pushret` to analyze `push ...; ret` sequence as a jump; `analysis.nopskip` to skip the NOP
 sequences at a function beginning.
 
-For now, rizin also allows you to change the maximum basic block size with `analysis.bb.maxsize` option.
+Analysis limits function size to `analysis.fcn_max_size` option.
 The default value just works in most use cases, but it's useful to increase that for example when
 dealing with obfuscated code. Beware that some of the basic block
 control options may disappear in the future in favor of more automated ways to set those.
