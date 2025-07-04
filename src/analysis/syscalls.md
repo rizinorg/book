@@ -35,7 +35,7 @@ the addresses where particular syscalls were found and list them.
 0x00018a0e sd_ble_gap_sec_info_reply
 ...
 ```
-To reduce searching time it is possible to [restrict the searching](../search_bytes/configurating_the_search.md)
+To reduce searching time it is possible to [restrict the searching](../search/configurating_the_search.md)
 range for only executable segments or sections with `/as @e:search.in=io.maps.x`
 
 Using the [ESIL emulation](emulation.md) Rizin can print syscall arguments
