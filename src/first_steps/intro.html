@@ -1380,25 +1380,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>The initial learning curve tends to be relatively steep. However, within an hour of usage, you should grasp the workings of most features and learn how to effectively utilize the different tools provided by <code>rizin</code>.</p>
 <p>For a quick introduction to basic commands, execute <code>rizin</code> on the command line and enter <code>help</code> (and press enter) to obtain an overview.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> help</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Welcome</span> to Rizin!</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Type</span> <span class="pp">?</span> for a list of commands available.</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Append</span> <span class="pp">?</span> to any command to get the list of sub-commands or more details about a specific command.</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Append</span> <span class="pp">??</span> to any command to get the full description of a command, e.g. with examples.</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Commands</span> output can be redirected as in a regular shell, see <span class="op">&gt;</span><span class="pp">?</span> for more info.</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">You</span> can grep commands output with the <span class="st">'internal grep'</span>, see ~<span class="pp">?</span> for more info.</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">You</span> can pipe an internal Rizin command to a system program, see <span class="kw">|</span><span class="ex">?</span> for more info.</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Chain</span> multiple commands with <span class="kw">;</span><span class="bu">.</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Temporary</span> modifiers are your friends, see @<span class="pp">?</span> for more info, but here some useful ones:</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a> <span class="ex">-</span> @  temporarily switch to a different address</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a> <span class="ex">-</span> @a:<span class="op">&lt;</span>arch<span class="op">&gt;</span> temporarily switch to a different architecture</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a> <span class="ex">-</span> @e:<span class="op">&lt;</span>varname<span class="op">&gt;</span>=<span class="op">&lt;</span>varvalue<span class="op">&gt;</span> temporarily change an eval variable</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ex">There</span> are a lot of settings that customize Rizin<span class="st">'s behaviour, see them with el. Have a look at e? to know how to interact with them.</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="st">You can save your preferred settings in ~/.rizinrc.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>[0x00000000]&gt; help
+Welcome to Rizin!
+
+Fastest way to help yourself
+Type ?** to search all commands' short descriptions.
+Type ?*** to search all commands' long descriptions.
+Type ?**e to search all settings' descriptions.
+
+Type ? for a list of commands available.
+Append ? to any command to get the list of sub-commands or more details about a specific command.
+Append ?? to any command to get the full description of a command, e.g. with examples.
+
+Commands output can be redirected as in a regular shell, see &gt;? for more info.
+You can grep commands output with the 'internal grep', see ~? for more info.
+You can pipe an internal Rizin command to a system program, see |? for more info.
+
+Chain multiple commands with ;.
+Temporary modifiers are your friends, see @? for more info, but here some useful ones:
+ - @  temporarily switch to a different address
+ - @a:&lt;arch&gt; temporarily switch to a different architecture
+ - @e:&lt;varname&gt;=&lt;varvalue&gt; temporarily change an eval variable
+
+There are a lot of settings that customize Rizin's behaviour, see them with el. Have a look at e? to know how to interact with them.
+You can save your preferred settings in ~/.rizinrc.</code></pre>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Fastest way to find what you need
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Use <code>?**</code> to interactively search all commands and their help messages.</li>
+<li>Use <code>?***</code> to interactively search all commands and their <strong>long</strong> help messages.</li>
+<li>Use <code>?**e</code> to interactively search all settings and their help messages.</li>
+</ul>
+</div>
+</div>
 <p><strong>Note</strong>: You have the option to add a <code>?</code> after any command to access its help, or for more in depth help (which may include examples) you can append <code>??</code>.</p>
 <p>Additionally, remember that a comprehensive search for <em>all</em> commands, settings, and their descriptions can be performed by typing <code>?*</code>.</p>
 <section id="internal-grep-list-commands-and-environment-variables" class="level3" data-number="6.0.1">
