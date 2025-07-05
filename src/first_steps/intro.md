@@ -4,9 +4,14 @@ The initial learning curve tends to be relatively steep. However, within an hour
 
 For a quick introduction to basic commands, execute `rizin` on the command line and enter `help` (and press enter) to obtain an overview.
 
-```bash
+```
 [0x00000000]> help
 Welcome to Rizin!
+
+Fastest way to help yourself
+Type ?** to search all commands' short descriptions.
+Type ?*** to search all commands' long descriptions.
+Type ?**e to search all settings' descriptions.
 
 Type ? for a list of commands available.
 Append ? to any command to get the list of sub-commands or more details about a specific command.
@@ -25,6 +30,15 @@ Temporary modifiers are your friends, see @? for more info, but here some useful
 There are a lot of settings that customize Rizin's behaviour, see them with el. Have a look at e? to know how to interact with them.
 You can save your preferred settings in ~/.rizinrc.
 ```
+
+::: {.callout-tip}
+### Fastest way to find what you need
+
+- Use `?**` to interactively search all commands and their help messages.
+- Use `?***` to interactively search all commands and their **long** help messages.
+- Use `?**e` to interactively search all settings and their help messages.
+
+:::
 
 **Note**: You have the option to add a `?` after any command to access its help, or for more in depth help (which may include examples) you can append `??`.
 
