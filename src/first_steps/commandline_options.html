@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.7.34">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -74,14 +74,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-234273d1456647dabc34a594ac50e507.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-0348920b7671f696dc9078d39bff215e.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-234273d1456647dabc34a594ac50e507.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9582434199d49cc9e91654cdeeb4866b.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8dcd8563ea6803ab7cbb3d71ca5772e1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9582434199d49cc9e91654cdeeb4866b.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-8db882f5897e443529b933579b9ca44a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-015746b6532fb39d5126d3d0f040a720.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-8db882f5897e443529b933579b9ca44a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-783de0924377d50fcac49befecea2652.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-2995d1a47e04461c732ae7f7a37853d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-783de0924377d50fcac49befecea2652.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -1381,49 +1381,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin <span class="at">-h</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> rizin <span class="pp">[-</span><span class="ss">ACdfLMnNqStuvwzX</span><span class="pp">]</span> [-P patch] [-p prj] [-a arch] [-b bits] [-i file]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>             <span class="ex">[-s</span> addr] [-B baddr] [-m maddr] [-c cmd] [-e k=v] file<span class="kw">|</span><span class="ex">pid</span><span class="kw">|</span><span class="ex">-</span><span class="kw">|</span><span class="ex">--</span><span class="kw">|</span><span class="ex">=</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">--</span>           run rizin without opening any file</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">=</span>            same as <span class="st">'rizin malloc://512</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st"> -            read file from stdin</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st"> -=           perform R=! command to run all commands remotely</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st"> -0           print \x00 after init and every command</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st"> -2           close stderr file descriptor (silent warning messages)</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st"> -a [arch]    set asm.arch</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st"> -A           run '</span>aaa<span class="st">' command to analyze all referenced code</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="st"> -b [bits]    set asm.bits</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="st"> -B [baddr]   set base address for PIE binaries</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="st"> -c '</span>cmd..<span class="st">'   execute rizin command</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="st"> -C           file is host:port (alias for -cR+http://%%s/cmd/)</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="st"> -d           debug the executable '</span>file<span class="st">' or running process '</span>pid</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a> <span class="ex">-D</span> <span class="pp">[</span><span class="ss">backend</span><span class="pp">]</span> enable debug mode <span class="er">(</span><span class="ex">e</span> cfg.debug=true<span class="kw">)</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a> <span class="ex">-e</span> k=v       evaluate config var</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a> <span class="ex">-f</span>           block size = file size</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a> <span class="ex">-F</span> <span class="pp">[</span><span class="ss">binplug</span><span class="pp">]</span> force to use that rbin plugin</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a> <span class="ex">-h,</span> <span class="at">-hh</span>      show help message, <span class="at">-hh</span> for long</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a> <span class="ex">-H</span> <span class="er">(</span><span class="ex">[var]</span><span class="kw">)</span>   <span class="ex">display</span> variable</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a> <span class="ex">-i</span> <span class="pp">[</span><span class="ss">file</span><span class="pp">]</span>    run script file</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a> <span class="ex">-I</span> <span class="pp">[</span><span class="ss">file</span><span class="pp">]</span>    run script file before the file is opened</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a> <span class="ex">-k</span> <span class="pp">[</span><span class="ss">OS/kern</span><span class="pp">]</span> set asm.os <span class="er">(</span><span class="ex">linux,</span> macos, w32, netbsd, ...<span class="kw">)</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a> <span class="ex">-l</span> <span class="pp">[</span><span class="ss">lib</span><span class="pp">]</span>     load plugin file</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a> <span class="ex">-L</span>           list supported IO plugins</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a> <span class="ex">-m</span> <span class="pp">[</span><span class="ss">addr</span><span class="pp">]</span>    map file at given address <span class="er">(</span><span class="ex">loadaddr</span><span class="kw">)</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a> <span class="ex">-M</span>           do not demangle symbol names</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a> <span class="ex">-n,</span> <span class="at">-nn</span>      do not load RzBin info <span class="er">(</span><span class="ex">-nn</span> only load bin structures<span class="kw">)</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a> <span class="ex">-N</span>           do not load user settings and scripts</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a> <span class="ex">-NN</span>          do not load any script or plugin</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a> <span class="ex">-q</span>           quiet mode <span class="er">(</span><span class="ex">no</span> prompt<span class="kw">)</span> <span class="ex">and</span> quit after <span class="at">-i</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a> <span class="ex">-qq</span>          quit after running all <span class="at">-c</span> and <span class="at">-i</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a> <span class="ex">-Q</span>           quiet mode <span class="er">(</span><span class="ex">no</span> prompt<span class="kw">)</span> <span class="ex">and</span> quit faster <span class="er">(</span><span class="va">quickLeak</span><span class="op">=</span>true<span class="kw">)</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a> <span class="ex">-p</span> <span class="pp">[</span><span class="ss">p.rzdb</span><span class="pp">]</span>  load project file</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a> <span class="ex">-r</span> <span class="pp">[</span><span class="ss">rz</span><span class="pp">-</span><span class="ss">run</span><span class="pp">]</span>  specify rz-run profile to load <span class="er">(</span><span class="ex">same</span> as <span class="at">-e</span> dbg.profile=X<span class="kw">)</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a> <span class="ex">-R</span> <span class="pp">[</span><span class="ss">rule</span><span class="pp">]</span>    specify custom rz-run directive</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a> <span class="ex">-s</span> <span class="pp">[</span><span class="ss">addr</span><span class="pp">]</span>    initial seek</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a> <span class="ex">-T</span>           do not compute file hashes</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a> <span class="ex">-u</span>           set bin.filter=false to get raw sym/sec/cls names</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a> <span class="ex">-v,</span> <span class="at">-V</span>       show rizin version <span class="er">(</span><span class="ex">-V</span> show lib versions<span class="kw">)</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a> <span class="ex">-w</span>           open file in write mode</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a> <span class="ex">-x</span>           open without exec-flag <span class="er">(</span><span class="ex">asm.emu</span> will not work<span class="kw">)</span><span class="ex">,</span> See io.exec</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a> <span class="ex">-X</span>           same as <span class="at">-e</span> bin.usextr=false <span class="er">(</span><span class="ex">useful</span> for dyldcache<span class="kw">)</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a> <span class="ex">-z,</span> <span class="at">-zz</span>      do not load strings or load them even in raw</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">--</span>         Run rizin without opening any file</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">=</span>          Same as <span class="st">'rizin malloc://512</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st"> -          Read file from stdin</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st"> -=         Perform R=! command to run all commands remotely</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st"> -0         Print \x00 after init and every command</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st"> -1         Redirect stderr to stdout</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st"> -2         Close stderr file descriptor (silent warning messages)</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st"> -a arch    Set asm.arch</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="st"> -A         Run '</span>aaa<span class="st">' command to analyze all referenced code</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="st"> -b bits    Set asm.bits</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="st"> -B baddr   Set base address for PIE binaries</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="st"> -c '</span>cmd..<span class="st">' Execute rizin command</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="st"> -C         File is host:port (alias for -cR+http://%%s/cmd/)</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="st"> -d         Debug the executable '</span>file<span class="st">' or running process '</span>pid</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a> <span class="ex">-D</span> backend Enable debug mode <span class="er">(</span><span class="ex">e</span> cfg.debug=true<span class="kw">)</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a> <span class="ex">-e</span> k=v     Evaluate config var</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a> <span class="ex">-f</span>         Block size = file size</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a> <span class="ex">-F</span> binplug Force to use that rbin plugin</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a> <span class="ex">-h,</span> <span class="at">-hh</span>    Show help message, <span class="at">-hh</span> for long</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a> <span class="ex">-H</span> <span class="pp">[</span><span class="ss">var</span><span class="pp">]</span>   Display variable</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a> <span class="ex">-i</span> file    Run script file</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a> <span class="ex">-I</span> file    Run script file before the file is opened</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a> <span class="ex">-k</span> OS/kern Set asm.os <span class="er">(</span><span class="ex">linux,</span> macos, w32, netbsd, ...<span class="kw">)</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a> <span class="ex">-l</span> lib     Load plugin file</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a> <span class="ex">-L</span>         List supported IO plugins</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a> <span class="ex">-m</span> addr    Map file at given address <span class="er">(</span><span class="ex">loadaddr</span><span class="kw">)</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a> <span class="ex">-M</span>         Do not demangle symbol names</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a> <span class="ex">-n,</span> <span class="at">-nn</span>    Do not load RzBin info <span class="er">(</span><span class="ex">-nn</span> only load bin structures<span class="kw">)</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a> <span class="ex">-N</span>         Do not load user settings and scripts</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a> <span class="ex">-NN</span>        Do not load any script or plugin</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a> <span class="ex">-q</span>         Quiet mode <span class="er">(</span><span class="ex">no</span> prompt<span class="kw">)</span> <span class="ex">and</span> quit after <span class="at">-i</span> and <span class="at">-c</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a> <span class="ex">-qq</span>        Quiet mode <span class="er">(</span><span class="ex">no</span> prompt<span class="kw">)</span> <span class="ex">and</span> force quit</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a> <span class="ex">-p</span> p.rzdb  Load project file</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a> <span class="ex">-r</span> rz-run  Specify rz-run profile to load <span class="er">(</span><span class="ex">same</span> as <span class="at">-e</span> dbg.profile=X<span class="kw">)</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a> <span class="ex">-R</span> rule    Specify custom rz-run directive</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a> <span class="ex">-s</span> addr    Initial seek</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a> <span class="ex">-T</span>         Do not compute file hashes</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a> <span class="ex">-u</span>         Set bin.filter=false to get raw sym/sec/cls names</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a> <span class="ex">-v,</span> <span class="at">-V</span>     Show rizin version <span class="er">(</span><span class="ex">-V</span> show lib versions<span class="kw">)</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a> <span class="ex">-w</span>         Open file in write mode</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a> <span class="ex">-x</span>         Open without exec-flag <span class="er">(</span><span class="ex">asm.emu</span> will not work<span class="kw">)</span><span class="ex">,</span> See io.exec</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a> <span class="ex">-X</span>         Same as <span class="at">-e</span> bin.usextr=false <span class="er">(</span><span class="ex">useful</span> for dyldcache<span class="kw">)</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a> <span class="ex">-z,</span> <span class="at">-zz</span>    Do not load strings or load them even in raw</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="common-usage-patterns" class="level3" data-number="7.0.1">
 <h3 data-number="7.0.1" class="anchored" data-anchor-id="common-usage-patterns"><span class="header-section-number">7.0.1</span> Common usage patterns</h3>
 <ul>
