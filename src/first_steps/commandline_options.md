@@ -4,7 +4,7 @@ The `rizin` command line tool supports various options from the shell command li
 
 Here is the usage help message:
 
-```
+```bash
 $ rizin -h
 Usage: rizin [-ACdfLMnNqStuvwzX] [-P patch] [-p prj] [-a arch] [-b bits] [-i file]
              [-s addr] [-B baddr] [-m maddr] [-c cmd] [-e k=v] file|pid|-|--|=
