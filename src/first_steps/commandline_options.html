@@ -1382,19 +1382,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> rizin <span class="pp">[-</span><span class="ss">ACdfLMnNqStuvwzX</span><span class="pp">]</span> [-P patch] [-p prj] [-a arch] [-b bits] [-i file]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>             <span class="ex">[-s</span> addr] [-B baddr] [-m maddr] [-c cmd] [-e k=v] file<span class="kw">|</span><span class="ex">pid</span><span class="kw">|</span><span class="ex">-</span><span class="kw">|</span><span class="ex">--</span><span class="kw">|</span><span class="ex">=</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">--</span>         Run rizin without opening any file</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">=</span>          Same as <span class="st">'rizin malloc://512</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st"> -          Read file from stdin</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st"> -=         Perform R=! command to run all commands remotely</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st"> -0         Print \x00 after init and every command</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st"> -1         Redirect stderr to stdout</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st"> -2         Close stderr file descriptor (silent warning messages)</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st"> -a arch    Set asm.arch</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="st"> -A         Run '</span>aaa<span class="st">' command to analyze all referenced code</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="st"> -b bits    Set asm.bits</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="st"> -B baddr   Set base address for PIE binaries</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="st"> -c '</span>cmd..<span class="st">' Execute rizin command</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="st"> -C         File is host:port (alias for -cR+http://%%s/cmd/)</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="st"> -d         Debug the executable '</span>file<span class="st">' or running process '</span>pid</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">=</span>          Same as <span class="st">'rizin malloc://512'</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> <span class="ex">-</span>          Read file from stdin</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">-=</span>         Perform R=! command to run all commands remotely</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">-0</span>         Print <span class="dt">\x</span>00 after init and every command</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a> <span class="ex">-1</span>         Redirect stderr to stdout</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a> <span class="ex">-2</span>         Close stderr file descriptor <span class="er">(</span><span class="ex">silent</span> warning messages<span class="kw">)</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a> <span class="ex">-a</span> arch    Set asm.arch</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a> <span class="ex">-A</span>         Run <span class="st">'aaa'</span> command to analyze all referenced code</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a> <span class="ex">-b</span> bits    Set asm.bits</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a> <span class="ex">-B</span> baddr   Set base address for PIE binaries</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a> <span class="ex">-c</span> <span class="st">'cmd..'</span> Execute rizin command</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a> <span class="ex">-C</span>         File is host:port <span class="er">(</span><span class="bu">alias</span> for <span class="at">-cR+http:</span>//%%s/cmd/<span class="kw">)</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a> <span class="ex">-d</span>         Debug the executable <span class="st">'file'</span> or running process <span class="st">'pid'</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a> <span class="ex">-D</span> backend Enable debug mode <span class="er">(</span><span class="ex">e</span> cfg.debug=true<span class="kw">)</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a> <span class="ex">-e</span> k=v     Evaluate config var</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a> <span class="ex">-f</span>         Block size = file size</span>
