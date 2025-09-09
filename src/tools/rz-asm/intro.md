@@ -65,7 +65,7 @@ _dA__ 16 32 64   cil         LGPL3   .NET CIL/MSIL (Common Intermediate Language
 _dA__ 16         cr16        LGPL3   CompactRISC CR16 disassembler
 _dA__ 32         cris        GPL3    Axis Communications 32-bit embedded processor disassembler (by pancake)
 adA__ 32 64      dalvik      LGPL3   Dalvik (Android VM) bytecode disassembler
-ad___ 16         dcpu16      PD      Mojang's DCPU-16 disassembler
+ad___ 16         dcpu16      PD      Mojang′s DCPU-16 disassembler
 _dA__ 32 64      ebc         LGPL3   EFI bytecode disassembler (by Fedor Sakharov)
 adAeI 16         gb          LGPL3   GameBoy(TM) (z80-like) (by condret)
 _dAe_ 8 16 32 64 ghidra      LGPL3   SLEIGH Disassembler from Ghidra (by FXTi)
