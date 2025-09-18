@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -70,18 +70,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../src/first_steps/commandline_options.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9582434199d49cc9e91654cdeeb4866b.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8dcd8563ea6803ab7cbb3d71ca5772e1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9582434199d49cc9e91654cdeeb4866b.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-a6e161b2431e1f94a14e0f5d32135a3c.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-4a17e18fdf56099d4f6da1e105f33a53.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-a6e161b2431e1f94a14e0f5d32135a3c.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-783de0924377d50fcac49befecea2652.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-2995d1a47e04461c732ae7f7a37853d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-783de0924377d50fcac49befecea2652.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a49a3c03e9fe45d5688ec34d82a808cd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7bab72d3478b66a849edd5df9ed30138.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-a49a3c03e9fe45d5688ec34d82a808cd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -297,7 +298,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -1388,20 +1391,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Following these brackets, users can input commands. Typically, commands are represented by a single case-sensitive character.</p>
 <p>Rizin includes special commands that enable the execution of shell-like commands. These can be accessed through the help command <code>shell?</code>.</p>
 <p>The standard format for Rizin commands is as follows:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># executes a rizin command at at the current address (0x00000000)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># executes a rizin command at at the current address (0x00000000)</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> command <span class="op">&lt;</span>args<span class="op">&gt;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># executes a rizin command with a special temporary modifier</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> command <span class="op">&lt;</span>args<span class="op">&gt;</span> @<span class="op">&lt;</span>temporary modifier<span class="op">&gt;</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># executes a shell command</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> !<span class="op">&lt;</span>shell command<span class="op">&gt;</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># executes a rizin command and pipes its contents to a shell command</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> command <span class="op">&lt;</span>args<span class="op">&gt;</span> <span class="kw">|</span> <span class="op">&lt;</span>shell <span class="bu">command</span><span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> command <span class="op">&lt;</span>args<span class="op">&gt;</span> <span class="kw">|</span> <span class="op">&lt;</span>shell <span class="bu">command</span><span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This format will be consistently used throughout the book.</p>
 <section id="help-commands" class="level3" data-number="8.0.1">
 <h3 data-number="8.0.1" class="anchored" data-anchor-id="help-commands"><span class="header-section-number">8.0.1</span> Help commands</h3>
 <p>Every shell command is accompanied by a description that can be accessed by adding <code>?</code>. This displays the help descriptions for the individual command and all its subcommands.</p>
 <p>Appending <code>??</code> instead provides the help message for the single command (excluding subcommands) along with an extended description, which may include possible examples.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> e<span class="pp">?</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> e<span class="pp">?</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> e<span class="pp">[</span><span class="ss">?</span><span class="pp">]</span>   <span class="co"># List/get/set config evaluable vars</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">e</span> <span class="op">&lt;</span>key<span class="op">&gt;</span>[=<span class="op">&lt;</span>val<span class="kw">|</span><span class="ex">?</span><span class="op">&gt;</span>] [<span class="op">&lt;</span>key<span class="op">&gt;</span>[=<span class="op">&lt;</span>val<span class="kw">|</span><span class="ex">?</span><span class="op">&gt;</span>] ...]] <span class="co"># Get/Set value of config variable &lt;key&gt;</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="va">el</span><span class="op">[</span>j<span class="pp">*</span>qlJ<span class="op">]</span> <span class="ex">[</span><span class="op">&lt;</span>key<span class="op">&gt;</span>]  <span class="co"># List config variables with their descriptions</span></span>
@@ -1420,33 +1423,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">e</span> asm.bytes=true     <span class="co"># Set config variable `asm.bytes` to `true`</span></span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">e</span> search.in=<span class="pp">?</span>        <span class="co"># Show all possible values for config variable `search.in`</span></span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">e</span> search.in=<span class="pp">??</span>       <span class="co"># Show all possible values for config variable `search.in` together with description</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">e</span> asm.bytes=true asm.offset=false <span class="co"># Set asm.bytes to true and asm.offset to false</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">e</span> asm.bytes=true asm.offset=false <span class="co"># Set asm.bytes to true and asm.offset to false</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="shell-command-within-rizin-command-line" class="level3" data-number="8.0.2">
 <h3 data-number="8.0.2" class="anchored" data-anchor-id="shell-command-within-rizin-command-line"><span class="header-section-number">8.0.2</span> Shell command within rizin command line</h3>
 <p>Executing shell commands within the Rizin command line is achievable through various methods, each with distinct behaviors.</p>
 <p>The initial method involves using the <code>!</code> command. The syntax for this approach is as follows: <code>!&lt;shell command&gt;</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> !<span class="pp">?</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> !<span class="pp">?</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> !<span class="pp">[</span><span class="ss">!</span><span class="pp">]</span>   <span class="co"># Run given commands as in system(3) or shows command history</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">!</span><span class="op">&lt;</span>command<span class="op">&gt;</span> [<span class="op">&lt;</span>args1<span class="op">&gt;</span> <span class="op">&lt;</span>args2<span class="op">&gt;</span> ...]  <span class="co"># Runs given commands in system(3)</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">!!</span><span class="op">&lt;</span>command<span class="op">&gt;</span> [<span class="op">&lt;</span>args1<span class="op">&gt;</span> <span class="op">&lt;</span>args2<span class="op">&gt;</span> ...] <span class="co"># Runs a given commands in system(3) and pipes stdout to rizin</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># executes `ls /path/to/dir` within the shell of the operating system</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> !ls /path/to/dir</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">somefile</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">somefile</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The second method involves using the pipe command <code>|</code>, enabling the redirection of a command’s output (<code>stdout</code>) to an external shell command.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> <span class="kw">|</span><span class="ex">?</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> <span class="kw">|</span><span class="ex">?</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> <span class="kw">|</span><span class="ex">[</span><span class="op">&lt;</span>program<span class="op">&gt;|</span>H<span class="kw">|</span><span class="ex">T</span><span class="kw">|</span><span class="bu">.</span><span class="kw">|</span><span class="ex">]</span>   <span class="co"># Pipe help ('|')</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> <span class="kw">|</span>           <span class="co"># Disable scr.html and scr.color</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> <span class="kw">|</span><span class="ex">H</span>          <span class="co"># Enable scr.html, respect scr.color</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> <span class="kw">|</span> <span class="op">&lt;</span>program<span class="op">&gt;</span> <span class="co"># Pipe output of command to program</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> <span class="kw">|</span><span class="bu">.</span>          <span class="co"># Alias for .&lt;cmd&gt;</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># executes the `iz` rizin command and redirects the output to the external command `grep "hello"`</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> iz <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"hello"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> iz <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"hello"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="temporary-modifiers" class="level3" data-number="8.0.3">
 <h3 data-number="8.0.3" class="anchored" data-anchor-id="temporary-modifiers"><span class="header-section-number">8.0.3</span> Temporary modifiers</h3>
 <p>When utilizing the Rizin command-line, users may encounter situations where they need to temporarily modify specific values or configurations before executing a command. This can be accomplished using the <code>@</code> commands.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> @<span class="pp">?</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> @<span class="pp">?</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> <span class="op">&lt;</span>@<span class="op">&gt;</span> <span class="op">&lt;</span>args<span class="op">&gt;</span> [<span class="op">&lt;</span>@<span class="op">&gt;</span> <span class="op">&lt;</span>args<span class="op">&gt;</span> ...]   <span class="co"># '@' help, temporary modifiers, applied left-to-right</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> @ <span class="op">&lt;</span>addr<span class="op">&gt;</span>             <span class="co"># Temporary seek to &lt;addr&gt;</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> @ <span class="ex">..</span><span class="op">&lt;</span>addr<span class="op">&gt;</span>           <span class="co"># Temporary partial address seek (see s..)</span></span>
@@ -1473,13 +1476,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co"># and replace the block with 00112233445566778822 hex bytes.</span></span>
 <span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> px @!10 @x:00112233445566778822</span>
 <span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> offset <span class="at">-</span>   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="ex">0x00000000</span>  0011 2233 4455 6677 8822                 ..<span class="st">"3DUfw."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="ex">0x00000000</span>  0011 2233 4455 6677 8822                 ..<span class="st">"3DUfw."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Multiple temporary commands can be used simultaneously, requiring them to be space-separated. For instance: <code>@!10 @x:0011223344 @e:cfg.bigendian=true @ 0x12345</code>.</p>
 </section>
 <section id="pipe-output-to-file" class="level3" data-number="8.0.4">
 <h3 data-number="8.0.4" class="anchored" data-anchor-id="pipe-output-to-file"><span class="header-section-number">8.0.4</span> Pipe output to file</h3>
 <p>In certain situations, users may need to save output to a file. This can be achieved by using <code>&gt;</code>, similar to how it’s done in the UNIX shell.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> <span class="op">&gt;</span><span class="pp">?</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> <span class="op">&gt;</span><span class="pp">?</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> <span class="op">&gt;</span> <span class="op">&lt;</span>arg<span class="op">&gt;</span>   <span class="co"># Redirection help ('&gt;')</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> <span class="op">&gt;</span> <span class="op">&lt;</span>file<span class="op">&gt;|&lt;</span><span class="va">$alias</span><span class="op">&gt;</span>  <span class="co"># Redirect STDOUT of &lt;cmd&gt; to &lt;file&gt; or save it to an alias (see $?)</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span> 2<span class="op">&gt;</span> <span class="op">&lt;</span>file<span class="op">&gt;|&lt;</span><span class="va">$alias</span><span class="op">&gt;</span> <span class="co"># Redirect STDERR of &lt;cmd&gt; to &lt;file&gt; or save it to an alias (see $?)</span></span>
@@ -1493,25 +1496,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> !hexdump <span class="at">-C</span> dump.bin </span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="ex">00000000</span>  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  <span class="kw">|</span><span class="ex">................</span><span class="kw">|</span></span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="ex">00000080</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="ex">00000080</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="executing-multiple-commands-on-a-single-line" class="level3" data-number="8.0.5">
 <h3 data-number="8.0.5" class="anchored" data-anchor-id="executing-multiple-commands-on-a-single-line"><span class="header-section-number">8.0.5</span> Executing multiple commands on a single line</h3>
 <p>The Rizin command line employs the <code>;</code> character to separate commands, enabling the execution of multiple commands in a single line.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> px 20 <span class="kw">;</span> <span class="ex">pd</span> 3 <span class="kw">;</span> <span class="ex">px</span> 40</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> px 20 <span class="kw">;</span> <span class="ex">pd</span> 3 <span class="kw">;</span> <span class="ex">px</span> 40</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="repeat-a-command-n-times" class="level3" data-number="8.0.6">
 <h3 data-number="8.0.6" class="anchored" data-anchor-id="repeat-a-command-n-times"><span class="header-section-number">8.0.6</span> Repeat a command n-times</h3>
 <p>It is possible to execute a command repeatedly, by prepending the command with a numerical value:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># executes `px`</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># executes `px`</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> px</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># executes `px` 3 times</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> 3 px</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> 3 px</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="filtering-grep-output-lines" class="level3" data-number="8.0.7">
 <h3 data-number="8.0.7" class="anchored" data-anchor-id="filtering-grep-output-lines"><span class="header-section-number">8.0.7</span> Filtering (grep) output lines</h3>
 <p>Filtering the output of an Rizin command is possible with any shell program that reads from stdin, such as <code>grep</code>, <code>less</code>, or <code>wc</code>, by utilizing the <code>|</code> pipe command. However, if spawning external processes is not desirable, possible, or the target system lacks essential UNIX tools (as is the case for Windows or embedded systems), you can also employ the built-in grep (<code>~</code>).</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> ~<span class="pp">?</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> ~<span class="pp">?</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> <span class="op">&lt;</span>command<span class="op">&gt;</span>~<span class="pp">[</span><span class="ss">modifier</span><span class="pp">][</span><span class="ss">word,word</span><span class="pp">][</span><span class="ss">endmodifier</span><span class="pp">]</span>[<span class="pp">[</span><span class="ss">column</span><span class="pp">]</span>]<span class="pp">[</span><span class="ss">:line</span><span class="pp">]</span>   <span class="co"># Internal grep help ('~')</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Modifiers:</span></span>
@@ -1552,9 +1555,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">i~:2..5</span>  <span class="co"># Show three lines of 'i' output starting from 2nd line</span></span>
 <span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">pd~mov</span>   <span class="co"># Disasm and grep for mov</span></span>
 <span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">pi~[0]</span>   <span class="co"># Show only opcode</span></span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">i~0x400$</span> <span class="co"># Show lines ending with 0x400</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">i~0x400$</span> <span class="co"># Show lines ending with 0x400</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Moreover, you can employ grep for either columns (using <code>[n]</code>) or rows (using <code>:n</code>). For instance:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get first row</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get first row</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> pd 20~call:0 </span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># get second row</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> pd 20~call:1 </span>
@@ -1564,7 +1567,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> pd 20~call<span class="pp">[</span><span class="ss">1</span><span class="pp">]</span></span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively, you can combine them.</span></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># This filters the first column of the first row matching 'call'.</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> pd 20~call:0<span class="pp">[</span><span class="ss">0</span><span class="pp">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> pd 20~call:0<span class="pp">[</span><span class="ss">0</span><span class="pp">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The internal grep function is a crucial feature for scripting in Rizin.</p>
 </section>
 <section id="iterators-and-loops" class="level3" data-number="8.0.8">
@@ -1574,11 +1577,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="examples-of-shell-usage." class="level3" data-number="8.0.9">
 <h3 data-number="8.0.9" class="anchored" data-anchor-id="examples-of-shell-usage."><span class="header-section-number">8.0.9</span> Examples of shell usage.</h3>
 <p>Here are a few examples of shell usage:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> ds                    <span class="co"># call the debugger's 'step' command</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> ds                    <span class="co"># call the debugger's 'step' command</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> px 200 @ esp          <span class="co"># show 200 hex bytes at esp</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> pc <span class="op">&gt;</span> file.c           <span class="co"># dump buffer as a C byte array to file.c</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> wx 90 @@is            <span class="co"># write a nop on every symbol</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> pd 2000 <span class="kw">|</span> <span class="fu">grep</span> eax    <span class="co"># grep opcodes that use the 'eax' register</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> pd 2000 <span class="kw">|</span> <span class="fu">grep</span> eax    <span class="co"># grep opcodes that use the 'eax' register</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The <code>@</code> character is used to specify a temporary offset at which the command to its left will be executed. The original seek position in a file is then restored.</p>
 <p>For example, <code>pd 5 @ 0x100000fce</code> to disassemble 5 instructions at address 0x100000fce.</p>
 <p>Most of the commands offer autocompletion support using <code>&lt;TAB&gt;</code> key, for example <code>s</code>eek or <code>f</code>lags commands. It offers autocompletion using all possible values, taking flag names in this case. Note that it is possible to see the history of the commands using the <code>!~...</code> command - it offers a visual mode to scroll through the rizin command history.</p>
@@ -1652,13 +1655,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

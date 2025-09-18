@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -70,18 +70,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../src/configuration/colors.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9582434199d49cc9e91654cdeeb4866b.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8dcd8563ea6803ab7cbb3d71ca5772e1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9582434199d49cc9e91654cdeeb4866b.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-a6e161b2431e1f94a14e0f5d32135a3c.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-4a17e18fdf56099d4f6da1e105f33a53.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-a6e161b2431e1f94a14e0f5d32135a3c.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-783de0924377d50fcac49befecea2652.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-2995d1a47e04461c732ae7f7a37853d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-783de0924377d50fcac49befecea2652.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a49a3c03e9fe45d5688ec34d82a808cd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7bab72d3478b66a849edd5df9ed30138.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-a49a3c03e9fe45d5688ec34d82a808cd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -297,7 +298,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -1430,7 +1433,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Below you can find a compilation of the most frequently used configuration variables.</p>
 <p>Utilize the <code>el</code> command to list all the evaluable variables in Rizin. If the output is extensive, you can narrow it down by combining it with the internal grep <code>~</code> to filter for specific information or by appending the sub-space after the command, such as <code>el cfg</code>.</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> el scr.color</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> el scr.color</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>           <span class="ex">scr.color:</span> Enable colors <span class="er">(</span><span class="ex">0:</span> none, 1: ansi, 2: 256 colors, 3: truecolor<span class="kw">)</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>      <span class="ex">scr.color.args:</span> Colorize arguments and variables of functions</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>     <span class="ex">scr.color.bytes:</span> Colorize bytes that represent the opcodes of the instruction</span>
@@ -1444,7 +1447,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ex">e</span> scr.color.grep=false</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ex">e</span> scr.color.ops=true</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ex">e</span> scr.color.pipe=false</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> e scr.color=2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> e scr.color=2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <section id="assembly-configuration" class="level2" data-number="14.1">
 <h2 data-number="14.1" class="anchored" data-anchor-id="assembly-configuration"><span class="header-section-number">14.1</span> Assembly Configuration</h2>
 <p>This section provides instructions on altering the behavior of the assembler and disassembler.</p>
@@ -1460,7 +1463,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="asm.bytes-bool" class="level3" data-number="14.1.3">
 <h3 data-number="14.1.3" class="anchored" data-anchor-id="asm.bytes-bool"><span class="header-section-number">14.1.3</span> asm.bytes: <code>bool</code></h3>
 <p>When <code>asm.bytes</code> is set to <code>true</code>, it enables the display of raw bytes of instructions. By default, it is turned off, resulting in a disassembly format like shown below. When activated, the raw bytes will be shown alongside the instructions.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># you can disable this also via `e asm.bytes=false`</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># you can disable this also via `e asm.bytes=false`</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00005fa0]</span><span class="op">&gt;</span> pd 5 @e:asm.bytes=false</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span><span class="ex">--</span> entry0:</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005fa0</span>      endbr64</span>
@@ -1475,7 +1478,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005fa4</span>      31ed           xor   ebp, ebp</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005fa6</span>      4989d1         mov   r9, rdx</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005fa9</span>      5e             pop   rsi</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005faa</span>      4889e2         mov   rdx, rsp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005faa</span>      4889e2         mov   rdx, rsp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="asm.cpu-string" class="level3" data-number="14.1.4">
 <h3 data-number="14.1.4" class="anchored" data-anchor-id="asm.cpu-string"><span class="header-section-number">14.1.4</span> asm.cpu: <code>string</code></h3>
@@ -1492,7 +1495,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="asm.fcn.size-bool" class="level3" data-number="14.1.7">
 <h3 data-number="14.1.7" class="anchored" data-anchor-id="asm.fcn.size-bool"><span class="header-section-number">14.1.7</span> asm.fcn.size: <code>bool</code></h3>
 <p>The <code>asm.fcn.size</code> variable is employed to show the size of the function in the disassembly. By default, it is set to false, and enabling it would lead to a disassembly format similar to the one below:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># you can enable this also via `e asm.fcn.size=true`</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># you can enable this also via `e asm.fcn.size=true`</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 10 @e:asm.fcn.size=true</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from entry0 @ 0x5fb8</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> 7992: int main<span class="er">(</span><span class="ex">int</span> argc, char <span class="pp">**</span>argv, char <span class="pp">**</span>envp<span class="kw">);</span></span>
@@ -1507,7 +1510,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405d</span>      push  rbx</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405e</span>      sub   rsp, 0xf8</span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004065</span>      mov   rbx, qword <span class="pp">[</span><span class="ss">rsi</span><span class="pp">]</span>                     <span class="kw">;</span> <span class="ex">argv</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov   dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, edi                <span class="kw">;</span> <span class="ex">argc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov   dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, edi                <span class="kw">;</span> <span class="ex">argc</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Here, <code>7992</code> is the size of the function.</p>
 </section>
 <section id="asm.lines.call-bool" class="level3" data-number="14.1.8">
@@ -1529,7 +1532,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="asm.pseudo-bool" class="level3" data-number="14.1.12">
 <h3 data-number="14.1.12" class="anchored" data-anchor-id="asm.pseudo-bool"><span class="header-section-number">14.1.12</span> asm.pseudo: <code>bool</code></h3>
 <p>The <code>asm.pseudo</code> configuration variable is a boolean value used to set the pseudo syntax in the disassembly. When set to <code>false</code>, it indicates a native syntax defined by the current architecture. When set to <code>true</code>, it activates a pseudocode strings format; this feature can be beneficial when disassembling obscure architectures.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># you can disable this also via `e asm.pseudo=false`</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># you can disable this also via `e asm.pseudo=false`</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00100508]</span><span class="op">&gt;</span> pd 10 @e:asm.pseudo=false</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span><span class="ex">--</span> _start:</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> entry0<span class="er">(</span><span class="ex">int64_t</span> arg_18h, int64_t arg_8h, int64_t arg_10h, int64_t arg1, int64_t arg2, int64_t arg4, int64_t arg5<span class="kw">);</span></span>
@@ -1576,7 +1579,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="st">|           0x00100524      [r1 + 0] = r0                              ; start.S:73</span></span>
 <span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="st">|           0x00100528      r8 = [r2 - 0x7ff0]                         ; start.S:77 ; 0x194c40</span></span>
 <span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="st">|                                                                      ; sym..rodata</span></span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="st">|       ,=&lt; 0x0010052c      goto 0x101048                              ; start.S:80</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="st">|       ,=&lt; 0x0010052c      goto 0x101048                              ; start.S:80</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="asm.sub.jmp-bool" class="level3" data-number="14.1.13">
 <h3 data-number="14.1.13" class="anchored" data-anchor-id="asm.sub.jmp-bool"><span class="header-section-number">14.1.13</span> asm.sub.jmp: <code>bool</code></h3>
@@ -1586,7 +1589,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="14.1.14" class="anchored" data-anchor-id="asm.sub.reg-bool"><span class="header-section-number">14.1.14</span> asm.sub.reg: <code>bool</code></h3>
 <p>asm.sub.reg Replace register names with arguments or their associated role alias.</p>
 <p>For example, if you have something like this:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 4 @e:asm.sub.reg=false</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 4 @e:asm.sub.reg=false</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from entry0 @ 0x5fb8</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from fcn.00015be0 @ 0x17078</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> int main<span class="er">(</span><span class="ex">int</span> argc, char <span class="pp">**</span>argv, char <span class="pp">**</span>envp<span class="kw">);</span></span>
@@ -1605,28 +1608,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405d</span>      push  rbx</span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405e</span>      sub   SP, 0xf8</span>
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004065</span>      mov   rbx, qword <span class="pp">[</span><span class="ss">A1</span><span class="pp">]</span>                      <span class="kw">;</span> <span class="ex">argv</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov   dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, A0                 <span class="kw">;</span> <span class="ex">argc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov   dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, A0                 <span class="kw">;</span> <span class="ex">argc</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="asm.sub.rel-bool" class="level3" data-number="14.1.15">
 <h3 data-number="14.1.15" class="anchored" data-anchor-id="asm.sub.rel-bool"><span class="header-section-number">14.1.15</span> asm.sub.rel: <code>bool</code></h3>
 <p>The <code>asm.sub.rel</code> configuration variable, when set to true, substitutes expressions relative to the Program Counter in the disassembly. When activated, it displays the references as string references.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 30 @e:asm.sub.rel=false ~lea</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 30 @e:asm.sub.rel=false ~lea</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>     <span class="kw">|||</span>   <span class="ex">0x000040bb</span>      lea   rsi, [rip + 0x15f51]                 <span class="kw">;</span> <span class="ex">str..libs</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 30 @e:asm.sub.rel=true ~lea</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>     <span class="kw">|||</span>   <span class="ex">0x000040bb</span>      lea   rsi, str..libs                       <span class="kw">;</span> <span class="ex">0x1a013</span> <span class="kw">;</span> <span class="st">"/.libs/"</span> <span class="kw">;</span> <span class="ex">const</span> char <span class="pp">*</span>s2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>     <span class="kw">|||</span>   <span class="ex">0x000040bb</span>      lea   rsi, str..libs                       <span class="kw">;</span> <span class="ex">0x1a013</span> <span class="kw">;</span> <span class="st">"/.libs/"</span> <span class="kw">;</span> <span class="ex">const</span> char <span class="pp">*</span>s2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="asm.sub.section-bool" class="level3" data-number="14.1.16">
 <h3 data-number="14.1.16" class="anchored" data-anchor-id="asm.sub.section-bool"><span class="header-section-number">14.1.16</span> asm.sub.section: <code>bool</code></h3>
 <p>The <code>asm.sub.section</code> configuration variable, when set, prefixes offsets in the disassembly with the name of the section or map.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 30 @e:asm.sub.rel=false ~lea</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 30 @e:asm.sub.rel=false ~lea</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">0x000067ea</span>      488d0def0c01.  lea rcx, <span class="pp">[</span><span class="ss">0x000174e0</span><span class="pp">]</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 30 @e:asm.sub.rel=true ~lea</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">0x000067ea</span>      488d0def0c01.  lea rcx, <span class="pp">[</span><span class="ss">fmap.LOAD1.0x000174e0</span><span class="pp">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">0x000067ea</span>      488d0def0c01.  lea rcx, <span class="pp">[</span><span class="ss">fmap.LOAD1.0x000174e0</span><span class="pp">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="asm.sub.varonly-bool" class="level3" data-number="14.1.17">
 <h3 data-number="14.1.17" class="anchored" data-anchor-id="asm.sub.varonly-bool"><span class="header-section-number">14.1.17</span> asm.sub.varonly: <code>bool</code></h3>
 <p>The <code>asm.sub.varonly</code> configuration variable, when enabled, substitutes the variable expression with the local variable name. For instance, it would display <code>var_118h</code> as <code>rsp + var_118h</code> in the disassembly.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 10 @e:asm.sub.varonly=false</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 10 @e:asm.sub.varonly=false</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from entry0 @ 0x5fb8</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from fcn.00015be0 @ 0x17078</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> int main<span class="er">(</span><span class="ex">int</span> argc, char <span class="pp">**</span>argv, char <span class="pp">**</span>envp<span class="kw">);</span></span>
@@ -1657,12 +1660,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405d</span>      push  rbx</span>
 <span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405e</span>      sub   rsp, 0xf8</span>
 <span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004065</span>      mov   rbx, qword <span class="pp">[</span><span class="ss">rsi</span><span class="pp">]</span>                     <span class="kw">;</span> <span class="ex">argv</span></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov   dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, edi                <span class="kw">;</span> <span class="ex">argc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov   dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, edi                <span class="kw">;</span> <span class="ex">argc</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="asm.syntax-string" class="level3" data-number="14.1.18">
 <h3 data-number="14.1.18" class="anchored" data-anchor-id="asm.syntax-string"><span class="header-section-number">14.1.18</span> asm.syntax: <code>string</code></h3>
 <p>The <code>asm.syntax</code> configuration variable enables you to change the syntax flavor for disassembler syntax. Supported values can be queried using <code>e asm.syntax=?</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 10 @e:asm.syntax=att</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 10 @e:asm.syntax=att</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from entry0 @ 0x5fb8</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span> <span class="ex">DATA</span> XREF from fcn.00015be0 @ 0x17078</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> int main<span class="er">(</span><span class="ex">int</span> argc, char <span class="pp">**</span>argv, char <span class="pp">**</span>envp<span class="kw">);</span></span>
@@ -1709,13 +1712,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405d</span>      push  rbx</span>
 <span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405e</span>      sub   rsp, 0xf8</span>
 <span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004065</span>      mov   rbx, qword <span class="pp">[</span><span class="ss">rsi</span><span class="pp">]</span>                     <span class="kw">;</span> <span class="ex">argv</span></span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov   dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, edi                <span class="kw">;</span> <span class="ex">argc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov   dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, edi                <span class="kw">;</span> <span class="ex">argc</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="asm.tabs-int" class="level3" data-number="14.1.19">
 <h3 data-number="14.1.19" class="anchored" data-anchor-id="asm.tabs-int"><span class="header-section-number">14.1.19</span> asm.tabs: <code>int</code></h3>
 <p>If the disassembly output doesn’t fit on your screen or appears awkwardly aligned, <code>asm.tabs</code> can be helpful. You can adjust the spacing between operands by setting the number of spaces while displaying your disassembly using this variable.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 10 @e:asm.tabs=0</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 10 @e:asm.tabs=0</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> int main<span class="er">(</span><span class="ex">int</span> argc, char <span class="pp">**</span>argv, char <span class="pp">**</span>envp<span class="kw">);</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">stack:</span> 29 <span class="er">(</span><span class="ex">vars</span> 29, args 0<span class="kw">)</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">rg:</span> 2 <span class="er">(</span><span class="ex">vars</span> 0, args 2<span class="kw">)</span></span>
@@ -1742,12 +1745,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405d</span>      push  rbx</span>
 <span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405e</span>      sub   rsp, 0xf8</span>
 <span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004065</span>      mov   rbx, qword <span class="pp">[</span><span class="ss">rsi</span><span class="pp">]</span>                     <span class="kw">;</span> <span class="ex">argv</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov   dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, edi                <span class="kw">;</span> <span class="ex">argc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov   dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, edi                <span class="kw">;</span> <span class="ex">argc</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="asm.tabs.once-bool" class="level3" data-number="14.1.20">
 <h3 data-number="14.1.20" class="anchored" data-anchor-id="asm.tabs.once-bool"><span class="header-section-number">14.1.20</span> asm.tabs.once: <code>bool</code></h3>
 <p><code>asm.tabs.once</code> represents a boolean variable, which can be configured as true if the alignment is desired solely for opcodes, omitting the arguments. This configuration is meaningful only when <code>asm.tabs</code> has been previously enabled.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 10 @e:asm.tabs=10 @e:asm.tabs.once=false</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00004050]</span><span class="op">&gt;</span> pd 10 @e:asm.tabs=10 @e:asm.tabs.once=false</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> int main<span class="er">(</span><span class="ex">int</span> argc, char <span class="pp">**</span>argv, char <span class="pp">**</span>envp<span class="kw">);</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">stack:</span> 29 <span class="er">(</span><span class="ex">vars</span> 29, args 0<span class="kw">)</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">rg:</span> 2 <span class="er">(</span><span class="ex">vars</span> 0, args 2<span class="kw">)</span></span>
@@ -1774,7 +1777,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405d</span>      push      rbx</span>
 <span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x0000405e</span>      sub       rsp, 0xf8</span>
 <span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004065</span>      mov       rbx, qword <span class="pp">[</span><span class="ss">rsi</span><span class="pp">]</span>                 <span class="kw">;</span> <span class="ex">argv</span></span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov       dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, edi            <span class="kw">;</span> <span class="ex">argc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x00004068</span>      mov       dword <span class="pp">[</span><span class="ss">var_118h</span><span class="pp">]</span>, edi            <span class="kw">;</span> <span class="ex">argc</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="asm.trace-bool" class="level3" data-number="14.1.21">
 <h3 data-number="14.1.21" class="anchored" data-anchor-id="asm.trace-bool"><span class="header-section-number">14.1.21</span> asm.trace: <code>bool</code></h3>
@@ -1827,7 +1830,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="scr.utf8.curvy-bool" class="level3" data-number="14.3.6">
 <h3 data-number="14.3.6" class="anchored" data-anchor-id="scr.utf8.curvy-bool"><span class="header-section-number">14.3.6</span> scr.utf8.curvy: <code>bool</code></h3>
 <p>The <code>scr.utf8.curvy</code> variable enables the presentation of curved corners in locations such as function graphs. It is dependent on having the <code>scr.utf8</code> setting activated.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x0000415c]</span><span class="op">&gt;</span> pd 4</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x0000415c]</span><span class="op">&gt;</span> pd 4</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>           0x0000415c      cmp   eax, 2</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>       ┌─<span class="op">&lt;</span> 0x0000415f      je    0x5001</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>       │   0x00004165      cmp   eax, 3</span>
@@ -1837,7 +1840,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>           0x0000415c      cmp   eax, 2</span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>       ╭─<span class="op">&lt;</span> 0x0000415f      je    0x5001</span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>       │   0x00004165      cmp   eax, 3</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>      ╭──<span class="op">&lt;</span> 0x00004168      jne   0x4348</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>      ╭──<span class="op">&lt;</span> 0x00004168      jne   0x4348</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="scr.wheel-bool" class="level3" data-number="14.3.7">
 <h3 data-number="14.3.7" class="anchored" data-anchor-id="scr.wheel-bool"><span class="header-section-number">14.3.7</span> scr.wheel: <code>bool</code></h3>
@@ -1857,13 +1860,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="cfg.fortunes.file-string" class="level3" data-number="14.4.3">
 <h3 data-number="14.4.3" class="anchored" data-anchor-id="cfg.fortunes.file-string"><span class="header-section-number">14.4.3</span> cfg.fortunes.file: <code>string</code></h3>
 <p>Rizin offers two categories of fortunes: <code>tips</code> and <code>fun</code>. Fortunes categorized as <code>tips</code> provide general advice to enhance your usage of Rizin, while the other category offers lighthearted jokes. You can specify the type of fortune to display by utilizing the <code>cfg.fortunes.file</code> variable.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> fortune @e:cfg.fortunes.file=tips</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> fortune @e:cfg.fortunes.file=tips</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a> <span class="ex">--</span> Interpret rizin scripts with <span class="st">'. &lt;path-to-script&gt;'</span>. Similar to the bash source alias command.</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> fortune @e:cfg.fortunes.file=fun</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">--</span> For a full list of commands see <span class="kw">`</span><span class="fu">strings</span> /dev/urandom<span class="kw">`</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Rizin additionally supports custom fortunes. You can store your own fortunes in a file and then specify the relative or absolute path to that file using the same variable. This allows your custom fortunes to be displayed at startup.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> fortune @e:cfg.fortunes.file=/path/to/my/fortunes.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> fortune @e:cfg.fortunes.file=/path/to/my/fortunes.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Ensure to include these configurations in your <code>rizinrc</code> file to retain the changes when reopening Rizin.</p>
 </section>
 <section id="cfg.newtab-bool" class="level3" data-number="14.4.4">
@@ -1885,7 +1888,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="14.7" class="anchored" data-anchor-id="cmd.repeat-bool"><span class="header-section-number">14.7</span> cmd.repeat: <code>bool</code></h2>
 <p>At times, you might find the need to execute a particular command repeatedly, and that’s where <code>cmd.repeat</code> comes into play. When configured as <code>true</code>, pressing the Return key (Enter key) will rerun the previous command. This may alter the current offset.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00005bc0]</span><span class="op">&gt;</span> e cmd.repeat=true</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00005bc0]</span><span class="op">&gt;</span> e cmd.repeat=true</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00005bc0]</span><span class="op">&gt;</span> pd 2</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span><span class="ex">--</span> entry.fini0:</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005bc0</span>      endbr64</span>
@@ -1893,7 +1896,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00005bc4]</span><span class="op">&gt;</span></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005bce</span>      cmp   qword <span class="pp">[</span><span class="ss">reloc.__cxa_finalize</span><span class="pp">]</span>, 0</span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>            <span class="ex">0x00005bd6</span>      mov   rbp, rsp</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00005bd6]</span><span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00005bd6]</span><span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>
@@ -1963,13 +1966,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

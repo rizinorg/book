@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -70,18 +70,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../src/disassembling/adding_metadata.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9582434199d49cc9e91654cdeeb4866b.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8dcd8563ea6803ab7cbb3d71ca5772e1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9582434199d49cc9e91654cdeeb4866b.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-a6e161b2431e1f94a14e0f5d32135a3c.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-4a17e18fdf56099d4f6da1e105f33a53.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-a6e161b2431e1f94a14e0f5d32135a3c.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-783de0924377d50fcac49befecea2652.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-2995d1a47e04461c732ae7f7a37853d7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-783de0924377d50fcac49befecea2652.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a49a3c03e9fe45d5688ec34d82a808cd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7bab72d3478b66a849edd5df9ed30138.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-a49a3c03e9fe45d5688ec34d82a808cd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -297,7 +298,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -1387,7 +1390,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>aoip</code> generates a <strong>prettified</strong> LISP-like syntax</li>
 </ul>
 <p>Here an example using <code>aoip</code> (the <em>prettified</em> output) of two PowerPC instructions (<code>stwu</code> and <code>mflr</code>).</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x10000488]</span><span class="op">&gt;</span> pd 2</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x10000488]</span><span class="op">&gt;</span> pd 2</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x10000488</span>      stwu  r1, <span class="at">-0x10</span><span class="er">(</span><span class="ex">r1</span><span class="kw">)</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x1000048c</span>      mflr  r0</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x10000488]</span><span class="op">&gt;</span> aoi<span class="pp">?</span></span>
@@ -1434,9 +1437,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="bu">set</span> r0</span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>  <span class="kw">(</span><span class="ex">cast</span> 32</span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">false</span></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    <span class="kw">(</span><span class="ex">var</span> lr<span class="kw">)))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    <span class="kw">(</span><span class="ex">var</span> lr<span class="kw">)))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The <code>plf</code> command allows to generate an in-line representation of the entire function in s-expressions.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x100002bc]</span><span class="op">&gt;</span> pdf @ sym.example</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x100002bc]</span><span class="op">&gt;</span> pdf @ sym.example</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/</span> sym.example<span class="er">(</span><span class="kw">);</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="kw">;</span> <span class="ex">var</span> int32_t var_1ch @ stack <span class="at">-</span> 0x1c</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x1000044c</span>      stwu  r1, <span class="at">-0x10</span><span class="er">(</span><span class="ex">r1</span><span class="kw">)</span></span>
@@ -1454,17 +1457,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="ex">0x1000045c</span> <span class="er">(</span><span class="fu">seq</span> <span class="er">(</span><span class="bu">set</span> a <span class="er">(</span><span class="ex">var</span> r1<span class="kw">))</span> <span class="kw">(</span><span class="bu">set</span> b <span class="er">(</span><span class="bu">let</span> <span class="va">v</span> <span class="er">(</span><span class="ex">bv</span> 16 0x10<span class="kw">)</span> <span class="kw">(</span><span class="ex">ite</span> <span class="er">(</span><span class="ex">msb</span> <span class="er">(</span><span class="ex">var</span> v<span class="kw">))</span> <span class="kw">(</span><span class="ex">cast</span> 32 <span class="er">(</span><span class="ex">msb</span> <span class="er">(</span><span class="ex">var</span> v<span class="kw">))</span> <span class="kw">(</span><span class="ex">var</span> v<span class="kw">))</span> <span class="kw">(</span><span class="ex">cast</span> 32 false <span class="er">(</span><span class="ex">var</span> v<span class="kw">)))))</span> <span class="ex">empty</span> <span class="er">(</span><span class="bu">set</span> r1 <span class="er">(</span><span class="ex">+</span> <span class="er">(</span><span class="ex">var</span> a<span class="kw">)</span> <span class="kw">(</span><span class="ex">var</span> b<span class="kw">)))</span> <span class="ex">empty</span> empty empty<span class="kw">)</span></span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="ex">0x10000460</span> <span class="er">(</span><span class="bu">set</span> lr <span class="er">(</span><span class="ex">cast</span> 32 false <span class="er">(</span><span class="ex">var</span> r0<span class="kw">)))</span></span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="ex">0x10000464</span> <span class="er">(</span><span class="fu">seq</span> <span class="er">(</span><span class="bu">set</span> CIA <span class="er">(</span><span class="ex">bv</span> 32 0x10000464<span class="kw">))</span> <span class="ex">empty</span> empty <span class="er">(</span><span class="bu">set</span> NIA <span class="er">(</span><span class="kw">&amp;</span> <span class="kw">(</span><span class="ex">bv</span> 32 0xfffffffc<span class="kw">)</span> <span class="kw">(</span><span class="ex">var</span> lr<span class="kw">)))</span> <span class="kw">(</span><span class="ex">jmp</span> <span class="er">(</span><span class="ex">var</span> NIA<span class="kw">)))</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x100002bc]</span><span class="op">&gt;</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x100002bc]</span><span class="op">&gt;</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The same output of <code>aoi</code> can be obtained via <code>rz-asm</code> like this:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-asm <span class="at">-de</span> <span class="at">-a</span> ppc 7c0802a6</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-asm <span class="at">-de</span> <span class="at">-a</span> ppc 7c0802a6</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mflr</span> r0</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-asm <span class="at">-Ie</span> <span class="at">-a</span> ppc 7c0802a6</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="bu">set</span> r0 <span class="er">(</span><span class="ex">cast</span> 32 false <span class="er">(</span><span class="ex">var</span> lr<span class="kw">)))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="bu">set</span> r0 <span class="er">(</span><span class="ex">cast</span> 32 false <span class="er">(</span><span class="ex">var</span> lr<span class="kw">)))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="emulation" class="level2" data-number="45.2">
 <h2 data-number="45.2" class="anchored" data-anchor-id="emulation"><span class="header-section-number">45.2</span> Emulation</h2>
 <p>Rizin enables instruction emulation by leveraging RzIL. The emulation can be used to record changes within the VM, like read and writes of registers and memory locations (<code>e io.buffers=true</code> is required for memory ops). The emulation is controlled via the <code>aez</code> commands.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> aez<span class="pp">?</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> aez<span class="pp">?</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> aez<span class="op">&lt;</span>isv<span class="pp">?</span><span class="op">&gt;</span>   <span class="co"># RzIL Emulation</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">aezi</span>                     <span class="co"># Initialize the RzIL Virtual Machine at the current offset</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">aezs</span> [<span class="op">&lt;</span>n_times<span class="op">&gt;</span>]         <span class="co"># Step N instructions within the RzIL Virtual Machine</span></span>
@@ -1472,37 +1475,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">write</span><span class="er">)</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">aezsu</span> <span class="op">&lt;</span>address<span class="op">&gt;</span>          <span class="co"># Step until PC equals given address</span></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">aezsue</span> <span class="op">&lt;</span>address<span class="op">&gt;</span>         <span class="co"># Step until PC equals given address and output VM changes (read &amp; write)</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="va">aezv</span><span class="op">[</span>jqt<span class="op">]</span> <span class="ex">[</span><span class="op">&lt;</span>var_name<span class="op">&gt;</span> [<span class="op">&lt;</span>number<span class="op">&gt;</span>]] <span class="co"># Print or modify the current status of the RzIL Virtual Machine</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="va">aezv</span><span class="op">[</span>jqt<span class="op">]</span> <span class="ex">[</span><span class="op">&lt;</span>var_name<span class="op">&gt;</span> [<span class="op">&lt;</span>number<span class="op">&gt;</span>]] <span class="co"># Print or modify the current status of the RzIL Virtual Machine</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Supported architectures can be inspected via the <code>La</code> command. If the architecture has an <code>I</code>, as in the example below, it supports RzIL.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">_dAeI</span> 32 64      ppc         BSD     Capstone PowerPC disassembler</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">_dAeI</span> 32 64      ppc         BSD     Capstone PowerPC disassembler</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Here is an example of emulation of a PowerPC binary printing a string via <em>printf</em>.</p>
 <p>In this example, <code>r9</code> contains the base address which is used to calculate the pointer to the string (stored in <code>r3</code>) used by ‘reloc.printf’.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x1000049c]</span><span class="op">&gt;</span> pd 3</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x1000049c]</span><span class="op">&gt;</span> pd 3</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x1000049c</span>      lis   r9, 0x1000</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x100004a0</span>      addi  r3, r9, 0x640</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x100004a4</span>      bl    reloc.printf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>           <span class="ex">0x100004a4</span>      bl    reloc.printf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>First we need to initialize the RzIL Virtual Machine at the current offset using <code>aezi</code></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x1000049c]</span><span class="op">&gt;</span> aezi<span class="pp">?</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x1000049c]</span><span class="op">&gt;</span> aezi<span class="pp">?</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> aezi   <span class="co"># Initialize the RzIL Virtual Machine at the current offset</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x1000049c]</span><span class="op">&gt;</span> aezi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x1000049c]</span><span class="op">&gt;</span> aezi</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Then we execute 2 instructions via <code>aezs</code> (quiet) or use <code>aezse</code> to see the actual changes within the RzIL VM.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x1000049c]</span><span class="op">&gt;</span> aezse<span class="pp">?</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x1000049c]</span><span class="op">&gt;</span> aezse<span class="pp">?</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> aezse<span class="pp">[</span><span class="ss">j</span><span class="pp">]</span> [<span class="op">&lt;</span>n_times<span class="op">&gt;</span>]   <span class="co"># Step N instructions within the RzIL VM and output VM changes (read &amp; write)</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x1000049c]</span><span class="op">&gt;</span> aezse 2 <span class="co"># execute 2 instructions</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pc_write</span><span class="er">(</span><span class="ex">old:</span> 0x1000049c, new: 0x100004a0<span class="kw">)</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">var_write</span><span class="er">(</span><span class="ex">name:</span> r9, old: 0x0, new: 0x10000000<span class="kw">)</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="ex">pc_write</span><span class="er">(</span><span class="ex">old:</span> 0x100004a0, new: 0x100004a4<span class="kw">)</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">var_write</span><span class="er">(</span><span class="ex">name:</span> r3, old: 0x0, new: 0x10000640<span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">var_write</span><span class="er">(</span><span class="ex">name:</span> r3, old: 0x0, new: 0x10000640<span class="kw">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>It’s possible to see (or modify) the values of the registers in the RzIL VM via <code>aezv</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x1000049c]</span><span class="op">&gt;</span> <span class="co"># We can also print the content of the RzIL VM via 'aezv'</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x1000049c]</span><span class="op">&gt;</span> <span class="co"># We can also print the content of the RzIL VM via 'aezv'</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x1000049c]</span><span class="op">&gt;</span> aezv<span class="pp">?</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> aezv<span class="pp">[</span><span class="ss">jqt</span><span class="pp">]</span> [<span class="op">&lt;</span>var_name<span class="op">&gt;</span> [<span class="op">&lt;</span>number<span class="op">&gt;</span>]]   <span class="co"># Print or modify the current status of the RzIL Virtual Machine</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x1000049c]</span><span class="op">&gt;</span> aezv r3</span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">r3:</span> 0x10000640</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x1000049c]</span><span class="op">&gt;</span> aezv r9</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">r9:</span> 0x10000000</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">r9:</span> 0x10000000</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Now that we know that the string is situated at <code>0x10000640</code>, we can print it.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x1000049c]</span><span class="op">&gt;</span> <span class="co"># hexdump the content of address 0x10000640 with a buffer size of 0x20 bytes.</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x1000049c]</span><span class="op">&gt;</span> <span class="co"># hexdump the content of address 0x10000640 with a buffer size of 0x20 bytes.</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x1000049c]</span><span class="op">&gt;</span> px @ 0x10000640 @! 0x20</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> offset <span class="at">-</span>   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">0x10000640</span>  5369 6d70 6c65 2050 5043 2070 726f 6772  Simple PPC progr</span>
@@ -1511,7 +1514,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x1000049c]</span><span class="op">&gt;</span> <span class="co"># Decode and print the utf-8 string at address 0x10000640</span></span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x1000049c]</span><span class="op">&gt;</span> ps @ 0x10000640</span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Simple</span> PPC program.</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x1000049c]</span><span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x1000049c]</span><span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>
@@ -1581,13 +1584,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
