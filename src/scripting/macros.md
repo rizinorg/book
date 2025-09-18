@@ -64,7 +64,7 @@ simple scripting situations. To create a macro that takes arguments you simply a
 
 ```
 [0x00404800]> s entry0
-[0x004047d0]> (foo x y; pd $0; sd +$1)
+[0x004047d0]> (foo x y; pd ${x}; sd +${y})
 [0x004047d0]> .(foo 5 6)
 ;-- entry0:
 0x004047d0      xor ebp, ebp
@@ -74,8 +74,6 @@ simple scripting situations. To create a macro that takes arguments you simply a
 0x004047d9      and rsp, 0xfffffffffffffff0
 [0x004047d6]>
 ```
-
-As you can see, the arguments are named by index, starting from 0: $0, $1, ...
 
 To run a macro multiple times with different arguments, a convenient way is to use `..(`:
 
