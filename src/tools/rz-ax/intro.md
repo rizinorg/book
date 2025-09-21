@@ -24,12 +24,12 @@ The syntax in which the numbers are represented define the base, for example:
 * 2M : units, 2 megabytes
 * ...
 
-This is the help message of rz-ax -h, which will show you a bunch more syntaxes
+This is the help message of rz-ax -h, which will show you a bunch more syntaxes:
 
 ```bash
 $ rz-ax -h
 Usage: rz-ax [options] [expr ...]
-  =[base]                      ;  rz-ax =10 0x46 -> output in base 10
+If expr is not provided, reads from stdin
   int     ->  hex              ;  rz-ax 10
   hex     ->  int              ;  rz-ax 0xa
   -int    ->  hex              ;  rz-ax -77
@@ -48,6 +48,7 @@ Usage: rz-ax [options] [expr ...]
   hex     ->  ternary          ;  rz-ax Tx23
   raw     ->  hex              ;  rz-ax -S < /binfile
   hex     ->  raw              ;  rz-ax -s 414141
+  =base                        ;  rz-ax =10 0x46 -> output in base 10
   -l                           ;  append newline to output (for -E/-D/-r/..
   -a      show ascii table     ;  rz-ax -a
   -b      bin -> str           ;  rz-ax -b 01000101 01110110
@@ -69,7 +70,9 @@ Usage: rz-ax [options] [expr ...]
   -r      rz style output      ;  rz-ax -r 0x1234
   -s      hexstr -> raw        ;  rz-ax -s 43 4a 50
   -S      raw -> hexstr        ;  rz-ax -S < /bin/ls > ls.hex
-  -t      tstamp -> str        ;  rz-ax -t 1234567890
+  -t      Unix tstamp -> str   ;  rz-ax -t 1234567890
+  -m      MS-DOS tstamp -> str ;  rz-ax -m 1234567890
+  -W      Win32 tstamp -> str  ;  rz-ax -W 1234567890
   -x      hash string          ;  rz-ax -x linux osx
   -u      units                ;  rz-ax -u 389289238 # 317.0M
   -w      signed word          ;  rz-ax -w 16 0xffff
