@@ -9,7 +9,7 @@ This is the help message of rz-ax, this tool can be used in the command-line or 
 
 Inside Rizin, the functionality of rz-ax is available under the `%` command. For example:
 
-```
+```bash
 [0x00000000]> % 3+4
 ```
 
@@ -26,7 +26,7 @@ The syntax in which the numbers are represented define the base, for example:
 
 This is the help message of rz-ax -h, which will show you a bunch more syntaxes
 
-```
+```bash
 $ rz-ax -h
 Usage: rz-ax [options] [expr ...]
   =[base]                      ;  rz-ax =10 0x46 -> output in base 10
@@ -79,7 +79,7 @@ Usage: rz-ax [options] [expr ...]
 
 Some examples:
 
-```
+```bash
 $ rz-ax 3+0x80
 0x83
 
