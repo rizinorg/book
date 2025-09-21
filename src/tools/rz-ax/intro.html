@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -1341,7 +1376,7 @@ ul.task-list li input[type="checkbox"] {
 <p>The <code>rz-ax</code> utility comes with the Rizin framework and aims to be a minimalistic expression evaluator for the shell. It is useful for making base conversions between floating point values, hexadecimal representations, hexpair strings to ascii, octal to integer. It supports endianness and can be used as a shell if no arguments are given.</p>
 <p>This is the help message of rz-ax, this tool can be used in the command-line or interactively (reading the values from stdin), so it can be used as a multi-base calculator.</p>
 <p>Inside Rizin, the functionality of rz-ax is available under the <code>%</code> command. For example:</p>
-<pre><code>[0x00000000]&gt; % 3+4</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> % 3+4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>As you can see, the numeric expressions can contain mathematical expressions like addition, subtraction, as well as group operations with parenthesis.</p>
 <p>The syntax in which the numbers are represented define the base, for example:</p>
 <ul>
@@ -1351,92 +1386,82 @@ ul.task-list li input[type="checkbox"] {
 <li>2M : units, 2 megabytes</li>
 <li>…</li>
 </ul>
-<p>This is the help message of rz-ax -h, which will show you a bunch more syntaxes</p>
-<pre><code>$ rz-ax -h
-Usage: rz-ax [options] [expr ...]
-  =[base]                      ;  rz-ax =10 0x46 -&gt; output in base 10
-  int     -&gt;  hex              ;  rz-ax 10
-  hex     -&gt;  int              ;  rz-ax 0xa
-  -int    -&gt;  hex              ;  rz-ax -77
-  -hex    -&gt;  int              ;  rz-ax 0xffffffb3
-  int     -&gt;  bin              ;  rz-ax b30
-  int     -&gt;  ternary          ;  rz-ax t42
-  bin     -&gt;  int              ;  rz-ax 1010d
-  ternary -&gt;  int              ;  rz-ax 1010dt
-  float   -&gt;  hex              ;  rz-ax 3.33f
-  hex     -&gt;  float            ;  rz-ax Fx40551ed8
-  oct     -&gt;  hex              ;  rz-ax 35o
-  hex     -&gt;  oct              ;  rz-ax Ox12 (O is a letter)
-  bin     -&gt;  hex              ;  rz-ax 1100011b
-  hex     -&gt;  bin              ;  rz-ax Bx63
-  ternary -&gt;  hex              ;  rz-ax 212t
-  hex     -&gt;  ternary          ;  rz-ax Tx23
-  raw     -&gt;  hex              ;  rz-ax -S &lt; /binfile
-  hex     -&gt;  raw              ;  rz-ax -s 414141
-  -l                           ;  append newline to output (for -E/-D/-r/..
-  -a      show ascii table     ;  rz-ax -a
-  -b      bin -&gt; str           ;  rz-ax -b 01000101 01110110
-  -B      str -&gt; bin           ;  rz-ax -B hello
-  -d      force integer        ;  rz-ax -d 3 -&gt; 3 instead of 0x3
-  -e      swap endianness      ;  rz-ax -e 0x33
-  -D      base64 decode        ;
-  -E      base64 encode        ;
-  -f      floating point       ;  rz-ax -f 6.3+2.1
-  -F      stdin slurp code hex ;  rz-ax -F &lt; shellcode.[c/py/js]
-  -h      show this help       ;  rz-ax -h
-  -i      dump as C byte array ;  rz-ax -i &lt; bytes
-  -I      IP address &lt;-&gt; LONG  ;  rz-ax -I 3530468537
-  -k      keep base            ;  rz-ax -k 33+3 -&gt; 36
-  -L      bin -&gt; hex(bignum)   ;  rz-ax -L 111111111 # 0x1ff
-  -n      int value -&gt; hexpairs;  rz-ax -n 0x1234 # 34120000
-  -o      octalstr -&gt; raw      ;  rz-ax -o \162 \172 # rz
-  -N      binary number        ;  rz-ax -N 0x1234 # \x34\x12\x00\x00
-  -r      rz style output      ;  rz-ax -r 0x1234
-  -s      hexstr -&gt; raw        ;  rz-ax -s 43 4a 50
-  -S      raw -&gt; hexstr        ;  rz-ax -S &lt; /bin/ls &gt; ls.hex
-  -t      tstamp -&gt; str        ;  rz-ax -t 1234567890
-  -x      hash string          ;  rz-ax -x linux osx
-  -u      units                ;  rz-ax -u 389289238 # 317.0M
-  -w      signed word          ;  rz-ax -w 16 0xffff
-  -v      version              ;  rz-ax -v
-  -p      position of set bits ;  rz-ax -p 0xb3</code></pre>
+<p>This is the help message of rz-ax -h, which will show you a bunch more syntaxes:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-ax <span class="at">-h</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> rz-ax <span class="pp">[</span><span class="ss">options</span><span class="pp">]</span> [expr ...]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">If</span> expr is not provided, reads from stdin</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">int</span>     <span class="at">-</span><span class="op">&gt;</span>  hex              <span class="kw">;</span>  <span class="ex">rz-ax</span> 10</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">hex</span>     <span class="at">-</span><span class="op">&gt;</span>  int              <span class="kw">;</span>  <span class="ex">rz-ax</span> 0xa</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-int</span>    <span class="at">-</span><span class="op">&gt;</span>  hex              <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-77</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-hex</span>    <span class="at">-</span><span class="op">&gt;</span>  int              <span class="kw">;</span>  <span class="ex">rz-ax</span> 0xffffffb3</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="ex">int</span>     <span class="at">-</span><span class="op">&gt;</span>  bin              <span class="kw">;</span>  <span class="ex">rz-ax</span> b30</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="ex">int</span>     <span class="at">-</span><span class="op">&gt;</span>  ternary          <span class="kw">;</span>  <span class="ex">rz-ax</span> t42</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="ex">bin</span>     <span class="at">-</span><span class="op">&gt;</span>  int              <span class="kw">;</span>  <span class="ex">rz-ax</span> 1010d</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="ex">ternary</span> <span class="at">-</span><span class="op">&gt;</span>  int              <span class="kw">;</span>  <span class="ex">rz-ax</span> 1010dt</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="ex">float</span>   <span class="at">-</span><span class="op">&gt;</span>  hex              <span class="kw">;</span>  <span class="ex">rz-ax</span> 3.33f</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="ex">hex</span>     <span class="at">-</span><span class="op">&gt;</span>  float            <span class="kw">;</span>  <span class="ex">rz-ax</span> Fx40551ed8</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="ex">oct</span>     <span class="at">-</span><span class="op">&gt;</span>  hex              <span class="kw">;</span>  <span class="ex">rz-ax</span> 35o</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="ex">hex</span>     <span class="at">-</span><span class="op">&gt;</span>  oct              <span class="kw">;</span>  <span class="ex">rz-ax</span> Ox12 <span class="er">(</span><span class="ex">O</span> is a letter<span class="kw">)</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="ex">bin</span>     <span class="at">-</span><span class="op">&gt;</span>  hex              <span class="kw">;</span>  <span class="ex">rz-ax</span> 1100011b</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="ex">hex</span>     <span class="at">-</span><span class="op">&gt;</span>  bin              <span class="kw">;</span>  <span class="ex">rz-ax</span> Bx63</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="ex">ternary</span> <span class="at">-</span><span class="op">&gt;</span>  hex              <span class="kw">;</span>  <span class="ex">rz-ax</span> 212t</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="ex">hex</span>     <span class="at">-</span><span class="op">&gt;</span>  ternary          <span class="kw">;</span>  <span class="ex">rz-ax</span> Tx23</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="ex">raw</span>     <span class="at">-</span><span class="op">&gt;</span>  hex              <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-S</span> <span class="op">&lt;</span> /binfile</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="ex">hex</span>     <span class="at">-</span><span class="op">&gt;</span>  raw              <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-s</span> 414141</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="ex">=base</span>                        <span class="kw">;</span>  <span class="ex">rz-ax</span> =10 0x46 <span class="at">-</span><span class="op">&gt;</span> output in base 10</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-l</span>                           <span class="kw">;</span>  <span class="ex">append</span> newline to output <span class="er">(</span><span class="cf">for</span> <span class="ex">-E/-D/-r/..</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-a</span>      show ascii table     <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-a</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-b</span>      bin <span class="at">-</span><span class="op">&gt;</span> str           <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-b</span> 01000101 01110110</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-B</span>      str <span class="at">-</span><span class="op">&gt;</span> bin           <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-B</span> hello</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-d</span>      force integer        <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-d</span> 3 <span class="at">-</span><span class="op">&gt;</span> 3 instead of 0x3</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-e</span>      swap endianness      <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-e</span> 0x33</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-D</span>      base64 decode        <span class="kw">;</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-E</span>      base64 encode        <span class="kw">;</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-f</span>      floating point       <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-f</span> 6.3+2.1</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-F</span>      stdin slurp code hex <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-F</span> <span class="op">&lt;</span> shellcode.<span class="pp">[</span><span class="ss">c/py/js</span><span class="pp">]</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-h</span>      show this help       <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-h</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-i</span>      dump as C byte array <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-i</span> <span class="op">&lt;</span> bytes</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-I</span>      IP address <span class="op">&lt;</span>-<span class="op">&gt;</span> LONG  <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-I</span> 3530468537</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-k</span>      keep base            <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-k</span> 33+3 <span class="at">-</span><span class="op">&gt;</span> 36</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-L</span>      bin <span class="at">-</span><span class="op">&gt;</span> hex<span class="er">(</span><span class="ex">bignum</span><span class="kw">)</span>   <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-L</span> 111111111 <span class="co"># 0x1ff</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-n</span>      int value <span class="at">-</span><span class="op">&gt;</span> hexpairs<span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-n</span> 0x1234 <span class="co"># 34120000</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-o</span>      octalstr <span class="at">-</span><span class="op">&gt;</span> raw      <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-o</span> <span class="dt">\1</span>62 <span class="dt">\1</span>72 <span class="co"># rz</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-N</span>      binary number        <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-N</span> 0x1234 <span class="co"># \x34\x12\x00\x00</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-r</span>      rz style output      <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-r</span> 0x1234</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-s</span>      hexstr <span class="at">-</span><span class="op">&gt;</span> raw        <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-s</span> 43 4a 50</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-S</span>      raw <span class="at">-</span><span class="op">&gt;</span> hexstr        <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-S</span> <span class="op">&lt;</span> /bin/ls <span class="op">&gt;</span> ls.hex</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-t</span>      Unix tstamp <span class="at">-</span><span class="op">&gt;</span> str   <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-t</span> 1234567890</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-m</span>      MS-DOS tstamp <span class="at">-</span><span class="op">&gt;</span> str <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-m</span> 1234567890</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-W</span>      Win32 tstamp <span class="at">-</span><span class="op">&gt;</span> str  <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-W</span> 1234567890</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-x</span>      hash string          <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-x</span> linux osx</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-u</span>      units                <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-u</span> 389289238 <span class="co"># 317.0M</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-w</span>      signed word          <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-w</span> 16 0xffff</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-v</span>      version              <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-v</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-p</span>      position of set bits <span class="kw">;</span>  <span class="ex">rz-ax</span> <span class="at">-p</span> 0xb3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Some examples:</p>
-<pre><code>$ rz-ax 3+0x80
-0x83
-
-$ rz-ax 0x80+3
-131
-
-$ echo 0x80+3 | rz-ax
-131
-
-$ rz-ax -s 4142
-AB
-
-$ rz-ax -S AB
-4142
-
-$ rz-ax -S &lt; bin.foo
-...
-
-$ rz-ax -e 33
-0x21000000
-
-$ rz-ax -e 0x21000000
-33
-
-$ rz-ax -K 90203010
-+--[0x10302090]---+
-|Eo. .            |
-| . . . .         |
-|      o          |
-|       .         |
-|        S        |
-|                 |
-|                 |
-|                 |
-|                 |
-+-----------------+</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-ax 3+0x80</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">0x83</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-ax 0x80+3</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">131</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> echo 0x80+3 <span class="kw">|</span> <span class="ex">rz-ax</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">131</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-ax <span class="at">-s</span> 4142</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="ex">AB</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-ax <span class="at">-S</span> AB</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="ex">4142</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-ax <span class="at">-S</span> <span class="op">&lt;</span> bin.foo</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-ax <span class="at">-e</span> 33</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="ex">0x21000000</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-ax <span class="at">-e</span> 0x21000000</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="ex">33</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 
