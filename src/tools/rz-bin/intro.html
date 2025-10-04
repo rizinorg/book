@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.24">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -40,9 +75,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-a6e161b2431e1f94a14e0f5d32135a3c.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-4a17e18fdf56099d4f6da1e105f33a53.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-a6e161b2431e1f94a14e0f5d32135a3c.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-969ddfa49e00a70eb3423444dbc81f6c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../site_libs/bootstrap/bootstrap-c5419881dab4e107af3db64d356923aa.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -1339,82 +1374,80 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>Rz-bin is a powerful tool to handle binaries, to get information on imports, sections, headers and other data. It can present this information in several formats accepted by other tools, including Rizin itself. rz-bin understands many file formats: Java CLASS, ELF, PE, Mach-O or any format supported by plugins, and it is able to obtain symbol import/exports, library dependencies, strings of data sections, xrefs, entrypoint address, sections, architecture type.</p>
-<pre><code>$ rz-bin -h
-Usage: rz-bin [-AcdeEghHiIjlLMqrRsSUvVxzZ] [-@ at] [-a arch] [-b bits] [-B addr]
-              [-C F:C:D] [-f str] [-m addr] [-n str] [-N m:M] [-P pdb]
-              [-o str] [-O str] [-k query] [-D lang symname] file
- -@ [addr]       Show section, symbol, or import at the given address
- -A              List sub-binaries and their arch-bits pairs
- -a [arch]       Set arch (x86, arm, .. or &lt;arch&gt;_&lt;bits&gt;)
- -b [bits]       Set bits (32, 64 ...)
- -B [addr]       Override base address (pie bins)
- -c              List classes
- -cc             List classes in header format
- -C [fmt:C:D]    Create [elf,mach0,pe] with Code and Data hexpairs (see -a)
- -d              Show debug/dwarf information
- -dd             Load debug/dwarf information from debuginfod server
- -D lang name    Demangle symbol name (-D all for bin.demangle=true)z
- -e              Entrypoint
- -ee             Constructor/destructor entrypoints
- -E              Globally exportable symbols
- -f [str]        Select sub-bin named str
- -F [binfmt]     Force to use that bin plugin (ignore header check)
- -g              Same as -SMZIHVResizcld -SS -SSS -ee (show all info)
- -G [addr]       Load address . offset to header
- -h              Show this help
- -H              Header fields
- -i              Import (symbols imported from libraries)
- -I              Binary info
- -j              Output in JSON
- -k [sdb-query]  Run sdb query. for example: '*'
- -K [algo]       Calculate checksums (md5, sha1, ..)
- -l              Linked libraries
- -L [plugin]     List supported bin plugins or plugin details
- -m [addr]       Show source line at addr
- -M              Main (show address of main symbol)
- -n [str]        Show section, symbol or import named str
- -N [min:max]    Force min:max number of chars per string (see -z and -zz)
- -o [str]        Output file/folder for write operations (out by default)
- -O [str]        Write/extract operations (-O help)
- -p              Show physical addresses
- -P              Show debug/pdb information
- -PP             Download pdb file for binary
- -q              Quiet mode, just show fewer data
- -qq             Show less info (no offset/size for -z for ex.)
- -Q              Show load address used by dlopen (non-aslr libs)
- -r              Show output in rizin format
- -R              Show relocations
- -s              Symbols
- -S              Sections
- -SS             Segments
- -SSS            Sections mapping to segments
- -T              Display file signature
- -u              Unfiltered (no rename duplicated symbols/sections)
- -U              Resources
- -v              Show version information
- -V              Show binary version information
- -w              Display try/catch blocks
- -x              Extract bins contained in file
- -X [fmt] [f] .. Package in fat or zip the given files and bins contained in file
- -Y [fw file]    Calculate all the possibles base address candidates of a firmware bin
- -z              Show strings (from data section)
- -zz             Show strings (from raw strings from bin)
- -zzz            Dump raw strings to stdout (for huge files)
- -Z              Guess size of binary program
-Environment:
- RZ_BIN_CODESIGN_VERBOSE:                               # make code signatures verbose
- RZ_BIN_DEBASE64:         e bin.debase64                # try to debase64 all strings
- RZ_BIN_DEBUGINFOD_URLS:  e bin.dbginfo.debuginfod_urls # use alternative debuginfod server
- RZ_BIN_DEMANGLE=0:       e bin.demangle                # do not demangle symbols
- RZ_BIN_LANG:             e bin.lang                    # assume lang for demangling
- RZ_BIN_MAXSTRBUF:        e str.search.buffer_size      # specify maximum buffer size
- RZ_BIN_PDBSERVER:        e pdb.server                  # use alternative PDB server
- RZ_BIN_PREFIX:           e bin.prefix                  # prefix symbols/sections/relocs with a specific string
- RZ_BIN_STRFILTER:        e bin.str.filter              # rizin -qc 'e bin.str.filter=??' -
- RZ_BIN_STRPURGE:         e bin.str.purge               # try to purge false positives
- RZ_BIN_SYMSTORE:         e pdb.symstore                # path to downstream PDB symbol store
- RZ_CONFIG:                                             # config file
- RZ_NOPLUGINS:                                          # do not load plugins</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-bin <span class="at">-h</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> rz-bin <span class="pp">[-</span><span class="ss">AcdeEghHiIjlLMqrRsSUvVxzZ</span><span class="pp">]</span> [-@ at] [-a arch] [-b bits] [-B addr]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>              <span class="ex">[-C</span> F:C:D] [-f str] [-m addr] [-n str] [-N m:M] [-P pdb]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>              <span class="ex">[-o</span> str] [-O str] [-k query] [-D lang symname] file</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">-@</span> addr      Show section, symbol, or import at the given address</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> <span class="ex">-A</span>           List sub-binaries and their arch-bits pairs</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">-a</span> arch      Set arch <span class="er">(</span><span class="ex">x86,</span> arm, .. or <span class="op">&lt;</span>arch<span class="op">&gt;</span>_<span class="op">&lt;</span>bits<span class="op">&gt;</span><span class="kw">)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">-b</span> bits      Set bits <span class="er">(</span><span class="ex">32,</span> 64 ...<span class="kw">)</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a> <span class="ex">-B</span> addr      Override base address <span class="er">(</span><span class="ex">pie</span> bins<span class="kw">)</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a> <span class="ex">-c</span>           List classes</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a> <span class="ex">-cc</span>          List classes in header format</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a> <span class="ex">-C</span> fmt:C:D   Create <span class="pp">[</span><span class="ss">elf,mach0,pe</span><span class="pp">]</span> with Code and Data hexpairs <span class="er">(</span><span class="ex">see</span> <span class="at">-a</span><span class="kw">)</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a> <span class="ex">-d</span>           Show debug/dwarf information</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a> <span class="ex">-dd</span>          Load debug/dwarf information from debuginfod server</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a> <span class="ex">-D</span> lang name Demangle symbol name <span class="er">(</span><span class="ex">-D</span> all for bin.demangle=true<span class="kw">)</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a> <span class="ex">-e</span>           Entrypoint</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a> <span class="ex">-ee</span>          Constructor/destructor entrypoints</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a> <span class="ex">-E</span>           Globally exportable symbols</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a> <span class="ex">-f</span> mach      Select sub-binary for the machine <span class="pp">[</span><span class="ss">mach</span><span class="pp">]</span>.</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a> <span class="ex">-F</span> binfmt    Force to use that bin plugin <span class="er">(</span><span class="ex">ignore</span> header check<span class="kw">)</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a> <span class="ex">-g</span>           Same as <span class="at">-SMZIHVResizcld</span> <span class="at">-SS</span> <span class="at">-SSS</span> <span class="at">-ee</span> <span class="er">(</span><span class="ex">show</span> all info<span class="kw">)</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a> <span class="ex">-G</span> addr      Load address . offset to header</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a> <span class="ex">-h</span>           Show this help</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a> <span class="ex">-H</span>           Header fields</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a> <span class="ex">-i</span>           Import <span class="er">(</span><span class="ex">symbols</span> imported from libraries<span class="kw">)</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a> <span class="ex">-I</span>           Binary info</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a> <span class="ex">-j</span>           Output in JSON</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a> <span class="ex">-k</span> sdb-query Run sdb query. for example: <span class="st">'*'</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a> <span class="ex">-K</span> algo      Calculate checksums <span class="er">(</span><span class="ex">md5,</span> sha1, ..<span class="kw">)</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a> <span class="ex">-l</span>           Linked libraries</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a> <span class="ex">-L</span> <span class="pp">[</span><span class="ss">plugin</span><span class="pp">]</span>  List supported bin plugins or plugin details</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a> <span class="ex">-m</span> addr      Show source line at addr</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a> <span class="ex">-M</span>           Main <span class="er">(</span><span class="ex">show</span> address of main symbol<span class="kw">)</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a> <span class="ex">-n</span> str       Show section, symbol or import named str</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a> <span class="ex">-N</span> min:max   Force min:max number of chars per string <span class="er">(</span><span class="ex">see</span> <span class="at">-z</span> and <span class="at">-zz</span><span class="kw">)</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a> <span class="ex">-o</span> str       Output file/folder for write operations <span class="er">(</span><span class="ex">out</span> by default<span class="kw">)</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a> <span class="ex">-O</span> str       Write/extract operations <span class="er">(</span><span class="ex">-O</span> help<span class="kw">)</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a> <span class="ex">-p</span>           Show physical addresses</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a> <span class="ex">-P</span>           Show debug/pdb information</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a> <span class="ex">-PP</span>          Download pdb file for binary</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a> <span class="ex">-q</span>           Quiet mode, just show fewer data</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a> <span class="ex">-qq</span>          Show less info <span class="er">(</span><span class="ex">no</span> offset/size for <span class="at">-z</span> for ex.<span class="kw">)</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a> <span class="ex">-Q</span>           Show load address used by dlopen <span class="er">(</span><span class="ex">non-aslr</span> libs<span class="kw">)</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a> <span class="ex">-r</span>           Show output in rizin format</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a> <span class="ex">-R</span>           Show relocations</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a> <span class="ex">-s</span>           Symbols</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a> <span class="ex">-S</span>           Sections</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a> <span class="ex">-SS</span>          Segments</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a> <span class="ex">-SSS</span>         Sections mapping to segments</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a> <span class="ex">-T</span>           Display file signature</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a> <span class="ex">-u</span>           Unfiltered <span class="er">(</span><span class="ex">no</span> rename duplicated symbols/sections<span class="kw">)</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a> <span class="ex">-U</span>           Resources</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a> <span class="ex">-v</span>           Show version information</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a> <span class="ex">-V</span>           Show binary version information</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a> <span class="ex">-w</span>           Display try/catch blocks</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a> <span class="ex">-x</span>           Extract bins contained in file</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a> <span class="ex">-Y</span>           Calculate all the possibles base address candidates of a firmware bin</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a> <span class="ex">-z</span>           Show strings <span class="er">(</span><span class="ex">from</span> data section<span class="kw">)</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a> <span class="ex">-zz</span>          Show strings <span class="er">(</span><span class="ex">from</span> raw strings from bin<span class="kw">)</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a> <span class="ex">-zzz</span>         Dump raw strings to stdout <span class="er">(</span><span class="cf">for</span> huge <span class="ex">files</span><span class="kw">)</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a> <span class="ex">-Z</span>           Guess size of binary program</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="ex">Environment:</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a> <span class="ex">RZ_BIN_CODESIGN_VERBOSE:</span>                               <span class="co"># make code signatures verbose</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a> <span class="ex">RZ_BIN_DEBUGINFOD_URLS:</span>  e bin.dbginfo.debuginfod_urls <span class="co"># use alternative debuginfod server</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a> <span class="va">RZ_BIN_DEMANGLE</span><span class="op">=</span>0:       <span class="ex">e</span> bin.demangle                <span class="co"># do not demangle symbols</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a> <span class="ex">RZ_BIN_LANG:</span>             e bin.lang                    <span class="co"># assume lang for demangling</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a> <span class="ex">RZ_BIN_MAXSTRBUF:</span>        e search.str.max_length       <span class="co"># specify maximum buffer size</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a> <span class="ex">RZ_BIN_PDBSERVER:</span>        e pdb.server                  <span class="co"># use alternative PDB server</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a> <span class="ex">RZ_BIN_PREFIX:</span>           e bin.prefix                  <span class="co"># prefix symbols/sections/relocs with a specific string</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a> <span class="ex">RZ_BIN_STRFILTER:</span>        e bin.str.filter              <span class="co"># rizin -qc 'e bin.str.filter=??' -</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a> <span class="ex">RZ_BIN_STRPURGE:</span>         e bin.str.purge               <span class="co"># try to purge false positives</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a> <span class="ex">RZ_BIN_SYMSTORE:</span>         e pdb.symstore                <span class="co"># path to downstream PDB symbol store</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a> <span class="ex">RZ_CONFIG:</span>                                             <span class="co"># config file</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a> <span class="ex">RZ_NOPLUGINS:</span>                                          <span class="co"># do not load plugins</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 
