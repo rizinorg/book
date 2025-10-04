@@ -6,7 +6,7 @@ rz-bin understands many file formats: Java CLASS, ELF, PE, Mach-O or any format 
 and it is able to obtain symbol import/exports, library dependencies, strings of data sections, xrefs,
 entrypoint address, sections, architecture type.
 
-```
+```bash
 $ rz-bin -h
 Usage: rz-bin [-AcdeEghHiIjlLMqrRsSUvVxzZ] [-@ at] [-a arch] [-b bits] [-B addr]
               [-C F:C:D] [-f str] [-m addr] [-n str] [-N m:M] [-P pdb]
