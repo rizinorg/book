@@ -2,7 +2,7 @@
 
 `rz-diff` is a tool designed to compare binary files, similar to how regular `diff` compares text files.
 
-```
+```bash
 $ rz-diff -h
 Usage: rz-diff [options] <file0> <file1>
  -a [arch] Specify architecture plugin to use (x86, arm, ..)
