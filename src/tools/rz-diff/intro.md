@@ -8,7 +8,7 @@ Usage: rz-diff [options] <file0> <file1>
  -a arch Specify architecture plugin to use (x86, arm, ..)
  -b bits Specify register size for arch (16 (thumb), 32, 64, ..)
  -d algo Compute edit distance based on the chosen algorithm:
-            myers  | Eugene W. Myers' O(ND) algorithm (no substitution)
+            myers  | Eugene W. Myers′ O(ND) algorithm (no substitution)
             leven  | Levenshtein O(N^2) algorithm (with substitution)
             ssdeep | Context triggered piecewise hashing comparison
  -i      Use command line arguments instead of files (only for -d)
