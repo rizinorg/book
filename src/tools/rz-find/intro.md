@@ -2,7 +2,7 @@
 
 `rz-find` is the command line frontend of the `rz_search` library. Which allows you to search for strings, sequences of bytes with binary masks, etc
 
-```
+```bash
 $ rz-find -h
 Usage: rz-find [-mXnzZhqv] [-a align] [-b sz] [-f/t from/to] [-[e|s|w|S|I] str] [-x hex] -|file|dir ..
  -a [align] Only accept aligned hits
@@ -32,8 +32,10 @@ Usage: rz-find [-mXnzZhqv] [-a align] [-b sz] [-f/t from/to] [-[e|s|w|S|I] str] 
 
 That's how to use it, first we'll search for "lib" inside the `/bin/ls` binary.
 
-```
+```bash
 $ rz-find -s lib /usr/bin/ls
+```
+```
 0x319
 0x11f3
 0x13b7
@@ -46,17 +48,21 @@ this output to feed other tools.
 
 Counting results:
 
-```
+```bash
 $ rz-find -s lib /usr/bin/ls | wc -l
+```
+```
 5
 ```
 
 Displaying results with context:
 
-```
+```bash
 $ export F=/usr/bin/ls
 $ for a in `rz-find -s lib $F` ; do \
     rizin -ns $a -qc'x 32' $F ; done
+```
+```
 - offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
 0x00000319  6c69 6236 342f 6c64 2d6c 696e 7578 2d78  lib64/ld-linux-x
 0x00000329  3836 2d36 342e 736f 2e32 0000 0000 0004  86-64.so.2......
@@ -77,16 +83,20 @@ $ for a in `rz-find -s lib $F` ; do \
 rz-find can also be used as a replacement of `file` to identify the mimetype of a file using the internal magic
 database of Rizin.
 
-```
+```bash
 $  rz-find -i /usr/bin/ls
+```
+```
 0x00000000 1 ELF 64-bit LSB shared object, x86-64, version 1
 ```
 
 Also works as a `strings` replacement, similar to what you do with `rz-bin -z`, but without caring about parsing
 headers and obeying binary sections.
 
-```
+```bash
 $ rz-find -z /usr/bin/ls | grep http
+```
+```
 # https://wiki.xiph.org/MIME_Types_and_File_Extensions
 # https://wiki.xiph.org/MIME_Types_and_File_Extensions
 https://www.gnu.org/gethelp/
