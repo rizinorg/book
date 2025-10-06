@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -1339,47 +1374,48 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p><code>rz-find</code> is the command line frontend of the <code>rz_search</code> library. Which allows you to search for strings, sequences of bytes with binary masks, etc</p>
-<pre><code>$ rz-find -h
-Usage: rz-find [-mXnzZhqv] [-a align] [-b sz] [-f/t from/to] [-[e|s|w|S|I] str] [-x hex] -|file|dir ..
- -a [align] Only accept aligned hits
- -b [size]  Set block size
- -e [regex] Search for regex matches (can be used multiple times)
- -f [from]  Start searching from address 'from'
- -F [file]  Read the contents of the file and use it as keyword
- -h         Show this help
- -i         Identify filetype (rizin -nqcpm file)
- -j         Output in JSON
- -m         Magic search, file-type carver
- -M [str]   Set a binary mask to be applied on keywords
- -n         Do not stop on read errors
- -r         Print using rizin commands
- -s [str]   Search for a specific string (can be used multiple times)
- -w [str]   Search for a specific wide string (can be used multiple times). Assumes str is UTF-8.
- -I [str]   Search for an entry in import table.
- -S [str]   Search for a symbol in symbol table.
- -t [to]    Stop search at address 'to'
- -q         Quiet - do not show headings (filenames) above matching contents (default for searching a single file)
- -v         Show version information
- -x [hex]   Search for hexpair string (909090) (can be used multiple times)
- -X         Show hexdump of search results
- -z         Search for zero-terminated strings
- -Z         Show string found on each search hit</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-find <span class="at">-h</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> rz-find <span class="pp">[-</span><span class="ss">mXnzZhqv</span><span class="pp">]</span> [-a align] [-b sz] [-f/t from/to] [-[e<span class="kw">|</span><span class="ex">s</span><span class="kw">|</span><span class="fu">w</span><span class="kw">|</span><span class="ex">S</span><span class="kw">|</span><span class="ex">I]</span> str] [-x hex] <span class="at">-</span><span class="kw">|</span><span class="fu">file</span><span class="kw">|</span><span class="fu">dir</span> ..</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">-a</span> align Only accept aligned hits</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">-b</span> size  Set block size</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">-e</span> regex Search for regex matches <span class="er">(</span><span class="ex">can</span> be used multiple times<span class="kw">)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> <span class="ex">-E</span> cmd   Execute command for each file found</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">-f</span> from  Start searching from address <span class="st">'from'</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">-F</span> file  Read the contents of the file and use it as keyword</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a> <span class="ex">-h</span>       Show this help</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a> <span class="ex">-i</span>       Identify filetype <span class="er">(</span><span class="ex">rizin</span> <span class="at">-nqcpm</span> file<span class="kw">)</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a> <span class="ex">-j</span>       Output in JSON</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a> <span class="ex">-m</span>       Magic search, file-type carver</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a> <span class="ex">-M</span> str   Set a binary mask to be applied on keywords</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a> <span class="ex">-n</span>       Do not stop on read errors</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a> <span class="ex">-r</span>       Print using rizin commands</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a> <span class="ex">-s</span> str   Search for a specific string <span class="er">(</span><span class="ex">can</span> be used multiple times<span class="kw">)</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a> <span class="ex">-w</span> str   Search for a specific wide string <span class="er">(</span><span class="ex">can</span> be used multiple times<span class="kw">)</span><span class="bu">.</span> Assumes str is UTF-8.</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a> <span class="ex">-I</span> str   Search for an entry in import table.</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a> <span class="ex">-S</span> str   Search for a symbol in symbol table.</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a> <span class="ex">-t</span> to    Stop search at address <span class="st">'to'</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a> <span class="ex">-q</span>       Quiet <span class="at">-</span> do not show headings <span class="er">(</span><span class="ex">filenames</span><span class="kw">)</span> <span class="ex">above</span> matching contents <span class="er">(</span><span class="ex">default</span> for searching a single file<span class="kw">)</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a> <span class="ex">-v</span>       Show version information</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a> <span class="ex">-x</span> hex   Search for hexpair string <span class="er">(</span><span class="ex">909090</span><span class="kw">)</span> <span class="kw">(</span><span class="ex">can</span> be used multiple times<span class="kw">)</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a> <span class="ex">-X</span>       Show hexdump of search results</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a> <span class="ex">-z</span>       Search for zero-terminated strings</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a> <span class="ex">-Z</span>       Show string found on each search hit</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>That’s how to use it, first we’ll search for “lib” inside the <code>/bin/ls</code> binary.</p>
-<pre><code>$ rz-find -s lib /usr/bin/ls
-0x319
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-find <span class="at">-s</span> lib /usr/bin/ls</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>0x319
 0x11f3
 0x13b7
 0x1b5ea
 0x1b792</code></pre>
 <p>Note that the output is pretty minimal, and shows the offsets where the string <code>lib</code> is found. We can then use this output to feed other tools.</p>
 <p>Counting results:</p>
-<pre><code>$ rz-find -s lib /usr/bin/ls | wc -l
-5</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-find <span class="at">-s</span> lib /usr/bin/ls <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>5</code></pre>
 <p>Displaying results with context:</p>
-<pre><code>$ export F=/usr/bin/ls
-$ for a in `rz-find -s lib $F` ; do \
-    rizin -ns $a -qc'x 32' $F ; done
-- offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> export F=/usr/bin/ls</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> for a in <span class="kw">`</span><span class="ex">rz-find</span> <span class="at">-s</span> lib <span class="va">$F</span><span class="kw">`</span> <span class="kw">;</span> <span class="cf">do</span> <span class="dt">\</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">rizin</span> <span class="at">-ns</span> <span class="va">$a</span> <span class="at">-qc</span><span class="st">'x 32'</span> <span class="va">$F</span> <span class="kw">;</span> <span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>- offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
 0x00000319  6c69 6236 342f 6c64 2d6c 696e 7578 2d78  lib64/ld-linux-x
 0x00000329  3836 2d36 342e 736f 2e32 0000 0000 0004  86-64.so.2......
 - offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
@@ -1395,11 +1431,11 @@ $ for a in `rz-find -s lib $F` ; do \
 0x0001b792  6c69 622f 7873 7472 746f 6c2e 6300 4153  lib/xstrtol.c.AS
 0x0001b7a2  4349 4900 0000 6361 6e6e 6f74 2064 6574  CII...cannot det</code></pre>
 <p>rz-find can also be used as a replacement of <code>file</code> to identify the mimetype of a file using the internal magic database of Rizin.</p>
-<pre><code>$  rz-find -i /usr/bin/ls
-0x00000000 1 ELF 64-bit LSB shared object, x86-64, version 1</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span>  rz-find <span class="at">-i</span> /usr/bin/ls</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>0x00000000 1 ELF 64-bit LSB shared object, x86-64, version 1</code></pre>
 <p>Also works as a <code>strings</code> replacement, similar to what you do with <code>rz-bin -z</code>, but without caring about parsing headers and obeying binary sections.</p>
-<pre><code>$ rz-find -z /usr/bin/ls | grep http
-# https://wiki.xiph.org/MIME_Types_and_File_Extensions
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-find <span class="at">-z</span> /usr/bin/ls <span class="kw">|</span> <span class="fu">grep</span> http</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code># https://wiki.xiph.org/MIME_Types_and_File_Extensions
 # https://wiki.xiph.org/MIME_Types_and_File_Extensions
 https://www.gnu.org/gethelp/
 https://www.gnu.org/software/coreutils/
