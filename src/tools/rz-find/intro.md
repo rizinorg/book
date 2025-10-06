@@ -5,29 +5,30 @@
 ```bash
 $ rz-find -h
 Usage: rz-find [-mXnzZhqv] [-a align] [-b sz] [-f/t from/to] [-[e|s|w|S|I] str] [-x hex] -|file|dir ..
- -a [align] Only accept aligned hits
- -b [size]  Set block size
- -e [regex] Search for regex matches (can be used multiple times)
- -f [from]  Start searching from address 'from'
- -F [file]  Read the contents of the file and use it as keyword
- -h         Show this help
- -i         Identify filetype (rizin -nqcpm file)
- -j         Output in JSON
- -m         Magic search, file-type carver
- -M [str]   Set a binary mask to be applied on keywords
- -n         Do not stop on read errors
- -r         Print using rizin commands
- -s [str]   Search for a specific string (can be used multiple times)
- -w [str]   Search for a specific wide string (can be used multiple times). Assumes str is UTF-8.
- -I [str]   Search for an entry in import table.
- -S [str]   Search for a symbol in symbol table.
- -t [to]    Stop search at address 'to'
- -q         Quiet - do not show headings (filenames) above matching contents (default for searching a single file)
- -v         Show version information
- -x [hex]   Search for hexpair string (909090) (can be used multiple times)
- -X         Show hexdump of search results
- -z         Search for zero-terminated strings
- -Z         Show string found on each search hit
+ -a align Only accept aligned hits
+ -b size  Set block size
+ -e regex Search for regex matches (can be used multiple times)
+ -E cmd   Execute command for each file found
+ -f from  Start searching from address 'from'
+ -F file  Read the contents of the file and use it as keyword
+ -h       Show this help
+ -i       Identify filetype (rizin -nqcpm file)
+ -j       Output in JSON
+ -m       Magic search, file-type carver
+ -M str   Set a binary mask to be applied on keywords
+ -n       Do not stop on read errors
+ -r       Print using rizin commands
+ -s str   Search for a specific string (can be used multiple times)
+ -w str   Search for a specific wide string (can be used multiple times). Assumes str is UTF-8.
+ -I str   Search for an entry in import table.
+ -S str   Search for a symbol in symbol table.
+ -t to    Stop search at address 'to'
+ -q       Quiet - do not show headings (filenames) above matching contents (default for searching a single file)
+ -v       Show version information
+ -x hex   Search for hexpair string (909090) (can be used multiple times)
+ -X       Show hexdump of search results
+ -z       Search for zero-terminated strings
+ -Z       Show string found on each search hit
 ```
 
 That's how to use it, first we'll search for "lib" inside the `/bin/ls` binary.
