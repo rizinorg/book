@@ -2,7 +2,7 @@
 
 The rz-hash tool can be used to calculate checksums and has functions of byte streams, files, text strings.
 
-```
+```bash
 $ rz-hash -h
 Usage: rz-hash [-vhBkjLq] [-b S] [-a A] [-c H] [-E A] [-D A] [-s S] [-x S] [-f O] [-t O] [files|-] ...
  -v        Show version information
@@ -21,7 +21,7 @@ Usage: rz-hash [-vhBkjLq] [-b S] [-a A] [-c H] [-E A] [-D A] [-s S] [-x S] [-f O
  -I iv     Set the initialization vector (IV)
  -i times  Repeat the calculation N times
  -j        Output the result as a JSON structure
- -k        Output the calculated value using openssh's randomkey algorithm
+ -k        Output the calculated value using openssh′s randomkey algorithm
  -L        List all algorithms
  -q        Set quiet mode (use -qq to get only the calculated value)
  -S seed   Set the seed for -a, use '^' to append it before the input, use '@'
@@ -31,15 +31,17 @@ Usage: rz-hash [-vhBkjLq] [-b S] [-a A] [-c H] [-E A] [-D A] [-s S] [-x S] [-f O
            From stdin (you can combine them)
  -s string Input read from a zero-terminated string instead from a file
  -x hex    Input read from a hexadecimal value instead from a file
-           
+
            All the input (besides -s/-x/-c) can be hexadecimal or strings
            If 's:' prefix is specified
 ```
 
 To obtain an MD5 hash value of a text string, use the `-s` option:
 
-```
+```bash
 $ rz-hash -q -a md5 -s 'hello world'
+```
+```
 string: md5: 5eb63bbbe01eeed093cb22bb8f5acdc3
 ```
 
@@ -48,8 +50,10 @@ because rz-hash buffers the whole input in memory before computing the hash.
 
 To apply all algorithms known to rz-hash, use `all` as an algorithm name:
 
-```
+```bash
 $ rz-hash -a all /usr/bin/ls
+```
+```
 /usr/bin/ls: 0x00000000-0x00024ac8 md2: 9a2a86a52e9cb44b2e06a58a00fee15e
 /usr/bin/ls: 0x00000000-0x00024ac8 md4: 725fc3498847e96d031ce4d1f4872b28
 /usr/bin/ls: 0x00000000-0x00024ac8 md5: bcf16aef7487e6ea478a168c180c07fa
