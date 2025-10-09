@@ -13,7 +13,7 @@ Plugins:
  RZ_LIB_PLUGINS   /home/username/.local/lib/rizin/plugins
  RZ_EXTRA_PLUGINS
 Environment:
- ANSICON             ansicon's W & H of the buffer and w & h of the window in the form of: "WxH (wxh)"
+ ANSICON             ansicon′s W & H of the buffer and w & h of the window in the form of: "WxH (wxh)"
  DEBUGINFOD_URLS     e bin.dbginfo.debuginfod_urls - use alternative debuginfod server
  COLUMNS             terminal columns to use
  RZ_ABORTLEVEL       target log level/severity when to abort (0:DEBUG, 1:VERBOSE, 2:INFO, 3:WARN, 4:ERROR, 5:FATAL)
