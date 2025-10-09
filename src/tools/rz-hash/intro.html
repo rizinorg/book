@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -1349,8 +1384,8 @@ ul.task-list li input[type="checkbox"] {
 <p>The <code>rz-hash</code> tool can be used to compute checksums of files, disk devices or strings. By block or entirely using many different hash algorithms.</p>
 <p>This tool is also capable of doing some encoding/decoding operations like base64 and xor encoding.</p>
 <p>This is an example usage:</p>
-<pre><code>$ rz-hash -a md5 -s "hello world"
-string: 0x00000000-0x0000000b md5: 5eb63bbbe01eeed093cb22bb8f5acdc3</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-hash <span class="at">-a</span> md5 <span class="at">-s</span> <span class="st">"hello world"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>string: 0x00000000-0x0000000b md5: 5eb63bbbe01eeed093cb22bb8f5acdc3</code></pre>
 <p>Note that rz-hash also permits to read from files in a stream, so you don’t need 4GB of ram to compute the hash of a 4GB file.</p>
 <section id="hashing-by-blocks" class="level2" data-number="97.1">
 <h2 data-number="97.1" class="anchored" data-anchor-id="hashing-by-blocks"><span class="header-section-number">97.1</span> Hashing by blocks</h2>
@@ -1358,8 +1393,8 @@ string: 0x00000000-0x0000000b md5: 5eb63bbbe01eeed093cb22bb8f5acdc3</code></pre>
 <p>This will spot the same hash for blocks containing the same contents. For example, if is filled with zeros.</p>
 <p>It can also be used to find which blocks have changed between more than one sample dump.</p>
 <p>This can be useful when analyzing ram dumps from a virtual machine for example. Use this command for this:</p>
-<pre><code>$ rz-hash -b 1M -B -a sha256 /usr/bin/ls
-/usr/bin/ls: 0x00000000-0x00000001 sha256: 620bfdaa346b088fb49998d92f19a7eaf6bfc2fb0aee015753966da1028cb731
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-hash <span class="at">-b</span> 1M <span class="at">-B</span> <span class="at">-a</span> sha256 /usr/bin/ls</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>/usr/bin/ls: 0x00000000-0x00000001 sha256: 620bfdaa346b088fb49998d92f19a7eaf6bfc2fb0aee015753966da1028cb731
 /usr/bin/ls: 0x00000001-0x00000002 sha256: a9f51566bd6705f7ea6ad54bb9deb449f795582d6529a0e22207b8981233ec58
 /usr/bin/ls: 0x00000002-0x00000003 sha256: 72dfcfb0c470ac255cde83fb8fe38de8a128188e03ea5ba5b2a93adbea1062fa
 /usr/bin/ls: 0x00000003-0x00000004 sha256: f67ab10ad4e4c53121b6a5fe4da9c10ddee905b978d3788d2723d7bfacbe28a9
@@ -1373,8 +1408,8 @@ string: 0x00000000-0x0000000b md5: 5eb63bbbe01eeed093cb22bb8f5acdc3</code></pre>
 <section id="hashing-with-rz-bin" class="level2" data-number="97.2">
 <h2 data-number="97.2" class="anchored" data-anchor-id="hashing-with-rz-bin"><span class="header-section-number">97.2</span> Hashing with rz-bin</h2>
 <p>The rz-bin tool parses the binary headers of the files, but it also have the ability to use the rhash plugins to compute checksum of sections in the binary.</p>
-<pre><code>$ rz-bin -K md5 -S /usr/bin/ls
-[Sections]
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-bin <span class="at">-K</span> md5 <span class="at">-S</span> /usr/bin/ls</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>[Sections]
 paddr      size    vaddr      vsize   align perm name               type       flags         md5                              
 ------------------------------------------------------------------------------------------------------------------------------
 0x00000000 0x0     ---------- 0x0     0x0   ----                    NULL       
@@ -1410,92 +1445,92 @@ paddr      size    vaddr      vsize   align perm name               type       f
 <section id="obtaining-hashes-within-rizin-session" class="level2" data-number="97.3">
 <h2 data-number="97.3" class="anchored" data-anchor-id="obtaining-hashes-within-rizin-session"><span class="header-section-number">97.3</span> Obtaining hashes within rizin session</h2>
 <p>To calculate a checksum of current block when running Rizin, use the <code>ph</code> command. Pass an algorithm name to it as a parameter. An example session:</p>
-<pre><code>$ rizin /usr/bin/ls
-[0x00005880]&gt; bf entry0
-[0x00005880]&gt; ph md5
-6334c2ae05c2421c687f516772b817da</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rizin /usr/bin/ls</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00005880]</span><span class="op">&gt;</span> bf entry0</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00005880]</span><span class="op">&gt;</span> ph md5</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">6334c2ae05c2421c687f516772b817da</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>You can use all hashing algorithms supported by <code>rz-hash</code>:</p>
-<pre><code>[0x00000000]&gt; phl
-algorithm      license    author
-md2            LGPL3      swedenspy
-md4            Apache 2.0 OpenSSL Team
-md5            Apache 2.0 OpenSSL Team
-sha1           Apache 2.0 OpenSSL Team
-sha256         Apache 2.0 OpenSSL Team
-sha384         Apache 2.0 OpenSSL Team
-sha512         Apache 2.0 OpenSSL Team
-sm3            Apache 2.0 OpenSSL Team
-blake3         CC0        Samuel Neves,Jack O'Connor
-fletcher8      LGPL3      deroad
-fletcher16     LGPL3      deroad
-fletcher32     LGPL3      deroad
-fletcher64     LGPL3      deroad
-adler32        LGPL3      deroad
-crc8smbus      LGPL3      deroad
-crc8cdma2000   LGPL3      deroad
-crc8darc       LGPL3      deroad
-crc8dvbs2      LGPL3      deroad
-crc8ebu        LGPL3      deroad
-crc8icode      LGPL3      deroad
-crc8itu        LGPL3      deroad
-crc8maxim      LGPL3      deroad
-crc8rohc       LGPL3      deroad
-crc8wcdma      LGPL3      deroad
-crc15can       LGPL3      deroad
-crc16          LGPL3      deroad
-crc16citt      LGPL3      deroad
-crc16usb       LGPL3      deroad
-crc16hdlc      LGPL3      deroad
-crc16augccitt  LGPL3      deroad
-crc16buypass   LGPL3      deroad
-crc16cdma2000  LGPL3      deroad
-crc16dds110    LGPL3      deroad
-crc16dectr     LGPL3      deroad
-crc16dectx     LGPL3      deroad
-crc16dnp       LGPL3      deroad
-crc16en13757   LGPL3      deroad
-crc16genibus   LGPL3      deroad
-crc16maxim     LGPL3      deroad
-crc16mcrf4xx   LGPL3      deroad
-crc16riello    LGPL3      deroad
-crc16t10dif    LGPL3      deroad
-crc16teledisk  LGPL3      deroad
-crc16tms37157  LGPL3      deroad
-crca           LGPL3      deroad
-crc16kermit    LGPL3      deroad
-crc16modbus    LGPL3      deroad
-crc16x25       LGPL3      deroad
-crc16xmodem    LGPL3      deroad
-crc24          LGPL3      deroad
-crc32          LGPL3      deroad
-crc32ecma267   LGPL3      deroad
-crc32c         LGPL3      deroad
-crc32bzip2     LGPL3      deroad
-crc32d         LGPL3      deroad
-crc32mpeg2     LGPL3      deroad
-crc32posix     LGPL3      deroad
-crc32q         LGPL3      deroad
-crc32jamcrc    LGPL3      deroad
-crc32xfer      LGPL3      deroad
-crc64          LGPL3      deroad
-crc64ecma182   LGPL3      deroad
-crc64we        LGPL3      deroad
-crc64xz        LGPL3      deroad
-crc64iso       LGPL3      deroad
-xor8           LGPL3      deroad
-xor16          LGPL3      deroad
-xxhash32       LGPL3      deroad
-ssdeep         LGPL3      deroad
-parity         LGPL3      deroad
-entropy        LGPL3      deroad
-entropy_fract  LGPL3      deroad</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x00000000]</span><span class="op">&gt;</span> phl</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">algorithm</span>      license    author</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">md2</span>            LGPL3      swedenspy</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">md4</span>            Apache 2.0 OpenSSL Team</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">md5</span>            Apache 2.0 OpenSSL Team</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="ex">sha1</span>           Apache 2.0 OpenSSL Team</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">sha256</span>         Apache 2.0 OpenSSL Team</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">sha384</span>         Apache 2.0 OpenSSL Team</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="ex">sha512</span>         Apache 2.0 OpenSSL Team</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ex">sm3</span>            Apache 2.0 OpenSSL Team</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="ex">blake3</span>         CC0        Samuel Neves,Jack O′Connor</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="ex">fletcher8</span>      LGPL3      deroad</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="ex">fletcher16</span>     LGPL3      deroad</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="ex">fletcher32</span>     LGPL3      deroad</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="ex">fletcher64</span>     LGPL3      deroad</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="ex">adler32</span>        LGPL3      deroad</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="ex">crc8smbus</span>      LGPL3      deroad</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="ex">crc8cdma2000</span>   LGPL3      deroad</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="ex">crc8darc</span>       LGPL3      deroad</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="ex">crc8dvbs2</span>      LGPL3      deroad</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="ex">crc8ebu</span>        LGPL3      deroad</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="ex">crc8icode</span>      LGPL3      deroad</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="ex">crc8itu</span>        LGPL3      deroad</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="ex">crc8maxim</span>      LGPL3      deroad</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="ex">crc8rohc</span>       LGPL3      deroad</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="ex">crc8wcdma</span>      LGPL3      deroad</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="ex">crc15can</span>       LGPL3      deroad</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16</span>          LGPL3      deroad</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16citt</span>      LGPL3      deroad</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16usb</span>       LGPL3      deroad</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16hdlc</span>      LGPL3      deroad</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16augccitt</span>  LGPL3      deroad</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16buypass</span>   LGPL3      deroad</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16cdma2000</span>  LGPL3      deroad</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16dds110</span>    LGPL3      deroad</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16dectr</span>     LGPL3      deroad</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16dectx</span>     LGPL3      deroad</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16dnp</span>       LGPL3      deroad</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16en13757</span>   LGPL3      deroad</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16genibus</span>   LGPL3      deroad</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16maxim</span>     LGPL3      deroad</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16mcrf4xx</span>   LGPL3      deroad</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16riello</span>    LGPL3      deroad</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16t10dif</span>    LGPL3      deroad</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16teledisk</span>  LGPL3      deroad</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16tms37157</span>  LGPL3      deroad</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a><span class="ex">crca</span>           LGPL3      deroad</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16kermit</span>    LGPL3      deroad</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16modbus</span>    LGPL3      deroad</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16x25</span>       LGPL3      deroad</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="ex">crc16xmodem</span>    LGPL3      deroad</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="ex">crc24</span>          LGPL3      deroad</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="ex">crc32</span>          LGPL3      deroad</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="ex">crc32ecma267</span>   LGPL3      deroad</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a><span class="ex">crc32c</span>         LGPL3      deroad</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a><span class="ex">crc32bzip2</span>     LGPL3      deroad</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a><span class="ex">crc32d</span>         LGPL3      deroad</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a><span class="ex">crc32mpeg2</span>     LGPL3      deroad</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a><span class="ex">crc32posix</span>     LGPL3      deroad</span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a><span class="ex">crc32q</span>         LGPL3      deroad</span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a><span class="ex">crc32jamcrc</span>    LGPL3      deroad</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a><span class="ex">crc32xfer</span>      LGPL3      deroad</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a><span class="ex">crc64</span>          LGPL3      deroad</span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a><span class="ex">crc64ecma182</span>   LGPL3      deroad</span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a><span class="ex">crc64we</span>        LGPL3      deroad</span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a><span class="ex">crc64xz</span>        LGPL3      deroad</span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a><span class="ex">crc64iso</span>       LGPL3      deroad</span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a><span class="ex">xor8</span>           LGPL3      deroad</span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a><span class="ex">xor16</span>          LGPL3      deroad</span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a><span class="ex">xxhash32</span>       LGPL3      deroad</span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a><span class="ex">ssdeep</span>         LGPL3      deroad</span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a><span class="ex">parity</span>         LGPL3      deroad</span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a><span class="ex">entropy</span>        LGPL3      deroad</span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a><span class="ex">entropy_fract</span>  LGPL3      deroad</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The <code>ph</code> command accepts an optional numeric argument to specify length of byte range to be hashed, instead of default block size. For example:</p>
-<pre><code>[0x08049A80]&gt; ph md5 32
-9b9012b00ef7a94b5824105b7aaad83b
-[0x08049A80]&gt; ph md5 64
-a71b087d8166c99869c9781e2edcf183
-[0x08049A80]&gt; ph md5 1024
-a933cc94cd705f09a41ecc80c0041def</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08049A80]</span><span class="op">&gt;</span> ph md5 32</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">9b9012b00ef7a94b5824105b7aaad83b</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08049A80]</span><span class="op">&gt;</span> ph md5 64</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">a71b087d8166c99869c9781e2edcf183</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[0x08049A80]</span><span class="op">&gt;</span> ph md5 1024</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="ex">a933cc94cd705f09a41ecc80c0041def</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

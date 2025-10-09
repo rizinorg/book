@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -1339,44 +1374,44 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>The rz-hash tool can be used to calculate checksums and has functions of byte streams, files, text strings.</p>
-<pre><code>$ rz-hash -h
-Usage: rz-hash [-vhBkjLq] [-b S] [-a A] [-c H] [-E A] [-D A] [-s S] [-x S] [-f O] [-t O] [files|-] ...
- -v        Show version information
- -h        Show this help
- -         Input read from stdin instead from a file
- -a algo   Hash algorithm to use and you can specify multiple ones by
-           Appending a comma (example: sha1,md4,md5,sha256)
- -B        Output the calculated value for each block
- -b size   Set the block size
- -c value  Compare calculated value with a given one (hexadecimal)
- -e endian Set the endianness (default: 'big' accepted: 'big' or 'little')
- -D algo   Decrypt the given input; use -S to set key and -I to set IV (if needed)
- -E algo   Encrypt the given input; use -S to set key and -I to set IV (if needed)
- -f from   Start the calculation at given offset
- -t to     Stop the calculation at given offset
- -I iv     Set the initialization vector (IV)
- -i times  Repeat the calculation N times
- -j        Output the result as a JSON structure
- -k        Output the calculated value using openssh's randomkey algorithm
- -L        List all algorithms
- -q        Set quiet mode (use -qq to get only the calculated value)
- -S seed   Set the seed for -a, use '^' to append it before the input, use '@'
-           Prefix to load it from a file and '-' from read it
- -K key    Set the hmac key for -a and the key for -E/-D, use '@' prefix to
-           Load it from a file and '-' from read it
-           From stdin (you can combine them)
- -s string Input read from a zero-terminated string instead from a file
- -x hex    Input read from a hexadecimal value instead from a file
-           
-           All the input (besides -s/-x/-c) can be hexadecimal or strings
-           If 's:' prefix is specified</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-hash <span class="at">-h</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> rz-hash <span class="pp">[-</span><span class="ss">vhBkjLq</span><span class="pp">]</span> [-b S] [-a A] [-c H] [-E A] [-D A] [-s S] [-x S] [-f O] [-t O] [files<span class="kw">|</span><span class="ex">-]</span> ...</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">-v</span>        Show version information</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">-h</span>        Show this help</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">-</span>         Input read from stdin instead from a file</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> <span class="ex">-a</span> algo   Hash algorithm to use and you can specify multiple ones by</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>           <span class="ex">Appending</span> a comma <span class="er">(</span><span class="ex">example:</span> sha1,md4,md5,sha256<span class="kw">)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">-B</span>        Output the calculated value for each block</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a> <span class="ex">-b</span> size   Set the block size</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a> <span class="ex">-c</span> value  Compare calculated value with a given one <span class="er">(</span><span class="ex">hexadecimal</span><span class="kw">)</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a> <span class="ex">-e</span> endian Set the endianness <span class="er">(</span><span class="ex">default:</span> <span class="st">'big'</span> accepted: <span class="st">'big'</span> or <span class="st">'little'</span><span class="kw">)</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a> <span class="ex">-D</span> algo   Decrypt the given input<span class="kw">;</span> <span class="ex">use</span> <span class="at">-S</span> to set key and <span class="at">-I</span> to set IV <span class="er">(</span><span class="cf">if</span> <span class="ex">needed</span><span class="kw">)</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a> <span class="ex">-E</span> algo   Encrypt the given input<span class="kw">;</span> <span class="ex">use</span> <span class="at">-S</span> to set key and <span class="at">-I</span> to set IV <span class="er">(</span><span class="cf">if</span> <span class="ex">needed</span><span class="kw">)</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a> <span class="ex">-f</span> from   Start the calculation at given offset</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a> <span class="ex">-t</span> to     Stop the calculation at given offset</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a> <span class="ex">-I</span> iv     Set the initialization vector <span class="er">(</span><span class="ex">IV</span><span class="kw">)</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a> <span class="ex">-i</span> times  Repeat the calculation N times</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a> <span class="ex">-j</span>        Output the result as a JSON structure</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a> <span class="ex">-k</span>        Output the calculated value using openssh′s randomkey algorithm</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a> <span class="ex">-L</span>        List all algorithms</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a> <span class="ex">-q</span>        Set quiet mode <span class="er">(</span><span class="ex">use</span> <span class="at">-qq</span> to get only the calculated value<span class="kw">)</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a> <span class="ex">-S</span> seed   Set the seed for <span class="at">-a,</span> use <span class="st">'^'</span> to append it before the input, use <span class="st">'@'</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>           <span class="ex">Prefix</span> to load it from a file and <span class="st">'-'</span> from read it</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a> <span class="ex">-K</span> key    Set the hmac key for <span class="at">-a</span> and the key for <span class="at">-E</span>/-D, use <span class="st">'@'</span> prefix to</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>           <span class="ex">Load</span> it from a file and <span class="st">'-'</span> from read it</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>           <span class="ex">From</span> stdin <span class="er">(</span><span class="ex">you</span> can combine them<span class="kw">)</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a> <span class="ex">-s</span> string Input read from a zero-terminated string instead from a file</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a> <span class="ex">-x</span> hex    Input read from a hexadecimal value instead from a file</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>           <span class="ex">All</span> the input <span class="er">(</span><span class="ex">besides</span> <span class="at">-s</span>/-x/-c<span class="kw">)</span> <span class="ex">can</span> be hexadecimal or strings</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>           <span class="ex">If</span> <span class="st">'s:'</span> prefix is specified</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>To obtain an MD5 hash value of a text string, use the <code>-s</code> option:</p>
-<pre><code>$ rz-hash -q -a md5 -s 'hello world'
-string: md5: 5eb63bbbe01eeed093cb22bb8f5acdc3</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-hash <span class="at">-q</span> <span class="at">-a</span> md5 <span class="at">-s</span> <span class="st">'hello world'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>string: md5: 5eb63bbbe01eeed093cb22bb8f5acdc3</code></pre>
 <p>It is possible to calculate hash values for contents of files. But do not attempt to do it for very large files because rz-hash buffers the whole input in memory before computing the hash.</p>
 <p>To apply all algorithms known to rz-hash, use <code>all</code> as an algorithm name:</p>
-<pre><code>$ rz-hash -a all /usr/bin/ls
-/usr/bin/ls: 0x00000000-0x00024ac8 md2: 9a2a86a52e9cb44b2e06a58a00fee15e
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rz-hash <span class="at">-a</span> all /usr/bin/ls</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>/usr/bin/ls: 0x00000000-0x00024ac8 md2: 9a2a86a52e9cb44b2e06a58a00fee15e
 /usr/bin/ls: 0x00000000-0x00024ac8 md4: 725fc3498847e96d031ce4d1f4872b28
 /usr/bin/ls: 0x00000000-0x00024ac8 md5: bcf16aef7487e6ea478a168c180c07fa
 /usr/bin/ls: 0x00000000-0x00024ac8 sha1: ccb226a119fe301b2ad2dc8a7013faf6f6296ea1
