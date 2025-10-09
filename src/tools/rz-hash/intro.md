@@ -7,8 +7,10 @@ This tool is also capable of doing some encoding/decoding operations like base64
 
 This is an example usage:
 
-```
+```bash
 $ rz-hash -a md5 -s "hello world"
+```
+```
 string: 0x00000000-0x0000000b md5: 5eb63bbbe01eeed093cb22bb8f5acdc3
 ```
 
@@ -26,8 +28,10 @@ It can also be used to find which blocks have changed between more than one samp
 
 This can be useful when analyzing ram dumps from a virtual machine for example. Use this command for this:
 
-```
+```bash
 $ rz-hash -b 1M -B -a sha256 /usr/bin/ls
+```
+```
 /usr/bin/ls: 0x00000000-0x00000001 sha256: 620bfdaa346b088fb49998d92f19a7eaf6bfc2fb0aee015753966da1028cb731
 /usr/bin/ls: 0x00000001-0x00000002 sha256: a9f51566bd6705f7ea6ad54bb9deb449f795582d6529a0e22207b8981233ec58
 /usr/bin/ls: 0x00000002-0x00000003 sha256: 72dfcfb0c470ac255cde83fb8fe38de8a128188e03ea5ba5b2a93adbea1062fa
@@ -44,8 +48,10 @@ $ rz-hash -b 1M -B -a sha256 /usr/bin/ls
 
 The rz-bin tool parses the binary headers of the files, but it also have the ability to use the rhash plugins to compute checksum of sections in the binary.
 
-```
+```bash
 $ rz-bin -K md5 -S /usr/bin/ls
+```
+```
 [Sections]
 paddr      size    vaddr      vsize   align perm name               type       flags         md5                              
 ------------------------------------------------------------------------------------------------------------------------------
@@ -85,7 +91,7 @@ paddr      size    vaddr      vsize   align perm name               type       f
 To calculate a checksum of current block when running Rizin, use the `ph` command. Pass an algorithm name to it
 as a parameter. An example session:
 
-```
+```bash
 $ rizin /usr/bin/ls
 [0x00005880]> bf entry0
 [0x00005880]> ph md5
@@ -94,7 +100,7 @@ $ rizin /usr/bin/ls
 
 You can use all hashing algorithms supported by `rz-hash`:
 
-```
+```bash
 [0x00000000]> phl
 algorithm      license    author
 md2            LGPL3      swedenspy
@@ -105,7 +111,7 @@ sha256         Apache 2.0 OpenSSL Team
 sha384         Apache 2.0 OpenSSL Team
 sha512         Apache 2.0 OpenSSL Team
 sm3            Apache 2.0 OpenSSL Team
-blake3         CC0        Samuel Neves,Jack O'Connor
+blake3         CC0        Samuel Neves,Jack O′Connor
 fletcher8      LGPL3      deroad
 fletcher16     LGPL3      deroad
 fletcher32     LGPL3      deroad
@@ -174,7 +180,7 @@ entropy_fract  LGPL3      deroad
 The `ph` command accepts an optional numeric argument to specify length of byte range to be hashed, instead of
 default block size. For example:
 
-```
+```bash
 [0x08049A80]> ph md5 32
 9b9012b00ef7a94b5824105b7aaad83b
 [0x08049A80]> ph md5 64
