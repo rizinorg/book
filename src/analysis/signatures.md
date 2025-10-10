@@ -162,15 +162,15 @@ Architecture: 0 (x86)
 You can also utilize `rz-sign` to automatically create, convert, or dump FLIRT signatures:
 ```bash
 $ rz-sign -h
-Usage: rz-sign [options] [file]
- -h                          Show this help
- -a [-a]                     Add extra 'a' to analysis command (available only with -o option)
- -e [k=v]                    Set an evaluable config variable (available only with -o option)
- -c [output.pat] [input.sig] Parse a FLIRT signature and convert it to its other format
- -o [output.sig] [input.bin] Perform an analysis on the binary and generate the FLIRT signature
- -d [flirt.sig]              Parse a FLIRT signature and dump its content
- -q                          Quiet mode
- -v                          Show version information
+Usage: rz-sign [-aqv] [-e k=v] (-c pat sig | -o sig bin | -d sig)
+ -h                      Show this help
+ -a, -aa                 Add extra 'a' to analysis command (available only with -o option)
+ -e k=v                  Set an evaluable config variable (available only with -o option)
+ -c output.pat input.sig Parse a FLIRT signature and convert it to its other format
+ -o output.sig input.bin Perform an analysis on the binary and generate the FLIRT signature
+ -d flirt.sig            Parse a FLIRT signature and dump its content
+ -q                      Quiet mode
+ -v                      Show version information
 Examples:
   rz-sign -d signature.sig
   rz-sign -c new_signature.pat old_signature.sig
