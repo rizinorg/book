@@ -4,7 +4,7 @@ rz-run is a tool allowing to setup a specified execution environment - redefine 
 change the environment variables and other settings useful to craft the boundary conditions you need to run
 a binary for debugging.
 
-```
+```bash
 $ rz-run -h
 Usage: [directives] [script.rz] [--] [program] [args]
  -h                  Show this help
@@ -27,7 +27,7 @@ For this you need to use `stdio`, `stdout`, `stdin`, `input`, and a couple simil
 
 Here is the basic profile example:
 
-```
+```bash
 program=/bin/ls
 arg1=/bin
 # arg2=hello
