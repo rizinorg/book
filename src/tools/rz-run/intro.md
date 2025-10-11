@@ -6,13 +6,13 @@ a binary for debugging.
 
 ```bash
 $ rz-run -h
-Usage: [directives] [script.rz] [--] [program] [args]
- -h                  Show this help
- -l                  Show profile options
- -t                  Output template profile
- -v                  Show version information
- -w                  Wait for incoming terminal process
- -- [program] [args] Run commands
+Usage: rz-run [directives | script.rz] [-- program [args]]
+ -h                Show this help
+ -l                Show profile directives
+ -t                Output template profile
+ -v                Show version information
+ -w                Wait for incoming terminal process
+ -- program [args] Run program
 ```
 
 It takes the text file in key=value format to specify the execution environment.
