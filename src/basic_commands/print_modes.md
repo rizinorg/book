@@ -518,3 +518,57 @@ the position (like coordinates) and the height and width of the gadget you would
 the configuration variable `scr.gadgets` to be turned on.
 
 See `pg?` for more information.
+
+### Print Patterns
+
+The `pp` command group generates deterministic patterns that are handy for fuzzing, debugging, and exploit development.
+
+```
+[0x00000000]> pp?
+Usage: pp[?]   # Print patterns
+| pp[ad] [len]   # Print different patterns
+| ppd <len>      # Print De Bruijn pattern of length <len>
+| ppd/<value>    # Show the offset of <value> in the default De Bruijn pattern (honors cfg.bigendian)
+```
+
+#### De Bruijn patterns
+
+De Bruijn sequences are cyclic patterns in which every substring of the chosen width appears exactly once. They’re perfect for recovering overwrite offsets after a crash.
+
+**Generate a pattern**
+
+```
+[0x00000000]> ppd 100
+AABAACAADAAEAAFAAGAAHAAIAAJAAKAALAAMAANAAOAAPAAQAARAASAATAAUAAVAAWAAXAAYAAZAAaAAbAAcAAdAAeAAfAAgAAh
+```
+
+**Locate an observed value**
+
+Use `ppd/<value>` to look up where a value appears in the default pattern. This is the fastest way to translate a register/memory capture back into an offset.
+
+```
+[0x00000000]> e cfg.bigendian=false
+[0x00000000]> ppd/ 0x41574141
+64
+```
+
+The command respects `cfg.bigendian`, so flip it if your target is big-endian:
+
+```
+[0x00000000]> e cfg.bigendian=true
+[0x00000000]> ppd/ 0x41574141
+65
+```
+
+**Writing the pattern**
+
+If you prefer to inject the pattern directly, `wD <len>` writes the same data at the current seek, and `wD/<value>` mirrors the lookup behavior:
+
+```
+[0x00000000]> wD 100        # Write 100 bytes of the pattern
+[0x00000000]> wD/ 0x41574141
+64
+```
+
+(See [Writing Data](write.md#writing-data) for more on `wD`.)
+
