@@ -553,7 +553,7 @@ The value is a sequence of ASCII bytes. In the example below it searches for "AW
 64
 ```
 
-The command respects `cfg.bigendian`, so flip it if your target is big-endian:
+The command respects `cfg.bigendian`, so flip it if your target is big-endian. The value is interpreted as a 64-bit integer (up to 8 bytes). Any leading zero bytes are dropped, so most inputs behave like 4-byte substrings, but every supplied byte participates in the endian swap:
 
 ```
 [0x00000000]> e cfg.bigendian=true
