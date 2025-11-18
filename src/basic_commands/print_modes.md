@@ -535,7 +535,7 @@ Usage: pp[?]   # Print patterns
 
 De Bruijn sequences are cyclic patterns in which every substring of the chosen width appears exactly once. They’re perfect for recovering overwrite offsets after a crash.
 
-**Generate a pattern**
+**Generate a De Bruijn pattern**
 
 ```
 [0x00000000]> ppd 100
