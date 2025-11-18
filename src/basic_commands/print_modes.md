@@ -544,7 +544,8 @@ AABAACAADAAEAAFAAGAAHAAIAAJAAKAALAAMAANAAOAAPAAQAARAASAATAAUAAVAAWAAXAAYAAZAAaAA
 
 **Locate an observed value**
 
-Use `ppd/<value>` to look up where a value appears in the default pattern. This is the fastest way to translate a register/memory capture back into an offset.
+Use `ppd/ <value>` to look up where a value appears in the De Bruijn pattern. This is the fastest way to translate a register/memory capture back into an offset.
+The value is a sequence of ASCII bytes. In the example below it searches for "AWAA".
 
 ```
 [0x00000000]> e cfg.bigendian=false
