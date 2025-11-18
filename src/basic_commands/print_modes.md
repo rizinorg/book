@@ -563,7 +563,7 @@ The command respects `cfg.bigendian`, so flip it if your target is big-endian:
 
 **Writing the pattern**
 
-If you prefer to inject the pattern directly, `wD <len>` writes the same data at the current seek, and `wD/<value>` mirrors the lookup behavior:
+If you prefer to inject the pattern directly, `wD <len>` writes the same data at the current seek, and `wD/ <value>` mirrors the lookup behavior:
 
 ```
 [0x00000000]> wD 100        # Write 100 bytes of the pattern
