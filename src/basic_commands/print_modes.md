@@ -571,5 +571,5 @@ If you prefer to inject the pattern directly, `wD <len>` writes the same data at
 64
 ```
 
-(See [Writing Data](write.md#writing-data) for more on `wD`.)
+See [Writing Data](write.md#writing-data) for more on `wD`.
 
