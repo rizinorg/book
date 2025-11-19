@@ -528,7 +528,7 @@ The `pp` command group generates deterministic patterns that are handy for fuzzi
 Usage: pp[?]   # Print patterns
 | pp[ad] [len]   # Print different patterns
 | ppd <len>      # Print De Bruijn pattern of length <len>
-| ppd/<value>    # Show the offset of <value> in the default De Bruijn pattern (honors cfg.bigendian)
+| ppd/ <value>    # Show the offset of <value> in the default De Bruijn pattern (honors cfg.bigendian)
 ```
 
 #### De Bruijn patterns
