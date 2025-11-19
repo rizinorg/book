@@ -553,7 +553,7 @@ The value is a sequence of ASCII bytes. In the example below it searches for "AW
 64
 ```
 
-The command respects `cfg.bigendian`, so flip it if your target is big-endian. The value is interpreted as a 64-bit integer (up to 8 bytes). Any leading zero bytes are dropped, so most inputs behave like 4-byte substrings, but every supplied byte participates in the endian swap:
+The command respects `cfg.bigendian`, so flip it if your target is big-endian. The value is converted to an 8-byte representation according to the endianness setting, then any leading zero bytes are skipped before searching the pattern. For example, `0x41574141` is written as 8 bytes, but only the non-zero portion is searched:
 
 ```
 [0x00000000]> e cfg.bigendian=true
@@ -563,11 +563,11 @@ The command respects `cfg.bigendian`, so flip it if your target is big-endian. T
 
 **Writing the pattern**
 
-If you prefer to inject the pattern directly, `wD <len>` writes the same data at the current seek, and `wD/ <value>` mirrors the lookup behavior:
+You can also write the De Bruijn pattern directly to memory. The `wD <len>` command writes a pattern of the specified length at the current offset, and `wD/ <value>` finds the offset of a value in the pattern (identical to `ppd/ <value>`):
 
 ```
-[0x00000000]> wD 100        # Write 100 bytes of the pattern
-[0x00000000]> wD/ 0x41574141
+[0x00000000]> wD 100        # Write 100 bytes of the pattern to memory
+[0x00000000]> wD/ 0x41574141 # Find offset (doesn't write, only searches)
 64
 ```
 
