@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -40,9 +40,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-969ddfa49e00a70eb3423444dbc81f6c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-597958c53c93a607afca12fd375c57ed.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-7ac2f9da8c2617a4fdd15004b4601015.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-597958c53c93a607afca12fd375c57ed.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-c5419881dab4e107af3db64d356923aa.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -263,9 +263,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="../../index.html" class="sidebar-logo-link">
-      </a>
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -1328,6 +1326,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#configuring-the-disassembler" id="toc-configuring-the-disassembler" class="nav-link" data-scroll-target="#configuring-the-disassembler"><span class="header-section-number">23.0.9</span> Configuring the Disassembler</a></li>
   <li><a href="#disassembly-syntax" id="toc-disassembly-syntax" class="nav-link" data-scroll-target="#disassembly-syntax"><span class="header-section-number">23.0.10</span> Disassembly Syntax</a></li>
   <li><a href="#print-gadgets" id="toc-print-gadgets" class="nav-link" data-scroll-target="#print-gadgets"><span class="header-section-number">23.0.11</span> Print gadgets</a></li>
+  <li><a href="#print-patterns" id="toc-print-patterns" class="nav-link" data-scroll-target="#print-patterns"><span class="header-section-number">23.0.12</span> Print Patterns</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/rizinorg/book/edit/master/src/basic_commands/print_modes.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -1756,8 +1755,39 @@ e asm.syntax=att</code></pre>
 <pre><code>pg 10 10 10 10 ddr</code></pre>
 <p>This will add the output of the Rizin command <code>ddr</code> be printed on the screen. The four arguments to be passed are the position (like coordinates) and the height and width of the gadget you would like to see. This command requires the configuration variable <code>scr.gadgets</code> to be turned on.</p>
 <p>See <code>pg?</code> for more information.</p>
+</section>
+<section id="print-patterns" class="level3" data-number="23.0.12">
+<h3 data-number="23.0.12" class="anchored" data-anchor-id="print-patterns"><span class="header-section-number">23.0.12</span> Print Patterns</h3>
+<p>The <code>pp</code> command group generates deterministic patterns that are handy for fuzzing, debugging, and exploit development.</p>
+<pre><code>[0x00000000]&gt; pp?
+Usage: pp[?]   # Print patterns
+| pp[ad] [len]   # Print different patterns
+| ppd &lt;len&gt;      # Print De Bruijn pattern of length &lt;len&gt;
+| ppd/ &lt;value&gt;    # Show the offset of &lt;value&gt; in the default De Bruijn pattern (honors cfg.bigendian)</code></pre>
+<section id="de-bruijn-patterns" class="level4" data-number="23.0.12.1">
+<h4 data-number="23.0.12.1" class="anchored" data-anchor-id="de-bruijn-patterns"><span class="header-section-number">23.0.12.1</span> De Bruijn patterns</h4>
+<p>De Bruijn sequences are cyclic patterns in which every substring of the chosen width appears exactly once. They’re perfect for recovering overwrite offsets after a crash.</p>
+<p><strong>Generate a De Bruijn pattern</strong></p>
+<pre><code>[0x00000000]&gt; ppd 100
+AABAACAADAAEAAFAAGAAHAAIAAJAAKAALAAMAANAAOAAPAAQAARAASAATAAUAAVAAWAAXAAYAAZAAaAAbAAcAAdAAeAAfAAgAAh</code></pre>
+<p><strong>Locate an observed value</strong></p>
+<p>Use <code>ppd/ &lt;value&gt;</code> to look up where a value appears in the De Bruijn pattern. This is the fastest way to translate a register/memory capture back into an offset. The value is a sequence of ASCII bytes. In the example below it searches for “AWAA”.</p>
+<pre><code>[0x00000000]&gt; e cfg.bigendian=false
+[0x00000000]&gt; ppd/ 0x41574141
+64</code></pre>
+<p>The command respects <code>cfg.bigendian</code>, so flip it if your target is big-endian. The value is converted to an 8-byte representation according to the endianness setting, then any leading zero bytes are skipped before searching the pattern. For example, <code>0x41574141</code> is written as 8 bytes, but only the non-zero portion is searched:</p>
+<pre><code>[0x00000000]&gt; e cfg.bigendian=true
+[0x00000000]&gt; ppd/ 0x41574141
+65</code></pre>
+<p><strong>Writing the pattern</strong></p>
+<p>You can also write the De Bruijn pattern directly to memory. The <code>wD &lt;len&gt;</code> command writes a pattern of the specified length at the current offset, and <code>wD/ &lt;value&gt;</code> finds the offset of a value in the pattern (identical to <code>ppd/ &lt;value&gt;</code>):</p>
+<pre><code>[0x00000000]&gt; wD 100        # Write 100 bytes of the pattern to memory
+[0x00000000]&gt; wD/ 0x41574141 # Find offset (doesn't write, only searches)
+64</code></pre>
+<p>See <a href="../../src/basic_commands/write.html#writing-data">Writing Data</a> for more on <code>wD</code>.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
