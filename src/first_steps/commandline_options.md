@@ -79,7 +79,7 @@ $ rizin =
 $ rizin -a ppc -b 32 ls.fat
 ```
 
-- To run a script **before** before the file is opened, you can use the `-i` option followed by the path to your script. Here's an example:
+- To run a script **before** the file is opened, you can use the `-i` option followed by the path to your script. Here's an example:
 
 ```bash
 $ rizin -i /path/to/patch.rz target.bin
