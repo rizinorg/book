@@ -22,9 +22,10 @@ Visual Studio must be installed with a Visual C++ compiler, supporting C++ libra
 
 If you need a copy of Visual Studio, the Community versions are free and work great.
 
-* [Download Visual Studio 2015 Community (registration required)](https://my.visualstudio.com/Downloads?q=Visual%20Studio%202015%20with%20Update%203)
-* [Download Visual Studio 2017 Community](https://visualstudio.microsoft.com/downloads/)
-* [Download Visual Studio 2019 Community](https://visualstudio.microsoft.com/downloads/)
+* [Download Visual Studio 2015 Community (registration required)](https://my.visualstudio.com/Downloads?q=visual%20studio%202015&wt.mc_id=o~msft~vscom~older-downloads)
+* [Download Visual Studio 2017 Community](https://my.visualstudio.com/Downloads?q=visual%20studio%202017&wt.mc_id=o~msft~vscom~older-downloads)
+* [Download Visual Studio 2019 Community](https://my.visualstudio.com/Downloads?q=visual%20studio%202019&wt.mc_id=o~msft~vscom~older-downloads)
+* [Download Visual Studio 2022 Community](https://my.visualstudio.com/Downloads?q=visual%20studio%202022&wt.mc_id=o~msft~vscom~older-downloads)
 
 #### Install Python 3 and Meson/Ninja via Conda
 It is strongly recommended you install Conda — a Python environment management system — when working with Python on the Windows platform. This will isolate the Rizin build environment from other installed Python versions and minimize potential conflicts.
@@ -96,6 +97,12 @@ Compiled binaries will be installed into the `dest` folder.
         Note 3: Change `2017` to `2019` if you are using Visual Studio 2019.
 
          `"%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"`
+    
+    * **Visual Studio 2022:**
+
+        Note: For the 32-bit version change only the `x64` at the very end of the command to `x86`.
+
+         `call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall.bat" x64`
 
     * **Visual Studio Preview:**
 
