@@ -16,3 +16,5 @@ index.tex
 /site_libs/
 /index_files/
 /docs/*
+
+**/*.quarto_ipynb

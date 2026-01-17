@@ -146,6 +146,7 @@ book:
          - src/tools/rz-bin/libraries.md
          - src/tools/rz-bin/strings.md
          - src/tools/rz-bin/program_sections.md
+         - src/tools/rz-bin/tables.md
          - src/tools/rz-diff/intro.md
          - src/tools/rz-diff/binary_diffing.md
          - src/tools/rz-asm/intro.md
