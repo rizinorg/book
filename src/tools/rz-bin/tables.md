@@ -1,12 +1,12 @@
-# Table API
+# Table Output and Queries
 
 Rizin generates tables for certain commands, such as `aflt`, `is`, `izz`, and `il`, when they are executed on a file. These commands return structured data in the form of tables.
 
-The Table API is used to process and display this data. Using table specifiers, users can sort rows, filter (grep) data, select specific columns or rows, paginate results, and limit the output. Tables can also be printed in different output formats such as CSV and JSON, or displayed in various textual layouts, including with borders and headers, with headers only, or without headers.
+The table output is used to process and display data. Using the table query syntax, users can sort rows, filter (grep) data, select specific columns or rows, paginate results, and limit the output. Tables can also be printed in different output formats such as CSV and JSON, or displayed in various textual layouts, including with borders and headers, with headers only, or without headers.
 
 ## Table Command Syntax
 
-In Rizin, the help command for table-based commands is `:?`.
+In Rizin, the help command for the table query syntax is `:?`.
 
 ```text
 Usage:
@@ -16,8 +16,8 @@ Note: Table specifiers are applied from left to right. Output format specifiers 
 
 Table format specifiers `(<table_spec>)`:
 ```
-| <col>/sort/<inc|dec>      # Sort table by column <col> in increasing or decreasing order.
-| <col>/sortlen/<inc|dec>   # Sort table length of column <col> in increasing or decreasing order.
+| <col>/sort/<rev>     # Sort table by column <col> in reverse order
+| <col>/sortlen/rev  # Sort table by column <col> length in reverse order.
 | <col>/cols[/<col2>[/<col3>...]] # Show only specified columns in the table.
 | <col>                     # Show only column <col> (it must not have the same name as an output format specifier).
 | <col>/gt/<val>            # Grep rows where column <col> is greater than <val>.
@@ -36,6 +36,13 @@ Table format specifiers `(<table_spec>)`:
 | <col>/maxlen/<value>      # Grep rows where the length of column <col> is less than <value>.
 | <col>/sum/<value>         # Sum all the values of column <col>.
 ```
+Note: The `/sort` and `/sortlen` commands sort values in increasing order by default. Adding `/rev` reverses the order of the output.
+
+Example:
+
+`aflt:nbbs/sort` sorts the results in increasing order of `nbbs` values.
+
+`aflt:nbbs/sort/rev` sorts the results in decreasing order of `nbbs` values.
 
 Output format specifiers `(<output_spec>)`:
 ```
@@ -51,19 +58,19 @@ Some examples which give a general overview of how to use.
 
 ### Example 1: Filter, sort, and format analyzed functions
 
-```text
-aflt:addr/cols/name/nbbs:size/gt/32:nbbs/gt/1:nbbs/lt/10:nbbs/sort/dec:fancy
 ```
-This command selects the `addr`, `name`, and `nbbs` columns. It filters functions whose size is greater than 32 bytes and keeps only those functions whose number of basic blocks (`nbbs`) is greater than 1 and less than 10. The results are sorted by nbbs in decreasing order and displayed using the fancy table format.
+aflt:addr/cols/name/nbbs:size/gt/32:nbbs/gt/1:nbbs/lt/10:nbbs/sort/rev:fancy
+```
+This command selects the `addr`, `name`, and `nbbs` columns. It filters functions whose size is greater than 32 bytes and keeps only those functions whose number of basic blocks (`nbbs`) is greater than 1 and less than 10. The results are displayed in reverse order of nbbs using the fancy table format.
 
 ### Example 2: Paginate strings, filter by length, and export as CSV
 ```
-izz:string/minlen/8:length/sort/dec:*/page/0/15:csv
+izz:string/minlen/8:length/sort/rev:*/page/0/15:csv
 ```
-This command filters strings whose length is greater than 8 characters and sorts them by length in decreasing order. It then paginates the output to show only the first page containing 15 rows and prints the result in CSV format.
+This command filters strings whose length is greater than 8 characters and sorts them by length in reverse order. It then paginates the output to show only the first page containing 15 rows and prints the result in CSV format.
 
 ### Example 3: Combine uniqueness, filtering, and JSON output for symbols
 ```
-is:name/uniq:addr/gt/0x1000:name/str/init:addr/sort/inc:json
+is:name/uniq:addr/gt/0x1000:name/str/init:addr/sort:json
 ```
-This command keeps only the first occurrence of each unique symbol name. It filters symbols whose address is greater than `0x1000` and whose name contains the substring `init`. The results are sorted by address in increasing order and printed in JSON format.
+This command keeps only the first occurrence of each unique symbol name. It filters symbols whose address is greater than `0x1000` and whose name contains the substring `init`. The results are sorted in increasing order.
