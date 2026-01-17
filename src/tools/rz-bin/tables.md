@@ -16,8 +16,8 @@ Note: Table specifiers are applied from left to right. Output format specifiers 
 
 Table format specifiers `(<table_spec>)`:
 ```
-| <col>/sort/<rev>     # Sort table by column <col> in reverse order
-| <col>/sortlen/rev  # Sort table by column <col> length in reverse order.
+| <col>/sort/rev            # Sort table by column <col> in reverse order.
+| <col>/sortlen/rev         # Sort table by column <col> length in reverse order.
 | <col>/cols[/<col2>[/<col3>...]] # Show only specified columns in the table.
 | <col>                     # Show only column <col> (it must not have the same name as an output format specifier).
 | <col>/gt/<val>            # Grep rows where column <col> is greater than <val>.
