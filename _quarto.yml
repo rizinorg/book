@@ -38,6 +38,7 @@ book:
          - src/configuration/colors.md
          - src/configuration/evars.md
          - src/configuration/initial_scripts.md
+         - src/configuration/global_variables.md
          - src/configuration/compile_time_variables.md
          - src/configuration/run_time_variables.md
 

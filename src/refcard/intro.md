@@ -67,6 +67,8 @@ Global variables appear after auto-analysis or after adding them manually.
 | avgp name           | Print global variable     |
 | avgx name           | Show xrefs to the global  |
 
+For more info check [this](/src/configuration/global_variables.md).
+
 ## Information
 
 Binary files have information stored inside the headers. The `i` command uses the RzBin API and allows us to the same things rz-bin does. Those are the most common ones.
