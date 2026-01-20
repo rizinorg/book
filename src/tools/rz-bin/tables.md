@@ -52,6 +52,7 @@ Output format specifiers `(<output_spec>)`:
 | simple # Print the table in a simple form, only with headers.
 | quiet  # Print the table in a simple form, without headers.
 ```
+
 Some examples which give a general overview of how to use.
 
 ---
