@@ -53,6 +53,8 @@ Output format specifiers `(<output_spec>)`:
 | quiet  # Print the table in a simple form, without headers.
 ```
 
+Note: Address-based table filters operate on the address type exposed by the table column. Columns such as `addr` and `vaddr` refer to virtual addresses, while `paddr` refers to physical addresses (file offsets). The table query engine does not perform address translation, therefore table filtering depends on the address type of the selected column.
+
 Some examples which give a general overview of how to use.
 
 ---
