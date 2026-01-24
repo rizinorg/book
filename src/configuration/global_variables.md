@@ -1,12 +1,18 @@
-## Global Variables(avg commands)
+# Global Variables(`avg` Commands)
 
-Global variables are declared outside any function or block and are accessible throughout the program. They persist for the program's entire execution. This improves readability, enables better analysis and makes cross-references easier to follow.
+Global variables are declared outside of any function or block and are accessible throughout the entire program. They persist for the full duration of execution.
 
-Note: In Rizin you can analyze using `aa` or `aaa`. You will get global variables only after analyzing, so make sure you analyze first.
+In reverse engineering, identifying global variables:
 
-Rizin provides a list of `avg` commands to list, add, modify, delete and inspect the global variables found in the analysis of the executable file.
+- Improves code readability  
+- Makes cross-references easier to follow  
+- Helps with data-flow and structure analysis  
 
-Note: The help command to list all `avg` commands is: `avg?`
+**Important:**
+> In Rizin, global variables are identified during analysis.  
+> Run `aa` or `aaa` before using `avg` commands, otherwise no globals will appear.
+
+The help command to list all `avg` commands is: `avg?`
 ```
  avgl[jqt] [<var_name>]          # show/list global variables
  avga <var_name> <type>          # add global variable manually
@@ -35,6 +41,8 @@ Note: The help command to list all `avg` commands is: `avg?`
  `avga <var_name> <type>` This command lets you manually add global variables with their name and type.
 
  You use then when a global variables is missed during the analysis. Here `<type>` means the datatype of the variable. Example int, char, long.
+
+ Rizin Example : 
 
  **Deleting Global Variables**
 
@@ -66,3 +74,44 @@ Note: The help command to list all `avg` commands is: `avg?`
  avgxq <name>     # print all xrefs to the global variable (quiet mode)
  ```
  There are two modes of display quiet and JSON.
+
+ A working example on how the commands work. Lets take a sample file with no global variables.
+
+ ```
+ [0x00001040]> avglt
+name type size address decl_file decl_line decl_col
+――――――――――――――――――――――――――――――――――――――――――――――――――――
+[0x00001040]> avga test_variable int
+[0x00001040]> avglt
+name          type size address decl_file decl_line decl_col
+―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+test_variable int   0x4  0x1040 -                -1       -1
+[0x00001040]> avgp test_variable
+ int : 0x00001040 = 3644689736
+[0x00001040]> avgt test_variable char
+[0x00001040]> avgp test_variable
+ char : 0x00001040 = 'H'
+[0x00001040]> avgn test_variable renamed_variable
+[0x00001040]> avglt
+name             type size address decl_file decl_line decl_col
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+renamed_variable char  0x1  0x1040 -                -1       -1
+[0x00001040]> avgx renamed_variable
+[0x00001040]> avgm renamed_variable
+[0x00001040]> avglt
+name type size address decl_file decl_line decl_col
+――――――――――――――――――――――――――――――――――――――――――――――――――――
+ ```
+### **What Was Done in This Example**
+
+- Ran `avglt` to check for existing global variables (none were present).
+- Used `avga test_variable int` to manually create a new global variable of type `int`.
+- Ran `avglt` again to confirm the variable was successfully added.
+- Used `avgp test_variable` to print the value at that memory location as an `int`.
+- Changed the variable type with `avgt test_variable char`.
+- Printed the value again using `avgp test_variable`, now interpreted as a `char` (`'H'`), showing how type affects data interpretation.
+- Renamed the variable using `avgn test_variable renamed_variable`.
+- Ran `avglt` to verify the variable name and updated type were reflected.
+- Used `avgx renamed_variable` to check for cross-references (none found since it was manually added).
+- Deleted the variable using `avgm renamed_variable`.
+- Ran `avglt` one final time to confirm the global variable list was empty again.
