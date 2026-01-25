@@ -65,7 +65,6 @@ Some examples which give a general overview of how to use.
 aflt:addr/cols/name/nbbs:size/gt/32:nbbs/gt/1:nbbs/lt/10:nbbs/sort/rev:fancy
 ```
 This command selects the `addr`, `name`, and `nbbs` columns. It filters functions whose size is greater than 32 bytes and keeps only those functions whose number of basic blocks (`nbbs`) is greater than 1 and less than 10. The results are displayed in reverse order of nbbs using the fancy table format.
-We are using `addr` for filtering, which means that the filtering is performed on virtual addresses.
 
 ### Example 2: Paginate strings, filter by length, and export as CSV
 ```
@@ -75,7 +74,6 @@ This command filters strings whose length is greater than 8 characters and sorts
 
 ### Example 3: Combine uniqueness, filtering, and JSON output for symbols
 ```
-is:name/uniq:addr/gt/0x1000:name/str/init:addr/sort:json
+is:name/uniq:vaddr/gt/0x1000:name/str/init:addr/sort:json
 ```
 This command keeps only the first occurrence of each unique symbol name. It filters symbols whose address is greater than `0x1000` and whose name contains the substring `init`. The results are sorted in increasing order.
-We are using `addr` for filtering, which means that the filtering is performed on virtual addresses.
