@@ -1,4 +1,4 @@
-# Global Variables(`avg` Commands)
+# Global Variables (`avg` Commands)
 
 Global variables are declared outside of any function or block and are accessible throughout the entire program. They persist for the full duration of execution.
 
