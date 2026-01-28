@@ -1367,9 +1367,10 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>If you need a copy of Visual Studio, the Community versions are free and work great.</p>
 <ul>
-<li><a href="https://my.visualstudio.com/Downloads?q=Visual%20Studio%202015%20with%20Update%203">Download Visual Studio 2015 Community (registration required)</a></li>
-<li><a href="https://visualstudio.microsoft.com/downloads/">Download Visual Studio 2017 Community</a></li>
-<li><a href="https://visualstudio.microsoft.com/downloads/">Download Visual Studio 2019 Community</a></li>
+<li><a href="https://my.visualstudio.com/Downloads?q=visual%20studio%202015&amp;wt.mc_id=o~msft~vscom~older-downloads">Download Visual Studio 2015 Community (registration required)</a></li>
+<li><a href="https://my.visualstudio.com/Downloads?q=visual%20studio%202017&amp;wt.mc_id=o~msft~vscom~older-downloads">Download Visual Studio 2017 Community</a></li>
+<li><a href="https://my.visualstudio.com/Downloads?q=visual%20studio%202019&amp;wt.mc_id=o~msft~vscom~older-downloads">Download Visual Studio 2019 Community</a></li>
+<li><a href="https://my.visualstudio.com/Downloads?q=visual%20studio%202022&amp;wt.mc_id=o~msft~vscom~older-downloads">Download Visual Studio 2022 Community</a></li>
 </ul>
 </section>
 <section id="install-python-3-and-mesonninja-via-conda" class="level4" data-number="4.0.2.2">
@@ -1440,6 +1441,9 @@ ul.task-list li input[type="checkbox"] {
 <p>Note 2: Change <code>vcvars32.bat</code> to <code>vcvars64.bat</code> in the command below for the 64-bit version.</p>
 <p>Note 3: Change <code>2017</code> to <code>2019</code> if you are using Visual Studio 2019.</p>
 <p><code>"%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"</code></p></li>
+<li><p><strong>Visual Studio 2022:</strong></p>
+<p>Note: For the 32-bit version change only the <code>x64</code> at the very end of the command to <code>x86</code>.</p>
+<p><code>call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall.bat" x64</code></p></li>
 <li><p><strong>Visual Studio Preview:</strong></p>
 <p>Note 1: Change <code>Community</code> to either <code>Professional</code> or <code>Enterprise</code> in the command below depending on the version installed.</p>
 <p>Note 2: Change <code>vcvars32.bat</code> to <code>vcvars64.bat</code> in the command below for the 64-bit version.</p>
