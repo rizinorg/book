@@ -67,7 +67,7 @@ Global variables appear after auto-analysis or after adding them manually.
 | avgp name           | Print global variable     |
 | avgx name           | Show xrefs to the global  |
 
-For more info check [this](/src/configuration/global_variables.md).
+For more info check the [global variable documentation](/src/configuration/global_variables.md).
 
 ## Information
 
