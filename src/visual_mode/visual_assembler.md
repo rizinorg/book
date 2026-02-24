@@ -1,7 +1,7 @@
 # Visual Assembler
 
 You can use Visual Mode to assemble code (patch) using `A`.
-For example, let's `xor` the EAX register instead of EBP register, here.
+For example, let's change the condition and target for the first conditional jump instruction in the example below.
 To assemble, seek to the location you want to patch and press `A`.
 
 ![Before](assembler_before.png)
