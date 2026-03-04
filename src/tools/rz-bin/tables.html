@@ -8,7 +8,7 @@
 
 <meta name="description" content="This book focuses on the Rizin reverse engineering framework">
 
-<title>1&nbsp; The Rizin Framework – The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework</title>
+<title>89&nbsp; Table Output and Queries – The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,30 +24,30 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<link href="../../src/introduction/getting_rizin.html" rel="next">
-<link href="../../index.html" rel="prev">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-8b4baf804e461d9b72633f0de59a0cac.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-f1aadacce99040138bbb613f9330654f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-8b4baf804e461d9b72633f0de59a0cac.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-0445027613d7f19d285f3df24f0e4238.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-f71687a9f24ade8682aaea117735bc7c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-0445027613d7f19d285f3df24f0e4238.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../src/tools/rz-diff/intro.html" rel="next">
+<link href="../../../src/tools/rz-bin/program_sections.html" rel="prev">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-8b4baf804e461d9b72633f0de59a0cac.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-f1aadacce99040138bbb613f9330654f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-8b4baf804e461d9b72633f0de59a0cac.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-0445027613d7f19d285f3df24f0e4238.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-f71687a9f24ade8682aaea117735bc7c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-0445027613d7f19d285f3df24f0e4238.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -250,7 +250,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/introduction/overview.html">Introduction</a></li><li class="breadcrumb-item"><a href="../../src/introduction/overview.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Rizin Framework</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../src/tools/intro.html">Command Line Tools</a></li><li class="breadcrumb-item"><a href="../../../src/tools/rz-bin/tables.html"><span class="chapter-number">89</span>&nbsp; <span class="chapter-title">Table Output and Queries</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -265,7 +265,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../../">The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework</a> 
+      <a href="../../../">The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework</a> 
         <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/rizinorg/book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
@@ -309,7 +309,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Welcome</span></a>
   </div>
 </li>
@@ -324,31 +324,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/introduction/overview.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../src/introduction/overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Rizin Framework</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/introduction/getting_rizin.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/introduction/getting_rizin.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Rizin</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/introduction/compilation_portability.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/introduction/compilation_portability.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Compilation and Portability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/introduction/windows_compilation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/introduction/windows_compilation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Windows</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/introduction/compilation_android.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/introduction/compilation_android.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Android</span></span></a>
   </div>
 </li>
@@ -365,37 +365,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/first_steps/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Basic Rizin Usage</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/commandline_options.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/first_steps/commandline_options.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Shell Command-line Options</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/commandline_rizin.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/first_steps/commandline_rizin.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Rizin Command-line</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/expressions.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/first_steps/expressions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Expressions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/basic_debugger_session.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/first_steps/basic_debugger_session.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Basic Debugger Session</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/first_steps/contributing.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/first_steps/contributing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Contributing</span></span></a>
   </div>
 </li>
@@ -412,37 +412,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/configuration/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/configuration/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/configuration/colors.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/configuration/colors.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Colors &amp; Themes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/configuration/evars.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/configuration/evars.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Evaluable Variables</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/configuration/initial_scripts.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/configuration/initial_scripts.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Initial Scripts</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/configuration/compile_time_variables.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/configuration/compile_time_variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Compile-Time Variables</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/configuration/run_time_variables.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/configuration/run_time_variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Run-Time Variables</span></span></a>
   </div>
 </li>
@@ -459,73 +459,73 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/basic_commands/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/basic_commands/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Basic Commands</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/basic_commands/seeking.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/basic_commands/seeking.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Seeking</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/basic_commands/block_size.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/basic_commands/block_size.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Block Size</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/basic_commands/sections.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/basic_commands/sections.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Sections</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/basic_commands/mapping_files.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/basic_commands/mapping_files.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Mapping Files</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/basic_commands/print_modes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/basic_commands/print_modes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Print Modes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/basic_commands/flags.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/basic_commands/flags.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Flags</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/basic_commands/write.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/basic_commands/write.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Writing Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/basic_commands/yank_paste.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/basic_commands/yank_paste.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Yank/Paste</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/basic_commands/comparing_bytes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/basic_commands/comparing_bytes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Comparing Bytes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/basic_commands/sdb.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/basic_commands/sdb.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">SDB</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/basic_commands/dietline.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/basic_commands/dietline.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Dietline</span></span></a>
   </div>
 </li>
@@ -542,31 +542,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/visual_mode/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/visual_mode/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Visual Mode</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/visual_mode/visual_disassembly.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/visual_mode/visual_disassembly.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Visual Disassembly</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/visual_mode/visual_assembler.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/visual_mode/visual_assembler.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Visual Assembler</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/visual_mode/visual_configuration_editor.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/visual_mode/visual_configuration_editor.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Visual Configuration Editor</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/visual_mode/visual_panels.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/visual_mode/visual_panels.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Visual Panels</span></span></a>
   </div>
 </li>
@@ -583,49 +583,49 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/search_bytes/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/search_bytes/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Searching for Bytes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/search_bytes/basic_searches.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/search_bytes/basic_searches.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Basic Search</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/search_bytes/configurating_the_search.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/search_bytes/configurating_the_search.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Configuring Search Options</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/search_bytes/pattern_search.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/search_bytes/pattern_search.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Pattern Matching Search</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/search_bytes/automation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/search_bytes/automation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Search Automation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/search_bytes/backward_search.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/search_bytes/backward_search.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Searching Backwards</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/search_bytes/search_in_assembly.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/search_bytes/search_in_assembly.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Assembler Search</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/search_bytes/searching_aes_keys.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/search_bytes/searching_aes_keys.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Searching for AES Keys</span></span></a>
   </div>
 </li>
@@ -642,25 +642,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/disassembling/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/disassembling/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">Disassembling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/disassembling/adding_metadata.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/disassembling/adding_metadata.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">Adding Metadata to Disassembly</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/disassembling/rzil.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/disassembling/rzil.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">45</span>&nbsp; <span class="chapter-title">RzIL</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/disassembling/esil.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/disassembling/esil.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">46</span>&nbsp; <span class="chapter-title">ESIL</span></span></a>
   </div>
 </li>
@@ -677,73 +677,73 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/analysis/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/analysis/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">47</span>&nbsp; <span class="chapter-title">Data and Code Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/analysis/code_analysis.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/analysis/code_analysis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">48</span>&nbsp; <span class="chapter-title">Code Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/analysis/variables.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/analysis/variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">49</span>&nbsp; <span class="chapter-title">Managing variables</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/analysis/types.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/analysis/types.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">50</span>&nbsp; <span class="chapter-title">Types</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/analysis/calling_conventions.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/analysis/calling_conventions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">51</span>&nbsp; <span class="chapter-title">Calling Conventions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/analysis/vtables.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/analysis/vtables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">52</span>&nbsp; <span class="chapter-title">Virtual Tables</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/analysis/syscalls.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/analysis/syscalls.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">53</span>&nbsp; <span class="chapter-title">Syscalls</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/analysis/emulation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/analysis/emulation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Emulation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/analysis/symbols.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/analysis/symbols.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">55</span>&nbsp; <span class="chapter-title">Symbols</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/analysis/signatures.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/analysis/signatures.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">56</span>&nbsp; <span class="chapter-title">Signatures</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/analysis/graphs.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/analysis/graphs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">57</span>&nbsp; <span class="chapter-title">Graph commands</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/analysis/cpu_platform_profiles.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/analysis/cpu_platform_profiles.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">58</span>&nbsp; <span class="chapter-title">CPU and platform profiles</span></span></a>
   </div>
 </li>
@@ -760,25 +760,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/scripting/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/scripting/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">59</span>&nbsp; <span class="chapter-title">Scripting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/scripting/loops.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/scripting/loops.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">60</span>&nbsp; <span class="chapter-title">Loops</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/scripting/macros.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/scripting/macros.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">61</span>&nbsp; <span class="chapter-title">Macros</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/scripting/rz-pipe.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/scripting/rz-pipe.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">62</span>&nbsp; <span class="chapter-title">Rz-pipe</span></span></a>
   </div>
 </li>
@@ -795,61 +795,61 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/debugger/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Debugger</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/getting_started.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/debugger/getting_started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">64</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/debugger/migration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">65</span>&nbsp; <span class="chapter-title">Migration from IDA, GDB or WinDBG</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/registers.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/debugger/registers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">66</span>&nbsp; <span class="chapter-title">Registers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/memory_maps.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/debugger/memory_maps.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">67</span>&nbsp; <span class="chapter-title">Memory Maps</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/heap.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/debugger/heap.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">68</span>&nbsp; <span class="chapter-title">Heap</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/files.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/debugger/files.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">69</span>&nbsp; <span class="chapter-title">Files</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/revdebug.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/debugger/revdebug.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">70</span>&nbsp; <span class="chapter-title">Reverse Debugging</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/windows_messages.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/debugger/windows_messages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Windows Messages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/debugger/apple.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/debugger/apple.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">macOS/iOS</span></span></a>
   </div>
 </li>
@@ -866,19 +866,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/remote_access/remoting_capabilities.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/remote_access/remoting_capabilities.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title">Remote Access Capabilities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/remote_access/remote_gdb.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/remote_access/remote_gdb.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">74</span>&nbsp; <span class="chapter-title">Debugging with gdbserver</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/remote_access/windbg.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/remote_access/windbg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">75</span>&nbsp; <span class="chapter-title">WinDBG Kernel-mode Debugging (KD)</span></span></a>
   </div>
 </li>
@@ -895,145 +895,145 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">76</span>&nbsp; <span class="chapter-title">Tools</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-ax/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-ax/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">77</span>&nbsp; <span class="chapter-title">Rz-ax</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-find/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-find/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">78</span>&nbsp; <span class="chapter-title">Rz-find</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-run/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-run/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">79</span>&nbsp; <span class="chapter-title">Rz-run</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-bin/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-bin/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">80</span>&nbsp; <span class="chapter-title">Rz-bin — Show Properties of a Binary</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-bin/file_identification.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-bin/file_identification.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">81</span>&nbsp; <span class="chapter-title">File Properties Identification</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-bin/entrypoints.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-bin/entrypoints.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">82</span>&nbsp; <span class="chapter-title">Code Entrypoints</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-bin/imports.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-bin/imports.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">83</span>&nbsp; <span class="chapter-title">Imports</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-bin/exports.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-bin/exports.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">84</span>&nbsp; <span class="chapter-title">Exports</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-bin/symbols.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-bin/symbols.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">85</span>&nbsp; <span class="chapter-title">Symbols (Exports)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-bin/libraries.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-bin/libraries.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">86</span>&nbsp; <span class="chapter-title">List Libraries</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-bin/strings.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-bin/strings.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">87</span>&nbsp; <span class="chapter-title">Strings</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-bin/program_sections.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-bin/program_sections.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">88</span>&nbsp; <span class="chapter-title">Program Sections</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-bin/tables.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-bin/tables.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">89</span>&nbsp; <span class="chapter-title">Table Output and Queries</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-diff/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-diff/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">90</span>&nbsp; <span class="chapter-title">Rz-diff</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-diff/binary_diffing.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-diff/binary_diffing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">91</span>&nbsp; <span class="chapter-title">Rz-Diff (binary and text diffing utility)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-asm/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-asm/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">92</span>&nbsp; <span class="chapter-title">Rz-asm</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-asm/assemble.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-asm/assemble.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">93</span>&nbsp; <span class="chapter-title">Assembler</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-asm/disassemble.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-asm/disassemble.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">94</span>&nbsp; <span class="chapter-title">Disassembler</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-asm/config.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-asm/config.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">95</span>&nbsp; <span class="chapter-title">Disassembler Configuration</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-gg/rz-gg.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-gg/rz-gg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">96</span>&nbsp; <span class="chapter-title">Rz-gg</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-gg/lang.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-gg/lang.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">97</span>&nbsp; <span class="chapter-title">Syntax of the language</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-hash/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-hash/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">98</span>&nbsp; <span class="chapter-title">Rz-hash</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tools/rz-hash/rz-hash_tool.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/tools/rz-hash/rz-hash_tool.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">99</span>&nbsp; <span class="chapter-title">Examples</span></span></a>
   </div>
 </li>
@@ -1050,61 +1050,61 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/plugins/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/plugins/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">100</span>&nbsp; <span class="chapter-title">Plugins</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/plugins/ioplugins.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/plugins/ioplugins.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">101</span>&nbsp; <span class="chapter-title">IO plugins</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/plugins/dev-asm.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/plugins/dev-asm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">102</span>&nbsp; <span class="chapter-title">Implementing a new disassembly plugin</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/plugins/dev-analysis.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/plugins/dev-analysis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">103</span>&nbsp; <span class="chapter-title">Implementing a new analysis plugin</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/plugins/dev-bin.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/plugins/dev-bin.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">104</span>&nbsp; <span class="chapter-title">Implementing a new format</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/plugins/dev-other.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/plugins/dev-other.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">105</span>&nbsp; <span class="chapter-title">Write a debugger plugin</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/plugins/python.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/plugins/python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">106</span>&nbsp; <span class="chapter-title">Python plugins</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/plugins/debug.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/plugins/debug.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">107</span>&nbsp; <span class="chapter-title">Debugging</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/plugins/testing.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/plugins/testing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">108</span>&nbsp; <span class="chapter-title">Testing the plugin</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/plugins/rz-pm.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/plugins/rz-pm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">109</span>&nbsp; <span class="chapter-title">Creating an rz-pm package of the plugin</span></span></a>
   </div>
 </li>
@@ -1121,157 +1121,157 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">110</span>&nbsp; <span class="chapter-title">Crackmes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/ioli/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/ioli/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">111</span>&nbsp; <span class="chapter-title">IOLI CrackMes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/ioli/ioli_0x00.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/ioli/ioli_0x00.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">112</span>&nbsp; <span class="chapter-title">IOLI 0x00</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/ioli/ioli_0x01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/ioli/ioli_0x01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">113</span>&nbsp; <span class="chapter-title">IOLI 0x01</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/ioli/ioli_0x02.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/ioli/ioli_0x02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">114</span>&nbsp; <span class="chapter-title">IOLI 0x02</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/ioli/ioli_0x03.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/ioli/ioli_0x03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">115</span>&nbsp; <span class="chapter-title">IOLI 0x03</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/ioli/ioli_0x04.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/ioli/ioli_0x04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">116</span>&nbsp; <span class="chapter-title">IOLI 0x04</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/ioli/ioli_0x05.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/ioli/ioli_0x05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">117</span>&nbsp; <span class="chapter-title">IOLI 0x05</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/ioli/ioli_0x06.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/ioli/ioli_0x06.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">118</span>&nbsp; <span class="chapter-title">IOLI 0x06</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/ioli/ioli_0x07.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/ioli/ioli_0x07.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">119</span>&nbsp; <span class="chapter-title">IOLI 0x07</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/ioli/ioli_0x08.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/ioli/ioli_0x08.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">120</span>&nbsp; <span class="chapter-title">IOLI 0x08</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/ioli/ioli_0x09.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/ioli/ioli_0x09.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">121</span>&nbsp; <span class="chapter-title">IOLI 0x09</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/avatao/01-reverse4/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/avatao/01-reverse4/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">122</span>&nbsp; <span class="chapter-title">Avatao R3v3rs3 4</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/avatao/01-reverse4/rizin.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/avatao/01-reverse4/rizin.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">123</span>&nbsp; <span class="chapter-title">.rizin</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/avatao/01-reverse4/first_steps.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/avatao/01-reverse4/first_steps.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">124</span>&nbsp; <span class="chapter-title">.first_steps</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/avatao/01-reverse4/main.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/avatao/01-reverse4/main.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">125</span>&nbsp; <span class="chapter-title">.main</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/avatao/01-reverse4/vmloop.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/avatao/01-reverse4/vmloop.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">126</span>&nbsp; <span class="chapter-title">.vmloop</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/avatao/01-reverse4/instructionset.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/avatao/01-reverse4/instructionset.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">127</span>&nbsp; <span class="chapter-title">.instructionset</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/avatao/01-reverse4/bytecode.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/avatao/01-reverse4/bytecode.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">128</span>&nbsp; <span class="chapter-title">.bytecode</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/avatao/01-reverse4/outro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/avatao/01-reverse4/outro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">129</span>&nbsp; <span class="chapter-title">.outro</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/hackthebox/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/hackthebox/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">130</span>&nbsp; <span class="chapter-title">hackthebox</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/hackthebox/find-the-easy-pass/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/hackthebox/find-the-easy-pass/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">131</span>&nbsp; <span class="chapter-title">Find The Easy Pass</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/hackthebox/find-the-easy-pass/identification.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/hackthebox/find-the-easy-pass/identification.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">132</span>&nbsp; <span class="chapter-title">identification</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/hackthebox/find-the-easy-pass/find-the-validation-routine.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/hackthebox/find-the-easy-pass/find-the-validation-routine.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">133</span>&nbsp; <span class="chapter-title">Find the validation routine</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/hackthebox/find-the-easy-pass/fire-up-the-debugger.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/hackthebox/find-the-easy-pass/fire-up-the-debugger.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">134</span>&nbsp; <span class="chapter-title">Fire up the debugger</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/crackmes/hackthebox/find-the-easy-pass/bonus.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/crackmes/hackthebox/find-the-easy-pass/bonus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">135</span>&nbsp; <span class="chapter-title">Bonus</span></span></a>
   </div>
 </li>
@@ -1288,7 +1288,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/refcard/intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/refcard/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">136</span>&nbsp; <span class="chapter-title">Rizin Reference Card</span></span></a>
   </div>
 </li>
@@ -1305,7 +1305,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/acknowledgments/credits.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../src/acknowledgments/credits.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">137</span>&nbsp; <span class="chapter-title">Authors &amp; Contributors</span></span></a>
   </div>
 </li>
@@ -1321,25 +1321,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#rizin" id="toc-rizin" class="nav-link active" data-scroll-target="#rizin"><span class="header-section-number">1.0.1</span> rizin</a></li>
-  <li><a href="#rz-bin" id="toc-rz-bin" class="nav-link" data-scroll-target="#rz-bin"><span class="header-section-number">1.0.2</span> rz-bin</a></li>
-  <li><a href="#rz-asm" id="toc-rz-asm" class="nav-link" data-scroll-target="#rz-asm"><span class="header-section-number">1.0.3</span> rz-asm</a></li>
-  <li><a href="#rz-hash" id="toc-rz-hash" class="nav-link" data-scroll-target="#rz-hash"><span class="header-section-number">1.0.4</span> rz-hash</a></li>
-  <li><a href="#rz-diff" id="toc-rz-diff" class="nav-link" data-scroll-target="#rz-diff"><span class="header-section-number">1.0.5</span> rz-diff</a></li>
-  <li><a href="#rz-find" id="toc-rz-find" class="nav-link" data-scroll-target="#rz-find"><span class="header-section-number">1.0.6</span> rz-find</a></li>
-  <li><a href="#rz-gg" id="toc-rz-gg" class="nav-link" data-scroll-target="#rz-gg"><span class="header-section-number">1.0.7</span> rz-gg</a></li>
-  <li><a href="#rz-run" id="toc-rz-run" class="nav-link" data-scroll-target="#rz-run"><span class="header-section-number">1.0.8</span> rz-run</a></li>
-  <li><a href="#rz-ax" id="toc-rz-ax" class="nav-link" data-scroll-target="#rz-ax"><span class="header-section-number">1.0.9</span> rz-ax</a></li>
+  <li><a href="#table-command-syntax" id="toc-table-command-syntax" class="nav-link active" data-scroll-target="#table-command-syntax"><span class="header-section-number">89.1</span> Table Command Syntax</a>
+  <ul class="collapse">
+  <li><a href="#example-1-filter-sort-and-format-analyzed-functions" id="toc-example-1-filter-sort-and-format-analyzed-functions" class="nav-link" data-scroll-target="#example-1-filter-sort-and-format-analyzed-functions"><span class="header-section-number">89.1.1</span> Example 1: Filter, sort, and format analyzed functions</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/rizinorg/book/edit/master/src/introduction/overview.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/rizinorg/book/edit/master/src/tools/rz-bin/tables.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/introduction/overview.html">Introduction</a></li><li class="breadcrumb-item"><a href="../../src/introduction/overview.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Rizin Framework</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../src/tools/intro.html">Command Line Tools</a></li><li class="breadcrumb-item"><a href="../../../src/tools/rz-bin/tables.html"><span class="chapter-number">89</span>&nbsp; <span class="chapter-title">Table Output and Queries</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Rizin Framework</span></h1>
+<h1 class="title"><span class="chapter-number">89</span>&nbsp; <span class="chapter-title">Table Output and Queries</span></h1>
 </div>
 
 
@@ -1356,174 +1351,57 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Rizin is a free and open-source reverse engineering framework that delivers a comprehensive binary analysis experience. It focuses on usability, stability, and functional features, striving to create a welcoming environment for developers and users.</p>
-<p>At its core, Rizin consists of a set of small command-line utilities. These utilities can be used in tandem with Rizin or independently, each serving specific purposes. While this chapter provides a brief introduction to these tools, dedicated sections for each tool can be found at the end of this book for more detailed information.</p>
-<section id="rizin" class="level3" data-number="1.0.1">
-<h3 data-number="1.0.1" class="anchored" data-anchor-id="rizin"><span class="header-section-number">1.0.1</span> rizin</h3>
-<p>The primary command line tool within the framework is <code>rizin</code>. It encompasses various features such as a disassembler, hexadecimal editor, and debugger. Rizin enables you to treat multiple input/output sources, such as plain text files, executables, kernel drivers, processes, etc., as if they were straightforward text files.</p>
-<p>It incorporates a sophisticated command line interface for navigating through the accessed resource, analyzing data, disassembling, patching binaries, comparing data, searching, replacing, and visualizing. Furthermore, scripting capabilities are available with a range of languages, including Python, Haskell, OCaml, JavaScript, and others.</p>
-</section>
-<section id="rz-bin" class="level3" data-number="1.0.2">
-<h3 data-number="1.0.2" class="anchored" data-anchor-id="rz-bin"><span class="header-section-number">1.0.2</span> rz-bin</h3>
-<p>The <code>rz-bin</code> utility serves the purpose of extracting information from executable binaries, encompassing formats like ELF, PE, Java CLASS, Mach-O, and any other format supported by rizin plugins. Within the core functionality, <code>rz-bin</code> plays a crucial role in obtaining data such as exported symbols, imports, file details, cross references, library dependencies, and sections.</p>
-<section id="examples" class="level4" data-number="1.0.2.1">
-<h4 data-number="1.0.2.1" class="anchored" data-anchor-id="examples"><span class="header-section-number">1.0.2.1</span> Examples</h4>
-<pre><code>$ rz-bin -I unknown.bin
-[Info]
-arch     x86
-cpu      N/A
-baddr    0x00000000
-binsz    0x000213b3
-bintype  elf
-bits     64
-class    ELF64
-compiler GCC: (GNU) 13.2.1 20230801
-dbg_file N/A
-endian   LE
-hdr.csum N/A
-guid     N/A
-intrp    /lib64/ld-linux-x86-64.so.2
-laddr    0x00000000
-lang     c
-machine  AMD x86-64 architecture
-maxopsz  16
-minopsz  1
-os       linux
-cc       N/A
-pcalign  0
-relro    full
-rpath    NONE
-subsys   linux
-stripped true
-crypto   false
-havecode true
-va       true
-sanitiz  false
-static   false
-linenum  false
-lsyms    false
-canary   true
-PIE      true
-RELROCS  false
-NX       true</code></pre>
-</section>
-</section>
-<section id="rz-asm" class="level3" data-number="1.0.3">
-<h3 data-number="1.0.3" class="anchored" data-anchor-id="rz-asm"><span class="header-section-number">1.0.3</span> rz-asm</h3>
-<p>The <code>rz-asm</code> tool operates as a command line assembler and disassembler, catering to various architectures such as Intel x86 and x86-64, MIPS, ARM, PowerPC, Java, and numerous others.</p>
-<section id="examples-1" class="level4" data-number="1.0.3.1">
-<h4 data-number="1.0.3.1" class="anchored" data-anchor-id="examples-1"><span class="header-section-number">1.0.3.1</span> Examples</h4>
-<pre><code>$ rz-asm -a java 'nop'
-00</code></pre>
-<pre><code>$ rz-asm -a x86 -d '90'
-nop</code></pre>
-<pre><code>$ rz-asm -a x86 -b 32 'mov eax, 33'
-b821000000</code></pre>
-<pre><code>$ echo 'push eax;nop;nop' | rz-asm -f -
-509090</code></pre>
-</section>
-</section>
-<section id="rz-hash" class="level3" data-number="1.0.4">
-<h3 data-number="1.0.4" class="anchored" data-anchor-id="rz-hash"><span class="header-section-number">1.0.4</span> rz-hash</h3>
-<p><code>rz-hash</code> stands as an implementation of a block-based hash tool. It offers support for a range of algorithms, including <code>MD4</code>, <code>MD5</code>, <code>CRC</code>, <code>SHA1</code>, <code>SHA256</code>, and more, accommodating both small text strings and large files. Its utility extends to checking the integrity or monitoring changes in substantial files and memory dumps.</p>
-<section id="examples-2" class="level4" data-number="1.0.4.1">
-<h4 data-number="1.0.4.1" class="anchored" data-anchor-id="examples-2"><span class="header-section-number">1.0.4.1</span> Examples</h4>
-<pre><code>$ rz-hash file.bin
-file.bin: 0x00000000-0x00000007 sha256: 887cfbd0d44aaff69f7bdbedebd282ec96191cce9d7fa7336298a18efc3c7a5a</code></pre>
-<pre><code>$ rz-hash -a md5 file.bin
-file.bin: 0x00000000-0x00000007 md5: d1833805515fc34b46c2b9de553f599d</code></pre>
-</section>
-</section>
-<section id="rz-diff" class="level3" data-number="1.0.5">
-<h3 data-number="1.0.5" class="anchored" data-anchor-id="rz-diff"><span class="header-section-number">1.0.5</span> rz-diff</h3>
-<p>The <code>rz-diff</code> utility serves as a binary diffing tool, implementing various algorithms. It facilitates byte-level or delta diffing for binary files and code-analysis diffing to identify alterations in fundamental code blocks derived from the rizin code analysis.</p>
-<p>This tool optimally leverages multi-threading to enhance performance, particularly on CPU-intensive and time-consuming tasks.</p>
-</section>
-<section id="rz-find" class="level3" data-number="1.0.6">
-<h3 data-number="1.0.6" class="anchored" data-anchor-id="rz-find"><span class="header-section-number">1.0.6</span> rz-find</h3>
-<p><code>rz-find</code> operates as a program designed to locate byte patterns in files. It provides the capability to search for various types of signatures, including strings in different encodings such as ASCII, UTF-8, wide, and more, across multiple encoding types.</p>
-</section>
-<section id="rz-gg" class="level3" data-number="1.0.7">
-<h3 data-number="1.0.7" class="anchored" data-anchor-id="rz-gg"><span class="header-section-number">1.0.7</span> rz-gg</h3>
-<p><code>rz-gg</code> is a tool designed to compile programs written in a simple high-level language into compact binaries suitable for x86, x86-64, and ARM architectures.</p>
-<section id="examples-3" class="level4" data-number="1.0.7.1">
-<h4 data-number="1.0.7.1" class="anchored" data-anchor-id="examples-3"><span class="header-section-number">1.0.7.1</span> Examples</h4>
-<pre><code>$ cat hi.r
-/* hello world in r_egg */
-write@syscall(4); //x64 write@syscall(1);
-exit@syscall(1); //x64 exit@syscall(60);
+<p>Rizin generates tables for certain commands, such as <code>aflt</code>, <code>is</code>, <code>izz</code>, and <code>il</code>, when they are executed on a file. These commands return structured data in the form of tables.</p>
+<p>The table output is used to process and display data. Using the table query syntax, users can sort rows, filter (grep) data, select specific columns or rows, paginate results, and limit the output. Tables can also be printed in different output formats such as CSV and JSON, or displayed in various textual layouts, including with borders and headers, with headers only, or without headers.</p>
+<section id="table-command-syntax" class="level2" data-number="89.1">
+<h2 data-number="89.1" class="anchored" data-anchor-id="table-command-syntax"><span class="header-section-number">89.1</span> Table Command Syntax</h2>
+<p>In Rizin, the help command for the table query syntax is <code>:?</code>.</p>
+<pre class="text"><code>Usage:
+&lt;command&gt;[:&lt;table_spec&gt;[:&lt;table_spec&gt;...]][:&lt;output_spec&gt;]</code></pre>
+<p>Note: Table specifiers are applied from left to right. Output format specifiers must be specified at the end.</p>
+<p>Table format specifiers <code>(&lt;table_spec&gt;)</code>:</p>
+<pre><code>| &lt;col&gt;/sort/rev            # Sort table by column &lt;col&gt; in reverse order.
+| &lt;col&gt;/sortlen/rev         # Sort table by column &lt;col&gt; length in reverse order.
+| &lt;col&gt;/cols[/&lt;col2&gt;[/&lt;col3&gt;...]] # Show only specified columns in the table.
+| &lt;col&gt;                     # Show only column &lt;col&gt; (it must not have the same name as an output format specifier).
+| &lt;col&gt;/gt/&lt;val&gt;            # Grep rows where column &lt;col&gt; is greater than &lt;val&gt;.
+| &lt;col&gt;/ge/&lt;val&gt;            # Grep rows where column &lt;col&gt; is greater than or equal to &lt;val&gt;.
+| &lt;col&gt;/lt/&lt;val&gt;            # Grep rows where column &lt;col&gt; is less than &lt;val&gt;.
+| &lt;col&gt;/le/&lt;val&gt;            # Grep rows where column &lt;col&gt; is less than or equal to &lt;val&gt;.
+| &lt;col&gt;/eq/&lt;val&gt;            # Grep rows where column &lt;col&gt; is equal to &lt;val&gt;.
+| &lt;col&gt;/ne/&lt;val&gt;            # Grep rows where column &lt;col&gt; is not equal to &lt;val&gt;.
+| &lt;col|*&gt;/uniq              # Only get the first row where column &lt;col&gt; or all columns are unique.
+| */page/&lt;n_page&gt;/&lt;page_size&gt; # Show &lt;page_size&gt; rows starting from the page number &lt;n_page&gt;.
+| */head/&lt;n_rows&gt;           # Show the first &lt;n_rows&gt; rows.
+| */tail/&lt;n_rows&gt;           # Show the last &lt;n_rows&gt; rows.
+| &lt;col&gt;/str/&lt;value&gt;         # Grep rows where string &lt;value&gt; is a substring of column &lt;col&gt;.
+| &lt;col&gt;/strlen/&lt;value&gt;      # Grep rows where the length of column &lt;col&gt; is &lt;value&gt;.
+| &lt;col&gt;/minlen/&lt;value&gt;      # Grep rows where the length of column &lt;col&gt; is greater than &lt;value&gt;.
+| &lt;col&gt;/maxlen/&lt;value&gt;      # Grep rows where the length of column &lt;col&gt; is less than &lt;value&gt;.
+| &lt;col&gt;/sum/&lt;value&gt;         # Sum all the values of column &lt;col&gt;.</code></pre>
+<p>Note: The <code>/sort</code> and <code>/sortlen</code> commands sort values in increasing order by default. Adding <code>/rev</code> reverses the order of the output.</p>
+<p>Example:</p>
+<p><code>aflt:nbbs/sort</code> sorts the results in increasing order of <code>nbbs</code> values.</p>
+<p><code>aflt:nbbs/sort/rev</code> sorts the results in decreasing order of <code>nbbs</code> values.</p>
+<p>Output format specifiers <code>(&lt;output_spec&gt;)</code>:</p>
+<pre><code>| csv    # Print the table in CSV format.
+| json   # Print the table in JSON format.
+| fancy  # Print the table in a nice form with borders and headers.
+| simple # Print the table in a simple form, only with headers.
+| quiet  # Print the table in a simple form, without headers.</code></pre>
+<hr>
+<section id="example-1-filter-sort-and-format-analyzed-functions" class="level3" data-number="89.1.1">
+<h3 data-number="89.1.1" class="anchored" data-anchor-id="example-1-filter-sort-and-format-analyzed-functions"><span class="header-section-number">89.1.1</span> Example 1: Filter, sort, and format analyzed functions</h3>
+<p>Some examples which give a general overview of how to use.</p>
+<p>aflt:addr/cols/name/nbbs:size/gt/32:nbbs/gt/1:nbbs/lt/10:nbbs/sort/rev:fancy</p>
+<pre><code>This command selects the `addr`, `name`, and `nbbs` columns. It filters functions whose size is greater than 32 bytes and keeps only those functions whose number of basic blocks (`nbbs`) is greater than 1 and less than 10. The results are displayed in reverse order of nbbs using the fancy table format.
 
-main@global(128) {
- .var0 = "hi!\n";
- write(1,.var0, 4);
- exit(0);
-}
-$ rz-gg -O -F hi.r
-$ ./hi
-hi!
+### Example 2: Paginate strings, filter by length, and export as CSV</code></pre>
+<p>izz:string/minlen/8:length/sort/rev:*/page/0/15:csv</p>
+<pre><code>This command filters strings whose length is greater than 8 characters and sorts them by length in reverse order. It then paginates the output to show only the first page containing 15 rows and prints the result in CSV format.
 
-$ cat hi.c
-main@global(0,6) {
- write(1, "Hello0", 6);
- exit(0);
-}
-$ rz-gg hi.c
-$ ./hi.c.bin
-Hello</code></pre>
-</section>
-</section>
-<section id="rz-run" class="level3" data-number="1.0.8">
-<h3 data-number="1.0.8" class="anchored" data-anchor-id="rz-run"><span class="header-section-number">1.0.8</span> rz-run</h3>
-<p><code>rz-run</code> functions as a launcher for executing programs within diverse environments, allowing customization of various aspects such as arguments, permissions, directories, and overridden default file descriptors. This utility proves beneficial for activities like solving crackmes, fuzzing, and running test suites.</p>
-<p>The versatility of <code>rz-run</code> is evident in its capabilities. Here are a few examples illustrating how it can be utilized:</p>
-<section id="sample-rz-run-script" class="level4" data-number="1.0.8.1">
-<h4 data-number="1.0.8.1" class="anchored" data-anchor-id="sample-rz-run-script"><span class="header-section-number">1.0.8.1</span> Sample rz-run script</h4>
-<pre><code>$ cat foo.rrz
-#!/usr/bin/rz-run
-program=./pp400
-arg0=10
-stdin=foo.txt
-chdir=/tmp
-#chroot=.
-./foo.rrz</code></pre>
-</section>
-<section id="connecting-a-program-with-a-socket" class="level4" data-number="1.0.8.2">
-<h4 data-number="1.0.8.2" class="anchored" data-anchor-id="connecting-a-program-with-a-socket"><span class="header-section-number">1.0.8.2</span> Connecting a program with a socket</h4>
-<pre><code>$ nc -l 9999
-$ rz-run program=/bin/ls connect=localhost:9999</code></pre>
-</section>
-<section id="debugging-a-program-redirecting-stdio-into-another-terminal" class="level4" data-number="1.0.8.3">
-<h4 data-number="1.0.8.3" class="anchored" data-anchor-id="debugging-a-program-redirecting-stdio-into-another-terminal"><span class="header-section-number">1.0.8.3</span> Debugging a program redirecting STDIO into another terminal</h4>
-<p>1 - Open a new terminal and type ‘tty’ to get a terminal name:</p>
-<pre><code>$ tty ; clear ; sleep 999999
-/dev/ttyS010</code></pre>
-<p>2 - Create a new file containing the following rz-run profile named foo.rrz:</p>
-<pre><code>#!/usr/bin/rz-run
-program=/bin/ls
-stdio=/dev/ttys010</code></pre>
-<p>3 - Launch the following rizin command:</p>
-<pre><code>rizin -r foo.rrz -d /bin/ls</code></pre>
-</section>
-</section>
-<section id="rz-ax" class="level3" data-number="1.0.9">
-<h3 data-number="1.0.9" class="anchored" data-anchor-id="rz-ax"><span class="header-section-number">1.0.9</span> rz-ax</h3>
-<p><code>rz-ax</code> stands out as a minimalistic mathematical expression evaluator tailored for the shell. Its utility extends to facilitating base conversions between floating-point values, hexadecimal representations, hexpair strings to ASCII, octal to integer, and more. Notably, it supports endianness settings and can serve as an interactive shell when invoked without arguments.</p>
-<section id="examples-4" class="level4" data-number="1.0.9.1">
-<h4 data-number="1.0.9.1" class="anchored" data-anchor-id="examples-4"><span class="header-section-number">1.0.9.1</span> Examples</h4>
-<pre><code>$ rz-ax 1337
-0x539
-
-$ rz-ax 0x400000
-4194304
-
-$ rz-ax -b 01111001
-y
-
-$ rz-ax -S rizin
-72616461726532
-
-$ rz-ax -s 617765736f6d65
-awesome</code></pre>
+### Example 3: Combine uniqueness, filtering, and JSON output for symbols</code></pre>
+<p>is:name/uniq:vaddr/gt/0x1000:name/str/init:addr/sort:json ``<code>This command keeps only the first occurrence of each unique symbol name. It filters symbols whose address is greater than</code>0x1000<code>and whose name contains the substring</code>init`. The results are sorted in increasing order.</p>
 
 
 </section>
@@ -1945,13 +1823,13 @@ awesome</code></pre>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../index.html" class="pagination-link" aria-label="Welcome">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Welcome</span>
+      <a href="../../../src/tools/rz-bin/program_sections.html" class="pagination-link" aria-label="Program Sections">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">88</span>&nbsp; <span class="chapter-title">Program Sections</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../src/introduction/getting_rizin.html" class="pagination-link" aria-label="Getting Rizin">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Rizin</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../src/tools/rz-diff/intro.html" class="pagination-link" aria-label="Rz-diff">
+        <span class="nav-page-text"><span class="chapter-number">90</span>&nbsp; <span class="chapter-title">Rz-diff</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1960,4 +1838,4 @@ awesome</code></pre>
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/rizinorg/book/edit/master/src/introduction/overview.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/rizinorg/book/edit/master/src/tools/rz-bin/tables.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
