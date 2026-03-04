@@ -53,15 +53,12 @@ Output format specifiers `(<output_spec>)`:
 | quiet  # Print the table in a simple form, without headers.
 ```
 
-Note: Address-based table filters operate on the address type exposed by the table column. Columns such as `addr` and `vaddr` refer to virtual addresses, while `paddr` refers to physical addresses (file offsets).
-
-Some examples which give a general overview of how to use.
-
 ---
 
 ### Example 1: Filter, sort, and format analyzed functions
 
-```
+Some examples which give a general overview of how to use.
+
 aflt:addr/cols/name/nbbs:size/gt/32:nbbs/gt/1:nbbs/lt/10:nbbs/sort/rev:fancy
 ```
 This command selects the `addr`, `name`, and `nbbs` columns. It filters functions whose size is greater than 32 bytes and keeps only those functions whose number of basic blocks (`nbbs`) is greater than 1 and less than 10. The results are displayed in reverse order of nbbs using the fancy table format.
