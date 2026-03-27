@@ -43,10 +43,6 @@ The help command to list all `avg` commands is: `avg?`
  **Printing Global Variables**
 
  `avgp <name>` reads memory at the address of the specified global variable and displays its current value.
- >In debug mode → shows the value at the current breakpoint.
- 
- >Without debugging → shows the value stored in the binary.
- 
 
  **Changing Variable Type**
 
