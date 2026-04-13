@@ -6,8 +6,7 @@ and so on. This is because Rizin requires every architecture plugin
 to provide also analysis information about every opcode. At the moment
 the implementation of disassembly and opcodes analysis is separated between
 two modules - RzAsm and RzAnalysis. Thus, we need to write an analysis plugin too.
-The principle is very similar - you just need to create a C file and
-corresponding Makefile.
+The principle is very similar - you just need to create a C file in `librz/arch/p/analysis/` and declare it in corresponding architecture plugin file `librz/arch/p/arch_mycpu.c`.
 
 They structure of RzAnalysis plugin looks like
 
@@ -29,32 +28,6 @@ RzAnalysisOp structure. On the other hand, in this example analysis plugins also
 ESIL, which is enabled in `.esil = true` statement. Thus, `mycpu_op` obliged to fill the
 corresponding RzAnalysisOp ESIL field for the opcodes. Second important thing for ESIL uplifting and
 emulation - register profile, like in debugger, which is set within `set_reg_profile` function.
-
-**Makefile**
-
-```makefile
-NAME=analysis_mycpu
-RZ_PLUGIN_PATH=$(shell rizin -H RZ_USER_PLUGINS)
-LIBEXT=$(shell rizin -H LIBEXT)
-CFLAGS=-g -fPIC $(shell pkg-config --cflags rz_analysis)
-LDFLAGS=-shared $(shell pkg-config --libs rz_analysis)
-OBJS=$(NAME).o
-LIB=$(NAME).$(LIBEXT)
-
-all: $(LIB)
-
-clean:
-	rm -f $(LIB) $(OBJS)
-
-$(LIB): $(OBJS)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) -o $(LIB)
-
-install:
-	cp -f analysis_mycpu.$(SO_EXT) $(RZ_PLUGIN_PATH)
-
-uninstall:
-	rm -f $(RZ_PLUGIN_PATH)/analysis_mycpu.$(SO_EXT)
-```
 
 **analysis_mycpu.c:**
 This is a dummy example please go check real life examples
@@ -134,6 +107,5 @@ Note the `A` just appeared on the left column (a=asm, d=disasm, A=analyze, e=ESI
 
 Examples:
 
-* [RzAnalysis plugin for 6502](https://github.com/rizinorg/rizin/commit/64636e9505f9ca8b408958d3c01ac8e3ce254a9b)
-* [RzAnalysis plugin for SNES](https://github.com/rizinorg/rizin/commit/60d6e5a1b9d244c7085b22ae8985d00027624b49)
-
+- [RzAnalysis plugin for 6502](https://github.com/rizinorg/rizin/commit/64636e9505f9ca8b408958d3c01ac8e3ce254a9b)
+- [RzAnalysis plugin for SNES](https://github.com/rizinorg/rizin/commit/60d6e5a1b9d244c7085b22ae8985d00027624b49)
