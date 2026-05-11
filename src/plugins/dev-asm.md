@@ -131,8 +131,14 @@ $ rz-asm -L |grep myc
 _d__  _8_32      mycpu        LGPL3   MYCPU disassembly plugin
 ```
 
-Check out how the NIOS II CPU disassembly plugin was implemented by reading those commits:
+Check out how AVR and Alpha architectures have been implemented by having a look at the following files
 
-[The RzAsm plugin](https://github.com/rizinorg/rizin/commit/933dc0ef6ddfe44c88bbb261165bf8f8b531476b)
+[RzAsm plugin for AVR](https://github.com/rizinorg/rizin/blob/dev/librz/arch/p/asm/asm_avr.c)
 
-[The RzAnalysis plugin](https://github.com/rizinorg/rizin/commit/ad430f0d52fbe933e0830c49ee607e9b0e4ac8f2)
+[AVR arch plugin](https://github.com/rizinorg/rizin/blob/dev/librz/arch/p/arch_avr.c)
+
+[RzAsm plugin for Alpha using Capstone](https://github.com/rizinorg/rizin/blob/dev/librz/arch/p/asm/asm_alpha_cs.c)
+
+[Alpha arch plugin](https://github.com/rizinorg/rizin/blob/dev/librz/arch/p/arch_alpha.c)
+
+Note: Create a disassembly parser plugin if needed under `librz/arch/p/parse/` which will be used when specific evaluable variables are set such as `asm.pseudo`, `asm.sub.jmp`, `asm.sub.reg`, `asm.sub.rel` etc

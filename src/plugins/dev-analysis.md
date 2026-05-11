@@ -97,6 +97,8 @@ RZ_API RzLibStruct rizin_plugin = {
 #endif
 ```
 
+After creating this plugin, include this plugin file in corresponding `librz/arch/p/arch_mycpu.c`
+
 After compiling rizin will list this plugin in the rz-asm output:
 
 ```
@@ -107,5 +109,5 @@ Note the `A` just appeared on the left column (a=asm, d=disasm, A=analyze, e=ESI
 
 Examples:
 
-- [RzAnalysis plugin for 6502](https://github.com/rizinorg/rizin/commit/64636e9505f9ca8b408958d3c01ac8e3ce254a9b)
-- [RzAnalysis plugin for SNES](https://github.com/rizinorg/rizin/commit/60d6e5a1b9d244c7085b22ae8985d00027624b49)
+- [RzAnalysis plugin for Alpha architecture using Capstone](https://github.com/rizinorg/rizin/blob/dev/librz/arch/p/analysis/analysis_alpha_cs.c)
+- [RzAnalysis plugin for AVR architecture](https://github.com/rizinorg/rizin/blob/dev/librz/arch/p/analysis/analysis_avr.c)
