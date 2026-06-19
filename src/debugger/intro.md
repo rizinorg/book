@@ -23,12 +23,12 @@ help with `R!?` or `R!help`. For example:
 ```
 $ rizin -d /bin/ls
 ...
-[0x7fc15afa3cc0]> R!help
-Usage: R!cmd args
- R!ptrace   - use ptrace io
- R!mem      - use /proc/pid/mem io if possible
- R!pid      - show targeted pid
- R!pid <#>  - select new pid
+[0x7fc15afa3cc0]> R! help
+Usage: R! cmd args
+ R! ptrace   - use ptrace io
+ R! mem      - use /proc/pid/mem io if possible
+ R! pid      - show targeted pid
+ R! pid <#>  - select new pid
 ```
 
 In general, debugger commands are portable between architectures and operating systems. Still, as Rizin tries
