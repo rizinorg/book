@@ -20,3 +20,19 @@ Another option is to render the book to any of the formats that are supported by
 ```sh
 quarto render . --to pdf --toc
 ```
+
+## Content additions
+
+New documentation should focus on the value it provides to the user.
+The examples and topics should cover common use cases and problems people try to solve,
+like "Command X solves problem Y for you."
+Figuring out the common use cases is part of contributing to the book.
+
+## AI guidelines
+
+It is not allowed to generate documentation solely with AI.
+New contributions must be correct and cannot contain _any_ hallucinations.
+Beginners should first use a module’s API or commands by experimenting with it,
+then write the documentation.
+
+AI can be used to get an initial overview and an idea of where to start experimenting.
