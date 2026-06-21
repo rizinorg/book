@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,6 +10,9 @@
 
 <title>74&nbsp; Debugging with gdbserver – The Rizin Handbook: A Guide to Reverse Engineering with the Rizin Framework</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -35,19 +38,18 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../src/remote_access/remoting_capabilities.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-8b4baf804e461d9b72633f0de59a0cac.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-f1aadacce99040138bbb613f9330654f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-8b4baf804e461d9b72633f0de59a0cac.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-6b6957c917596b414ec0b78690761e87.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-0445027613d7f19d285f3df24f0e4238.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-f71687a9f24ade8682aaea117735bc7c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-0445027613d7f19d285f3df24f0e4238.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-837c2843e287a055116b1ad4e14bdf17.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-e9b94c5c92cfde000641fbcd395a1216.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-837c2843e287a055116b1ad4e14bdf17.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -1361,27 +1363,27 @@ ul.task-list li input[type="checkbox"] {
 $ rizin -d gdb://&lt;host&gt;:&lt;port&gt;
 = attach &lt;pid&gt; &lt;tid&gt;
 Assuming filepath &lt;path/to/exe&gt;
-[0x7ff659d9fcc0]&gt; R!pktsz
+[0x7ff659d9fcc0]&gt; R! pktsz
 packet size: 512 bytes
-[0x7ff659d9fcc0]&gt; R!pktsz 64
-[0x7ff659d9fcc0]&gt; R!pktsz
+[0x7ff659d9fcc0]&gt; R! pktsz 64
+[0x7ff659d9fcc0]&gt; R! pktsz
 packet size: 64 bytes</code></pre>
-<p>The gdb IO system provides useful commands which might not fit into any standard rizin commands. You can get a list of these commands with <code>R!?</code>. (Remember, <code>R!</code> accesses the underlying IO plugin’s <code>system()</code>).</p>
-<pre><code>[0x7ff659d9fcc0]&gt; R!?
-Usage: R!cmd args
- R!pid             - show targeted pid
- R!pkt s           - send packet 's'
- R!monitor cmd     - hex-encode monitor command and pass to target interpreter
- R!rd              - show reverse debugging availability
- R!dsb             - step backwards
- R!dcb             - continue backwards
- R!detach [pid]    - detach from remote/detach specific pid
- R!inv.reg         - invalidate reg cache
- R!pktsz           - get max packet size used
- R!pktsz bytes     - set max. packet size as 'bytes' bytes
- R!exec_file [pid] - get file which was executed for current/specified pid</code></pre>
-<p>Note that <code>R!dsb</code> and <code>R!dcb</code> are only available in special gdbserver implementations such as <a href="https://github.com/mozilla/rr">Mozilla’s rr</a>, the default gdbserver doesn’t include remote reverse debugging support. Use <code>R!rd</code> to print the currently available reverse debugging capabilities.</p>
-<p>If you are interested in debugging rizin’s interaction with gdbserver you can use <code>R!monitor set remote-debug 1</code> to turn on logging of gdb’s remote protocol packets in gdbserver’s console and <code>R!monitor set debug 1</code> to show general debug messages from gdbserver in its console.</p>
+<p>The gdb IO system provides useful commands which might not fit into any standard rizin commands. You can get a list of these commands with <code>R! ?</code>. (Remember, <code>R!</code> accesses the underlying IO plugin’s <code>system()</code>).</p>
+<pre><code>[0x7ff659d9fcc0]&gt; R! ?
+Usage: R! &lt;cmd&gt; [args]
+ R! pid             - show targeted pid
+ R! pkt s           - send packet 's'
+ R! rd              - show reverse debugging availability
+ R! dsb             - step backwards
+ R! dcb             - continue backwards
+ R! monitor cmd     - hex-encode monitor command and pass to target interpreter
+ R! detach [pid]    - detach from remote/detach specific pid
+ R! inv.reg         - invalidate reg cache
+ R! pktsz           - get max packet size used
+ R! pktsz bytes     - set max. packet size as 'bytes' bytes
+ R! exec_file [pid] - get file which was executed for current/specified pid</code></pre>
+<p>Note that <code>R! dsb</code> and <code>R! dcb</code> are only available in special gdbserver implementations such as <a href="https://github.com/mozilla/rr">Mozilla’s rr</a>, the default gdbserver doesn’t include remote reverse debugging support. Use <code>R! rd</code> to print the currently available reverse debugging capabilities.</p>
+<p>If you are interested in debugging rizin’s interaction with gdbserver you can use <code>R! monitor set remote-debug 1</code> to turn on logging of gdb’s remote protocol packets in gdbserver’s console and <code>R! monitor set debug 1</code> to show general debug messages from gdbserver in its console.</p>
 <p>rizin also provides its own gdbserver implementation:</p>
 <pre><code>$ rizin =
 [0x00000000]&gt; Rg?
