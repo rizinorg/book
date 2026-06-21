@@ -11,18 +11,15 @@ Help for commands useful for remote access to rizin:
 Usage: R[?]   # Connect with other instances of rizin
 | R [[<fd>] <cmd>]        # List all open connections / Exec <cmd> at remote <fd>
 | R< [<fd> <cmd>]         # Send output of local <cmd> to remote <fd>
-| R![<cmd>]               # Run <cmd> via rz_io_system
+| R! <cmd>                # Run command via rz_io_system
 | R+ <[proto://]host:port> # Connect to remote host:port
 | R- [<fd>]               # remove all hosts or host 'fd'
 | R= <fd>                 # Open remote session with host 'fd', 'q' to quit
 | R!= <fd>=0              # Enable remote cmd mode, sending commands to remote <fd> server
 | R=!                     # Disable remote cmd mode
-| Rr <[host:]port> [<cmd>] # Start the rap server (o rap://9999) / Execute <cmd> on rap server
-| Rg[?]                   # Start the gdbserver
-| Rh[?]                   # Start the http webserver
-| RH[?]                   # Start the http webserver (and launch the web browser)
+| Rg[!]                   # Start the gdbserver
+| Rh[*?]                  # HTTP webserver commands.
 | Rt <[host:]port> [<cmd>] # Start the tcp server
-| R&r <port>              # Start rap server in background (same as '& Rr')
 ```
 
 You can learn rizin remote capabilities by displaying the list of supported IO plugins: `rizin -L`.

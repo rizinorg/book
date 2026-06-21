@@ -57,41 +57,41 @@ $ export R2_GDB_PKTSZ=512
 $ rizin -d gdb://<host>:<port>
 = attach <pid> <tid>
 Assuming filepath <path/to/exe>
-[0x7ff659d9fcc0]> R!pktsz
+[0x7ff659d9fcc0]> R! pktsz
 packet size: 512 bytes
-[0x7ff659d9fcc0]> R!pktsz 64
-[0x7ff659d9fcc0]> R!pktsz
+[0x7ff659d9fcc0]> R! pktsz 64
+[0x7ff659d9fcc0]> R! pktsz
 packet size: 64 bytes
 ```
 
 The gdb IO system provides useful commands which might not fit into any
 standard rizin commands. You can get a list of these commands with
-`R!?`. (Remember, `R!` accesses the underlying IO plugin's `system()`).
+`R! ?`. (Remember, `R!` accesses the underlying IO plugin's `system()`).
 
 ```
-[0x7ff659d9fcc0]> R!?
-Usage: R!cmd args
- R!pid             - show targeted pid
- R!pkt s           - send packet 's'
- R!monitor cmd     - hex-encode monitor command and pass to target interpreter
- R!rd              - show reverse debugging availability
- R!dsb             - step backwards
- R!dcb             - continue backwards
- R!detach [pid]    - detach from remote/detach specific pid
- R!inv.reg         - invalidate reg cache
- R!pktsz           - get max packet size used
- R!pktsz bytes     - set max. packet size as 'bytes' bytes
- R!exec_file [pid] - get file which was executed for current/specified pid
+[0x7ff659d9fcc0]> R! ?
+Usage: R! <cmd> [args]
+ R! pid             - show targeted pid
+ R! pkt s           - send packet 's'
+ R! rd              - show reverse debugging availability
+ R! dsb             - step backwards
+ R! dcb             - continue backwards
+ R! monitor cmd     - hex-encode monitor command and pass to target interpreter
+ R! detach [pid]    - detach from remote/detach specific pid
+ R! inv.reg         - invalidate reg cache
+ R! pktsz           - get max packet size used
+ R! pktsz bytes     - set max. packet size as 'bytes' bytes
+ R! exec_file [pid] - get file which was executed for current/specified pid
 ```
 
-Note that `R!dsb` and `R!dcb` are only available in special gdbserver implementations such
+Note that `R! dsb` and `R! dcb` are only available in special gdbserver implementations such
 as [Mozilla's rr](https://github.com/mozilla/rr), the default gdbserver doesn't include
 remote reverse debugging support.
-Use `R!rd` to print the currently available reverse debugging capabilities.
+Use `R! rd` to print the currently available reverse debugging capabilities.
 
 If you are interested in debugging rizin's interaction with gdbserver you can use
-`R!monitor set remote-debug 1` to turn on logging of gdb's remote protocol packets in
-gdbserver's console and `R!monitor set debug 1` to show general debug messages from
+`R! monitor set remote-debug 1` to turn on logging of gdb's remote protocol packets in
+gdbserver's console and `R! monitor set debug 1` to show general debug messages from
 gdbserver in its console.
 
 rizin also provides its own gdbserver implementation:

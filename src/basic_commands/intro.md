@@ -19,11 +19,11 @@ For example,
 ```
 
 If a command starts with `R!`, the rest of the string is passed to the currently loaded IO plugin (a debugger,
-for example). Most plugins provide help messages with `R!?` or `R!help`.
+for example). Most plugins provide help messages with `R! ?` or `R! help`.
 
 ```
 $ rizin -d /bin/ls
-> R!help      ; handled by the IO plugin
+> R! help      ; handled by the IO plugin
 ```
 
 If a command starts with `!`, posix_system() is called to pass the command to your shell. Check `!?` for more options
