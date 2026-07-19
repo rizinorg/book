@@ -47,9 +47,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-837c2843e287a055116b1ad4e14bdf17.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-e9b94c5c92cfde000641fbcd395a1216.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-837c2843e287a055116b1ad4e14bdf17.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-c47a06a8fec95f8cc6722256be864add.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-9610536d8d22315992092cf091b18667.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-c47a06a8fec95f8cc6722256be864add.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -1354,8 +1354,22 @@ ul.task-list li input[type="checkbox"] {
 <p>It is also possible to start debugging after analyzing a file using the <code>doof</code> command which rebases the current session’s data after opening gdb</p>
 <pre><code>[0x00404870]&gt; doof gdb://&lt;host&gt;:&lt;port&gt;/&lt;pid&gt;</code></pre>
 <p>After connecting, you can use the standard Rizin debug commands as normal.</p>
-<p>Rizin does not yet load symbols from gdbserver, so it needs the binary to be locally present to load symbols from it. In case symbols are not loaded even if the binary is present, you can try specifying the path with <code>e dbg.exe.path</code>:</p>
+<p>Rizin needs the binary to be locally present to load symbols from it. Rizin will automatically prompt you to download the remote binary if the remote host isn’t <code>localhost</code> or if it’s localhost but the file doesn’t exist at its full path. You can also always downlod the remote file manually by using the <code>R! download_file &lt;remote-path&gt; &lt;local-path&gt;</code> command.</p>
+<p>In case symbols are not loaded even if the binary is present, you can try specifying the binary’s local path with <code>e dbg.exe.path</code>:</p>
 <pre><code>$ rizin -e dbg.exe.path=&lt;path&gt; -d gdb://&lt;host&gt;:&lt;port&gt;</code></pre>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The given host has to be <code>localhost</code> literally for Rizin to attempt a local check for the binary, not <code>127.0.0.1</code> or any other loopback address. NAT and network namespaces means that knowing the locality of a connection is non-trivial from an IP address alone, even given “classical” local IPs like <code>127.0.0.1</code>. So the literal string <code>localhost</code> is taken by Rizin as a hardcoded locality hint that it should attempt a search for the binary locally, any other IP is treated as remote unconditionally.</p>
+</div>
+</div>
 <p>If symbols are loaded at an incorrect base address, you can try specifying the base address too with <code>e bin.baddr</code>:</p>
 <pre><code>$ rizin -e bin.baddr=&lt;baddr&gt; -e dbg.exe.path=&lt;path&gt; -d gdb://&lt;host&gt;:&lt;port&gt;</code></pre>
 <p>Usually the gdbserver reports the maximum packet size it supports. Otherwise, rizin resorts to sensible defaults. But you can specify the maximum packet size with the environment variable <code>R2_GDB_PKTSZ</code>. You can also check and set the max packet size during a session with the IO system, <code>R!</code>.</p>
@@ -1381,7 +1395,8 @@ Usage: R! &lt;cmd&gt; [args]
  R! inv.reg         - invalidate reg cache
  R! pktsz           - get max packet size used
  R! pktsz bytes     - set max. packet size as 'bytes' bytes
- R! exec_file [pid] - get file which was executed for current/specified pid</code></pre>
+ R! exec_file [pid] - get file which was executed for current/specified pid
+ R! download_file remote local - download remote file to the local path</code></pre>
 <p>Note that <code>R! dsb</code> and <code>R! dcb</code> are only available in special gdbserver implementations such as <a href="https://github.com/mozilla/rr">Mozilla’s rr</a>, the default gdbserver doesn’t include remote reverse debugging support. Use <code>R! rd</code> to print the currently available reverse debugging capabilities.</p>
 <p>If you are interested in debugging rizin’s interaction with gdbserver you can use <code>R! monitor set remote-debug 1</code> to turn on logging of gdb’s remote protocol packets in gdbserver’s console and <code>R! monitor set debug 1</code> to show general debug messages from gdbserver in its console.</p>
 <p>rizin also provides its own gdbserver implementation:</p>
