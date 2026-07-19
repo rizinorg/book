@@ -32,13 +32,25 @@ which rebases the current session's data after opening gdb
 
 After connecting, you can use the standard Rizin debug commands as normal.
 
-Rizin does not yet load symbols from gdbserver, so it needs the binary to
-be locally present to load symbols from it. In case symbols are not loaded even
-if the binary is present, you can try specifying the path with `e dbg.exe.path`:
+Rizin needs the binary to be locally present to load symbols from it. Rizin will automatically 
+prompt you to download the remote binary if the remote host isn't `localhost` or if it's localhost 
+but the file doesn't exist at its full path. You can also always downlod the remote file manually 
+by using the `R! download_file <remote-path> <local-path>` command. 
+
+In case symbols are not loaded even if the binary is present, you can try specifying the binary's 
+local path with `e dbg.exe.path`:
 
 ```
 $ rizin -e dbg.exe.path=<path> -d gdb://<host>:<port>
 ```
+
+::: {.callout-note}
+The given host has to be `localhost` literally for Rizin to attempt a local check for the binary,
+not `127.0.0.1` or any other loopback address. NAT and network namespaces means that knowing the locality
+of a connection is non-trivial from an IP address alone, even given "classical" local IPs like `127.0.0.1`.
+So the literal string `localhost` is taken by Rizin as a hardcoded locality hint that it should attempt a 
+search for the binary locally, any other IP is treated as remote unconditionally.
+:::
 
 If symbols are loaded at an incorrect base address, you can try specifying
 the base address too with `e bin.baddr`:
@@ -82,6 +94,7 @@ Usage: R! <cmd> [args]
  R! pktsz           - get max packet size used
  R! pktsz bytes     - set max. packet size as 'bytes' bytes
  R! exec_file [pid] - get file which was executed for current/specified pid
+ R! download_file remote local - download remote file to the local path
 ```
 
 Note that `R! dsb` and `R! dcb` are only available in special gdbserver implementations such
