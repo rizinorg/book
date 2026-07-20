@@ -40,6 +40,8 @@ book:
          - src/configuration/initial_scripts.md
          - src/configuration/compile_time_variables.md
          - src/configuration/run_time_variables.md
+         - src/configuration/global_variables.md
+
 
       - part: "Basic Commands"
         chapters:
