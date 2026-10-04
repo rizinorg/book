@@ -48,3 +48,14 @@ cc.ms.ret=rax
 counting number) will be stored in the stack from left to right
 
 `cc.x.argn=stack_rev` same as `cc.x.argn=stack` except for it means argument are passed right to left
+
+## Golang Calling Conventions
+
+Rizin automatically detects and applies Golang calling conventions for stripped and non-stripped Golang binaries (via `sym.go.*` functions recovered by the analysis).
+
+There are two primary Golang calling conventions supported:
+* `golang` (also known as ABIInternal): The register-based calling convention introduced in Go 1.17+. It passes arguments and returns values primarily through registers.
+* `golang_abi0` (also known as ABI0): The traditional stack-based calling convention used in older Go versions.
+
+Rizin uses a prologue voting heuristic to analyze function prologues and determine whether the binary employs `golang` (ABIInternal) or `golang_abi0` (ABI0), even when the build header is stripped.
+
